@@ -10,5 +10,6 @@
 
 2024/02/08 :  1h30min     Réunion Discord en groupe Front: Organisation des versions, idée/organisation.
 
+2024/02/13: 3h		  Réunion du mardi en groupe: Création du design de la page au brouillon+ idée pour la nouvelle regle du poker.
 
-TEMPS TOTAL: 9h30min 
+TEMPS TOTAL: 12h30min 
