@@ -30,3 +30,5 @@
 * 2024/02/13 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor, planification de la semaine, réunion avec le groupe pour améliorer notre projet selon les retours du mentor </i>
 
 * 2024/02/14 : <b>30 mins</b> <br/> Travail individuel :<i> Travail sur le comptes rendus personnels  </i>
+
+* 2024/02/14 : <b>30 mins</b> <br/> Travail individuel :<i> J'ai rédigé un document décrivant l'utilisation de Git pour ce projet  </i>
