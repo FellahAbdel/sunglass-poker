@@ -1,4 +1,4 @@
-# Noé Deangeon
+# Noé Demangeon
 
 2024/01/30 : 3h			Réunion du mardi en groupe: Choix du jeu, nom, logo et thème, nom de l’entreprise et ébauche d’idée du business model
 
@@ -10,4 +10,10 @@
 
 2024/02/11 : 30min		Relecture/Corrections cahier des charges
 
-TEMPS TOTAL: 9h00min 
+2024/02/13: 3h		  Réunion du mardi en groupe: Création du design de la page au brouillon+ idée pour la nouvelle regle du poker.
+
+2024/02/13: 1h		  Découverte Blender + design bouée
+
+2024/02/13: 30min		  Recherche assets cartes
+
+TEMPS TOTAL: 13h30min 
