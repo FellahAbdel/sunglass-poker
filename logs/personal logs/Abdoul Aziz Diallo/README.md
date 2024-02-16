@@ -9,3 +9,5 @@
 |       | NodeJS                                                       | 30m        |                                                                                                                                              |
 |       | ExpressJS                                                    | 30m        |                                                                                                                                              |
 | 11/02 | Re-learn Poker rules & Write them down in the specifications | 1h30       |                                                                                                                                              |
+|       | Work with the Project Manager (GANTT CHART)                  | 1h30       |                                                                                                                                              |
+| 16/02 | Write technical specification with the Project Manager       | 3h         |                                                                                                                                              |
