@@ -32,3 +32,5 @@
 * 2024/02/14 : <b>30 mins</b> <br/> Travail individuel :<i> Travail sur le comptes rendus personnels  </i>
 
 * 2024/02/14 : <b>30 mins</b> <br/> Travail individuel :<i> J'ai rédigé un document décrivant l'utilisation de Git pour ce projet  </i>
+
+* 2024/02/16 : <b>3h</b> <br/> Travail avec Tech Lead:<i> Travaille sur le spécification technique  </i>
