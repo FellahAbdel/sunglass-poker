@@ -15,7 +15,7 @@
 
 ## Week 3 - _Total:_
 
-| Date  | Description | Time Spent | Resources |
-| ----- | ----------- | ---------- | --------- |
-| 19/02 |             |            |           |
-|       |             |            |           |
+| Date  | Description                        | Time Spent | Resources |
+| ----- | ---------------------------------- | ---------- | --------- |
+| 19/02 | Figma Design (login & signup page) | 2h30       |           |
+|       |                                    |            |           |
