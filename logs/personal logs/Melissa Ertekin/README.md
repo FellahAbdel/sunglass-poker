@@ -34,3 +34,7 @@
 * 2024/02/14 : <b>30 mins</b> <br/> Travail individuel :<i> J'ai rédigé un document décrivant l'utilisation de Git pour ce projet  </i>
 
 * 2024/02/16 : <b>3h</b> <br/> Travail avec Tech Lead:<i> Travaille sur le spécification technique  </i>
+
+* 2024/02/19 : <b>1h</b> <br/> Discussion en 1 à 1 sur Discord :<i> Discussion sur l'avancement de cette semaine et retours généraux sur notre progression</i>
+
+* 2024/02/19 : <b>30 mins</b> <br/> Travail individuel :<i> Travail sur le comptes rendus hebdomadaire  </i>
