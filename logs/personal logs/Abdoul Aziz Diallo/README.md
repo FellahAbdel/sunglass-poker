@@ -11,3 +11,11 @@
 | 11/02 | Re-learn Poker rules & Write them down in the specifications | 1h30       |                                                                                                                                              |
 |       | Work with the Project Manager (GANTT CHART)                  | 1h30       |                                                                                                                                              |
 | 16/02 | Write technical specification with the Project Manager       | 3h         |                                                                                                                                              |
+| 18/02 | Review EJS and read React hand written course                | 1h20       |                                                                                                                                              |
+
+## Week 3 - _Total:_
+
+| Date  | Description | Time Spent | Resources |
+| ----- | ----------- | ---------- | --------- |
+| 19/02 |             |            |           |
+|       |             |            |           |
