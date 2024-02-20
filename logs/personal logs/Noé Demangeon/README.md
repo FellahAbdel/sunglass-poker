@@ -16,4 +16,8 @@
 
 2024/02/13: 30min		  Recherche assets cartes
 
-TEMPS TOTAL: 13h30min 
+2024/02/18: 1H30        Découverte Blender + design parasols
+
+2024/02/20 : 3h00          Réunion création pages, distribution taches.
+
+TEMPS TOTAL: 18h00min 
