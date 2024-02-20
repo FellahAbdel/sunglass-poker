@@ -32,3 +32,6 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# Apple 
+.DS_Store
