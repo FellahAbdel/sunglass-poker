@@ -16,4 +16,6 @@
 
 2024/02/13: 30min		  Recherche assets cartes
 
-TEMPS TOTAL: 13h30min 
+2024/02/20 : 2h30          Réunion création pages, distribution taches.
+
+TEMPS TOTAL: 16h00min 
