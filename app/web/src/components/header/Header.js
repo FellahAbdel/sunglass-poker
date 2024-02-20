@@ -7,10 +7,9 @@ const Header = () => {
 		<header className='header'>
 			<nav>
 				<Link to="/">Accueil</Link>
-				<Link to="/UrlHome">/UrlHome</Link>
-				<Link to="/NomURLMael">/NomURLMael</Link>
-				<Link to="/ebl">/ebl</Link>
-				<Link to="/logi">/logi</Link>
+				<Link to="/home">/home</Link>
+				<Link to="/login">/login</Link>
+				<Link to="/gameTable">/gameTable</Link>
 			</nav>
 		</header>
 	);
