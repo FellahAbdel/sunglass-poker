@@ -25,7 +25,7 @@
 
 * 2024/02/12 : <b>30min</b> <br/> Travail individuel : <i> Travail sur les comptes rendus </i>
 
-### Semaine 2 : 13 Février - 20 Février  | Temps Totale: 
+### Semaine 2 : 13 Février - 20 Février  | Temps Totale: 8h30
 
 * 2024/02/13 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor, planification de la semaine, réunion avec le groupe pour améliorer notre projet selon les retours du mentor </i>
 
@@ -38,3 +38,9 @@
 * 2024/02/19 : <b>1h</b> <br/> Discussion en 1 à 1 sur Discord :<i> Discussion sur l'avancement de cette semaine et retours généraux sur notre progression</i>
 
 * 2024/02/19 : <b>30 mins</b> <br/> Travail individuel :<i> Travail sur le comptes rendus hebdomadaire  </i>
+
+### Semaine 3 : 20 Février - 27  Février  | Temps Totale: 
+
+* 2024/02/20 : <b>1h</b> <br/> Travaille individuel : <i> Création de l'architecture basic du programme </i>
+
+* 2024/02/20 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunion hebdomadaires avec le mentor, planification de la semaine, distribustion des petites taches, réunion avec le groupe pour l'explication de architecture du projet et discussion sur les taches assignée en détaille </i>
