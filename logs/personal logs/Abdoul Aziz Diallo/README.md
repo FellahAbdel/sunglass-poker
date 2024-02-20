@@ -18,4 +18,4 @@
 | Date  | Description                        | Time Spent | Resources |
 | ----- | ---------------------------------- | ---------- | --------- |
 | 19/02 | Figma Design (login & signup page) | 2h30       |           |
-|       |                                    |            |           |
+| 20/02 | React Tutorial Review              | 7h30       |           |
