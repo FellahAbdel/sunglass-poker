@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header.js';
 import Home from './pages/home.js';
 import Login from './pages/login';
+import gameTable from './pages/gameTable.js';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/UrlHome" Component={Home}/>
         <Route path="/logi" Component={Login}/>
+        <Route path="/gameTable" Component={gameTable}/>
       </Routes>
     </Router>
   )

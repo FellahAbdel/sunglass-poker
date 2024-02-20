@@ -13,3 +13,5 @@
 * 2024/02/10 : <b> 1h </b> <br/>        Travail individuel: <i> Designé des concept pour les cart de jeu </i>
 
 * 2024/02/13 : <b> 3h </b> <br/>        Travail en groupe A: <i> Designé des concept pour interface </i>
+
+* 2024/02/20 : <b> 2h </b> <br/>        Travail individuel: <i> Apprentissage </i>
