@@ -42,5 +42,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "mini-css-extract-plugin": "^2.8.0",
+    "nodemon": "^3.0.3"
   }
 }
