@@ -5,5 +5,7 @@
 -  08/02 , Réunion Discord | Finition cahier des charges : 2H
 -  13/02 , Troisième réunion TP | ajout d'une règle au jeu , début de formation en NodeJs : 3h30
 -  16/02 , formation en NodeJs : 1H
+-  18/02 , formation et mise à jour en JS : 2H
+-  20/02 , Troisième réunion TP | Spécification techniques et mise en place de la structure algorithmiques des diffèrentes règles de jeux : 4H
 
-- TOTAL:14H
+- TOTAL:20H
