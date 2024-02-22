@@ -44,3 +44,7 @@
 * 2024/02/20 : <b>1h</b> <br/> Travaille individuel : <i> Création de l'architecture basic du programme </i>
 
 * 2024/02/20 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunion hebdomadaires avec le mentor, planification de la semaine, distribustion des petites taches, réunion avec le groupe pour l'explication de architecture du projet et discussion sur les taches assignée en détaille </i>
+
+* 2024/02/21 : <b>1h</b> <br/> Travail individuel : <i> Mise en place de Trello. Ajout des tâches détaillées côté front-end et côté serveur pour cette semaine et assignation sur Trello.  </i>
+
+* 2024/02/22 : <b>1h30</b> <br/> Réunion avec le Tech Lead : <i> Discussion sur l'avancement du projet du côté technique.</i>
