@@ -20,4 +20,8 @@
 
 2024/02/20 : 3h00          Réunion création pages, distribution taches.
 
-TEMPS TOTAL: 18h00min 
+2024/02/23 : 1h30          Début page login
+
+2024/02/23 : 2h         Avancée page login + page register
+
+TEMPS TOTAL: 19h30min 
