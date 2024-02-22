@@ -48,3 +48,5 @@
 * 2024/02/21 : <b>1h</b> <br/> Travail individuel : <i> Mise en place de Trello. Ajout des tâches détaillées côté front-end et côté serveur pour cette semaine et assignation sur Trello.  </i>
 
 * 2024/02/22 : <b>1h30</b> <br/> Réunion avec le Tech Lead : <i> Discussion sur l'avancement du projet du côté technique.</i>
+
+* 2024/02/22 : <b>1h</b> <br/> Réunion avec Groupe B: <i> Observations sur l'avancement du projet. Discussions sur les algorithmes du jeu ont eu lieu.</i>
