@@ -31,3 +31,4 @@
 | Date | Temps passé | Description | Ressources|
 |:-------|:--:|:----: |--:|
 | 20 février | 3 Heures | Execution des serveurs react à 'vide'. Mise en place des pages pour le front end. Ajout des packages manquants | -- 
+| 22 février | 1 Heure | Ajout des packages.json et ajout d'une base executable pour le serveur web et l'api. Installation de git flow et réorganisation pour le git. | ...
