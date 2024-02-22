@@ -4,6 +4,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# VSCode
+.VSCode/*
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
@@ -32,3 +34,6 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# Apple 
+.DS_Store
