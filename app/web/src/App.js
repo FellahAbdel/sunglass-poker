@@ -12,10 +12,9 @@ function App() {
         <Header />
       </div>
       <Routes>
-        <Route path="/home" Component={Home}/>
-        <Route path="/acceuil" Component={acceuil}/>
-        <Route path="/login" Component={Login}/>
-        <Route path="/gameTable" Component={gameTable}/>
+        <Route path="/home" Component={Home} />
+        <Route path="/login" Component={acceuil} />
+        <Route path="/gameTable" Component={gameTable} />
       </Routes>
     </Router>
   );
