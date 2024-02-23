@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Login from "../login/Login";
 import Signup from "../signup/Signup";
 
-const Acceuil = () => {
+const Accueil = () => {
   const [isLoginVisible, setLoginVisible] = useState(false);
   const [isSignupVisible, setSignupVisible] = useState(false);
 
@@ -37,4 +37,4 @@ const Acceuil = () => {
   );
 };
 
-export default Acceuil;
+export default Accueil;

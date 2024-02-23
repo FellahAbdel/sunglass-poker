@@ -1,4 +1,4 @@
 import React from 'react';
-import Acceuil from '../components/acceuil/acceuil';
+import Accueil from '../components/accueil/accueil';
 
-export const acceuil = () => { return <Acceuil/> }
+export const accueil = () => { return <Accueil/> }
