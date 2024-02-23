@@ -37,3 +37,7 @@ typings/
 
 # Apple 
 .DS_Store
+
+#Logs not updated on Develop
+logs/*
+gantt/*
