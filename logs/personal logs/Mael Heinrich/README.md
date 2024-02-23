@@ -15,6 +15,12 @@
 2024/02/18: 7H30	Temps total passer sur blender pour le trailer(partie communication/design)
 
 2024/02/20: 3H		Réunion du mardi: Répartition des taches de la semaine, mise en place du git fonctionnel/idée design pour les pages coté Front-End et idées pour le logo du jeu.
+
+2024/02/21: 30min   Réglage problème de Git.
+
+2024/02/23: 45min   réunion 1to1 avec tentative de réglage de problème GIT.
+
+2024/02/23: 1h      Travail en duo avec victor pour régler tous les problèmes Git et pour le bon fonctionnement du projet.
  	
 
-TEMPS TOTAL: 22h30min 
+TEMPS TOTAL: 24h45min 
