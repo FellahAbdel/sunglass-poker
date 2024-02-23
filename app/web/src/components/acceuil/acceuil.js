@@ -1,21 +1,40 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
-import "./acceuil.css";
-import logo from "../assets/SunGameStudio_logo.png"
+import React, { useState, useEffect } from "react";
+import Login from "../login/Login";
+import Signup from "../signup/Signup";
 
-export const acceuil = () => { 
-    return (
-        <div>
-            <div className='accueil'>
-                <img src={logo} alt="Logo de SunGamesStudio"></img>
-            </div>
-            <div className='accueil'>
-                <button className='jouer'><Link to="/login">JOUER</Link></button>
-                <button className='invite'><input type="text" placeholder="Code d'invitation"></input></button>
-                <img src="../../../../../design/SunGlassPoker_logo.png" alt="Logo de SunGlassPoker"></img>
-            </div>
-        </div>
-    )
-}
+const Acceuil = () => {
+  const [isLoginVisible, setLoginVisible] = useState(false);
+  const [isSignupVisible, setSignupVisible] = useState(false);
 
-export default acceuil;
+  const handleLoginClick = () => {
+    setLoginVisible(true);
+    setSignupVisible(false);
+  };
+
+  const handleSignupClick = () => {
+    setLoginVisible(false);
+    setSignupVisible(true);
+  };
+
+  const handleCloseWindows = () => {
+    setLoginVisible(false);
+    setSignupVisible(false);
+  };
+
+  return (
+    <div>
+      <h1>Bienvenue sur notre site</h1>
+      <button onClick={handleLoginClick}>Connexion</button>
+      <button onClick={handleSignupClick}>Créer un compte</button>
+
+      {isLoginVisible && (
+        <Login onClose={handleCloseWindows} onSignupClick={handleSignupClick} />
+      )}
+      {isSignupVisible && (
+        <Signup onClose={handleCloseWindows} onLoginClick={handleLoginClick} />
+      )}
+    </div>
+  );
+};
+
+export default Acceuil;
