@@ -15,11 +15,12 @@
 
 ## Week 3 - _Total:_
 
-| Date  | Description                                                                                    | Time Spent | Resources |
-| ----- | ---------------------------------------------------------------------------------------------- | ---------- | --------- |
-| 19/02 | Figma Design (login & sign up page)                                                            | 2h30       |           |
-| 20/02 | React Tutorial Review                                                                          | 7h30       |           |
-| 21/02 | Create button component and prototype in figma - Watch some tutorials on YouTube (Material UI) | 4h         |           |
-| 22/02 | Meeting with the project Manager I asked her some technical questions                          | 1h30       |           |
-| 22/02 | Work on the IHM add pop up box once clicked on settings button                                 | 2h         |           |
-| 22/02 | Meeting with team B discuss and write the technical specification (algorithm - OOP)            | 2h30       |           |
+| Date  | Description                                                                                        | Time Spent | Resources |
+| ----- | -------------------------------------------------------------------------------------------------- | ---------- | --------- |
+| 19/02 | Figma Design (login & sign up page)                                                                | 2h30       |           |
+| 20/02 | React Tutorial Review                                                                              | 7h30       |           |
+| 21/02 | Create button component and prototype in figma - Watch some tutorials on YouTube (Material UI)     | 4h         |           |
+| 22/02 | Meeting with the project Manager I asked her some technical questions                              | 1h30       |           |
+| 22/02 | Work on the IHM add pop up box once clicked on settings button                                     | 2h         |           |
+| 22/02 | Meeting with team B discuss and write the technical specification (algorithm - OOP)                | 2h30       |           |
+| 23/02 | Finish discussion with team B about the technical specification and shared tasks (algorithm - OOP) | 2h50       |           |
