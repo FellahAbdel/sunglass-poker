@@ -20,8 +20,10 @@
 
 2024/02/20 : 3h00          Réunion création pages, distribution taches.
 
-2024/02/23 : 1h30          Début page login
+2024/02/22 : 1h30          Début page login
 
-2024/02/23 : 2h         Avancée page login + page register
+2024/02/22 : 2h         Avancée page login + page register
 
-TEMPS TOTAL: 19h30min 
+2024/02/23 : 3h         Réorganisation pages login et signup
+
+TEMPS TOTAL: 22h30min 
