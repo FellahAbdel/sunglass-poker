@@ -17,3 +17,5 @@
 * 2024/02/13 : <b> 2h </b> <br/>        Travail individuel: <i> Refining the concept design </i>
 
 * 2024/02/20 : <b> 3h </b> <br/>        Travail en TP: <i> Apprentissage de REACT et creation de base de front </i>
+
+* 2024/02/24 : <b> 15min </b> <br/>     Reunion avec chef de projet: <i> distribution de tache et questions sur React </i>
