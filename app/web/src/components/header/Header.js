@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 const Header = () => {
 	return (
 		<header className='header'>
+			<h1>WOUAI</h1>
 			<nav>
 				<Link to="/">Accueil</Link>
 				<Link to="/home">/home</Link>
