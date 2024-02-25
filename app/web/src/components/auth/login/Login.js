@@ -35,8 +35,8 @@
 // export default Login;
 
 import React from "react";
-import "./login.css";
-import LoginBox from "./LoginBox";
+import "../login.css";
+import LoginBox from "../LoginBox";
 
 const Login = ({ onClose, onSignupClick }) => {
   return (
