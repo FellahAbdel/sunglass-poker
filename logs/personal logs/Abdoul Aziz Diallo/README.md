@@ -24,3 +24,5 @@
 | 22/02 | Work on the IHM add pop up box once clicked on settings button                                     | 2h         |           |
 | 22/02 | Meeting with team B discuss and write the technical specification (algorithm - OOP)                | 2h30       |           |
 | 23/02 | Finish discussion with team B about the technical specification and shared tasks (algorithm - OOP) | 2h50       |           |
+| 24/02 | Angela Yu React tutorial and some practical exercice                                               | 3h         |           |
+| 25/02 | Almost finish the 8h Angela's tutorial on udemy & improve signup & login page                      | 4h         |           |
