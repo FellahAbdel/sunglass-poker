@@ -84,7 +84,8 @@
 }
 
 .login-button:hover {
-  background-color: rgba(150, 150, 100, 1);
+  color: white;
+  background-color: #8f6904;
 }
 
 .forgot-button {
