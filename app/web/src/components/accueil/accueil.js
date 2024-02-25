@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Login from "../login/Login";
-import Signup from "../signup/Signup";
+import Login from "../auth/login/Login";
+import Signup from "../auth/signup/Signup";
 
 const Accueil = () => {
   const [isLoginVisible, setLoginVisible] = useState(false);
