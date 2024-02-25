@@ -1,14 +1,10 @@
-// SignUp.js
+// forgotPassword.jsx
 import React, { useState } from "react";
-import logo from "./logo.png";
-import "./signup.css"; // Import CSS file
+import logo from "../login/logo.png";
+import "./resetPassword.css"; // Import CSS file
 
-const SignUp = ({
-  showLogin,
-  hideAll,
-  showForgotPassword,
-  showResetPassword,
-}) => {
+const Login = ({ showLogin, showSignUp, hideAll, showForgotPassword, showResetPassword    }) => {
+  // Component code
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
@@ -16,30 +12,29 @@ const SignUp = ({
   return (
     <div className="container" id="login-box">
       <div className="overlay" onClick={hideAll}>
-        <h1 className="text">Create your account</h1>
+        <h1 className="text">Reset your password</h1>
         <div className="login-box" id="login-box" onClick={handleBoxClick}>
           <img src={logo} alt="Logo du site" className="logo" />
-          <input type="text" placeholder="Username" className="input" />
-          <input type="email" placeholder="Email" className="input" />
+          <p>Enter your new password here</p>
           <input type="password" placeholder="Password" className="input" />
           <input
             type="passwordrepeat"
             placeholder="Repeat your password"
             className="input"
           />
-          <button className="button login-button">Register</button>
+          <button className="button login-button" onClick={hideAll}>
+            Send
+          </button>
           <p></p>
-          <button className="button login-button google-button">
-            Register with google
-          </button>
-          <p> </p>
           <button className="forgot-button" onClick={showLogin}>
-            Already have an account ?
+            Return to connection menu
           </button>
+          
+          <p></p>
         </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default Login;
