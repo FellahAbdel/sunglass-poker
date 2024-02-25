@@ -13,7 +13,7 @@
 | 16/02 | Write technical specification with the Project Manager       | 3h         |                                                                                                                                              |
 | 18/02 | Review EJS and read React hand written course                | 1h20       |                                                                                                                                              |
 
-## Week 3 - _Total:_
+## Week 3 - _Total: 31.70 h_
 
 | Date  | Description                                                                                        | Time Spent | Resources |
 | ----- | -------------------------------------------------------------------------------------------------- | ---------- | --------- |
@@ -26,3 +26,4 @@
 | 23/02 | Finish discussion with team B about the technical specification and shared tasks (algorithm - OOP) | 2h50       |           |
 | 24/02 | Angela Yu React tutorial and some practical exercice                                               | 3h         |           |
 | 25/02 | Almost finish the 8h Angela's tutorial on udemy & improve signup & login page                      | 4h         |           |
+| 25/02 | Re-adapt Noe's web design to the figma design                                                      | 30m        |           |
