@@ -70,7 +70,8 @@
 }
 
 .button {
-  width: 100%;
+  width: 106%;
+  border-radius: 6px;
   height: 40px;
   font-size: 20px;
   border: 1px solid #ccc;
