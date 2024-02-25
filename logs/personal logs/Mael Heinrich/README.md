@@ -20,7 +20,9 @@
 
 2024/02/23: 45min   réunion 1to1 avec tentative de réglage de problème GIT.
 
-2024/02/23: 1h      Travail en duo avec victor pour régler tous les problèmes Git et pour le bon fonctionnement du projet.
+2024/02/23: 1h30    Travail en duo avec victor pour régler tous les problèmes Git et pour le bon fonctionnement du projet.
  	
+2024/02/25: 1H      Travail solo sur le js et le css de la page d'acceuil et navbar
 
-TEMPS TOTAL: 24h45min 
+
+TEMPS TOTAL: 26h15min 
