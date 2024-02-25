@@ -1,9 +1,9 @@
 // LoginPage.js
 import React, { useState } from "react";
-import Login from "../components/Login/Login";
-import SignUp from "../components/SignUp/SignUp";
+import Login from "../components/login/Login";
+import SignUp from "../components/signup/Signup";
 
-const loginPage = () => {
+const LoginPage = () => {
   const [isLoginVisible, setLoginVisible] = useState(false);
   const [isSignUpVisible, setSignUpVisible] = useState(false);
 
@@ -39,4 +39,4 @@ const loginPage = () => {
   );
 };
 
-export default loginPage;
+export default LoginPage;
