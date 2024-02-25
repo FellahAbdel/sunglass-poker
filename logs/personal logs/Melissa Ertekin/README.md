@@ -49,4 +49,10 @@
 
 * 2024/02/22 : <b>1h30</b> <br/> Réunion avec le Tech Lead : <i> Discussion sur l'avancement du projet du côté technique.</i>
 
-* 2024/02/22 : <b>1h</b> <br/> Réunion avec Groupe B: <i> Observations sur l'avancement du projet. Discussions sur les algorithmes du jeu ont eu lieu.</i>
+* 2024/02/22 : <b>1h</b> <br/> Réunion avec Groupe B : <i> Observations sur l'avancement du projet. Discussions sur les algorithmes du jeu ont eu lieu.</i>
+
+* 2024/02/23 : <b>1h30</b> <br/> Réunion avec Groupe A : <i>Observations sur l'avancement du projet. Correction des erreurs de structure dans le code.</i>
+
+* 2024/02/23 : <b>30 mins </b> <br/> Réunion avec Groupe B : <i> Observations sur l'avancement du projet. Discussions sur les algorithmes du jeu ont eu lieu. </i>
+
+* 2024/02/25 : <b>2h</b> <br/> Travail individuel : <i> Surveillance du projet & des journaux. Demandes de feedback personnalisé selon leur avancement. Rédaction du compte-rendu pour les réunions de cette semaine.  </i> 
