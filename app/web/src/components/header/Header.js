@@ -5,14 +5,14 @@ import {Link} from 'react-router-dom'
 const Header = () => {
 	return (
 		<header className='header'>
-			<h1>WOUAI</h1>
-			<nav>
-				<Link to="/">Accueil</Link>
-				<Link to="/home">/home</Link>
-				<Link to="/login">/login</Link>
-				<Link to="/gameTable">/gameTable</Link>
+			<button><Link to="/home">TEMPORAIRE</Link></button>
 
-				<button>Connexion</button>
+			<nav>
+				<button>Pseudo</button>
+
+				<button><Link to="">Tutoriel</Link></button>
+
+				<button><Link to="/login">Connexion</Link></button>
 			</nav>
 		</header>
 	);
