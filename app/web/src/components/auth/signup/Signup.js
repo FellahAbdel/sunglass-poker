@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../login/login.css";
-import logo from "../login/logo.png";
+import "../login.css";
+import logo from "../logo.png";
+import InputField from "../InputField";
+import Button from "../Button";
 
 const Signup = ({ onClose, onLoginClick }) => {
   const handleBoxClick = (event) => {
@@ -14,23 +16,19 @@ const Signup = ({ onClose, onLoginClick }) => {
         <h1 className="text">Create your account</h1>
         <div className="login-box" id="login-box" onClick={handleBoxClick}>
           <img src={logo} alt="Logo du site" className="logo" />
-          <input type="text" placeholder="Username" className="input" />
-          <input type="email" placeholder="Email" className="input" />
-          <input type="password" placeholder="Password" className="input" />
-          <input
-            type="passwordrepeat"
-            placeholder="Repeat your password"
-            className="input"
-          />
-          <button className="button login-button">Register</button>
+          <InputField type="text" placeholder="Username" />
+          <InputField type="email" placeholder="Email" />
+          <InputField type="password" placeholder="Password" />
+          <InputField type="password" placeholder="Repeat your password" />
+          <Button className="button login-button">Register</Button>
           <p>Already have an account ?</p>
-          <button className="button register-button" onClick={onLoginClick}>
+          <Button className="button register-button" onClick={onLoginClick}>
             Login
-          </button>
+          </Button>
           <p>or</p>
-          <button className="button login-button google-button">
+          <Button className="button login-button google-button">
             Register with google
-          </button>
+          </Button>
         </div>
       </div>
     </div>
