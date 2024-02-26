@@ -1,147 +1,60 @@
 .bonusPanel{
-
-  width:max-content;
-  height: max-content;
-
   border-style: none;
   border-radius: 10px;
-  border-width: medium;
-  padding: 1% ;
-
-  display:grid;
-  position: relative;
-
-  align-items: center;
+  position:fixed;
+  box-shadow: 0px 0px 5px black;
+  padding: 5px;
 }
 
 img.box{
   padding: 10px;
   width: 30px;
-  max-width: 100%;
   height: auto;
 }
 
-.box {
-  height: 50px;
-  border-style: none;
+.box{
+  position: relative;
+  height: 60px;
   border-radius: 5px;
   border-width: 2px;
   border-color: black;
-  margin: 1px;
-  background-color: aliceblue;
+  background-color:aliceblue;
+  flex:1 0;
+  margin: 3px;
 }
 
+.box-1{
+  background-image: linear-gradient(0deg, rgb(0, 255, 0) 20%, rgb(240, 248, 255) 50%);
+  transition: background-image 1s ease;
+}
+.box-2{
+  background-image: linear-gradient(0deg, rgb(0, 255, 0) 50%, rgb(240, 248, 255) 70%);
+  transition: background-image 1s ease;
+}
+.box-3{
+  background-color: rgb(0, 255, 0);
+  transition: background-color 1s ease;
+}
 
 
 .bonusButton{
-  width: 100%;
-  margin: 1px;
-  top: 100px;
-  position: absolute;
+  font-weight: bold;
+  font-style: italic;
 
-}
+  background-color: rgb(141, 0, 0);
+  box-shadow: 0px 0px 10px rgb(42, 0, 0);
+  color: aliceblue;
+  border-radius: 10px;
 
-.buttonPushable {
-  position: relative;
-  border: none;
-  background: transparent;
-  padding: 0;
+  text-align: center;
+  padding: 5px;
+  margin: 2px;
+
   cursor: pointer;
-  outline-offset: 4px;
-  transition: filter 250ms;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
 }
 
-.buttonShadow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: hsl(0deg 0% 0% / 0.25);
-  will-change: transform;
-  transform: translateY(2px);
-  transition:
-      transform
-      600ms
-      cubic-bezier(.3, .7, .4, 1);
+.bonusButton:hover{
+  box-shadow: inset 0 0 10px black;
 }
 
-.buttonEdge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: linear-gradient(
-    to left,
-    hsl(340deg 100% 16%) 0%,
-    hsl(340deg 100% 32%) 8%,
-    hsl(340deg 100% 32%) 92%,
-    hsl(340deg 100% 16%) 100%
-  );
-}
-
-.buttonFront {
-  display: block;
-  position: relative;
-  padding: 12px 27px;
-  width: 100%;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  color: white;
-  background: hsl(345deg 100% 47%);
-  will-change: transform;
-  transform: translateY(-4px);
-  transition:
-    transform
-    600ms
-    cubic-bezier(.3, .7, .4, 1);
-}
-
-@media (min-width: 768px) {
-  .button-82-front {
-    font-size: 1.25rem;
-    padding: 12px 42px;
-  }
-}
-
-.buttonPushable:hover {
-  filter: brightness(110%);
-  -webkit-filter: brightness(110%);
-}
-
-.buttonPushable:hover .buttonFront {
-  transform: translateY(-6px);
-  transition:
-    transform
-    250ms
-    cubic-bezier(.3, .7, .4, 1.5);
-}
-
-.buttonPushable:active .buttonFront {
-  transform: translateY(-2px);
-  transition: transform 34ms;
-}
-
-.buttonPushable:hover .buttonShadow {
-  transform: translateY(4px);
-  transition:
-    transform
-    250ms
-    cubic-bezier(.3, .7, .4, 1.5);
-}
-
-.buttonPushable:active .buttonShadow {
-  transform: translateY(1px);
-  transition: transform 34ms;
-}
-
-.buttonPushable:focus:not(:focus-visible) {
-  outline: none;
-}
 

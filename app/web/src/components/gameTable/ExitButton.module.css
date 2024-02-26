@@ -29,4 +29,6 @@
     filter:brightness(90%);
     cursor: pointer;
     color: black;
+    box-shadow: -2px 2px 10px #884947;
+
 }

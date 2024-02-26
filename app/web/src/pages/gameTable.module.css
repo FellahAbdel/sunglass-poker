@@ -1,5 +1,4 @@
 .mainContainer{
-    display: inline;
     position: relative;
     margin:0;
     padding: 0;
@@ -7,17 +6,10 @@
 
 .navbar{
     position: fixed;
-    top: 0;
 }
 
 .bonusPanel{
-    position: absolute;
     bottom: 0;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: aqua;
-    box-sizing: border-box;
 }
 
 

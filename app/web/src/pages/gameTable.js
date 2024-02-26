@@ -7,7 +7,7 @@ function gameTable() {
   return (
     <div className={`${styles.mainContainer}`}> 
       <div className={`${styles.Navbar}`}><Navbar/></div>
-      {/* <div className={`${styles.BonusPanel}`}><BonusPanel/></div> */}
+      <div className={`${styles.BonusPanel}`}><BonusPanel/></div>
     </div>
   );
 }
