@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 const Header = () => {
 	return (
 		<header className='header'>
-			<button><Link to="/home">TEMPORAIRE</Link></button>
+			<button><Link to="/acceuil">TEMPORAIRE</Link></button>
 
 			<nav>
 				<button>Pseudo</button>
