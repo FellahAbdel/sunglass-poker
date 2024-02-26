@@ -4,11 +4,11 @@ import "./acceuil.css";
 
 export const acceuil = () => { 
     return (
-        <div>
-            <div>
+        <div className='accueil'>
+            <div className='accueil'>
                 <img src="../../../../../design/SunGameStudio_logo.png" alt="Logo de SunGamesStudio"></img>
             </div>
-            <div>
+            <div className='accueil'>
                 <button><Link to="">JOUER</Link></button>
                 <button><Link to="">Code invite</Link></button>
                 <img src="../../../../../design/SunGlassPoker_logo.png" alt="Logo de SunGlassPoker"></img>
