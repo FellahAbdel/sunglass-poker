@@ -1,12 +1,12 @@
 /* Styles pour le conteneur principal */
-div {
+div.accueil {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Styles pour le premier div contenant le logo SunGameStudio */
-div > div:first-child {
+/* Styles pour le premier div.accueil contenant le logo SunGameStudio */
+div.accueil > div:first-child {
     text-align: center;
 }
 
@@ -16,9 +16,9 @@ button:nth-child(2) {
 }
 
 /* Styles pour le deuxième bouton et le logo SunGlassPoker */
-div > div:last-child {
+div.accueil > div:last-child {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-top: 10px; /* Espace entre le premier div et le deuxième div */
+    margin-top: 10px; /* Espace entre le premier div.accueil et le deuxième div.accueil */
 }
