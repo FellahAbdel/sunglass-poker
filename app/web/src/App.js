@@ -4,6 +4,7 @@ import Header from './components/header/Header';
 import Home from './pages/home';
 import Login from './pages/login';
 import gameTable from './pages/gameTable';
+import acceuil from './components/acceuil/acceuil';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <div className="App"><Header/></div>
       <Routes>
         <Route path="/home" Component={Home}/>
+        <Route path="/acceuil" Component={acceuil}/>
         <Route path="/login" Component={Login}/>
         <Route path="/gameTable" Component={gameTable}/>
       </Routes>
