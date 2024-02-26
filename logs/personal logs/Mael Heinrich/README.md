@@ -24,5 +24,6 @@
  	
 2024/02/25: 1H      Travail solo sur le js et le css de la page d'acceuil et navbar
 
+2024/02/26: 30min   Réarrangement des fichiers+avancement du CSS de acceuil 
 
-TEMPS TOTAL: 26h15min 
+TEMPS TOTAL: 26h45min 
