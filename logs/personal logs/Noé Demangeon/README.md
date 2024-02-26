@@ -28,4 +28,6 @@
 
 2024/02/25 : 2h         Réorganisation pages, découverte MUI, création pages réinitialisation mdp
 
-TEMPS TOTAL: 24h30min 
+2024/02/26 : 3h30h         Réorganisation, découpage en objets
+
+TEMPS TOTAL: 28h00min 
