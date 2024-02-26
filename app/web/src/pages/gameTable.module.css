@@ -1,11 +1,9 @@
 .mainContainer{
     position: relative;
-    margin:0;
-    padding: 0;
 }
 
 .navbar{
-    position: fixed;
+    position: none;
 }
 
 .bonusPanel{

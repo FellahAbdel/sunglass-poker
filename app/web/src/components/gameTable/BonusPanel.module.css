@@ -1,4 +1,6 @@
 .bonusPanel{
+  bottom:10px; /*temprory*/
+  left:10px;
   border-style: none;
   border-radius: 10px;
   position:fixed;
@@ -13,7 +15,6 @@ img.box{
 }
 
 .box{
-  position: relative;
   height: 60px;
   border-radius: 5px;
   border-width: 2px;
