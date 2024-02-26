@@ -1,0 +1,45 @@
+.table{
+    border-style: solid;
+    border-radius: 150px;
+
+    width: 70%;
+    height: 300px;
+
+    display: flex;
+    margin: 15%;
+    align-items: center;
+
+    box-shadow: inset 0 0 50px black;
+    background-color: #204f11;
+
+}
+
+
+.cardsPlacement{
+    border-style:solid;
+    border-width: 1px;
+    border-color: #477538;
+    height: 40px;
+    width: 32%;
+    margin: 0 0 0 30%;
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    font: italic small-caps  16px/2 cursive;
+}
+.sunGlassText{
+    color:aliceblue
+}
+
+
+.cardDuckPlacement {
+    border-style:solid;
+    border-width: 1px;
+    border-color: #477538;
+    height: 40px;
+    width: 6%;
+    margin-left: 10px;
+}
+

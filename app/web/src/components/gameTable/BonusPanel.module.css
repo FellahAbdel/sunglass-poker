@@ -22,6 +22,8 @@ img.box{
   background-color:aliceblue;
   flex:1 0;
   margin: 3px;
+
+  box-shadow: 0 0 4px black;
 }
 
 .box-1{
