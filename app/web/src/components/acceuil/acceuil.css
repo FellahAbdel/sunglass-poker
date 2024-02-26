@@ -9,16 +9,46 @@ div.accueil {
 div.accueil > div:first-child {
     text-align: center;
 }
-
-/* Styles pour le bouton JOUER */
-button:nth-child(2) {
-    margin-top: 10px; /* Espace entre le premier bouton et le logo SunGlassPoker */
+div.accueil button.jouer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 100px 250px;
+    margin: 0 5px;
+    background-color: #404040; /* Couleur de fond des boutons */
+    color: white;
+    border: none;
+    border-radius: 32px; /* Coins arrondis */
+    cursor: pointer;
 }
 
-/* Styles pour le deuxième bouton et le logo SunGlassPoker */
-div.accueil > div:last-child {
+div.accueil button.jouer a{
+    text-decoration: none;
+
+}
+div.accueil button.jouer a:visited{
+    color: white;
+}
+
+div.accueil button.invite {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-top: 10px; /* Espace entre le premier div.accueil et le deuxième div.accueil */
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 10px 25px;
+    margin: 0 5px;
+    background-color: #404040; /* Couleur de fond des boutons */
+    color: white;
+    border: none;
+    border-radius: 32px; /* Coins arrondis */
+    cursor: pointer;
+}
+
+div.accueil button.invite a{
+    text-decoration: none;
+
+}
+div.accueil button.invite a:visited{
+    color: white;
 }
