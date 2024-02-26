@@ -26,4 +26,6 @@
 
 * 2024/02/25 : <b> 3h </b> <br/>        Travail individuel: <i> creation des compenents pour bonus et navbar + apprentissage </i>
 
-* 2024/02/26 : <b> 7h </b> <br/>        Travail individuel: <i> navebar contenant les bottoms profile settings exit et chips est fait + bonus Panel est fait avec system visuel des cart chargé + table simple et backdrop basic </i>
+* 2024/02/26 : <b> 7h </b> <br/>        Travail individuel: <i> apprentissage de css + navbar contenant les buttoms profile ,settings ,exit et chips est fait + bonus Panel est fait avec system visuel des cart chargé + table simple et backdrop basic </i>
+
+total: 32h45min
