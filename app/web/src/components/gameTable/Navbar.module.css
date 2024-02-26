@@ -1,0 +1,22 @@
+.navbar{
+    display:inline-flex;
+    align-items: left;
+    margin: 0px;
+    flex-direction: column;
+}
+.profile{
+    top: 10px;
+}
+.settings{
+    top: 10px;
+}
+
+
+.chipsCash{
+    margin:0;
+}
+.exit{
+    margin:0;
+}
+
+

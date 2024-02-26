@@ -1,13 +1,13 @@
-// Import React and any other dependencies
 import React from 'react';
+import styles from './gameTable.module.css';
 import Navbar from '../components/gameTable/Navbar';
-import BonusWindow from '../components/gameTable/BonusPanel';
+import BonusPanel from '../components/gameTable/BonusPanel';
 
 function gameTable() {
   return (
-    <div> 
-      <Navbar/>
-      <BonusWindow/>
+    <div className={`${styles.mainContainer}`}> 
+      <div className={`${styles.Navbar}`}><Navbar/></div>
+      {/* <div className={`${styles.BonusPanel}`}><BonusPanel/></div> */}
     </div>
   );
 }

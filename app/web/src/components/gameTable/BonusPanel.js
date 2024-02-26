@@ -1,20 +1,26 @@
 import React from "react";
-import './BonusPanel.css';
+import styles from './BonusPanel.module.css';
+
+import Clubs from './images/card_type/Clubs.png';
+import Diamonds from './images/card_type/Diamons.png';
+import Hearts from './images/card_type/Hearts.png';
+import Spades from './images/card_type/Spades.png';
 
 function BonusPanel(){
     return (
-        <div className="bonus-panel">
-            <div className="card-boxes">
-                <img src="images/card_type/Hearts.png" alt="Heart" className="box"></img>
-                <img src="images/card_type/Diamonds.png" alt="Diamond" className="box"></img>
-                <img src="images/card_type/Spades.png" alt="Spade" className="box"></img>
-                <img src="images/card_type/Clubs.png" alt="Club" className="box"></img>
+        <div className={`${styles.bonusPanel}`}>
+            <div className={`${styles.cardPanel}`}>
+                <img src={Hearts} alt="Heart" className={`${styles.box}`}></img>
+                <img src={Diamonds} alt="Diamond" className={`${styles.box}`}></img>
+                <img src={Spades} alt="Spade" className={`${styles.box}`}></img>
+                <img src={Clubs} alt="Club" className={`${styles.box}`}></img>
             </div>
-            <div className="bonus-button">
-                <button class="button-82-pushable">
-                <span class="button-82-shadow"></span>
-                <span class="button-82-edge"></span>
-                <span class="button-82-front text">
+
+            <div className={`${styles.bonusButton}`}>
+                <button class={`${styles.buttonPushable}`}>
+                <span class={`${styles.buttonShadow}`}></span>
+                <span class={`${styles.buttonEdge}`}></span>
+                <span class={`${styles.buttonFront}`}>
                     Bonus
                 </span>
                 </button>

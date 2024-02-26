@@ -1,44 +1,19 @@
-import React ,{ useState, useEffect }  from "react";
-import './Navbar.css';
-import { Link } from "react-router-dom";
+import React  from "react";
+import styles from './Navbar.module.css';
+import ChipsCash from './ChipsCash';
+import ProfileButton from './ProfileButton';
+import SettingsButton from './SettingsButton';
+import ExitButton from './ExitButton';
 
-
-
-function Navbar(){
-
-    const Chips = 99999;
-    {/*
-    const Chips = () => {
-        const [number, setNumber] = useState(null); 
-        useEffect(() => {
-          fetch('your_api_endpoint_here')
-            .then(response => response.json())
-            .then(data => setNumber(data.number))
-            .catch(error => console.error('Error fetching number:', error));
-        }, []); 
-    }; */}
- 
+function Navbar(){ 
     return (
-        <>
-        <nav className="navbar">
-            <div className="navbar-container">
-                <div className="profile-panel">
-                    <Link to="">
-                        <img src="images/icons/profile-icon-black.png" alt="Icon" className="icon"/>
-                        <span>Profile</span>  
-                    </Link>
-                </div>
-            </div>
-            
-            <div className="current-chips-panel">
-                {Chips}
-            </div>
-
-        </nav>
-        
-        </>
+        <div className={`${styles.navbar}`}>
+            <div className={`${styles.chipsCash}`}><ChipsCash/></div>
+            <div className={`${styles.profile}`}><ProfileButton/></div>
+            <div className={`${styles.exit}`}><ExitButton/></div>
+            <div className={`${styles.settings}`}><SettingsButton/></div>
+        </div>
     )
-
 }
 
 export default Navbar;
