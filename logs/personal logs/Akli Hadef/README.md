@@ -9,5 +9,5 @@
 -  20/02 , Troisième réunion TP | Spécification techniques et mise en place de la structure algorithmiques des diffèrentes règles de jeux : 4H
 -  22/2 , Réunuin ,suite de la specification du backend et du deroulement d'une partie : 2H.
 - 23/2 , finition de la spéc du backend pour la premiere version du jeu  et attribution des taches au membres du groupes : 2H30
-
-- TOTAL:24H30
+-  27/2 , Quatrième réunion TP | début code des fonctions de combinaisons, stund-meeting , échange d'idées avec les membres back-end : 4H
+- TOTAL:28H30
