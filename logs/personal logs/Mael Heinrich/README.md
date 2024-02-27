@@ -26,4 +26,6 @@
 
 2024/02/26: 30min   Réarrangement des fichiers+avancement du CSS de acceuil 
 
-TEMPS TOTAL: 26h45min 
+2024/02/27: 1h      Amélioration du css+ modification du head de la page
+
+TEMPS TOTAL: 28h15min 
