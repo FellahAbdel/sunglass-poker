@@ -4,12 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
 document.title = 'SunGlassPoker'; // Remplacez 'Nouveau Titre' par le titre souhaité
 
-const link = document.createElement('link');
-link.rel = 'icon';
-link.href = './components/assets/SunGameStudio_logo.ico'; // Remplacez par le chemin vers la nouvelle icône
-document.head.appendChild(link);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
