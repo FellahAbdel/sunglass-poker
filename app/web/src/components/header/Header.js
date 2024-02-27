@@ -20,7 +20,6 @@ const [isWindowOpen, setIsWindowOpen] = useState(false);
 	return (
 
 		<header className='header'>
-			<button><Link to="/acceuil">TEMPORAIRE</Link></button>
 
 			<nav>
 				<button>Pseudo</button>
