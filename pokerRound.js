@@ -99,7 +99,7 @@ class PokerRound {
       }
       // Si nous avons trouvé une quinte flush royale, renvoyer les cartes
       if (royalFlush.length === 5) {
-        return royalFlush;
+        return { handType: royalFlush, weight: 10 };
       }
     }
     // Si aucune quinte flush royale n'est trouvée, renvoyer false
@@ -256,7 +256,7 @@ function isRoyalFlush(cards) {
       const royalCard = cards.find(
         (card) => card.symbol === symbol && card.value === value
       );
-      console.log(royalCard);
+      //   console.log(royalCard);
       if (royalCard) {
         royalFlush.push(royalCard);
       } else {
@@ -265,7 +265,7 @@ function isRoyalFlush(cards) {
     }
     // Si nous avons trouvé une quinte flush royale, renvoyer les cartes
     if (royalFlush.length === 5) {
-      return royalFlush;
+      return { royalFlushHand: royalFlush, weight: 10 };
     }
   }
   // Si aucune quinte flush royale n'est trouvée, renvoyer false
