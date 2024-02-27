@@ -13,6 +13,7 @@ function App() {
       </div>
       <Routes>
         <Route path="/home" Component={Home} />
+        <Route path="/acceuil" Component={acceuil}/>
         <Route path="/login" Component={Login} />
         <Route path="/gameTable" Component={gameTable} />
       </Routes>
