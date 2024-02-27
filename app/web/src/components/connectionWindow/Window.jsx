@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from "react";
 import "./window.css";
 import { Link } from "react-router-dom";
-import LoginWindow from "./pages/LoginWindow";
-import SignUpWindow from "./pages/SignupWindow";
-import ResetPasswordWindow from "./pages/ResetPassword";
-import ForgotPassword from "./pages/ForgotPassword";
+import LoginWindow from "./WindowContent/LoginWindow";
+import SignUpWindow from "./WindowContent/SignupWindow";
+import ResetPasswordWindow from "./WindowContent/ResetPassword";
+import ForgotPassword from "./WindowContent/ForgotPassword";
 
 
 const Window = ({ onClose, windowType }) => {
