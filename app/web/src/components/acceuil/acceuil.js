@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import "./acceuil.css";
 import LogoComponent from "../logo/logo";
+import Button from "../button/buttons";
 
 
 export const acceuil = () => { 
@@ -12,9 +13,12 @@ export const acceuil = () => {
             </div>
             <div className='accueil'>
 
-                <button className='jouer'><Link to="/login">JOUER</Link></button>
-                <button className='invite'><input type="text" placeholder="Code d'invitation"></input></button>
-                <img src="../../../../../design/SunGlassPoker_logo.png" alt="Logo de SunGlassPoker"></img>
+                <Button 
+				className="cta" 
+				label="JOUER" 
+				/>
+                
+                <LogoComponent className="logoacceuil"/>
             </div>
         </div>
     )
