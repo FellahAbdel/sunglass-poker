@@ -71,7 +71,37 @@ class PokerRound {
    * OUT : objet { poid : NUMBER, type : STRING }
    * FUNCTION : trouve dans les 7 cartes la main la plus puissante
    */
-  combinaison({ tableau7cartes, idJoueur }) {}
+  combinaison({ tableau7cartes, idJoueur }) {
+    // Triez les cartes par valeur (de la plus basse à la plus élevée)
+    tableau7cartes.sort((a, b) => a.value - b.value);
+
+    // Appelez des fonctions pour vérifier chaque type de main dans l'ordre de puissance
+    const functionsToCall = [
+      this.isRoyalFlush,
+      this.isStraightFlush,
+      this.isFourOfAKind,
+      this.isFullHouse,
+      this.isFlush,
+      this.isStraight,
+      this.isThreeOfAKind,
+      this.isTwoPair,
+      this.isOnePair,
+      this.isHighCard,
+    ];
+
+    let bestHand = { handType: [], weight: -1 };
+
+    for (let fn of functionsToCall) {
+      const hand = fn(tableau7cartes);
+      if (hand) {
+        if (hand.weight > bestHand.weight) {
+          bestHand = hand;
+        }
+      }
+    }
+
+    return bestHand;
+  }
 
   /*
    * IN : tableau de 7 cartes
