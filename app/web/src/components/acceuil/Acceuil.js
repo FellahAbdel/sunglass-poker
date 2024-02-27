@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import "./acceuil.css";
-import LogoComponent from "../logo/logo";
-import Button from "../button/buttons";
+import LogoComponent from "../logo/Logo";
+import Button from "../button/Buttons";
 
 
 export const acceuil = () => { 

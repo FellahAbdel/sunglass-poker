@@ -3,7 +3,7 @@ import "./header.css";
 import {Link} from 'react-router-dom'
 import React, { useState } from "react";
 import Window from "../connectionWindow/Window";
-import Button from "../button/buttons";
+import Button from "../button/Buttons";
 
 
 const Header = () => {

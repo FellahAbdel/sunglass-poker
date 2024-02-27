@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header";
-import acceuil from './components/acceuil/acceuil';
+import acceuil from './components/acceuil/Acceuil';
 
 function App() {
   return (
