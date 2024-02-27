@@ -75,8 +75,8 @@ class PokerRound {
 
   /*
    * IN : tableau de 7 cartes
-   * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
-   * FUNCTION : determine si les 7 possedent une quinte flush royale et renvoi la combianaison si elle est trouve.
+   * OUT : {[], weight}, objet contenant le tableau qui composent la main. Au plus 5 et le poids associé | False si rien trouve
+   * FUNCTION : determine si les 7 possèdent une quinte flush royale et renvoi la combinaison si elle est trouve.
    */
   isRoyalFlush(cards) {
     // Définir les symboles et valeurs des cartes royales
