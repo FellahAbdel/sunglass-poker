@@ -3,6 +3,7 @@ import "./header.css";
 import {Link} from 'react-router-dom'
 import React, { useState } from "react";
 import Window from "../connectionWindow/Window";
+import Button from "../button/buttons";
 
 
 const Header = () => {
@@ -24,10 +25,19 @@ const [isWindowOpen, setIsWindowOpen] = useState(false);
 			<nav>
 				<button>Pseudo</button>
 
-				<button><Link to="">Tutoriel</Link></button>
-
-				<button onClick={() => openWindow("signup")}>Create an account</button>
-      			<button onClick={() => openWindow("login")}>Login</button>
+				<Button onClick={() => openWindow("tuto")} 
+				className="login" 
+				label="tutoriel" 
+				/>
+				<Button onClick={() => openWindow("signup")} 
+				className="login" 
+				label="Create an account" 
+				/>
+				<Button onClick={() => openWindow("login")} 
+				className="login" 
+				label="login" 
+				/>
+      			
 		  		{isWindowOpen && <Window onClose={closeWindow} windowType={windowType} />}
 				
 			</nav>

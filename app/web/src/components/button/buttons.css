@@ -38,3 +38,25 @@
 .register-button:hover {
   background-color: rgb(255, 255, 255);
 }
+
+  
+header button {
+  padding: 15px 20px;
+  font-size: 18px;
+  margin: 0px;
+  background-color: #404040; /* Couleur de fond des boutons */
+  color: white;
+  border: none;
+  border-radius: 0px 0px 8px 8px; /* Coins arrondis */
+  cursor: pointer;
+  text-decoration: none;
+}
+header button a {
+  text-decoration: none; /* Supprimer le soulignement du lien à l'intérieur du bouton */
+  color: inherit; /* Utiliser la couleur du texte du parent (button) */
+}
+
+
+header a:visited {
+  color: white; /* Couleur du texte pour les liens visités */
+}
