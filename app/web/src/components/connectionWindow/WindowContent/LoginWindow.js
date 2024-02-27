@@ -8,8 +8,8 @@ import Text from "../../text/Text";
 const LoginWindow = ({ openSignUpWindow, openForgotPassword }) => {
   return (
     <div className="box">
-      <Text className="title" content= "Sign in to your account"/>
-      <LogoComponent className="logoconnexion"/>
+      <Text className="title" content="Sign in to your account" />
+      <LogoComponent className="logoconnexion" />
       <TextInputComponent placeholder="Username" />
       <TextInputComponent type="password" placeholder="Password" />
       <Button className="buttonconnexion login-button" label="Login" />
@@ -24,7 +24,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword }) => {
         className="buttonconnexion register-button"
         label="Register New Account"
       />
-      <Text className="littletext" content= "or"/>
+      <Text className="littletext" content="or" />
       <Button
         className="buttonconnexion login-button google-button"
         label="Sign in with google"

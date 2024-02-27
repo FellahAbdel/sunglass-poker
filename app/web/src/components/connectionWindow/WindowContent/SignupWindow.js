@@ -8,8 +8,8 @@ import Text from "../../text/Text";
 const SignUpWindow = ({ openLoginWindow }) => {
   return (
     <div className="box">
-      <Text className="title" content= "Create your account"/>
-      <LogoComponent className="logoconnexion"/>
+      <Text className="title" content="Create your account" />
+      <LogoComponent className="logoconnexion" />
       <TextInputComponent placeholder="Username" />
       <TextInputComponent type="email" placeholder="Email" />
       <TextInputComponent type="password" placeholder="Password" />

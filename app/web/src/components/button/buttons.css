@@ -158,7 +158,6 @@ path.two {
 
 /* Mixin Shadows */
 
-
 /* Base Styles */
 * {
   font-size: 10px;
@@ -270,7 +269,6 @@ button {
 }
 
 /* Fifth Button */
-
 
 .btn--5:before {
   transform: translate(-120%, -50%) translateZ(0);

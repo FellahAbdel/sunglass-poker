@@ -1,20 +1,19 @@
 /* styles.css */
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
-  
+
 .header {
-    background-color: #fece17; /* Couleur de fond jaune */
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    
+  background-color: #fece17; /* Couleur de fond jaune */
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
-  
+
 header nav {
-    display: flex;
-    justify-content: space-between; /* Aligner les boutons à gauche, au centre et à droite */
-    width: 100%; /* Assurer que la largeur de nav prend toute la largeur disponible */ 
+  display: flex;
+  justify-content: space-between; /* Aligner les boutons à gauche, au centre et à droite */
+  width: 100%; /* Assurer que la largeur de nav prend toute la largeur disponible */
 }

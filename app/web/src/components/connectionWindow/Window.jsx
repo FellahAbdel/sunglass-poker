@@ -8,7 +8,6 @@ import SignUpWindow from "./WindowContent/SignupWindow";
 import ResetPasswordWindow from "./WindowContent/ResetPassword";
 import ForgotPassword from "./WindowContent/ForgotPassword";
 
-
 const Window = ({ onClose, windowType }) => {
   const [currentWindow, setWindowType] = useState(null);
 
