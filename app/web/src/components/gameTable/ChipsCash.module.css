@@ -1,5 +1,4 @@
 .chipCashPanel {
-    left:0;
     text-align: center;
     border-radius: 0 20px 20px 20px;
 
@@ -18,7 +17,6 @@
     
     padding: 13px 14px 4px 14px;
 
-    position: absolute;
     top: 40px;
 
 }

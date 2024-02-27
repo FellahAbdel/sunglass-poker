@@ -1,0 +1,27 @@
+
+.actionButtons{
+    width:250px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.raise, .checkOrCall, .Fold{
+
+    background-color: #2d2a2a;
+    color: aliceblue;
+
+    border-style: inset;
+    box-shadow: inset;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    height: 25px;
+    min-width: 70px;
+
+    cursor: pointer;
+
+}
+
+

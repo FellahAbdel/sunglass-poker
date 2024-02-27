@@ -2,7 +2,8 @@
     border-style: solid;
     border-radius: 150px;
 
-    width: 70%;
+    width: calc(50% * var(100vh));
+    min-width: 600px;
     height: 300px;
 
     display: flex;
@@ -20,7 +21,7 @@
     border-width: 1px;
     border-color: #477538;
     height: 40px;
-    width: 32%;
+    min-width: 200px;
     margin: 0 0 0 30%;
 
     justify-content: center;

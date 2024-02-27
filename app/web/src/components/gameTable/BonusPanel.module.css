@@ -1,11 +1,16 @@
 .bonusPanel{
-  bottom:10px;  /*temprory*/
-  left:10px;    /*temprory*/
-  border-style: none;
+  bottom:10px;  
+  left:10px;    
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  width:240px;
   border-radius: 10px;
   position:fixed;
   box-shadow: 0px 0px 5px black;
   padding: 5px;
+
 }
 
 img.box{
@@ -20,8 +25,7 @@ img.box{
   border-width: 2px;
   border-color: black;
   background-color:aliceblue;
-  flex:1 0;
-  margin: 3px;
+  margin: 5px;
 
   box-shadow: 0 0 4px black;
 }
@@ -50,10 +54,11 @@ img.box{
   border-radius: 10px;
 
   text-align: center;
-  padding: 5px;
-  margin: 2px;
 
   cursor: pointer;
+
+  align-self: flex-end;
+  flex: 0 0 100%;
 }
 
 .bonusButton:hover{
