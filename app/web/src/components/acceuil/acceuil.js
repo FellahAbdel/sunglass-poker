@@ -1,14 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import "./acceuil.css";
-import logo from "../assets/SunGameStudio_logo.png"
+import LogoComponent from "../logo/logo";
 
 
 export const acceuil = () => { 
     return (
         <div>
             <div className='accueil'>
-                <img src={logo} alt="Logo de SunGamesStudio"></img>
+            <LogoComponent className="logoacceuil"/>
             </div>
             <div className='accueil'>
 
