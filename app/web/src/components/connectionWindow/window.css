@@ -26,14 +26,6 @@
   box-shadow: 10px 15px rgba(253, 204, 22, 1);
 }
 
-.text {
-  color: rgb(0, 0, 0);
-  font-size: 24px;
-  margin-bottom: 20px;
-  z-index: 4;
-  display: block;
-}
-
 .box {
   display: flex;
   flex-direction: column;
