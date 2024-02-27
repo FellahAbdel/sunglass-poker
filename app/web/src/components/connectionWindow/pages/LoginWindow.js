@@ -8,7 +8,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword }) => {
   return (
     <div className="box">
       <h1 className="text">Sign in to your account</h1>
-      <LogoComponent />
+      <LogoComponent className="logoconnexion"/>
       <TextInputComponent placeholder="Username" />
       <TextInputComponent type="password" placeholder="Password" />
       <Button className="login-button" label="Login" />

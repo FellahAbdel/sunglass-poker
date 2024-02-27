@@ -8,6 +8,7 @@ import SignUpWindow from "./pages/SignupWindow";
 import ResetPasswordWindow from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 
+
 const Window = ({ onClose, windowType }) => {
   const [currentWindow, setWindowType] = useState(null);
 
