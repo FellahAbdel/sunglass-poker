@@ -4,7 +4,7 @@ import "./buttons.css";
 
 const Button = ({ onClick, label, className }) => {
   return (
-    <button className={`buttonconnexion ${className}`} onClick={onClick}>
+    <button className={`${className}`} onClick={onClick}>
       {label}
     </button>
   );
