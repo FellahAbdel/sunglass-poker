@@ -30,4 +30,8 @@
 
 2024/02/26 : 3h30h         Réorganisation, découpage en objets
 
-TEMPS TOTAL: 28h00min 
+2024/02/27 : 4H             Réunion, finition pages, fusion pages login et accueil, discussion semaine suivantes
+
+2024/02/27 : 30min          Modification css, ajout component text.
+
+TEMPS TOTAL: 32h30min 
