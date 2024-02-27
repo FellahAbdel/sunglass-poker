@@ -1,9 +1,9 @@
 import React  from "react";
-import styles from './ProfileButton.module.css';
+import styles from './profileButton.module.css';
 import ProfileIcon from './images/icons/profile-icon.png';
 
 
-function ProfileButton(){ 
+const ProfileButton = () => { 
     const handleClick = () => {
     }
     return (

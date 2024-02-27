@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import styles from './BonusPanel.module.css';
+import styles from './bonusPanel.module.css';
 
 import Clubs from './images/card_type/Clubs.png';
 import Diamonds from './images/card_type/Diamons.png';
 import Hearts from './images/card_type/Hearts.png';
 import Spades from './images/card_type/Spades.png';
 
-function BonusPanel(){
+const BonusPanel = () => {
 //we can use a number divisable by all the different numbers that they need 
 //to fill the bonus boxes and back-end will manage the part of the variable
 //bonus numbers to show graphiquly
@@ -21,7 +21,7 @@ function BonusPanel(){
     const handleChangeClubs = (e) => {setClubsNumber(parseInt(e.target.value));}; */
 
     const handleChangeHearts = 1;
-    const handleChangeDiamonds = 2;
+    const handleChangeDiamonds = 0;
     const handleChangeSpades = 0;
     const handleChangeClubs = 3;
     return (
@@ -33,7 +33,7 @@ function BonusPanel(){
                 <img src={Clubs} alt="Club" className={`${styles.box} ${styles[`box-${handleChangeClubs}`]}`}></img>
             </div>
 
-            <div className={`${styles.bonusButton}`}>BONUS</div>
+            <button className={`${styles.bonusButton}`}>BONUS</button>
         </div>
     );
 };

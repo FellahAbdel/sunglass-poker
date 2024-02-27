@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './ExitButton.module.css';
+import styles from './exitButton.module.css';
 
-function ExitButton() {
+const ExitButton=() =>{
     const handleClick = () => {}
     return (
         <div className={`${styles.exitButton}`} onClick={handleClick}>

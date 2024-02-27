@@ -59,6 +59,9 @@ img.box{
 
   align-self: flex-end;
   flex: 0 0 100%;
+
+  border-style: unset;
+
 }
 
 .bonusButton:hover{

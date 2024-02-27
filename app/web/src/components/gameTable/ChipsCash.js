@@ -1,8 +1,8 @@
 import React  from "react";
-import styles from './ChipsCash.module.css';
+import styles from './chipsCash.module.css';
 
 
-function ChipsCash(){
+const ChipsCash = () =>{
     const chips = 9999999999;
     const formattedChips = chips.toLocaleString();
     const dollarSign = '$';

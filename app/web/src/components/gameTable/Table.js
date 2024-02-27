@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Table.module.css'
+import styles from './table.module.css'
 
-function Table() {
+const Table = () => {
   return (
     <div className={`${styles.table}`}>
         <div className={`${styles.cardsPlacement}`}>

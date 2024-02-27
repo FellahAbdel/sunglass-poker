@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './SettingsButton.module.css';
+import styles from './settingsButton.module.css';
 import SettingsIcon from './images/icons/settings-icon.png';
 
-function SettingsButton(){
+const SettingsButton= () =>{
     const handleClick = () => {
       }
 

@@ -1,11 +1,11 @@
 import React  from "react";
-import styles from './Navbar.module.css';
+import styles from './navbar.module.css';
 import ChipsCash from './ChipsCash';
 import ProfileButton from './ProfileButton';
 import SettingsButton from './SettingsButton';
 import ExitButton from './ExitButton';
 
-function Navbar(){ 
+const Navbar = () => { 
     return (
         <div className={`${styles.navbar}`}>
             <div className={`${styles.chipsCash}`}><ChipsCash/></div>
