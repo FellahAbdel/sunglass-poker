@@ -8,17 +8,17 @@ const ForgotPassword = ({ openResetPassword, openLoginWindow }) => {
   return (
     <div className="box">
       <h1 className="text">You forgot your password?</h1>
-      <LogoComponent />
+      <LogoComponent className="logoconnexion"/>
       <p>Enter your account email here</p>
       <TextInputComponent type="email" placeholder="Email" />
       <Button
-        className="button login-button"
+        className="buttonconnexion button login-button"
         onClick={openResetPassword}
         label="Send"
       />
       <p></p>
       <Button
-        className="forgot-button"
+        className="buttonconnexion forgot-button"
         onClick={openLoginWindow}
         label="Return to connection menu"
       />
