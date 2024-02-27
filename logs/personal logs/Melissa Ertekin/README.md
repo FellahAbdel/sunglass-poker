@@ -58,3 +58,7 @@
 * 2024/02/25 : <b>2h</b> <br/> Travail individuel : <i> Surveillance du projet & des journaux. Demandes de feedback personnalisé selon leur avancement. Rédaction du compte-rendu pour les réunions de cette semaine.  </i> 
 
 * 2024/02/26 : <b>30 mins</b> <br/> Travail individuel :<i> Travail sur le comptes rendus hebdomadaire  </i>
+
+### Semaine 4 : 13 Février - 20 Février  | Temps Totale: 
+
+* 2024/02/27 : <b>3h30</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor, standup meeting, planification de la semaine, revue du code, réunion avec le groupe pour améliorer notre projet selon les retours du mentor </i>
