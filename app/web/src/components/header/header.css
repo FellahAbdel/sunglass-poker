@@ -10,10 +10,8 @@ body {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 0px 0px 0px 0px;
     
 }
-
   
 header nav {
     display: flex;

@@ -3,23 +3,22 @@ import React from "react";
 import Button from "../../button/Buttons";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
+import Text from "../../text/Text";
 
 const ResetPasswordWindow = ({ openLoginWindow }) => {
   return (
     <div className="box">
-      <h1 className="text">Reset your password</h1>
+      <Text className="title" content= "Reset your password"/>
       <LogoComponent className="logoconnexion"/>
-      <p>Enter your new password here</p>
+      <Text className="littletext" content= "Enter your new password here"/>
       <TextInputComponent type="password" placeholder="Password" />
       <TextInputComponent type="password" placeholder="Repeat your password" />
       <Button className="buttonconnexion button login-button" label="Send" />
-      <p></p>
       <Button
         className="buttonconnexion forgot-button"
         onClick={openLoginWindow}
         label="Return to connection menu"
       />
-      <p></p>
     </div>
   );
 };

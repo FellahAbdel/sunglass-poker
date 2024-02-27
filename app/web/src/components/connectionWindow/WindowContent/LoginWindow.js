@@ -3,11 +3,12 @@ import React from "react";
 import Button from "../../button/Buttons";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
+import Text from "../../text/Text";
 
 const LoginWindow = ({ openSignUpWindow, openForgotPassword }) => {
   return (
     <div className="box">
-      <h1 className="text">Sign in to your account</h1>
+      <Text className="title" content= "Sign in to your account"/>
       <LogoComponent className="logoconnexion"/>
       <TextInputComponent placeholder="Username" />
       <TextInputComponent type="password" placeholder="Password" />
@@ -23,7 +24,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword }) => {
         className="buttonconnexion register-button"
         label="Register New Account"
       />
-      <p>or</p>
+      <Text className="littletext" content= "or"/>
       <Button
         className="buttonconnexion login-button google-button"
         label="Sign in with google"
