@@ -1,8 +1,8 @@
 // forgotPassword.jsx
 import React from "react";
-import Button from "./buttonComponent/buttons";
-import LogoComponent from "./logoComponent/logo";
-import TextInputComponent from "./textInputComponent/TextInput";
+import Button from "../../button/buttons";
+import LogoComponent from "../../logo/logo";
+import TextInputComponent from "../../textInput/TextInput";
 
 const ForgotPassword = ({ openResetPassword, openLoginWindow }) => {
   return (
