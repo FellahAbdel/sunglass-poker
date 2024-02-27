@@ -8,3 +8,8 @@
 -- 1h30 apprentissage le 16/02 (node js)
 -- 2h apprentissage le 17/02 (node js)
 -- 2h apprentissage le 18/02 (iexpress js)
+-- 4 séance réunion le 20/02 (spécification)
+-- 2h30 réunion le 22/02 (spécification technique)
+-- 2H30 réunion le 23/02 (finalisation de la spécification technique + répartition des fonctions)
+-- 2H le 25/02 (implémentation de la focntion estFlushRoyale + tests)
+-- 3H le 26/02 (implémentation des fonctions : estFull + estCarteHaute + estBrelan + tests)
