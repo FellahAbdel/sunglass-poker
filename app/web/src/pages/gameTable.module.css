@@ -8,18 +8,28 @@
     display: flex;
     justify-content: space-around;
 }
-/* .backdrop{
+.backdrop{
     position:absolute;
     width: 100%;
     height: 100%;
 
-    left: 0;
+    top:0 ;
     z-index: -999;
 
     background-image: url('./../components/gameTable/images/backdrop.png'); 
     background-size:cover; 
-    filter: blur(2px);
-} */
+    filter: blur(5px);
+    background-color: black;
+}
+
+.background{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    top:0 ;
+    z-index: -1000;
+    background-color: black;
+}
 
 .navbar{
     align-self: baseline;

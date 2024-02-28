@@ -13,7 +13,7 @@
     font-weight: 600;
 
 
-    background-color: #717171; 
+    background-color: #004577; 
     color: aliceblue;   
     box-shadow: 2px 2px 10px black;
     border-radius: 0 14px 14px 14px;
@@ -25,9 +25,17 @@
 }
 
 .profileButton:hover {
-    filter:brightness(90%);
     cursor: pointer;
-    color: black;
+    color: rgb(255, 255, 255);
+    text-shadow:
+    0 0 5px #fff, /* Neon glow */
+    0 0 10px #fff, /* Neon glow */
+    0 0 15px #fff, /* Neon glow */
+    0 0 20px rgb(0, 51, 255), /* Neon glow color */
+    0 0 30px rgb(0, 51, 255), /* Neon glow color */
+    0 0 40px rgb(0, 51, 255), /* Neon glow color */
+    0 0 55px #0ff, /* Neon glow color */
+    0 0 75px #0ff; /* Neon glow color */
 }
 
 img.profileIcon{
@@ -42,6 +50,6 @@ img.profileIcon{
 }
 
 .profileButton:hover img.profileIcon {
-    filter: invert(0%);
+    filter: invert(100%);
 }
 

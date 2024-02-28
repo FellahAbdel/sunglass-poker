@@ -10,6 +10,7 @@ import HandCards from '../components/gameTable/HandCards'
 function gameTable() {
   return (
     <div className={`${styles.mainContainer}`}> 
+      <div className={`${styles.background}`}></div>
       <div className={`${styles.backdrop}`}></div>
       <div className={`${styles.navbar}`}><Navbar/></div>
       
