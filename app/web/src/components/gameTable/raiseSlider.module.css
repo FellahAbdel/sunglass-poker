@@ -30,13 +30,11 @@
 }
 
 .range .field input{
-    -webkit-appearance: none;
+    appearance:unset;
     height: 3px;
     width: 100%;
     background-color: black;
     border-radius: 5px;
-    outline: none;
-    border: none;
 }
 
 .range .field input::-webkit-slider-thumb{
