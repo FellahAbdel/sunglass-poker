@@ -5,6 +5,7 @@ import Navbar from '../components/gameTable/Navbar';
 import BonusPanel from '../components/gameTable/BonusPanel';
 import Table from '../components/gameTable/Table';
 import GameActionButtons from '../components/gameTable/GameActionButtons';
+import HandCards from '../components/gameTable/HandCards'
 
 function gameTable() {
   return (
@@ -17,6 +18,8 @@ function gameTable() {
 
       <div className={`${styles.bonusPanel}`}><BonusPanel/></div>
       <div className={`${styles.gameActionButtons}`}><GameActionButtons/></div>
+
+      <div className={`${styles.HandCards}`}><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"}/></div>
     </div>
   );
 }

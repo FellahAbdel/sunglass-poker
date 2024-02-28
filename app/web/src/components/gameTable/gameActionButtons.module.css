@@ -34,6 +34,10 @@
 
 }
 
+.raise, .checkOrCall, .Fold:hover{
+    filter:brightness(90%);
+}
+
 .raiseSlider{
     align-self: center;
     position: relative;
