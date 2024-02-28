@@ -31,11 +31,19 @@
     cursor: pointer;
 
     margin-bottom: 10px;
+    box-shadow: 0 0 10px black;
 
+    
 }
 
-.raise, .checkOrCall, .Fold:hover{
+.raise:hover, .checkOrCall:hover, .Fold:hover{
     filter:brightness(90%);
+    text-shadow:
+    0 0 5px #fff, /* Neon glow */
+    0 0 10px #fff, /* Neon glow */
+    0 0 15px #fff, /* Neon glow */
+    0 0 20px rgb(255, 255, 255), /* Neon glow color */
+    0 0 30px rgb(255, 255, 255);
 }
 
 .raiseSlider{
