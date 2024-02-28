@@ -28,4 +28,6 @@
 
 * 2024/02/26 : <b> 7h </b> <br/>        Travail individuel: <i> apprentissage de css + navbar contenant les buttoms profile ,settings ,exit et chips est fait + bonus Panel est fait avec system visuel des cart chargé + table simple et backdrop basic </i>
 
-total: 32h45min
+* 2024/02/27 : <b> 3h30min </b> <br/>        Travail en TP: <i> apprentissage input range slider et implimentation + correction des structure des fichier de gameTable + reunion avec prof </i>
+
+total: 36h15min
