@@ -30,4 +30,6 @@
 
 * 2024/02/27 : <b> 3h30min </b> <br/>        Travail en TP: <i> apprentissage input range slider et implimentation + correction des structure des fichier de gameTable + reunion avec prof </i>
 
-total: 36h15min
+* 2024/02/27 : <b> 3h </b> <br/>        Travail individuel: <i>range slide est fini et il peut envoyer les value de input </i>
+
+total: 39h15min
