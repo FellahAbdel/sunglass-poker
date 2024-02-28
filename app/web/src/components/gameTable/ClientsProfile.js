@@ -1,18 +1,24 @@
 import React from 'react';
-import Styles from './clientProfile.module.css'
+import Styles from './clientProfile.css'
+import ProgressBar from './ProgressBar';
 
 const  ClientsProfile=({status, chips, name}) =>{
     const formattedChips = chips.toLocaleString();
     const dollarSign = '$';
 
     return (
-    <div className={`${Styles.container}`}>
-        <div className={`${Styles.statusBar}`}>{status}</div>
-        <div className={`${Styles.info}`}>
+    <div className="container">
+        <div className="info">
             {formattedChips}{dollarSign}<br/>
             {name}
         </div>
-        <img className={`${Styles.profilePic}`} src={require('./images/pp_simple.jpg')} alt='profilePic'/>
+        <div className="statusBar">
+            <ProgressBar className="progressBar ProgressPercentage" durationInSeconds={5}/>
+            <div className="status">{status}</div>
+            
+        </div>
+        <img className="profilePic" src={require('./images/pp_simple.jpg')} alt='profilePic'/>
+        
     </div>
     )
 }

@@ -29,7 +29,6 @@
     justify-content: center;
     align-items: center;
     display: flex;
-
     font: italic small-caps  16px/2 cursive;
 }
 .sunGlassText{
@@ -45,5 +44,9 @@
     min-width: 40px;
     margin-left: 10px;
     
+}
+
+.clientProfile0{
+    position: absolute;
 }
 
