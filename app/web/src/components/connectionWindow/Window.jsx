@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import "./window.css";
-import { Link } from "react-router-dom";
 import LoginWindow from "./WindowContent/LoginWindow";
 import SignUpWindow from "./WindowContent/SignupWindow";
 import ResetPasswordWindow from "./WindowContent/ResetPassword";
