@@ -4,7 +4,7 @@ import styles from './gameTable.module.css';
 import Navbar from '../components/gameTable/Navbar';
 import BonusPanel from '../components/gameTable/BonusPanel';
 import Table from '../components/gameTable/Table';
-import GameActionButtons from '../components/gameTable/GameActionButtons.js';
+import GameActionButtons from '../components/gameTable/GameActionButtons';
 
 function gameTable() {
   return (

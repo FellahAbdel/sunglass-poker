@@ -1,8 +1,16 @@
 
-.actionButtons{
-    width:250px;
+.container{
+    width: 450px;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column; /* Stack items vertically */
+}
+
+.actionButtons{
+    width:430px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    align-self: center;
 }
 
 .raise, .checkOrCall, .Fold{
@@ -12,22 +20,23 @@
 
     border-style: unset;
 
-    border-radius: 10px;
+    border-radius: 15px;
 
     font-weight: 600;
+    font-size: 15px;
 
-    height: 25px;
-    min-width: 70px;
+    height: 40px;
+    min-width: 120px;
 
     cursor: pointer;
+
+    margin-bottom: 10px;
 
 }
 
 .raiseSlider{
-    height: 60px;
-    display: flex;
-    align-items: center;
-
+    align-self: center;
+    position: relative;
 }
 
 
