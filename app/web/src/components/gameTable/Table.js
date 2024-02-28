@@ -6,9 +6,12 @@ const Table = () => {
   return (
     <div className={`${styles.table}`}>
         <div className={`${styles.cardsPlacement}`}>
-            <div className={`${styles.sunGlassText}`}>Sun Glass Poker</div>
+          <div className={`${styles.tableCards}`}>
+          <div className={`${styles.sunGlassText}`}>Sun Glass Poker</div>
+
+          </div>
+          <div className={`${styles.dealerCards}`}></div>
         </div>
-        <div className={`${styles.cardDuckPlacement}`}></div>
 
         <div className={`${styles.clientsProfile0}`}><ClientsProfile status={"Waiting"} chips={9999999} name={"Mostafa"}/></div>
         <div className={`${styles.clientsProfile1}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>

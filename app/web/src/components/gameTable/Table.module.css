@@ -4,39 +4,34 @@
     border-width: 20px;
     border-color: rgb(0, 4, 17);
 
-    width: calc(50% * var(100vh));
-    min-width: 600px;
+    width: 60vw;
+    min-width: 400px;
     height: 300px;
 
+
     display: flex;
-    margin: 15%;
     align-items: center;
+    justify-content: center;
 
     box-shadow: inset 0 0 50px rgb(0, 0, 0);
     background-color: #083f87;
 
+    flex-wrap: wrap;    
 }
 
 
 .cardsPlacement{
-    border-style:solid;
-    border-width: 1px;
-    border-color: #ffffff;
-    height: 50px;
-    min-width: 200px;
-    margin: 0 0 0 30%;
-
-    justify-content: center;
-    align-items: center;
+    position: absolute;
     display: flex;
-    font: italic small-caps  16px/2 cursive;
+    align-items: center;
+
 }
 .sunGlassText{
     color:aliceblue
 }
 
 
-.cardDuckPlacement {
+.dealerCards {
     border-style:solid;
     border-width: 1px;
     border-color: #ffffff;
@@ -45,8 +40,23 @@
     margin-left: 10px;
     
 }
+.tableCards {
+    border-style: solid;
+    border-style:solid;
+    border-width: 1px;
+    border-color: #ffffff;
+    height: 50px;
+    min-width: 200px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font: italic small-caps  16px/2 cursive;
+}
 
 .clientProfile0{
     position: absolute;
+    display: flex;
+    align-self: center;
+    align-items: center;
 }
 

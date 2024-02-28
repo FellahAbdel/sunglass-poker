@@ -42,8 +42,10 @@
 
 .table{
     flex:1 ;
+    position: absolute;
     margin: auto;
     align-self: center;
+    
     z-index: 0;
 }
 
