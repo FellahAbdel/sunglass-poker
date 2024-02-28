@@ -53,10 +53,54 @@
     font: italic small-caps  16px/2 cursive;
 }
 
-.clientProfile0{
+.profile{
     position: absolute;
     display: flex;
-    align-self: center;
-    align-items: center;
+}
+.clientsProfile0{
+   top:-25%; 
+}
+
+.clientsProfile1{
+    top:-25%;
+    right:20%;
+}
+
+.clientsProfile2{
+    top:-5%;
+    right:-3%;
+}
+
+.clientsProfile3{
+    bottom: 15%;
+    right:-3%;
+}
+.clientsProfile4{
+    bottom: -20%;
+    right:20%;
+}
+
+.clientsProfile5{
+    bottom: -20%;
+}
+
+.clientsProfile6{
+    bottom: -20%;
+    left:20%;
+}
+
+.clientsProfile7{
+    bottom: 15%;
+    left:-3%;
+}
+
+.clientsProfile8{
+    top: -5%;
+    left: -3%;
+}
+
+.clientsProfile9{
+    top:-25%;
+    left:20%;
 }
 

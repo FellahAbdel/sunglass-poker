@@ -13,16 +13,16 @@ const Table = () => {
           <div className={`${styles.dealerCards}`}></div>
         </div>
 
-        <div className={`${styles.clientsProfile0}`}><ClientsProfile status={"Waiting"} chips={9999999} name={"Mostafa"}/></div>
-        <div className={`${styles.clientsProfile1}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>
-        <div className={`${styles.clientsProfile2}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>
-        <div className={`${styles.clientsProfile3}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>
-        <div className={`${styles.clientsProfile4}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>
-        <div className={`${styles.clientsProfile5}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>
-        <div className={`${styles.clientsProfile6}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>
-        <div className={`${styles.clientsProfile7}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>
-        <div className={`${styles.clientsProfile8}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>
-        <div className={`${styles.clientsProfile9}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile0}`}><ClientsProfile status={"Waiting"} chips={9999999} name={"Mostafa0"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile1}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa1"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile2}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa2"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile3}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa3"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile4}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa4"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile5}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa5"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile6}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa6"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile7}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa7"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile8}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa8"}/></div>
+        <div className={`${styles.profile} ${styles.clientsProfile9}`}><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa9"}/></div>
     </div>
   )
 }
