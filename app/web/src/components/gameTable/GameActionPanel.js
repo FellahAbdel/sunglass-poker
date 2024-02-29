@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import styles from './gameActionButtons.module.css';
+import styles from './gameActionPanel.module.css';
 import RaiseSlider from './RaiseSlider';
 
 const GameActionButtons = () => {

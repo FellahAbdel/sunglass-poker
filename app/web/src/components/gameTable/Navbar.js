@@ -1,17 +1,16 @@
 import React  from "react";
-import styles from './navbar.module.css';
+import './navbar.css';
 import ChipsCash from './ChipsCash';
-import ProfileButton from './ProfileButton';
-import SettingsButton from './SettingsButton';
-import ExitButton from './ExitButton';
+import Button from './Button/Button.tsx';
+
 
 const Navbar = () => { 
     return (
-        <div className={`${styles.navbar}`}>
-            <div className={`${styles.chipsCash}`}><ChipsCash/></div>
-            <div className={`${styles.profile}`}><ProfileButton/></div>
-            <div className={`${styles.exit}`}><ExitButton/></div>
-            <div className={`${styles.settings}`}><SettingsButton/></div>
+        <div className="container-nav">
+            <ChipsCash style="box-chips"/>
+            <Button style="btn-profile" children={"Profile"} iconStyle="icon-profile" iconSrc={require('./images/icons/profile-icon.png')}/>
+            <Button style="btn-exit" children={"Exit"}/>
+            <Button style="btn-settings" children={"Settings"} iconStyle='icon-settings' iconSrc={require('./images/icons/settings-icon.png')}/>
         </div>
     )
 }
