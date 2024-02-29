@@ -14,9 +14,6 @@ const RaiseSlider = ({initialValue, onSliderChange}) =>{
     
     return (
     <div className={`${Styles.range}`}>
-{/*         <div className={`${Styles.sliderValue}`}> 
-            <span>{sliderValue}</span>
-        </div> */}
         <div className={`${Styles.field}`}>
             <div className={`${Styles.minValue}`}>1%</div>
             <input type='range' min={1} max={100}  step={1} onChange={handleSliderChange}></input>
