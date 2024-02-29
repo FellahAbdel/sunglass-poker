@@ -1,36 +1,42 @@
-.container{
-    width: 300px;
-    height: 200px;
+.container-hand-cards{
+    width: 20vw;
+    height: 14vw;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    flex:1;
 }
 
-.handGuide{
+.hand-guide{
     display: flex;
     justify-content: center;
     position: absolute;
+    flex:1;
+    z-index: -1;
     bottom: 0;
-    padding-top: 10px;
-    height: 200px;
-    min-width: 150px;
+    padding: 10px 5px 0px 5px;
+    height: 100%;
+    width: 60%;
+
+
     border-radius: 10px 10px 0 0;
     box-shadow: 0 0 10px black;
+
+    font-size: calc(5px + 1vw);
     color: white;
     background:linear-gradient(to top, black, rgb(0, 41, 48)) ;
-    z-index: -1;
-
+    
     text-shadow:
-    0 0 5px #fff, /* Neon glow */
-    0 0 10px #fff, /* Neon glow */
-    0 0 15px #fff, /* Neon glow */
-    0 0 20px rgb(255, 255, 255), /* Neon glow color */
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px #fff,
+    0 0 20px rgb(255, 255, 255),
     0 0 30px rgb(255, 255, 255);
 }
 
-.cardDuo{
+.container-card{
     display: flex;
     position: absolute;
 
@@ -44,7 +50,7 @@
 .card{
     align-self: center;
     background-color: white;
-    width: 100px;
+    width: 40%;
     padding: 2px;
     border-radius: 15px;
 

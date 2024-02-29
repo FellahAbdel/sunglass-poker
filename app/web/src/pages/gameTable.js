@@ -28,3 +28,4 @@ function gameTable() {
 }
 
 export default gameTable;
+

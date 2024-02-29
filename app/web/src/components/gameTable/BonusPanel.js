@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import styles from './bonusPanel.module.css';
+import './bonusPanel.css';
+import Button from "./Button/Button.tsx";
 
 import Clubs from './images/card_type/Clubs.png';
 import Diamonds from './images/card_type/Diamons.png';
@@ -22,18 +23,18 @@ const BonusPanel = () => {
 
     const handleChangeHearts = 1;
     const handleChangeDiamonds = 0;
-    const handleChangeSpades = 0;
+    const handleChangeSpades = 2;
     const handleChangeClubs = 3;
     return (
-        <div className={`${styles.bonusPanel}`}>
-            <div className={`${styles.cardPanel}`}>
-                <img src={Hearts} alt="Heart" className={`${styles.box} ${styles[`box-${handleChangeHearts}`]}`}></img>
-                <img src={Diamonds} alt="Diamond" className={`${styles.box} ${styles[`box-${handleChangeDiamonds}`]}`}></img>
-                <img src={Spades} alt="Spade" className={`${styles.box} ${styles[`box-${handleChangeSpades}`]}`}></img>
-                <img src={Clubs} alt="Club" className={`${styles.box} ${styles[`box-${handleChangeClubs}`]}`}></img>
+        <div className="panel-bonus">
+            <div>
+                <img src={Hearts} alt="Heart" className={`box box-${handleChangeHearts}`}/>
+                <img src={Diamonds} alt="Diamond" className={`box box-${handleChangeDiamonds}`}/>
+                <img src={Spades} alt="Spade" className={`box box-${handleChangeSpades}`}/>
+                <img src={Clubs} alt="Club" className={`box box-${handleChangeClubs}`}/>
             </div>
 
-            <button className={`${styles.bonusButton}`}>BONUS</button>
+            <Button style={"btn-bonus"} children={"BONUS"}/>
         </div>
     );
 };
