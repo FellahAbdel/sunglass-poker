@@ -5,11 +5,7 @@ const HandCards = ({cardType1 , cardNumber1 , cardType2, cardNumber2}) => {
     const handGuide = "Full House";
 
     return (
-<<<<<<< HEAD
     <div className="container-hand-cards">
-=======
-    <div className="container-hand-cards">
->>>>>>> ca9f8a6 (hand cards CSS dynamique update)
         <div className="hand-guide">{handGuide}!</div>
         <div className="container-card">     
             <img className="card" src={require(`./images/card_front/${cardNumber1}_of_${cardType1}.png`)} alt="Card1"/>
