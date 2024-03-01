@@ -2,11 +2,12 @@
     width: 100%;
 }
 
+
+
 /*PROFILE BUTTON*/
 .btn-profile {
     border-style: unset;
     padding: 5px;
-    width: auto;
     min-width: 150px;
     height: 40px;
 
@@ -182,3 +183,23 @@ img.icon-settings {
 }
 
 
+@media (max-width: 1000px) {
+    .btn-profile{
+        transform: scale(70%);
+        transform-origin: left top;
+    }
+    .box-chips{
+        transform: scale(70%);
+        transform-origin: left top;
+        top:20px;
+    }
+    .btn-settings{
+        transform: scale(70%);
+        transform-origin: right top;
+    }
+    .btn-exit{
+        transform: scale(70%);
+        transform-origin: right top;
+        top:20px;
+    }
+}
