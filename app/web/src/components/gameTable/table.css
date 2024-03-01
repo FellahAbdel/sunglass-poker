@@ -1,12 +1,12 @@
 .table{
     border-style: solid;
     border-radius: 150px;
-    border-width: 20px;
+    border-width: 1.5vw;
     border-color: rgb(0, 4, 17);
 
     width: 60vw;
     min-width: 400px;
-    height: 300px;
+    height: 40vh;
 
 
     display: flex;
@@ -18,13 +18,14 @@
 
     flex-wrap: wrap;    
 }
+@media all () {} 
 
 
 .container-cards{
     position: absolute;
     display: flex;
     align-items: center;
-
+    width: 20vw;
     color: aliceblue;
 }
 .tableCardsPlacement {
@@ -33,7 +34,7 @@
     border-width: 1px;
     border-color: #ffffff;
     height: 50px;
-    min-width: 200px;
+    width: 80%;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -45,7 +46,7 @@
     border-width: 1px;
     border-color: #ffffff;
     height: 50px;
-    min-width: 40px;
+    width: 17.3%;
     margin-left: 10px;
     
 }
@@ -55,11 +56,11 @@
     display: flex;
 }
 .profile0{
-   top:-25%; 
+   top:-30%; 
 }
 
 .profile1{
-    top:-25%;
+    top:-30%;
     right:20%;
 }
 
@@ -69,25 +70,25 @@
 }
 
 .profile3{
-    bottom: 15%;
+    bottom: 30%;
     right:-3%;
 }
 .profile4{
-    bottom: -20%;
+    bottom:0%;
     right:20%;
 }
 
 .profile5{
-    bottom: -20%;
+    bottom: 0%;
 }
 
 .profile6{
-    bottom: -20%;
+    bottom: 0%;
     left:20%;
 }
 
 .profile7{
-    bottom: 15%;
+    bottom: 30%;
     left:-3%;
 }
 
@@ -97,7 +98,7 @@
 }
 
 .profile9{
-    top:-25%;
+    top:-30%;
     left:20%;
 }
 
