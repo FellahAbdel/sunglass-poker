@@ -109,196 +109,235 @@ class partie {
    * FUNCTION : determine si les 7 possedent un carre et renvoi la combianaison si elle est trouve.
    */
   estCarre(tableau7cartes) {
-    // là pour mes fonctions il suffit de trouver 4 cartes du meme chiffre et prendre de chaque tableau de 7 la meilleure carte pour completer un tableau de 5 
+    // Ordonne le tableau
+    tableau7cartes.sort(function (a, b) {
+      return b - a;
+    });
+
     const compteur = {};
+    let monCarre = 0;
+
     // Utiliser une boucle for pour parcourir le tableau de cartes
     for (let i = 0; i < tableau7cartes.length; i++) {
       const carte = tableau7cartes[i];
+
       if (!compteur[carte]) {
         compteur[carte] = 1; // Initialiser à 1 si la carte n'existe pas encore dans le compteur
       } else {
         compteur[carte] += 1; // Incrémenter si elle existe déjà
+
+        // Si on trouve 4 cartes du même chiffre, alors c'est un carré
+        if (compteur[carte] === 4) {
+          // Recherche de la cinquième carte la plus élevée
+          let plusHaut = 0;
+          for (let j = 0; j < tableau7cartes.length; j++) {
+            if (tableau7cartes[j] !== carte) {
+              plusHaut = tableau7cartes[j];
+              break;
+            }
+          }
+
+          // Construire la main finale: le carré + la meilleure carte restante
+          const maMain = new Array(4).fill(carte).concat(plusHaut);
+          return maMain;
+        }
       }
     }
 
-    // Identifier le carré et les cartes restantes
-    let carteCarre = null;
-    let meilleureCarteRestante = null;
-    for (const carte in compteur) {
-      if (compteur[carte] === 4) {
-        carteCarre = carte; // Carré trouvé
-      } if (!meilleureCarteRestante || comparateurCartes(carte, meilleureCarteRestante) > 0) {
-        meilleureCarteRestante = carte; // Mise à jour de la meilleure carte restante
+    return false; // Retourner false si aucun carré n'est trouvé
+  }
+
+
+
+  /*
+   * IN : tableau de 7 cartes
+   * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
+   * FUNCTION : determine si les 7 possedent un full et renvoi la combianaison si elle est trouve.
+   */
+  estFull(tableau7cartes) { }
+
+  /*
+   * IN : tableau de 7 cartes
+   * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
+   * FUNCTION : determine si les 7 possedent une couleur et renvoi la combianaison si elle est trouve.
+   */
+  estCouleur(tableau7cartes) { }
+
+  /*
+   * ...
+   */
+  estSuite(tableau7cartes) { }
+
+  /*
+   * ...
+   */
+  estBrelan(tableau7cartes) { }
+
+  /*
+   * ...
+   */
+  estDoublePaire(tableau7cartes) {
+
+    // Ordonne le tableau
+    tableau7cartes.sort(function (a, b) {
+      return b - a;
+    });
+
+    const maMain = new Array(5);
+    let maPaire1 = 0;
+    let maPaire2 = 0;
+    let verificateur = false;
+    let plusHaut = 0;
+
+    //chercher mes cartes paires
+    for (let i = 0; i < tableau7cartes.length - 1; i++) {
+
+      if (tableau7cartes[i] === tableau7cartes[i + 1]) {
+        if (maPaire1 == 0) maPaire1 === tableau7cartes[i];
+        else {
+          maPaire2 === tableau7cartes[i];
+          verificateur = true;
+        }
+      }
+
+    }
+    //chercher la carte haute
+    if (verificateur) {
+      for (let j = 0; j < tableau7cartes.length; j++) {
+        if (tableau7cartes[j] !== maPaire1 || tableau7cartes[j] !== maPaire2) {
+          plusHaut = tableau7cartes[j];
+          break;
+        }
+      }
+
+      // Construire la main finale: les deux paires + la meilleure carte restante
+      const maMain = new Array(2).fill(maCarte1).concat(new Array(2).fill(maCarte2)).concat([plusHaut]);
+      return maMain;
+    }
+    else {
+      // Retourne false si une double paire n'est pas trouvée
+      return false;
+    }
+
+  }
+
+  /*
+   * ...
+   */
+
+  estPaire(tableau7cartes) {
+    // Ordonne le tableau
+    tableau7cartes.sort(function (a, b) {
+      return b - a;
+    });
+
+    const maMain = new Array(5);
+    let maPaire = 0;
+    let verificateur = false;
+
+    // Cherche la carte paire
+    for (let i = 0; i < tableau7cartes.length - 1; i++) {
+      if (tableau7cartes[i] === tableau7cartes[i + 1]) {
+        maPaire = tableau7cartes[i];
+        verificateur = true;
+        break;
       }
     }
 
-    if (!carteCarre) {
-      return false; // Pas de carré trouvé
-    }
+    if (verificateur) {
+      let compteur = 0;
 
-    // Construire la main finale: le carré + la meilleure carte restante
-    const maMain = new Array(4).fill(carteCarre).concat(meilleureCarteRestante);
-
-    return maMain;
-  }
-
-// Fonction pour comparer deux cartes basée sur l'ordre préétabli
- comparateurCartes(carteA, carteB) {
-  const ordreCartes = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-  return ordreCartes.indexOf(carteA) - ordreCartes.indexOf(carteB);
-}
-
-
-
-
-
-
-/*
- * IN : tableau de 7 cartes
- * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
- * FUNCTION : determine si les 7 possedent un full et renvoi la combianaison si elle est trouve.
- */
-estFull(tableau7cartes) {}
-
-/*
- * IN : tableau de 7 cartes
- * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
- * FUNCTION : determine si les 7 possedent une couleur et renvoi la combianaison si elle est trouve.
- */
-estCouleur(tableau7cartes) { }
-
-/*
- * ...
- */
-estSuite(tableau7cartes) { }
-
-/*
- * ...
- */
-estBrelan(tableau7cartes) { }
-
-/*
- * ...
- */
-estDoublePaire(tableau7cartes) {}
-
-/*
- * ...
- */
-
-estPaire(tableau7cartes) {
-  // Ordonne le tableau
-  tableau7cartes.sort(function (a, b) {
-    return b - a;
-  });
-
-  const maMain = new Array(5);
-  let maPaire = 0;
-  let verificateur = false;
-
-  // Cherche la carte paire
-  for (let i = 0; i < tableau7cartes.length - 1; i++) {
-    if (tableau7cartes[i] === tableau7cartes[i + 1]) {
-      maPaire = tableau7cartes[i];
-      verificateur = true;
-      break;
-    }
-  }
-
-  if (verificateur) {
-    let compteur = 0;
-
-    // Complète la grille des 5 cartes avec les 3 plus grandes cartes.
-    for (let t = 0; t < 5; t++) {
-      maMain[t] = tableau7cartes[compteur];
-      if (tableau7cartes[compteur] === maPaire) {
-        maMain[++t] = maPaire;
-        compteur += 2;
+      // Complète la grille des 5 cartes avec les 3 plus grandes cartes.
+      for (let t = 0; t < 5; t++) {
+        maMain[t] = tableau7cartes[compteur];
+        if (tableau7cartes[compteur] === maPaire) {
+          maMain[++t] = maPaire;
+          compteur += 2;
+        }
       }
+
+      // Retourne le tableau contenant la main avec la paire
+      return maMain;
+    } else {
+      // Retourne false si aucune paire n'est trouvée
+      return false;
     }
-
-    // Retourne le tableau contenant la main avec la paire
-    return maMain;
-  } else {
-    // Retourne false si aucune paire n'est trouvée
-    return false;
   }
-}
 
 
-estQuarteHaute(tableau7cartes) { }
-
-
-
-// verification de deuxieme niveau
-// pas besoin pour le flush et le quinte flush
-
-/*
- * IN : tableau de tableau contenant les 5 cartes composant les mains main [{[], id}, {[], id}, ...]
- * OUT : STRING ==> identifiant d' un joueur
- * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des carres
- */
-secondCarre(listeJoueurCombinaison) { }
-
-/*
- * IN : tableau de tableau contenant les 5 cartes composant les mains main [{[], id}, {[], id}, ...]
- * OUT : STRING ==> identifiant d' un joueur
- * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des full
- */
-secondFull(listeJoueurCombinaison) { }
-
-/*
- * ...
- */
-secondSuite(listeJoueurCombinaison) { }
-
-/*
- * ...
- */
-secondBrelan(listeJoueurCombinaison) { }
-
-/*
- * ...
- */
-secondDoublePaire(listeJoueurCombinaison) { }
-
-/*
- * ...
- */
-secondPaire(listeJoueurCombinaison) { }
-
-/*
- * ...
- */
-secondCarteHaute(listeJoueurCombinaison) { }
+  estQuarteHaute(tableau7cartes) { }
 
 
 
-/*
- * IN : rien
- * OUT : rien
- * FUNCTION : initialise la premiere partie
- */
-lancerPartie() { }
+  // verification de deuxieme niveau
+  // pas besoin pour le flush et le quinte flush
 
-/*
- * IN : rien
- * OUT : rien
- * FUNCTION : 
- *      - decales les utilisateurs
- *      - remet a 0 les historiques et les mises
- *      - reinitialise l'etat des joueurs et vider l'historique
- *      - remelanger et redistribuer les cartes
- */
-reset() { } // redemarer une partie
+  /*
+   * IN : tableau de tableau contenant les 5 cartes composant les mains main [{[], id}, {[], id}, ...]
+   * OUT : STRING ==> identifiant d' un joueur
+   * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des carres
+   */
+  secondCarre(listeJoueurCombinaison) { }
+
+  /*
+   * IN : tableau de tableau contenant les 5 cartes composant les mains main [{[], id}, {[], id}, ...]
+   * OUT : STRING ==> identifiant d' un joueur
+   * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des full
+   */
+  secondFull(listeJoueurCombinaison) { }
+
+  /*
+   * ...
+   */
+  secondSuite(listeJoueurCombinaison) { }
+
+  /*
+   * ...
+   */
+  secondBrelan(listeJoueurCombinaison) { }
+
+  /*
+   * ...
+   */
+  secondDoublePaire(listeJoueurCombinaison) { }
+
+  /*
+   * ...
+   */
+  secondPaire(listeJoueurCombinaison) { }
+
+  /*
+   * ...
+   */
+  secondCarteHaute(listeJoueurCombinaison) { }
 
 
-/*
- * IN : rien
- * OUT : rien
- * FUNCTION : deroule UNE partie
- */
-deroulerPartie() { }
+
+  /*
+   * IN : rien
+   * OUT : rien
+   * FUNCTION : initialise la premiere partie
+   */
+  lancerPartie() { }
+
+  /*
+   * IN : rien
+   * OUT : rien
+   * FUNCTION : 
+   *      - decales les utilisateurs
+   *      - remet a 0 les historiques et les mises
+   *      - reinitialise l'etat des joueurs et vider l'historique
+   *      - remelanger et redistribuer les cartes
+   */
+  reset() { } // redemarer une partie
+
+
+  /*
+   * IN : rien
+   * OUT : rien
+   * FUNCTION : deroule UNE partie
+   */
+  deroulerPartie() { }
 }
 
 
