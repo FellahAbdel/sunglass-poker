@@ -66,10 +66,12 @@
 
 
 .btn-bonus{
-  height: fit-content;
+  height: 5vh;
+  min-height: 20px;
   width: 100%;
+
   margin: 5%;
-  align-self: flex-end;
+
 
   border-radius: 10px;
   border-style: unset;
