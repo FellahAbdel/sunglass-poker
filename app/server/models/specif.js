@@ -284,7 +284,36 @@ class partie {
    * OUT : STRING ==> identifiant d' un joueur
    * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des full
    */
-  secondFull(listeJoueurCombinaison) { }
+
+    secondFull(listeJoueurCombinaison) {
+      let meilleurFull = null;
+      let deuxiemeMeilleurFull = null;
+  
+      for (let i = 0; i < listeJoueurCombinaison.length; i++) {
+          const maMain = listeJoueurCombinaison[i].maMain;
+  
+          
+  
+          if (meilleurFull === null) {
+              meilleurFull = { joueurId: listeJoueurCombinaison[i].id, maMain: maMain };
+          } else if (deuxiemeMeilleurFull === null) {
+              deuxiemeMeilleurFull = { joueurId: listeJoueurCombinaison[i].id, maMain: maMain };
+          } else if (compareFull(maMain, meilleurFull.maMain) > 0) {
+              deuxiemeMeilleurFull = meilleurFull;
+              meilleurFull = { joueurId: listeJoueurCombinaison[i].id, maMain: maMain };
+          } else if (compareFull(maMain, deuxiemeMeilleurFull.maMain) > 0) {
+              deuxiemeMeilleurFull = { joueurId: listeJoueurCombinaison[i].id, maMain: maMain };
+          }
+      }
+  
+      return deuxiemeMeilleurFull ? deuxiemeMeilleurFull.joueurId : null;
+  }
+  
+  // Fonction pour comparer deux fulls
+   compareFull(full1, full2) {
+      // Retourne un nombre positif si full1 est meilleur, négatif si full2 est meilleur, 0 s'ils sont égaux
+  }
+  }
 
   /*
    * ...
