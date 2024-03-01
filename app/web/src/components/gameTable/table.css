@@ -24,7 +24,8 @@
     position: absolute;
     display: flex;
     align-items: center;
-    width: 20vw;
+    width: 27vw;
+    height: 10vh;
     color: aliceblue;
 }
 .tableCardsPlacement {
@@ -32,19 +33,20 @@
     border-style:solid;
     border-width: 1px;
     border-color: #ffffff;
-    height: 50px;
+    height: 100%;
     width: 80%;
+
     justify-content: center;
     align-items: center;
     display: flex;
-    font: italic small-caps  16px/2 cursive;
+    font: italic small-caps  1.5vw/2 cursive;
 }
 
 .dealerCardsPlacement {
     border-style:solid;
     border-width: 1px;
     border-color: #ffffff;
-    height: 50px;
+    height: 100%;
     width: 17.3%;
     margin-left: 10px;
     
