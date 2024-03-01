@@ -1,22 +1,22 @@
 import React , { useState } from 'react';
-import styles from './gameActionPanel.module.css';
+import './gameActionPanel.css';
 import RaiseSlider from './RaiseSlider';
 
 const GameActionButtons = () => {
-    const checkValue = true;
+    const checkValue = useState(true);
     let checkOrCall = checkValue ? 'Check' : 'Call';
 
     const [sliderValueText, setSliderValueText] = useState("");
     const handleSliderChange = (value) => {setSliderValueText(value)};
 
   return (
-    <div className={`${styles.container}`}>
-    <div className={`${styles.actionButtons}`}>
-          <button className={`${styles.raise}`}>Raise {sliderValueText ? sliderValueText + "%" : sliderValueText}</button>
-          <button className={`${styles.checkOrCall}`}>{checkOrCall}</button>
-          <button className={`${styles.Fold}`}>Fold</button>
+    <div className="container">
+    <div className="container-buttons">
+          <button className="btn-raise">Raise {sliderValueText ? sliderValueText + "%" : sliderValueText}</button>
+          <button className="btn-checkOrCall">{checkOrCall}</button>
+          <button className="btn-fold">Fold</button>
       </div>
-      <div className={`${styles.raiseSlider}`}> <RaiseSlider initialValue={25} onSliderChange={handleSliderChange}/> </div>
+      <RaiseSlider  initialValue={25} onSliderChange={handleSliderChange}/>
     </div>
   )
 }
