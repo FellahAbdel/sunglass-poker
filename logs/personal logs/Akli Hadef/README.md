@@ -12,6 +12,6 @@
 -  27/2 , Quatrième réunion TP | début code des fonctions de combinaisons, stund-meeting , échange d'idées avec les membres back-end : 4H
 -  28/2 , rajout fonction de combinaison "paire" et j'ai effectué des tests : 1H
 - 29/2 , finition de la fonction double paire et correction de la fonction est carre : 1H
+-  30/2 , début implementation fonction secondFull :00H30
 
-
-- TOTAL:30H30
+- TOTAL:31H
