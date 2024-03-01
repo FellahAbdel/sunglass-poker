@@ -4,13 +4,10 @@
     align-items: center;
     width: 7vw;
     min-width: 40px;
-    height: 13vh;
+    height: 17vh;
 }
 
 @media (max-height:500px){
-    .container-onGameProfile{
-        height: 17vh;
-    }
     .box-statusText{
         font-size: 1.8vh;
     }
@@ -18,18 +15,21 @@
         font-size: 1.8vh;
     }
 } 
-@media (max-height:700px){
+
+
+@media (max-height:300px){
     .container-onGameProfile{
         height: 16vh;
     }
 }
 
 
-@media (max-height:1000px){
+@media (max-height:600px){
     .container-onGameProfile{
-        height: 15vh;
+        height: 18vh;
     }
 }
+
 
 .box-status{
     display: flex;
@@ -102,7 +102,6 @@
 .profilePic{
     position: absolute;
     bottom: 0;
-
     border-radius:50%;
     width:3.3vw;
     border-style:solid;
