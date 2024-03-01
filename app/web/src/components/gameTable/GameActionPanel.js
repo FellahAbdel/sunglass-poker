@@ -10,8 +10,8 @@ const GameActionButtons = () => {
     const handleSliderChange = (value) => {setSliderValueText(value)};
 
   return (
-    <div className="container">
-    <div className="container-buttons">
+    <div className="container-gameAction">
+    <div className="container-ActionButtons">
           <button className="btn-raise">Raise {sliderValueText ? sliderValueText + "%" : sliderValueText}</button>
           <button className="btn-checkOrCall">{checkOrCall}</button>
           <button className="btn-fold">Fold</button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Styles from './clientProfile.css'
+import './clientProfile.css';
 import ProgressBar from './ProgressBar';
 
 const  ClientsProfile=({status, chips, name}) =>{
@@ -7,15 +7,14 @@ const  ClientsProfile=({status, chips, name}) =>{
     const dollarSign = '$';
 
     return (
-    <div className="container">
-        <div className="info">
+    <div className="container-onGameProfile">
+        <div className="box-playerInfo">
             {formattedChips}{dollarSign}<br/>
             {name}
         </div>
-        <div className="statusBar">
+        <div className="box-status">
             <ProgressBar className="progressBar ProgressPercentage" durationInSeconds={5}/>
-            <div className="status">{status}</div>
-            
+            <div className="box-statusText">{status}</div>
         </div>
         <img className="profilePic" src={require('./images/pp_simple.jpg')} alt='profilePic'/>
         

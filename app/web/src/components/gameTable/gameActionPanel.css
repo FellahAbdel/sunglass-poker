@@ -1,11 +1,11 @@
 
-.container{
+.container-gameAction{
     width: 450px;
     display: flex;
     flex-direction: column; 
 }
 
-.container-buttons{
+.container-ActionButtons{
     width:430px;
     display: flex;
     justify-content: space-between;

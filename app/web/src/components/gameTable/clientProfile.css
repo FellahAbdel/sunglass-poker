@@ -1,4 +1,4 @@
-.container{
+.container-onGameProfile{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
     flex-direction: column;
 }
 
-.statusBar{
+.box-status{
     position: absolute;
     display: flex;
     align-items: center;
@@ -22,7 +22,7 @@
     z-index: 1;
 }
 
-.status{
+.box-statusText{
     z-index: -1;
     color:white;
 }
@@ -54,7 +54,7 @@
 }
 
 
-.info{
+.box-playerInfo{
     display:flex;
     align-items: center;
     justify-content: center;
