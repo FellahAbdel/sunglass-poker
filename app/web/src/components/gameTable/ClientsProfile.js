@@ -8,14 +8,22 @@ const  ClientsProfile=({status, chips, name}) =>{
 
     return (
     <div className="container-onGameProfile">
+
+
+
+        <div className="box-status">
+        {["Checked", "Fold", "Raised"].includes(status) ? (
+                <div className="box-statusText">{status}</div>
+            ) : (
+                <ProgressBar className="progressBar progressPercentage" durationInSeconds={5} />
+            )}
+        </div>
+
         <div className="box-playerInfo">
             {formattedChips}{dollarSign}<br/>
             {name}
         </div>
-        <div className="box-status">
-            <ProgressBar className="progressBar ProgressPercentage" durationInSeconds={5}/>
-            <div className="box-statusText">{status}</div>
-        </div>
+
         <img className="profilePic" src={require('./images/pp_simple.jpg')} alt='profilePic'/>
         
     </div>
