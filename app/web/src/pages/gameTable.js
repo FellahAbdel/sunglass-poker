@@ -12,15 +12,15 @@ function gameTable() {
     <div className="container-main"> 
       <div className="background"></div>
       <div className="backdrop"></div>
-      <div className="navbar"><Navbar/></div>
+      <div className="comp-navbar"><Navbar/></div>
       
       
-      <div className="table"><Table/></div>
+      <div className="comp-table"><Table/></div>
 
-      <div className="panel-bonus"><BonusPanel/></div>
-      <div className="panel-gameAction"><GameActionPanel/></div>
+      <div className="comp-bonus"><BonusPanel/></div>
+      <div className="comp-gameAction"><GameActionPanel/></div>
 
-      <div className="panel-handCards slideUp"><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"}/></div> 
+      <div className="comp-handCards slideUp"><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"}/></div> 
 
     </div>
   );

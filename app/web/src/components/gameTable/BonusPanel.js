@@ -26,7 +26,7 @@ const BonusPanel = () => {
     const handleChangeClubs = 3;
     return (
         <div className="panel-bonus">
-            <div>
+            <div className="container-bonusCards">
                 <img src={Hearts} alt="Heart" className={`box box-${handleChangeHearts}`}/>
                 <img src={Diamonds} alt="Diamond" className={`box box-${handleChangeDiamonds}`}/>
                 <img src={Spades} alt="Spade" className={`box box-${handleChangeSpades}`}/>

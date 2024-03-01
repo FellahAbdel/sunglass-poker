@@ -28,19 +28,18 @@
     background-color: black;
 }
 
-.navbar{
+.comp-navbar{
     align-self: baseline;
     z-index: 3;
 }
 
-.panel-bonus{
+.comp-bonus{
     position: absolute;
     bottom:10px;  
     left:10px;  
-    z-index: 1;
 }
 
-.table{
+.comp-table{
     flex:1 ;
     position: absolute;
     margin: auto;
@@ -49,14 +48,14 @@
     z-index: 0;
 }
 
-.panel-gameAction{
+.comp-gameAction{
     position: absolute;
     bottom: 10px;
     z-index: 1;
     flex:1;
 }
 
-.panel-handCards{
+.comp-handCards{
     position: absolute;
     bottom: 0;
     right: 0;
