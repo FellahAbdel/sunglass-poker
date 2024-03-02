@@ -36,8 +36,10 @@
 
 * 2024/02/27 : <b> 3h30min </b> <br/>        Travail en TP: <i> apprentissage input range slider et implimentation + correction des structure des fichier de gameTable + reunion avec prof </i>
 
-* 2024/02/27 : <b> 9h </b> <br/>        Travail individuel: <i>changement de thematique de gameTable + range slide est fini et il peut envoyer les value de input + correction de placement de table de jeu + profile de jeur et progress waiting bar + hand cards </i>
+* 2024/02/28 : <b> 9h </b> <br/>        Travail individuel: <i>changement de thematique de gameTable + range slide est fini et il peut envoyer les value de input + correction de placement de table de jeu + profile de jeur et progress waiting bar + hand cards </i>
 
+* 2024/02/29 : <b> 4h </b> <br/>        Travail individuel: <i> apprentissage de CSS + changements des buttons à des buttons reutilisable + correction css </i>
 
+* 2024/03/01 : <b> 6h </b> <br/>        Travail individuel: <i>changement des css pour avoir des pages dynamique et responssive à des tailles des écrans differents  </i>
 
-total: 45h15min
+total: 55h15min
