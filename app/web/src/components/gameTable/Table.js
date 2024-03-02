@@ -1,13 +1,25 @@
-import React from 'react';
+import React , {useState} from 'react';
 import './table.css';
 import ClientsProfile from './ClientsProfile';
 
-const Table = () => {
+const Table = ({dealingFlop, showCards}) => {
+
   return (
     <div className="table">
-        <div className="container-cards">
-          <div className="tableCardsPlacement">SunGlass Poker</div>
-          <div className="dealerCardsPlacement"></div>
+
+        <div className={`container-cards`}>
+          <div className="tableCardsPlacement">
+            {dealingFlop ? false : <p>SunGlass Poker</p>}
+            
+            <img className={`tableCard0 ${dealingFlop ? "dealingFlop" : ""} ${showCards[0] ? "cardFlip" : ""} `} src={require('./images/card-design.png')} alt="card0"/>
+            <img className={`tableCard1 ${showCards[1] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card1"/>
+            <img className={`tableCard2 ${showCards[2] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card2"/>
+            <img className={`tableCard3 ${showCards[3] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card3"/>
+            <img className="dealingFlop" src={require('./images/card-design.png')} alt="card4"/>
+          </div>  
+          <div className="dealerCardsPlacement">
+            <img src={require('./images/card-design.png')} alt=""/>
+          </div>
         </div>
 
         <div className="profile profile0"><ClientsProfile status={"Waiting"} chips={9999999} name={"Mostafa0"}/></div>

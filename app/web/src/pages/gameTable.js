@@ -15,7 +15,7 @@ function gameTable() {
       <div className="comp-navbar"><Navbar/></div>
       
       
-      <div className="comp-table"><Table/></div>
+      <div className="comp-table"><Table dealingFlop={true} showCards={[0,1,2,3,4]}/></div>
 
       <div className="comp-bonus"><BonusPanel/></div>
       <div className="comp-gameAction"><GameActionPanel/></div>
