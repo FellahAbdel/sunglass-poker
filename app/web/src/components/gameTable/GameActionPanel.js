@@ -24,8 +24,8 @@ const GameActionButtons = () => {
     <div className="container-gameAction">
     <div className={`container-ActionButtons ${showPopup ? "container-ActionButtons-slideUp" : ""}`}>
           <button className="btn-raise" onClick={togglePopup} >Raise {sliderValueText ? sliderValueText + "%" : ""}</button>
-          <button className="btn-checkOrCall">{checkOrCall}</button>
-          <button className="btn-fold">Fold</button>
+          <button className="btn-checkOrCall" onClick={this.check}>{checkOrCall}</button>
+          <button className="btn-fold" onClick={this.fold}>Fold</button>
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}><RaiseSlider initialValue={25} onSliderChange={handleSliderChange}/></div>
     </div>

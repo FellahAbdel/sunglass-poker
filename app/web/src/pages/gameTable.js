@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './gameTable.css';
 import '../components/gameTable/animations.css'
 import Navbar from '../components/gameTable/Navbar';
@@ -7,7 +7,11 @@ import Table from '../components/gameTable/Table';
 import GameActionPanel from '../components/gameTable/GameActionPanel';
 import HandCards from '../components/gameTable/HandCards';
 
-function gameTable() {
+const GameTable = () => {
+  const dealingFlop = useState(false);
+  this.check = () =>{ dealingFlop = true }
+
+
   return (
     <div className="container-main"> 
       <div className="background"></div>
@@ -15,10 +19,10 @@ function gameTable() {
       <div className="comp-navbar"><Navbar/></div>
       
       
-      <div className="comp-table"><Table dealingFlop={true} showCards={[0,1,2,3,4]}/></div>
+      <div className="comp-table"><Table dealingFlop={false} showCards={[0,1,2,3,4]}/></div>
 
       <div className="comp-bonus"><BonusPanel/></div>
-      <div className="comp-gameAction"><GameActionPanel/></div>
+      <div className="comp-gameAction"><GameActionPanel onClick={this.check}/></div>
 
       <div className="comp-handCards slideUp"><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"}/></div> 
 
@@ -26,5 +30,5 @@ function gameTable() {
   );
 }
 
-export default gameTable;
+export default GameTable;
 
