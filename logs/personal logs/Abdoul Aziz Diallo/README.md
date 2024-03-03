@@ -27,3 +27,12 @@
 | 24/02 | Angela Yu React tutorial and some practical exercice                                               | 3h         |           |
 | 25/02 | Almost finish the 8h Angela's tutorial on udemy & improve signup & login page                      | 4h         |           |
 | 25/02 | Re-adapt Noe's web design to the figma design                                                      | 30m        |           |
+
+## Week 4 - _Total: 9h_
+
+| Date  | Description                        | Skills developed | Time Spent | Resources                                                                                    |
+| ----- | ---------------------------------- | ---------------- | ---------- | -------------------------------------------------------------------------------------------- |
+| 27/03 | Code review & Start Redux tutorial | Redux            | 4h00       | [Redux Tutorial](https://www.youtube.com/watch?v=poQXNp9ItL4&ab_channel=ProgrammingwithMosh) |
+| 28/03 | Keep watching the Redux tutorial   | Redux            | 2h00       | [Redux Tutorial](https://www.youtube.com/watch?v=poQXNp9ItL4&ab_channel=ProgrammingwithMosh) |
+| 01/03 | Add forgot password box in figma   | Figma            | 30min      |                                                                                              |
+| 03/03 | Code debugging with Mostapha       | Debugging        | 2h30       |                                                                                              |
