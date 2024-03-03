@@ -1,6 +1,7 @@
 import React , { useState } from 'react';
 import './gameActionPanel.css';
 import RaiseSlider from './RaiseSlider';
+import Button from '/Users/mostafahqv/Documents/SunGameStudio/sunglass-poker/app/web/src/components/gameTable/Button/Button.tsx';
 
 
 const GameActionButtons = ({ handleFoldProp , handleCheckOrCallProp , handleRaiseProp }) => {
@@ -22,9 +23,9 @@ const GameActionButtons = ({ handleFoldProp , handleCheckOrCallProp , handleRais
   return (
     <div className="container-gameAction">
     <div className={`container-ActionButtons ${showPopup ? "container-ActionButtons-slideUp" : ""}`}>
-          <button className="btn-raise" onClick={() => {handleRaiseProp(); setShowPopup(!showPopup);}} >Raise {sliderValueText ? sliderValueText + "%" : ""}</button>
-          <button className="btn-checkOrCall" onClick={handleCheckOrCallProp}>{checkOrCall}</button>
-          <button className="btn-fold" onClick={handleFoldProp}>Fold</button>
+          <Button style="btn-raise" onClick={() => {handleRaiseProp(); setShowPopup(!showPopup);}} children={`Raise ${sliderValueText ? sliderValueText + "%" : ""}`}/>
+          <Button style="btn-checkOrCall" onClick={handleCheckOrCallProp} children={checkOrCall}/>
+          <Button style="btn-fold" onClick={handleFoldProp} children={"Fold"}/>
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}><RaiseSlider initialValue={25} onSliderChange={handleSliderChange}/></div>
     </div>
