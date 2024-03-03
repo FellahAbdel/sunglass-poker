@@ -2,30 +2,42 @@ import React , { useState } from 'react';
 import './gameActionPanel.css';
 import RaiseSlider from './RaiseSlider';
 
-//checkValue = true -> Check
-//checkValue = False -> Call
-//sliderValue text -> percentage of the raise
-const GameActionButtons = () => {
-    const checkValue = useState(true);
-    let checkOrCall = checkValue ? 'Check' : 'Call';
 
-    const [sliderValueText, setSliderValueText] = useState("");
-    const handleSliderChange = (value) => {setSliderValueText(value)};
+const GameActionButtons = ({onClickOrCall, onFold, onRaise}) => {
 
+  //checkValue = true -> Check
+  //checkValue = False -> Call
+  const checkValue = useState(true);
+  //to open the raise range
+  const [showPopup, setShowPopup] = useState(false);
+  //sliderValue text -> percentage of the raise
+  const [sliderValueText, setSliderValueText] = useState("");
 
-    const [showPopup, setShowPopup] = useState(false);
+  
+  let checkOrCall = checkValue ? 'Check' : 'Call';
 
-    const togglePopup = () => {
-        setShowPopup(!showPopup);
-    };
-    
+  const handleSliderChange = (value) => {
+    setSliderValueText(value);
+  };
+
+  const handleRaise = () => {
+      setShowPopup(!showPopup);
+  };
+  
+  const handleCheckOrCall = () => {
+  };
+
+  const handleFold = () => {
+
+  };
+
 
   return (
     <div className="container-gameAction">
     <div className={`container-ActionButtons ${showPopup ? "container-ActionButtons-slideUp" : ""}`}>
-          <button className="btn-raise" onClick={togglePopup} >Raise {sliderValueText ? sliderValueText + "%" : ""}</button>
-          <button className="btn-checkOrCall" onClick={this.check}>{checkOrCall}</button>
-          <button className="btn-fold" onClick={this.fold}>Fold</button>
+          <button className="btn-raise" onClick={handleRaise} >Raise {sliderValueText ? sliderValueText + "%" : ""}</button>
+          <button className="btn-checkOrCall" onClick={handleCheckOrCall}>{checkOrCall}</button>
+          <button className="btn-fold" onClick={handleFold}>Fold</button>
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}><RaiseSlider initialValue={25} onSliderChange={handleSliderChange}/></div>
     </div>
