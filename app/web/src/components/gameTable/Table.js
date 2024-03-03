@@ -1,6 +1,7 @@
 import React , {useState} from 'react';
 import './table.css';
 import ClientsProfile from './ClientsProfile';
+import cardBack from './images/card-design.png';
 
 const Table = ({dealingFlop, showCards}) => {
   
@@ -10,19 +11,41 @@ const Table = ({dealingFlop, showCards}) => {
         <div className={`container-cards`}>
         {dealingFlop[0] ? false : <p>SunGlassPoker</p>}
 
-          <div className="tableCardsPlacement">
+        <div className="tableCardsPlacement">
+
             {/* first three flops -> dealingFlop[0]
             first forth flops -> dealingFlop[1]
             first fifth flops -> dealingFlop[2] */}
-            <img className={`disappear ${dealingFlop[0] ? "dealingFlop0" : ""} ${showCards[0] ? "cardFlip" : ""} `} src={require('./images/card-design.png')} alt="card0"/>
-            <img className={`disappear ${dealingFlop[0] ? "dealingFlop1" : ""} ${showCards[1] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card1"/>
-            <img className={`disappear ${dealingFlop[0] ? "dealingFlop2" : ""} ${showCards[2] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card2"/>
-            <img className={`disappear ${dealingFlop[1] ? "dealingFlop3" : ""} ${showCards[3] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card3"/>
-            <img className={`disappear ${dealingFlop[2] ? "dealingFlop4" : ""} ${showCards[4] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card4"/>
+            <div className={`tableCard  ${dealingFlop[0] ? "dealingFlop0 flipped" : ""}`}>
+              <img className="tableCardBack " src={cardBack} alt="card0"/>
+              <img className="tableCardFront" src={require('./images/card_front/2_of_clubs.png')} alt="card0"/>
+            </div>
+            
+            <div className={`tableCard  ${dealingFlop[0] ? "dealingFlop1 flipped" : ""}`}>
+              <img className="tableCardBack " src={cardBack} alt="card1"/>
+              <img className="tableCardFront" src={require('./images/card_front/3_of_clubs.png')} alt="card1"/>
+            </div>
+
+            <div className={`tableCard  ${dealingFlop[0] ? "dealingFlop2 flipped" : ""}`}>
+              <img className="tableCardBack " src={cardBack} alt="card2"/>
+              <img className="tableCardFront" src={require('./images/card_front/4_of_clubs.png')} alt="card2"/>
+            </div>
+
+            <div className={`tableCard  ${dealingFlop[1] ? "dealingFlop3 flipped" : ""}`}>
+              <img className="tableCardBack " src={cardBack} alt="card3"/>
+              <img className="tableCardFront" src={require('./images/card_front/5_of_clubs.png')} alt="card3"/>
+            </div>
+
+            <div className={`tableCard  ${dealingFlop[2] ? "dealingFlop4 flipped" : ""}`}>
+              <img className="tableCardBack " src={cardBack} alt="card4"/>
+              <img className="tableCardFront" src={require('./images/card_front/6_of_clubs.png')} alt="card4"/>
+            </div>
+
+
           </div>  
 
           <div className="dealerCardsPlacement">
-            <img src={require('./images/card-design.png')} alt=""/>
+            <img src={cardBack} alt=""/>
           </div>
         </div>
 
