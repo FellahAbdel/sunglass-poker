@@ -8,15 +8,19 @@ const Table = ({dealingFlop, showCards}) => {
     <div className="table">
 
         <div className={`container-cards`}>
+        {dealingFlop[0] ? false : <p>SunGlassPoker</p>}
+
           <div className="tableCardsPlacement">
-            {dealingFlop ? false : <p>SunGlass Poker</p>}
-            
-            <img className={`${dealingFlop ? "dealingFlop0" : ""} ${showCards[0] ? "cardFlip" : ""} `} src={require('./images/card-design.png')} alt="card0"/>
-            <img className={`${dealingFlop ? "dealingFlop1" : ""} ${showCards[1] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card1"/>
-            <img className={`${dealingFlop ? "dealingFlop2" : ""} ${showCards[2] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card2"/>
-            <img className={`${dealingFlop ? "dealingFlop3" : ""} ${showCards[3] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card3"/>
-            <img className={`${dealingFlop ? "dealingFlop4" : ""} ${showCards[4] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card4"/>
+            {/* first three flops -> dealingFlop[0]
+            first forth flops -> dealingFlop[1]
+            first fifth flops -> dealingFlop[2] */}
+            <img className={`disappear ${dealingFlop[0] ? "dealingFlop0" : ""} ${showCards[0] ? "cardFlip" : ""} `} src={require('./images/card-design.png')} alt="card0"/>
+            <img className={`disappear ${dealingFlop[0] ? "dealingFlop1" : ""} ${showCards[1] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card1"/>
+            <img className={`disappear ${dealingFlop[0] ? "dealingFlop2" : ""} ${showCards[2] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card2"/>
+            <img className={`disappear ${dealingFlop[1] ? "dealingFlop3" : ""} ${showCards[3] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card3"/>
+            <img className={`disappear ${dealingFlop[2] ? "dealingFlop4" : ""} ${showCards[4] ? "cardFlip" : ""}`} src={require('./images/card-design.png')} alt="card4"/>
           </div>  
+
           <div className="dealerCardsPlacement">
             <img src={require('./images/card-design.png')} alt=""/>
           </div>

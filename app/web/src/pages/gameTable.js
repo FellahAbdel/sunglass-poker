@@ -8,19 +8,21 @@ import GameActionPanel from '../components/gameTable/GameActionPanel';
 import HandCards from '../components/gameTable/HandCards';
 
 const GameTable = () => {
-  const [dealingFlop, setDealingFlop] = useState(false);
-
-  const handleCheckOrCall = () => {
-    setDealingFlop(!dealingFlop);
-  };
-
+  const [dealingFlop, setDealingFlop] = useState([false,false,false]);
+  
   const handleFold = () => {
-      // Handle fold action
-  };
-
+    console.log('handleFold function called from parent component');
+    setDealingFlop([true,dealingFlop[1],dealingFlop[2]]);
+  }
+  const handleCheckOrCall = () => {
+    console.log('handleFold function called from parent component');
+    setDealingFlop([dealingFlop[0],true,dealingFlop[2]]);
+  }
   const handleRaise = () => {
-      // Handle raise action
-  };
+    console.log('handleFold function called from parent component');
+    setDealingFlop([dealingFlop[0],dealingFlop[1],true]);
+  }
+
 
   return (
     <div className="container-main"> 
@@ -34,9 +36,9 @@ const GameTable = () => {
       <div className="comp-bonus"><BonusPanel/></div>
       <div className="comp-gameAction">
         <GameActionPanel
-          onCheckOrCall={handleCheckOrCall}
-          onFold={handleFold}
-          onRaise={handleRaise}
+            handleFoldProp={handleFold}
+            handleRaiseProp={handleRaise}
+            handleCheckOrCallProp={handleCheckOrCall}
         />
         </div>
 

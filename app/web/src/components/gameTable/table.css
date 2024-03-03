@@ -24,9 +24,11 @@
     position: absolute;
     display: flex;
     align-items: center;
-    width: 27vw;
-    height: 9vh;
+    width: fit-content;
+    height: fit-content;
     color: aliceblue;
+    width: 30vw;
+    height: 20vh;
 }
 
 
@@ -41,75 +43,87 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    font: italic small-caps  1.5vw/2 cursive;
 }
 /*SunGlass Poker text*/
-.tableCardsPlacement p{
+.container-cards p{
     position: absolute;
     display: flex;
+    justify-content: center;
+    width: 100%;
+    font: italic small-caps  1.5vw/2 cursive;
+
 }
 .tableCardsPlacement img{
-    display: flex;
+    position: absolute;
+    right: 0;
     height: auto;
-    width: 19.5%;
+    width: 4vw;
     z-index: 1;
     margin:0 1% 0 1%; 
 }
+.disappear{
+    display: none;
+}
+
 /*dealing the flop animation*/
 .dealingFlop0 {
-    display: unset;
-    animation: dealingFlop0 1s ease-out 0s 1 normal forwards;
+    display: flex;
+    animation: dealingFlop0 1s ease-out 0s 1 normal both;
 }
 .dealingFlop1 {
+    display: flex;
     animation: dealingFlop1 1s ease-in-out 0.2s 1 normal forwards;
 }
 .dealingFlop2 {
+    display: flex;
     animation: dealingFlop2 1s ease-in-out 0.4s 1 normal forwards;
 }
 .dealingFlop3 {
-    animation: dealingFlop3 1s ease-in-out 0.6s 1 normal forwards;
+    display: flex;
+    animation: dealingFlop3 1s ease-in-out 0s 1 normal forwards;
 }
 .dealingFlop4 {
-    animation: dealingFlop4 1s ease-in-out 0.8s 1 normal forwards;
+    display: flex;
+    animation: dealingFlop4 1s ease-in-out 0s 1 normal forwards;
 }
-@keyframes dealingFlop0{
+@keyframes dealingFlop4{
     from{
-        transform: translateX(550%);
-    }
-    to{
         transform: translateX(0%);
     }
-}
-@keyframes dealingFlop1{
-    from{
-        transform: translateX(450%);
-    }
     to{
-        transform: translateX(0%);
-    }
-}
-@keyframes dealingFlop2{
-    from{
-        transform: translateX(350%);
-    }
-    to{
-        transform: translateX(0%);
+        transform: translateX(-160%);
     }
 }
 @keyframes dealingFlop3{
     from{
-        transform: translateX(250%);
+        transform: translateX(0);
     }
     to{
-        transform: translateX(0%);
+        transform: translateX(-280%);
     }
 }
-@keyframes dealingFlop4{
+@keyframes dealingFlop2{
     from{
-        transform: translateX(150%);
+        transform: translateX(0%);
     }
     to{
+        transform: translateX(-395%);
+    }
+}
+@keyframes dealingFlop1{
+    from{
         transform: translateX(0%);
+    }
+    to{
+        transform: translateX(-510%);
+    }
+}
+@keyframes dealingFlop0{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-620%);
     }
 }
 
@@ -119,21 +133,26 @@
     align-items: center;
     justify-content: center;
 
-    /* border-style:solid;
-    border-width: 1px;
-    border-color: #ffffff; */
-    height: 100%;
-    width: 17.3%;
-    margin-left: 20px;   
 }
 .dealerCardsPlacement img{
+    position: absolute;
+    right:0;
     height: auto;
-    width: 90%;
-    margin: 1%;
+    width: 4vw;
     border-style: solid;
     border-color: white;
     border-radius: 5px;
-    padding: 5%;
+    padding: 1%;
+}
+
+@media (max-width:600px) {
+    .dealerCardsPlacement img{
+        width: 5vw;
+    }
+    .tableCardsPlacement img{
+        width: 5vw;
+    }
+
 }
 
 .profile{
