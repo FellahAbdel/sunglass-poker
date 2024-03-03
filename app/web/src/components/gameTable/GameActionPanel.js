@@ -23,9 +23,9 @@ const GameActionButtons = ({ handleFoldProp , handleCheckOrCallProp , handleRais
   return (
     <div className="container-gameAction">
     <div className={`container-ActionButtons ${showPopup ? "container-ActionButtons-slideUp" : ""}`}>
-          <Button style="btn-raise" onClick={() => {handleRaiseProp(); setShowPopup(!showPopup);}} children={`Raise ${sliderValueText ? sliderValueText + "%" : ""}`}/>
-          <Button style="btn-checkOrCall" onClick={handleCheckOrCallProp} children={checkOrCall}/>
-          <Button style="btn-fold" onClick={handleFoldProp} children={"Fold"}/>
+          <Button style={"btn-raise"} onClick={() => {handleRaiseProp(); setShowPopup(!showPopup);}} children={`Raise ${sliderValueText ? sliderValueText + "%" : ""}`}/>
+          <Button style={"btn-checkOrCall"} onClick={handleCheckOrCallProp} children={checkOrCall}/>
+          <Button style={"btn-fold"} onClick={handleFoldProp} children={"Fold"}/>
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}><RaiseSlider initialValue={25} onSliderChange={handleSliderChange}/></div>
     </div>
