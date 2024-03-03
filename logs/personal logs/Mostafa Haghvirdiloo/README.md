@@ -36,6 +36,6 @@
 
 * 2024/03/01 : <b> 6h </b> <br/>        Travail individuel: <i>changement des css pour avoir des pages dynamique et responssive à des tailles des écrans differents  </i>
 
-* 2024/03/03 : <b> 4h </b> <br/>        Travail individuel: <i>associé les buttons de gameActionPanel + animation des cards sur la table + ameliorations des CSS </i>
+* 2024/03/03 : <b> 5h </b> <br/>        Travail individuel: <i>associé les buttons de gameActionPanel + animation des cards sur la table + flip animation + ameliorations des CSS </i>
 
-total: 55h15min
+total:60h15min
