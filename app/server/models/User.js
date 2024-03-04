@@ -1,7 +1,28 @@
-import mongo from 'mongoose'
+// User.js
 
-const { Schema, model } = mongo
+const mongoose = require('mongoose');
 
-const UserSchema = new Schema({});
+const { Schema, model } = mongoose;
 
-export default UserSchema
+const UserSchema = new Schema({
+  pseudo: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  coins: {
+    type: Number,
+    required: true,
+  },
+});
+
+const UserModel = model('User', UserSchema);
+
+module.exports = UserModel;
