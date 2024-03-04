@@ -34,4 +34,8 @@
 
 2024/02/27 : 30min          Modification css, ajout component text.
 
-TEMPS TOTAL: 32h30min 
+2024/03/03 : 1H             Apprentissage mongodb.
+
+2024/03/04 : 2H             Installation MongoDB, MongoSH, découverte, création table User, fichier Index de base.
+
+TEMPS TOTAL: 35h30min 
