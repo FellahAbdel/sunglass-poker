@@ -38,4 +38,7 @@
 
 2024/03/04 : 2H             Installation MongoDB, MongoSH, découverte, création table User, fichier Index de base.
 
-TEMPS TOTAL: 35h30min 
+2024/03/05 : 2H             Début fonctionnement formulaires, fonctionne pour SignUp, ajout fenetre confirmation quand le formulaire est bien envoyé (server/models : npm install cors)
+
+
+TEMPS TOTAL: 37h30min 
