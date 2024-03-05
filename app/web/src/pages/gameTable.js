@@ -9,10 +9,13 @@ import HandCards from '../components/gameTable/HandCards';
 
 const GameTable = () => {
   const [dealingFlop, setDealingFlop] = useState([false,false,false]);
+  const [handGuide, setHandGuide ] = useState("");
+
   
   const handleFold = () => {
     console.log('handleFold function called from parent component');
     setDealingFlop([!dealingFlop[0],!dealingFlop[1],!dealingFlop[2]]);
+    setHandGuide("Full House");
   }
   const handleCheckOrCall = () => {
     console.log('handleFold function called from parent component');
@@ -42,7 +45,7 @@ const GameTable = () => {
         />
         </div>
 
-      <div className="comp-handCards slideUp"><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"}/></div> 
+      <div className="comp-handCards slideUp"><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"} handGuideProp={handGuide}/></div> 
 
     </div>
   );
