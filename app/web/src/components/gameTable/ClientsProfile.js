@@ -18,12 +18,12 @@ const  ClientsProfile=({status, chips, name}) =>{
             )}
         </div>
 
-        <div className="box-playerInfo">
+        <div className={`box-playerInfo ${status}`}>
             {formattedChips}{dollarSign}<br/>
             {name}
         </div>
 
-        <img className="profilePic" src={require('./images/pp_simple.jpg')} alt='profilePic'/>
+        <img className={`profilePic ${status}`} src={require('./images/pp_simple.jpg')} alt='profilePic'/>
         
     </div>
     )
