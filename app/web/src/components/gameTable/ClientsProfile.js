@@ -14,7 +14,7 @@ const  ClientsProfile=({status, chips, name}) =>{
         {status === "Waiting" ? (
                 <ProgressBar className="progressBar progressPercentage" durationInSeconds={5} />
             ) : (
-                <div className="box-statusText">{status}</div>
+                <div className={`box-statusText  ${status}`}>{status}</div>
             )}
         </div>
 
@@ -23,7 +23,7 @@ const  ClientsProfile=({status, chips, name}) =>{
             {name}
         </div>
 
-        <img className={`profilePic ${status}`} src={status === "Empty" ? null : require('./images/pp_simple.jpg')} alt='profilePic'/>
+        <img className={`profilePic ${status}`} src={status === "Empty" ? require('./images/pp_empty.png') : require('./images/pp_simple.jpg')} alt='profilePic'/>
         
     </div>
     )
