@@ -25,8 +25,9 @@ export default function Progressbar({ durationInSeconds }) {
                 <div style={{
                     height: "100%",
                     width: `${filled}%`,
-                    backgroundColor: "#850000",
-                    transition: "width 0.5s"
+                    backgroundColor: "rgb(0, 69, 59)",
+                    boxShadow: "inset 0 0 10px 1px rgb(0, 255, 98)",
+                    transition: "width 0.5s"    
                 }}></div>
                 <span className="progressPercent">{getTimeToFinish()}s</span>
             </div>

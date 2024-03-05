@@ -16,8 +16,19 @@
     box-shadow: inset 0 0 50px rgb(0, 0, 0);
     background-color: #083f87;
 
+
+    background:
+        radial-gradient(black 15%, transparent 16%) 0 0,
+        radial-gradient(black 15%, transparent 16%) 8px 8px,
+        radial-gradient(#083f87 15%, transparent 20%) 0 1px,
+        radial-gradient(#083f87 15%, transparent 20%) 8px 9px;
+    background-color:#282828;
+    background-size:16px 16px;
+
     flex-wrap: wrap;    
+
 }
+
 
 
 .container-cards{
@@ -78,7 +89,7 @@
   }
 
 .flipped {
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
     transform-origin: center;
 }
 .tableCardBack , .tableCardFront{
@@ -86,10 +97,13 @@
     width: 100%;
     height: 100%;
     -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;    
+    backface-visibility: hidden;   
+    box-shadow: -5px 5px 10px black;
+ 
 }
 .tableCardFront{
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
+
 }
 
 
@@ -168,7 +182,7 @@
     height: auto;
     width: 4vw;
     border-style: solid;
-    border-color: white;
+    border-color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 1%;
 }

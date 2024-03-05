@@ -9,9 +9,10 @@ const Table = ({dealingFlop, showCards}) => {
     <div className="table">
 
         <div className={`container-cards`}>
-        {dealingFlop[0] ? false : <p>SunGlassPoker</p>}
 
-        <div className="tableCardsPlacement">
+          {/* {dealingFlop[0] ? false : <p>SunGlassPoker</p>} */}
+          <p>SunGlassPoker</p>
+          <div className="tableCardsPlacement">
 
             {/* first three flops -> dealingFlop[0]
             first forth flops -> dealingFlop[1]
@@ -49,10 +50,10 @@ const Table = ({dealingFlop, showCards}) => {
           </div>
         </div>
 
-        <div className="profile profile0"><ClientsProfile status={"Waiting"} chips={9999999} name={"Mostafa0"}/></div>
-        <div className="profile profile1"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa1"}/></div>
-        <div className="profile profile2"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa2"}/></div>
-        <div className="profile profile3"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa3"}/></div>
+        <div className="profile profile0"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa0"}/></div>
+        <div className="profile profile1"><ClientsProfile status={"Fold"} chips={9999999} name={"Mostafa1"}/></div>
+        <div className="profile profile2"><ClientsProfile status={"Waiting"} chips={9999999} name={"Mostafa2"}/></div>
+        <div className="profile profile3"><ClientsProfile status={"Raised"} chips={9999999} name={"Mostafa3"}/></div>
         <div className="profile profile4"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa4"}/></div>
         <div className="profile profile5"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa5"}/></div>
         <div className="profile profile6"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa6"}/></div>

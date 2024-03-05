@@ -12,15 +12,15 @@ const GameTable = () => {
   
   const handleFold = () => {
     console.log('handleFold function called from parent component');
-    setDealingFlop([true,dealingFlop[1],dealingFlop[2]]);
+    setDealingFlop([!dealingFlop[0],!dealingFlop[1],!dealingFlop[2]]);
   }
   const handleCheckOrCall = () => {
     console.log('handleFold function called from parent component');
-    setDealingFlop([dealingFlop[0],true,dealingFlop[2]]);
+    setDealingFlop([dealingFlop[0],!dealingFlop[1],dealingFlop[2]]);
   }
   const handleRaise = () => {
     console.log('handleFold function called from parent component');
-    setDealingFlop([dealingFlop[0],dealingFlop[1],true]);
+    setDealingFlop([dealingFlop[0],dealingFlop[1],!dealingFlop[2]]);
   }
 
 
