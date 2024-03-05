@@ -6,7 +6,7 @@ class partie {
     #joueurs = []; // liste de joueurs
     #jeuDeCarte = []; // liste de l'ensemble des cartes
     #cartesMasque = []; // tableau de 5 cartes 
-    #historiqueDesMises = []; // [{ idJoueur, sommeMisee }, ...]
+    #historiqueDesMises = []; // [{ playerId, sommeMisee }, ...]
     #mises = 0;
     #misesSecondaires = 0;
     #joueurCourant = 0;
@@ -45,19 +45,58 @@ class partie {
 
     /*
      * IN : rien
-     * OUT : { [c1, ..., c5], idJoueur } tableau de combinaison et identifiant du gagant
+     * OUT : { [c1, ..., c5], playerId } tableau de combinaison et identifiant du gagnant
      * FUNCTION : identifie le joueur gagnant de la partie et la main avec laquelle il a gagne
      */
     gagnant () {
-        // let listeMainJoueur = [];
-        // let liste = []
-        // for (let i=0; i<this.#joueurs) {
-        //     let obj = {
-        //         main : null,
-        //         idJoueur : listeMainJoueur[i].idJoueur
-        //     }
-        //     obj.main = this.estCarre(listeMainJoueur[i].cartes)
-        // }
+
+        let activeUsers = listeJoueursActifs();
+        let combinationList = this.listeCombinaison(activeUsers);
+        let maxList = this.maximums(combinationList, (x) => x.poids);
+
+        if (maxList.length > 1) {
+
+            let winners = [];
+
+            switch (maxList[0].type) {
+                case "carre":
+                    winners = this.secondCarre(maxList);
+                    break;
+                case "full":
+                    winners = this.secondFull(maxList);
+                    break;
+                case "suite":
+                    winners = this.secondSuite(maxList);
+                    break;
+                case "brelan":
+                    winners = this.secondBrelan(maxList);
+                    break;
+                case "double paire":
+                    winners = this.secondDoublePaire(maxList);
+                    break;
+                case "paire":
+                    winners = this.secondPaire(maxList);
+                    break;
+                case "carte haute":
+                    winners = this.secondCarteHaute(maxList);
+                    break;
+            }
+
+            let res;
+            for (let i=0; i < winners.length; i++) {
+                for (let j=0; j < maxList.length; j++) {
+                    if (winners[i] === maxList[j].playerId) {
+                        res.push(maxList[j]);
+                    }
+                }
+            }
+
+            return res;
+
+        } else {
+            return [maxList[0]];
+        }
+
     }
 
 
@@ -70,7 +109,7 @@ class partie {
 
     /*
      * IN : JOUEUR
-     * OUT : { [c1, ..., c7], idJoueur } tableau des 7 cartes associe a l'id du joueur
+     * OUT : { [c1, ..., c7], playerId } tableau des 7 cartes associe a l'id du joueur
      * FUNCTION : compose et renvoi le tableau de 7 cartes pour les combinaisons
      */
     fait7cartes (joueur) {}
@@ -88,20 +127,20 @@ class partie {
      * OUT : [{ poid, main, type }, ...] tableau du/des maximum(s) des poids
      * FUNCTION : tri et renvoi le ou les maximums des poids
      */
-    maximums (listePoidMainJoueur, accesseur) { 
+    maximums (playerHandWeightList, getter) { 
         let maximums = [];
-        let poidMax = accesseur(listePoidMainJoueur[0]);
+        let maxWeight = getter(playerHandWeightList[0]);
 
-        for (let i=0; i<listePoidMainJoueur.length; i++) {
+        for (let i=0; i<playerHandWeightList.length; i++) {
 
-            if (accesseur(listePoidMainJoueur[i]) > poidMax) {
+            if (getter(playerHandWeightList[i]) > maxWeight) {
 
                 maximums.splice(0, maximums.length);
-                maximums.push(listePoidMainJoueur[i]);
-                poidMax = accesseur(listePoidMainJoueur[i]);
+                maximums.push(playerHandWeightList[i]);
+                maxWeight = getter(playerHandWeightList[i]);
 
-            } else if (accesseur(listePoidMainJoueur[i]) === poidMax) {
-                maximums.push(listePoidMainJoueur[i]);
+            } else if (getter(playerHandWeightList[i]) === maxWeight) {
+                maximums.push(playerHandWeightList[i]);
             }
         }
 
@@ -109,14 +148,14 @@ class partie {
     }
 
 
-    trier (liste, accesseur) {
+    trier (list, getter) {
 
-        let tab = [...liste];
+        let tab = [...list];
         let tmp;
 
         for(let i=0; i<tab.length; i++) {
             for (let j=0; j<tab.length-1; j++) {
-                if ( accesseur(tab[j]) > accesseur(tab[j+1]) ) {
+                if ( getter(tab[j]) > getter(tab[j+1]) ) {
                     tmp = tab[j];
                     tab[j] = tab[j+1];
                     tab[j+1] = tmp;
@@ -135,16 +174,7 @@ class partie {
      * OUT : objet { poid : NUMBER, type : STRING }
      * FUNCTION : trouve dans les 7 cartes la main la plus puissante
      */
-    combinaison ({ tableau7cartes, idJoueur }) {
-        
-        if (this.estQuinteFlushRoyale(tableau7cartes)) {
-            return {
-                poid : 15,
-                main : [], // tableau de 5 cartes composant la main
-                type : "quinteFlush"
-            }
-        }
-    } 
+    combinaison ({ tableau7cartes, playerId }) {} 
 
     /*
      * IN : tableau de 7 cartes
@@ -179,54 +209,54 @@ class partie {
      * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
      * FUNCTION : determine si les 7 possedent une couleur et renvoi la combianaison si elle est trouve.
      */
-    estCouleur (tableau7cartes) {
-        let tab = [...tableau7cartes];
-        let familles = [
+    estCouleur (sevenCardsTab) {
+        let tab = [...sevenCardsTab];
+        let colors = [
             [],
             [],
             [],
             []
         ];
 
-        // on repartis les cartes par familles 
+        // on repartis les cartes par famille 
         for (let i=0; i<tab.length; i++) {
-            switch (tab[i].famille) {
-                case "carre" :
-                    familles[0].push(tab[i]);
+            switch (tab[i].color) {
+                case "diamond" :
+                    colors[0].push(tab[i]);
                     break;
-                case "coeur" :
-                    familles[1].push(tab[i]);
+                case "heart" :
+                    colors[1].push(tab[i]);
                     break;
-                case "trefle" :
-                    familles[2].push(tab[i]);
+                case "club" :
+                    colors[2].push(tab[i]);
                     break;
-                case "pique" :
-                    familles[3].push(tab[i]);
+                case "spade" :
+                    colors[3].push(tab[i]);
                     break;
             }
         }
         
         // 
-        for (let i=0; i < familles.length; i++) {
+        for (let i=0; i < colors.length; i++) {
 
-            if (familles[i].length > 5) {
+            if (colors[i].length > 5) {
 
-                while (familles[i].length > 5) {
-                    let indice = 0;
+                while (colors[i].length > 5) {
+                    let index = 0;
 
-                    for (let j=0; j<familles[i].length; j++) {
-                        if (familles[i][j].numero < familles[i][indice].numero) {
-                            indice = j;
+                    for (let j=0; j<colors[i].length; j++) {
+                        if (colors[i][j].number < colors[i][index].number) {
+                            index = j;
                         }
                     }
 
-                    familles[i].splice(indice, 1);
+                    colors[i].splice(index, 1);
                 }
 
-                return familles[i];
+                return colors[i];
 
-            } else if (familles[i].length === 5) {
-                return familles[i];
+            } else if (colors[i].length === 5) {
+                return colors[i];
             }
         }
 
@@ -236,48 +266,47 @@ class partie {
     /*
      * ...
      */
-    estSuite (tableau7cartes) {
-        let tab = [...tableau7cartes];
-        let main = [];
+    estSuite (sevenCardsTab) {
+        let tab = [...sevenCardsTab];
+        let hand = [];
         let pluriCouleur = false;
 
         while (tab.length !== 0) {
-            let indice = 0;
+            let index = 0;
             for (let i=0; i<tab.length; i++) {
-                if (tab[i].numero < tab[indice].numero) {
-                    indice = i;
+                if (tab[i].number < tab[index].number) {
+                    index = i;
                 }
             }
-            if (main.length - 1 >= 0) {
+            if (hand.length - 1 >= 0) {
                 // la main est non vide
 
-                if (tab[indice].numero === main[main.length-1].numero + 1) {
+                if (tab[index].number === hand[hand.length-1].number + 1) {
                     // les deux chiffres sont consecutifs
 
-                    if (tab[indice].famille !== main[main.length-1].famille) {
+                    if (tab[index].color !== hand[hand.length-1].color) {
                         pluriCouleur = true;
                     }
-                    if (main.length === 5) {
+                    if (hand.length === 5) {
                         // pour s'assurer qu'il y ait au plus 5 cartes
                         // les 5 cartes seront les plus grandes
-                        main.splice(0,1);
+                        hand.splice(0,1);
                     }
-                    main.push(tab[indice]);
-                    tab.splice(indice, 1);
+                    hand.push(tab[index]);
+                    tab.splice(index, 1);
                 } else {
                     // si pas condecutifs alors on vide la main
-                    main.splice(0, main.length);
+                    hand.splice(0, hand.length);
                     pluriCouleur = false;
                 }
             } else {
-                main.push(tab[indice]);
-                tab.splice(indice, 1);
+                hand.push(tab[index]);
+                tab.splice(index, 1);
             }
         }
 
-        console.log("pluriCouleur : ", pluriCouleur);
-        if (main.length === 5 && pluriCouleur) {
-            return main;
+        if (hand.length === 5 && pluriCouleur) {
+            return hand;
         } 
         return false;
     }
@@ -315,29 +344,29 @@ class partie {
     secondCarre (listeJoueurCombinaison) {
         // je sais que cette liste contient deux elements
 
-        let typeCarre = function (mainJoueur) {
+        let typeCarre = function (playerHand) {
             let type = {
                 type   : null,
-                intrus : null,
-                id : mainJoueur.idJoueur
+                intruder : null,
+                id : playerHand.playerId
             }
             
-            if (mainJoueur.main[0].numero === mainJoueur.main[1].numero) {
-                type.type = mainJoueur.main[0].numero;
+            if (playerHand.hand[0].number === playerHand.hand[1].number) {
+                type.type = playerHand.hand[0].number;
                 // chercher l'intrus
-                for (let i=0; i<mainJoueur.main.length; i++) {
-                    if (mainJoueur.main[i].numero !== type.type) {
-                        type.intrus = mainJoueur.main[i].numero;
+                for (let i=0; i<playerHand.hand.length; i++) {
+                    if (playerHand.hand[i].number !== type.type) {
+                        type.intruder = playerHand.hand[i].number;
                     }
                 }
 
             } else {
-                if (mainJoueur.main[0].numero === mainJoueur.main[2].numero) {
-                    type.type = mainJoueur.main[0].numero;
-                    type.intrus = mainJoueur.main[1].numero;
+                if (playerHand.hand[0].number === playerHand.hand[2].number) {
+                    type.type = playerHand.hand[0].number;
+                    type.intruder = playerHand.hand[1].number;
                 } else {
-                    type.type = mainJoueur.main[1].numero;
-                    type.intrus = mainJoueur.main[0].numero;
+                    type.type = playerHand.hand[1].number;
+                    type.intruder = playerHand.hand[0].number;
                 }
             }
 
@@ -358,15 +387,15 @@ class partie {
 
         } else {
 
-            let maxIntrus = this.maximums(maxTypes, (x) => x.intrus);
+            let intruderMax = this.maximums(maxTypes, (x) => x.intruder);
 
-            if (maxIntrus.length === 1) {
-                return [maxIntrus[0].id];
+            if (intruderMax.length === 1) {
+                return [intruderMax[0].id];
 
             } else {
                 let res = [];
-                for (let i=0; i<maxIntrus.length; i++) {
-                    res.push(maxIntrus[i].id);
+                for (let i=0; i<intruderMax.length; i++) {
+                    res.push(intruderMax[i].id);
                 }
                 return res;
             }
@@ -391,32 +420,32 @@ class partie {
     secondBrelan (listeJoueurCombinaison) {
 
 
-        let typeBrelan = function (mainJoueur, trier) {
+        let typeBrelan = function (playerHand, trier) {
             let type = {
                 type : null,
-                intrus : null,
-                id : mainJoueur.idJoueur
+                intruder : null,
+                id : playerHand.playerId
             }
 
-            let cartes = trier(mainJoueur.main, (x) => x.numero); 
-            type.type = cartes[2].numero;
+            let cards = trier(playerHand.hand, (x) => x.number); 
+            type.type = cards[2].number;
 
-            if (cartes[1].numero === cartes[2].numero) {
+            if (cards[1].number === cards[2].number) {
 
-                if (cartes[0] === cartes[1]) {
-                    type.intrus = cartes[3].numero > cartes[4].numero ? 
-                        cartes[3].numero : cartes[4].numero;
+                if (cards[0] === cards[1]) {
+                    type.intruder = cards[3].number > cards[4].number ? 
+                        cards[3].number : cards[4].number;
 
 
                 } else {
-                    type.intrus = cartes[0].numero > cartes[4].numero ? 
-                        cartes[0].numero : cartes[4].numero;
+                    type.intruder = cards[0].number > cards[4].number ? 
+                        cards[0].number : cards[4].number;
 
                 }
 
             } else {
-                type.intrus = cartes[1].numero > cartes[0].numero ? 
-                    cartes[1].numero : cartes[0].numero;
+                type.intruder = cards[1].number > cards[0].number ? 
+                    cards[1].number : cards[0].number;
 
             }
 
@@ -438,15 +467,15 @@ class partie {
 
         } else {
 
-            let maxIntrus = this.maximums(maxTypes, (x) => x.intrus);
+            let intruderMax = this.maximums(maxTypes, (x) => x.intruder);
 
-            if (maxIntrus.length === 1) {
-                return [maxIntrus[0].id];
+            if (intruderMax.length === 1) {
+                return [intruderMax[0].id];
 
             } else {
                 let res = [];
-                for (let i=0; i<maxIntrus.length; i++) {
-                    res.push(maxIntrus[i].id);
+                for (let i=0; i<intruderMax.length; i++) {
+                    res.push(intruderMax[i].id);
                 }
                 return res;
             }
@@ -468,23 +497,43 @@ class partie {
      */
     secondCarteHaute (listeJoueurCombinaison) {
 
+        const refactor = function (cardList, undo=false) {
+
+            for (let i=0; i < cardList.length; i++) {
+                
+                if (cardList[i].number === 1 || cardList[i] === 14) {
+                    if (undo) {
+                        cardList[i].number = 1;
+                    } else {
+                        cardList[i].number = 14;
+                    }
+                }
+            }
+        }
+
         let tab = [...listeJoueurCombinaison];
 
         for (let i=0; i<tab.length; i++) {
-            tab[i].main = this.trier(tab[i].main, (x) => x.numero);
+            // change le 1 en 14 pour en faire la carte la plus haute
+            refactor(tab[i].hand);
+            tab[i].hand = this.trier(tab[i].hand, (x) => x.number);
         }
 
         let max ;
 
         for (let i=4; i>=0; i--) {
-            max = this.maximums(tab, (x) => x.main[i].numero);
-            console.log(max);
-            if (max.length === 1) return [max[0].idJoueur];
+            max = this.maximums(tab, (x) => x.hand[i].number);
+            if (max.length === 1) return [max[0].playerId];
+        }
+
+        // retabli l'etat des cartes
+        for (let i=0; i<tab.length; i++) {
+            refactor(tab[i].hand, true);
         }
 
         let res = [];
         for (let i=0; i<max.length; i++) {
-            res.push(max[i].idJoueur)
+            res.push(max[i].playerId)
         }
         
         return res;
@@ -518,3 +567,47 @@ class partie {
      */
     deroulerPartie () {}
 }
+
+let p = new partie;
+console.log(p.estSuite([
+    {number : 5, color : "diamond"},
+    {number : 6, color : "spade"},
+    {number : 7, color : "heart"},
+    {number : 2, color : "club"},
+    {number : 9, color : "diamond"},
+    {number : 10, color : "spade"},
+    {number : 11, color : "heart"}
+]));
+
+console.log(p.secondCarteHaute([
+    {
+        hand : [
+            {number : 2, color : "diamond"},
+            {number : 1, color : "diamond"},
+            {number : 2, color : "heart"},
+            {number : 2, color : "spade"},
+            {number : 2, color : "club"}
+        ],
+        playerId : '20'
+    },
+    {
+        hand : [
+            {number : 5, color : "diamond"},
+            {number : 5, color : "heart"},
+            {number : 5, color : "spade"},
+            {number : 5, color : "club"},
+            {number : 9, color : "diamond"}
+        ],
+        playerId : '21'
+    },
+    {
+        hand : [
+            {number : 5, color : "diamond"},
+            {number : 5, color : "heart"},
+            {number : 7, color : "diamond"},
+            {number : 5, color : "club"},
+            {number : 5, color : "spade"}
+        ],
+        playerId : '21'
+    }
+]));
