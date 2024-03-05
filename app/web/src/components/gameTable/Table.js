@@ -58,7 +58,7 @@ const Table = ({dealingFlop, showCards}) => {
         <div className="profile profile5"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa5"}/></div>
         <div className="profile profile6"><ClientsProfile status={"Fold"} chips={9999999} name={"Mostafa6"}/></div>
         <div className="profile profile7"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa7"}/></div>
-        <div className="profile profile8"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa8"}/></div>
+        <div className="profile profile8"><ClientsProfile status={"Empty"} chips={""} name={""}/></div>
         <div className="profile profile9"><ClientsProfile status={"Fold"} chips={9999999} name={"Mostafa9"}/></div>
     </div>
   )

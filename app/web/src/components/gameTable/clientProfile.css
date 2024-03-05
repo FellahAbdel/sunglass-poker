@@ -85,12 +85,17 @@
     box-shadow: inset 0 0 10px 1px rgb(255, 0, 0),
                 0 0 10px 1px rgb(255, 0, 0);
 }
+.box-status.Empty{
+    box-shadow: inset 0 0 10px 0px rgb(255, 255, 255),
+    0 0 10px 0px rgb(255, 255, 255);
+}
 .profilePic.Fold{
     filter: blur(5px);
 }
 .box-playerInfo.Fold{
     color: gray;
 }
+
 
 
 
@@ -155,4 +160,5 @@
     border-width: 0.3vw;
     border-color: black;
     box-shadow: 0 0 10px black;
+    background-color: #ffffff;
 }
