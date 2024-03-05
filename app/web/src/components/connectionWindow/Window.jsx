@@ -7,6 +7,7 @@ import LoginWindow from "./WindowContent/LoginWindow";
 import SignUpWindow from "./WindowContent/SignupWindow";
 import ResetPasswordWindow from "./WindowContent/ResetPassword";
 import ForgotPassword from "./WindowContent/ForgotPassword";
+import SuccessWindow from "./WindowContent/SuccessWindow";
 
 const Window = ({ onClose, windowType }) => {
   const [currentWindow, setWindowType] = useState(null);
@@ -31,9 +32,17 @@ const Window = ({ onClose, windowType }) => {
     setWindowType("reset");
   };
 
+  const openSuccessWindow = () => {
+    setWindowType("success");
+  };
+
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
+
+  useEffect(() => {
+    setWindowType(windowType);
+  }, [windowType]);
 
   return (
     <div className="overlay" onClick={onClose}>
@@ -45,7 +54,11 @@ const Window = ({ onClose, windowType }) => {
           />
         )}
         {currentWindow === "signup" && (
-          <SignUpWindow openLoginWindow={openLoginWindow} />
+          <SignUpWindow
+            openLoginWindow={openLoginWindow}
+            onClose={onClose}
+            showSuccess={openSuccessWindow}
+          />
         )}
         {currentWindow === "forgot" && (
           <ForgotPassword
@@ -54,7 +67,16 @@ const Window = ({ onClose, windowType }) => {
           />
         )}
         {currentWindow === "reset" && (
-          <ResetPasswordWindow openLoginWindow={openLoginWindow} />
+          <ResetPasswordWindow
+            openLoginWindow={openLoginWindow}
+            onClose={onClose}
+          />
+        )}
+        {currentWindow === "success" && (
+          <SuccessWindow
+            message="Account created with success!"
+            onClose={onClose}
+          />
         )}
       </div>
     </div>
