@@ -10,8 +10,11 @@ const Table = ({dealingFlop, showCards}) => {
 
         <div className={`container-cards`}>
 
-          {/* {dealingFlop[0] ? false : <p>SunGlassPoker</p>} */}
-          <p>SunGlassPoker</p>
+          {dealingFlop[0] ? false : 
+            <div class="glitch-wrapper">
+              <div class="glitch" data-glitch="SunGlassPoker">SunGlassPoker</div>
+            </div>
+          }
           <div className="tableCardsPlacement">
 
             {/* first three flops -> dealingFlop[0]
@@ -59,7 +62,7 @@ const Table = ({dealingFlop, showCards}) => {
         <div className="profile profile6"><ClientsProfile status={"Fold"} chips={9999999} name={"Mostafa6"}/></div>
         <div className="profile profile7"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa7"}/></div>
         <div className="profile profile8"><ClientsProfile status={"Empty"} chips={""} name={""}/></div>
-        <div className="profile profile9"><ClientsProfile status={"Fold"} chips={9999999} name={"Mostafa9"}/></div>
+        <div className="profile profile9"><ClientsProfile status={"Called"} chips={9999999} name={"Mostafa9"}/></div>
     </div>
   )
 }

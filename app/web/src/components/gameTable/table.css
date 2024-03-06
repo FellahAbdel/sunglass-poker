@@ -1,8 +1,10 @@
 .table{
-    border-style: solid;
-    border-radius: 150px;
+    /* border-style: solid;
+    
     border-width: 1.5vw;
-    border-color: rgb(0, 4, 17);
+    border-color: rgb(0, 4, 17); */
+
+    border-radius: 150px;
 
     width: 60vw;
     min-width: 400px;
@@ -13,7 +15,14 @@
     align-items: center;
     justify-content: center;
 
-    box-shadow: inset 0 0 50px rgb(0, 0, 0);
+    box-shadow: 
+        inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
+        
+        0 0 1vw 0.8vW rgb(26, 94, 154),
+        0 0 0 1vW rgb(0, 0, 0),
+        0 0 0 2vW rgb(31, 33, 36),
+        inset 0 0 0 2vW rgb(43, 41, 41),
+        0 0 5vw 3vw black;
     background-color: #083f87;
 
 
@@ -212,39 +221,108 @@
 
 .profile2{
     top:-5%;
-    right:-3%;
+    right:-5%;
 }
 
 .profile3{
     bottom: 15%;
-    right:-3%;
+    right:-5%;
 }
 .profile4{
-    bottom:-15%;
+    bottom:-25%;
     right:20%;
 }
 
 .profile5{
-    bottom: -15%;
+    bottom: -25%;
 }
 
 .profile6{
-    bottom: -15%;
+    bottom: -25%;
     left:20%;
 }
 
 .profile7{
     bottom: 15%;
-    left:-3%;
+    left:-5%;
 }
 
 .profile8{
     top: -5%;
-    left: -3%;
+    left: -5%;
 }
 
 .profile9{
     top:-30%;
     left:20%;
 }
-
+ 
+/*text glitch*/
+.glitch-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+ }
+ 
+ .glitch {
+    position: relative;
+    font-size: 1.5vw;
+    font-family: "Monaco", monospace;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #ffffff31;
+    letter-spacing: 0.5vw;
+    z-index: 1;
+ }
+ 
+ .glitch:before,
+ .glitch:after {
+    display: block;
+    content: attr(data-glitch);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+ }
+ 
+ .glitch:before {
+    animation: glitch-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    color: rgba(0, 255, 255, 0.238);
+    z-index: -1;
+ }
+ 
+ .glitch:after {
+    animation: glitch-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+    color: rgba(255, 0, 255, 0.235);
+    z-index: -2;
+ }
+ 
+ @keyframes glitch-color {
+    0% {
+       transform: translate(0);
+    }
+ 
+    20% {
+       transform: translate(-3px, 3px);
+    }
+ 
+    40% {
+       transform: translate(-3px, -3px);
+    }
+ 
+    60% {
+       transform: translate(3px, 3px);
+    }
+ 
+    80% {
+       transform: translate(3px, -3px);
+    }
+ 
+    to {
+       transform: translate(0);
+    }
+ }

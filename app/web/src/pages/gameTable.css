@@ -14,10 +14,18 @@
     height: 100%;
     top:0 ;
     z-index: -999;
-    background-image: url('./../components/gameTable/images/backdrop.png'); 
-    background-size:cover; 
-    filter: blur(5px);
+    /* background-image: url('./../components/gameTable/images/backdrop.png'); 
+    background-size:cover;  */
+    filter: blur(1px) ;
+    filter: brightness(30%);
     background-color: black;
+
+    background: linear-gradient(315deg, transparent 75%, #000000 0)-8px 0,
+      linear-gradient(45deg, transparent 75%, #000000 0) 8px 0,
+      linear-gradient(135deg, #333 50%, transparent 0) 0 0,
+      linear-gradient(45deg, #4d4d4d 50%, #666 0) 0 0 #666;
+    background-size: 16px 16px;
+
 }
 
 .background{

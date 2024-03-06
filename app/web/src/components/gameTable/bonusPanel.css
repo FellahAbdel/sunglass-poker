@@ -4,7 +4,8 @@
   height: auto;
   width:17vw;
   border-radius: 10px;
-  box-shadow: 0px 0px 5px black;
+  background-color: rgba(0, 225, 255, 0.094);
+  box-shadow: 0px 0px 20px 5px black;
 
 }
 
@@ -52,15 +53,15 @@
 
 
 .box-1{
-  background-image: linear-gradient(0deg, rgb(0, 169, 107) 20%, rgb(240, 248, 255) 50%);
+  background-image: linear-gradient(0deg, rgb(0, 166, 169) 20%, rgb(240, 248, 255) 50%);
   transition: background-image 1s ease;
 }
 .box-2{
-  background-image: linear-gradient(0deg, rgb(0, 169, 107) 50%, rgb(240, 248, 255) 70%);
+  background-image: linear-gradient(0deg, rgb(0, 166, 169) 50%, rgb(240, 248, 255) 70%);
   transition: background-image 1s ease;
 }
 .box-3{
-  background-color: rgb(0, 169, 107);
+  background-color: rgb(0, 166, 169);
   transition: background-color 1s ease;
 }
 
@@ -76,8 +77,11 @@
   border-radius: 10px;
   border-style: unset;
 
-  background-color: rgb(0, 169, 107);
-  box-shadow: 0px 0px 10px rgb(42, 0, 0);
+  background-color: rgb(0, 132, 169);
+  box-shadow: 
+    0px 0px 10px rgb(0, 0, 0),
+    0px 0px 0 2px rgba(0, 0, 0, 0.3),
+    inset 0px 0px 5px 1px rgb(0, 0, 0);
 
   font-size: 1vw;
   color: aliceblue;
