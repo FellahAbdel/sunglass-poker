@@ -40,5 +40,7 @@
 
 2024/03/05 : 2H             Début fonctionnement formulaires, fonctionne pour SignUp, ajout fenetre confirmation quand le formulaire est bien envoyé (server/models : npm install cors)
 
+2024/03/06 : 1H             Fonctionnement formulaire login (Reste à faire le feedback lors d'une mauvaise combinaison), modiff fenêtre Success qui prend désormais en argument le message à afficher.
+
 
 TEMPS TOTAL: 37h30min 
