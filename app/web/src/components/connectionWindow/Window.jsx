@@ -11,6 +11,7 @@ import SuccessWindow from "./WindowContent/SuccessWindow";
 
 const Window = ({ onClose, windowType }) => {
   const [currentWindow, setWindowType] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     setWindowType(windowType);
@@ -32,12 +33,19 @@ const Window = ({ onClose, windowType }) => {
     setWindowType("reset");
   };
 
-  const openSuccessWindow = () => {
+  const openSuccessWindow = (message) => {
     setWindowType("success");
+    setSuccessMessage(message);
   };
 
   const handleBoxClick = (event) => {
     event.stopPropagation();
+  };
+
+  const handleSuccessClose = () => {
+    setWindowType(null);
+    setSuccessMessage("");
+    onClose();
   };
 
   useEffect(() => {
@@ -51,6 +59,7 @@ const Window = ({ onClose, windowType }) => {
           <LoginWindow
             openSignUpWindow={openSignUpWindow}
             openForgotPassword={openForgotPassword}
+            showSuccess={openSuccessWindow}
           />
         )}
         {currentWindow === "signup" && (
@@ -74,8 +83,8 @@ const Window = ({ onClose, windowType }) => {
         )}
         {currentWindow === "success" && (
           <SuccessWindow
-            message="Account created with success!"
-            onClose={onClose}
+            message={successMessage}
+            onClose={handleSuccessClose}
           />
         )}
       </div>

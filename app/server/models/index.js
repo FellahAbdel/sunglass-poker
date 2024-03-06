@@ -77,6 +77,28 @@ app.post("/api/users", async (req, res) => {
   }
 });
 
+app.post("/api/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Recherche d'un utilisateur dans la base de données avec la combinaison pseudo/mot de passe
+    const user = await UserModel.findOne({ pseudo: username, password });
+
+    if (user) {
+      // La combinaison de pseudo et de mot de passe est correcte
+      res.json({ success: true, message: 'Login successful' });
+    } else {
+      // La combinaison de pseudo et de mot de passe n'est pas correcte
+      res.json({ success: false, message: 'Invalid credentials' });
+    }
+  } catch (error) {
+    console.error("Erreur lors de la connexion :", error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+
+
 // Démarrage du serveur
 app.listen(port, () => {
   console.log(`Serveur en écoute sur le port ${port}`);

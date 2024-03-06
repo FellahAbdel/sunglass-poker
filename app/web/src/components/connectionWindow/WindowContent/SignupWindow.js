@@ -45,7 +45,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
       if (response.ok) {
         console.log("Utilisateur créé avec succès!");
         // Ajouter ici la logique pour rediriger ou afficher un message de succès
-        showSuccess();
+        showSuccess("Account created with success!");
         return;
       } else {
         console.error("Erreur lors de la création de l'utilisateur");
