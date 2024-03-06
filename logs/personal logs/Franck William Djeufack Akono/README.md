@@ -11,3 +11,4 @@ travail de groupe sur la finalisation de la specifications des fonctions du back
 --------|-------------|---------|
 | 25/02/24 | travail sur les fonctions maximums, shuffle et estCouleur | 2h |
 | 27/02/24 | travail sur les fonctions secondCarre secondBrelan, et second carteHaute | 4h |
+| 05/03/24 | travail sur la fonction gagnant et refactoration de la nomonclature des variables du code | 2h |
