@@ -73,6 +73,7 @@ const Window = ({ onClose, windowType }) => {
           <ForgotPassword
             openLoginWindow={openLoginWindow}
             openResetPassword={openResetPassword}
+            showSuccess={openSuccessWindow}
           />
         )}
         {currentWindow === "reset" && (

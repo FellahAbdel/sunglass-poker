@@ -30,28 +30,6 @@ db.once("open", () => {
   console.log("Connecté à la base de données MongoDB");
 });
 
-// Exemple d'ajout d'un utilisateur et de récupération de tous les utilisateurs
-const nouveauUtilisateur = new UserModel({
-  pseudo: "john_doe",
-  email: "john.doe@example.com",
-  password: "motDePasseSecret",
-  coins: 100,
-});
-
-nouveauUtilisateur
-  .save()
-  .then((result) => {
-    console.log("Utilisateur enregistré avec succès :", result);
-
-    // Récupérer tous les utilisateurs
-    return UserModel.find({});
-  })
-  .then((users) => {
-    console.log("Utilisateurs existants :", users);
-  })
-  .catch((error) => {
-    console.error("Erreur :", error);
-  });
 
 app.post("/api/users", async (req, res) => {
   try {
@@ -94,6 +72,26 @@ app.post("/api/login", async (req, res) => {
   } catch (error) {
     console.error("Erreur lors de la connexion :", error);
     res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+app.post("/api/check-email", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Recherche d'un utilisateur dans la base de données avec l'e-mail fourni
+    const user = await UserModel.findOne({ email });
+
+    if (user) {
+      // L'e-mail existe dans la base de données
+      res.json({ exists: true, message: 'E-mail exists in the database' });
+    } else {
+      // L'e-mail n'existe pas dans la base de données
+      res.json({ exists: false, message: 'E-mail does not exist in the database' });
+    }
+  } catch (error) {
+    console.error("Erreur lors de la vérification de l'e-mail :", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
