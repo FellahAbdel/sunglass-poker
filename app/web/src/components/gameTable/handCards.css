@@ -1,4 +1,4 @@
-.container-hand-cards{
+.container-hand{
     width: 20vw;
     height: 14vw;
     display: flex;
@@ -36,19 +36,22 @@
     0 0 30px rgb(255, 255, 255);
 }
 
-.container-card{
+.container-handCard{
     display: flex;
     position: absolute;
-
+    bottom:0;
     width: 85%;
+    height: 80%;
     flex-direction:row;
     justify-content: space-evenly;
     margin: 20px 0px 0px 0px;
     z-index: 0;
 }
 
-.card{
+.handCard{
     align-self: center;
-    width: 40%;
+    width: 45%;
+    height: 100%;
     box-shadow: 0 0 10px black;
+
 }

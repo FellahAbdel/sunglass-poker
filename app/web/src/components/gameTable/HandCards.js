@@ -1,14 +1,17 @@
 import React from 'react';
 import './handCards.css';
+import Card from './Card/Card.js'
 
-const HandCards = ({cardType1 , cardNumber1 , cardType2, cardNumber2 , handGuideProp}) => {
+const HandCards = ({card1 , card2 , handGuideProp , showHandCardProp}) => {
 
     return (
-    <div className="container-hand-cards">
+    <div className="container-hand">
         {handGuideProp ? <div className="hand-guide slideUp">{handGuideProp}!</div> : null }
-        <div className="container-card">     
-            <img className="card" src={require(`./images/card_front/${cardNumber1}_of_${cardType1}.png`)} alt="Card1"/>
-            <img className="card" src={require(`./images/card_front/${cardNumber2}_of_${cardType2}.png`)} alt="Card2"/>
+        <div className="container-handCard">     
+            {/* <img className="handCard" src={require(`./images/card_front/${cardNumber1}_of_${cardType1}.png`)} alt="Card1"/>
+            <img className="handCard" src={require(`./images/card_front/${cardNumber2}_of_${cardType2}.png`)} alt="Card2"/> */}
+            <Card style="handCard" card={card1} flippingCard={showHandCardProp}/>
+            <Card style="handCard" card={card2} flippingCard={showHandCardProp}/>
         </div>  
     </div>
     )

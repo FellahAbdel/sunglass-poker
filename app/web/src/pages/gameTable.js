@@ -12,7 +12,11 @@ const GameTable = () => {
   const [handGuide, setHandGuide ] = useState("");
   const [profileMenu , setProfileMenu] = useState(false);
   const [settingsMenu , setSettingsMenu] = useState(false);
+  const [showHandCard, setShowHandCard] = useState(false);
 
+  const handleShowHandCard = () => {
+    setShowHandCard(!showHandCard);
+  }
 
   const handleProfileMenu = () => {
     setProfileMenu(!profileMenu);
@@ -27,6 +31,8 @@ const GameTable = () => {
     console.log('handleFold function called from parent component');
     setDealingFlop([!dealingFlop[0],!dealingFlop[1],!dealingFlop[2]]);
     setHandGuide("Full House");
+    setShowHandCard(!showHandCard);
+
   }
   const handleCheckOrCall = () => {
     console.log('handleFold function called from parent component');
@@ -60,7 +66,13 @@ const GameTable = () => {
         />
         </div>
 
-      <div className={`comp-handCards ${profileMenu || settingsMenu  ? "slideDown": "slideUp"}`}><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"} handGuideProp={handGuide}/></div> 
+      <div className={`comp-handCards ${profileMenu || settingsMenu  ? "slideDown": "slideUp"}`}>
+        <HandCards 
+          card1={["a","hearts"]}
+          card2={["a","diamonds"]}
+          showHandCardProp={showHandCard}
+          handGuideProp={handGuide}/>
+      </div> 
 
     </div>
   );
