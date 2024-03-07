@@ -1,6 +1,7 @@
 import React ,{useState} from 'react';
 import './profileMenu.css'
 import ClientsProfile from '../ClientsProfile';
+import Button from '../Button/Button.tsx';
 
 
 const ProfileMenu = ({userInfoProp}) => {
@@ -23,24 +24,28 @@ const ProfileMenu = ({userInfoProp}) => {
 
   return (
     <div className="profileMenu">
-    <img className='userPP' src={require('./../images/pp_simple.jpg')} alt="User Profile" />
-    <div className='userInfo'>
-        Name: {editingName ? (
-            <input type="text" value={name} onChange={handleNameChange} />
-        ) : (
-            <>
-                {name}
-                <button onClick={handleEditName}>Edit</button>
-            </>
-        )}
-        <br />
-        ID: {userInfoProp[1]}<br />
-        Level: {userInfoProp[2]}<br />
-        Games Played: {userInfoProp[3]}<br />
-        Winning Ratio: {userInfoProp[4]}<br />
-        Joined Date: {userInfoProp[5]}
-    </div>
-    {editingName && <button onClick={handleSaveName}>Save</button>}
+        <img className='userPP' src={require('./../images/pp_simple.jpg')} alt="User Profile" />
+        
+        <div className='userInfo'>
+            <span>
+            Name: {editingName ? (
+                <input type="text" value={name} onChange={handleNameChange} />
+            ) : (   <>
+                        {name}
+                    </>
+            )}
+            </span>
+            ID: {userInfoProp[1]}<br />
+            Level: {userInfoProp[2]}<br />
+            Games Played: {userInfoProp[3]}<br />
+            Winning Ratio: {userInfoProp[4]}<br />
+            Joined Date: {userInfoProp[5]}
+        </div>
+
+        <div className='container-btns'>
+            <Button style={"btn-edit"} children={"Edit"} onClick={handleEditName}/>
+            {editingName && <Button style={"btn-save"} onClick={handleSaveName} children={"save"}/>}
+        </div>
     </div>
   )
 }
