@@ -1,9 +1,5 @@
+/*the table*/
 .container-table{
-    /* border-style: solid;
-    
-    border-width: 1.5vw;
-    border-color: rgb(0, 4, 17); */
-
     border-radius: 150px;
 
     width: 60vw;
@@ -33,9 +29,9 @@
     background-size:16px 16px;
 
     flex-wrap: wrap;    
-
 }
 
+/*table size and color change animation*/
 .container-menu, .container-table{
     position: relative;
 
@@ -64,11 +60,9 @@
     radial-gradient(#4a4a4a 15%, transparent 20%) 8px 9px;
     background-color:#282828;
     background-size:16px 16px;
-
-    
 } 
 
-
+/*cards and users disappearing animation*/
 .profiles.disappear, .container-cards.disappear{    
     opacity: 0;
     transition: opacity 1s ease-out;
@@ -82,6 +76,7 @@
     transition: opacity 1s ease-out;
 }
 
+/*main center table cards container*/
 .container-cards{
     position: absolute;
     display: flex;
@@ -94,118 +89,7 @@
     transition: opacity 1s ease-out;
 }
 
-.tableCardsPlacement {
-    border-style: none;
-    border-width: 1px;
-    border-color: #ffffff;
-    height: 100%;
-    width: 80%;
-
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-/*SunGlass Poker text*/
-.container-cards p{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    font: italic small-caps  1.5vw/2 cursive;
-}
-.tableCardsPlacement img{
-    display: flex;
-    position: absolute;
-    right: 0;
-    height: auto;
-    width: 4vw;
-    z-index: 1;
-    margin:0 1% 0 1%; 
-}
-
-/*new approch*/
-.tableCard {
-    display: flex;
-    align-items: center;
-    width: 4vw;
-    height: 100%;
-    position: absolute;
-    right:0;
-    z-index: 1;
-    margin:0 1% 0 1%; 
-    transition: transform 2s, right 2s;
-    transform-style: preserve-3d;
-  }
-
-.flipped {
-    transform: rotateY(-180deg);
-    transform-origin: center;
-}
-.tableCardBack , .tableCardFront{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;   
-    box-shadow: -5px 5px 10px black;
- 
-}
-.tableCardFront{
-    transform: rotateY(-180deg);
-
-}
-
-
-/*dealing the flop animation*/
-.dealingFlop0 {
-    display: flex;
-    right:85%;
-}
-.dealingFlop1 {
-    display: flex;
-    right: 70%;
-}
-.dealingFlop2 {
-    display: flex;
-    right: 55%;
-}
-.dealingFlop3 {
-    display: flex;
-    right: 40%;
-}
-.dealingFlop4 {
-    display: flex;
-    right: 25%;    
-}
-
-
-.dealerCardsPlacement {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-.dealerCardsPlacement img{
-    position: absolute;
-    right:0;
-    height: auto;
-    width: 4vw;
-    border-style: solid;
-    border-color: rgb(255, 255, 255);
-    border-radius: 5px;
-    padding: 1%;
-}
-
-@media (max-width:600px) {
-    .dealerCardsPlacement img{
-        width: 5vw;
-    }
-    .tableCardsPlacement img{
-        width: 5vw;
-    }
-
-}
-
+/*users placements around the table*/
 .profile{
     position: absolute;
     display: flex;

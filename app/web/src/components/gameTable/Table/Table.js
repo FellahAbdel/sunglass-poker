@@ -1,5 +1,6 @@
 import React , {useState} from 'react';
 import './table.css';
+import './tableCards.css'
 import './textGlitch.css';
 import ClientsProfile from '../ClientsProfile';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
@@ -21,7 +22,7 @@ const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive}) 
               <div class="glitch" data-glitch="SunGlassPoker">SunGlassPoker</div>
             </div>
           }
-          <div className="tableCardsPlacement">
+          <div className="container-tableCards">
 
             {/* first three flops -> dealingFlop[0]
             first forth flops -> dealingFlop[1]
@@ -54,7 +55,7 @@ const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive}) 
 
           </div>  
 
-          <div className="dealerCardsPlacement">
+          <div className="container-dealerDuck">
             <img src={cardBack} alt=""/>
           </div>
         </div>
