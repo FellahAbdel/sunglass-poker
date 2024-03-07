@@ -22,12 +22,13 @@ const [isWindowOpen, setIsWindowOpen] = useState(false);
 		<header className='header'>
 
 			<nav>
-				<div>
-
+				
+				
 			<Button 
 				className="login" 
 				label="Pseudo" 
 				/>
+	
 				<Button onClick={() => openWindow("tuto")} 
 				className="login" 
 				label="tutoriel" 
@@ -37,9 +38,10 @@ const [isWindowOpen, setIsWindowOpen] = useState(false);
 				label="login" 
 				/>
       			
+				
 		  		{isWindowOpen && <Window onClose={closeWindow} windowType={windowType} />}
 				
-				</div>
+				
 			</nav>
 		</header>
 	);

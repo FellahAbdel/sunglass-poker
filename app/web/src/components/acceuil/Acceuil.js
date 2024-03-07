@@ -17,6 +17,7 @@ export const acceuil = () => {
 				label="JOUER" 
 				/>
                 
+                
                 <LogoComponent className="logoacceuil"/>
             </div>
         </div>

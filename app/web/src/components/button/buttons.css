@@ -157,23 +157,7 @@ path.two {
   --lighter: lighten(var(--color2), 10%);
 }
 
-/* Mixin Shadows */
 
-@mixin box_shadow($level) {
-  @if $level == 0 {
-    box-shadow: none;
-  } @else if $level == 1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  } @else if $level == 2 {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  } @else if $level == 3 {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  } @else if $level == 4 {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  } @else if $level == 5 {
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  }
-}
 
 /* Base Styles */
 * {
@@ -197,14 +181,7 @@ body {
   margin: auto;
 }
 
-h1 {
-  font-size: 6rem;
-  padding: 1rem;
-  text-align: center;
-  color: white;
-  font-weight: 500;
-  margin: 5rem 0 0 0;
-}
+
 
 button {
   border: none;
@@ -212,92 +189,47 @@ button {
   color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
 }
-
-.div {
-  padding-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  text-align: center;
-  position: relative;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.psuedo-text {
-  color: var(--color);
-  position: relative;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  display: inline;
-  height: auto;
-  font-size: 1.7rem;
-  font-weight: 700;
-  transition: 0.25s ease-in;
-  transition-delay: 0.1s;
-}
-
-.flex-1 {
-  flex: 1;
-  min-width: 250px;
-  margin: 0 auto 50px;
-}
-
-
-/* Base Button Styles */
+/* CSS */
 .login {
-  padding: 2rem 7rem;
-  background: #404040;
-  text-align: center;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
   display: inline-block;
-  font-size: 1.7rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  position: relative;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+ 
   will-change: transform;
 }
 
-.login-mat {
-  color: var(--color);
-  border: 0px transparent;
-  border-radius: 0.3rem;
-  transition: 0.3s ease-in-out;
-  transition-delay: 0.35s;
-  overflow: hidden;
+.login:disabled {
+  pointer-events: none;
 }
 
-.login-mat:before {
-  content: '';
-  display: block;
-  background: var(--deeper);
-  position: absolute;
-  width: 200%;
-  height: 500%;
-  border-radius: 100%;
-  transition: 0.36s cubic-bezier(0.4, 0.0, 1, 1);
+.login:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
 }
 
-.login-mat:hover .psuedo-text {
-  color: white;
+.login:active {
+  box-shadow: none;
+  transform: translateY(0);
 }
-
-.login-mat:hover {
-  color: transparent;
-}
-
-
-/* Fifth Button */
-.btn--5 {
-  @include box_shadow(2);
-}
-
-.btn--5:before {
-  transform: translate(-120%, -50%) translateZ(0);
-}
-
-.btn--5:hover:before {
-  transform: translate(-45%, -34%) translateZ(0);
-}
-
- 
