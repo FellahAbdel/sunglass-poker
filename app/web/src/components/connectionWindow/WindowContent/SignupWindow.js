@@ -23,10 +23,18 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { pseudo, email, password, repeatPassword } = formData;
+
     try {
       // Vérifier que les champs requis sont présents
-      if (!formData.pseudo || !formData.email || formData.password === "") {
+      if (!pseudo || !email || password === "") {
         console.error("Veuillez remplir tous les champs obligatoires");
+        return;
+      }
+
+      if (password !== repeatPassword) {
+        console.error("Passwords do not match");
+        //Faire le feedback
         return;
       }
 

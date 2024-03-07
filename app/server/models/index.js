@@ -95,6 +95,28 @@ app.post("/api/check-email", async (req, res) => {
   }
 });
 
+app.post("/api/reset-password", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Effectuer une requête pour mettre à jour le mot de passe dans la base de données
+    const updatedUser = await UserModel.findOneAndUpdate(
+      { email },
+      { $set: { password } },
+      { new: true }
+    );
+
+    if (updatedUser) {
+      res.json({ success: true, message: "Password reset successful" });
+    } else {
+      res.json({ success: false, message: "User not found" });
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
 
 
 // Démarrage du serveur
