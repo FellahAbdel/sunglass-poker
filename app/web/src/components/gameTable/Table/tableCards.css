@@ -34,7 +34,7 @@
     transform-style: preserve-3d;
   }
 /*flipping animation*/
-.flipped {
+/* .flipped {
     transform: rotateY(-180deg);
     transform-origin: center;
 }
@@ -50,7 +50,7 @@
 .tableCardFront{
     transform: rotateY(-180deg);
 
-}
+} */
 .dealingFlop0 {
     display: flex;
     right:85%;

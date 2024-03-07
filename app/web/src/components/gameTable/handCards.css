@@ -53,5 +53,6 @@
     width: 45%;
     height: 100%;
     box-shadow: 0 0 10px black;
-
+    transition: transform 2s ease;
+    transform-style: preserve-3d; 
 }
