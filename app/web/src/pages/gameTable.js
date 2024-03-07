@@ -47,8 +47,8 @@ const GameTable = () => {
       
       <div className="comp-table"><Table dealingFlop={dealingFlop} showCards={[0,1,2,3,4]} menuActive={profileMenu}/></div>
 
-      <div className="comp-bonus"><BonusPanel/></div>
-      <div className="comp-gameAction">
+      <div className={`comp-bonus  ${profileMenu ? "slideDown": "slideUp"}`}><BonusPanel/></div>
+      <div className={`comp-gameAction ${profileMenu ? "slideDown": "slideUp"}`}>
         <GameActionPanel
             handleFoldProp={handleFold}
             handleRaiseProp={handleRaise}
@@ -56,7 +56,7 @@ const GameTable = () => {
         />
         </div>
 
-      <div className="comp-handCards slideUp"><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"} handGuideProp={handGuide}/></div> 
+      <div className={`comp-handCards ${profileMenu ? "slideDown": "slideUp"}`}><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"} handGuideProp={handGuide}/></div> 
 
     </div>
   );

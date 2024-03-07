@@ -18,3 +18,17 @@
     animation-direction: normal;
     animation-fill-mode:both;
 }
+
+@keyframes slideDown{
+    from{
+        transform: TranslateY(0%);
+        filter: opacity(100%);
+    }
+    to{
+        transform: translateY(100%);
+        filter: opacity(0%);
+    }
+}
+.slideDown{
+    animation: slideDown 1.5s ease 0s 1 normal both;
+}
