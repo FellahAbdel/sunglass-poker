@@ -42,5 +42,7 @@
 
 2024/03/06 : 1H             Fonctionnement formulaire login (Reste à faire le feedback lors d'une mauvaise combinaison), modiff fenêtre Success qui prend désormais en argument le message à afficher.
 
+2024/03/07 : 1H             Fonctionnement fomulaire réinitialisation mot de passe/Envoi mail. Reste a faire l'envoi de l'email.
 
-TEMPS TOTAL: 37h30min 
+
+TEMPS TOTAL: 38h30min 
