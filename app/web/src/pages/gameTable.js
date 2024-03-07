@@ -10,6 +10,11 @@ import HandCards from '../components/gameTable/HandCards';
 const GameTable = () => {
   const [dealingFlop, setDealingFlop] = useState([false,false,false]);
   const [handGuide, setHandGuide ] = useState("");
+  const [profileMenu , setProfileMenu] = useState(false);
+
+  const handleProfileMenu = () => {
+    setProfileMenu(!profileMenu);
+  }
 
   
   const handleFold = () => {
@@ -31,10 +36,16 @@ const GameTable = () => {
     <div className="container-main"> 
       <div className="background"></div>
       <div className="backdrop"></div>
-      <div className="comp-navbar"><Navbar/></div>
+      <div className="comp-navbar">
+        <Navbar
+          exitOnClick={null}
+          settingsOnClick={null}
+          profileOnClick={handleProfileMenu}
+        />
+      </div>
       
       
-      <div className="comp-table"><Table dealingFlop={dealingFlop} showCards={[0,1,2,3,4]} menuActive={true}/></div>
+      <div className="comp-table"><Table dealingFlop={dealingFlop} showCards={[0,1,2,3,4]} menuActive={profileMenu}/></div>
 
       <div className="comp-bonus"><BonusPanel/></div>
       <div className="comp-gameAction">
