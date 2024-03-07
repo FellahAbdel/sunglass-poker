@@ -16,3 +16,4 @@
 -- 4h séance réunion le 27/02 (standup-meeting + réunion Backend + tests fonction estfull + tests fonction estCarteHaute )
 -- 3h le 01/03 (implémentation fonction secondSuite + tests)
 -- 3h le 02/03 (implémentation fonction secondPaire + tests )
+-- 3h le 07/03 (correction et modification de la fonction secondpaire + tests)
