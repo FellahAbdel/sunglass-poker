@@ -3,17 +3,18 @@ import './table.css';
 import './textGlitch.css';
 import ClientsProfile from '../ClientsProfile';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
+import SettingsMenu from '../SettingsMenu/SettingsMenu';
 import cardBack from './../images/card-design.png';
 
 
-const Table = ({dealingFlop, showCards, menuActive}) => {
+const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive}) => {
   //name , user ID , level , games played , winning ratio , joined Date 
   const userInfo = ["Mostafa","otsuno" , "100", "5" , "30%","10/march/2024"];
 
   return (
-    <div className={`container-table ${menuActive ? 'container-menu' : ""}`}>
+    <div className={`container-table ${profileMenuActive || settingsMenuActive ? 'container-menu' : ""}`}>
 
-        <div className={`container-cards ${menuActive ? 'disappear' : ""}`}>
+        <div className={`container-cards ${profileMenuActive || settingsMenuActive ? 'disappear' : ""}`}>
 
           {dealingFlop[0] ? false : 
             <div class="glitch-wrapper">
@@ -57,7 +58,7 @@ const Table = ({dealingFlop, showCards, menuActive}) => {
             <img src={cardBack} alt=""/>
           </div>
         </div>
-        <span className={`profiles ${menuActive ? 'disappear' : ""}`}>
+        <span className={`profiles ${profileMenuActive || settingsMenuActive ? 'disappear' : ""}`}>
           <div className="profile profile0"><ClientsProfile status={"Checked"} chips={9999999} name={"Mostafa0"}/></div>
           <div className="profile profile1"><ClientsProfile status={"Fold"} chips={9999999} name={"Mostafa1"}/></div>
           <div className="profile profile2"><ClientsProfile status={"Waiting"} chips={9999999} name={"Mostafa2"}/></div>
@@ -70,8 +71,9 @@ const Table = ({dealingFlop, showCards, menuActive}) => {
           <div className="profile profile9"><ClientsProfile status={"Called"} chips={9999999} name={"Mostafa9"}/></div>
         </span>
 
-          {menuActive ?  <ProfileMenu userInfoProp={userInfo}/> : null }
-       
+          {profileMenuActive ?  <ProfileMenu userInfoProp={userInfo}/> : null }
+          {settingsMenuActive ?  <SettingsMenu /> : null }
+
     </div>
   )
 }

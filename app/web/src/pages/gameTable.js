@@ -11,11 +11,17 @@ const GameTable = () => {
   const [dealingFlop, setDealingFlop] = useState([false,false,false]);
   const [handGuide, setHandGuide ] = useState("");
   const [profileMenu , setProfileMenu] = useState(false);
+  const [settingsMenu , setSettingsMenu] = useState(false);
+
 
   const handleProfileMenu = () => {
     setProfileMenu(!profileMenu);
+    if (settingsMenu) { setSettingsMenu(false) };
   }
-
+  const handleSettingsMenu = () => {
+    setSettingsMenu(!settingsMenu);
+    if (profileMenu) { setProfileMenu(false) };
+  }
   
   const handleFold = () => {
     console.log('handleFold function called from parent component');
@@ -24,11 +30,9 @@ const GameTable = () => {
   }
   const handleCheckOrCall = () => {
     console.log('handleFold function called from parent component');
-    setDealingFlop([dealingFlop[0],!dealingFlop[1],dealingFlop[2]]);
   }
   const handleRaise = () => {
     console.log('handleFold function called from parent component');
-    setDealingFlop([dealingFlop[0],dealingFlop[1],!dealingFlop[2]]);
   }
 
 
@@ -39,16 +43,16 @@ const GameTable = () => {
       <div className="comp-navbar">
         <Navbar
           exitOnClick={null}
-          settingsOnClick={null}
+          settingsOnClick={handleSettingsMenu}
           profileOnClick={handleProfileMenu}
         />
       </div>
       
       
-      <div className="comp-table"><Table dealingFlop={dealingFlop} showCards={[0,1,2,3,4]} menuActive={profileMenu}/></div>
+      <div className="comp-table"><Table dealingFlop={dealingFlop} showCards={[0,1,2,3,4]} profileMenuActive={profileMenu} settingsMenuActive={settingsMenu}/></div>
 
-      <div className={`comp-bonus  ${profileMenu ? "slideDown": "slideUp"}`}><BonusPanel/></div>
-      <div className={`comp-gameAction ${profileMenu ? "slideDown": "slideUp"}`}>
+      <div className={`comp-bonus  ${profileMenu || settingsMenu ? "slideDown": "slideUp"}`}><BonusPanel/></div>
+      <div className={`comp-gameAction ${profileMenu || settingsMenu  ? "slideDown": "slideUp"}`}>
         <GameActionPanel
             handleFoldProp={handleFold}
             handleRaiseProp={handleRaise}
@@ -56,7 +60,7 @@ const GameTable = () => {
         />
         </div>
 
-      <div className={`comp-handCards ${profileMenu ? "slideDown": "slideUp"}`}><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"} handGuideProp={handGuide}/></div> 
+      <div className={`comp-handCards ${profileMenu || settingsMenu  ? "slideDown": "slideUp"}`}><HandCards cardType1={"hearts"} cardNumber1={"a"} cardType2={"diamonds"} cardNumber2={"a"} handGuideProp={handGuide}/></div> 
 
     </div>
   );
