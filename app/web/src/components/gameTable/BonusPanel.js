@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import './bonusPanel.css';
 import Button from "./Button/Button.tsx";
-import Clubs from './images/card_type/Clubs.png';
-import Diamonds from './images/card_type/Diamons.png';
-import Hearts from './images/card_type/Hearts.png';
-import Spades from './images/card_type/Spades.png';
+import Clubs from './../assets/images/card_type/Clubs.png';
+import Diamonds from './../assets/images/card_type/Diamons.png';
+import Hearts from './../assets/images/card_type/Hearts.png';
+import Spades from './../assets/images/card_type/Spades.png';
 
 const BonusPanel = () => {
 //we can use a number divisable by all the different numbers that they need 

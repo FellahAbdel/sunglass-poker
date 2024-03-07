@@ -23,7 +23,7 @@ const  ClientsProfile=({status, chips, name}) =>{
             {name}
         </div>
 
-        <img className={`profilePic ${status}`} src={status === "Empty" ? require('./images/pp_empty.png') : require('./images/pp_simple.jpg')} alt='profilePic'/>
+        <img className={`profilePic ${status}`} src={status === "Empty" ? require('./../assets/images/pp_empty.png') : require('./../assets/images/pp_simple.jpg')} alt='profilePic'/>
         
     </div>
     )

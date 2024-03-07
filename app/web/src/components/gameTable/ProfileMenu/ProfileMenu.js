@@ -24,7 +24,7 @@ const ProfileMenu = ({userInfoProp}) => {
 
   return (
     <div className="profileMenu">
-        <img className='userPP' src={require('./../images/pp_simple.jpg')} alt="User Profile" />
+        <img className='userPP' src={require('./../../assets/images/pp_simple.jpg')} alt="User Profile" />
         
         <div className='userInfo'>
             <span>

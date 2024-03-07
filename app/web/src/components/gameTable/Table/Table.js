@@ -5,7 +5,7 @@ import './textGlitch.css';
 import ClientsProfile from '../ClientsProfile';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import SettingsMenu from '../SettingsMenu/SettingsMenu';
-import cardBack from './../images/card-design.png';
+import cardBack from './../../assets/images/card-design.png';
 
 
 const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive}) => {
@@ -29,27 +29,27 @@ const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive}) 
             first fifth flops -> dealingFlop[2] */}
             <div className={`tableCard  ${dealingFlop[0] ? "dealingFlop0 flipped" : ""}`}>
               <img className="tableCardBack " src={cardBack} alt="card0"/>
-              <img className="tableCardFront" src={require('./../images/card_front/2_of_clubs.png')} alt="card0"/>
+              <img className="tableCardFront" src={require('./../../assets/images/card_front/2_of_clubs.png')} alt="card0"/>
             </div>
             
             <div className={`tableCard  ${dealingFlop[0] ? "dealingFlop1 flipped" : ""}`}>
               <img className="tableCardBack " src={cardBack} alt="card1"/>
-              <img className="tableCardFront" src={require('./../images/card_front/3_of_clubs.png')} alt="card1"/>
+              <img className="tableCardFront" src={require('./../../assets/images/card_front/3_of_clubs.png')} alt="card1"/>
             </div>
 
             <div className={`tableCard  ${dealingFlop[0] ? "dealingFlop2 flipped" : ""}`}>
               <img className="tableCardBack " src={cardBack} alt="card2"/>
-              <img className="tableCardFront" src={require('./../images/card_front/4_of_clubs.png')} alt="card2"/>
+              <img className="tableCardFront" src={require('./../../assets/images/card_front/4_of_clubs.png')} alt="card2"/>
             </div>
 
             <div className={`tableCard  ${dealingFlop[1] ? "dealingFlop3 flipped" : ""}`}>
               <img className="tableCardBack " src={cardBack} alt="card3"/>
-              <img className="tableCardFront" src={require('./../images/card_front/5_of_clubs.png')} alt="card3"/>
+              <img className="tableCardFront" src={require('./../../assets/images/card_front/5_of_clubs.png')} alt="card3"/>
             </div>
 
             <div className={`tableCard  ${dealingFlop[2] ? "dealingFlop4 flipped" : ""}`}>
               <img className="tableCardBack " src={cardBack} alt="card4"/>
-              <img className="tableCardFront" src={require('./../images/card_front/6_of_clubs.png')} alt="card4"/>
+              <img className="tableCardFront" src={require('./../../assets/images/card_front/6_of_clubs.png')} alt="card4"/>
             </div>
 
 
