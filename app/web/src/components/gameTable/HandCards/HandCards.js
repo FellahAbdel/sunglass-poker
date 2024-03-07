@@ -1,6 +1,6 @@
 import React from 'react';
 import './handCards.css';
-import Card from './Card/Card.js'
+import Card from '../Card/Card.js'
 
 const HandCards = ({card1 , card2 , handGuideProp , showHandCardProp}) => {
 

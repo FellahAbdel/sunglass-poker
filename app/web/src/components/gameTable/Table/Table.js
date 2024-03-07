@@ -2,7 +2,7 @@ import React , {useState} from 'react';
 import './table.css';
 import './tableCards.css'
 import './textGlitch.css';
-import ClientsProfile from '../ClientsProfile';
+import ClientsProfile from '../PlayersProfile/PlayersProfile';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import SettingsMenu from '../SettingsMenu/SettingsMenu';
 import cardBack from './../../assets/images/card-design.png';

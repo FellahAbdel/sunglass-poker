@@ -1,6 +1,6 @@
 import React ,{useState} from 'react';
 import './profileMenu.css'
-import ClientsProfile from '../ClientsProfile';
+import ClientsProfile from '../PlayersProfile/PlayersProfile.js';
 import Button from '../Button/Button.tsx';
 
 

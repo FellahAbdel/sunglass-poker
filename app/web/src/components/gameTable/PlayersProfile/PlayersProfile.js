@@ -1,8 +1,8 @@
 import React from 'react';
-import './clientProfile.css';
-import ProgressBar from './ProgressBar';
+import './playersProfile.css';
+import ProgressBar from '../Utiles/ProgressBar';
 
-const  ClientsProfile=({status, chips, name}) =>{
+const  PlayersProfile=({status, chips, name}) =>{
     const formattedChips = chips.toLocaleString();
     const dollarSign = '$';
 
@@ -23,10 +23,10 @@ const  ClientsProfile=({status, chips, name}) =>{
             {name}
         </div>
 
-        <img className={`profilePic ${status}`} src={status === "Empty" ? require('./../assets/images/pp_empty.png') : require('./../assets/images/pp_simple.jpg')} alt='profilePic'/>
+        <img className={`profilePic ${status}`} src={status === "Empty" ? require('./../../assets/images/pp_empty.png') : require('./../../assets/images/pp_simple.jpg')} alt='profilePic'/>
         
     </div>
     )
 }
 
-export default ClientsProfile;
+export default PlayersProfile;

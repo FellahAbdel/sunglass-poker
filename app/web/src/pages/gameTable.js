@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './gameTable.css';
-import '../components/gameTable/animations.css';
-import Navbar from '../components/gameTable/Navbar';
-import BonusPanel from '../components/gameTable/BonusPanel';
+import '../components/gameTable/Utiles/animations.css';
+import Navbar from '../components/gameTable/Navbar/Navbar';
+import BonusPanel from '../components/gameTable/Bonus/BonusPanel';
 import Table from '../components/gameTable/Table/Table';
-import GameActionPanel from '../components/gameTable/GameActionPanel';
-import HandCards from '../components/gameTable/HandCards';
+import GameActionPanel from '../components/gameTable/GameActionPanel/GameActionPanel';
+import HandCards from '../components/gameTable/HandCards/HandCards';
 
 const GameTable = () => {
   const [dealingFlop, setDealingFlop] = useState([false,false,false]);

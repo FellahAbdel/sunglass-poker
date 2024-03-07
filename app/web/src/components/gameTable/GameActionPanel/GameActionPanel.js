@@ -1,6 +1,6 @@
 import React , { useState } from 'react';
 import './gameActionPanel.css';
-import RaiseSlider from './RaiseSlider';
+import RaiseSlider from '../Range/RaiseSlider';
 import Button from '/Users/mostafahqv/Documents/SunGameStudio/sunglass-poker/app/web/src/components/gameTable/Button/Button.tsx';
 
 
