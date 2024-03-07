@@ -3,7 +3,7 @@ import './gameTable.css';
 import '../components/gameTable/animations.css';
 import Navbar from '../components/gameTable/Navbar';
 import BonusPanel from '../components/gameTable/BonusPanel';
-import Table from '../components/gameTable/Table';
+import Table from '../components/gameTable/Table/Table';
 import GameActionPanel from '../components/gameTable/GameActionPanel';
 import HandCards from '../components/gameTable/HandCards';
 
@@ -34,7 +34,7 @@ const GameTable = () => {
       <div className="comp-navbar"><Navbar/></div>
       
       
-      <div className="comp-table"><Table dealingFlop={dealingFlop} showCards={[0,1,2,3,4]}/></div>
+      <div className="comp-table"><Table dealingFlop={dealingFlop} showCards={[0,1,2,3,4]} menuActive={true}/></div>
 
       <div className="comp-bonus"><BonusPanel/></div>
       <div className="comp-gameAction">
