@@ -4,8 +4,6 @@ import Header from './components/header/Header';
 import Home from './pages/home';
 import Login from './pages/login';
 import gameTable from './pages/gameTable';
-import './services/socket.js'
-
 function App() {
   return (
     <Router>
