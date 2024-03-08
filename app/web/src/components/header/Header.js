@@ -4,18 +4,15 @@ import React, { useState } from "react";
 import Window from "../connectionWindow/Window";
 import Button from "../button/Buttons";
 
-const Header = () => {
-  const [isWindowOpen, setIsWindowOpen] = useState(false);
-  const [windowType, setWindowType] = useState(null);
-
-  const openWindow = (type) => {
-    setIsWindowOpen(true);
-    setWindowType(type);
-  };
-
-  const closeWindow = () => {
-    setIsWindowOpen(false);
-  };
+const Header = ({
+  isLogged,
+  openWindow,
+  logingIn,
+  isWindowOpen,
+  windowType,
+  closeWindow,
+  logingOut,
+}) => {
   return (
     <header className="header">
       <nav>
@@ -26,14 +23,25 @@ const Header = () => {
             className="login"
             label="tutoriel"
           />
-          <Button
-            onClick={() => openWindow("login")}
-            className="login"
-            label="login"
-          />
-
+          {isLogged ? ( //Elements affichés quand il est connecté
+            <>
+              <Button onClick={logingOut} className="login" label="logout" />
+            </>
+          ) : (
+            //Elements affichés quand non connecté
+            <Button
+              onClick={() => openWindow("login")}
+              className="login"
+              label="login"
+            />
+          )}
           {isWindowOpen && (
-            <Window onClose={closeWindow} windowType={windowType} />
+            <Window
+              onClose={closeWindow}
+              windowType={windowType}
+              logingIn={logingIn}
+              logingOut={logingOut}
+            />
           )}
         </div>
       </nav>

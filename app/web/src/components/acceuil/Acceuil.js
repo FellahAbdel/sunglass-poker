@@ -4,15 +4,24 @@ import "./acceuil.css";
 import LogoComponent from "../logo/Logo";
 import Button from "../button/Buttons";
 
-export const acceuil = () => {
+const acceuil = ({ isLogged, openWindow }) => {
+  const handleClick = () => {
+    // Regarder si on est connecté ou pas
+    isLogged ? startGame() : openWindow("login");
+  };
+
+  const startGame = () => {
+    // Commncer une partie
+    console.log("Démarrez la partie !");
+  };
+
   return (
     <div>
       <div className="accueil">
         <LogoComponent className="logoacceuil" />
       </div>
       <div className="accueil">
-        <Button className="cta" label="JOUER" />
-
+        <Button className="cta" label="JOUER" onClick={handleClick} />
         <LogoComponent className="logoacceuil" />
       </div>
     </div>

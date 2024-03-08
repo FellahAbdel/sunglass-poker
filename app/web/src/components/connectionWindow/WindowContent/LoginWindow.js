@@ -4,7 +4,12 @@ import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import Text from "../../text/Text";
 
-const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
+const LoginWindow = ({
+  openSignUpWindow,
+  openForgotPassword,
+  showSuccess,
+  logingIn,
+}) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -35,9 +40,10 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
         // Actions après succès
         console.log(data.message);
         showSuccess("Logged with success ! ");
+        logingIn();
         return;
       } else {
-        console.error(data.message); 
+        console.error(data.message);
         // Actions après mauvaise combinaison (ajouter message à l'utilisateur)
         return;
       }

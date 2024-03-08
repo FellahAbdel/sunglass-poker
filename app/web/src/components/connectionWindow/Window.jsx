@@ -9,7 +9,7 @@ import ResetPasswordWindow from "./WindowContent/ResetPassword";
 import ForgotPassword from "./WindowContent/ForgotPassword";
 import SuccessWindow from "./WindowContent/SuccessWindow";
 
-const Window = ({ onClose, windowType }) => {
+const Window = ({ onClose, windowType, logingIn }) => {
   const [currentWindow, setWindowType] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -60,6 +60,7 @@ const Window = ({ onClose, windowType }) => {
             openSignUpWindow={openSignUpWindow}
             openForgotPassword={openForgotPassword}
             showSuccess={openSuccessWindow}
+            logingIn={logingIn}
           />
         )}
         {currentWindow === "signup" && (
