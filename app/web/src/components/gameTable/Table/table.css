@@ -89,6 +89,97 @@
     transition: opacity 1s ease-out;
 }
 
+/*distribution cards*/
+/* .container-cardDistribution{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    background-color: aqua;
+    z-index: 5;
+} */
+.cardPlayer{
+    display: flex;
+    align-self: center; 
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right:1%;
+    top:20%;
+}
+.transition1{
+    transition: right 1s ease,top 1s ease,opacity 1s ease;
+}
+.transition2{
+    transition: right 1s ease 0.2s,top 1s ease 0.2s,opacity 1s ease 0.2s;
+}
+.cardPlayer img{
+    display: flex;
+    align-self: center; 
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 4vw;
+    height: auto;
+    position: absolute;
+    right:0;
+    top:0;
+    margin: 1%;
+}
+.profile0cards{
+    top:-100%; 
+    right:43%;
+    opacity: 0;
+}
+.profile1cards{
+    top:-100%;
+    right:-5%;
+    opacity: 0;
+}
+.profile2cards{
+    top:-30%;
+    right:-55%;
+    opacity: 0;
+}
+.profile3cards{
+    top:60%;
+    right:-55%;
+    opacity: 0;
+}
+.profile4cards{
+    top: 120%;
+    right:-5%;
+    opacity: 0;
+}
+.profile5cards{
+    top: 120%;
+    right:43%;
+    opacity: 0;
+}
+.profile6cards{
+    top:120%;
+    right:91.5%;
+    opacity: 0;
+}
+.profile7cards{
+    top:60%;
+    right:141%;
+    opacity: 0;
+}
+.profile8cards{
+    top:-33%;
+    right:141%;
+    opacity: 0;
+}
+.profile9cards{
+    top:-100%;
+    right:91.5%;
+    opacity: 0;
+}
+
+
 /*users placements around the table*/
 .profile{
     position: absolute;
