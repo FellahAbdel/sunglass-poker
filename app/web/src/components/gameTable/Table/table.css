@@ -99,6 +99,8 @@
     background-color: aqua;
     z-index: 5;
 } */
+
+/*card distribution animation*/
 .cardPlayer{
     display: flex;
     align-self: center; 
