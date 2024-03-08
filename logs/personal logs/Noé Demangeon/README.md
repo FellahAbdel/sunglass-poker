@@ -48,4 +48,6 @@
 
 2024/03/08 : 3H             Table stat, localstorage, AuthProvider pour connexion/récupération des infos de l'utilisateur sur la bdd. Menu déroulant du profil.
 
-TEMPS TOTAL: 42h30min 
+2024/03/08 : 1H30           Ajout image de profil, modification css header.
+
+TEMPS TOTAL: 44h00min 
