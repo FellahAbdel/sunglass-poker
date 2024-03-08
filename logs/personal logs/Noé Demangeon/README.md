@@ -46,5 +46,6 @@
 
 2024/03/08 : 1H             Ajout condionnel connecté/nonconnecté sur le bouton start et sur le bouton connexion. Légère réorganisation de la gestion des fenêtres de connexion.
 
+2024/03/08 : 3H             Table stat, localstorage, AuthProvider pour connexion/récupération des infos de l'utilisateur sur la bdd. Menu déroulant du profil.
 
-TEMPS TOTAL: 39h30min 
+TEMPS TOTAL: 42h30min 
