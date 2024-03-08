@@ -18,4 +18,24 @@
 
 * 2024/02/20 : <b> 3h </b> <br/>        Travail en TP: <i> Apprentissage de REACT et creation de base de front </i>
 
-* 2024/02/24 : <b> 15min </b> <br/>     Reunion avec chef de projet: <i> distribution de tache et questions sur React </i>
+* 2024/02/23 : <b> 15min </b> <br/>     Reunion avec chef de projet: <i> distribution de tache et questions sur React </i>
+
+* 2024/02/24 : <b> 2h </b> <br/>        Travail individuel: <i> Apprentissage React </i>
+
+* 2024/02/25 : <b> 3h </b> <br/>        Travail individuel: <i> creation des compenents pour bonus et navbar + apprentissage </i>
+
+* 2024/02/25 : <b> 3h </b> <br/>        Travail individuel: <i> creation des compenents pour bonus et navbar + apprentissage </i>
+
+* 2024/02/26 : <b> 7h </b> <br/>        Travail individuel: <i> apprentissage de css + navbar contenant les buttoms profile ,settings ,exit et chips est fait + bonus Panel est fait avec system visuel des cart chargé + table simple et backdrop basic </i>
+
+* 2024/02/27 : <b> 3h30min </b> <br/>        Travail en TP: <i> apprentissage input range slider et implimentation + correction des structure des fichier de gameTable + reunion avec prof </i>
+
+* 2024/02/28 : <b> 9h </b> <br/>        Travail individuel: <i>changement de thematique de gameTable + range slide est fini et il peut envoyer les value de input + correction de placement de table de jeu + profile de jeur et progress waiting bar + hand cards </i>
+
+* 2024/02/29 : <b> 4h </b> <br/>        Travail individuel: <i> apprentissage de CSS + changements des buttons à des buttons reutilisable + correction css </i>
+
+* 2024/03/01 : <b> 6h </b> <br/>        Travail individuel: <i>changement des css pour avoir des pages dynamique et responssive à des tailles des écrans differents  </i>
+
+* 2024/03/03 : <b> 5h </b> <br/>        Travail individuel: <i>associé les buttons de gameActionPanel + animation des cards sur la table + flip animation + ameliorations des CSS </i>
+
+total:60h15min

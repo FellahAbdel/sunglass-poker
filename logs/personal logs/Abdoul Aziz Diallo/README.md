@@ -13,13 +13,27 @@
 | 16/02 | Write technical specification with the Project Manager       | 3h         |                                                                                                                                              |
 | 18/02 | Review EJS and read React hand written course                | 1h20       |                                                                                                                                              |
 
-## Week 3 - _Total:_
+## Week 3 - _Total: 31.70 h_
 
-| Date  | Description                                                                                    | Time Spent | Resources |
-| ----- | ---------------------------------------------------------------------------------------------- | ---------- | --------- |
-| 19/02 | Figma Design (login & sign up page)                                                            | 2h30       |           |
-| 20/02 | React Tutorial Review                                                                          | 7h30       |           |
-| 21/02 | Create button component and prototype in figma - Watch some tutorials on YouTube (Material UI) | 4h         |           |
-| 22/02 | Meeting with the project Manager I asked her some technical questions                          | 1h30       |           |
-| 22/02 | Work on the IHM add pop up box once clicked on settings button                                 | 2h         |           |
-| 22/02 | Meeting with team B discuss and write the technical specification (algorithm - OOP)            | 2h30       |           |
+| Date  | Description                                                                                        | Time Spent | Resources |
+| ----- | -------------------------------------------------------------------------------------------------- | ---------- | --------- |
+| 19/02 | Figma Design (login & sign up page)                                                                | 2h30       |           |
+| 20/02 | React Tutorial Review                                                                              | 7h30       |           |
+| 21/02 | Create button component and prototype in figma - Watch some tutorials on YouTube (Material UI)     | 4h         |           |
+| 22/02 | Meeting with the project Manager I asked her some technical questions                              | 1h30       |           |
+| 22/02 | Work on the IHM add pop up box once clicked on settings button                                     | 2h         |           |
+| 22/02 | Meeting with team B discuss and write the technical specification (algorithm - OOP)                | 2h30       |           |
+| 23/02 | Finish discussion with team B about the technical specification and shared tasks (algorithm - OOP) | 2h50       |           |
+| 24/02 | Angela Yu React tutorial and some practical exercice                                               | 3h         |           |
+| 25/02 | Almost finish the 8h Angela's tutorial on udemy & improve signup & login page                      | 4h         |           |
+| 25/02 | Re-adapt Noe's web design to the figma design                                                      | 30m        |           |
+
+## Week 4 - _Total: 9h30_
+
+| Date  | Description                        | Skills developed | Time Spent | Resources                                                                                    |
+| ----- | ---------------------------------- | ---------------- | ---------- | -------------------------------------------------------------------------------------------- |
+| 27/03 | Code review & Start Redux tutorial | Redux            | 4h00       | [Redux Tutorial](https://www.youtube.com/watch?v=poQXNp9ItL4&ab_channel=ProgrammingwithMosh) |
+| 28/03 | Keep watching the Redux tutorial   | Redux            | 2h00       | [Redux Tutorial](https://www.youtube.com/watch?v=poQXNp9ItL4&ab_channel=ProgrammingwithMosh) |
+| 01/03 | Add forgot password box in figma   | Figma            | 30min      |                                                                                              |
+| 03/03 | Code debugging with Mostapha       | Debugging        | 2h30       |                                                                                              |
+| 03/03 | Just finish the Redux tutorial     | Redux            | 30m        |                                                                                              |

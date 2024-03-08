@@ -7,5 +7,11 @@
 -  16/02 , formation en NodeJs : 1H
 -  18/02 , formation et mise à jour en JS : 2H
 -  20/02 , Troisième réunion TP | Spécification techniques et mise en place de la structure algorithmiques des diffèrentes règles de jeux : 4H
+-  22/2 , Réunuin ,suite de la specification du backend et du deroulement d'une partie : 2H.
+- 23/2 , finition de la spéc du backend pour la premiere version du jeu  et attribution des taches au membres du groupes : 2H30
+-  27/2 , Quatrième réunion TP | début code des fonctions de combinaisons, stund-meeting , échange d'idées avec les membres back-end : 4H
+-  28/2 , rajout fonction de combinaison "paire" et j'ai effectué des tests : 1H
+- 29/2 , finition de la fonction double paire et correction de la fonction est carre : 1H
+-  30/2 , début implementation fonction secondFull :00H30
 
-- TOTAL:20H
+- TOTAL:31H
