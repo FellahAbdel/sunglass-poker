@@ -1,19 +1,17 @@
+//LoginWindow.js
 import React, { useState } from "react";
 import Button from "../../button/Buttons";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import Text from "../../text/Text";
+import { useAuth } from "../../AuthProvider";
 
-const LoginWindow = ({
-  openSignUpWindow,
-  openForgotPassword,
-  showSuccess,
-  logingIn,
-}) => {
+const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setFormData({
@@ -26,26 +24,14 @@ const LoginWindow = ({
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const loginSuccess = await login(formData);
 
-      const data = await response.json();
-
-      if (data.success) {
-        // Actions après succès
-        console.log(data.message);
-        showSuccess("Logged with success ! ");
-        logingIn();
+      if (loginSuccess) {
+        showSuccess("Logged with success !");
         return;
       } else {
-        console.error(data.message);
-        // Actions après mauvaise combinaison (ajouter message à l'utilisateur)
-        return;
+        // Feedback après mauvaise combinaison
+        console.error("mauvaise combinaison");
       }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error);

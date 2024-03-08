@@ -3,31 +3,66 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import Window from "../connectionWindow/Window";
 import Button from "../button/Buttons";
-import { useAuth } from '../AuthProvider';
+import { useAuth, getUserInfo } from "../AuthProvider";
 
-
-const Header = ({
-  openWindow,
-  isWindowOpen,
-  windowType,
-  closeWindow,
-}) => {
-  const { isLogged, logingIn, logingOut } = useAuth();
+const Header = ({ openWindow, isWindowOpen, windowType, closeWindow }) => {
+  const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
+  
 
   return (
     <header className="header">
       <nav>
         <div>
-          <Button className="login" label="Pseudo" />
+          {isLogged ? (
+            <>
+              <div className="dropdown">
+                <Button
+                  className="login"
+                  label={getUserInfo() ? getUserInfo().username : "Pseudo"}
+                />
+
+                <div className="dropdown-content">
+                  {
+                    /* Contenu du menu déroulant */
+                    <>
+                      <Button className="deroulant" label="Profil" />
+
+                      <Button className="deroulant" label="Stats" />
+
+                      <Button
+                        className="deroulant"
+                        label={`Coins : ${
+                          getUserInfo() && getUserInfo().coins !== undefined
+                            ? getUserInfo().coins
+                            : 0
+                        }`}
+                        /*OnClick : ouvre l'historique */
+                      />
+                      <Button
+                        onClick={logingOut}
+                        className="logout deroulant"
+                        label="Logout"
+                      />
+                    </>
+                  }
+                </div>
+              </div>
+            </>
+          ) : (
+            <Button
+              onClick={() => openWindow("login")}
+              className="login"
+              label="Profil"
+            />
+          )}
+
           <Button
             onClick={() => openWindow("tuto")}
             className="login"
             label="tutoriel"
           />
           {isLogged ? ( //Elements affichés quand il est connecté
-            <>
-              <Button onClick={logingOut} className="login" label="logout" />
-            </>
+            <></>
           ) : (
             //Elements affichés quand non connecté
             <Button

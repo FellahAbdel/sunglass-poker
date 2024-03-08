@@ -33,14 +33,13 @@ db.once("open", () => {
 
 app.post("/api/users", async (req, res) => {
   try {
-    const { pseudo, email, password, coins } = req.body;
+    const { pseudo, email, password } = req.body;
 
     // Création d'un nouvel utilisateur
     const nouveauUtilisateur = new UserModel({
       pseudo,
       email,
       password,
-      coins,
     });
 
     // Enregistrement dans la base de données
@@ -80,7 +79,10 @@ app.post("/api/login", async (req, res) => {
 
     if (user) {
       // La combinaison de pseudo et de mot de passe est correcte
-      res.json({ success: true, message: "Login successful" });
+      console.log("Coins during login:", user.coins); // Ajoutez ce log
+
+      // Envoyer toutes les informations de l'utilisateur dans la réponse
+      res.json({ success: true, message: "Login successful", userData: user });
     } else {
       // La combinaison de pseudo et de mot de passe n'est pas correcte
       res.json({ success: false, message: "Invalid credentials" });

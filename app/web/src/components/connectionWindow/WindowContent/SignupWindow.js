@@ -38,16 +38,13 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
         return;
       }
 
-      // Ajouter la propriété 'coins' avec la valeur 0
-      const formDataWithCoins = { ...formData, coins: 0 };
-
       // Effectuer la requête POST vers votre API
       const response = await fetch("http://localhost:3001/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formDataWithCoins),
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {

@@ -17,3 +17,36 @@ header nav {
   justify-content: space-between; /* Aligner les boutons à gauche, au centre et à droite */
   width: 100%; /* Assurer que la largeur de nav prend toute la largeur disponible */
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Contenu du menu déroulant (masqué par défaut) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 400px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Style des boutons à l'intérieur du menu déroulant */
+.dropdown-content button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: large;
+  font-weight: bold;
+}
+
+/* Au survol du bouton de profil, afficher le menu déroulant */
+.dropdown:hover .dropdown-content {
+  display: block;
+}

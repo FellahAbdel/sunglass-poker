@@ -20,6 +20,7 @@ const UserSchema = new Schema({
   coins: {
     type: Number,
     required: true,
+    default: 0,
   },
   stat: {
     type: Schema.Types.ObjectId,

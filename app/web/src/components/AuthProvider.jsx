@@ -1,30 +1,73 @@
-// AuthProvider.jsx
-import React, { createContext, useContext, useEffect, useState } from 'react';
+// AuthProvider.js
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isLogged, setIsLogged] = useState(() => {
-    // Initialiser à partir de localStorage lors de la première exécution
-    const storedIsLogged = localStorage.getItem('isLogged');
-    return storedIsLogged ? JSON.parse(storedIsLogged) : false;
-  });
+  const [isLogged, setIsLogged] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const logingIn = () => {
-    setIsLogged(true);
+  useEffect(() => {
+    // Récupérer les informations de l'utilisateur depuis le localStorage lors du chargement de la page
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setIsLogged(true);
+    }
+  }, []);
+
+  const login = async (credentials) => {
+    try {
+      const response = await fetch("http://localhost:3001/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Utilisez les données récupérées de la base de données
+        const fullUserData = { ...credentials, ...data.userData };
+
+        setIsLogged(true);
+        setUser(fullUserData);
+
+        // Stocker les informations de l'utilisateur dans le localStorage
+        localStorage.setItem("user", JSON.stringify(fullUserData));
+        console.log("Coins during login:", fullUserData.coins);
+
+        console.log(data.message);
+        return true;
+      } else {
+        console.error(data.message);
+        return false;
+      }
+    } catch (error) {
+      console.error("Erreur lors de la connexion :", error);
+      return false;
+    }
   };
 
   const logingOut = () => {
     setIsLogged(false);
+    setUser(null);
+
+    // Supprimer les informations de l'utilisateur du localStorage lors de la déconnexion
+    localStorage.removeItem("user");
   };
 
-  // Enregistrer dans le localStorage à chaque changement d'isLogged
-  useEffect(() => {
-    localStorage.setItem('isLogged', JSON.stringify(isLogged));
-  }, [isLogged]);
+  const getUserInfo = () => {
+    // Fonction pour récupérer les informations de l'utilisateur
+    return user;
+  };
 
   return (
-    <AuthContext.Provider value={{ isLogged, logingIn, logingOut }}>
+    <AuthContext.Provider
+      value={{ isLogged, user, login, logingOut, getUserInfo }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -33,7 +76,7 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
