@@ -36,6 +36,7 @@ const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive}) 
         
           <div className="container-dealerDuck">
             <Card  style={"cardDuck"}  card={null} flippedStyle={null} flippingCard={false}/>
+            
             <Card  style={`cardPlayer ${dealingFlop[0] ? "transition1 profile0cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
             <Card  style={`cardPlayer ${dealingFlop[0] ? "transition2 profile0cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
 
