@@ -34,7 +34,6 @@ const GameTable = () => {
     setDealingFlop([!dealingFlop[0],!dealingFlop[1],!dealingFlop[2]]);
     setHandGuide("Full House");
     setShowHandCard(!showHandCard);
-    setPlayersCardsShow([!playersCardsShow[0],!playersCardsShow[1],!playersCardsShow[2]]);
 
   }
   const handleCheckOrCall = () => {
@@ -43,6 +42,8 @@ const GameTable = () => {
   }
   const handleRaise = () => {
     console.log('handleFold function called from parent component');
+    setPlayersCardsShow([!playersCardsShow[0],!playersCardsShow[1],!playersCardsShow[2]]);
+
   }
 
 
