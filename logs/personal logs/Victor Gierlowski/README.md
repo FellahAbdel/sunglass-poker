@@ -47,5 +47,5 @@
 
 | Date | Temps passé | Description | Ressources|
 |:-------|:--:|:----: |--:|
-| 8 mars |  | DOC | -- 
+| 8 mars | 4 Heures | Ajout de sessions persistante avec socketio et express-session.| -- 
 | TOTAL | 0 |  | ...
