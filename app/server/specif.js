@@ -30,9 +30,19 @@ class partie {
      * OUT : rien
      * FUNCTION : distribue les cartes aux joueurs et selectionne les 5 cartes masquées
      */
-    distrubuer () {}
+    distribuer () {
+        // Distribuer les cartes à chaque joueur
+        for (let i = 0; i < this.#joueurs.length; i++) {
+            const joueur = this.#joueurs[i];
+            if (joueur.carte.length < 2) { // Vérifier si le joueur a moins de 2 cartes
+                joueur.carte.push(this.#jeuDeCarte.shift()); // Distribuer la première carte au joueur
+                joueur.carte.push(this.#jeuDeCarte.shift()); // Distribuer la deuxième carte au joueur
+            }
+        }
+        // Ajouter les 5 premières cartes de jeuDeCarte à cartesMasque
+        this.#cartesMasque = this.#jeuDeCarte.slice(0, 5);
+    }
     
-
     /*
      * IN : rien
      * OUT : { [c1, ..., c5], idJoueur } tableau de combinaison et identifiant du gagant
@@ -169,7 +179,7 @@ class partie {
         let paire = [];
         const resteCartes = tableau7cartes.filter(carte => !brelan.includes(carte));
         for (let i = 0; i < resteCartes.length; i++) {
-            const cartesMemeNumero = resteCartes.filter(carte => carte.numero === tableau7cartes[i].numero);
+            const cartesMemeNumero = resteCartes.filter(carte => carte.numero === resteCartes[i].numero);
             //au cas ou y a un autre brelan mais on prends que la paire
             if (cartesMemeNumero.length === 3 || cartesMemeNumero.length === 2) {
                 paire = cartesMemeNumero;
@@ -182,7 +192,7 @@ class partie {
             return false;
         }
         // Si on a trouvé un brelan et une paire, renvoyer la combinaison complète (full house)
-        return [...brelan, ...paire.slice(0,2)];  
+        return [...brelan, ...paire.slice(0,2)];   
     }
 
     /*
