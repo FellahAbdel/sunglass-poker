@@ -6,7 +6,7 @@ const cors = require("cors");
 
 
 // Durée d'une session en seconde.
-const SESSION_DURATION = 5 * 1e3;
+const SESSION_DURATION = 2 * 1e3;
 
 
 /** Paramètres cors du serveur.
@@ -57,24 +57,30 @@ app.get('/', (req, res) => {
  *  En cas de déconnexion on log la session Id qui s'arrête.
  */
 io.on('connection', (socket) => {
-    // On récupère  la session lié à la connexion.
+    // On récupère la session lié à la connexion.
     const session = socket.request.session;
+    // On rejoint la session déjà existante.
     socket.join(session.id);
     console.log('a user connected n: '+socket.id + ' | session : '+session.id); 
+    // Fixe un délais avec lequel la connexion est fermer.
     const session_timer = setInterval(() => {
-            session.destroy(() => {
-                socket.conn.close();
-            })
+        io.in(session.id).disconnectSockets(true);
+        session.destroy();
     }, SESSION_DURATION);
 
+    // Fonction test
     socket.on('hello', (data) => {
         session_timer.refresh();
         console.log('Received from client : ' + socket.id + ' data :' + data + ' | session : ' + session.id);
         socket.emit('world', {responseData:'The world salute you'});
     });
+
+    // Si le client quitte
     socket.on('disconnect',() => {
         console.log('user disconnected n:' + socket.id + ' | session : ' + session.id);
     });
+
+
     session.save();
 });
 
