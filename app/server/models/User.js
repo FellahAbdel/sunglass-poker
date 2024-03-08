@@ -21,6 +21,11 @@ const UserSchema = new Schema({
     type: Number,
     required: true,
   },
+  stat: {
+    type: Schema.Types.ObjectId,
+    ref: "Stat",
+    unique: true,
+  },
 });
 
 const UserModel = model("User", UserSchema);

@@ -3,6 +3,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const UserModel = require("./User");
+const StatModel = require("./stat");
 const cors = require("cors");
 
 const app = express();
@@ -30,7 +31,6 @@ db.once("open", () => {
   console.log("Connecté à la base de données MongoDB");
 });
 
-
 app.post("/api/users", async (req, res) => {
   try {
     const { pseudo, email, password, coins } = req.body;
@@ -45,6 +45,22 @@ app.post("/api/users", async (req, res) => {
 
     // Enregistrement dans la base de données
     const utilisateurEnregistre = await nouveauUtilisateur.save();
+
+    // Création d'une nouvelle instance de Stat
+    const nouvelleStat = new StatModel({
+      maxCoins: 0,
+      maxGain: 0,
+      totalGain: 0,
+      experience: 0,
+      user: utilisateurEnregistre._id, // Associez l'ID de l'utilisateur
+    });
+
+    // Enregistrement de la statistique dans la base de données
+    await nouvelleStat.save();
+
+    // Mettre à jour la propriété 'stat' de l'utilisateur avec l'ID de la nouvelle stat
+    utilisateurEnregistre.stat = nouvelleStat._id;
+    await utilisateurEnregistre.save();
 
     res.status(201).json(utilisateurEnregistre);
   } catch (error) {
@@ -64,14 +80,14 @@ app.post("/api/login", async (req, res) => {
 
     if (user) {
       // La combinaison de pseudo et de mot de passe est correcte
-      res.json({ success: true, message: 'Login successful' });
+      res.json({ success: true, message: "Login successful" });
     } else {
       // La combinaison de pseudo et de mot de passe n'est pas correcte
-      res.json({ success: false, message: 'Invalid credentials' });
+      res.json({ success: false, message: "Invalid credentials" });
     }
   } catch (error) {
     console.error("Erreur lors de la connexion :", error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
@@ -84,10 +100,13 @@ app.post("/api/check-email", async (req, res) => {
 
     if (user) {
       // L'e-mail existe dans la base de données
-      res.json({ exists: true, message: 'E-mail exists in the database' });
+      res.json({ exists: true, message: "E-mail exists in the database" });
     } else {
       // L'e-mail n'existe pas dans la base de données
-      res.json({ exists: false, message: 'E-mail does not exist in the database' });
+      res.json({
+        exists: false,
+        message: "E-mail does not exist in the database",
+      });
     }
   } catch (error) {
     console.error("Erreur lors de la vérification de l'e-mail :", error);
@@ -116,8 +135,6 @@ app.post("/api/reset-password", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
-
-
 
 // Démarrage du serveur
 app.listen(port, () => {
