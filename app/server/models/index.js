@@ -79,7 +79,6 @@ app.post("/api/login", async (req, res) => {
 
     if (user) {
       // La combinaison de pseudo et de mot de passe est correcte
-      console.log("Coins during login:", user.coins); // Ajoutez ce log
 
       // Envoyer toutes les informations de l'utilisateur dans la réponse
       res.json({ success: true, message: "Login successful", userData: user });
@@ -116,25 +115,28 @@ app.post("/api/check-email", async (req, res) => {
   }
 });
 
-app.post("/api/reset-password", async (req, res) => {
+app.put("/api/update-user-data", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { field, value, identifierType, identifierValue } = req.body;
 
-    // Effectuer une requête pour mettre à jour le mot de passe dans la base de données
+    // Mettez à jour le champ de l'utilisateur dans la base de données
     const updatedUser = await UserModel.findOneAndUpdate(
-      { email },
-      { $set: { password } },
+      { [identifierType]: identifierValue },
+      { $set: { [field]: value } },
       { new: true }
     );
 
     if (updatedUser) {
-      res.json({ success: true, message: "Password reset successful" });
+      return res.json({
+        success: true,
+        message: `${field} updated successfully`,
+      });
     } else {
-      res.json({ success: false, message: "User not found" });
+      return res.json({ success: false, message: `Failed to update ${field}` });
     }
   } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ success: false, message: "Server error" });
+    console.error(`Error updating ${field}:`, error);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
