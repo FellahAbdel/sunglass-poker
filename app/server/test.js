@@ -23,7 +23,7 @@ function estFull (tableau7cartes) {
         let paire = [];
         const resteCartes = tableau7cartes.filter(carte => !brelan.includes(carte));
         for (let i = 0; i < resteCartes.length; i++) {
-            const cartesMemeNumero = resteCartes.filter(carte => carte.numero === tableau7cartes[i].numero);
+            const cartesMemeNumero = resteCartes.filter(carte => carte.numero === resteCartes[i].numero);
             //au cas ou y a un autre brelan mais on prends que la paire
             if (cartesMemeNumero.length === 3 || cartesMemeNumero.length === 2) {
                 paire = cartesMemeNumero;
@@ -185,26 +185,7 @@ function secondPaire (listeJoueurCombinaison) {
         // Renvoyer l'id du joueur avec la paire la plus haute
         return hautesPaires[0].id;
 }
-
-const tableau7cartes1 = [
-    { numero: 'Q', famille: 'Coeur' },
-    { numero: 'K', famille: 'Coeur' },
-    { numero: 'A', famille: 'Coeur' },
-    { numero: '10', famille: 'Coeur' },
-    { numero: 'J', famille: 'Coeur' },
-    { numero: '4', famille: 'Coeur' },
-    { numero: '4', famille: 'Carreau' }
-];
-
-const tableau7cartes2 = [
-    { numero: '2', famille: 'Coeur' },
-    { numero: '2', famille: 'Pique' },
-    { numero: '2', famille: 'Carreau' },
-    { numero: 'A', famille: 'Coeur' },
-    { numero: 'A', famille: 'Pique' },
-    { numero: 'A', famille: 'Trefle' },
-    { numero: '5', famille: 'Carreau' }
-];
+/*
 // Exemple de test
 const listeJoueurCombinaison = [
     { main: [
@@ -242,3 +223,187 @@ console.log(secondPaire(listeJoueurCombinaison)); // Output attendu: 'joueur1'
 console.log(estQuarteHaute(tableau7cartes1)); // Doit renvoyer false
 console.log(estQuarteHaute(tableau7cartes2)); // Doit renvoyer un tableau contenant le full house
 */
+
+// Fonction de test pour estFull
+function testEstFull() {
+    const tableau7cartes1 = [
+        { numero: 'Q', famille: 'Coeur' },
+        { numero: 'K', famille: 'Coeur' },
+        { numero: 'A', famille: 'Coeur' },
+        { numero: '10', famille: 'Coeur' },
+        { numero: 'J', famille: 'Coeur' },
+        { numero: '4', famille: 'Coeur' },
+        { numero: '4', famille: 'Carreau' }
+    ];
+    console.log(estFull(tableau7cartes1)); // devrait renvoyer False
+
+    const tableau7cartes2 = [
+        { numero: '2', famille: 'Coeur' },
+        { numero: '2', famille: 'Pique' },
+        { numero: '5', famille: 'Carreau' },
+        { numero: 'A', famille: 'Coeur' },
+        { numero: 'A', famille: 'Pique' },
+        { numero: 'A', famille: 'Trefle' },
+        { numero: '5', famille: 'Carreau' }
+    ];
+    console.log(estFull(tableau7cartes2)); // devrait renvoyer le FULL HOUSE le plus grand
+}
+
+// Fonction de test pour estBrelan
+function testEstBrelan() {
+    const tableau7cartes1 = [
+        { numero: 'Q', famille: 'Coeur' },
+        { numero: 'K', famille: 'Coeur' },
+        { numero: 'A', famille: 'Coeur' },
+        { numero: '10', famille: 'Coeur' },
+        { numero: 'J', famille: 'Coeur' },
+        { numero: '4', famille: 'Coeur' },
+        { numero: '4', famille: 'Carreau' }
+    ];
+    console.log(estBrelan(tableau7cartes1)); // devrait renvoyer false
+
+    const tableau7cartes2 = [
+        { numero: '2', famille: 'Coeur' },
+        { numero: '2', famille: 'Pique' },
+        { numero: '2', famille: 'Carreau' },
+        { numero: 'A', famille: 'Coeur' },
+        { numero: 'A', famille: 'Pique' },
+        { numero: 'A', famille: 'Trefle' },
+        { numero: '5', famille: 'Carreau' }
+    ];
+    console.log(estBrelan(tableau7cartes2)); // devrait renvoyer le Brelan le plus grand
+}
+
+// Fonction de test pour estQuinteFlushRoyale
+function testEstQuinteFlushRoyale() {
+    const tableau7cartes1 = [
+        { numero: 'Q', famille: 'Coeur' },
+        { numero: 'K', famille: 'Coeur' },
+        { numero: 'A', famille: 'Coeur' },
+        { numero: '10', famille: 'Coeur' },
+        { numero: 'J', famille: 'Coeur' },
+        { numero: '4', famille: 'Coeur' },
+        { numero: '4', famille: 'Carreau' }
+    ];
+    console.log(estQuinteFlushRoyale(tableau7cartes1)); // devrait renvoyer le QUINTE FLUSH ROYALE
+
+    const tableau7cartes2 = [
+        { numero: '10', famille: 'Coeur' },
+        { numero: 'J', famille: 'Trefle' },
+        { numero: 'Q', famille: 'Coeur' },
+        { numero: 'K', famille: 'Coeur' },
+        { numero: 'A', famille: 'Coeur' },
+        { numero: '2', famille: 'Trefle' },
+        { numero: '4', famille: 'Carreau' }
+    ];
+    console.log(estQuinteFlushRoyale(tableau7cartes2)); // devrait renvoyer false
+
+    const tableau7cartes3 = [
+        { numero: '10', famille: 'Coeur' },
+        { numero: 'J', famille: 'Coeur' },
+        { numero: 'Q', famille: 'Coeur' },
+        { numero: 'K', famille: 'Coeur' },
+        { numero: 'A', famille: 'Coeur' },
+        { numero: '4', famille: 'Trefle' },
+        { numero: 'A', famille: 'Carreau' }
+    ];
+    console.log(estQuinteFlushRoyale(tableau7cartes3)); // devrait renvoyer [ { numero: '10', famille: 'Coeur' }, { numero: 'J', famille: 'Coeur' }, { numero: 'Q', famille: 'Coeur' }, { numero: 'K', famille: 'Coeur' }, { numero: 'A', famille: 'Coeur' } ]
+}
+
+// Fonction de test pour estQuarteHaute
+function testEstQuarteHaute() {
+    const tableau7cartes1 = [
+        { numero: 'Q', famille: 'Coeur' },
+        { numero: 'K', famille: 'Coeur' },
+        { numero: 'A', famille: 'Coeur' },
+        { numero: '10', famille: 'Coeur' },
+        { numero: 'J', famille: 'Coeur' },
+        { numero: '4', famille: 'Coeur' },
+        { numero: '4', famille: 'Carreau' }
+    ];
+    console.log(estQuarteHaute(tableau7cartes1)); // devrait renvoyer { numero: 'A', famille: 'Coeur' }
+
+    const tableau7cartes2 = [
+        { numero: '2', famille: 'Coeur' },
+        { numero: '2', famille: 'Pique' },
+        { numero: '2', famille: 'Carreau' },
+        { numero: 'A', famille: 'Coeur' },
+        { numero: 'A', famille: 'Pique' },
+        { numero: 'A', famille: 'Trefle' },
+        { numero: '5', famille: 'Carreau' }
+    ];
+    console.log(estQuarteHaute(tableau7cartes2)); // devrait renvoyer { numero: 'A', famille: 'Coeur' }
+}
+
+// Tests pour la fonction secondSuite
+function testSecondSuite() {
+    const listeJoueurCombinaison = [
+        { main: [
+            { numero: '2', famille: 'Coeur' },
+            { numero: '3', famille: 'Coeur' },
+            { numero: '4', famille: 'Coeur' },
+            { numero: '5', famille: 'Coeur' },
+            { numero: 'A', famille: 'Coeur' }
+        ], id: 'joueur1' },
+        { main: [
+            { numero: '10', famille: 'Trefle' },
+            { numero: 'J', famille: 'Trefle' },
+            { numero: 'Q', famille: 'Trefle' },
+            { numero: 'K', famille: 'Trefle' },
+            { numero: 'A', famille: 'Trefle' }
+        ], id: 'joueur2' },
+        { main: [
+            { numero: '2', famille: 'Pique' },
+            { numero: '3', famille: 'Pique' },
+            { numero: '4', famille: 'Pique' },
+            { numero: '5', famille: 'Pique' },
+            { numero: '6', famille: 'Pique' }
+        ], id: 'joueur3' }
+    ];
+
+    console.log(secondSuite(listeJoueurCombinaison)); // Attendu: ['joueur2']
+}
+
+// Tests pour la fonction secondPaire
+function testSecondPaire() {
+    const listeJoueurCombinaison = [
+        { main: [
+            { numero: '2', famille: 'Coeur' },
+            { numero: '2', famille: 'Trefle' },
+            { numero: '3', famille: 'Coeur' },
+            { numero: '4', famille: 'Pique' },
+            { numero: '5', famille: 'Coeur' }
+        ], id: 'joueur1' },
+        { main: [
+            { numero: '6', famille: 'Coeur' },
+            { numero: '6', famille: 'Trefle' },
+            { numero: '7', famille: 'Coeur' },
+            { numero: '8', famille: 'Pique' },
+            { numero: '9', famille: 'Coeur' }
+        ], id: 'joueur2' },
+        { main: [
+            { numero: '10', famille: 'Coeur' },
+            { numero: 'J', famille: 'Trefle' },
+            { numero: 'Q', famille: 'Coeur' },
+            { numero: 'K', famille: 'Pique' },
+            { numero: 'A', famille: 'Coeur' }
+        ], id: 'joueur3' },
+        { main: [
+            { numero: 'A', famille: 'Coeur' },
+            { numero: 'A', famille: 'Trefle' },
+            { numero: '3', famille: 'Coeur' },
+            { numero: '4', famille: 'Pique' },
+            { numero: '5', famille: 'Coeur' }
+        ], id: 'joueur4' }
+    ];
+
+    console.log(secondPaire(listeJoueurCombinaison)); // Attendu: ['joueur1', 'joueur4']
+}
+
+// Appeler les fonctions de test
+testEstFull();
+testEstBrelan();
+testEstQuinteFlushRoyale();
+testEstQuarteHaute();
+testSecondSuite();
+testSecondPaire();
