@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import Window from "../connectionWindow/Window";
 import Button from "../button/Buttons";
+import { useAuth } from '../AuthProvider';
+
 
 const Header = ({
-  isLogged,
   openWindow,
-  logingIn,
   isWindowOpen,
   windowType,
   closeWindow,
-  logingOut,
 }) => {
+  const { isLogged, logingIn, logingOut } = useAuth();
+
   return (
     <header className="header">
       <nav>

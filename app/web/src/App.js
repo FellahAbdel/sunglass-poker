@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
 import Header from "./components/header/Header";
 import Acceuil from "./components/acceuil/Acceuil";
+import { AuthProvider } from "./components/AuthProvider";
 
 function App() {
   const [isWindowOpen, setIsWindowOpen] = useState(false);
@@ -17,29 +18,18 @@ function App() {
     setIsWindowOpen(false);
   };
 
-  const [isLogged, setIsLogged] = useState(false);
-
-  const logingIn = () => {
-    setIsLogged(true);
-  };
-
-  const logingOut = () => {
-    setIsLogged(false);
-  };
-
   return (
     <Router>
-      <Header
-        isLogged={isLogged}
-        logingIn={logingIn}
-        logingOut={logingOut}
-        openWindow={openWindow}
-        closeWindow={closeWindow}
-        isWindowOpen={isWindowOpen}
-        windowType={windowType}
-      />
+      <AuthProvider>
+        <Header
+          openWindow={openWindow}
+          closeWindow={closeWindow}
+          isWindowOpen={isWindowOpen}
+          windowType={windowType}
+        />
 
-      <Acceuil isLogged={isLogged} openWindow={openWindow} />
+        <Acceuil openWindow={openWindow} />
+      </AuthProvider>
     </Router>
   );
 }

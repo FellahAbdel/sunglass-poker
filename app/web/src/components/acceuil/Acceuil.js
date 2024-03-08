@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import "./acceuil.css";
 import LogoComponent from "../logo/Logo";
 import Button from "../button/Buttons";
+import { useAuth } from '../AuthProvider';
 
-const acceuil = ({ isLogged, openWindow }) => {
+
+const Acceuil = ({ openWindow }) => {
+  const { isLogged } = useAuth();
   const handleClick = () => {
     // Regarder si on est connecté ou pas
     isLogged ? startGame() : openWindow("login");
@@ -28,4 +31,4 @@ const acceuil = ({ isLogged, openWindow }) => {
   );
 };
 
-export default acceuil;
+export default Acceuil;
