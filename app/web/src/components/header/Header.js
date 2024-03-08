@@ -18,6 +18,7 @@ const Header = ({ openWindow, isWindowOpen, windowType, closeWindow }) => {
               className="profil header-button"
               label={getUserInfo() ? getUserInfo().username : "Pseudo"}
               image={getUserInfo().avatar}
+              onClick2={() => openWindow("avatar")}
             />
 
             <div className="dropdown-content">

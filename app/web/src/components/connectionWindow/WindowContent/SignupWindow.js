@@ -4,8 +4,10 @@ import Button from "../../button/Buttons";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import Text from "../../text/Text";
+import { useAuth } from "../../AuthProvider";
 
 const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
+  const { registerUser } = useAuth();
   const [formData, setFormData] = useState({
     pseudo: "",
     email: "",
@@ -23,40 +25,17 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { pseudo, email, password, repeatPassword } = formData;
-
     try {
-      // Vérifier que les champs requis sont présents
-      if (!pseudo || !email || password === "") {
-        console.error("Veuillez remplir tous les champs obligatoires");
-        return;
-      }
+      const success = await registerUser(formData);
 
-      if (password !== repeatPassword) {
-        console.error("Passwords do not match");
-        //Faire le feedback
-        return;
-      }
-
-      // Effectuer la requête POST vers votre API
-      const response = await fetch("http://localhost:3001/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        console.log("Utilisateur créé avec succès!");
-        // Ajouter ici la logique pour rediriger ou afficher un message de succès
+      if (success) {
         showSuccess("Account created with success!");
-        return;
       } else {
-        console.error("Erreur lors de la création de l'utilisateur");
+        //Feedback a faire
+        console.error("Failed to create user.");
       }
     } catch (error) {
-      console.error("Erreur lors de la création de l'utilisateur :", error);
+      console.error("Error:", error);
     }
   };
 

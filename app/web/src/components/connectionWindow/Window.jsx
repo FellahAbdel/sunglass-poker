@@ -8,6 +8,7 @@ import SignUpWindow from "./WindowContent/SignupWindow";
 import ResetPasswordWindow from "./WindowContent/ResetPassword";
 import ForgotPassword from "./WindowContent/ForgotPassword";
 import SuccessWindow from "./WindowContent/SuccessWindow";
+import AvatarWindow from "./WindowContent/AvatarWindow";
 
 const Window = ({ onClose, windowType, logingIn }) => {
   const [currentWindow, setWindowType] = useState(null);
@@ -86,6 +87,12 @@ const Window = ({ onClose, windowType, logingIn }) => {
         )}
         {currentWindow === "success" && (
           <SuccessWindow
+            message={successMessage}
+            onClose={handleSuccessClose}
+          />
+        )}
+        {currentWindow === "avatar" && (
+          <AvatarWindow
             message={successMessage}
             onClose={handleSuccessClose}
           />

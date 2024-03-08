@@ -3,13 +3,18 @@ import Button from "../../button/Buttons";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import Text from "../../text/Text";
+import { useAuth } from "../../AuthProvider";
 
-const ForgotPassword = ({ openResetPassword, openLoginWindow, showSuccess }) => {
+
+const ForgotPassword = ({
+  openResetPassword,
+  openLoginWindow,
+  showSuccess,
+}) => {
+  const { checkEmail } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
   });
-
-  const [emailExists, setEmailExists] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -22,33 +27,10 @@ const ForgotPassword = ({ openResetPassword, openLoginWindow, showSuccess }) => 
     e.preventDefault();
 
     try {
-      // Effectuer la requête POST vers votre API pour vérifier l'existence de l'e-mail
-      const response = await fetch("http://localhost:3001/api/check-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (data.exists) {
-        // L'e-mail existe dans la base de données
-        // Envoyer l'email à l'utilisateur (A faire !)
-
-        console.log(data.message); // Affichez un message de succès
-        setEmailExists(true);
-        showSuccess("Email sent !");
-        return;
-      } else {
-        // L'e-mail n'existe pas dans la base de données
-        // Faire le feedback
-        console.error(data.message); // Affichez un message d'erreur
-        setEmailExists(false);
-      }
+      // Effectuer la vérification de l'e-mail en utilisant la fonction de AuthProvider
+      await checkEmail(formData.email);
     } catch (error) {
-      console.error("Erreur lors de la vérification de l'e-mail :", error);
+      console.error("Error:", error);
     }
   };
 

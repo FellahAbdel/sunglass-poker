@@ -125,3 +125,23 @@ button {
 .logout {
   color: red;
 }
+
+
+
+/* Boutons changement avatar */
+
+.Next-Previous{
+  background-color: #404040;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100px;
+  margin:10px;
+}
+
+.Next-Previous:hover {
+  background-color: #555;
+}

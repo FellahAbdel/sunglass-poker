@@ -3,8 +3,11 @@ import Button from "../../button/Buttons";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import Text from "../../text/Text";
+import { useAuth } from "../../AuthProvider";
 
 const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
+  const { updateUserData } = useAuth();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,44 +23,27 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const { email, password, repeatPassword } = formData;
-  
+
     // Vérifier si les mots de passe sont identiques
     if (password !== repeatPassword) {
       console.error("Passwords do not match");
       //Faire le feedback
       return;
     }
-  
+
     try {
-      // Effectuer une requête pour modifier le mot de passe dans la base de données
-      const response = await fetch("http://localhost:3001/api/reset-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-  
-      const data = await response.json();
-  
-      if (data.success) {
-        console.log(data.message); // Affichez un message de succès
-        showSuccess("Password changed !");
-        return;
-      } else {
-        console.error(data.message); // Affichez un message d'erreur
-        // feedback a faire
-      }
+      // Utilisez la fonction générique pour mettre à jour le mot de passe dans la base de données
+      await updateUserData("password", password, "email", email);
+
+      // Affichez un message de succès
+      showSuccess("Password changed !");
     } catch (error) {
-      console.error("Error:", error);
-      // Vous pouvez afficher un message d'erreur à l'utilisateur si nécessaire
+      console.error("Error changing password:", error);
+      // Affichez un message d'erreur à l'utilisateur si nécessaire
     }
-  
+
     onClose();
   };
 
