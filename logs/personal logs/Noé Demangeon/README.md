@@ -50,4 +50,6 @@
 
 2024/03/08 : 1H30           Ajout image de profil, modification css header.
 
-TEMPS TOTAL: 44h00min 
+2024/03/08 : 2H00           Ajout fenetre changement avatar. Ajout fonctions dans AuthProvider
+
+TEMPS TOTAL: 46h00min 
