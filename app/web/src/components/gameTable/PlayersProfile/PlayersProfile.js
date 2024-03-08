@@ -1,8 +1,9 @@
 import React from 'react';
 import './playersProfile.css';
 import ProgressBar from '../Utiles/ProgressBar';
+import Card from '../Card/Card';
 
-const  PlayersProfile=({status, chips, name}) =>{
+const  PlayersProfile=({status, chips, name , cards , flippingPlayerCards }) =>{
     const formattedChips = chips.toLocaleString();
     const dollarSign = '$';
 
@@ -22,6 +23,11 @@ const  PlayersProfile=({status, chips, name}) =>{
             {formattedChips} {status === "Empty" ? null : dollarSign}<br/>
             {name}
         </div>
+        
+
+        <Card style={"showCardPlayers1"} card={["a","clubs"]} flippedStyle={"flippedPlayerCards"} flippingCard={flippingPlayerCards}/>
+        <Card style={"showCardPlayers2"} card={["a","clubs"]} flippedStyle={"flippedPlayerCards"} flippingCard={flippingPlayerCards}/>
+
 
         <img className={`profilePic ${status}`} src={status === "Empty" ? require('./../../assets/images/pp_empty.png') : require('./../../assets/images/pp_simple.jpg')} alt='profilePic'/>
         

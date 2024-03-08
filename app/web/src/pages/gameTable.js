@@ -13,6 +13,7 @@ const GameTable = () => {
   const [profileMenu , setProfileMenu] = useState(false);
   const [settingsMenu , setSettingsMenu] = useState(false);
   const [showHandCard, setShowHandCard] = useState(false);
+  const [playersCardsShow, setPlayersCardsShow] = useState([0,0,0,0,0,0,0,0,0,0]);
 
   const handleShowHandCard = () => {
     setShowHandCard(!showHandCard);
@@ -32,6 +33,7 @@ const GameTable = () => {
     setDealingFlop([!dealingFlop[0],!dealingFlop[1],!dealingFlop[2]]);
     setHandGuide("Full House");
     setShowHandCard(!showHandCard);
+    setPlayersCardsShow([!playersCardsShow[0]]);
 
   }
   const handleCheckOrCall = () => {
@@ -55,7 +57,15 @@ const GameTable = () => {
       </div>
       
       
-      <div className="comp-table"><Table dealingFlop={dealingFlop} showCards={[0,1,2,3,4]} profileMenuActive={profileMenu} settingsMenuActive={settingsMenu}/></div>
+      <div className="comp-table">
+        <Table 
+          dealingFlop={dealingFlop} 
+          showCards={[0,1,2,3,4]} 
+          profileMenuActive={profileMenu} 
+          settingsMenuActive={settingsMenu}
+          playersCardsShowProp={playersCardsShow}
+        />
+      </div>
 
       <div className={`comp-bonus  ${profileMenu || settingsMenu ? "slideDown": "slideUp"}`}><BonusPanel/></div>
       <div className={`comp-gameAction ${profileMenu || settingsMenu  ? "slideDown": "slideUp"}`}>

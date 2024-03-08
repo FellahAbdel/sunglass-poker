@@ -9,7 +9,7 @@ import cardBack from './../../assets/images/card-design.png';
 import Card from '../Card/Card';
 
 
-const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive}) => {
+const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive, playersCardsShowProp}) => {
   //name , user ID , level , games played , winning ratio , joined Date 
   const userInfo = ["Mostafa","otsuno" , "100", "5" , "30%","10/march/2024"];
 
@@ -78,16 +78,16 @@ const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive}) 
 
 
         <span className={`profiles ${profileMenuActive || settingsMenuActive ? 'disappear' : ""}`}>
-          <div className="profile profile0"><PlayersProfile status={"Checked"} chips={9999999} name={"Mostafa0"}/></div>
-          <div className="profile profile1"><PlayersProfile status={"Fold"} chips={9999999} name={"Mostafa1"}/></div>
-          <div className="profile profile2"><PlayersProfile status={"Waiting"} chips={9999999} name={"Mostafa2"}/></div>
-          <div className="profile profile3"><PlayersProfile status={"Raised"} chips={9999999} name={"Mostafa3"}/></div>
-          <div className="profile profile4"><PlayersProfile status={"Raised"} chips={9999999} name={"Mostafa4"}/></div>
-          <div className="profile profile5"><PlayersProfile status={"Checked"} chips={9999999} name={"Mostafa5"}/></div>
-          <div className="profile profile6"><PlayersProfile status={"Fold"} chips={9999999} name={"Mostafa6"}/></div>
-          <div className="profile profile7"><PlayersProfile status={"Checked"} chips={9999999} name={"Mostafa7"}/></div>
-          <div className="profile profile8"><PlayersProfile status={"Empty"} chips={""} name={""}/></div>
-          <div className="profile profile9"><PlayersProfile status={"Called"} chips={9999999} name={"Mostafa9"}/></div>
+          <div className="profile profile0"><PlayersProfile status={"Checked"} chips={9999999} name={"Mostafa0"} flippingPlayerCards={playersCardsShowProp[0]}/></div>
+          <div className="profile profile1"><PlayersProfile status={"Fold"} chips={9999999} name={"Mostafa1"} flippingPlayerCards={playersCardsShowProp[1]}/></div>
+          <div className="profile profile2"><PlayersProfile status={"Waiting"} chips={9999999} name={"Mostafa2"} flippingPlayerCards={playersCardsShowProp[2]}/></div>
+          <div className="profile profile3"><PlayersProfile status={"Raised"} chips={9999999} name={"Mostafa3"} flippingPlayerCards={playersCardsShowProp[3]}/></div>
+          <div className="profile profile4"><PlayersProfile status={"Raised"} chips={9999999} name={"Mostafa4"} flippingPlayerCards={playersCardsShowProp[4]}/></div>
+          <div className="profile profile5"><PlayersProfile status={"Checked"} chips={9999999} name={"Mostafa5"} flippingPlayerCards={playersCardsShowProp[5]}/></div>
+          <div className="profile profile6"><PlayersProfile status={"Fold"} chips={9999999} name={"Mostafa6"} flippingPlayerCards={playersCardsShowProp[6]}/></div>
+          <div className="profile profile7"><PlayersProfile status={"Checked"} chips={9999999} name={"Mostafa7"} flippingPlayerCards={playersCardsShowProp[7]}/></div>
+          <div className="profile profile8"><PlayersProfile status={"Empty"} chips={""} name={""} flippingPlayerCards={playersCardsShowProp[8]}/></div>
+          <div className="profile profile9"><PlayersProfile status={"Called"} chips={9999999} name={"Mostafa9"} flippingPlayerCards={playersCardsShowProp[9]}/></div>
         </span>
 
 
