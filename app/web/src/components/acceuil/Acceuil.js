@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import "./acceuil.css";
 import LogoComponent from "../logo/Logo";
 import Button from "../button/Buttons";
-import { useAuth } from '../AuthProvider';
-
+import { useAuth } from "../AuthProvider";
 
 const Acceuil = ({ openWindow }) => {
   const { isLogged } = useAuth();

@@ -19,3 +19,23 @@ div div.accueil {
 div div.accueil button.invite a:visited {
   color: white;
 }
+
+body {
+  background: linear-gradient(to bottom right, var(--color), var(--color2));
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+}
+
+:root {
+  --color: #5533ff;
+  --color2: #38e2ee;
+  --deeper: darken(var(--color), 5%);
+  --lighter: lighten(var(--color2), 10%);
+}
+
+* {
+  font-size: 10px;
+  font-family: "Ubuntu", sans-serif;
+}

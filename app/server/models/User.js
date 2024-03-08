@@ -22,6 +22,11 @@ const UserSchema = new Schema({
     required: true,
     default: 0,
   },
+  avatar: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
   stat: {
     type: Schema.Types.ObjectId,
     ref: "Stat",
