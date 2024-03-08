@@ -174,30 +174,33 @@
 
 
 .showCardPlayers1 img ,.showCardPlayers2 img{
-    width:2vw;
+    width:2.5vw;
     height: auto;
     position: absolute;
     box-shadow: -2px 2px 5px  black;
 }
-
 .showCardPlayers1 , .showCardPlayers2{
+    opacity: 0%;
     transform: rotate(-20deg);
     transform-origin: left bottom;
     position: absolute;
-    transition: transform 1s ease; 
+    transition: transform 1s ease, opacity 1s ease; 
+}
+.playerCardAppear{
+    opacity: 100;
 }
 .showCardPlayers1{
     left: 0;
     bottom: 30%;
 }
 .showCardPlayers2{
-    left: 10%;
+    left: 15%;
     bottom: 30%;
 }
-
 .flippedPlayerCards{
     transform: rotateY(180deg);
     transform-origin: center;
     transition: transform 2s ease;
     transform-style: preserve-3d;
 }
+

@@ -14,6 +14,7 @@ const GameTable = () => {
   const [settingsMenu , setSettingsMenu] = useState(false);
   const [showHandCard, setShowHandCard] = useState(false);
   const [playersCardsShow, setPlayersCardsShow] = useState([0,0,0,0,0,0,0,0,0,0]);
+  const [playersCardDistributed, setpPayersCardDistributed] = useState([1,1,1,1,1,0,0,0,0,0]);
 
   const handleShowHandCard = () => {
     setShowHandCard(!showHandCard);
@@ -33,7 +34,7 @@ const GameTable = () => {
     setDealingFlop([!dealingFlop[0],!dealingFlop[1],!dealingFlop[2]]);
     setHandGuide("Full House");
     setShowHandCard(!showHandCard);
-    setPlayersCardsShow([!playersCardsShow[0]]);
+    setPlayersCardsShow([!playersCardsShow[0],!playersCardsShow[1],!playersCardsShow[2]]);
 
   }
   const handleCheckOrCall = () => {
@@ -63,6 +64,7 @@ const GameTable = () => {
           showCards={[0,1,2,3,4]} 
           profileMenuActive={profileMenu} 
           settingsMenuActive={settingsMenu}
+          playersCardDistributedProp={playersCardDistributed}
           playersCardsShowProp={playersCardsShow}
         />
       </div>
