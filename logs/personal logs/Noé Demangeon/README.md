@@ -44,5 +44,7 @@
 
 2024/03/07 : 1H             Fonctionnement fomulaire réinitialisation mot de passe/Envoi mail. Reste a faire l'envoi de l'email.
 
+2024/03/08 : 1H             Ajout condionnel connecté/nonconnecté sur le bouton start et sur le bouton connexion. Légère réorganisation de la gestion des fenêtres de connexion.
 
-TEMPS TOTAL: 38h30min 
+
+TEMPS TOTAL: 39h30min 
