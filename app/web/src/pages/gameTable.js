@@ -14,7 +14,7 @@ const GameTable = () => {
   const [settingsMenu , setSettingsMenu] = useState(false);
   const [showHandCard, setShowHandCard] = useState(false);
   const [playersCardsShow, setPlayersCardsShow] = useState([0,0,0,0,0,0,0,0,0,0]);
-  const [playersCardDistributed, setpPayersCardDistributed] = useState([1,1,1,1,1,0,0,0,0,0]);
+  const [playersCardDistributed, setPlayersCardDistributed] = useState([0,0,0,0,0,0,0,0,0,0]);
 
   const handleShowHandCard = () => {
     setShowHandCard(!showHandCard);
@@ -38,6 +38,7 @@ const GameTable = () => {
 
   }
   const handleCheckOrCall = () => {
+    setPlayersCardDistributed([!playersCardDistributed[0],!playersCardDistributed[1],!playersCardDistributed[2],!playersCardDistributed[3]]);
     console.log('handleFold function called from parent component');
   }
   const handleRaise = () => {

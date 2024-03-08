@@ -184,7 +184,7 @@
     transform: rotate(-20deg);
     transform-origin: left bottom;
     position: absolute;
-    transition: transform 1s ease, opacity 1s ease; 
+    transition: transform 1s ease, opacity 1s ease 0.5s; 
 }
 .playerCardAppear{
     opacity: 100;
