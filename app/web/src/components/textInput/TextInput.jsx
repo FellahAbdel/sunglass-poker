@@ -7,16 +7,21 @@ const TextInputComponent = ({
   type = "text",
   value,
   onChange,
+  errorMessage,
 }) => {
+  const hasError = errorMessage !== "";
   return (
-    <input
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      className="input"
-      value={value}
-      onChange={(e) => onChange(e)}
-    />
+    <div className="divTextInput">
+      <input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        className={`input ${hasError ? "error-border" : ""}`}
+        value={value}
+        onChange={(e) => onChange(e)}
+      />
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+    </div>
   );
 };
 

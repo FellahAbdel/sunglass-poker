@@ -5,10 +5,23 @@ import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
+import {
+  validateUsername,
+  validateEmail,
+  validatePassword,
+  validatePasswordMatch,
+} from "../../ValidationUtils";
 
 const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
   const { registerUser } = useAuth();
   const [formData, setFormData] = useState({
+    pseudo: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  });
+
+  const [validationErrors, setValidationErrors] = useState({
     pseudo: "",
     email: "",
     password: "",
@@ -22,20 +35,66 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
     });
   };
 
+  const validateForm = () => {
+    const errors = {
+      pseudo: "",
+      email: "",
+      password: "",
+      repeatPassword: "",
+    };
+
+    // Validation du pseudo
+    const usernameValidation = validateUsername(formData.pseudo);
+    if (!usernameValidation.isValid) {
+      errors.pseudo = usernameValidation.errorMessage;
+    }
+
+    // Validation de l'e-mail
+    const emailValidation = validateEmail(formData.email);
+    if (!emailValidation.isValid) {
+      errors.email = emailValidation.errorMessage;
+    }
+
+    // Validation du mot de passe
+    const passwordValidation = validatePassword(formData.password);
+    if (!passwordValidation.isValid) {
+      errors.password = passwordValidation.errorMessage;
+    }
+
+    // Validation de la correspondance des mots de passe
+    const passwordMatchValidation = validatePasswordMatch(
+      formData.password,
+      formData.repeatPassword
+    );
+    if (!passwordMatchValidation.isValid) {
+      errors.repeatPassword = passwordMatchValidation.errorMessage;
+    }
+
+    setValidationErrors(errors);
+
+    // Vérifie si tous les champs sont valides
+    return Object.values(errors).every((error) => error === "");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const success = await registerUser(formData);
+    if (validateForm()) {
+      try {
+        const success = await registerUser(formData);
 
-      if (success) {
-        showSuccess("Account created with success!");
-      } else {
-        //Feedback a faire
-        console.error("Failed to create user.");
+        if (success) {
+          showSuccess("Account created with success!");
+        } else {
+          //Feedback à faire
+          console.error("Failed to create user.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
+    } else {
+      // Feedback à faire pour indiquer les erreurs de validation
+      console.error("Form validation failed");
     }
   };
 
@@ -49,27 +108,30 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           value={formData.pseudo}
           onChange={handleChange}
           placeholder="Username"
+          errorMessage={validationErrors.pseudo}
         />
         <TextInputComponent
           name="email"
           value={formData.email}
           onChange={handleChange}
-          type="email"
           placeholder="Email"
+          errorMessage={validationErrors.email}
         />
         <TextInputComponent
           name="password"
           value={formData.password}
           onChange={handleChange}
-          type="password"
           placeholder="Password"
+          type={"password"}
+          errorMessage={validationErrors.password}
         />
         <TextInputComponent
           name="repeatPassword"
           value={formData.repeatPassword}
           onChange={handleChange}
-          type="password"
           placeholder="Repeat your password"
+          type={"password"}
+          errorMessage={validationErrors.repeatPassword}
         />
         <Button
           className="buttonconnexion login-button"
