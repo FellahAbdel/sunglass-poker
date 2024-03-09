@@ -4,8 +4,6 @@ import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
-
-
 const ForgotPassword = ({
   openResetPassword,
   openLoginWindow,
@@ -16,11 +14,15 @@ const ForgotPassword = ({
     email: "",
   });
 
+  const [validationError, setValidationError] = useState("");
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    // Réinitialiser le message d'erreur lorsqu'un utilisateur modifie l'e-mail
+    setValidationError("");
   };
 
   const handleSubmit = async (e) => {
@@ -28,9 +30,23 @@ const ForgotPassword = ({
 
     try {
       // Effectuer la vérification de l'e-mail en utilisant la fonction de AuthProvider
-      await checkEmail(formData.email);
+      const result = await checkEmail(formData.email);
+
+      if (result === true) {
+        showSuccess("Reset password email sent successfully.");
+      } else if (result === "not-found") {
+        // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
+        setValidationError("Email not found");
+      } else {
+        // Autres erreurs
+        console.error("Failed to found the mail.");
+      }
     } catch (error) {
       console.error("Error:", error);
+      // Afficher le message d'erreur à l'utilisateur
+      setValidationError(
+        "Failed to send reset password email. Please check your email address."
+      );
     }
   };
 
@@ -44,8 +60,8 @@ const ForgotPassword = ({
           name="email"
           value={formData.email}
           onChange={handleChange}
-          type="email"
           placeholder="Email"
+          errorMessage={validationError}
         />
         <Button
           className="buttonconnexion button login-button"

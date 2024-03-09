@@ -11,6 +11,10 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
     username: "",
     password: "",
   });
+  const [validationErrors, setValidationErrors] = useState({
+    username: "",
+    password: "",
+  });
   const { login } = useAuth();
 
   const handleChange = (e) => {
@@ -24,17 +28,23 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
     e.preventDefault();
 
     try {
-      const loginSuccess = await login(formData);
+      const loginResult = await login(formData);
 
-      if (loginSuccess) {
-        showSuccess("Logged with success !");
-        return;
+      if (loginResult === true) {
+        showSuccess("Logged with success!");
+      } else if (loginResult || loginResult.error === "invalid_credentials") {
+        // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
+        setValidationErrors({
+          ...validationErrors,
+          username: "",
+          password: "No account found",
+        });
       } else {
-        // Feedback après mauvaise combinaison
-        console.error("mauvaise combinaison");
+        // Autres erreurs
+        console.error("Failed to log in.");
       }
     } catch (error) {
-      console.error("Erreur lors de la connexion :", error);
+      console.error("Error:", error);
     }
   };
 
@@ -48,6 +58,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
           value={formData.username}
           onChange={handleChange}
           placeholder="Username"
+          errorMessage={validationErrors.username}
         />
         <TextInputComponent
           name="password"
@@ -55,6 +66,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
           onChange={handleChange}
           type="password"
           placeholder="Password"
+          errorMessage={validationErrors.password}
         />
         <Button
           className="buttonconnexion login-button"

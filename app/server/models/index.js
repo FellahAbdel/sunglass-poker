@@ -35,6 +35,18 @@ app.post("/api/users", async (req, res) => {
   try {
     const { pseudo, email, password } = req.body;
 
+    // Vérification si le pseudo existe déjà
+    const existingPseudo = await UserModel.findOne({ pseudo });
+    if (existingPseudo) {
+      return res.status(400).json({ error: "user_exists", field: "pseudo" });
+    }
+
+    // Vérification si l'email existe déjà
+    const existingEmail = await UserModel.findOne({ email });
+    if (existingEmail) {
+      return res.status(400).json({ error: "user_exists", field: "email" });
+    }
+
     // Création d'un nouvel utilisateur
     const nouveauUtilisateur = new UserModel({
       pseudo,

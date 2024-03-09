@@ -37,13 +37,12 @@ export const AuthProvider = ({ children }) => {
 
         // Stocker les informations de l'utilisateur dans le localStorage
         localStorage.setItem("user", JSON.stringify(fullUserData));
-        console.log("Coins during login:", fullUserData.coins);
 
         console.log(data.message);
         return true;
       } else {
         console.error(data.message);
-        return false;
+        return { error: data.message };
       }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error);
@@ -117,6 +116,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         console.log(`${field} updated successfully.`);
+        return true;
       } else {
         console.error(`Failed to update ${field}:`, data.message);
       }
@@ -141,7 +141,8 @@ export const AuthProvider = ({ children }) => {
       if (data.success) {
         console.log("Reset password email sent successfully.");
       } else {
-        console.error("Failed to send reset password email:", data.message);
+        console.error("not-found");
+        return "not-found";
       }
     } catch (error) {
       console.error("Error sending reset password email:", error);
@@ -159,12 +160,14 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify(userData),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         console.log("Utilisateur créé avec succès!");
         return true;
       } else {
         console.error("Erreur lors de la création de l'utilisateur");
-        return false;
+        return { error: data.error, field: data.field };
       }
     } catch (error) {
       console.error("Erreur lors de la création de l'utilisateur :", error);

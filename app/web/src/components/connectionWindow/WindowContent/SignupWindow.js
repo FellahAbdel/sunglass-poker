@@ -33,6 +33,12 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+
+    // Réinitialiser le message d'erreur associé au champ modifié
+    setValidationErrors((prevErrors) => ({
+      ...prevErrors,
+      [e.target.name]: "",
+    }));
   };
 
   const validateForm = () => {
@@ -81,13 +87,23 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
 
     if (validateForm()) {
       try {
-        const success = await registerUser(formData);
+        const result = await registerUser(formData);
 
-        if (success) {
+        if (result === true) {
           showSuccess("Account created with success!");
-        } else {
-          //Feedback à faire
-          console.error("Failed to create user.");
+        } else if (result && result.error) {
+          if (result.error === "user_exists") {
+            // Affichez un message d'erreur indiquant que l'utilisateur existe déjà
+            setValidationErrors((prevErrors) => ({
+              ...prevErrors,
+              [result.field]: `${
+                result.field.charAt(0).toUpperCase() + result.field.slice(1)
+              } already exists`,
+            }));
+          } else {
+            // Autres erreurs
+            console.error("Failed to create user.");
+          }
         }
       } catch (error) {
         console.error("Error:", error);
