@@ -52,4 +52,6 @@
 
 2024/03/08 : 2H00           Ajout fenetre changement avatar. Ajout fonctions dans AuthProvider
 
-TEMPS TOTAL: 46h00min 
+2024/03/09 : 1H30           Ajout vérification information fformulaire signup + feedback
+
+TEMPS TOTAL: 47h30min 
