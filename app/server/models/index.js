@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 // Connexion à la base de données MongoDB
-mongoose.connect("mongodb://localhost:27017/Poker", {
+mongoose.connect("mongodb://pokerBackEndServer:azerty@127.0.0.1:27017/Poker", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -30,6 +30,13 @@ db.on(
 db.once("open", () => {
   console.log("Connecté à la base de données MongoDB");
 });
+
+
+//file to create a user
+app.get("/",(req,res)  => {
+  const filepath = 'test.html';
+  res.sendFile(filepath,{root:__dirname});
+})
 
 app.post("/api/users", async (req, res) => {
   try {
