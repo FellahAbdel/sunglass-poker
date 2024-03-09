@@ -54,4 +54,6 @@
 
 2024/03/09 : 1H30           Ajout vérification information fformulaire signup + feedback
 
-TEMPS TOTAL: 47h30min 
+2024/03/09 : 2H00           Ajout feedback avec la bdd
+
+TEMPS TOTAL: 49h30min 
