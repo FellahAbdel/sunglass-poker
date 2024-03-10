@@ -48,4 +48,5 @@
 | Date | Temps passé | Description | Ressources|
 |:-------|:--:|:----: |--:|
 | 8 mars | 4 Heures | Ajout de sessions persistante avec socketio et express-session.| -- 
-| TOTAL | 0 |  | ...
+| 9 mars | 5 Heures | Refactorisation des fichiers, de codes et de certaines nomenclature. Préparations de la fusion des branches pour la base de données et les serveurs backend / frontend. Setup de roles basique pour mongodb (Afin de prévoir la sécurité) | -- 
+| TOTAL | 9 Heures |  | ...
