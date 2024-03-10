@@ -3,7 +3,7 @@ const app = express();
 const session = require("express-session");
 const server = require('http').createServer(app);
 const cors = require("cors");
-
+const db = require('./models/index')(app);
 
 
 
@@ -42,10 +42,9 @@ const io = require('./controller/socket.io')(server,Middleware,corsSettings);
 // Port du server
 const port = 3001;
 
-// Requête vide on n'envoit rien.
-app.get('/', (req, res) => {
-    res.send('');
-});
+
+// router
+const router = require('./routes/apiroutes')(app,db);
 
 
 /** Démarrage du serveur.

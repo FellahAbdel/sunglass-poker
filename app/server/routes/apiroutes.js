@@ -1,8 +1,17 @@
-const express = require('express');
-const router = express.Router();
+module.exports = function(app, db) {
+    //file to create a user
+    app.get("/view/createUser", (req, res) => {
+        const filepath = 'test.html';
+        res.sendFile(filepath, { root: __dirname });
+    })
 
-// Define your API routes here
+    // Requête vide on n'envoit rien.
+    app.get('/', (req, res) => {
+        res.send('');
+    });
 
-app = express();
-port = 3001;
-module.exports = router;
+    app.get('/createUser', (req, res) => {
+        db.createUser(req, res);
+    })
+
+};
