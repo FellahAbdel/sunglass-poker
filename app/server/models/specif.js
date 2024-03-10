@@ -176,51 +176,47 @@ class partie {
   /*
    * ...
    */
-  estDoublePaire(tableau7cartes) {
-
+   estDoublePaire(tableau7cartes) {
     // Ordonne le tableau
     tableau7cartes.sort(function (a, b) {
       return b - a;
     });
-
-    const maMain = new Array(5);
+  
     let maPaire1 = 0;
     let maPaire2 = 0;
     let verificateur = false;
     let plusHaut = 0;
-
-    //chercher mes cartes paires
+  
+    // Chercher mes cartes paires
     for (let i = 0; i < tableau7cartes.length - 1; i++) {
-
       if (tableau7cartes[i] === tableau7cartes[i + 1]) {
-        if (maPaire1 == 0) maPaire1 === tableau7cartes[i];
-        else {
-          maPaire2 === tableau7cartes[i];
+        if (maPaire1 === 0) {
+          maPaire1 = tableau7cartes[i];
+        } else {
+          maPaire2 = tableau7cartes[i];
           verificateur = true;
         }
       }
-
     }
-    //chercher la carte haute
+  
+    // Chercher la carte haute
     if (verificateur) {
       for (let j = 0; j < tableau7cartes.length; j++) {
-        if (tableau7cartes[j] !== maPaire1 || tableau7cartes[j] !== maPaire2) {
+        if (tableau7cartes[j] !== maPaire1 && tableau7cartes[j] !== maPaire2) {
           plusHaut = tableau7cartes[j];
           break;
         }
       }
-
+  
       // Construire la main finale: les deux paires + la meilleure carte restante
-      const maMain = new Array(2).fill(maCarte1).concat(new Array(2).fill(maCarte2)).concat([plusHaut]);
+      const maMain = [maPaire1, maPaire1, maPaire2, maPaire2, plusHaut];
       return maMain;
-    }
-    else {
+    } else {
       // Retourne false si une double paire n'est pas trouvée
       return false;
     }
-
   }
-
+  
   /*
    * ...
    */
@@ -286,34 +282,31 @@ class partie {
    */
 
     secondFull(listeJoueurCombinaison) {
-      let meilleurFull = null;
-      let deuxiemeMeilleurFull = null;
-  
-      for (let i = 0; i < listeJoueurCombinaison.length; i++) {
-          const maMain = listeJoueurCombinaison[i].maMain;
-  
-          
-  
-          if (meilleurFull === null) {
-              meilleurFull = { joueurId: listeJoueurCombinaison[i].id, maMain: maMain };
-          } else if (deuxiemeMeilleurFull === null) {
-              deuxiemeMeilleurFull = { joueurId: listeJoueurCombinaison[i].id, maMain: maMain };
-          } else if (compareFull(maMain, meilleurFull.maMain) > 0) {
-              deuxiemeMeilleurFull = meilleurFull;
-              meilleurFull = { joueurId: listeJoueurCombinaison[i].id, maMain: maMain };
-          } else if (compareFull(maMain, deuxiemeMeilleurFull.maMain) > 0) {
-              deuxiemeMeilleurFull = { joueurId: listeJoueurCombinaison[i].id, maMain: maMain };
+      let meilleurId = tableauxAvecId[0].id;
+      let meilleurTableau = tableauxAvecId[0].tableau;
+    
+      for (let i = 1; i < tableauxAvecId.length; i++) {
+          const tableauCourant = tableauxAvecId[i].tableau;
+    
+          for (let j = 0; j < 5; j++) {
+              if (tableauCourant[j] > meilleurTableau[j]) {
+                  meilleurId = tableauxAvecId[i].id;
+                  meilleurTableau = tableauCourant;
+                  break;
+              } else if (tableauCourant[j] < meilleurTableau[j]) {
+                  break;
+              }
           }
       }
-  
-      return deuxiemeMeilleurFull ? deuxiemeMeilleurFull.joueurId : null;
+    
+      return meilleurId;
   }
   
   // Fonction pour comparer deux fulls
    compareFull(full1, full2) {
       // Retourne un nombre positif si full1 est meilleur, négatif si full2 est meilleur, 0 s'ils sont égaux
   }
-  }
+  
 
   /*
    * ...
@@ -328,7 +321,26 @@ class partie {
   /*
    * ...
    */
-  secondDoublePaire(listeJoueurCombinaison) { }
+  secondDoublePaire(listeJoueurCombinaison) { 
+    let meilleurId = tableauxAvecId[0].id;
+    let meilleurTableau = tableauxAvecId[0].tableau;
+  
+    for (let i = 1; i < tableauxAvecId.length; i++) {
+        const tableauCourant = tableauxAvecId[i].tableau;
+  
+        for (let j = 0; j < 5; j++) {
+            if (tableauCourant[j] > meilleurTableau[j]) {
+                meilleurId = tableauxAvecId[i].id;
+                meilleurTableau = tableauCourant;
+                break;
+            } else if (tableauCourant[j] < meilleurTableau[j]) {
+                break;
+            }
+        }
+    }
+  
+    return meilleurId;
+  }
 
   /*
    * ...
