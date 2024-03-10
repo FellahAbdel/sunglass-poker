@@ -13,5 +13,6 @@
 -  28/2 , rajout fonction de combinaison "paire" et j'ai effectué des tests : 1H
 - 29/2 , finition de la fonction double paire et correction de la fonction est carre : 1H
 -  30/2 , début implementation fonction secondFull :00H30
+- 09/03 , finition implementation des fonctions de combinaisons de jeux : 2H
 
-- TOTAL:31H
+- TOTAL:33H
