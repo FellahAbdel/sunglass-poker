@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+document.title = 'SunGlassPoker'; // Remplacez 'Nouveau Titre' par le titre souhaité
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
