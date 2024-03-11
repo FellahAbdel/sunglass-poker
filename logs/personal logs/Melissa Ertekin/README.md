@@ -59,10 +59,16 @@
 
 * 2024/02/26 : <b>30 mins</b> <br/> Travail individuel :<i> Travail sur le comptes rendus hebdomadaire  </i>
 
-### Semaine 4 : 13 Février - 20 Février  | Temps Totale: 
+### Semaine 4 : 27 Février - 4 Mars  | Temps Totale: 6h30
 
 * 2024/02/27 : <b>3h30</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor, standup meeting, planification de la semaine, revue du code, réunion avec le groupe pour améliorer notre projet selon les retours du mentor </i>
 
 * 2024/03/03 : <b>2h</b> <br/> Travail individuel : <i> Surveillance du projet. Demandes de feedback personnalisé selon leur avancement. Rédaction du compte-rendu pour les réunions de cette semaine.  </i> 
 
 * 2024/03/04 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Rédaction du compte-rendu hebdomadaire. </i> 
+
+### Semaine 4 : 4 Mars - 11 Mars (Vacance)  | Temps Totale: 3h
+
+* 2024/03/10 : <b>2h</b> <br/> Travail individuel : <i> Surveillance du projet sur git et Trello. Demandes de feedback personnalisé selon leur avancement. </i> 
+
+* 2024/03/11 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Rédaction du compte-rendu hebdomadaire. </i> 
