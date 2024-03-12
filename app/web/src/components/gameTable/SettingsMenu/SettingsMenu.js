@@ -2,22 +2,29 @@ import React ,{useState} from 'react';
 import './settingsMenu.css'
 import Button from '../Button/Button.tsx';
 
-const settingsMenu = ({handleSliderChange,checkBox,nightMode}) => {
+const settingsMenu = ({handleSliderChange,checkBox,darkMode,mute}) => {
 
   return (
     <div className="settingsMenu">
           <h1>SETTINGS</h1>
 
-          <label>
-            <input type="checkbox" value={checkBox}/>
-            Mute
-          </label>
-
-          NIGHT MODE
+          <span className='container-switch'>
+            <p>Mute</p>
           <label class="switch">
-            <input type="checkbox" onClick={nightMode}/>
-            <span class="slider"></span>
+            <input type="checkbox" onClick={mute}/>
+            <span class="slider"/>
           </label>
+          </span>
+
+          <span className='container-switch'>
+            <p>DARK MODE</p>
+            <label class="switch">
+            <input type="checkbox" onClick={darkMode}/>
+            <span class="slider"/>
+          </label>
+          </span>
+
+
 
           <div className='container-ranges'>
           <div className='rangeContainer-blah'>
