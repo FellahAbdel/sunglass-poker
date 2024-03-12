@@ -3,7 +3,7 @@ const app = express();
 const session = require("express-session");
 const server = require('http').createServer(app);
 const cors = require("cors");
-const db = require('./models/index')(app);
+const db = require('./models/bdd')(app);
 
 
 

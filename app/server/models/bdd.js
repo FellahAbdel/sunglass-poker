@@ -1,7 +1,7 @@
 // index.js
 const mongoose = require("mongoose");
 const UserModel = require("./User");
-const StatModel = require("./stat");
+const StatModel = require("./Stat");
 
 
 module.exports = function (app) {
