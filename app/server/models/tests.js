@@ -20,17 +20,26 @@ function estCarre(tableau7cartes) {
 
       // Si on trouve 4 cartes du même chiffre, alors c'est un carré
       if (compteur[carte.number] === 4) {
-        // Recherche de la cinquième carte la plus élevée
-        let plusHaut = 0;
+        // Construire la main finale: le carré + la meilleure carte restante
+        const maMain = [];
+
+        // Ajouter les 4 cartes du carré avec leurs couleurs respectives
+        for (let j = 0; j < 4; j++) {
+          maMain.push({ number: carte.number, color: tab[i - j].color });
+        }
+
+        // Trouver la meilleure carte restante
+        let plusHauteRestante = null;
         for (let j = 0; j < tab.length; j++) {
-          if (tab[j].number !== carte.number) {
-            plusHaut = tab[j];
-            break;
+          if (tab[j].number !== carte.number && (plusHauteRestante === null || tab[j].number > plusHauteRestante.number)) {
+            plusHauteRestante = tab[j];
           }
         }
 
-        // Construire la main finale: le carré + la meilleure carte restante
-        const maMain = new Array(4).fill(carte).concat(plusHaut);
+        // Ajouter la meilleure carte restante
+        if (plusHauteRestante) {
+          maMain.push({ number: plusHauteRestante.number, color: plusHauteRestante.color });
+        }
 
         return maMain;
       }
@@ -44,8 +53,8 @@ console.log(estCarre([
   { number: 10, color: "H" },
   { number: 10, color: "S" },
   { number: 10, color: "D" },
-  { number: 11, color: "C" },
+  { number: 8, color: "C" },
   { number: 10, color: "C" },
   { number: 9, color: "C" },
-  { number: 8, color: "C" }
+  { number: 7, color: "C" }
 ]));
