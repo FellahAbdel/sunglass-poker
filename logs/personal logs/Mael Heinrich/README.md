@@ -28,4 +28,11 @@
 
 2024/02/27: 1h      Amélioration du css+ modification du head de la page
 
-TEMPS TOTAL: 28h15min 
+2024/02/28 et 29: 1h    recherche css pour améliorer les bouton
+
+2024/03/07: 1h30    Mise en place du conditionning avec recherche de comment cela fonctionne 
+
+2024/03/12: 30min   Résolution des quelques bug et erreur 
+
+
+TEMPS TOTAL: 31h15min 
