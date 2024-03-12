@@ -35,9 +35,9 @@
 .container-menu, .container-table{
     position: relative;
 
-    width: 60vw;
+    width: 65vw;
     min-width: 400px;
-    height: 40vh;
+    height: 45vh;
     
     transition: width 1s ease, height 1s ease, box-shadow 0.5s ease;
 }
@@ -65,7 +65,7 @@
 /*cards and users disappearing animation*/
 .profiles.disappear, .container-cards.disappear{    
     opacity: 0;
-    transition: opacity 1s ease-out;
+    transition: opacity 0.1s ease-out;
 }
 .profiles{
     width: 100%;

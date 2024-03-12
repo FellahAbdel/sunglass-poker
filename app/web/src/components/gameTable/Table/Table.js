@@ -9,7 +9,7 @@ import cardBack from './../../assets/images/card-design.png';
 import Card from '../Card/Card';
 
 
-const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive,playersCardDistributedProp ,playersCardsShowProp}) => {
+const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive,playersCardDistributedProp ,playersCardsShowProp, moneyPot}) => {
   //name , user ID , level , games played , winning ratio , joined Date 
   const userInfo = ["Mostafa","otsuno" , "100", "5" , "30%","10/march/2024"];
 
@@ -17,6 +17,8 @@ const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive,pl
     <div className={`container-table ${profileMenuActive || settingsMenuActive ? 'container-menu' : ""}`}>
 
         <div className={`container-cards ${profileMenuActive || settingsMenuActive ? 'disappear' : ""}`}>
+          
+          <div className={`container-moneyPot`}>{moneyPot.toLocaleString()}$</div>
 
           {dealingFlop[0] ? false : 
             <div class="glitch-wrapper">

@@ -11,7 +11,7 @@
 }
 .slideUp{
     animation-name: slideUp ;
-    animation-duration: 1.5s;
+    animation-duration: 0.5s;
     animation-timing-function: ease-out;
     animation-delay: 0s;
     animation-iteration-count: 1;
@@ -30,5 +30,5 @@
     }
 }
 .slideDown{
-    animation: slideDown 1.5s ease 0s 1 normal both;
+    animation: slideDown 0.5s ease 0s 1 normal both;
 }

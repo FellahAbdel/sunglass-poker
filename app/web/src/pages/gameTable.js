@@ -68,6 +68,7 @@ const GameTable = () => {
           settingsMenuActive={settingsMenu}
           playersCardDistributedProp={playersCardDistributed}
           playersCardsShowProp={playersCardsShow}
+          moneyPot={9999999999}
         />
       </div>
 
