@@ -1,4 +1,4 @@
-const tableau7cartes = [2, 7, 15, 11, 8, 9, 14];
+const tableau7cartes = [2, 2, 2, 2, 8, 9, 14];
 
 function estPaire(tableau7cartes) {
     // Ordonne le tableau
@@ -54,6 +54,12 @@ function estCarre(tableau7cartes) {
     tableau7cartes.sort(function (a, b) {
       return b - a;
     });
+
+
+
+
+
+
 
     const compteur = {};
     let monCarre = 0;
@@ -151,9 +157,9 @@ function meilleurTableauAvecIdentifiant(...tableauxAvecId) {
   return meilleurId;
 }
 
-const tableauAvecId1 = { id: "A", tableau: [1, 2, 3, 4, 5] };
-const tableauAvecId2 = { id: "B", tableau: [2, 1, 1, 1, 6] };
-const tableauAvecId3 = { id: "C", tableau: [0, 2, 3, 4, 5] };
+const tableauAvecId1 = { id: "A", tableau: [2, 2, 3, 4, 5] };
+const tableauAvecId2 = { id: "B", tableau: [8, 8, 1, 1, 6] };
+const tableauAvecId3 = { id: "C", tableau: [10, 10, 3, 4, 5]};
 
 const meilleurIdResultat = meilleurTableauAvecIdentifiant(tableauAvecId1, tableauAvecId2, tableauAvecId3);
 console.log("L'identifiant du meilleur tableau est :", meilleurIdResultat);
@@ -161,5 +167,5 @@ console.log("L'identifiant du meilleur tableau est :", meilleurIdResultat);
 
 // Test de la fonction
 
-  const maMainD =estPaire(tableau7cartes);
+  const maMainD =estCarre(tableau7cartes);
 console.log(maMainD);

@@ -282,6 +282,7 @@ class partie {
    */
 
     secondFull(listeJoueurCombinaison) {
+      
       let meilleurId = tableauxAvecId[0].id;
       let meilleurTableau = tableauxAvecId[0].tableau;
     
@@ -302,10 +303,7 @@ class partie {
       return meilleurId;
   }
   
-  // Fonction pour comparer deux fulls
-   compareFull(full1, full2) {
-      // Retourne un nombre positif si full1 est meilleur, négatif si full2 est meilleur, 0 s'ils sont égaux
-  }
+
   
 
   /*
