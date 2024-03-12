@@ -64,32 +64,43 @@ function estCarre(tableau7cartes) {
     const compteur = {};
     let monCarre = 0;
 
-    // Utiliser une boucle for pour parcourir le tableau de cartes
-    for (let i = 0; i < tableau7cartes.length; i++) {
-      const carte = tableau7cartes[i];
+   // Utiliser une boucle for pour parcourir le tableau de cartes
+for (let i = 0; i < tableau7cartes.length; i++) {
+  const carte = tableau7cartes[i];
 
-      if (!compteur[carte]) {
-        compteur[carte] = 1; // Initialiser à 1 si la carte n'existe pas encore dans le compteur
-      } else {
-        compteur[carte] += 1; // Incrémenter si elle existe déjà
+  if (!compteur[carte]) {
+    compteur[carte] = 1; // Initialiser à 1 si la carte n'existe pas encore dans le compteur
+  } else {
+    compteur[carte] += 1; // Incrémenter si elle existe déjà
 
-        // Si on trouve 4 cartes du même chiffre, alors c'est un carré
-        if (compteur[carte] === 4) {
-          // Recherche de la cinquième carte la plus élevée
-          let plusHaut = 0;
-          for (let j = 0; j < tableau7cartes.length; j++) {
-            if (tableau7cartes[j] !== carte) {
-              plusHaut = tableau7cartes[j];
-              break;
-            }
-          }
-
-          // Construire la main finale: le carré + la meilleure carte restante
-          const maMain = new Array(4).fill(carte).concat(plusHaut);
-          return maMain;
+    // Si on trouve 4 cartes du même chiffre, alors c'est un carré
+    if (compteur[carte] === 4) {
+      // Recherche des quatre cartes du carré
+      const carre = [];
+      for (let j = 0; j < tableau7cartes.length; j++) {
+        if (tableau7cartes[j] === carte) {
+          carre.push(carte);
         }
       }
+
+      // Recherche de la carte la plus élevée en dehors du carré
+      let plusHaute = 0;
+      for (let j = 0; j < tableau7cartes.length; j++) {
+        if (tableau7cartes[j] !== carte && tableau7cartes[j] > plusHaute) {
+          plusHaute = tableau7cartes[j];
+        }
+      }
+
+      // Ajouter la carte la plus élevée au tableau du carré
+      carre.push(plusHaute);
+
+      // Construire la main finale: le carré avec la carte la plus élevée en dehors
+      const maMain = carre;
+      return maMain;
     }
+  }
+}
+
 
     return false; // Retourner false si aucun carré n'est trouvé
 }
