@@ -20,7 +20,6 @@ const [isWindowOpen, setIsWindowOpen] = useState(false);
 	return (
 
 		<header className='header'>
-
 			<nav>
 				<div>
 
