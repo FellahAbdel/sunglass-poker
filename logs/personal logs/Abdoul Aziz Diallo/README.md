@@ -37,3 +37,15 @@
 | 01/03 | Add forgot password box in figma   | Figma            | 30min      |                                                                                              |
 | 03/03 | Code debugging with Mostapha       | Debugging        | 2h30       |                                                                                              |
 | 03/03 | Just finish the Redux tutorial     | Redux            | 30m        |                                                                                              |
+
+## Week 5 - _Total: _
+
+| Date | Description | Skills developed | Time Spent | Resources |
+| ---- | ----------- | ---------------- | ---------- | --------- |
+
+## Week 6 - _Total: _
+
+| Date  | Description                                                         | Skills developed | Time Spent | Resources |
+| ----- | ------------------------------------------------------------------- | ---------------- | ---------- | --------- |
+| 12/03 | Work on redux & help my team to do some debug                       |                  | 4h00       |           |
+|       | Code improvement home page, I restructured the navbar in the header |                  | 2h00       |           |
