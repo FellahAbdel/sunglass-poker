@@ -1,5 +1,5 @@
 // Import React and any other dependencies
-import React from 'react';
+import React from "react";
 
 // Define your page component as a function or class
 function gameTable() {
