@@ -1,6 +1,6 @@
 
 import "./header.css";
-import React, { useState } from "react";
+import React from "react";
 // import Window from "../connectionWindow/Window";
 // import Button from "../button/Buttons";
 import FormHeader from "../acceuil/Formheader";
@@ -18,8 +18,6 @@ const Header = () => {
 			<FormHeader isConnected={userIsConnected}/>
 
 
-				
-				
 			</nav>
 		</header>
 	);
