@@ -15,7 +15,8 @@ function Form(props){
       setIsWindowOpen(false);
     };
     return(
-        <form className="form">
+        
+        <div>
         
             {props.isConnected && (
                 <Button 
@@ -32,7 +33,7 @@ function Form(props){
             )}
 
             {isWindowOpen && <Window onClose={closeWindow} windowType={windowType} />}
-        </form>
+        </div>
     );
 }
 

@@ -16,7 +16,8 @@ function FormHeader(props){
     setIsWindowOpen(false);
   };
     return(
-        <form className="form">
+        <div>
+
     
 
             {props.isConnected && (
@@ -40,6 +41,14 @@ function FormHeader(props){
 				label="tutoriel" 
 				/>
 
+            {props.isConnected && (
+                <Button 
+				className="login" 
+				label="Vous êtes connecter" 
+				/>
+
+                )}
+
             {!props.isConnected && (
               <Button onClick={() => openWindow("login")} 
               className="login" 
@@ -51,7 +60,8 @@ function FormHeader(props){
             
 
                 {isWindowOpen && <Window onClose={closeWindow} windowType={windowType} />}
-        </form>
+      
+        </div>
     );
 }
 
