@@ -3,6 +3,7 @@ const app = express();
 const session = require("express-session");
 const server = require('http').createServer(app);
 const cors = require("cors");
+app.use(express.json());
 const db = require('./models/bdd')(app);
 
 
@@ -19,7 +20,6 @@ const corsSettings = {
     credentials: true
   }
 app.use(cors(corsSettings))
-
 /** Paramètres de session
  * 
  * 

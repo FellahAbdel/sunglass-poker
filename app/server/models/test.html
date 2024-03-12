@@ -13,6 +13,7 @@
                     email: document.getElementById('email').value,
                     password: document.getElementById('password').value
                 };
+                console.log(formData);
 
                 fetch('/api/users', {
                     method: 'POST',

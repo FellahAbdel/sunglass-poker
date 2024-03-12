@@ -30,6 +30,7 @@ module.exports = function (app) {
 
   app.post("/api/users", async (req, res) => {
     try {
+      console.log(req.body);
       const { pseudo, email, password } = req.body;
 
       // Vérification si le pseudo existe déjà
