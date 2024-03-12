@@ -1,12 +1,12 @@
 class partie {
 
-    #joueurs = []; // liste de joueurs
-    #jeuDeCarte = []; // liste de l'ensemble des cartes
-    #cartesMasque = []; // tableau de 5 cartes 
-    #historiqueDesMises = []; // [{ idJoueur, sommeMisee }, ...]
-    #mises = 0;
-    #misesSecondaires = 0;
-    #joueurCourant = 0;
+    #players = []; // liste de joueurs
+    #cardsGame = []; // liste de l'ensemble des cartes
+    #hiddenCards = []; // tableau de 5 cartes 
+    #betHistory = []; // [{ idJoueur, sommeMisee }, ...]
+    #bets = 0;
+    #sideBets = 0;
+    #currentPlayer = 0;
     #revolution = 0;
 
     constructor () {
@@ -19,13 +19,13 @@ class partie {
      * OUT : [elti, ...] liste melangee
      * FUNCTION : melange une liste
      */
-    shuffle (liste) {
+    shuffle (list) {
         let newList = [];
         let index;
 
-        while (liste.length !== 0) {
-            index = Math.floor(Math.random() * (liste.length-1));
-            newList.push(liste.splice(index, 1)[0]);
+        while (list.length !== 0) {
+            index = Math.floor(Math.random() * (list.length-1));
+            newList.push(list.splice(index, 1)[0]);
         }
 
         return newList;
@@ -39,15 +39,14 @@ class partie {
      */
     distribuer () {
         // Distribuer les cartes à chaque joueur
-        for (let i = 0; i < this.#joueurs.length; i++) {
-            const joueur = this.#joueurs[i];
-            if (joueur.carte.length < 2) { // Vérifier si le joueur a moins de 2 cartes
-                joueur.carte.push(this.#jeuDeCarte.shift()); // Distribuer la première carte au joueur
-                joueur.carte.push(this.#jeuDeCarte.shift()); // Distribuer la deuxième carte au joueur
+        for (let i = 0; i < this.#players.length; i++) {
+            const player = this.#players[i];
+            if (player.getPlayerCards().length < 2) { // Vérifier si le joueur a moins de 2 cartes
+                player.setCards(this.#cardsGame.shift(), this.#cardsGame.shift()); // Distribuer les deux cartes au joueur
             }
         }
         // Ajouter les 5 premières cartes de jeuDeCarte à cartesMasque
-        this.#cartesMasque = this.#jeuDeCarte.slice(0, 5);
+        this.#hiddenCards = this.#cardsGame.slice(0, 5);
     }
     
     /*
@@ -112,14 +111,25 @@ class partie {
      * OUT : [j1, ...] liste des joueurs actifs
      * FUNCTION : renvoi la liste des joueurs actifs dans la partie
      */
-    listeJoueursActifs () {}
+    listeJoueursActifs () {
+        let res = [];
+        for (let i=0; i < this.#players; i++) {
+            if (this.#players[i].getPlayerState() === "active") {
+                res.push(this.#players[i]);
+            }
+        }
+
+        return res;
+    }
 
     /*
      * IN : JOUEUR
      * OUT : { [c1, ..., c7], idJoueur } tableau des 7 cartes associe a l'id du joueur
      * FUNCTION : compose et renvoi le tableau de 7 cartes pour les combinaisons
      */
-    fait7cartes (joueur) {}
+    fait7cartes (player) {
+        return {cards : this.#hiddenCards + player.getPlayerCards(), id : player.getPlayerId()};
+    }
 
 
     /*
@@ -230,13 +240,13 @@ class partie {
         // Cœur/heart, Carreau/diamond, Trèfle/club, Pique/spade
       
         // Vérifier si les 7 cartes contiennent une quinte flush royale
-        for (let symbol of royalSymbols) {
+        for (let color of royalSymbols) {
           const royalFlush = [];
-          for (let value of royalValues) {
+          for (let number of royalValues) {
             // Vérifier si la carte royale actuelle est présente dans les 7 cartes
             // Trouve le première carte vérifiant la condition
             const royalCard = cards.find(
-              (card) => card.symbol === symbol && card.value === value
+              (card) => card.color === color && card.number === number
             );
             //   console.log(royalCard);
             if (royalCard) {
@@ -258,7 +268,38 @@ class partie {
      * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
      * FUNCTION : determine si les 7 possedent une quinte flush et renvoi la combianaison si elle est trouve.
      */
-    estQuinteFlush (tableau7cartes) {}
+    estQuinteFlush (tableau7cartes) {
+
+        // Étape 1: Vérifier si au moins 5 cartes sont de la même couleur
+        let couleurMajoritaire = null;
+        let compteurCouleurs = {}; // Compteur pour chaque couleur
+        for (let carte of tableau7cartes) {
+            if (!compteurCouleurs[carte.color]) {
+                compteurCouleurs[carte.color] = 0;
+            }
+            compteurCouleurs[carte.color]++;
+            if (compteurCouleurs[carte.color] >= 5) {
+                couleurMajoritaire = carte.color;
+                break;
+            }
+        }
+    
+        if (couleurMajoritaire === null) {
+            return false; // Pas de couleur majoritaire, pas de quinte flush
+        }
+    
+        // Étape 2: Filtrer les cartes de la couleur majoritaire
+        let cartesMemeCouleur = tableau7cartes.filter(carte => carte.color === couleurMajoritaire);
+        // console.log(cartesMemeCouleur);
+    
+        // Étape 3: Vérifier si ces cartes forment une suite
+        let quinteFlush = this.estSuite(cartesMemeCouleur);
+        if (quinteFlush !== false) {
+            return quinteFlush; // Renvoie les cartes de la quinte flush si elles forment une suite
+        } else {
+            return false; // Pas de quinte flush
+        }
+    }
 
     /*
      * IN : tableau de 7 cartes
@@ -267,40 +308,51 @@ class partie {
      */
     estCarre(tableau7cartes) {
         // Ordonne le tableau
-        tableau7cartes.sort(function (a, b) {
-          return b - a;
+        let tab = [...tableau7cartes];
+      
+        tab.sort(function (a, b) {
+          return b.number - a.number;
         });
-    
+      
         const compteur = {};
-        let monCarre = 0;
-    
+      
         // Utiliser une boucle for pour parcourir le tableau de cartes
-        for (let i = 0; i < tableau7cartes.length; i++) {
-          const carte = tableau7cartes[i];
-    
-          if (!compteur[carte]) {
-            compteur[carte] = 1; // Initialiser à 1 si la carte n'existe pas encore dans le compteur
+        for (let i = 0; i < tab.length; i++) {
+          const carte = tab[i];
+      
+          if (!compteur[carte.number]) {
+            compteur[carte.number] = 1; // Initialiser à 1 si la carte n'existe pas encore dans le compteur
           } else {
-            compteur[carte] += 1; // Incrémenter si elle existe déjà
-    
+            compteur[carte.number] += 1; // Incrémenter si elle existe déjà
+      
             // Si on trouve 4 cartes du même chiffre, alors c'est un carré
-            if (compteur[carte] === 4) {
-              // Recherche de la cinquième carte la plus élevée
-              let plusHaut = 0;
-              for (let j = 0; j < tableau7cartes.length; j++) {
-                if (tableau7cartes[j] !== carte) {
-                  plusHaut = tableau7cartes[j];
-                  break;
+            if (compteur[carte.number] === 4) {
+              // Construire la main finale: le carré + la meilleure carte restante
+              const maMain = [];
+      
+              // Ajouter les 4 cartes du carré avec leurs couleurs respectives
+              for (let j = 0; j < 4; j++) {
+                maMain.push({ number: carte.number, color: tab[i - j].color });
+              }
+      
+              // Trouver la meilleure carte restante
+              let plusHauteRestante = null;
+              for (let j = 0; j < tab.length; j++) {
+                if (tab[j].number !== carte.number && (plusHauteRestante === null || tab[j].number > plusHauteRestante.number)) {
+                  plusHauteRestante = tab[j];
                 }
               }
-    
-              // Construire la main finale: le carré + la meilleure carte restante
-              const maMain = new Array(4).fill(carte).concat(plusHaut);
+      
+              // Ajouter la meilleure carte restante
+              if (plusHauteRestante) {
+                maMain.push({ number: plusHauteRestante.number, color: plusHauteRestante.color });
+              }
+      
               return maMain;
             }
           }
         }
-    
+      
         return false; // Retourner false si aucun carré n'est trouvé
       }
     
@@ -310,15 +362,16 @@ class partie {
      * FUNCTION : determine si les 7 possedent un full et renvoi la combianaison si elle est trouve.
      */
     estFull (tableau7cartes) {
-        const valeurs = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        let tab = [...tableau7cartes];
+        const valeurs = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
         // Étape 1: Trier les cartes pour avoir les combinaisons les plus importantes
-        tableau7cartes.sort((a, b) => valeurs.indexOf(b.numero) - valeurs.indexOf(a.numero));
+        tab.sort((a, b) => valeurs.indexOf(b.number) - valeurs.indexOf(a.number));
 
         // Étape 2: Extraire les 3 cartes de même numéro (brelan)
         let brelan = [];
-        for (let i = 0; i < tableau7cartes.length - 2; i++) {
-            const cartesMemeNumero = tableau7cartes.filter(carte => carte.numero === tableau7cartes[i].numero);
+        for (let i = 0; i < tab.length - 2; i++) {
+            const cartesMemeNumero = tab.filter(carte => carte.number === tab[i].number);
             if (cartesMemeNumero.length === 3) {
                 brelan = cartesMemeNumero;
                 break;
@@ -332,9 +385,9 @@ class partie {
 
         // Étape 3: Rechercher une paire parmi les cartes restantes
         let paire = [];
-        const resteCartes = tableau7cartes.filter(carte => !brelan.includes(carte));
+        const resteCartes = tab.filter(carte => !brelan.includes(carte));
         for (let i = 0; i < resteCartes.length; i++) {
-            const cartesMemeNumero = resteCartes.filter(carte => carte.numero === resteCartes[i].numero);
+            const cartesMemeNumero = resteCartes.filter(carte => carte.number === resteCartes[i].number);
             //au cas ou y a un autre brelan mais on prends que la paire
             if (cartesMemeNumero.length === 3 || cartesMemeNumero.length === 2) {
                 paire = cartesMemeNumero;
@@ -367,16 +420,16 @@ class partie {
         // on repartis les cartes par famille 
         for (let i=0; i<tab.length; i++) {
             switch (tab[i].color) {
-                case "diamond" :
+                case "D" :
                     colors[0].push(tab[i]);
                     break;
-                case "heart" :
+                case "H" :
                     colors[1].push(tab[i]);
                     break;
-                case "club" :
+                case "C" :
                     colors[2].push(tab[i]);
                     break;
-                case "spade" :
+                case "S" :
                     colors[3].push(tab[i]);
                     break;
             }
@@ -412,64 +465,71 @@ class partie {
     /*
      * ...
      */
-    estSuite (sevenCardsTab) {
-        let tab = [...sevenCardsTab];
-        let hand = [];
-        let pluriCouleur = false;
+    estSuite (sevenCardsTab, refact=false) {
 
-        while (tab.length !== 0) {
-            let index = 0;
-            for (let i=0; i<tab.length; i++) {
-                if (tab[i].number < tab[index].number) {
-                    index = i;
-                }
-            }
-            if (hand.length - 1 >= 0) {
-                // la main est non vide
+        const refactor = function (cardList, undo=false) {
 
-                if (tab[index].number === hand[hand.length-1].number + 1) {
-                    // les deux chiffres sont consecutifs
-
-                    if (tab[index].color !== hand[hand.length-1].color) {
-                        pluriCouleur = true;
+            for (let i = 0; i < cardList.length; i++) {
+                if (!undo) {
+                    if (cardList[i].number === 14) {
+                        cardList[i].number = 1;
                     }
-                    if (hand.length === 5) {
-                        // pour s'assurer qu'il y ait au plus 5 cartes
-                        // les 5 cartes seront les plus grandes
-                        hand.splice(0,1);
-                    }
-                    hand.push(tab[index]);
-                    tab.splice(index, 1);
                 } else {
-                    // si pas condecutifs alors on vide la main
-                    hand.splice(0, hand.length);
-                    pluriCouleur = false;
+                    if (cardList[i].number === 1) {
+                        cardList[i].number = 14;
+                    }
                 }
-            } else {
-                hand.push(tab[index]);
-                tab.splice(index, 1);
             }
+            return cardList;
         }
 
-        if (hand.length === 5 && pluriCouleur) {
-            return hand;
-        } 
-        return false;
+        let tab = [...sevenCardsTab];
+        let hand = [];
+
+        if (refact) {
+            tab = refactor(tab);
+        }
+        tab = this.trier(tab, (x) => x.number);
+
+        while (tab.length !== 0) {
+
+            let tmp = tab.pop();
+
+            if (hand.length === 0) {
+                hand.push(tmp);
+
+            } else if (hand.length < 5) {
+
+                if (tmp.number === hand[hand.length - 1].number - 1){
+                    hand.push(tmp); 
+                } else {
+                    hand.splice(0, hand.length);
+                    hand.push(tmp);
+                }
+            }
+
+        }
+
+        if (refact) {
+            return hand.length === 5 ? refactor(hand, true) : false;
+        }
+        return hand.length === 5 ? hand : this.estSuite(sevenCardsTab, true);
     }
 
     /*
      * ...
      */
     estBrelan (tableau7cartes) {
-        const valeurs = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        let tab = [...tableau7cartes];
+        const valeurs = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1];
 
         // Étape 1: Trier le tableau de 7 cartes d'ordre décroissant et Extraire les 3 cartes de même numéro
         let brelan = [];
-        tableau7cartes.sort((a,b) => valeurs.indexOf(b.numero) - valeurs.indexOf(a.numero));
-        for(let i = 0 ; i < tableau7cartes.length - 2 ; i++){
-            const cartesMemeNumero = tableau7cartes.filter(carte => carte.numero === tableau7cartes[i].numero);
+        tab.sort((a,b) => valeurs.indexOf(b.number) - valeurs.indexOf(a.number));
+        for(let i = 0 ; i < tab.length - 2 ; i++){
+            const cartesMemeNumero = tab.filter(carte => carte.number === tab[i].number);
             if(cartesMemeNumero.length === 3) {
-                brelan = cartesMemeNumero;$
+                brelan = cartesMemeNumero;
                 break;
             }
         }
@@ -480,7 +540,7 @@ class partie {
         }
 
         // Étape 2: Trier le reste des cartes dans l'ordre décroissant et renvoyer la combinaison des cartes
-        const resteCartes = tableau7cartes.filter(carte => !brelan.includes(carte));
+        const resteCartes = tab.filter(carte => !brelan.includes(carte));
 
         // Combinaison des 3 cartes de même numéro et des 2 cartes les plus hautes parmi les restantes
         return [...brelan, ...resteCartes.slice(0, 2)];
@@ -490,39 +550,49 @@ class partie {
      * ...
      */
     estDoublePaire(tableau7cartes) {
+
+        let tab = [...tableau7cartes];
         // Ordonne le tableau
-        tableau7cartes.sort(function (a, b) {
-          return b - a;
+        tab.sort(function (a, b) {
+          return b.number - a.number;
         });
-      
-        let maPaire1 = 0;
-        let maPaire2 = 0;
+
+        console.log(tab);
+        
+        let p1c1 = null;
+        let p1c2 = null;
+        let p2c1 = null;
+        let p2c2 = null;
+        let ch = null;
         let verificateur = false;
-        let plusHaut = 0;
       
         // Chercher mes cartes paires
-        for (let i = 0; i < tableau7cartes.length - 1; i++) {
-          if (tableau7cartes[i] === tableau7cartes[i + 1]) {
-            if (maPaire1 === 0) {
-              maPaire1 = tableau7cartes[i];
+        for (let i = 0; i < tab.length - 1; i++) {
+          if (tab[i].number === tab[i + 1].number) {
+            if (p1c1 === null) {
+              p1c1 = tab[i];
+              p1c2 = tab[i+1];
+
             } else {
-              maPaire2 = tableau7cartes[i];
+              p2c1 = tab[i];
+              p2c2 = tab[i+1];
               verificateur = true;
+              break;
             }
           }
         }
       
         // Chercher la carte haute
         if (verificateur) {
-          for (let j = 0; j < tableau7cartes.length; j++) {
-            if (tableau7cartes[j] !== maPaire1 && tableau7cartes[j] !== maPaire2) {
-              plusHaut = tableau7cartes[j];
+          for (let j = 0; j < tab.length; j++) {
+            if (tab[j].number !== p1c1.number && tab[j].number !== p2c1.number) {
+              ch = tab[j];
               break;
             }
           }
       
           // Construire la main finale: les deux paires + la meilleure carte restante
-          const maMain = [maPaire1, maPaire1, maPaire2, maPaire2, plusHaut];
+          const maMain = [p1c1, p1c2, p2c1, p2c2, ch];
           return maMain;
         } else {
           // Retourne false si une double paire n'est pas trouvée
@@ -534,19 +604,23 @@ class partie {
      * ...
      */
     estPaire(tableau7cartes) {
+        let tab = [...tableau7cartes];
         // Ordonne le tableau
-        tableau7cartes.sort(function (a, b) {
-          return b - a;
+        tab.sort(function (a, b) {
+          return b.number - a.number;
         });
+        console.log(tab);
     
         const maMain = new Array(5);
-        let maPaire = 0;
+        let p1c1 = null;
+        let p1c2 = null;
         let verificateur = false;
     
         // Cherche la carte paire
-        for (let i = 0; i < tableau7cartes.length - 1; i++) {
-          if (tableau7cartes[i] === tableau7cartes[i + 1]) {
-            maPaire = tableau7cartes[i];
+        for (let i = 0; i < tab.length - 1; i++) {
+          if (tab[i].number === tab[i + 1].number) {
+            p1c1 = tab[i];
+            p1c2 = tab[i+1]
             verificateur = true;
             break;
           }
@@ -556,12 +630,15 @@ class partie {
           let compteur = 0;
     
           // Complète la grille des 5 cartes avec les 3 plus grandes cartes.
-          for (let t = 0; t < 5; t++) {
-            maMain[t] = tableau7cartes[compteur];
-            if (tableau7cartes[compteur] === maPaire) {
-              maMain[++t] = maPaire;
+          maMain[0] = p1c1;
+          maMain[1] = p1c2;
+
+          for (let t = 2; t < 5; t++) {
+            if (tab[compteur].number === p1c1.number) {
               compteur += 2;
             }
+            maMain[t] = tab[compteur];
+            compteur++;
           }
     
           // Retourne le tableau contenant la main avec la paire
@@ -578,24 +655,20 @@ class partie {
      * OUT : la carte la plus elevée dans la main du joueur/ne retourne pas de booléens
      * FUNCTION : determine la carte la plus élevée.
      */
-    estQuarteHaute (tableau2cartes) {
-        const valeurs = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    estCarteHaute (tableau2cartes) {
 
-        // Extraire les numéros des deux cartes
-        const numeroCarte1 = tableau2cartes[0].numero;
-        const numeroCarte2 = tableau2cartes[1].numero;
+        let tab = [...tableau2cartes];
+        const valeurs = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
-        // Comparer les numéros des cartes
-        const indexCarte1 = valeurs.indexOf(numeroCarte1);
-        const indexCarte2 = valeurs.indexOf(numeroCarte2);
+        // Etape 1 : Trier le tableau de 7 carte par ordre décroissant
+        const carteTriees = tab.sort((a, b) => valeurs.indexOf(b.number) - valeurs.indexOf(a.number));
 
-        // Renvoyer la carte avec le numéro le plus élevé
-        if (indexCarte1 > indexCarte2) {
-            return tableau2cartes[0]; // Carte 1 est la plus haute
-        } else {
-            return tableau2cartes[1]; // Carte 2 est la plus haute ou les deux ont le même numéro
-        }
+        // Etape 2 : renvoyer la carte la plus haute càd la première carte dans le tableau
+        return carteTriees.splice(0, 5);
     }
+
+
+
     /*
      * IN : tableau de tableau contenant les 5 cartes composant les mains main [{[], id}, {[], id}, ...]
      * OUT : STRING ==> identifiant d' un joueur
@@ -608,7 +681,7 @@ class partie {
             let type = {
                 type   : null,
                 intruder : null,
-                id : playerHand.playerId
+                id : playerHand.id
             }
             
             if (playerHand.hand[0].number === playerHand.hand[1].number) {
@@ -667,52 +740,53 @@ class partie {
      * OUT : STRING ==> identifiant d' un joueur
      * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des full
      */
-    secondFull(listeJoueurCombinaison) {
+    secondFull(tableauxAvecId) {
+
         let meilleurId = tableauxAvecId[0].id;
-        let meilleurTableau = tableauxAvecId[0].tableau;
+        let meilleurTableau = tableauxAvecId[0].hand;
       
         for (let i = 1; i < tableauxAvecId.length; i++) {
-            const tableauCourant = tableauxAvecId[i].tableau;
+            const tableauCourant = tableauxAvecId[i].hand;
       
             for (let j = 0; j < 5; j++) {
-                if (tableauCourant[j] > meilleurTableau[j]) {
+                if (tableauCourant[j].number > meilleurTableau[j].number) {
                     meilleurId = tableauxAvecId[i].id;
                     meilleurTableau = tableauCourant;
                     break;
-                } else if (tableauCourant[j] < meilleurTableau[j]) {
+                } else if (tableauCourant[j].number < meilleurTableau[j].number) {
                     break;
                 }
             }
         }
       
-        return meilleurId;
+        return [meilleurId];
     }
   
     /*
      * ...
      */
     secondSuite (listeJoueurCombinaison) {
-        const valeurs = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        const valeurs = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1];
         const mainsTriees = [];
         let joueursAvecCartePlusHaute = [];
 
         // Étape 1: Trier les mains des joueurs et stocker les mains triées dans un tableau
         for (const joueur of listeJoueurCombinaison) {
-            const mainTrie = joueur.main.slice().sort((a, b) => valeurs.indexOf(b.numero) - valeurs.indexOf(a.numero));
+            const mainTrie = joueur.hand.slice().sort((a, b) => valeurs.indexOf(b.number) - valeurs.indexOf(a.number));
             mainsTriees.push(mainTrie);
         }
 
         // Étape 2: Parcourir chaque main pour vérifier si la carte la plus haute est un As
         for (let main of mainsTriees) {
             let asCommeUn = false;
-            if (main[0].numero === 'A') {
+            if (main[0].number === 1) {
                 asCommeUn = true;
             }
 
             // Étape 3: Si un As est détecté comme la carte la plus haute, procéder à l'ajustement
             if (asCommeUn) {
                 // Vérifier si la deuxième carte est un 5
-                if (main[1].numero === '5') {
+                if (main[1].number === 5) {
                     // Déplacer l'As à la fin du tableau et mettre le 5 à sa place au début
                     const as = main.shift(); // Retirer l'As du début du tableau
                     main.push(as); // Mettre l'As à la fin du tableau
@@ -724,7 +798,7 @@ class partie {
         let cartePlusHaute = null;
 
         for (const main of mainsTriees) {
-            if (!cartePlusHaute || valeurs.indexOf(main[0].numero) > valeurs.indexOf(cartePlusHaute.numero)) {
+            if (!cartePlusHaute || valeurs.indexOf(main[0].number) > valeurs.indexOf(cartePlusHaute.number)) {
                 cartePlusHaute = main[0];
             }
         }
@@ -732,7 +806,7 @@ class partie {
         // Étape 5: Trouver les joueurs avec la carte la plus haute et les stocker dans le tableau joueursAvecCartePlusHaute
         for (let i = 0; i < mainsTriees.length; i++) {
             const main = mainsTriees[i];
-            if (main[0].numero === cartePlusHaute.numero) {
+            if (main[0].number === cartePlusHaute.number) {
                 joueursAvecCartePlusHaute.push(listeJoueurCombinaison[i].id);
             }
         }
@@ -811,7 +885,8 @@ class partie {
     /*
      * ...
      */
-    secondDoublePaire(listeJoueurCombinaison) { 
+    secondDoublePaire(tableauxAvecId) { 
+
         let meilleurId = tableauxAvecId[0].id;
         let meilleurTableau = tableauxAvecId[0].tableau;
       
@@ -938,3 +1013,143 @@ class partie {
      */
     deroulerPartie () {}
 }
+
+
+
+let p = new partie;
+// console.log(p.estQuinteFlushRoyale([
+//     {number : 14, color : "C"},
+//     {number : 13, color : "C"},
+//     {number : 12, color : "C"},
+//     {number : 11, color : "C"},
+//     {number : 10, color : "C"},
+//     {number : 9, color : "C"},
+//     {number : 8, color : "C"}
+// ]));
+
+// console.log(p.estQuinteFlush(p.shuffle([
+//     { number: 10, color: 'D' },
+//     { number: 9, color: 'S' },
+//     { number: 5, color: 'D' },
+//     { number: 4, color: 'D' },
+//     { number: 2, color: 'D' },
+//     { number: 3, color: 'D' },
+//     { number: 14, color: 'D' }
+// ])));
+
+
+// console.log(p.estCarre(p.shuffle([
+//     {number : 10, color : "H"},
+//     {number : 10, color : "S"},
+//     {number : 10, color : "D"},
+//     {number : 9, color : "C"},
+//     {number : 10, color : "C"},
+//     {number : 9, color : "C"},
+//     {number : 8, color : "C"}
+// ])));
+
+// console.log(p.estFull([
+//     {number : 10, color : "H"},
+//     {number : 10, color : "S"},
+//     {number : 10, color : "D"},
+//     {number : 11, color : "C"},
+//     {number : 11, color : "D"},
+//     {number : 9, color : "C"},
+//     {number : 8, color : "C"}
+// ]));
+
+// console.log(p.estCouleur([
+//     {number : 14, color : "H"},
+//     {number : 2, color : "H"},
+//     {number : 5, color : "H"},
+//     {number : 12, color : "H"},
+//     {number : 11, color : "H"},
+//     {number : 9, color : "H"},
+//     {number : 8, color : "C"}
+// ]));
+
+// console.log(p.estSuite([
+//     {number : 14, color : "H"},
+//     {number : 2, color : "H"},
+//     {number : 5, color : "H"},
+//     {number : 12, color : "H"},
+//     {number : 6, color : "H"},
+//     {number : 4, color : "H"},
+//     {number : 3, color : "C"}
+// ]));
+
+// console.log(p.estBrelan(p.shuffle([
+//     { number: 10, color: 'C' },
+//     { number: 10, color: 'S' },
+//     { number: 10, color: 'H' },
+//     { number: 11, color: 'D' },
+//     { number: 11, color: 'H' },
+//     { number: 5, color: 'D' },
+//     { number: 4, color: 'D' }
+// ])));
+
+// console.log(p.estDoublePaire(p.shuffle([
+//     { number: 10, color: 'C' },
+//     { number: 10, color: 'S' },
+//     { number: 14, color: 'H' },
+//     { number: 11, color: 'D' },
+//     { number: 11, color: 'H' },
+//     { number: 4, color: 'D' },
+//     { number: 4, color: 'D' }
+// ])));
+
+// console.log(p.estPaire(p.shuffle([
+//     { number: 10, color: 'C' },
+//     { number: 10, color: 'S' },
+//     { number: 14, color: 'H' },
+//     { number: 11, color: 'D' },
+//     { number: 11, color: 'H' },
+//     { number: 5, color: 'D' },
+//     { number: 4, color: 'D' }
+// ])));
+
+// console.log(p.estCarteHaute(p.shuffle([
+//     { number: 10, color: 'D' },
+//     { number: 9, color: 'S' },
+//     { number: 5, color: 'D' },
+//     { number: 4, color: 'D' },
+//     { number: 2, color: 'D' },
+//     { number: 3, color: 'D' },
+//     { number: 14, color: 'D' }
+// ])));
+
+
+// test second 
+
+console.log(p.secondFull([
+    {
+        hand : [
+            {number : 9, color : "H"},
+            {number : 9, color : "S"},
+            {number : 9, color : "D"},
+            {number : 14, color : "C"},
+            {number : 14, color : "C"}
+        ], 
+        id : '1'
+    },
+    {
+        hand : [
+            {number : 9, color : "H"},
+            {number : 9, color : "S"},
+            {number : 9, color : "D"},
+            {number : 14, color : "C"},
+            {number : 14, color : "C"}
+        ], 
+        id : '2'
+    },
+    {
+        hand : [
+            {number : 8, color : "H"},
+            {number : 8, color : "S"},
+            {number : 8, color : "D"},
+            {number : 9, color : "C"},
+            {number : 9, color : "C"}
+        ], 
+        id : '3'
+    }
+]))
