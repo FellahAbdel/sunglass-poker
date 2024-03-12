@@ -1,9 +1,18 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/header/Header';
-import Home from './pages/home';
-import Login from './pages/login';
-import gameTable from './pages/gameTable';
+// import { useAuth, getUserInfo } from "../AuthProvider";
+// import React, { useState } from 'react';
+// import './App.css';
+// import { BrowserRouter as Router, Route, Routes }from 'react-router-dom';
+// import Header from './components/header/Header';
+// import Home from './pages/home';
+// import Login from './pages/login';
+// import gameTable from './pages/gameTable';
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
+import Header from "./components/header/Header";
+import Acceuil from "./components/acceuil/Acceuil";
+import { AuthProvider } from "./components/AuthProvider";
+
 
 function App() {
   const [isWindowOpen, setIsWindowOpen] = useState(false);
