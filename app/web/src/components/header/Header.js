@@ -1,45 +1,23 @@
 
 import "./header.css";
 import React, { useState } from "react";
-import Window from "../connectionWindow/Window";
-import Button from "../button/Buttons";
+// import Window from "../connectionWindow/Window";
+// import Button from "../button/Buttons";
+import FormHeader from "../acceuil/Formheader";
 
+var userIsConnected=false;
 
 const Header = () => {
-const [isWindowOpen, setIsWindowOpen] = useState(false);
-  const [windowType, setWindowType] = useState(null);
 
-  const openWindow = (type) => {
-    setIsWindowOpen(true);
-    setWindowType(type);
-  };
-
-  const closeWindow = () => {
-    setIsWindowOpen(false);
-  };
 	return (
 
 		<header className='header'>
 
 			<nav>
-				
-				
-			<Button 
-				className="login" 
-				label="Pseudo" 
-				/>
-	
-				<Button onClick={() => openWindow("tuto")} 
-				className="login" 
-				label="tutoriel" 
-				/>
-				<Button onClick={() => openWindow("login")} 
-				className="login" 
-				label="login" 
-				/>
-      			
-				
-		  		{isWindowOpen && <Window onClose={closeWindow} windowType={windowType} />}
+
+			<FormHeader isConnected={userIsConnected}/>
+
+
 				
 				
 			</nav>

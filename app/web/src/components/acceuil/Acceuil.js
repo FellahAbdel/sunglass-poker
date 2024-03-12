@@ -1,8 +1,10 @@
 import React from 'react';
 import "./acceuil.css";
 import LogoComponent from "../logo/Logo";
-import Button from "../button/Buttons";
+// import Button from "../button/Buttons";
+import Form from "./Form";
 
+var userIsConnected=false;
 
 export const acceuil = () => { 
     return (
@@ -12,10 +14,9 @@ export const acceuil = () => {
             </div>
             <div className='accueil'>
 
-                <Button 
-				className="cta" 
-				label="JOUER" 
-				/>
+                <div>
+                <Form isConnected={userIsConnected}/>
+                </div>
                 
                 
                 <LogoComponent className="logoacceuil"/>
