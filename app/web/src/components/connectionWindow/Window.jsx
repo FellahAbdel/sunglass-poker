@@ -6,10 +6,12 @@ import LoginWindow from "./WindowContent/LoginWindow";
 import SignUpWindow from "./WindowContent/SignupWindow";
 import ResetPasswordWindow from "./WindowContent/ResetPassword";
 import ForgotPassword from "./WindowContent/ForgotPassword";
+import SuccessWindow from "./WindowContent/SuccessWindow";
+import AvatarWindow from "./WindowContent/AvatarWindow";
 
-
-const Window = ({ onClose, windowType }) => {
+const Window = ({ onClose, windowType, logingIn }) => {
   const [currentWindow, setWindowType] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     setWindowType(windowType);
@@ -31,9 +33,24 @@ const Window = ({ onClose, windowType }) => {
     setWindowType("reset");
   };
 
+  const openSuccessWindow = (message) => {
+    setWindowType("success");
+    setSuccessMessage(message);
+  };
+
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
+
+  const handleSuccessClose = () => {
+    setWindowType(null);
+    setSuccessMessage("");
+    onClose();
+  };
+
+  useEffect(() => {
+    setWindowType(windowType);
+  }, [windowType]);
 
   return (
     <div className="overlay" onClick={onClose}>
@@ -42,19 +59,42 @@ const Window = ({ onClose, windowType }) => {
           <LoginWindow
             openSignUpWindow={openSignUpWindow}
             openForgotPassword={openForgotPassword}
+            showSuccess={openSuccessWindow}
+            logingIn={logingIn}
           />
         )}
         {currentWindow === "signup" && (
-          <SignUpWindow openLoginWindow={openLoginWindow} />
+          <SignUpWindow
+            openLoginWindow={openLoginWindow}
+            onClose={onClose}
+            showSuccess={openSuccessWindow}
+          />
         )}
         {currentWindow === "forgot" && (
           <ForgotPassword
             openLoginWindow={openLoginWindow}
             openResetPassword={openResetPassword}
+            showSuccess={openSuccessWindow}
           />
         )}
         {currentWindow === "reset" && (
-          <ResetPasswordWindow openLoginWindow={openLoginWindow} />
+          <ResetPasswordWindow
+            openLoginWindow={openLoginWindow}
+            showSuccess={openSuccessWindow}
+            onClose={onClose}
+          />
+        )}
+        {currentWindow === "success" && (
+          <SuccessWindow
+            message={successMessage}
+            onClose={handleSuccessClose}
+          />
+        )}
+        {currentWindow === "avatar" && (
+          <AvatarWindow
+            message={successMessage}
+            onClose={handleSuccessClose}
+          />
         )}
       </div>
     </div>
