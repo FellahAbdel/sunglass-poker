@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 import "./acceuil.css";
 import LogoComponent from "../logo/Logo";
 import Button from "../button/Buttons";
@@ -15,36 +16,18 @@ const Acceuil = ({ openWindow }) => {
     // Commncer une partie
     console.log("Démarrez la partie !");
   };
-var userIsConnected=false;
 
-export const acceuil = () => { 
-    return (
-        <div>
-            <div className='accueil'>
-            <LogoComponent className="logoacceuil"/>
-            </div>
-            <div className='accueil'>
-            <div>
-        
-        {props.isConnected && (
-            <Button 
-    className="cta" 
-    label="JOUER" 
-    />
-        )}
-
-        {!props.isConnected && (
-            <Button onClick={() => openWindow("login")}
-    className="cta" 
-    label="LOGIN TO PLAY" 
-    />
-        )}
-
-        {isWindowOpen && <Window onClose={closeWindow} windowType={windowType} />}
+  return (
+    <div>
+      <div className="accueil">
+        <LogoComponent className="logoacceuil" />
+      </div>
+      <div className="accueil">
+        <Button className="cta" label={isLogged ? "JOUER" : "CONNECTE TOI POUR JOUER"} onClick={handleClick} />
+        <LogoComponent className="logoacceuil" />
+      </div>
     </div>
-                
-                <LogoComponent className="logoacceuil"/>
-            </div>
-        </div>
-    )
-}
+  );
+};
+
+export default Acceuil;
