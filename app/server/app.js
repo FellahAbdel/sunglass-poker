@@ -1,10 +1,7 @@
 const express = require('express');
 const app = express();
 const session = require("express-session");
-const server = require('http').createServer(app);
 const cors = require("cors");
-app.use(express.json());
-const db = require('./models/bdd')(app);
 
 
 
@@ -15,11 +12,15 @@ const db = require('./models/bdd')(app);
  *  */
 const corsSettings = {
     origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
+    methods: ["GET", "POST", "PUT"],
+    allowedHeaders: ["my-custom-header", "Content-Type"],
     credentials: true
   }
 app.use(cors(corsSettings))
+
+const server = require('http').createServer(app);
+app.use(express.json());
+const db = require('./models/bdd')(app);
 /** Paramètres de session
  * 
  * 
@@ -44,7 +45,7 @@ const port = 3001;
 
 
 // router
-const router = require('./routes/apiroutes')(app,db);
+// const router = require('./routes/apiroutes')(app,db);
 
 
 /** Démarrage du serveur.

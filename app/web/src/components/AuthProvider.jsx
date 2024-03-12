@@ -2,6 +2,14 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
+const CORSSETTINGS = {
+  method: "POST",
+  mode: "cors",
+  origin: "http://localhost:3000",
+  headers: {
+    "Content-Type": "application/json",
+  },
+}
 
 export const AuthProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
@@ -18,11 +26,9 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
+      
       const response = await fetch("http://localhost:3001/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        ... CORSSETTINGS,
         body: JSON.stringify(credentials),
       });
 
@@ -88,10 +94,7 @@ export const AuthProvider = ({ children }) => {
       const response = await fetch(
         "http://localhost:3001/api/update-user-data",
         {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          ... CORSSETTINGS,
           body: JSON.stringify({
             field,
             value,
@@ -129,10 +132,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // Envoyer l'e-mail à l'utilisateur avec un lien pour réinitialiser le mot de passe
       const response = await fetch("http://localhost:3001/api/check-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        ... CORSSETTINGS,
         body: JSON.stringify({ email }),
       });
 
@@ -153,10 +153,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // Effectuer la requête POST vers votre API
       const response = await fetch("http://localhost:3001/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        ... CORSSETTINGS,
         body: JSON.stringify(userData),
       });
 

@@ -29,6 +29,7 @@ module.exports = function (app) {
   })
 
   app.post("/api/users", async (req, res) => {
+    res.header("Access-Control-Allow-Credentials", "true");
     try {
       console.log(req.body);
       const { pseudo, email, password } = req.body;
@@ -81,6 +82,8 @@ module.exports = function (app) {
   });
 
   app.post("/api/login", async (req, res) => {
+
+    res.header("Access-Control-Allow-Credentials", "true");
     try {
       const { username, password } = req.body;
 
@@ -103,6 +106,8 @@ module.exports = function (app) {
   });
 
   app.post("/api/check-email", async (req, res) => {
+    res.header("Access-Control-Allow-Credentials", "true");
+
     try {
       const { email } = req.body;
 
@@ -126,6 +131,8 @@ module.exports = function (app) {
   });
 
   app.put("/api/update-user-data", async (req, res) => {
+
+    res.header("Access-Control-Allow-Credentials", "true");
     try {
       const { field, value, identifierType, identifierValue } = req.body;
 
