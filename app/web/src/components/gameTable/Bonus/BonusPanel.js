@@ -27,10 +27,10 @@ const BonusPanel = () => {
     return (
         <div className="panel-bonus">
             <div className="container-bonusCards">
-                <img src={Hearts} alt="Heart" className={`box box-${handleChangeHearts}`}/>
-                <img src={Diamonds} alt="Diamond" className={`box box-${handleChangeDiamonds}`}/>
-                <img src={Spades} alt="Spade" className={`box box-${handleChangeSpades}`}/>
-                <img src={Clubs} alt="Club" className={`box box-${handleChangeClubs}`}/>
+                <img src={Hearts} alt="Heart" className={`container-cardType box-${handleChangeHearts}`}/>
+                <img src={Diamonds} alt="Diamond" className={`container-cardType box-${handleChangeDiamonds}`}/>
+                <img src={Spades} alt="Spade" className={`container-cardType box-${handleChangeSpades}`}/>
+                <img src={Clubs} alt="Club" className={`container-cardType box-${handleChangeClubs}`}/>
             </div>
 
             <Button style={"btn-bonus"} children={"BONUS"}/>

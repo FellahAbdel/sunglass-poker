@@ -18,15 +18,15 @@ const Acceuil = ({ openWindow }) => {
   };
 
   return (
-    <div>
+    <>
       <div className="accueil">
         <LogoComponent className="logoacceuil" />
       </div>
       <div className="accueil">
-        <Button className="cta" label={isLogged ? "JOUER" : "CONNECTE TOI POUR JOUER"} onClick={handleClick} />
+        <Button className="cta principale" label={isLogged ? "JOUER" : "CONNECTE TOI POUR JOUER"} onClick={handleClick} />
         <LogoComponent className="logoacceuil" />
       </div>
-    </div>
+    </>
   );
 };
 

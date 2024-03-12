@@ -2,16 +2,16 @@
 // import React, { useState } from 'react';
 // import './App.css';
 // import { BrowserRouter as Router, Route, Routes }from 'react-router-dom';
-// import Header from './components/header/Header';
-// import Home from './pages/home';
-// import Login from './pages/login';
-// import gameTable from './pages/gameTable';
+import GameTable from './pages/gameTable';
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
 import Header from "./components/header/Header";
 import Acceuil from "./components/acceuil/Acceuil";
 import { AuthProvider } from "./components/AuthProvider";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 
 
 function App() {
@@ -29,7 +29,12 @@ function App() {
 
   return (
     <Router>
+          <Routes>
+        <Route path="/GameTable" Component={GameTable}/>
+      </Routes>
       <AuthProvider>
+
+
         <Header
           openWindow={openWindow}
           closeWindow={closeWindow}
@@ -37,7 +42,7 @@ function App() {
           windowType={windowType}
         />
 
-        <Acceuil openWindow={openWindow} />
+        {/* <Acceuil openWindow={openWindow} /> */}
       </AuthProvider>
     </Router>
   );

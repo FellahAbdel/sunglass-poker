@@ -63,7 +63,7 @@ body {
   --lighter: lighten(var(--color2), 10%);
 }
 
-* {
+/* * {
   font-size: 10px;
   font-family: "Ubuntu", sans-serif;
-}
+} */
