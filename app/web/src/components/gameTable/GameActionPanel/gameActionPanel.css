@@ -1,0 +1,103 @@
+
+.container-gameAction{
+    width: 30vw;
+    display: flex;
+    flex-direction: column; 
+
+}
+
+.btn-raise, .btn-checkOrCall, .btn-fold{
+
+
+    background-color: #2d2a2a;
+    color: aliceblue;
+
+    border-style: unset;
+
+    border-radius: 15px;
+
+    font-weight: 600;
+    font-size: 2vh;
+
+    height: 4vh;
+    width: 8vw;
+
+    cursor: pointer;
+
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px black;
+
+    
+}
+
+@media (max-height: 500px){
+    .btn-raise, .btn-checkOrCall, .btn-fold{
+        font-size: 2.5vh;
+        height: 7vh;
+        width: 9vw;
+    }
+    .container-gameAction{
+        width: none;
+    }
+}
+
+.btn-raise:hover, .btn-checkOrCall:hover, .btn-fold:hover{
+    filter:brightness(90%);
+    text-shadow:
+    0 0 5px #fff, /* Neon glow */
+    0 0 10px #fff, /* Neon glow */
+    0 0 15px #fff, /* Neon glow */
+    0 0 20px rgb(255, 255, 255), /* Neon glow color */
+    0 0 30px rgb(255, 255, 255);
+}
+
+
+
+
+.container-ActionButtons{
+    width:100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    align-self: center;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+.container-ActionButtons-slideUp{
+    animation: ActionButtons-slideUp 1s ease-out 0s 1 normal both;
+}
+
+.rangeSlider{
+    position:absolute;
+    display: none;
+    width:100%;
+}
+.rangeSlider-open{
+    display:unset;
+    height: 100%;
+    animation: rangeSlider-slideDown 0.6s ease-out 0s 1 normal both;
+
+}
+.rangeSlider-close{
+    display:none;
+}
+@keyframes rangeSlider-slideDown{
+    0%{
+        transform: scaleX(25%);
+        transform-origin: center;
+    }
+    100%{
+        transform: scaleX(100%);
+
+    }
+}
+@keyframes ActionButtons-slideUp{
+    from{
+        transform: translateY(0%);
+    }
+    to{
+        transform: TranslateY(-100%);
+    }
+}

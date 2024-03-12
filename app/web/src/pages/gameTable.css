@@ -1,0 +1,74 @@
+.container-main{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.backdrop{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    top:0 ;
+    z-index: -999;
+    /* background-image: url('./../components/gameTable/images/backdrop.png'); 
+    background-size:cover;  */
+    filter: blur(1px) ;
+    filter: brightness(30%);
+    background-color: black;
+
+    background: linear-gradient(315deg, transparent 75%, #000000 0)-8px 0,
+      linear-gradient(45deg, transparent 75%, #000000 0) 8px 0,
+      linear-gradient(135deg, #333 50%, transparent 0) 0 0,
+      linear-gradient(45deg, #4d4d4d 50%, #666 0) 0 0 #666;
+    background-size: 16px 16px;
+
+}
+
+.background{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    top:0 ;
+    z-index: -1000;
+    background-color: black;
+}
+
+.comp-navbar{
+    align-self: baseline;
+    z-index: 3;
+}
+
+.comp-bonus{
+    position: absolute;
+    bottom:10px;  
+    left:10px;  
+}
+
+.comp-table{
+    flex:1 ;
+    position: absolute;
+    margin: auto;
+    align-self: center;
+    top:20%;
+    z-index: 0;
+}
+
+.comp-gameAction{
+    position: absolute;
+    bottom: 10px;
+    z-index: 1;
+    flex:1;
+}
+
+.comp-handCards{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+
+

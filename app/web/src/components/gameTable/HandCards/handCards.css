@@ -1,0 +1,58 @@
+.container-hand{
+    width: 20vw;
+    height: 14vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+}
+
+.hand-guide{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    flex:1;
+    z-index: -1;
+    bottom: 0;
+    padding: 10px 5px 0px 5px;
+    height: 100%;
+    width: 60%;
+
+
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 10px black;
+
+    font-size: calc(5px + 1vw);
+    color: white;
+    background:linear-gradient(to top, black, rgb(0, 41, 48)) ;
+    
+    text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px #fff,
+    0 0 20px rgb(255, 255, 255),
+    0 0 30px rgb(255, 255, 255);
+}
+
+.container-handCard{
+    display: flex;
+    position: absolute;
+    bottom:0;
+    width: 85%;
+    height: 80%;
+    flex-direction:row;
+    justify-content: space-evenly;
+    margin: 20px 0px 0px 0px;
+    z-index: 0;
+}
+
+.handCard{
+    align-self: center;
+    width: 45%;
+    height: 100%;
+    box-shadow: 0 0 10px black;
+    transition: transform 2s ease;
+    transform-style: preserve-3d; 
+}
