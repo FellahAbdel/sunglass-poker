@@ -38,4 +38,10 @@
 
 * 2024/03/03 : <b> 5h </b> <br/>        Travail individuel: <i>associé les buttons de gameActionPanel + animation des cards sur la table + flip animation + ameliorations des CSS </i>
 
-total:60h15min
+* 2024/03/05 : <b> 3h </b> <br/>        Travail individuel: <i>adaptation de CSS + changement de backdrop + status different de profile ajouté + handGuide  </i>
+
+* 2024/03/07 : <b> 6h </b> <br/>        Travail individuel: <i>menu Profile ajouté + adaptation de menu à la table + name logo text glitch + disparaître des element pour menu et quand la page s'oeuvre + correction de structure + creation de component Card reutilisable + implimentation de component card sur Table </i>
+
+* 2024/03/08 : <b> 4h </b> <br/>        Travail individuel: <i>animation de distribution des card + correction de placement des cards sur table + liste pour selection des distribution des card + association des buttons pour tester les fonctionnement des animation </i>
+
+total: 73h15min
