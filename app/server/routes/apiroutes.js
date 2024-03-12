@@ -4,7 +4,7 @@ const router = express.Router();
 // Define your API routes here
 
 app = express();
-port = 3001;
+port = 3001; // Port du server
 module.exports = router;
 
 app.get('/', (req,res) => {

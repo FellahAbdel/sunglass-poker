@@ -30,4 +30,30 @@
 
 2024/02/26 : 3h30h         Réorganisation, découpage en objets
 
-TEMPS TOTAL: 28h00min 
+2024/02/27 : 4H             Réunion, finition pages, fusion pages login et accueil, discussion semaine suivantes
+
+2024/02/27 : 30min          Modification css, ajout component text.
+
+2024/03/03 : 1H             Apprentissage mongodb.
+
+2024/03/04 : 2H             Installation MongoDB, MongoSH, découverte, création table User, fichier Index de base.
+
+2024/03/05 : 2H             Début fonctionnement formulaires, fonctionne pour SignUp, ajout fenetre confirmation quand le formulaire est bien envoyé (server/models : npm install cors)
+
+2024/03/06 : 1H             Fonctionnement formulaire login (Reste à faire le feedback lors d'une mauvaise combinaison), modiff fenêtre Success qui prend désormais en argument le message à afficher.
+
+2024/03/07 : 1H             Fonctionnement fomulaire réinitialisation mot de passe/Envoi mail. Reste a faire l'envoi de l'email.
+
+2024/03/08 : 1H             Ajout condionnel connecté/nonconnecté sur le bouton start et sur le bouton connexion. Légère réorganisation de la gestion des fenêtres de connexion.
+
+2024/03/08 : 3H             Table stat, localstorage, AuthProvider pour connexion/récupération des infos de l'utilisateur sur la bdd. Menu déroulant du profil.
+
+2024/03/08 : 1H30           Ajout image de profil, modification css header.
+
+2024/03/08 : 2H00           Ajout fenetre changement avatar. Ajout fonctions dans AuthProvider
+
+2024/03/09 : 1H30           Ajout vérification information fformulaire signup + feedback
+
+2024/03/09 : 2H00           Ajout feedback avec la bdd
+
+TEMPS TOTAL: 49h30min 
