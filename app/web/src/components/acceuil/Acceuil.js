@@ -15,18 +15,36 @@ const Acceuil = ({ openWindow }) => {
     // Commncer une partie
     console.log("Démarrez la partie !");
   };
+var userIsConnected=false;
 
-  return (
-    <div>
-      <div className="accueil">
-        <LogoComponent className="logoacceuil" />
-      </div>
-      <div className="accueil">
-        <Button className="cta" label="JOUER" onClick={handleClick} />
-        <LogoComponent className="logoacceuil" />
-      </div>
+export const acceuil = () => { 
+    return (
+        <div>
+            <div className='accueil'>
+            <LogoComponent className="logoacceuil"/>
+            </div>
+            <div className='accueil'>
+            <div>
+        
+        {props.isConnected && (
+            <Button 
+    className="cta" 
+    label="JOUER" 
+    />
+        )}
+
+        {!props.isConnected && (
+            <Button onClick={() => openWindow("login")}
+    className="cta" 
+    label="LOGIN TO PLAY" 
+    />
+        )}
+
+        {isWindowOpen && <Window onClose={closeWindow} windowType={windowType} />}
     </div>
-  );
-};
-
-export default Acceuil;
+                
+                <LogoComponent className="logoacceuil"/>
+            </div>
+        </div>
+    )
+}

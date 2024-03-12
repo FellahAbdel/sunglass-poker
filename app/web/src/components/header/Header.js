@@ -1,8 +1,9 @@
 import "./header.css";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
-import Window from "../connectionWindow/Window";
-import Button from "../button/Buttons";
+import React from "react";
+// import Window from "../connectionWindow/Window";
+// import Button from "../button/Buttons";
+import FormHeader from "../acceuil/Formheader";
 
 import { useAuth, getUserInfo } from "../AuthProvider";
 

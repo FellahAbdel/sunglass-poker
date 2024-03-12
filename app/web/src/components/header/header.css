@@ -1,16 +1,19 @@
-/* styles.css */
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
 .header {
   height: 50px;
-  background-color: #fece17; /* Couleur de fond jaune */
+  background-color: #fece17; 
 }
 
 header nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+} 
   display: flex;
 
   justify-content: space-between; /* Aligner les boutons à gauche, au centre et à droite */
@@ -51,3 +54,4 @@ header nav {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
