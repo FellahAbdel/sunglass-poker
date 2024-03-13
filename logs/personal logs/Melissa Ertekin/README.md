@@ -1,4 +1,5 @@
-# Melissa Ertekin
+# Melissa Ertekin | Temps Totale : 50h
+
 
 ### Semaine 0 : 30 Janvier - 05 Février  | Temps Totale: 5h
 
@@ -67,8 +68,14 @@
 
 * 2024/03/04 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Rédaction du compte-rendu hebdomadaire. </i> 
 
-### Semaine 4 : 4 Mars - 11 Mars (Vacance)  | Temps Totale: 3h
+### Semaine 5 : 4 Mars - 11 Mars (Vacance)  | Temps Totale: 3h
 
 * 2024/03/10 : <b>2h</b> <br/> Travail individuel : <i> Surveillance du projet sur git et Trello. Demandes de feedback personnalisé selon leur avancement. </i> 
 
 * 2024/03/11 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Rédaction du compte-rendu hebdomadaire. </i> 
+
+### Semaine 6 : 11 Mars - 18 Mars | Temps Totale: 
+
+* 2024/03/12 : <b>3h30</b> <br/> Réunion du mardi en groupe :  <i> Réunions hebdomadaires avec le mentor, revue de code, réunion en groupe pour améliorer notre projet en fonction des retours du mentor, réorganisation des tâches de la semaine afin d'éviter les retards. </i>
+
+* 2024/03/13 : <b>30mins</b> <br/> Travail individuel : <i> Rédaction du rapport de la réunion du 12 mars. </i> 
