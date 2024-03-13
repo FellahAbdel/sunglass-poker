@@ -7,8 +7,9 @@ class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
 
-  constructor(playerId) {
+  constructor(playerId, name) {
     this.#playerId = playerId;
+    this.name = name;
   }
 
   /*
@@ -72,5 +73,13 @@ class Player {
    */
   action(playerAction, playerMoneyBet) {
     this.#playerActionLog.push({ action: playerAction, bet: playerMoneyBet });
+  }
+
+  addCard(card) {
+    this.#playerCards.push(card);
+  }
+
+  clearHand() {
+    this.#playerCards = [];
   }
 }
