@@ -1,7 +1,7 @@
 function estCarre(tableau7cartes) {
   // Ordonne le tableau
   let tab = [...tableau7cartes];
-
+!
   tab.sort(function (a, b) {
     return b.number - a.number;
   });
