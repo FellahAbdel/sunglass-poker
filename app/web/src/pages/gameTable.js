@@ -1,11 +1,19 @@
+//react imports
 import React, { useState } from 'react';
+import { Link, useHistory } from "react-router-dom";
+import { AuthProvider } from "./../components/AuthProvider";
+//css imports
 import './gameTable.css';
 import '../components/gameTable/Utiles/animations.css';
+//components imports
 import Navbar from '../components/gameTable/Navbar/Navbar';
 import BonusPanel from '../components/gameTable/Bonus/BonusPanel';
 import Table from '../components/gameTable/Table/Table';
 import GameActionPanel from '../components/gameTable/GameActionPanel/GameActionPanel';
 import HandCards from '../components/gameTable/HandCards/HandCards';
+
+
+
 
 const GameTable = () => {
   const [dealingFlop, setDealingFlop] = useState([false,false,false]);
@@ -51,6 +59,9 @@ const GameTable = () => {
     <div className="container-main"> 
       <div className="background"></div>
       <div className="backdrop"></div>
+
+
+
       <div className="comp-navbar">
         <Navbar
           exitOnClick={null}
@@ -59,6 +70,19 @@ const GameTable = () => {
         />
       </div>
       
+
+      {/* <AuthProvider>
+        <Header
+          openWindow={openWindow}
+          closeWindow={closeWindow}
+          isWindowOpen={isWindowOpen}
+          windowType={windowType}
+        />
+        <Acceuil openWindow={openWindow} />
+      </AuthProvider> */}
+
+
+
       
       <div className="comp-table">
         <Table 
@@ -88,6 +112,9 @@ const GameTable = () => {
           showHandCardProp={showHandCard}
           handGuideProp={handGuide}/>
       </div> 
+
+
+
 
     </div>
   );

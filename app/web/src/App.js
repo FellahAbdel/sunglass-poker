@@ -1,6 +1,6 @@
 // import { useAuth, getUserInfo } from "../AuthProvider";
 // import React, { useState } from 'react';
-// import './App.css';
+import './App.css';
 // import { BrowserRouter as Router, Route, Routes }from 'react-router-dom';
 import GameTable from "./pages/gameTable";
 
@@ -27,19 +27,18 @@ function App() {
 
   return (
     <Router>
-      <AuthProvider>
+      <Routes>
+        <Route path="/GameTable" Component={GameTable}/>
+      </Routes>
+      {/* <AuthProvider>
         <Header
           openWindow={openWindow}
           closeWindow={closeWindow}
           isWindowOpen={isWindowOpen}
           windowType={windowType}
         />
-        <Routes>
-          <Route path="/GameTable" Component={GameTable} />
-        </Routes>
-
-        {/* <Acceuil openWindow={openWindow} /> */}
-      </AuthProvider>
+        <Acceuil openWindow={openWindow} />
+      </AuthProvider> */}
     </Router>
   );
 }
