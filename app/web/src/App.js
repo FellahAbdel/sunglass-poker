@@ -30,15 +30,15 @@ function App() {
       <Routes>
         <Route path="/GameTable" Component={GameTable}/>
       </Routes>
-      {/* <AuthProvider>
+      <AuthProvider>
         <Header
           openWindow={openWindow}
           closeWindow={closeWindow}
           isWindowOpen={isWindowOpen}
           windowType={windowType}
         />
-        <Acceuil openWindow={openWindow} />
-      </AuthProvider> */}
+        {/* <Acceuil openWindow={openWindow} /> */}
+      </AuthProvider>
     </Router>
   );
 }

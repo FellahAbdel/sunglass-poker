@@ -1,7 +1,7 @@
 import React  from "react";
 
-const ChipsCash = ({style}) =>{
-    const chips = 9999999999;
+const ChipsCash = ({style,currentChips}) =>{
+    const chips = currentChips;
     const formattedChips = chips.toLocaleString();
     const dollarSign = '$';
     return (

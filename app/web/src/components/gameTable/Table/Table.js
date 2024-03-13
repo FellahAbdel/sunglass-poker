@@ -9,13 +9,24 @@ import cardBack from './../../assets/images/card-design.png';
 import Card from '../Card/Card';
 
 
-const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive,playersCardDistributedProp ,playersCardsShowProp, moneyPot}) => {
+const Table = ({
+    dealingFlop,
+    showCards,
+    profileMenuActive,
+    settingsMenuActive,
+    playersCardDistributedProp,
+    playersCardsShowProp,
+    moneyPot,
+    isLoggedTable
+  }) => {
   //name , user ID , level , games played , winning ratio , joined Date 
   const userInfo = ["Mostafa","otsuno" , "100", "5" , "30%","10/march/2024"];
 
   return (
     <div className={`container-table ${profileMenuActive || settingsMenuActive ? 'container-menu' : ""}`}>
 
+
+    {isLoggedTable && (<>
         <div className={`container-cards ${profileMenuActive || settingsMenuActive ? 'disappear' : ""}`}>
           
           <div className={`container-moneyPot`}>{moneyPot.toLocaleString()}$</div>
@@ -71,11 +82,6 @@ const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive,pl
 
             
           </div>  
-{/* 
-          <div className='container-cardDistribution'>
-            {/* <img className="cardPlayer0" src={cardBack}/> 
-          </div> */}
-
         </div>
 
 
@@ -92,16 +98,10 @@ const Table = ({dealingFlop, showCards, profileMenuActive, settingsMenuActive,pl
           <div className="profile profile9"><PlayersProfile status={"Called"} chips={9999999} name={"Mostafa9"} flippingPlayerCards={playersCardsShowProp[9]} gotCards={playersCardDistributedProp[9]}/></div>
         </span>
 
-
-
-
-
-
-
         {profileMenuActive ?  <ProfileMenu userInfoProp={userInfo}/> : null }
         {settingsMenuActive ?  <SettingsMenu /> : null }
 
-
+        </>)}
 
     </div>
   )

@@ -24,6 +24,8 @@ const GameTable = () => {
   const [playersCardsShow, setPlayersCardsShow] = useState([0,0,0,0,0,0,0,0,0,0]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([0,0,0,0,0,0,0,0,0,0]);
 
+  const [isLogged] = useState(true);
+
   const handleShowHandCard = () => {
     setShowHandCard(!showHandCard);
   }
@@ -88,32 +90,37 @@ const GameTable = () => {
         <Table 
           dealingFlop={dealingFlop} 
           showCards={[0,1,2,3,4]} 
-          profileMenuActive={profileMenu} 
-          settingsMenuActive={settingsMenu}
           playersCardDistributedProp={playersCardDistributed}
           playersCardsShowProp={playersCardsShow}
           moneyPot={9999999999}
+          // to open the profile and setting menus
+          profileMenuActive={profileMenu} 
+          settingsMenuActive={settingsMenu}
+          // LogIn panel
+          isLoggedTable={isLogged}
         />
       </div>
 
-      <div className={`comp-bonus  ${profileMenu || settingsMenu ? "slideDown": "slideUp"}`}><BonusPanel/></div>
-      <div className={`comp-gameAction ${profileMenu || settingsMenu  ? "slideDown": "slideUp"}`}>
-        <GameActionPanel
-            handleFoldProp={handleFold}
-            handleRaiseProp={handleRaise}
-            handleCheckOrCallProp={handleCheckOrCall}
-        />
-        </div>
+      {isLogged && (<>
 
-      <div className={`comp-handCards ${profileMenu || settingsMenu  ? "slideDown": "slideUp"}`}>
-        <HandCards 
-          card1={["a","hearts"]}
-          card2={["a","diamonds"]}
-          showHandCardProp={showHandCard}
-          handGuideProp={handGuide}/>
-      </div> 
+        <div className={`comp-bonus  ${profileMenu || settingsMenu ? "slideDown": "slideUp"}`}><BonusPanel/></div>
+        <div className={`comp-gameAction ${profileMenu || settingsMenu  ? "slideDown": "slideUp"}`}>
+          <GameActionPanel
+              handleFoldProp={handleFold}
+              handleRaiseProp={handleRaise}
+              handleCheckOrCallProp={handleCheckOrCall}
+          />
+          </div>
 
+        <div className={`comp-handCards ${profileMenu || settingsMenu  ? "slideDown": "slideUp"}`}>
+          <HandCards 
+            card1={["a","hearts"]}
+            card2={["a","diamonds"]}
+            showHandCardProp={showHandCard}
+            handGuideProp={handGuide}/>
+        </div> 
 
+      </>)}
 
 
     </div>
