@@ -1,4 +1,5 @@
-import Card from "./Card.js";
+// import Card from "./Card.js";
+const Card = require("./Card");
 
 class Deck {
   constructor() {
@@ -49,6 +50,7 @@ class Deck {
   }
 }
 
+// export default Deck;
 const deck = new Deck();
 
 console.log(deck);
@@ -56,3 +58,5 @@ console.log(deck);
 deck.shuffle();
 
 console.log(deck);
+
+deck.deal();
