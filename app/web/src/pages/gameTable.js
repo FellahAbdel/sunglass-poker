@@ -24,7 +24,7 @@ const GameTable = () => {
   const [playersCardsShow, setPlayersCardsShow] = useState([0,0,0,0,0,0,0,0,0,0]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([0,0,0,0,0,0,0,0,0,0]);
 
-  const [isLogged] = useState(true);
+  const [isLogged] = useState(false);
 
   const handleShowHandCard = () => {
     setShowHandCard(!showHandCard);
@@ -69,6 +69,8 @@ const GameTable = () => {
           exitOnClick={null}
           settingsOnClick={handleSettingsMenu}
           profileOnClick={handleProfileMenu}
+          //navbar changes for loggedIn
+          isLoggedNavbar={isLogged}
         />
       </div>
       

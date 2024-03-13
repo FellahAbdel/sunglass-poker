@@ -10,15 +10,22 @@ import Button from '../Button/Button.tsx';
 
 
 
-const Navbar = ({profileOnClick,exitOnClick ,settingsOnClick, openWindow, isWindowOpen, windowType, closeWindow}) => { 
+const Navbar = ({
+    profileOnClick,
+    exitOnClick ,
+    settingsOnClick, 
+    isLoggedNavbar,
+    openWindow, 
+    isWindowOpen, 
+    windowType, 
+    closeWindow}) => { 
     //const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
-    const [isLogged] = useState(true);
 
     return (
         <div className="container-nav">
             
             {/* Current Chips inventory and LogOut Button */}
-            {isLogged && ( <>
+            {isLoggedNavbar && ( <>
             
                 <ChipsCash 
                     currentChips={9999999999}
@@ -35,8 +42,8 @@ const Navbar = ({profileOnClick,exitOnClick ,settingsOnClick, openWindow, isWind
 
             {/* Profile/LogIn Button */}
             <Button 
-                children={isLogged ? "Profile" : "LogIn"}
-                onClick={isLogged ? profileOnClick : null}
+                children={isLoggedNavbar ? "Profile" : "LogIn"}
+                onClick={isLoggedNavbar ? profileOnClick : null}
                 style="btn-profile"
                 iconStyle="icon-profile"
                 iconSrc={require('./../../assets/images/icons/profile-icon.png')}
@@ -44,11 +51,11 @@ const Navbar = ({profileOnClick,exitOnClick ,settingsOnClick, openWindow, isWind
 
             {/* Settings/Tutorial Buttons */}
             <Button 
-                children={isLogged ? "Settings" : "Tutorial"}
-                onClick={settingsOnClick}
+                children={isLoggedNavbar ? "Settings" : "Tutorial"}
+                onClick={isLoggedNavbar ? settingsOnClick : null}
                 style="btn-settings"
                 iconStyle='icon-settings'
-                iconSrc={isLogged ? require('./../../assets/images/icons/settings-icon.png') : require('./../../assets/images/icons/tutorial-icon.png')}
+                iconSrc={isLoggedNavbar ? require('./../../assets/images/icons/settings-icon.png') : require('./../../assets/images/icons/tutorial-icon.png')}
             />
         
 

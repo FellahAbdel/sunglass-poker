@@ -19,6 +19,7 @@ const Table = ({
     moneyPot,
     isLoggedTable
   }) => {
+    
   //name , user ID , level , games played , winning ratio , joined Date 
   const userInfo = ["Mostafa","otsuno" , "100", "5" , "30%","10/march/2024"];
 
