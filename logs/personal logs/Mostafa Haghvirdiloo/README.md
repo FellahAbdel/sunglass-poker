@@ -44,4 +44,7 @@
 
 * 2024/03/08 : <b> 4h </b> <br/>        Travail individuel: <i>animation de distribution des card + correction de placement des cards sur table + liste pour selection des distribution des card + association des buttons pour tester les fonctionnement des animation </i>
 
-total: 73h15min
+* 2024/03/13 : <b> 4h </b> <br/>        Travail individuel: <i>table pot ajouté + toggles et range ajouté dans les Settings + fusion des branches de front + resoudre des conflis </i>
+
+
+total: 77h15min
