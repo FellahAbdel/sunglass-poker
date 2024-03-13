@@ -2,11 +2,14 @@
 
 file to be tested has a naming convention which is : `[name].test.js`
 
+Go to the shared directory and then :
+
 ```bash
-npm i jest  #
+npm init -y
+npm i --save-dev jest  #
 ```
 
-and we should have this :
+and then update the test script test key like this:
 
 ```js
   "scripts": {
@@ -15,4 +18,4 @@ and we should have this :
 
 ```
 
-Enter `npm test` to lunch the test.
+Enter `npm test` it will run jest to make the test.
