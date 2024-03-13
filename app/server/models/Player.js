@@ -83,3 +83,5 @@ class Player {
     this.#playerCards = [];
   }
 }
+
+export default Player;
