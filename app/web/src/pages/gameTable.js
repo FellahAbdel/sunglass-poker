@@ -1,7 +1,7 @@
 //react imports
 import React, { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
-import { AuthProvider } from "./../components/AuthProvider";
+import { useAuth, getUserInfo, AuthProvider } from "./../components/AuthProvider";
 //css imports
 import './gameTable.css';
 import '../components/gameTable/Utiles/animations.css';
@@ -24,7 +24,8 @@ const GameTable = () => {
   const [playersCardsShow, setPlayersCardsShow] = useState([0,0,0,0,0,0,0,0,0,0]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([0,0,0,0,0,0,0,0,0,0]);
   const [logInButton, setLogInButton] = useState();
-  const [isLogged] = useState(false);
+
+  const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
 
 
   const handleLogIn = () => {

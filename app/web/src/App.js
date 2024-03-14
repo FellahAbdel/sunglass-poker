@@ -27,10 +27,10 @@ function App() {
 
   return (
     <Router>
+      <AuthProvider>
       <Routes>
         <Route path="/GameTable" Component={GameTable}/>
       </Routes>
-      <AuthProvider>
         <Header
           openWindow={openWindow}
           closeWindow={closeWindow}
