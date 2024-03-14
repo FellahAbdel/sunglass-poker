@@ -59,6 +59,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
           onChange={handleChange}
           placeholder="Username"
           errorMessage={validationErrors.username}
+          style={"input-login"}
         />
         <TextInputComponent
           name="password"
@@ -67,6 +68,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
           type="password"
           placeholder="Password"
           errorMessage={validationErrors.password}
+          style={"input-login"}
         />
         <Button
           className="buttonconnexion login-button"

@@ -62,6 +62,7 @@ const ForgotPassword = ({
           onChange={handleChange}
           placeholder="Email"
           errorMessage={validationError}
+          style={"input-login"}
         />
         <Button
           className="buttonconnexion button login-button"

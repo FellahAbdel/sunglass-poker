@@ -125,6 +125,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           onChange={handleChange}
           placeholder="Username"
           errorMessage={validationErrors.pseudo}
+          style={"input-login"}
         />
         <TextInputComponent
           name="email"
@@ -132,6 +133,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           onChange={handleChange}
           placeholder="Email"
           errorMessage={validationErrors.email}
+          style={"input-login"}
         />
         <TextInputComponent
           name="password"
@@ -140,6 +142,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           placeholder="Password"
           type={"password"}
           errorMessage={validationErrors.password}
+          style={"input-login"}
         />
         <TextInputComponent
           name="repeatPassword"
@@ -148,6 +151,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           placeholder="Repeat your password"
           type={"password"}
           errorMessage={validationErrors.repeatPassword}
+          style={"input-login"}
         />
         <Button
           className="buttonconnexion login-button"

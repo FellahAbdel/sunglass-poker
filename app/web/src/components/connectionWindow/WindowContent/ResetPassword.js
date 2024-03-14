@@ -115,6 +115,7 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           onChange={handleChange}
           placeholder="Mail (temporary)"
           errorMessage={validationErrors.email}
+          style={"input-login"}
         />
         <TextInputComponent
           name="password"
@@ -123,6 +124,7 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           type="password"
           placeholder="Password"
           errorMessage={validationErrors.password}
+          style={"input-login"}
         />
         <TextInputComponent
           name="repeatPassword"
@@ -131,6 +133,7 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           type="password"
           placeholder="Repeat your password"
           errorMessage={validationErrors.repeatPassword}
+          style={"input-login"}
         />
         <Button
           className="buttonconnexion button login-button"

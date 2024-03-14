@@ -12,12 +12,12 @@ const TextInputComponent = ({
 }) => {
   const hasError = errorMessage !== "";
   return (
-    <div className="container-textInput">
+    <div className="container-textInputComponent">
       <input
         type={type}
         name={name}
         placeholder={placeholder}
-        className={`input-component ${hasError ? "input-component-error" : ""}`}
+        className={`${style} ${hasError ? "input-component-error" : ""}`}
         value={value}
         onChange={(e) => onChange(e)}
       />
