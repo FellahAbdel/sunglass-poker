@@ -45,6 +45,14 @@ class Game {
     this.pokerTable.communityCards = [...flopCards];
   }
 
+  turn() {
+    this.pokerTable.communityCards.push(this.deck.deal());
+  }
+
+  river() {
+    this.pokerTable.communityCards.push(this.deck.deal());
+  }
+
   showHands() {
     this.players.forEach((player) => {
       console.log(`${player.name}'s hand:`);
@@ -57,7 +65,7 @@ class Game {
 }
 
 // const game = new Game();
-// // console.log(game);
+// console.log(game);
 
 // game.start();
 
@@ -67,4 +75,7 @@ class Game {
 
 // game.flop();
 
+// game.turn();
+
+// game.river();
 module.exports = Game;
