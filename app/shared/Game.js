@@ -54,11 +54,19 @@ class Game {
   }
 
   /*
-  In : nothing
-  OUT : nothing but we push one card to the community cards (5 cards in total)
-  */
+   * In : nothing
+   * OUT : nothing but we push one card to the community cards (5 cards in total)
+   */
   river() {
     this.pokerTable.communityCards.push(this.deck.deal());
+  }
+
+  /*
+   * Retrieves all active players in the game.
+   * Returns an array of active player objects.
+   */
+  getActivePlayers() {
+    return this.players.filter((player) => player.isPlayerActive());
   }
 
   showHands() {
