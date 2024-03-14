@@ -26,6 +26,11 @@ class Game {
     });
   }
 
+  /*
+  in : nothing
+  out : nothing but we update the communityCards by pushing three cards in the 
+        pokerTable cards.
+  */
   flop() {
     // Deal 3 cards for the flop
     const flopCards = this.deck.deal3Cards();
