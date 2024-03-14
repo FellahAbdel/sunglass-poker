@@ -82,6 +82,10 @@ class Player {
   clearHand() {
     this.#playerCards = [];
   }
+
+  isPlayerActive() {
+    return this.#playerState === "active";
+  }
 }
 
 module.exports = Player;
