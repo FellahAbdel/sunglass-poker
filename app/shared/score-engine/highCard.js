@@ -3,7 +3,7 @@
  * OUT : la carte la plus elevée dans la main du joueur/ne retourne pas de booléens
  * FUNCTION : determine la carte la plus élevée.
  */
-function estCarteHaute(tableau2cartes) {
+function isHighCard(tableau2cartes) {
   let tab = [...tableau2cartes];
   const valeurs = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 

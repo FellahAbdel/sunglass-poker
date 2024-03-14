@@ -1,7 +1,7 @@
 /*
  * ...
  */
-function estSuite(sevenCardsTab, refact = false) {
+function isStraight(sevenCardsTab, refact = false) {
   const refactor = function (cardList, undo = false) {
     for (let i = 0; i < cardList.length; i++) {
       if (!undo) {

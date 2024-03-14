@@ -1,7 +1,7 @@
 /*
  * ...
  */
-function estBrelan(tableau7cartes) {
+function isThreeOfAKind(tableau7cartes) {
   let tab = [...tableau7cartes];
   const valeurs = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1];
 

@@ -1,7 +1,7 @@
 /*
  * ...
  */
-function estDoublePaire(tableau7cartes) {
+function isTwoPair(tableau7cartes) {
   let tab = [...tableau7cartes];
   // Ordonne le tableau
   tab.sort(function (a, b) {
