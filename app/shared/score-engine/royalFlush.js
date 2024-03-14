@@ -10,13 +10,13 @@ function estQuinteFlushRoyale(cards) {
   // Cœur/heart, Carreau/diamond, Trèfle/club, Pique/spade
 
   // Vérifier si les 7 cartes contiennent une quinte flush royale
-  for (let color of royalSymbols) {
+  for (let suit of royalSymbols) {
     const royalFlush = [];
-    for (let number of royalValues) {
+    for (let value of royalValues) {
       // Vérifier si la carte royale actuelle est présente dans les 7 cartes
       // Trouve le première carte vérifiant la condition
       const royalCard = cards.find(
-        (card) => card.color === color && card.number === number
+        (card) => card.suit === suit && card.value === value
       );
       //   console.log(royalCard);
       if (royalCard) {
