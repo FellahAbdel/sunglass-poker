@@ -88,7 +88,7 @@ const GameTable = () => {
       {/* Navbar or header */}
       <div className="comp-navbar">
         <Navbar
-          exitOnClick={null}
+          exitOnClick={handleIsLogged}
           settingsOnClick={handleSettingsMenu}
           profileOnClick={handleProfileMenu}
           //navbar changes for loggedIn
@@ -116,7 +116,8 @@ const GameTable = () => {
           isWindowOpen={logInButton}
           windowType={logInButton ? "login" : null}
 
-          isLoggedAction={handleIsLogged}
+          isLoggedOnClick={handleIsLogged}
+          isLogged={isLogged}
           
         />
       </div>

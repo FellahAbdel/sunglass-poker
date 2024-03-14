@@ -25,17 +25,14 @@ const Table = ({
     moneyPot, // money on the table
     logingInMenuActive, // to see if the page is logged in
     tutorialMenuActive,
-    isLoggedAction, //temprory
+    isLoggedOnClick, //temprory
+    isLogged, // temprory
     openWindow, isWindowOpen, windowType, closeWindow
   }) => {
     
   const {  logingIn, logingOut, getUserInfo } = useAuth();
 
-  //temprory to test
-  const [isLogged , setIsLogged]= useState(false);
-  const handleIsLogged = () =>{
-    setIsLogged(true);
-  }
+
 
   //name , user ID , level , games played , winning ratio , joined Date 
   const userInfo = ["Mostafa","otsuno" , "100", "5" , "30%","10/march/2024"];
@@ -111,7 +108,7 @@ const Table = ({
             <Tutorial style="text-tutorial"/>
             ) : ( <>
             <TextGlitch children={"SunGlassPoker"} style={"glitch-accueil"} glitchStyle={"glitchStyle-accueil"}/>
-            <Button style={"btn-gameStart"} children={"Start Playing"} onClick={handleIsLogged}/>
+            <Button style={"btn-gameStart"} children={"Start Playing"} onClick={isLoggedOnClick}/>
             </>)}
 
           </>)}
