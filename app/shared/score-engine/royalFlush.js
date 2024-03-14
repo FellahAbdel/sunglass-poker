@@ -34,4 +34,4 @@ function isRoyalFlush(cards) {
   return false;
 }
 
-module.exports = estQuinteFlushRoyale;
+module.exports = isRoyalFlush;
