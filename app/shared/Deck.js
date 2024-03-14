@@ -3,7 +3,8 @@ const Card = require("./Card");
 
 class Deck {
   constructor() {
-    this.cards = []; // Array of Card objects representing the deck
+    this.cards = []; // Array of Card objects representing the deck.
+    this.communityCards = []; // Array of five cards.
     this.reset();
     // Initialize the deck with all 52 cards
   }
@@ -47,6 +48,19 @@ class Deck {
       throw new Error("Deck is empty");
     }
     return this.cards.pop();
+  }
+
+  deal3Cards() {
+    if (this.cards.length === 0) {
+      throw new Error("Deck is empty");
+    }
+
+    let cards = [];
+    for (let i = 0; i < 3; i++) {
+      cards.push(this.cards.pop());
+    }
+
+    return cards;
   }
 }
 
