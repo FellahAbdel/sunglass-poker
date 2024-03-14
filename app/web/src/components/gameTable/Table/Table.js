@@ -77,8 +77,16 @@ const Table = ({
 
         {/* Acceuil */}
 
+          {/* dynamique logo , moves according to the menu that is open */}
+          <LogoComponent 
+            style={`
+              logo-acceuil
+              ${tutorialMenuActive && 'logo-tutorial'}
+              ${logingInMenuActive && "logo-login"}
+            `}
+          />
 
-          <LogoComponent style={`logo-acceuil ${tutorialMenuActive && 'logo-tutorial'}`} />
+
 
 
           {isWindowOpen ? (

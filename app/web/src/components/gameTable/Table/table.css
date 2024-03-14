@@ -123,7 +123,7 @@
     radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
     background-color:#282828;
     background-size:16px 16px;
-    overflow:scroll;
+    /* overflow:scroll; */
 }
 
 

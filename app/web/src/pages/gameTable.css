@@ -56,6 +56,12 @@
     top:0vh;
     bottom:0vh;
     z-index: 0;
+    right:17%;
+    transition: right 0.5s ease;
+}
+
+.comp-table-move{
+    right:20%;
 }
 
 .comp-gameAction{

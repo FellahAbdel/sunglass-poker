@@ -6,12 +6,18 @@
 .logo-acceuil {
   width:10vw;
   position: absolute;
-  top:20%;
-  transition: top 1s ease, bottom 1s ease;
+  bottom: 40%;
+  right: 42%;
+  transition: top 1s ease, bottom 1s ease, right 1s ease, width 1s ease;
 }
 
 .logo-tutorial{
-  top: unset;
   bottom:110%;
-  z-index: 0;
+  z-index: -1;
+}
+
+.logo-login{
+  right:120%;
+  z-index: -1;
+  width: 13vw;
 }
