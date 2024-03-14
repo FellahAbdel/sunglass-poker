@@ -207,3 +207,15 @@
     left:20%;
 }
  
+.btn-gameStart{
+    width: 15vw;
+    height: 4vh;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 13%;
+    background-color: #5c5f17;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px black;
+    font-size: 1vw;
+    font-weight: bold;
+}

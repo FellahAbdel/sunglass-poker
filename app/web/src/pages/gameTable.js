@@ -26,8 +26,14 @@ const GameTable = () => {
   const [logInButton, setLogInButton] = useState();
   const [tutorialMenu, setTutorialMenu] = useState();
 
-  const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
+  const {  logingIn, logingOut, getUserInfo } = useAuth();
 
+
+  const [isLogged , setIsLogged]= useState(false);
+  const handleIsLogged = () =>{
+    setIsLogged(!isLogged);
+    console.log("baaboo");
+  }
 
   const handleLogInButton = () => {
     setTutorialMenu(false);
@@ -109,6 +115,8 @@ const GameTable = () => {
           // LogIn panel
           isWindowOpen={logInButton}
           windowType={logInButton ? "login" : null}
+
+          isLoggedAction={handleIsLogged}
           
         />
       </div>

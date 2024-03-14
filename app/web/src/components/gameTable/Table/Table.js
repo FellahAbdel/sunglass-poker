@@ -12,6 +12,8 @@ import CardsPlacements from './CardsPlacements';
 import TextGlitch from './../TextGlitch/TextGlitch';
 import LogoComponent from '../../logo/Logo';
 import Tutorial from './../Tutorial/Tutorial';
+import Button from './../Button/Button.tsx';
+import HandCards from '../HandCards/HandCards';
 
 const Table = ({
     dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
@@ -22,12 +24,18 @@ const Table = ({
     playersCardsShowProp, // a list of 10 booleans to show the cards of choosen players
     moneyPot, // money on the table
     logingInMenuActive, // to see if the page is logged in
-    tutorialMenuActive, 
+    tutorialMenuActive,
+    isLoggedAction, //temprory
     openWindow, isWindowOpen, windowType, closeWindow
   }) => {
     
-  const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
+  const {  logingIn, logingOut, getUserInfo } = useAuth();
 
+  //temprory to test
+  const [isLogged , setIsLogged]= useState(false);
+  const handleIsLogged = () =>{
+    setIsLogged(true);
+  }
 
   //name , user ID , level , games played , winning ratio , joined Date 
   const userInfo = ["Mostafa","otsuno" , "100", "5" , "30%","10/march/2024"];
@@ -100,12 +108,11 @@ const Table = ({
             
             {tutorialMenuActive ? 
             (
-              <Tutorial style="text-tutorial"/>
+            <Tutorial style="text-tutorial"/>
             ) : ( <>
             <TextGlitch children={"SunGlassPoker"} style={"glitch-accueil"} glitchStyle={"glitchStyle-accueil"}/>
+            <Button style={"btn-gameStart"} children={"Start Playing"} onClick={handleIsLogged}/>
             </>)}
-
-
 
           </>)}
         
