@@ -81,7 +81,6 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
         className="buttonconnexion forgot-button"
         label="I forgot my password"
       />
-      <p></p>
       <Button
         onClick={openSignUpWindow}
         className="buttonconnexion register-button"
