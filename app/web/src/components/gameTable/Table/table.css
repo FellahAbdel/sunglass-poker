@@ -33,6 +33,7 @@
 
 /*table size and color change animation*/
 .container-menu, .container-table{
+    border-radius: 150px;
     position: relative;
 
     width: 65vw;
@@ -64,6 +65,7 @@
 
 /*container for the logIn*/
 .container-logIn{
+    border-radius: 150px;
     width: 45vw;
     height: 60vh;
 
@@ -85,8 +87,7 @@
 }
 
 .container-acceuil{
-
-
+    border-radius: 50px;
     box-shadow: 
     inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
     0 0 1vw 0.8vW rgb(245, 255, 112),
@@ -103,6 +104,26 @@
     background-color:#282828;
     background-size:16px 16px;
 }
+
+
+.container-tutorial{
+    box-shadow: 
+    inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
+    0 0 1vw 0.8vW rgb(115, 122, 16),
+    0 0 0 1vW rgb(0, 0, 0),
+    0 0 0 2vW rgb(31, 33, 36),
+    inset 0 0 0 2vW rgb(43, 41, 41),
+    0 0 5vw 3vw black;
+
+    background:
+    radial-gradient(black 15%, transparent 16%) 0 0,
+    radial-gradient(black 15%, transparent 16%) 8px 8px,
+    radial-gradient(#a5a5a56c 15%, transparent 20%) 0 1px,
+    radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
+    background-color:#282828;
+    background-size:16px 16px;
+}
+
 
 /*cards and users disappearing animation*/
 .profiles.disappear, .container-cards.disappear{    

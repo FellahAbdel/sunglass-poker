@@ -29,12 +29,14 @@ const GameTable = () => {
   const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
 
 
-  const handleLogIn = () => {
+  const handleLogInButton = () => {
+    setTutorialMenu(false);
     setLogInButton(!logInButton);
-    console.log('handleLogIn function called from parent component');
+    console.log('handleLogInButton function called from parent component');
   }
 
-  const handleTutorialMenu = () => {
+  const handleTutorialButton = () => {
+    setLogInButton(false);
     setTutorialMenu(!tutorialMenu);
   }
 
@@ -85,8 +87,8 @@ const GameTable = () => {
           profileOnClick={handleProfileMenu}
           //navbar changes for loggedIn
           isLoggedNavbar={isLogged}
-          logInOnClick={handleLogIn}
-          tutorialOnClick={handleTutorialMenu}
+          logInOnClick={handleLogInButton}
+          tutorialOnClick={handleTutorialButton}
         />
       </div>
 

@@ -11,6 +11,7 @@ import PlayersPlacements from './PlayersPlacements';
 import CardsPlacements from './CardsPlacements';
 import TextGlitch from './../TextGlitch/TextGlitch';
 import LogoComponent from '../../logo/Logo';
+import Tutorial from './../Tutorial/Tutorial';
 
 const Table = ({
     dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
@@ -38,10 +39,12 @@ const Table = ({
     // container-menu : table css for settings and profile menu
     // container-logIn : css for when user click on logIn button for table menu to open
     // container-acceuil : for the table to show up in acceuil when game opens
+    // container-tutorial : for tuto
     <div className={`
       container-table 
       ${(profileMenuActive || settingsMenuActive) && 'container-menu' } 
       ${!isLogged && "container-acceuil"}
+      ${tutorialMenuActive && !isLogged && "container-tutorial"}
       ${logingInMenuActive && !isLogged && "container-logIn"}  
       `}>
 
@@ -83,8 +86,8 @@ const Table = ({
           ) : (<>
             
             {tutorialMenuActive ? 
-            (<h1>BLAH BLAH</h1>
-
+            (
+              <Tutorial style="text-tutorial"/>
             ) : ( <>
             <LogoComponent className={"logoacceuil"} style={""}/>
             <TextGlitch children={"SunGlassPoker"} style={"glitch-accueil"} glitchStyle={"glitchStyle-accueil"}/>

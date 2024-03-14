@@ -1,0 +1,17 @@
+.container-text-tutorial {
+    overflow: hidden; /* Hide any overflowing content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .text-tutorial {
+    color: #ffffff;
+    width: 90%; /* Set the width of the text box to 100% of the container */
+    height: 90%; /* Set the height of the text box to 100% of the container */
+    padding: 0%; /* Add padding for visual clarity */
+    resize: none; /* Disable resizing of the text box */
+    overflow: auto; /* Enable scrolling for overflowing content */
+    border: none; /* Remove border for the text box */
+    text-align: justify;
+  }
