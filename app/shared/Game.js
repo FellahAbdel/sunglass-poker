@@ -1,7 +1,11 @@
+const Deck = require("./Deck");
+const PokerTable = require("./PokerTable");
+
 class Game {
   constructor() {
     this.players = [];
     this.deck = new Deck();
+    this.pokerTable = new PokerTable();
   }
 
   addPlayer(player) {
@@ -16,21 +20,46 @@ class Game {
     // Deal cards to each player
     this.players.forEach((player) => {
       player.clearHand();
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 2; i++) {
         player.addCard(this.deck.deal());
       }
     });
   }
 
+  flop() {
+    // Deal 3 cards for the flop
+    const flopCards = this.deck.deal3Cards();
+
+    // If dealCards() doesn't return exactly 3 cards, handle the error
+    if (flopCards.length !== 3) {
+      console.error("Unexpected number of cards dealt for the flop");
+      return; // Exit the method or handle the error appropriately
+    }
+
+    // Update the community cards on the poker table with the flop cards
+    this.pokerTable.communityCards = [...flopCards];
+  }
+
   showHands() {
     this.players.forEach((player) => {
       console.log(`${player.name}'s hand:`);
-      player.hand.forEach((card) => {
+      player.getPlayerCards().forEach((card) => {
         console.log(`${card.value} of ${card.suit}`);
       });
       console.log();
     });
   }
 }
+
+// const game = new Game();
+// // console.log(game);
+
+// game.start();
+
+// console.log(game);
+
+// // game.showHands();
+
+// game.flop();
 
 module.exports = Game;
