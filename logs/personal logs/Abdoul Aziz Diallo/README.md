@@ -45,10 +45,11 @@
 
 ## Week 6 - _Total: _
 
-| Date  | Description                                                                       | Skills developed | Time Spent | Resources |
-| ----- | --------------------------------------------------------------------------------- | ---------------- | ---------- | --------- |
-| 12/03 | Work on redux & help my team to do some debug                                     |                  | 4h00       |           |
-|       | Code improvement home page, I restructured the navbar in the header               |                  | 2h00       |           |
-| 13/03 | Fix link to gametable & try to fix some bug in noe's code                         | Debugging        | 1h30       |           |
-|       | Split Partie.js into more class and create shared folder for unit testing purpose | Jest             | 2h30       |           |
-| 14/03 | Keep working on splitting Partie.js into more class & adapt the code              |                  | 2h30       |           |
+| Date  | Description                                                                                                                                      | Skills developed    | Time Spent | Resources |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- | ---------- | --------- |
+| 12/03 | Work on redux & help my team to do some debug                                                                                                    |                     | 4h00       |           |
+|       | Code improvement home page, I restructured the navbar in the header                                                                              |                     | 2h00       |           |
+| 13/03 | Fix link to gametable & try to fix some bug in noe's code                                                                                        | Debugging           | 1h30       |           |
+|       | Split Partie.js into more class and create shared folder for unit testing purpose                                                                | Jest                | 2h30       |           |
+| 14/03 | Keep working on splitting Partie.js into more class & adapt the code                                                                             |                     | 2h30       |           |
+|       | Advance on the Partie.js split and was block durant hours on the jest config files but finally manage to make some unit testing on some function | Jest (unit testing) | 3h00       |           |
