@@ -87,7 +87,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
         className="buttonconnexion register-button"
         label="Register New Account"
       />
-      <Text className="littletext" content="or" />
+      <Text className="littletext" content="OR" />
       <Button
         className="buttonconnexion login-button google-button"
         label="Sign in with google"
