@@ -100,7 +100,12 @@ const GameTable = () => {
 
       {/* Menu/Table */}
       <AuthProvider> 
-      <div className={`comp-table ${logInButton && 'comp-table-move'}`}>
+      <div 
+        className={`
+          comp-table 
+          ${logInButton && 'comp-table-move'}
+          ${isLogged && 'comp-table-inGame'}
+      `}>
         <Table 
           dealingFlop={dealingFlop} 
           showCards={[0,1,2,3,4]} 
