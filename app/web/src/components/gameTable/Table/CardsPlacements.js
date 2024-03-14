@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from '../Card/Card'
+import TextGlitch from './TextGlitch'
 
 const CardsPlacements = ({
     moneyPot,
@@ -14,9 +15,7 @@ const CardsPlacements = ({
           <div className={`container-moneyPot`}>{moneyPot.toLocaleString()}$</div>
 
           {dealingFlop[0] ? false : 
-            <div class="glitch-wrapper">
-              <div class="glitch" data-glitch="SunGlassPoker">SunGlassPoker</div>
-            </div>
+            <TextGlitch children={"SunGlassPoker"}/>
           }
           <div className="container-tableCards">
             {/* first three flops -> dealingFlop[0]

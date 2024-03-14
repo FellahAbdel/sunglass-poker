@@ -24,7 +24,7 @@ const GameTable = () => {
   const [playersCardsShow, setPlayersCardsShow] = useState([0,0,0,0,0,0,0,0,0,0]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([0,0,0,0,0,0,0,0,0,0]);
   const [logInButton, setLogInButton] = useState();
-  const [isLogged] = useState(true);
+  const [isLogged] = useState(false);
 
 
   const handleLogIn = () => {
@@ -65,11 +65,13 @@ const GameTable = () => {
 
   return (
     <div className="container-main"> 
+
+      {/* css Pattern background */}
       <div className="background"></div>
       <div className="backdrop"></div>
 
 
-
+      {/* Navbar or header */}
       <div className="comp-navbar">
         <Navbar
           exitOnClick={null}
@@ -80,7 +82,9 @@ const GameTable = () => {
           logInOnClick={handleLogIn}
         />
       </div>
-          
+
+      {/* Menu/Table */}
+      <AuthProvider> 
       <div className="comp-table">
         <Table 
           dealingFlop={dealingFlop} 
@@ -91,14 +95,16 @@ const GameTable = () => {
           // to open the profile and setting menus
           profileMenuActive={profileMenu} 
           settingsMenuActive={settingsMenu}
+          logingInMenuActive={logInButton}
           // LogIn panel
-          isLoggedTable={isLogged}
           isWindowOpen={logInButton}
           windowType={logInButton ? "login" : null}
           
         />
       </div>
+      </AuthProvider> 
 
+      {/* playing elements opens when logged in */}
       {isLogged && (<>
 
         <div className={`comp-bonus  ${profileMenu || settingsMenu ? "slideDown": "slideUp"}`}><BonusPanel/></div>

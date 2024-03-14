@@ -16,12 +16,7 @@ const Navbar = ({
     settingsOnClick, 
     isLoggedNavbar,
     logInOnClick,
-    openWindow, 
-    isWindowOpen, 
-    windowType, 
-    closeWindow}) => { 
-
-    //const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
+    }) => { 
 
     return (
         <div className="container-nav">
@@ -46,7 +41,7 @@ const Navbar = ({
             <Button 
                 children={isLoggedNavbar ? "Profile" : "LogIn"}
                 onClick={isLoggedNavbar ? profileOnClick : logInOnClick}
-                style="btn-profile"
+                style={`${isLoggedNavbar ? "btn-profile" : "btn-logIn"}`}
                 iconStyle="icon-profile"
                 iconSrc={require('./../../assets/images/icons/profile-icon.png')}
             />
@@ -55,8 +50,8 @@ const Navbar = ({
             <Button 
                 children={isLoggedNavbar ? "Settings" : "Tutorial"}
                 onClick={isLoggedNavbar ? settingsOnClick : null}
-                style="btn-settings"
-                iconStyle='icon-settings'
+                style={`${isLoggedNavbar ? "btn-settings" : "btn-tutorial"}`}
+                iconStyle={`${isLoggedNavbar ? "icon-settings" : "icon-tutorial"}`}
                 iconSrc={isLoggedNavbar ? require('./../../assets/images/icons/settings-icon.png') : require('./../../assets/images/icons/tutorial-icon.png')}
             />
         

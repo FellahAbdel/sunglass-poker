@@ -4,6 +4,8 @@
 }
 
 .logoacceuil {
-  width: 300px;
-  margin-bottom: 20px;
+  width:10vw;
+  position: absolute;
+  top:20%;
 }
+

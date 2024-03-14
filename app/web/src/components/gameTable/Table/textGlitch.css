@@ -67,3 +67,16 @@
     transform: translate(0);
     }
 }
+
+.glitch-accueil{
+    position:absolute;
+    bottom: 30%;
+}
+.glitchStyle-accueil::before{
+    color: rgba(255, 242, 0, 0.238);
+
+}
+.glitchStyle-accueil::after{
+    color: rgba(106, 255, 0, 0.238);
+
+}
