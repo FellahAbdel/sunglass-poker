@@ -45,10 +45,18 @@ class Game {
     this.pokerTable.communityCards = [...flopCards];
   }
 
+  /*
+  In : nothing
+  OUT : nothing but we push one card to the community cards (4 cards in total)
+  */
   turn() {
     this.pokerTable.communityCards.push(this.deck.deal());
   }
 
+  /*
+  In : nothing
+  OUT : nothing but we push one card to the community cards (5 cards in total)
+  */
   river() {
     this.pokerTable.communityCards.push(this.deck.deal());
   }
