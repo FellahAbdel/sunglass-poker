@@ -15,7 +15,7 @@
 
 .login-box {
   /* background-color: white; */
-  width: 400px;
+  width: 60%;
   padding: 20px 40px;
   z-index: 3;
   display: flex;
@@ -31,7 +31,7 @@
   font-size: 24px;
   margin-bottom: 20px;
   z-index: 4;
-  display: block;
+  display: flex;
 }
 
 .box {

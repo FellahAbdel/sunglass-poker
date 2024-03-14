@@ -3,14 +3,13 @@ import { useAuth, getUserInfo , AuthProvider  } from "../../AuthProvider";
 //CSS
 import './table.css';
 import './tableCards.css'
-import './textGlitch.css';
 //Components
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import SettingsMenu from '../SettingsMenu/SettingsMenu';
 import Window from "../../connectionWindow/Window";
 import PlayersPlacements from './PlayersPlacements';
 import CardsPlacements from './CardsPlacements';
-import TextGlitch from './TextGlitch';
+import TextGlitch from './../TextGlitch/TextGlitch';
 import LogoComponent from '../../logo/Logo';
 
 const Table = ({
@@ -21,7 +20,8 @@ const Table = ({
     playersCardDistributedProp, // a list of 10 booleans to distribute to choosen players
     playersCardsShowProp, // a list of 10 booleans to show the cards of choosen players
     moneyPot, // money on the table
-    logingInMenuActive, // to see if the page is logged in 
+    logingInMenuActive, // to see if the page is logged in
+    tutorialMenuActive, 
     openWindow, isWindowOpen, windowType, closeWindow
   }) => {
     
@@ -82,6 +82,10 @@ const Table = ({
           />
           ) : (<>
             
+            {tutorialMenuActive && null
+
+            }
+
             <LogoComponent className={"logoacceuil"} style={""}/>
             <TextGlitch children={"SunGlassPoker"} style={"glitch-accueil"} glitchStyle={"glitchStyle-accueil"}/>
 

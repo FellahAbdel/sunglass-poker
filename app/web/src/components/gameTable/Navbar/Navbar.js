@@ -16,6 +16,7 @@ const Navbar = ({
     settingsOnClick, 
     isLoggedNavbar,
     logInOnClick,
+    tutorialOnClick
     }) => { 
 
     return (
@@ -49,7 +50,7 @@ const Navbar = ({
             {/* Settings/Tutorial Buttons */}
             <Button 
                 children={isLoggedNavbar ? "Settings" : "Tutorial"}
-                onClick={isLoggedNavbar ? settingsOnClick : null}
+                onClick={isLoggedNavbar ? settingsOnClick : tutorialOnClick}
                 style={`${isLoggedNavbar ? "btn-settings" : "btn-tutorial"}`}
                 iconStyle={`${isLoggedNavbar ? "icon-settings" : "icon-tutorial"}`}
                 iconSrc={isLoggedNavbar ? require('./../../assets/images/icons/settings-icon.png') : require('./../../assets/images/icons/tutorial-icon.png')}
