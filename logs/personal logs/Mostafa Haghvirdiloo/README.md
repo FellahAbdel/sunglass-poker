@@ -46,5 +46,8 @@
 
 * 2024/03/13 : <b> 4h </b> <br/>        Travail individuel: <i>table pot ajouté + toggles et range ajouté dans les Settings + fusion des branches de front + resoudre des conflis </i>
 
+* 2024/03/14 : <b> 1h </b> <br/>        Travail en groupe Front-End : <i>s'expliquer des codes et clarification </i>
 
-total: 77h15min
+* 2024/03/14 : <b> 5h </b> <br/>        Travail individuel: <i>implimentation de l'acceuil et login avec la table + des animations de logo floatant </i>
+
+total: 83h15min
