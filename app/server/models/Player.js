@@ -1,4 +1,4 @@
-class Player {
+export class Player {
   #playerId = 0;
   #playerState = "";
   #playerMoney = 1000;
@@ -7,8 +7,9 @@ class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
 
-  constructor(playerId) {
+  constructor(playerId, playerState) {
     this.#playerId = playerId;
+    this.#playerState = playerState;
   }
 
   /*
