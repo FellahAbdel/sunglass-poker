@@ -34,5 +34,8 @@
 
 2024/03/12: 30min   Résolution des quelques bug et erreur 
 
+2024/03/12: 4h30    Réunion, fusion de banches, test de la bdd, correction de multiple bug ou problémes.
 
-TEMPS TOTAL: 31h15min 
+
+
+TEMPS TOTAL: 35h45min 

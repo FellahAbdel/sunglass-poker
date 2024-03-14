@@ -14,5 +14,6 @@
 - 29/2 , finition de la fonction double paire et correction de la fonction est carre : 1H
 -  30/2 , début implementation fonction secondFull :00H30
 - 09/03 , finition implementation des fonctions de combinaisons de jeux : 2H
-
-- TOTAL:33H
+- 12/03 , Reunion TP | finition de la fusion des diffèrentes fonctions de jeux avec le autres membres du backend, réalisations de plusieurs tests et etudes de diffèrents cas de figure et correction des erreurs : 5H 
+- 13/03 , corrections erreurs fichier Partie.js : 1H
+- TOTAL:39H
