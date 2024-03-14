@@ -117,7 +117,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
   return (
     <div className="box">
       <Text className="title" content="Create your account" />
-      <LogoComponent className="logoconnexion" />
+      {/* <LogoComponent className="logoconnexion" /> */}
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="pseudo"

@@ -53,8 +53,8 @@ const Window = ({ onClose, windowType, logingIn }) => {
   }, [windowType]);
 
   return (
-    <div className="overlay" onClick={onClose}>
-      <div className="login-box" id="login-box" onClick={handleBoxClick}>
+    <div className="component-login" onClick={onClose}>
+      <div className="login-box" onClick={handleBoxClick}>
         {currentWindow === "login" && (
           <LoginWindow
             openSignUpWindow={openSignUpWindow}

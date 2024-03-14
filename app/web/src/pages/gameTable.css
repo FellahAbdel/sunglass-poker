@@ -53,7 +53,8 @@
     position: absolute;
     margin: auto;
     align-self: center;
-    top:20%;
+    top:0vh;
+    bottom:0vh;
     z-index: 0;
 }
 
