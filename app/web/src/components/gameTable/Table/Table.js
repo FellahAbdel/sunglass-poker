@@ -74,8 +74,13 @@ const Table = ({
 
       </>): (<>
         
+
         {/* Acceuil */}
-        
+
+
+          <LogoComponent style={`logo-acceuil ${tutorialMenuActive && 'logo-tutorial'}`} />
+
+
           {isWindowOpen ? (
           <Window
             onClose={closeWindow}
@@ -89,7 +94,6 @@ const Table = ({
             (
               <Tutorial style="text-tutorial"/>
             ) : ( <>
-            <LogoComponent className={"logoacceuil"} style={""}/>
             <TextGlitch children={"SunGlassPoker"} style={"glitch-accueil"} glitchStyle={"glitchStyle-accueil"}/>
             </>)}
 
