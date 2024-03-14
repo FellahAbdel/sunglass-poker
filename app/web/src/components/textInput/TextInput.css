@@ -1,5 +1,4 @@
 .container-textInputComponent{
-  width:100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,8 +6,8 @@
 }
 
 .input-login {
-  width: 100%;
-  height: 40px;
+  width: 20vw;
+  height: 4.5vh;
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 15px;
@@ -16,6 +15,7 @@
   background-color: rgba(237, 242, 247, 1);
   border-bottom: 2px solid rgb(115, 122, 16);
   margin-bottom: 10px;
+  transition: width 0.5s ease , height 0.5s ease;
 }
 
 
