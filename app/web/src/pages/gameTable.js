@@ -24,7 +24,7 @@ const GameTable = () => {
   const [playersCardsShow, setPlayersCardsShow] = useState([0,0,0,0,0,0,0,0,0,0]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([0,0,0,0,0,0,0,0,0,0]);
   const [logInButton, setLogInButton] = useState();
-  const [isLogged] = useState(false);
+  const [isLogged] = useState(true);
 
 
   const handleLogIn = () => {
@@ -80,21 +80,7 @@ const GameTable = () => {
           logInOnClick={handleLogIn}
         />
       </div>
-      
-
-      {/* <AuthProvider>
-        <Header
-          openWindow={openWindow}
-          closeWindow={closeWindow}
-          isWindowOpen={isWindowOpen}
-          windowType={windowType}
-        />
-        <Acceuil openWindow={openWindow} />
-      </AuthProvider> */}
-
-
-
-      
+          
       <div className="comp-table">
         <Table 
           dealingFlop={dealingFlop} 
