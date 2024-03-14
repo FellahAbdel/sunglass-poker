@@ -7,6 +7,9 @@ import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import SettingsMenu from '../SettingsMenu/SettingsMenu';
 import cardBack from './../../assets/images/card-design.png';
 import Card from '../Card/Card';
+import Window from "../../connectionWindow/Window";
+import { useAuth, getUserInfo,AuthProvider  } from "../../AuthProvider";
+
 
 
 const Table = ({
@@ -17,9 +20,13 @@ const Table = ({
     playersCardDistributedProp,
     playersCardsShowProp,
     moneyPot,
-    isLoggedTable
+    isLoggedTable,
+    openWindow, isWindowOpen, windowType, closeWindow
   }) => {
     
+  const { isLogged, logingIn, logingOut, getUserInfo } = useState();
+
+
   //name , user ID , level , games played , winning ratio , joined Date 
   const userInfo = ["Mostafa","otsuno" , "100", "5" , "30%","10/march/2024"];
 
@@ -27,7 +34,7 @@ const Table = ({
     <div className={`container-table ${profileMenuActive || settingsMenuActive ? 'container-menu' : ""}`}>
 
 
-    {isLoggedTable && (<>
+    {isLoggedTable ? (<>
         <div className={`container-cards ${profileMenuActive || settingsMenuActive ? 'disappear' : ""}`}>
           
           <div className={`container-moneyPot`}>{moneyPot.toLocaleString()}$</div>
@@ -102,7 +109,22 @@ const Table = ({
         {profileMenuActive ?  <ProfileMenu userInfoProp={userInfo}/> : null }
         {settingsMenuActive ?  <SettingsMenu /> : null }
 
-        </>)}
+        </>): (
+            <>
+      <AuthProvider>
+      {isWindowOpen && (
+          <Window
+            onClose={closeWindow}
+            windowType={windowType}
+            logingIn={logingIn}
+            logingOut={logingOut}
+          />
+        )}
+        </AuthProvider>
+            
+            </>
+    
+        )}
 
     </div>
   )

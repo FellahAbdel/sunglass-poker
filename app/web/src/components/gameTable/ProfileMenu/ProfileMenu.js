@@ -29,7 +29,7 @@ const ProfileMenu = ({userInfoProp}) => {
         <div className='userInfo'>
             <span>
             Name: {editingName ? (
-                <input type="text" value={name} onChange={handleNameChange} />
+                <input className="input-editName" type="text" value={name} onChange={handleNameChange} />
             ) : (   <>
                         {name}
                     </>

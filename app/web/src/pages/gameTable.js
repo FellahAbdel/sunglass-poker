@@ -23,8 +23,14 @@ const GameTable = () => {
   const [showHandCard, setShowHandCard] = useState(false);
   const [playersCardsShow, setPlayersCardsShow] = useState([0,0,0,0,0,0,0,0,0,0]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([0,0,0,0,0,0,0,0,0,0]);
-
+  const [logInButton, setLogInButton] = useState();
   const [isLogged] = useState(false);
+
+
+  const handleLogIn = () => {
+    setLogInButton(!logInButton);
+    console.log('handleLogIn function called from parent component');
+  }
 
   const handleShowHandCard = () => {
     setShowHandCard(!showHandCard);
@@ -71,6 +77,7 @@ const GameTable = () => {
           profileOnClick={handleProfileMenu}
           //navbar changes for loggedIn
           isLoggedNavbar={isLogged}
+          logInOnClick={handleLogIn}
         />
       </div>
       
@@ -100,6 +107,9 @@ const GameTable = () => {
           settingsMenuActive={settingsMenu}
           // LogIn panel
           isLoggedTable={isLogged}
+          isWindowOpen={logInButton}
+          windowType={logInButton ? "login" : null}
+          
         />
       </div>
 

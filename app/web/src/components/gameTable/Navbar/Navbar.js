@@ -15,10 +15,12 @@ const Navbar = ({
     exitOnClick ,
     settingsOnClick, 
     isLoggedNavbar,
+    logInOnClick,
     openWindow, 
     isWindowOpen, 
     windowType, 
     closeWindow}) => { 
+
     //const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
 
     return (
@@ -43,7 +45,7 @@ const Navbar = ({
             {/* Profile/LogIn Button */}
             <Button 
                 children={isLoggedNavbar ? "Profile" : "LogIn"}
-                onClick={isLoggedNavbar ? profileOnClick : null}
+                onClick={isLoggedNavbar ? profileOnClick : logInOnClick}
                 style="btn-profile"
                 iconStyle="icon-profile"
                 iconSrc={require('./../../assets/images/icons/profile-icon.png')}

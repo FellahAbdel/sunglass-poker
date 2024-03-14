@@ -69,7 +69,7 @@
     background-color: #006777; 
 }
 
-input[type=text] {
+.input-editName input[type=text] {
     border-style: unset;
     width: 60%;
     height: 100%;

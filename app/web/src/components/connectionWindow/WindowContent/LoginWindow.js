@@ -51,7 +51,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
   return (
     <div className="box">
       <Text className="title" content="Sign in to your account" />
-      <LogoComponent className="logoconnexion" />
+      {/* <LogoComponent className="logoconnexion" /> */}
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="username"
