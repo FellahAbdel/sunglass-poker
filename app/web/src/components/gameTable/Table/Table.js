@@ -82,12 +82,15 @@ const Table = ({
           />
           ) : (<>
             
-            {tutorialMenuActive && null
+            {tutorialMenuActive ? 
+            (<h1>BLAH BLAH</h1>
 
-            }
-
+            ) : ( <>
             <LogoComponent className={"logoacceuil"} style={""}/>
             <TextGlitch children={"SunGlassPoker"} style={"glitch-accueil"} glitchStyle={"glitchStyle-accueil"}/>
+            </>)}
+
+
 
           </>)}
         
