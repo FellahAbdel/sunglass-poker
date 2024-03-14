@@ -33,14 +33,13 @@
 
 /*table size and color change animation*/
 .container-menu, .container-table{
-    border-radius: 150px;
     position: relative;
 
     width: 65vw;
     min-width: 400px;
     height: 45vh;
     
-    transition: width 1s ease, height 1s ease, box-shadow 0.5s ease;
+    transition: width 1s ease, height 1s ease, box-shadow 0.5s ease , border-radius 1s ease;
 }
 .container-menu{
     width: 65vw;
@@ -65,13 +64,12 @@
 
 /*container for the logIn*/
 .container-logIn{
-    border-radius: 150px;
     width: 45vw;
     height: 60vh;
 
     box-shadow: 
     inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-    0 0 1vw 0.8vW rgb(245, 255, 112),
+    0 0 1vw 0.8vW rgb(181, 194, 5),
     0 0 0 1vW rgb(0, 0, 0),
     0 0 0 2vW rgb(31, 33, 36),
     inset 0 0 0 2vW rgb(43, 41, 41),
@@ -87,10 +85,9 @@
 }
 
 .container-acceuil{
-    border-radius: 50px;
     box-shadow: 
     inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-    0 0 1vw 0.8vW rgb(245, 255, 112),
+    0 0 1vw 0.8vW rgb(115, 122, 16),
     0 0 0 1vW rgb(0, 0, 0),
     0 0 0 2vW rgb(31, 33, 36),
     inset 0 0 0 2vW rgb(43, 41, 41),
@@ -107,9 +104,11 @@
 
 
 .container-tutorial{
+    border-radius: 50px;
+
     box-shadow: 
     inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-    0 0 1vw 0.8vW rgb(115, 122, 16),
+    0 0 1vw 0.8vW rgb(79, 83, 16),
     0 0 0 1vW rgb(0, 0, 0),
     0 0 0 2vW rgb(31, 33, 36),
     inset 0 0 0 2vW rgb(43, 41, 41),
