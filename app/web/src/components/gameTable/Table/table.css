@@ -65,7 +65,7 @@
 /*container for the logIn*/
 .container-logIn{
     border-radius: 100px;
-    width: 45vw;
+    width: 40vw;
     height: 80vh;
 
     box-shadow: 
@@ -101,6 +101,7 @@
     radial-gradient(#a5a5a5 15%, transparent 20%) 8px 9px;
     background-color:#282828;
     background-size:16px 16px;
+    overflow:scroll;
 }
 
 
