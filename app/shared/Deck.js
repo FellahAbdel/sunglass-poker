@@ -2,22 +2,25 @@
 const Card = require("./Card");
 
 class Deck {
+  #cardsGame = [];
+
   constructor() {
-    this.cards = []; // Array of Card objects representing the deck.
     this.communityCards = []; // Array of five cards.
-    this.reset();
+    this.initCards();
     // Initialize the deck with all 52 cards
   }
 
-  // Methods to shuffle the deck, deal cards, etc.
-  reset() {
-    this.cards = [];
-    const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
-    const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1];
+  initCards() {
+    // on vide la liste de carte actuelle
+    this.#cardsGame.splice(0, this.#cardsGame.length);
 
-    for (let suit of suits) {
-      for (let value of values) {
-        this.cards.push(new Card(value, suit));
+    // on la rempli de nouvelles cartes
+    const colors = ["H", "S", "C", "D"];
+    const number = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+
+    for (let color of colors) {
+      for (let value of number) {
+        this.#cardsGame.push(new Card(value, color));
       }
     }
   }
