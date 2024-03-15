@@ -1,7 +1,7 @@
 /*
  * IN : tableau de 7 cartes
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
- * FUNCTION : determine si les 7 possedent une couleur et renvoi la combinaison si elle est trouve.
+ * FUNCTION : determine si les 7 possedent une couleur et renvoi la combianaison si elle est trouve.
  */
 function isFlush(sevenCardsTab) {
   let tab = [...sevenCardsTab];

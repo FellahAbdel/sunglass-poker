@@ -7,7 +7,6 @@ function isOnePair(tableau7cartes) {
   tab.sort(function (a, b) {
     return b.number - a.number;
   });
-  console.log(tab);
 
   const maMain = new Array(5);
   let p1c1 = null;

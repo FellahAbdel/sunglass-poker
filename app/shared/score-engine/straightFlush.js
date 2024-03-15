@@ -26,10 +26,9 @@ function isStraightFlush(tableau7cartes) {
   let cartesMemeCouleur = tableau7cartes.filter(
     (carte) => carte.color === couleurMajoritaire
   );
-  // console.log(cartesMemeCouleur);
 
   // Étape 3: Vérifier si ces cartes forment une suite
-  let quinteFlush = this.estSuite(cartesMemeCouleur);
+  let quinteFlush = self.isStraight(cartesMemeCouleur);
   if (quinteFlush !== false) {
     return quinteFlush; // Renvoie les cartes de la quinte flush si elles forment une suite
   } else {

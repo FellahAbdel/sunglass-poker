@@ -23,7 +23,7 @@ function isStraight(sevenCardsTab, refact = false) {
   if (refact) {
     tab = refactor(tab);
   }
-  tab = this.trier(tab, (x) => x.number);
+  tab.sort((a, b) => a.number - b.number);
 
   while (tab.length !== 0) {
     let tmp = tab.pop();
@@ -43,5 +43,5 @@ function isStraight(sevenCardsTab, refact = false) {
   if (refact) {
     return hand.length === 5 ? refactor(hand, true) : false;
   }
-  return hand.length === 5 ? hand : this.estSuite(sevenCardsTab, true);
+  return hand.length === 5 ? hand : self.isStraight(sevenCardsTab, self, true);
 }
