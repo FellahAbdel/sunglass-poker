@@ -7,7 +7,7 @@
   
   .text-tutorial {
     color: #ffffff;
-    width: 90%; /* Set the width of the text box to 100% of the container */
+    width: 95%; /* Set the width of the text box to 100% of the container */
     height: 90%; /* Set the height of the text box to 100% of the container */
     padding: 0%; /* Add padding for visual clarity */
     resize: none; /* Disable resizing of the text box */
