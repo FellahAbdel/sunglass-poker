@@ -8,33 +8,41 @@ describe("Deck", () => {
     deck = new Deck();
   });
 
-  test("constructor initializes the deck with 52 cards", () => {
-    expect(deck.cards.length).toBe(52);
-    expect(deck.cards[0]).toBeInstanceOf(Card);
+  test("should initialize with 52 cards", () => {
+    expect(deck.getCardsGame().length).toBe(52);
   });
 
-  test("reset method resets the deck with 52 cards", () => {
+  test("should shuffle the deck", () => {
+    const originalCards = [...deck.getCardsGame()];
     deck.shuffle();
-    deck.reset();
-    expect(deck.cards.length).toBe(52);
-    expect(deck.cards[0]).toBeInstanceOf(Card);
+    const shuffledCards = deck.getCardsGame();
+    expect(shuffledCards).not.toEqual(originalCards);
   });
 
-  test("shuffle method shuffles the deck", () => {
-    const originalOrder = [...deck.cards];
-    deck.shuffle();
-    expect(deck.cards).not.toEqual(originalOrder);
-  });
-
-  test("deal method returns a card and removes it from the deck", () => {
-    const initialLength = deck.cards.length;
+  test("should deal one card", () => {
     const card = deck.deal();
-    expect(deck.cards.length).toBe(initialLength - 1);
-    expect(card).toBeInstanceOf(Card);
+    expect(card instanceof Card).toBe(true);
   });
 
-  test("deal method throws an error if the deck is empty", () => {
-    deck.cards = []; // Empty the deck
-    expect(() => deck.deal()).toThrow("Deck is empty");
+  test("should deal three cards", () => {
+    const cards = deck.deal3Cards();
+    expect(cards.length).toBe(3);
+    cards.forEach((card) => {
+      expect(card instanceof Card).toBe(true);
+    });
+  });
+
+  test("should throw error when dealing from empty deck", () => {
+    deck.getCardsGame().splice(0); // Empty the deck
+    expect(() => {
+      deck.deal();
+    }).toThrow("Deck is empty");
+  });
+
+  test("should throw error when dealing 3 cards from empty deck", () => {
+    deck.getCardsGame().splice(0); // Empty the deck
+    expect(() => {
+      deck.deal3Cards();
+    }).toThrow("Deck is empty");
   });
 });
