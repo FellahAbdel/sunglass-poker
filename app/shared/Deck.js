@@ -44,12 +44,12 @@ class Deck {
       throw new Error("Deck is empty");
     }
 
-    let cards = [];
+    let threeCards = [];
     for (let i = 0; i < 3; i++) {
-      cards.push(this.cards.pop());
+      threeCards.push(this.threeCards.pop());
     }
 
-    return cards;
+    return threeCards;
   }
 }
 
