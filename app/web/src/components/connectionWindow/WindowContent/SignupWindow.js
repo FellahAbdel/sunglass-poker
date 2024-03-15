@@ -159,12 +159,12 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           label="Register"
         />
       </form>
-      <p></p>
+      
       <Button
         className="buttonconnexion login-button google-button"
         label="Register with google"
       />
-      <p> </p>
+      
       <Button
         onClick={openLoginWindow}
         className="buttonconnexion forgot-button"

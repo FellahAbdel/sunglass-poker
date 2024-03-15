@@ -53,7 +53,7 @@ const ForgotPassword = ({
   return (
     <div className="box">
       <Text className="title" content="You forgot your password?" />
-      <LogoComponent className="logoconnexion" />
+      {/* <LogoComponent className="logoconnexion" /> */}
       <Text className="littletext" content="Enter your account email here" />
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent

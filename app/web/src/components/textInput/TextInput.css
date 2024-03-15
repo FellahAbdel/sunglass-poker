@@ -18,14 +18,13 @@
   transition: width 0.5s ease , height 0.5s ease;
 }
 
-
-.container-textInput p {
-  color: #f58282;
-  font-size: 14px;
+.container-textInputComponent p {
+  color: #f63e3e;
+  font-size: 12px;
   margin-top: 1px;
   margin-bottom: 15px; 
 }
 
 .input-component-error{
-    border-bottom: 2px solid #f58282;
+    border-bottom: 2px solid #f63e3e;
 }
