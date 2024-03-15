@@ -40,8 +40,14 @@ const GameTable = () => {
   const [isLogged, setIsLogged] = useState(false);
   const handleIsLogged = () => {
     setIsLogged(!isLogged);
-    console.log("baaboo");
+    console.log("isLogged");
   };
+
+  const handleLogOut = () => {
+    setIsLogged(false);
+    setProfileMenu(false);
+    setSettingsMenu(false);
+  }
 
   const handleLogInButton = () => {
     setTutorialMenu(false);
@@ -60,15 +66,11 @@ const GameTable = () => {
 
   const handleProfileMenu = () => {
     setProfileMenu(!profileMenu);
-    if (settingsMenu) {
-      setSettingsMenu(false);
-    }
+    setSettingsMenu(false);
   };
   const handleSettingsMenu = () => {
     setSettingsMenu(!settingsMenu);
-    if (profileMenu) {
-      setProfileMenu(false);
-    }
+    setProfileMenu(false);
   };
 
   const handleFold = () => {
@@ -104,7 +106,7 @@ const GameTable = () => {
       {/* Navbar or header */}
       <div className="comp-navbar">
         <Navbar
-          exitOnClick={handleIsLogged}
+          exitOnClick={handleLogOut}
           settingsOnClick={handleSettingsMenu}
           profileOnClick={handleProfileMenu}
           //navbar changes for loggedIn
