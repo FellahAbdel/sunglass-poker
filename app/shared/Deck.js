@@ -1,4 +1,3 @@
-// import Card from "./Card.js";
 const Card = require("./Card");
 
 class Deck {
@@ -8,6 +7,10 @@ class Deck {
     this.communityCards = []; // Array of five cards.
     this.initCards();
     // Initialize the deck with all 52 cards
+  }
+
+  getCardsGame() {
+    return this.#cardsGame;
   }
 
   initCards() {
@@ -26,27 +29,30 @@ class Deck {
   }
 
   shuffle() {
-    for (let i = this.cards.length - 1; i > 0; i--) {
+    for (let i = this.#cardsGame.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+      [this.#cardsGame[i], this.#cardsGame[j]] = [
+        this.#cardsGame[j],
+        this.#cardsGame[i],
+      ];
     }
   }
 
   deal() {
-    if (this.cards.length === 0) {
+    if (this.#cardsGame.length === 0) {
       throw new Error("Deck is empty");
     }
-    return this.cards.pop();
+    return this.#cardsGame.pop();
   }
 
   deal3Cards() {
-    if (this.cards.length === 0) {
+    if (this.#cardsGame.length === 0) {
       throw new Error("Deck is empty");
     }
 
     let threeCards = [];
     for (let i = 0; i < 3; i++) {
-      threeCards.push(this.threeCards.pop());
+      threeCards.push(this.#cardsGame.pop());
     }
 
     return threeCards;
