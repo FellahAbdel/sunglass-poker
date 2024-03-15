@@ -120,6 +120,7 @@ const GameTable = () => {
           className={`
           comp-table 
           ${logInMenu && "comp-table-login"}
+          ${tutorialMenu && "comp-table-tutorial"}
           ${isLogged && "comp-table-inGame"}
       `}
         >
