@@ -33,6 +33,10 @@ const GameTable = () => {
 
   const { logingIn, logingOut, getUserInfo } = useAuth();
 
+  const handleLanguageChange = (language) => {
+    console.log("Selected Language:", language);
+  };
+
   const [isLogged, setIsLogged] = useState(false);
   const handleIsLogged = () => {
     setIsLogged(!isLogged);
@@ -120,6 +124,7 @@ const GameTable = () => {
       `}
         >
           <Table
+            selectedLanguage={handleLanguageChange}
             dealingFlop={dealingFlop}
             showCards={[0, 1, 2, 3, 4]}
             playersCardDistributedProp={playersCardDistributed}

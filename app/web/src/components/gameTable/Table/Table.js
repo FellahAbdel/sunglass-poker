@@ -25,6 +25,7 @@ const Table = ({
     moneyPot, // money on the table
     logingInMenuActive, // to see if the page is logged in
     tutorialMenuActive,
+    selectedLanguage,
     isLoggedOnClick, //temprory
     isLogged, // temprory
     openWindow, isWindowOpen, windowType, closeWindow
@@ -76,7 +77,7 @@ const Table = ({
         {profileMenuActive ?  <ProfileMenu userInfoProp={userInfo}/> : null }
 
         {/* Settings menu panel */}
-        {settingsMenuActive ?  <SettingsMenu /> : null }
+        {settingsMenuActive ?  <SettingsMenu onLanguageChange={selectedLanguage}/> : null }
 
       </>): (<>
         

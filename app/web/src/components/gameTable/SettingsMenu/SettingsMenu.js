@@ -1,8 +1,16 @@
-import React ,{useState} from 'react';
+import React, { useState } from 'react';
 import './settingsMenu.css'
 import Button from '../Button/Button.tsx';
 
-const settingsMenu = ({handleSliderChange,checkBox,darkMode,mute}) => {
+const SettingsMenu = ({handleSliderChange,darkMode,mute,onLanguageChange}) => {
+
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+
+  const handleLanguageChange = (event) => {
+    const language = event.target.value;
+    setSelectedLanguage(language);
+    onLanguageChange(language);
+  };
 
   return (
     <div className="settingsMenu">
@@ -32,9 +40,23 @@ const settingsMenu = ({handleSliderChange,checkBox,darkMode,mute}) => {
             <input className='slider-blah' type='range' min={1} max={100}  step={1} onChange={handleSliderChange}/>
             </div>
           </div>
-          
+
+
+          <span htmlFor="language-select">Select Language:</span>
+          <select
+              id="language-select"
+              value={selectedLanguage}
+              onChange={handleLanguageChange}
+            >
+              <option value="en">English</option>
+              <option value="fr">French</option>
+              <option value="es">Spanish</option>
+          </select>
+
+              
     </div>
+    
   )
 }
 
-export default settingsMenu;
+export default SettingsMenu;
