@@ -1,14 +1,24 @@
+
+
 .logoconnexion {
   width: 100px;
   margin-bottom: 20px;
 }
 
 .logo-acceuil {
-  width:10vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  
+  width:100%;
+
   position: absolute;
   bottom: 40%;
-  right: 42%;
-  transition: top 1s ease, bottom 1s ease, right 1s ease, width 1s ease;
+  right:0;
+  left:0;
+
+  transition: top 1s ease, bottom 1s ease, right 1s ease,left 1s ease;
 }
 
 .logo-tutorial{
@@ -17,7 +27,19 @@
 }
 
 .logo-login{
-  right:120%;
+  left:-90%;
   z-index: -1;
+}
+
+
+.logo-acceuil img{
+  width:12vw;
+  transition: width 1s ease;
+}
+.logo-tutorial img{
+  width: 10vw;
+}
+
+.logo-login img{
   width: 13vw;
 }

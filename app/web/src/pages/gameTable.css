@@ -49,21 +49,21 @@
 }
 
 .comp-table{
-
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: center;
+    flex:1;
 
-    flex:1 ;
     position: absolute;
-    margin: auto;
-    top:0vh;
-    bottom:0vh;
-    z-index: 0;
+    top:0;
+    bottom:0;
     right:0;
     left: 0;
     
+    z-index: 0;
+    margin: auto;
+
     transition: right 0.5s ease, left 0.5s ease, top 1s ease, bottom 0.5s ease;
 }
 
