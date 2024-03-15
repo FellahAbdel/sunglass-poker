@@ -1065,7 +1065,6 @@ class partie {
     this.#players = this.shuffle(this.#players);
 
     // Mélanger les cartes
-    this.initCards();
     this.#cardsGame = this.shuffle(this.#cardsGame);
 
     //distribuer les cartes
