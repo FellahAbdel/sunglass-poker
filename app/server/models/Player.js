@@ -7,9 +7,10 @@ export class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
 
-  constructor(playerId, playerState) {
+  constructor(playerId, playerState, playerMoney) {
     this.#playerId = playerId;
     this.#playerState = playerState;
+    this.#playerMoney = playerMoney;
   }
 
   /*
@@ -40,12 +41,30 @@ export class Player {
   }
 
   /*
+   * IN : rien
+   * OUT : STRING, la somme restante du joueur
+   * FUNCTION : retourne l'état courant du joueur
+   */
+  getPlayerMoney() {
+    return this.#playerMoney;
+  }
+
+  /*
    * IN : "actif", "passif"
    * OUT : rien
    * FUNCTION : altère l'état d'un joueur
    */
   setPlayerState(state) {
     this.#playerState = state;
+  }
+
+  /*
+   * IN : NUMBER somme d'argent a initialiser
+   * OUT : rien
+   * FUNCTION : initialise la somme disponible du joueur
+   */
+  setPlayerMoney(amount) {
+    this.#playerMoney = amount;
   }
 
   /*
@@ -64,6 +83,15 @@ export class Player {
    */
   bet(moneyToBet) {
     this.#playerMoney -= moneyToBet;
+  }
+
+  /*
+   * IN : NUMBER somme a crediter
+   * OUT : rien
+   * FUNCTION : ajouter une somme a celle du joueur
+   */
+  addMoney(amount) {
+    this.#playerMoney += amount;
   }
 
   /*
