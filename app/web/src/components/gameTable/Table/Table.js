@@ -47,7 +47,8 @@ const Table = ({
     // container-tutorial : for tuto
     <div className={`
       container-table 
-      ${(profileMenuActive || settingsMenuActive) && 'container-menu' } 
+      ${profileMenuActive  && 'container-profile' }
+      ${settingsMenuActive  && 'container-settings'}
       ${!isLogged && "container-acceuil"}
       ${tutorialMenuActive && !isLogged && "container-tutorial"}
       ${logingInMenuActive && !isLogged && "container-logIn"}  

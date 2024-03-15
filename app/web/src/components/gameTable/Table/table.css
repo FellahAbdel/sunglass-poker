@@ -2,13 +2,18 @@
 .container-table{
     border-radius: 150px;
 
-    width: 60vw;
+    width: 65vw;
     min-width: 400px;
-    height: 40vh;
+    height: 45vh;
+
+    position: relative;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+
 
     box-shadow: 
         inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
@@ -28,22 +33,38 @@
     background-color:#282828;
     background-size:16px 16px;
 
-    flex-wrap: wrap;    
-}
-
-/*table size and color change animation*/
-.container-menu, .container-table{
-    position: relative;
-
-    width: 65vw;
-    min-width: 400px;
-    height: 45vh;
     
     transition: width 1s ease, height 1s ease, box-shadow 0.5s ease , border-radius 1s ease;
 }
-.container-menu{
+
+
+.container-profile{
     width: 65vw;
     height: 50vh;
+
+    box-shadow: 
+    inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
+    0 0 1vw 0.8vW rgb(146, 146, 146),
+    0 0 0 1vW rgb(0, 0, 0),
+    0 0 0 2vW rgb(31, 33, 36),
+    inset 0 0 0 2vW rgb(43, 41, 41),
+    0 0 5vw 3vw black;
+
+    background:
+    radial-gradient(black 15%, transparent 16%) 0 0,
+    radial-gradient(black 15%, transparent 16%) 8px 8px,
+    radial-gradient(#a5a5a56c 15%, transparent 20%) 0 1px,
+    radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
+    background-color:#282828;
+    background-size:16px 16px;
+}
+
+.container-settings{
+    left:0;
+    right: 0;
+
+    width:90%;
+    height: 70vh;
 
     box-shadow: 
     inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
