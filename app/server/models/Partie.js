@@ -1059,8 +1059,35 @@ class partie {
      *      - reinitialise l'etat des joueurs et vider l'historique
      *      - remelanger et redistribuer les cartes
      */
-    reset () {} // redemarer une partie
+    reset () { // redemarer une partie
 
+        // Réinitialiser les propriétés à zéro
+        this.#cardsGame = [];
+        this.#betHistory = [];
+        this.#bets = 0;
+        this.#sideBets = 0;
+        this.#currentPlayer = 0;
+        this.#revolution = 0;
+
+        // Étape 1: Supprimer les joueurs avec le statut "quit"
+        this.joueurs = this.joueurs.filter(joueur => joueur.statut !== "quit");
+
+        // Étape 2: Décaler les joueurs dans le tableau
+        if (this.joueurs.length >= 2) {
+            let premierJoueur = this.joueurs.shift(); // Retirer le premier joueur
+            this.joueurs.push(premierJoueur); // Ajouter le premier joueur à la fin du tableau
+        }
+        
+        // Etape 3: reinitialise l'etat des joueurs et vide l'historique
+        for (let i = 0; i < this.#players.length; i++){
+            this.#players[i].setPlayerState("actif");
+            this.#players[i].setPlayerActionLog([])
+        }
+        
+        //Etape 4: mélanger et distribuer les cartes
+        this.shuffle();
+        this.distribuer();
+    } 
 
     /*
      * IN : rien

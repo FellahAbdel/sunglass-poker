@@ -77,6 +77,15 @@ export class Player {
   }
 
   /*
+   * IN : Log
+   * OUT : rien
+   * FUNCTION : altère l'historique des mises d'un joueur
+   */
+  setPlayerActionLog(PlayerActionLog) {
+    this.#playerActionLog = PlayerActionLog;
+  }
+
+  /*
    * IN : NUMBER somme a miser
    * OUT : rien
    * FUNCTION : déduire la somme misée de la somme des moneys
