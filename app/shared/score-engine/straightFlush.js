@@ -35,3 +35,5 @@ function isStraightFlush(tableau7cartes) {
     return false; // Pas de quinte flush
   }
 }
+
+module.exports = isStraightFlush;

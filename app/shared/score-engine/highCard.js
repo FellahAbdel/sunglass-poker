@@ -15,3 +15,5 @@ function isHighCard(tableau2cartes) {
   // Etape 2 : renvoyer la carte la plus haute càd la première carte dans le tableau
   return carteTriees.splice(0, 5);
 }
+
+module.exports = isHighCard;

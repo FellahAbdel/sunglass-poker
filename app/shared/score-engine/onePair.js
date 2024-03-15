@@ -45,3 +45,5 @@ function isOnePair(tableau7cartes) {
     return false;
   }
 }
+
+module.exports = isOnePair;

@@ -48,3 +48,5 @@ function isFlush(sevenCardsTab) {
 
   return false;
 }
+
+module.exports = isFlush;

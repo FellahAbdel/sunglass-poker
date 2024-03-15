@@ -59,3 +59,5 @@ function isFourOfAKind(tableau7cartes) {
 
   return false; // Retourner false si aucun carré n'est trouvé
 }
+
+module.exports = isFourOfAKind;

@@ -95,3 +95,5 @@ function isTwoPair(tableau7cartes) {
     return false;
   }
 }
+
+module.exports = isTwoPair;

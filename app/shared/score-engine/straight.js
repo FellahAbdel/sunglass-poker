@@ -45,3 +45,5 @@ function isStraight(sevenCardsTab, refact = false) {
   }
   return hand.length === 5 ? hand : self.isStraight(sevenCardsTab, self, true);
 }
+
+module.exports = isStraight;

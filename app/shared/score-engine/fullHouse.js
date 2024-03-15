@@ -48,3 +48,5 @@ function isFullHouse(tableau7cartes) {
   // Si on a trouvé un brelan et une paire, renvoyer la combinaison complète (full house)
   return [...brelan, ...paire.slice(0, 2)];
 }
+
+module.exports = isFullHouse;
