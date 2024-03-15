@@ -781,25 +781,33 @@ class partie {
      * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des full
      */
     secondFull(tableauxAvecId) {
-
         let meilleurId = tableauxAvecId[0].id;
         let meilleurTableau = tableauxAvecId[0].hand;
-      
+        let meilleursIds = [meilleurId];
+        
         for (let i = 1; i < tableauxAvecId.length; i++) {
             const tableauCourant = tableauxAvecId[i].hand;
-      
+            let isBetter = false;
+    
             for (let j = 0; j < 5; j++) {
                 if (tableauCourant[j].number > meilleurTableau[j].number) {
                     meilleurId = tableauxAvecId[i].id;
                     meilleurTableau = tableauCourant;
+                    meilleursIds = [meilleurId];
+                    isBetter = true;
                     break;
                 } else if (tableauCourant[j].number < meilleurTableau[j].number) {
+                    isBetter = true;
                     break;
                 }
             }
+    
+            if (!isBetter) {
+                meilleursIds.push(tableauxAvecId[i].id);
+            }
         }
-      
-        return [meilleurId];
+        
+        return [meilleursIds];
     }
   
     /*
@@ -926,28 +934,34 @@ class partie {
      */
     secondDoublePaire(tableauxAvecId) { 
 
-        let tab = [...tableauxAvecId];
-
-        let meilleurId = tab[0].id;
-        let meilleurTableau = tab[0].hand;
-      
-        for (let i = 1; i < tab.length; i++) {
-            const tableauCourant = tab[i].hand;
-      
+        let meilleurId = tableauxAvecId[0].id;
+        let meilleurTableau = tableauxAvecId[0].hand;
+        let meilleursIds = [meilleurId];
+        
+        for (let i = 1; i < tableauxAvecId.length; i++) {
+            const tableauCourant = tableauxAvecId[i].hand;
+            let isBetter = false;
+    
             for (let j = 0; j < 5; j++) {
-                if (tableauCourant[j] > meilleurTableau[j]) {
-                    meilleurId = tab[i].id;
+                if (tableauCourant[j].number > meilleurTableau[j].number) {
+                    meilleurId = tableauxAvecId[i].id;
                     meilleurTableau = tableauCourant;
+                    meilleursIds = [meilleurId];
+                    isBetter = true;
                     break;
-                } else if (tableauCourant[j] < meilleurTableau[j]) {
+                } else if (tableauCourant[j].number < meilleurTableau[j].number) {
+                    isBetter = true;
                     break;
                 }
             }
-        }
-      
-        return [meilleurId];
-      }
     
+            if (!isBetter) {
+                meilleursIds.push(tableauxAvecId[i].id);
+            }
+        }
+        
+        return [meilleursIds];
+      }
     /*
      * ...
      */
