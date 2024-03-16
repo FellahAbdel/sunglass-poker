@@ -56,4 +56,8 @@
 
 2024/03/09 : 2H00           Ajout feedback avec la bdd
 
-TEMPS TOTAL: 49h30min 
+2024/09/12 : 5h00           Réunion groupe, merge de toutes les branch de front-end, fonctionnement bdd.
+
+2024/03/14 : 1h00           Réunion avec Mostafa, mise en commun code, fonctionnement window
+
+TEMPS TOTAL: 55h30min 
