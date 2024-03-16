@@ -33,24 +33,23 @@ const GameTable = () => {
   const [logInMenu, setLogInMenu] = useState();
   const [tutorialMenu, setTutorialMenu] = useState();
 
-  const { logingIn, logingOut, getUserInfo } = useAuth();
+  const { logingIn, logingOut, getUserInfo, isLogged } = useAuth();
   const { windowType, isWindowOpen, closeWindow, openWindow } = useWindowContext();
 
   const handleLanguageChange = (language) => {
     console.log("Selected Language:", language);
   };
 
-  const [isLogged, setIsLogged] = useState(false);
-  const handleIsLogged = () => {
-    setIsLogged(!isLogged);
-    console.log("isLogged");
-  };
+  // const handleIsLogged = () => {
+  //   setIsLogged(!isLogged);
+  //   console.log("isLogged");
+  // };
 
   const handleLogOut = () => {
     logingOut();
-    setIsLogged(false);
     setProfileMenu(false);
     setSettingsMenu(false);
+    closeWindow();
   };
 
   const handleLogInButton = () => {
@@ -164,8 +163,8 @@ const GameTable = () => {
             profileMenuActive={profileMenu}
             settingsMenuActive={settingsMenu}
             // LogIn panel
-            isLoggedOnClick={handleIsLogged}
-            isLogged={isLogged}
+            //isLoggedOnClick={handleIsLogged}
+            //isLogged={isLogged}
             onClick={(e) => handleBoxClick}
           />
         </div>

@@ -21,6 +21,12 @@ export const WindowProvider = ({ children }) => {
     setWindowType("");
   };
 
+  const showSuccess = () => {
+    console.log("Fermeture de la fenêtre");
+    setIsWindowOpen(false); // Permet de fermer la fenêtre
+    setWindowType("");
+  };
+
 // Fonctions spécifiques pour chaque type de fenêtre
 const openLoginWindow = () => openWindow("login");
 const openSignUpWindow = () => openWindow("signup");
