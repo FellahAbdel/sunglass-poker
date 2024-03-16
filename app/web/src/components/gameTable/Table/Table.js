@@ -103,6 +103,7 @@ const Table = ({
                 (windowType == "login" ||
                   windowType == "register" ||
                   windowType == "forgot" ||
+                  windowType == "success" ||
                   windowType == "reset") &&
                 "logo-login"
               }

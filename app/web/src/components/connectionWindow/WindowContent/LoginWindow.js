@@ -13,7 +13,6 @@ const LoginWindow = ({}) => {
     windowType,
     openSuccessWindow,
     openWindow,
-    showSuccess,
   } = useWindowContext();
 
   const [formData, setFormData] = useState({
@@ -40,7 +39,7 @@ const LoginWindow = ({}) => {
       const loginResult = await login(formData);
 
       if (loginResult === true) {
-      showSuccess("Logged with success!");
+        openSuccessWindow("Logged with success!");
       } else if (loginResult || loginResult.error === "invalid_credentials") {
         // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
         setValidationErrors({

@@ -39,7 +39,6 @@ const Window = ({ onClose, logingIn }) => {
           <LoginWindow
             showSuccess={(message) => {
               setSuccessMessage(message);
-              openSuccessWindow();
             }}
             logingIn={logingIn}
           />
@@ -49,7 +48,6 @@ const Window = ({ onClose, logingIn }) => {
             onClose={onClose}
             showSuccess={(message) => {
               setSuccessMessage(message);
-              openSuccessWindow();
             }}
           />
         )}
@@ -57,7 +55,6 @@ const Window = ({ onClose, logingIn }) => {
           <ForgotPassword
             showSuccess={(message) => {
               setSuccessMessage(message);
-              openSuccessWindow();
             }}
           />
         )}
@@ -65,7 +62,6 @@ const Window = ({ onClose, logingIn }) => {
           <ResetPasswordWindow
             showSuccess={(message) => {
               setSuccessMessage(message);
-              openSuccessWindow();
             }}
             onClose={onClose}
           />

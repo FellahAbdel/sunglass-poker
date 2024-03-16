@@ -7,6 +7,8 @@ export const useWindowContext = () => useContext(WindowContext);
 export const WindowProvider = ({ children }) => {
   const [isWindowOpen, setIsWindowOpen] = useState(false);
   const [windowType, setWindowType] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
 
 
   const openWindow = (type) => {
@@ -21,10 +23,11 @@ export const WindowProvider = ({ children }) => {
     setWindowType("");
   };
 
-  const showSuccess = () => {
-    console.log("Fermeture de la fenêtre");
-    setIsWindowOpen(false); // Permet de fermer la fenêtre
-    setWindowType("");
+  const openSuccessWindow = (message) => {
+    console.log(`Ouverture de la fenêtre de succès avec le message : ${message}`);
+    setIsWindowOpen(true);
+    setWindowType("success");
+    setSuccessMessage(message);
   };
 
 // Fonctions spécifiques pour chaque type de fenêtre
@@ -44,6 +47,8 @@ return (
       openSignUpWindow,
       openForgotPassword,
       openResetPassword,
+      openSuccessWindow,
+      successMessage,
     }}
   >
     {children}
