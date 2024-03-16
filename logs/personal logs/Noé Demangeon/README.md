@@ -60,4 +60,6 @@
 
 2024/03/14 : 1h00           Réunion avec Mostafa, mise en commun code, fonctionnement window
 
-TEMPS TOTAL: 55h30min 
+2024/03/15 : 2h00           Création 2 pages, Acceuil et GameTable, création fichier WindowContext qui gère quelle fenêtre est affichée. Probleme header ne s'affiche pas dans gametable
+
+TEMPS TOTAL: 57h30min 
