@@ -33,7 +33,7 @@ const Window = ({ onClose, logingIn }) => {
   };
 
   return (
-    <div className="component-login" onClick={() => closeWindow()}>
+    <div className="component-login">
       <div className="login-box" onClick={() =>handleBoxClick}>
         {windowType === "login" && (
           <LoginWindow
