@@ -4,13 +4,10 @@ const UserModel = require("./User");
 const StatModel = require("./Stat");
 
 
-module.exports = function (app) {
-
+module.exports = function (app,bdd) {
+  console.log(bdd);
   // Connexion à la base de données MongoDB
-  mongoose.connect("mongodb://pokerBackEndServer:azerty@127.0.0.1:27017/Poker", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  mongoose.connect("mongodb://pokerBackEndServer:azerty@"+bdd+"/Poker", {});
   const db = mongoose.connection;
 
   db.on(
