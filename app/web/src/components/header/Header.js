@@ -5,16 +5,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import React from "react";
 import Window from "../connectionWindow/Window";
 import Button from "../button/Buttons";
+import FormHeader from "../acceuil/Formheader";
 import GameTable from "../../pages/gameTable";
 
 import { useAuth, getUserInfo } from "../AuthProvider";
-import { useWindowContext } from "../WindowContext";
 
-
-const Header = ({ }) => {
+const Header = ({ openWindow, isWindowOpen, windowType, closeWindow }) => {
   const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
-  const { openWindow, closeWindow, isWindowOpen, windowType } =
-  useWindowContext();
 
   return (
     <header className="header">
