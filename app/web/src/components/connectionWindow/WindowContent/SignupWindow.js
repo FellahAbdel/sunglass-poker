@@ -11,8 +11,17 @@ import {
   validatePassword,
   validatePasswordMatch,
 } from "../../ValidationUtils";
+import { useWindowContext } from "../../WindowContext";
 
-const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
+
+const SignUpWindow = ({}) => {
+  const {
+    closeWindow,
+    isWindowOpen,
+    windowType,
+    openSuccessWindow,
+    openWindow,
+  } = useWindowContext();
   const { registerUser } = useAuth();
   const [formData, setFormData] = useState({
     pseudo: "",
@@ -90,7 +99,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
         const result = await registerUser(formData);
 
         if (result === true) {
-          showSuccess("Account created with success!");
+          //showSuccess("Account created with success!");
         } else if (result && result.error) {
           if (result.error === "user_exists") {
             // Affichez un message d'erreur indiquant que l'utilisateur existe déjà
@@ -166,7 +175,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
       />
       
       <Button
-        onClick={openLoginWindow}
+        onClick={() => openWindow("login")}
         className="buttonconnexion forgot-button"
         label="Already have an account ?"
       />

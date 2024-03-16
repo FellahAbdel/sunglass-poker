@@ -8,93 +8,79 @@ import ResetPasswordWindow from "./WindowContent/ResetPassword";
 import ForgotPassword from "./WindowContent/ForgotPassword";
 import SuccessWindow from "./WindowContent/SuccessWindow";
 import AvatarWindow from "./WindowContent/AvatarWindow";
+import TutorialWindow from "./WindowContent/TutorialWindow";
 
-const Window = ({ onClose, windowType, logingIn }) => {
-  const [currentWindow, setWindowType] = useState(null);
+import { useWindowContext } from "../WindowContext";
+
+const Window = ({ onClose, logingIn }) => {
+  const {
+    closeWindow,
+    isWindowOpen,
+    windowType,
+    openSuccessWindow,
+    openWindow,
+  } = useWindowContext();
+
   const [successMessage, setSuccessMessage] = useState("");
-
-  useEffect(() => {
-    setWindowType(windowType);
-  }, [windowType]);
-
-  const openLoginWindow = () => {
-    setWindowType("login");
-  };
-
-  const openSignUpWindow = () => {
-    setWindowType("signup");
-  };
-
-  const openForgotPassword = () => {
-    setWindowType("forgot");
-  };
-
-  const openResetPassword = () => {
-    setWindowType("reset");
-  };
-
-  const openSuccessWindow = (message) => {
-    setWindowType("success");
-    setSuccessMessage(message);
-  };
 
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
 
   const handleSuccessClose = () => {
-    setWindowType(null);
     setSuccessMessage("");
     onClose();
   };
 
-  useEffect(() => {
-    setWindowType(windowType);
-  }, [windowType]);
-
   return (
-    <div className="component-login" onClick={onClose}>
-      <div className="login-box" onClick={handleBoxClick}>
-        {currentWindow === "login" && (
+    <div className="component-login" onClick={() => closeWindow()}>
+      <div className="login-box" onClick={() =>handleBoxClick}>
+        {windowType === "login" && (
           <LoginWindow
-            openSignUpWindow={openSignUpWindow}
-            openForgotPassword={openForgotPassword}
-            showSuccess={openSuccessWindow}
+            showSuccess={(message) => {
+              setSuccessMessage(message);
+              openSuccessWindow();
+            }}
             logingIn={logingIn}
           />
         )}
-        {currentWindow === "signup" && (
+        {windowType === "register" && (
           <SignUpWindow
-            openLoginWindow={openLoginWindow}
             onClose={onClose}
-            showSuccess={openSuccessWindow}
+            showSuccess={(message) => {
+              setSuccessMessage(message);
+              openSuccessWindow();
+            }}
           />
         )}
-        {currentWindow === "forgot" && (
+        {windowType === "forgot" && (
           <ForgotPassword
-            openLoginWindow={openLoginWindow}
-            openResetPassword={openResetPassword}
-            showSuccess={openSuccessWindow}
+            showSuccess={(message) => {
+              setSuccessMessage(message);
+              openSuccessWindow();
+            }}
           />
         )}
-        {currentWindow === "reset" && (
+        {windowType === "reset" && (
           <ResetPasswordWindow
-            openLoginWindow={openLoginWindow}
-            showSuccess={openSuccessWindow}
+            showSuccess={(message) => {
+              setSuccessMessage(message);
+              openSuccessWindow();
+            }}
             onClose={onClose}
           />
         )}
-        {currentWindow === "success" && (
+        {windowType === "success" && (
           <SuccessWindow
             message={successMessage}
             onClose={handleSuccessClose}
           />
         )}
-        {currentWindow === "avatar" && (
-          <AvatarWindow
-            message={successMessage}
-            onClose={handleSuccessClose}
-          />
+        {windowType === "avatar" && (
+          <AvatarWindow onClose={handleSuccessClose} />
+        )}
+        {windowType === "tutorial" && (
+          <TutorialWindow onClose={handleSuccessClose} />
         )}
       </div>
     </div>

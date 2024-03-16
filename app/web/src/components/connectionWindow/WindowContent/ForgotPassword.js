@@ -4,11 +4,22 @@ import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
+import { useWindowContext } from "../../WindowContext";
+
+
 const ForgotPassword = ({
+  
   openResetPassword,
   openLoginWindow,
   showSuccess,
 }) => {
+    const {
+    closeWindow,
+    isWindowOpen,
+    windowType,
+    openSuccessWindow,
+    openWindow,
+  } = useWindowContext();
   const { checkEmail } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
@@ -72,13 +83,13 @@ const ForgotPassword = ({
         <Button
           className="buttonconnexion button login-button"
           type="temporary"
-          onClick={openResetPassword}
+          onClick={() => openWindow("reset")}
           label="TEMPORARY BUTTON"
         />
       </form>
       <Button
         className="buttonconnexion forgot-button"
-        onClick={openLoginWindow}
+        onClick={() => openWindow("login")}
         label="Return to connection menu"
       />
       <p></p>

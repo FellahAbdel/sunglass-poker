@@ -6,6 +6,8 @@ import {
   getUserInfo,
   AuthProvider,
 } from "./../components/AuthProvider";
+import { useWindowContext } from "./../components/WindowContext";
+
 //css imports
 import "./gameTable.css";
 import "../components/gameTable/Utiles/animations.css";
@@ -32,6 +34,7 @@ const GameTable = () => {
   const [tutorialMenu, setTutorialMenu] = useState();
 
   const { logingIn, logingOut, getUserInfo } = useAuth();
+  const { windowType, isWindowOpen, closeWindow } = useWindowContext();
 
   const handleLanguageChange = (language) => {
     console.log("Selected Language:", language);
@@ -47,7 +50,7 @@ const GameTable = () => {
     setIsLogged(false);
     setProfileMenu(false);
     setSettingsMenu(false);
-  }
+  };
 
   const handleLogInButton = () => {
     setTutorialMenu(false);
@@ -97,8 +100,18 @@ const GameTable = () => {
     ]);
   };
 
+  const handleCloseOnClickOutside = (event) => {
+    if (isWindowOpen) {
+      closeWindow();
+    }
+  };
+
+  const handleBoxClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
-    <div className="container-main">
+    <div className="container-main" onClick={handleCloseOnClickOutside}>
       {/* css Pattern background */}
       <div className="background"></div>
       <div className="backdrop"></div>
@@ -121,29 +134,35 @@ const GameTable = () => {
         <div
           className={`
           comp-table 
-          ${logInMenu && "comp-table-login"}
-          ${tutorialMenu && "comp-table-tutorial"}
+          ${
+            (windowType == "login" ||
+              windowType == "register" ||
+              windowType == "forgot" ||
+              windowType == "reset") &&
+            "comp-table-login"
+          }
+          ${windowType == "tutorial" && "comp-table-tutorial"}
           ${isLogged && "comp-table-inGame"}
+         
       `}
         >
-          <Table
-            selectedLanguage={handleLanguageChange}
-            dealingFlop={dealingFlop}
-            showCards={[0, 1, 2, 3, 4]}
-            playersCardDistributedProp={playersCardDistributed}
-            playersCardsShowProp={playersCardsShow}
-            moneyPot={9999999999}
-            // to open the profile and setting menus
-            profileMenuActive={profileMenu}
-            settingsMenuActive={settingsMenu}
-            logingInMenuActive={logInMenu}
-            tutorialMenuActive={tutorialMenu}
-            // LogIn panel
-            isWindowOpen={logInMenu}
-            windowType={logInMenu ? "login" : null}
-            isLoggedOnClick={handleIsLogged}
-            isLogged={isLogged}
-          />
+
+            <Table
+              selectedLanguage={handleLanguageChange}
+              dealingFlop={dealingFlop}
+              showCards={[0, 1, 2, 3, 4]}
+              playersCardDistributedProp={playersCardDistributed}
+              playersCardsShowProp={playersCardsShow}
+              moneyPot={9999999999}
+              // to open the profile and setting menus
+              profileMenuActive={profileMenu}
+              settingsMenuActive={settingsMenu}
+              // LogIn panel
+              isLoggedOnClick={handleIsLogged}
+              isLogged={isLogged}
+              onClick={(e) => handleBoxClick}
+            />
+
         </div>
       </AuthProvider>
 

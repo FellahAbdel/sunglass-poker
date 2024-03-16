@@ -9,8 +9,17 @@ import {
   validatePassword,
   validatePasswordMatch,
 } from "../../ValidationUtils";
+import { useWindowContext } from "../../WindowContext";
+
 
 const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
+  const {
+    closeWindow,
+    isWindowOpen,
+    windowType,
+    openSuccessWindow,
+    openWindow,
+  } = useWindowContext();
   const { updateUserData } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -143,7 +152,7 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
       </form>
       <Button
         className="buttonconnexion forgot-button"
-        onClick={openLoginWindow}
+        onClick={() => openWindow("login")}
         label="Return to connection menu"
       />
       <p></p>

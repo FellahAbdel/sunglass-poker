@@ -5,8 +5,17 @@ import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
+import { useWindowContext } from "../../WindowContext";
 
-const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
+const LoginWindow = ({}) => {
+  const {
+    closeWindow,
+    isWindowOpen,
+    windowType,
+    openSuccessWindow,
+    openWindow,
+  } = useWindowContext();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -31,7 +40,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
       const loginResult = await login(formData);
 
       if (loginResult === true) {
-        showSuccess("Logged with success!");
+        //showSuccess("Logged with success!");
       } else if (loginResult || loginResult.error === "invalid_credentials") {
         // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
         setValidationErrors({
@@ -77,12 +86,12 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
         />
       </form>
       <Button
-        onClick={openForgotPassword}
+        onClick={() => openWindow("forgot")}
         className="buttonconnexion forgot-button"
         label="I forgot my password"
       />
       <Button
-        onClick={openSignUpWindow}
+        onClick={() => openWindow("register")}
         className="buttonconnexion register-button"
         label="Register New Account"
       />
