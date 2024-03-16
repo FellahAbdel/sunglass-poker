@@ -1,7 +1,7 @@
 import React ,{useState} from 'react';
 import './profileMenu.css'
 import ClientsProfile from '../PlayersProfile/PlayersProfile.js';
-import Button from '../Button/Button.tsx';
+import Button from "../../button/Button.tsx";
 
 
 const ProfileMenu = ({userInfoProp}) => {
@@ -43,8 +43,8 @@ const ProfileMenu = ({userInfoProp}) => {
         </div>
 
         <div className='container-btns'>
-            <Button style={"btn-edit"} children={"Edit"} onClick={handleEditName}/>
-            {editingName && <Button style={"btn-save"} onClick={handleSaveName} children={"save"}/>}
+            <Button style={"btn-edit"} label={"Edit"} onClick={handleEditName}/>
+            {editingName && <Button style={"btn-save"} onClick={handleSaveName} label={"save"}/>}
         </div>
     </div>
   )

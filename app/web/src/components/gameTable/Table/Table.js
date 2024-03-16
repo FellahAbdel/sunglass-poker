@@ -13,8 +13,7 @@ import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import TextGlitch from "./../TextGlitch/TextGlitch";
 import LogoComponent from "../../logo/Logo";
-import Tutorial from "./../Tutorial/Tutorial";
-import Button from "./../Button/Button.tsx";
+import Button from "../../button/Button.tsx";
 import HandCards from "../HandCards/HandCards";
 
 const Table = ({
@@ -28,17 +27,15 @@ const Table = ({
   logingInMenuActive, // to see if the page is logged in
   tutorialMenuActive,
   selectedLanguage,
-  isLoggedOnClick, //temprory
-  isLogged, // temprory
+  onClickStartGame
 }) => {
   const { openWindow, closeWindow, isWindowOpen, windowType } =
     useWindowContext();
-  const { logingIn, logingOut, getUserInfo } = useAuth();
+  const { logingIn, logingOut, getUserInfo, isLogged } = useAuth();
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
   }, [isWindowOpen]);
-
 
   //name , user ID , level , games played , winning ratio , joined Date
   const userInfo = ["Mostafa", "otsuno", "100", "5", "30%", "10/march/2024"];
@@ -116,9 +113,7 @@ const Table = ({
             <Window />
           ) : (
             <>
-              {tutorialMenuActive ? (
-                <Tutorial style="text-tutorial" />
-              ) : (
+              {tutorialMenuActive ? null : (
                 <>
                   <TextGlitch
                     children={"SunGlassPoker"}
@@ -127,8 +122,8 @@ const Table = ({
                   />
                   <Button
                     style={"btn-gameStart"}
-                    children={"Start Playing"}
-                    onClick={isLoggedOnClick}
+                    label={"Start Playing"}
+                    onClick={onClickStartGame}
                   />
                 </>
               )}

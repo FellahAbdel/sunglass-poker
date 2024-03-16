@@ -34,7 +34,7 @@ const GameTable = () => {
   const [tutorialMenu, setTutorialMenu] = useState();
 
   const { logingIn, logingOut, getUserInfo } = useAuth();
-  const { windowType, isWindowOpen, closeWindow } = useWindowContext();
+  const { windowType, isWindowOpen, closeWindow, openWindow } = useWindowContext();
 
   const handleLanguageChange = (language) => {
     console.log("Selected Language:", language);
@@ -75,6 +75,11 @@ const GameTable = () => {
   const handleSettingsMenu = () => {
     setSettingsMenu(!settingsMenu);
     setProfileMenu(false);
+  };
+
+  const handleClickStartGame = () => {
+    // Regarder si on est connecté ou pas
+    !isLogged && openWindow("login") ;
   };
 
   const handleFold = () => {
@@ -148,6 +153,7 @@ const GameTable = () => {
       `}
         >
           <Table
+            onClickStartGame={handleClickStartGame}
             selectedLanguage={handleLanguageChange}
             dealingFlop={dealingFlop}
             showCards={[0, 1, 2, 3, 4]}

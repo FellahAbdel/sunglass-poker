@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './settingsMenu.css'
-import Button from '../Button/Button.tsx';
+import Button from "../../button/Button.tsx";
 
 const SettingsMenu = ({handleSliderChange,darkMode,mute,onLanguageChange}) => {
 

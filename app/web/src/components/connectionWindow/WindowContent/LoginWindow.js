@@ -1,9 +1,8 @@
 //LoginWindow.js
 import React, { useState } from "react";
-import Button from "../../button/Buttons";
+import Button from "../../button/Button.tsx";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
-import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../WindowContext";
 
@@ -59,7 +58,6 @@ const LoginWindow = ({}) => {
 
   return (
     <div className="box">
-      <Text className="title" content="Sign in to your account" />
       {/* <LogoComponent className="logoconnexion" /> */}
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
@@ -80,24 +78,23 @@ const LoginWindow = ({}) => {
           style={"input-login"}
         />
         <Button
-          className="buttonconnexion login-button"
+          style="buttonconnexion login-button"
           type="submit"
           label="Login"
         />
       </form>
       <Button
         onClick={() => openWindow("forgot")}
-        className="buttonconnexion forgot-button"
+        style="buttonconnexion forgot-button"
         label="I forgot my password"
       />
       <Button
         onClick={() => openWindow("register")}
-        className="buttonconnexion register-button"
+        style="buttonconnexion register-button"
         label="Register New Account"
       />
-      <Text className="littletext" content="OR" />
       <Button
-        className="buttonconnexion login-button google-button"
+        style="buttonconnexion login-button google-button"
         label="Sign in with google"
       />
     </div>

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Button from "../../button/Buttons";
+import Button from "../../button/Button.tsx";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
-import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
 import {
   validateEmail,
@@ -114,9 +113,8 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
 
   return (
     <div className="box">
-      <Text className="title" content="Reset your password" />
       {/* <LogoComponent className="logoconnexion" /> */}
-      <Text className="littletext" content="Enter your new password here" />
+      Enter your new password here
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent //Temporaire, il faudrait que l'e-mail soit passé en parametre et récupéré dans le mail du user
           name="email"
@@ -145,13 +143,13 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           style={"input-login"}
         />
         <Button
-          className="buttonconnexion button login-button"
+          style="buttonconnexion button login-button"
           type="submit"
           label="Send"
         />
       </form>
       <Button
-        className="buttonconnexion forgot-button"
+        style="buttonconnexion forgot-button"
         onClick={() => openWindow("login")}
         label="Return to connection menu"
       />

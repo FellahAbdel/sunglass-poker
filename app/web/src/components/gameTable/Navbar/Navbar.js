@@ -7,7 +7,7 @@ import { useWindowContext } from "../../WindowContext";
 import "./navbar.css";
 //components
 import ChipsCash from "./ChipsCash";
-import Button from "../Button/Button.tsx";
+import Button from "../../button/Button.tsx";
 
 const Navbar = ({
   profileOnClick,
@@ -28,14 +28,14 @@ const Navbar = ({
       {isLogged && (
         <>
           <ChipsCash currentChips={9999999999} style={`box-chips`} />
-          <Button children={"LogOut"} onClick={exitOnClick} style="btn-exit" />
+          <Button label={"LogOut"} onClick={exitOnClick} style="btn-exit" />
         </>
       )}
 
       {/* Profile/LogIn Button */}
 
       <Button
-        children={isLogged ? "Profile" : "LogIn"}
+        label={isLogged ? "Profile" : "LogIn"}
         onClick={() =>
             isLogged ? profileOnClick() : openWindow("login")
         }
@@ -46,7 +46,7 @@ const Navbar = ({
 
       {/* Settings/Tutorial Buttons */}
       <Button
-        children={isLogged ? "Settings" : "Tutorial"}
+        label={isLogged ? "Settings" : "Tutorial"}
         onClick={() => isLogged ? settingsOnClick() : openWindow("tutorial")}
         style={`${isLogged ? "btn-settings" : "btn-tutorial"}`}
         iconStyle={`${isLogged ? "icon-settings" : "icon-tutorial"}`}

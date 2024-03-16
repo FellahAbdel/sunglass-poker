@@ -1,15 +1,14 @@
 // SuccessWindow.jsx
 import React from "react";
-import Button from "../../button/Buttons";
-import Text from "../../text/Text";
+import Button from "../../button/Button.tsx";
 
 const SuccessWindow = ({ message, onClose }) => {
   return (
     <div className="box">
-      <Text className="title" content="Success!" />
-      <Text className="title" content={message} />
+      Success!
+      {message}
       <Button
-        className="buttonconnexion login-button google-button"
+        style="buttonconnexion login-button google-button"
         label="OK"
         onClick={onClose}
       />

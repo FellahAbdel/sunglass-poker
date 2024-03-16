@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import './bonusPanel.css';
-import Button from "../Button/Button.tsx";
+import Button from "../../button/Button.tsx";
 import Clubs from './../../assets/images/card_type/Clubs.png';
 import Diamonds from './../../assets/images/card_type/Diamons.png';
 import Hearts from './../../assets/images/card_type/Hearts.png';
@@ -33,7 +33,7 @@ const BonusPanel = () => {
                 <img src={Clubs} alt="Club" className={`container-cardType box-${handleChangeClubs}`}/>
             </div>
 
-            <Button style={"btn-bonus"} children={"BONUS"}/>
+            <Button style={"btn-bonus"} label={"BONUS"}/>
         </div>
     );
 };

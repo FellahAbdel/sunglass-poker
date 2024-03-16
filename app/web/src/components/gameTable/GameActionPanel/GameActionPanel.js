@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./gameActionPanel.css";
 import RaiseSlider from "../Range/RaiseSlider";
-import Button from "../Button/Button.tsx";
+import Button from "../../button/Button.tsx";
 
 const GameActionButtons = ({
   handleFoldProp,
@@ -35,14 +35,14 @@ const GameActionButtons = ({
             handleRaiseProp();
             setShowPopup(!showPopup);
           }}
-          children={`Raise ${sliderValueText ? sliderValueText + "%" : ""}`}
+          label={`Raise ${sliderValueText ? sliderValueText + "%" : ""}`}
         />
         <Button
           style={"btn-checkOrCall"}
           onClick={handleCheckOrCallProp}
-          children={checkOrCall}
+          label={checkOrCall}
         />
-        <Button style={"btn-fold"} onClick={handleFoldProp} children={"Fold"} />
+        <Button style={"btn-fold"} onClick={handleFoldProp} label={"Fold"} />
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
         <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />

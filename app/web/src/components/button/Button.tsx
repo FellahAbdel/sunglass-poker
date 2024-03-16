@@ -1,9 +1,10 @@
 import React from 'react';
+import "./button.css";
 
-const Button = ({ children , iconStyle , iconSrc , style, onClick }) => {
+const Button = ({ label , iconStyle , iconSrc , style, onClick }) => {
   return (
     <button className={style} onClick={onClick}>
-      {children}
+      {label}
       {iconStyle && <img className={iconStyle} src={iconSrc}/>}
     </button>
   );

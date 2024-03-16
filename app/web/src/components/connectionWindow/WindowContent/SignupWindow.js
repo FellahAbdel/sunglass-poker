@@ -1,9 +1,8 @@
 // forgotPassword.jsx
 import React, { useState } from "react";
-import Button from "../../button/Buttons";
+import Button from "../../button/Button.tsx";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
-import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
 import {
   validateUsername,
@@ -125,7 +124,7 @@ const SignUpWindow = ({}) => {
 
   return (
     <div className="box">
-      <Text className="title" content="Create your account" />
+      Create your account
       {/* <LogoComponent className="logoconnexion" /> */}
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
@@ -163,20 +162,20 @@ const SignUpWindow = ({}) => {
           style={"input-login"}
         />
         <Button
-          className="buttonconnexion login-button"
+          style="buttonconnexion login-button"
           type="submit"
           label="Register"
         />
       </form>
       
       <Button
-        className="buttonconnexion login-button google-button"
+        style="buttonconnexion login-button google-button"
         label="Register with google"
       />
       
       <Button
         onClick={() => openWindow("login")}
-        className="buttonconnexion forgot-button"
+        style="buttonconnexion forgot-button"
         label="Already have an account ?"
       />
     </div>

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Button from "../../button/Buttons";
+import Button from "../../button/Button.tsx";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
-import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../WindowContext";
 
@@ -63,9 +62,7 @@ const ForgotPassword = ({
 
   return (
     <div className="box">
-      <Text className="title" content="You forgot your password?" />
       {/* <LogoComponent className="logoconnexion" /> */}
-      <Text className="littletext" content="Enter your account email here" />
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="email"
@@ -76,19 +73,19 @@ const ForgotPassword = ({
           style={"input-login"}
         />
         <Button
-          className="buttonconnexion button login-button"
+          style="buttonconnexion button login-button"
           type="submit"
           label="Send"
         />
         <Button
-          className="buttonconnexion button login-button"
+          style="buttonconnexion button login-button"
           type="temporary"
           onClick={() => openWindow("reset")}
           label="TEMPORARY BUTTON"
         />
       </form>
       <Button
-        className="buttonconnexion forgot-button"
+        style="buttonconnexion forgot-button"
         onClick={() => openWindow("login")}
         label="Return to connection menu"
       />

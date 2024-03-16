@@ -6,7 +6,6 @@ import GameTable from "./pages/gameTable";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
-import Header from "./components/header/Header";
 import { AuthProvider } from "./components/AuthProvider";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -20,7 +19,6 @@ function App() {
           <Routes>
             <Route path="/GameTable" Component={GameTable} />
           </Routes>
-          {/* <Acceuil openWindow={openWindow} /> */}
         </AuthProvider>
       </Router>
     </WindowProvider>
