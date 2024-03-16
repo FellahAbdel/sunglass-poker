@@ -6,6 +6,8 @@ import {
   getUserInfo,
   AuthProvider,
 } from "./../components/AuthProvider";
+import { useWindowContext } from "../components/WindowContext";
+
 //css imports
 import "./gameTable.css";
 import "../components/gameTable/Utiles/animations.css";
@@ -31,23 +33,26 @@ const GameTable = () => {
   const [logInMenu, setLogInMenu] = useState();
   const [tutorialMenu, setTutorialMenu] = useState();
 
-  const { logingIn, logingOut, getUserInfo } = useAuth();
+  const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
+
+  const { openWindow, closeWindow, isWindowOpen, windowType } =
+  useWindowContext();
 
   const handleLanguageChange = (language) => {
     console.log("Selected Language:", language);
   };
 
-  const [isLogged, setIsLogged] = useState(false);
-  const handleIsLogged = () => {
-    setIsLogged(!isLogged);
-    console.log("isLogged");
-  };
+  //const [isLogged, setIsLogged] = useState(false);
+  // const handleIsLogged = () => {
+  //   setIsLogged(!isLogged);
+  //   console.log("isLogged");
+  // };
 
-  const handleLogOut = () => {
-    setIsLogged(false);
-    setProfileMenu(false);
-    setSettingsMenu(false);
-  }
+  // const handleLogOut = () => {
+  //   setIsLogged(false);
+  //   setProfileMenu(false);
+  //   setSettingsMenu(false);
+  // }
 
   const handleLogInButton = () => {
     setTutorialMenu(false);
@@ -104,9 +109,9 @@ const GameTable = () => {
       <div className="backdrop"></div>
 
       {/* Navbar or header */}
-      <div className="comp-navbar">
+      {/* <div className="comp-navbar">
         <Navbar
-          exitOnClick={handleLogOut}
+          //exitOnClick={handleLogOut}
           settingsOnClick={handleSettingsMenu}
           profileOnClick={handleProfileMenu}
           //navbar changes for loggedIn
@@ -114,7 +119,7 @@ const GameTable = () => {
           logInOnClick={handleLogInButton}
           tutorialOnClick={handleTutorialButton}
         />
-      </div>
+      </div> */}
 
       {/* Menu/Table */}
       <AuthProvider>
@@ -141,8 +146,9 @@ const GameTable = () => {
             // LogIn panel
             isWindowOpen={logInMenu}
             windowType={logInMenu ? "login" : null}
-            isLoggedOnClick={handleIsLogged}
-            isLogged={isLogged}
+            //isLoggedOnClick={handleIsLogged}
+            //isLogged={isLogged}
+            showGameTable={true}
           />
         </div>
       </AuthProvider>
