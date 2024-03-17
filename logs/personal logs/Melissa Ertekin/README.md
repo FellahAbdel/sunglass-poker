@@ -79,3 +79,7 @@
 * 2024/03/12 : <b>3h30</b> <br/> Réunion du mardi en groupe :  <i> Réunions hebdomadaires avec le mentor, revue de code, réunion en groupe pour améliorer notre projet en fonction des retours du mentor, réorganisation des tâches de la semaine afin d'éviter les retards. </i>
 
 * 2024/03/13 : <b>30mins</b> <br/> Travail individuel : <i> Rédaction du rapport de la réunion du 12 mars. </i> 
+
+* 2024/03/14 : <b>1h</b> <br/> Travail individuel : <i>Rédaction du documents avec les liens utiles. Surveillance des journaux.</i> 
+
+* Durant la semaine : <b>2h</b> <br/> Discussions en directe sur Discord: <i>Échanges sur les réunions réalisées et leur avancement.  </i> 
