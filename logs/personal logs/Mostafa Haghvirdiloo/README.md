@@ -50,4 +50,8 @@
 
 * 2024/03/14 : <b> 5h </b> <br/>        Travail individuel: <i>implimentation de l'acceuil et login avec la table + des animations de logo floatant </i>
 
-total: 83h15min
+* 2024/03/15 : <b> 2h </b> <br/>        Travail individuel: <i>correctoion de animation , exit button handle , css petits fixes , language selector input   </i>
+
+* 2024/03/16 : <b> 2h </b> <br/>        Travail avec Noe: <i>sujet: organisation des fichier , simplification , fusion des components , debuggage </i>
+
+total: 87h15min
