@@ -70,4 +70,4 @@
 
 2024/03/18 : 2h00           Ajout isGameTableVisible pour voir si on affiche accueil ou gametable, ajout successwindow. Problème avec isLogged.
 
-TEMPS TOTAL: 61h00min 
+TEMPS TOTAL: 64h00min 
