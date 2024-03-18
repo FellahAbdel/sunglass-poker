@@ -17,7 +17,7 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route path="/GameTable" Component={GameTable} />
+            <Route path="/" Component={GameTable} />
           </Routes>
         </AuthProvider>
       </Router>
