@@ -28,7 +28,7 @@ const Navbar = ({
       {isLogged && (
         <>
           <ChipsCash currentChips={9999999999} style={`box-chips`} />
-          <Button label={"LogOut"} onClick={exitOnClick} style="btn-exit" />
+          <Button label={"LogOut"} onClick={logingOut} style="btn-exit" />
         </>
       )}
 

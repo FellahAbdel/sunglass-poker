@@ -1,5 +1,6 @@
 // AuthProvider.js
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useWindowContext } from "./WindowContext";
 
 const AuthContext = createContext();
 const CORSSETTINGS = {
@@ -9,11 +10,19 @@ const CORSSETTINGS = {
   headers: {
     "Content-Type": "application/json",
   },
-}
+};
 
 export const AuthProvider = ({ children }) => {
+  const { showHome } = useWindowContext();
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    console.log(
+      "isLogged AuthProvider : ",
+      isLogged ? "true" : "false"
+    );
+  }, [isLogged]);
 
   useEffect(() => {
     // Récupérer les informations de l'utilisateur depuis le localStorage lors du chargement de la page
@@ -26,9 +35,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      
       const response = await fetch("http://localhost:3001/api/login", {
-        ... CORSSETTINGS,
+        ...CORSSETTINGS,
         body: JSON.stringify(credentials),
       });
 
@@ -59,6 +67,7 @@ export const AuthProvider = ({ children }) => {
   const logingOut = () => {
     setIsLogged(false);
     setUser(null);
+    showHome();
 
     // Supprimer les informations de l'utilisateur du localStorage lors de la déconnexion
     localStorage.removeItem("user");
@@ -94,7 +103,7 @@ export const AuthProvider = ({ children }) => {
       const response = await fetch(
         "http://localhost:3001/api/update-user-data",
         {
-          ... CORSSETTINGS,
+          ...CORSSETTINGS,
           body: JSON.stringify({
             field,
             value,
@@ -132,7 +141,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // Envoyer l'e-mail à l'utilisateur avec un lien pour réinitialiser le mot de passe
       const response = await fetch("http://localhost:3001/api/check-email", {
-        ... CORSSETTINGS,
+        ...CORSSETTINGS,
         body: JSON.stringify({ email }),
       });
 
@@ -153,7 +162,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // Effectuer la requête POST vers votre API
       const response = await fetch("http://localhost:3001/api/users", {
-        ... CORSSETTINGS,
+        ...CORSSETTINGS,
         body: JSON.stringify(userData),
       });
 

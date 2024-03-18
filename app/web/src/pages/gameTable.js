@@ -34,7 +34,8 @@ const GameTable = () => {
   const [tutorialMenu, setTutorialMenu] = useState();
 
   const { logingIn, logingOut, getUserInfo, isLogged } = useAuth();
-  const { windowType, isWindowOpen, closeWindow, openWindow } = useWindowContext();
+  const { windowType, isWindowOpen, closeWindow, openWindow, isGameTableVisible } =
+    useWindowContext();
 
   const handleLanguageChange = (language) => {
     console.log("Selected Language:", language);
@@ -75,10 +76,14 @@ const GameTable = () => {
     setSettingsMenu(!settingsMenu);
     setProfileMenu(false);
   };
-
   const handleClickStartGame = () => {
-    // Regarder si on est connecté ou pas
-    !isLogged && openWindow("login") ;
+    if (isLogged) {
+      // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
+      console.log("Démarrer le jeu");
+    } else {
+      // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
+      openWindow("login");
+    }
   };
 
   const handleFold = () => {
@@ -143,6 +148,7 @@ const GameTable = () => {
             (windowType == "login" ||
               windowType == "register" ||
               windowType == "forgot" ||
+              windowType == "success" ||
               windowType == "reset") &&
             "comp-table-login"
           }
@@ -171,7 +177,7 @@ const GameTable = () => {
       </AuthProvider>
 
       {/* playing elements opens when logged in */}
-      {isLogged && (
+      {isGameTableVisible && (
         <>
           <div
             className={`comp-bonus  ${

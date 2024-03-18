@@ -27,10 +27,16 @@ const Table = ({
   logingInMenuActive, // to see if the page is logged in
   tutorialMenuActive,
   selectedLanguage,
-  onClickStartGame
 }) => {
-  const { openWindow, closeWindow, isWindowOpen, windowType } =
-    useWindowContext();
+  const {
+    openWindow,
+    closeWindow,
+    isWindowOpen,
+    windowType,
+    isGameTableVisible,
+    toggleGameTableVisibility,
+    showGameTable,
+  } = useWindowContext();
   const { logingIn, logingOut, getUserInfo, isLogged } = useAuth();
 
   useEffect(() => {
@@ -39,6 +45,22 @@ const Table = ({
 
   //name , user ID , level , games played , winning ratio , joined Date
   const userInfo = ["Mostafa", "otsuno", "100", "5", "30%", "10/march/2024"];
+
+  const onClickStartGame = () => {
+    console.log(
+      "isLogged Table : ",
+      isLogged ? "true" : "false"
+    );
+    if (isLogged) {
+      // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
+      console.log("Utilisateur connecté, on montre la table")
+      showGameTable();
+    } else {
+      // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
+      console.log("Utilisateur déconnecté, login page")
+      openWindow("login");
+    }
+  };
 
   return (
     // Table that becomes a container for the menus when they are activated
@@ -58,6 +80,7 @@ const Table = ({
         (windowType == "login" ||
           windowType == "register" ||
           windowType == "forgot" ||
+          windowType == "success" ||
           windowType == "reset") &&
         !isLogged &&
         "container-logIn"
@@ -65,7 +88,7 @@ const Table = ({
       `}
     >
       {/* Acceuil table if not logged in and game table if logged in */}
-      {isLogged ? (
+      {isGameTableVisible ? (
         <>
           {/* cards and the pot in the center of the table */}
           <CardsPlacements
@@ -91,6 +114,7 @@ const Table = ({
           ) : null}
         </>
       ) : (
+
         <>
           {/* Acceuil */}
 
@@ -123,7 +147,7 @@ const Table = ({
                   />
                   <Button
                     style={"btn-gameStart"}
-                    label={"Start Playing"}
+                    label={isLogged ? "Start Playing" : "Login to Play"}
                     onClick={onClickStartGame}
                   />
                 </>

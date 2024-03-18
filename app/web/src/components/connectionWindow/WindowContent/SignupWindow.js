@@ -98,7 +98,7 @@ const SignUpWindow = ({}) => {
         const result = await registerUser(formData);
 
         if (result === true) {
-          //showSuccess("Account created with success!");
+          openSuccessWindow("Account created with success!");
         } else if (result && result.error) {
           if (result.error === "user_exists") {
             // Affichez un message d'erreur indiquant que l'utilisateur existe déjà
