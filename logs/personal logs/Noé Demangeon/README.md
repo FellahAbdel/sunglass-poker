@@ -66,4 +66,8 @@
 
 2024/03/16 : 1h30           Réunion Mostafa, Simplification code, Reste a faire content window et variable pour gérer page accueil/gametable
 
+2024/03/17 : 1h00           Recherche et début du desktop avec electron.
+
+2024/03/18 : 2h00           Ajout isGameTableVisible pour voir si on affiche accueil ou gametable, ajout successwindow. Problème avec isLogged.
+
 TEMPS TOTAL: 61h00min 
