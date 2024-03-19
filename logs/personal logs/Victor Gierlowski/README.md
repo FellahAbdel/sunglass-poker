@@ -51,3 +51,13 @@
 | 9 mars | 5 Heures | Refactorisation des fichiers, de codes et de certaines nomenclature. Préparations de la fusion des branches pour la base de données et les serveurs backend / frontend. Setup de roles basique pour mongodb (Afin de prévoir la sécurité) | --
 | 10 mars | 3 Heures | Fusion des branches des fonctionnalités lié au jeu en backend. Adaptation des nominations des fichiers et reconstitutions du code dans une structure cohérentes. | -- 
 | TOTAL | 12 Heures |  | ...
+
+## Septième semaine
+
+| Date | Temps passé | Description | Ressources |
+|:-------|:--:|:----: |--:|
+| 12 mars | 4 Heures | Fusions de plusieurs branches. Résolutions de bugs sur divers branches. Recherche sur des solutions future pour héberger les parties. Mise à jour des VM. Ajustement des branches avec les autres, débuguage et structuration du future code. Code review et future changement à venir | --
+| 14 mars | 4 Heures | Création d'options de démarage pour choisir un environnement de test pour s'adapter au travail sur VM, en local avec ou sans BDD externe. | --
+| 16 mars | 5 Heures | Création d'un serveur fonctionnel à distance pour simplifier l'utilisation de la base de donnée et répondre aux besoin du frontend. | --
+| 17 mars | 1 Heure | Rédaction de documentation sur les commandes possible. Les commandes précédentes étant par défaut le meilleur environnement sur Pc personnel. Fusion sur develop. || --
+| TOTAL | 14 Heures || --

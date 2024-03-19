@@ -56,4 +56,18 @@
 
 2024/03/09 : 2H00           Ajout feedback avec la bdd
 
-TEMPS TOTAL: 49h30min 
+2024/09/12 : 5h00           Réunion groupe, merge de toutes les branch de front-end, fonctionnement bdd.
+
+2024/03/14 : 1h00           Réunion avec Mostafa, mise en commun code, fonctionnement window
+
+2024/03/16 : 2h00           Création 2 pages, Acceuil et GameTable, création fichier WindowContext qui gère quelle fenêtre est affichée. Probleme header ne s'affiche pas dans gametable
+
+2024/03/16 : 2h00           Réorganisation, Windowcontext.
+
+2024/03/16 : 1h30           Réunion Mostafa, Simplification code, Reste a faire content window et variable pour gérer page accueil/gametable
+
+2024/03/17 : 1h00           Recherche et début du desktop avec electron.
+
+2024/03/18 : 2h00           Ajout isGameTableVisible pour voir si on affiche accueil ou gametable, ajout successwindow. Problème avec isLogged.
+
+TEMPS TOTAL: 64h00min 
