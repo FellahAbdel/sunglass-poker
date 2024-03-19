@@ -17,7 +17,7 @@ const getEnvironmentConstants = () => {
   const vmCONST = {
     ...sharedCONST,
     ENV_TYPE: 'VM',
-    ENV_PORT_WEB: 10001,
+    ENV_PORT_WEB: 80,
     ENV_PORT_SERVER: 10002,
   };
 
