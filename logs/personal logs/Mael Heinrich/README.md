@@ -40,4 +40,6 @@
 
 2024/03/19: 1h      Poursuite des recherches et mise en place de la fenetre du desktop pas encore valide
 
-TEMPS TOTAL: 37h45min 
+2024/03/19: 45min   Recherche complémentaires pour le desktop 
+
+TEMPS TOTAL: 38h30min 
