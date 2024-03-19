@@ -6,8 +6,8 @@ import { useWindowContext } from "../../WindowContext";
 import "./table.css";
 import "./tableCards.css";
 //Components
-import ProfileMenu from "../ProfileMenu/ProfileMenu";
-import SettingsMenu from "../SettingsMenu/SettingsMenu";
+import ProfileMenu from "../../connectionWindow/WindowContent/ProfileWindow";
+import SettingsMenu from "../../connectionWindow/WindowContent/SettingsWindow";
 import Window from "../../connectionWindow/Window";
 import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
@@ -77,8 +77,8 @@ const Table = ({
     <div
       className={`
       container-table 
-      ${profileMenuActive && "container-profile"}
-      ${settingsMenuActive && "container-settings"}
+      ${windowType == "profil" && "container-profile"}
+      ${windowType == "settings" && "container-settings"}
       ${!isLogged && "container-acceuil"}
       ${windowType == "tutorial" && !isLogged && "container-tutorial"}
       ${
@@ -99,7 +99,7 @@ const Table = ({
           <CardsPlacements
             moneyPot={moneyPot}
             dealingFlop={dealingFlop}
-            disappear={profileMenuActive || settingsMenuActive}
+            disappear={profileMenuActive || settingsMenuActive  || isWindowOpen }
             playersCardDistributedProp={playersCardDistributedProp}
           />
 
@@ -107,15 +107,15 @@ const Table = ({
           <PlayersPlacements
             playersCardDistributedProp={playersCardDistributedProp}
             playersCardsShowProp={playersCardsShowProp}
-            disappear={profileMenuActive || settingsMenuActive}
+            disappear={profileMenuActive || settingsMenuActive|| isWindowOpen}
           />
 
           {/* Profile menu panel */}
           {profileMenuActive ? <ProfileMenu userInfoProp={userInfo} /> : null}
 
           {/* Settings menu panel */}
-          {settingsMenuActive ? (
-            <SettingsMenu onLanguageChange={selectedLanguage} />
+          {isWindowOpen ? (
+            <Window />
           ) : null}
         </>
       ) : (
@@ -128,7 +128,9 @@ const Table = ({
             onClick={logoOnClick}
             style={`
               logo-acceuil
+              ${windowType == "profil" && "logo-profile"}
               ${windowType == "tutorial" && "logo-tutorial"}
+              ${windowType == "settings" && "logo-login"}
               ${
                 (windowType == "login" ||
                   windowType == "register" ||

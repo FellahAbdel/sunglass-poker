@@ -80,12 +80,12 @@ const GameTable = ({}) => {
     console.log("handleTutorialButton function called from parent component");
   };
   const handleProfileButton = () => {
-    setProfileMenu(!profileMenu);
-    setSettingsMenu(false);
+    openWindow("profil");
+    console.log("handleProfileButton function called from parent component");
   };
   const handleSettingsButton = () => {
-    setSettingsMenu(!settingsMenu);
-    setProfileMenu(false);
+    openWindow("settings");
+    console.log("handleSettingsButton function called from parent component");
   };
   //-----------------------------------------Navbar buttons handles
 
@@ -159,6 +159,7 @@ const GameTable = ({}) => {
               windowType == "reset") &&
             "comp-table-login"
           }
+          ${windowType == "profil" && "comp-table-tutorial"}
           ${windowType == "tutorial" && "comp-table-tutorial"}
           ${isLogged && "comp-table-inGame"}
          

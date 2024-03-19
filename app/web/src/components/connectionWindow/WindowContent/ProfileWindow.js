@@ -1,32 +1,33 @@
 import React ,{useState} from 'react';
 import './profileMenu.css'
-import ClientsProfile from '../PlayersProfile/PlayersProfile.js';
+import ClientsProfile from './../../gameTable/PlayersProfile/PlayersProfile';
 import Button from "../../button/Button.tsx";
 
 
-const ProfileMenu = ({userInfoProp}) => {
+const ProfileWindow = ({}) => {
 
-    const [editingName, setEditingName] = useState(false);
-    const [name, setName] = useState(userInfoProp[0]);
+    const userInfoProp = ["Mostafa", "otsuno", "100", "5", "30%", "10/march/2024"];
 
-    const handleEditName = () => {
-        setEditingName(true);
-    }
 
-    const handleSaveName = () => {
-        // Here you would typically update the user's name in your state or database
-        setEditingName(false);
-    }
 
-    const handleNameChange = (event) => {
-        setName(event.target.value);
-    }
+    // const handleEditName = () => {
+    //     setEditingName(true);
+    // }
+
+    // const handleSaveName = () => {
+    //     // Here you would typically update the user's name in your state or database
+    //     setEditingName(false);
+    // }
+
+    // const handleNameChange = (event) => {
+    //     setName(event.target.value);
+    // }
 
   return (
     <div className="profileMenu">
         <img className='userPP' src={require('./../../assets/images/pp_simple.jpg')} alt="User Profile" />
         
-        <div className='userInfo'>
+        {/* <div className='userInfo'>
             <span>
             Name: {editingName ? (
                 <input className="input-editName" type="text" value={name} onChange={handleNameChange} />
@@ -45,9 +46,9 @@ const ProfileMenu = ({userInfoProp}) => {
         <div className='container-btns'>
             <Button style={"btn-edit"} label={"Edit"} onClick={handleEditName}/>
             {editingName && <Button style={"btn-save"} onClick={handleSaveName} label={"save"}/>}
-        </div>
+        </div> */}
     </div>
   )
 }
 
-export default ProfileMenu;
+export default ProfileWindow;

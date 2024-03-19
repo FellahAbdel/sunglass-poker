@@ -10,15 +10,19 @@ import { AuthProvider } from "./components/AuthProvider";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { WindowProvider } from "./components/WindowContext";
+import { SettingsProvider } from "./components/SettingsContext";
+
 
 function App() {
   return (
     <WindowProvider>
       <Router>
         <AuthProvider>
-          <Routes>
-            <Route path="/" Component={GameTable} />
-          </Routes>
+          <SettingsProvider>
+            <Routes>
+              <Route path="/" Component={GameTable} />
+            </Routes>
+          </SettingsProvider>
         </AuthProvider>
       </Router>
     </WindowProvider>

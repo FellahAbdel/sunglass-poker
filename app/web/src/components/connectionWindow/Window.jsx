@@ -9,6 +9,9 @@ import ForgotPassword from "./WindowContent/ForgotPassword";
 import SuccessWindow from "./WindowContent/SuccessWindow";
 import AvatarWindow from "./WindowContent/AvatarWindow";
 import TutorialWindow from "./WindowContent/TutorialWindow";
+import SettingsWindow from "./WindowContent/SettingsWindow";
+import ProfileWindow from "./WindowContent/ProfileWindow";
+
 
 import { useWindowContext } from "../WindowContext";
 
@@ -78,6 +81,13 @@ const Window = ({ onClose, logingIn }) => {
         {windowType === "tutorial" && (
           <TutorialWindow onClose={handleSuccessClose} />
         )}
+        {windowType === "settings" && (
+          <SettingsWindow/>
+        )}
+        {windowType === "profil" && (
+          <ProfileWindow/>
+        )}
+        
       </div>
     </div>
   );
