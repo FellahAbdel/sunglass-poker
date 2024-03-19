@@ -7,7 +7,7 @@ const localServerApp = express();
 const PORT = 8088;
 const startLocalServer = (done) => {
     localServerApp.use(express.json({ limit: "100mb" }));
-    localServerApp.use(express.static(path.join(__dirname, "build")));
+    localServerApp.use(express.static(path.join(__dirname, "public")));
     /*Le probleme viens du faite que je donne pas la racine ici mais jsp ou elle est en vrai 
     il faut trouver la bonen arborescence et cela devait fonctionner */
 
