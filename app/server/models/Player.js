@@ -3,6 +3,7 @@ export class Player {
   #playerState = "";
   #playerMoney = 1000;
   #playerCards = []; // tableau de deux cartes au maximum
+  #playerTotalBet = 0;
   #playerActionLog = [
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
@@ -42,11 +43,20 @@ export class Player {
 
   /*
    * IN : rien
-   * OUT : STRING, la somme restante du joueur
+   * OUT : NUMBER, la somme restante du joueur
    * FUNCTION : retourne l'état courant du joueur
    */
   getPlayerMoney() {
     return this.#playerMoney;
+  }
+
+  /*
+   * IN : rien
+   * OUT : NUMBER, la somme totale des paris du joueur
+   * FUNCTION : retourne la somme totale des paris du joueur
+   */
+  getPlayerTotalBet () {
+    return this.#playerTotalBet;
   }
 
   /*
@@ -83,6 +93,7 @@ export class Player {
    */
   bet(moneyToBet) {
     this.#playerMoney -= moneyToBet;
+    this.#playerTotalBet += moneyToBet;
   }
 
   /*

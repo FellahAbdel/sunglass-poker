@@ -6,10 +6,19 @@ class partie {
     #cardsGame = []; // liste de l'ensemble des cartes
     #hiddenCards = []; // tableau de 5 cartes 
     #betHistory = []; // [{ idJoueur, sommeMisee }, ...]
+    #lastBet = 0;
     #bets = 0;
     #sideBets = 0;
     #currentPlayer = 0;
     #revolution = 0;
+
+    #SMALL_BLIND = 10;
+    #BIG_BLIND = 2 * this.#SMALL_BLIND;
+    #CHECK = {command : "v", action : "CHECK"};
+    #CALL = {command : "c", action : "CALL"};
+    #FOLD = {command : "f", action : "FOLD"};
+    #BET = {command : "b", action : "BET"};
+    #RAISE = {command : "r", action : "RAISE"};
 
     constructor () {
         this.initCards();
@@ -1067,7 +1076,238 @@ class partie {
      * OUT : rien
      * FUNCTION : deroule UNE partie
      */
-    deroulerPartie () {}
+    async deroulerPartie () {
+
+        // on recupere la petite et la grosse blinde
+        this.#players[0].bet(this.#SMALL_BLIND);
+        this.#players[1].bet(this.#BIG_BLIND);
+        this.#bets += this.#SMALL_BLIND;
+        this.#bets += this.#BIG_BLIND;
+
+        // actualise l'historique
+        this.#betHistory.push({id : this.#players[0].getPlayerId(), amount : this.#SMALL_BLIND});
+        this.#betHistory.push({id : this.#players[1].getPlayerId(), amount : this.#BIG_BLIND});
+        this.#lastBet = this.#BIG_BLIND;
+
+
+        let nbPlayers = this.#players.length;
+        let currentPlayer = 2 % nbPlayers;
+        let nextActions = [this.#CALL, this.#RAISE, this.#FOLD];
+        
+
+        process.stdout.write("bets : " + this.#bets + "\n");
+        process.stdout.write("side bets : " + this.#sideBets + "\n\n");
+        process.stdout.write("tour de jeu : joeur " + this.#players[currentPlayer].getPlayerId() + "\n");
+        process.stdout.write("Vous disposez de : " + this.#players[currentPlayer].getPlayerMoney() + "\n");
+        process.stdout.write(this.proposeAction(nextActions) + "\n\n>");
+
+        process.stdin.setEncoding('utf8');
+
+        process.stdin.on('data', (data) => {
+
+            let response = data; //process.stdin.read();
+            response = response.replace(/\r?\n|\r/g, '');
+            let split = response.split(' ');
+
+            if (split.length > 2) {
+                process.stdout.write("entree invalide\n>");
+                return;
+            }
+
+            let prompt = typeof split[0] !== "undefined" ? split[0] : response;
+            let amount;
+
+            if (split.length > 1) {
+                amount = parseInt(split[1]);
+
+                if (!amount || amount <= 0) {
+                    process.stdout.write("somme a parier invalide\n>");
+                    return;
+                }
+            }
+
+
+
+            if (prompt !== null) {
+                if (prompt.length === 1) {
+
+                    let playerDisponibleFound = this.#players[currentPlayer].getPlayerMoney();
+                    let cPlayer = this.#players[currentPlayer];
+
+                    switch (prompt) {
+
+                        case "c":
+                            let amountToCall = this.#lastBet;
+                            if (currentPlayer === 0 && this.#revolution === 1) {
+                                amountToCall = this.#lastBet - this.#SMALL_BLIND;
+                            }
+                            if (playerDisponibleFound < amountToCall) {
+                                // le joueur n'a plus assez d'argent pour continuer donc on l'elimine
+                                process.stdout.write("Vous ne disposez plus d'assez de fond pour continuer.\n");
+                                process.stdout.write("Joueur " + cPlayer.getPlayerId() + " est elimine\n");
+                                cPlayer.setPlayerState('passive');
+                            } else {
+                                cPlayer.bet(amountToCall);
+                                this.#bets += amountToCall;
+                                this.#betHistory.push({id : cPlayer.getPlayerId(), amount : amountToCall});
+                                process.stdout.write("Il vous reste : " + cPlayer.getPlayerMoney() + "\n");
+                            }
+
+                            nextActions = [this.#CALL, this.#RAISE, this.#FOLD];
+                            break;
+
+                        case "f":
+                            process.stdout.write("Joueur " + cPlayer.getPlayerId() + " est elimine\n");
+                            cPlayer.setPlayerState("passive");
+                            break;
+
+                        case "b":
+                            // recuperer la somme que le joueur souhaite parier
+                            let betAmount = 0;
+                            
+                            if (amount) {
+                                if (amount < playerDisponibleFound) {
+                                    betAmount = amount;
+                                } else {
+                                    betAmount = playerDisponibleFound;
+                                }
+                            } else {
+                                process.stdout.write("somme a parier invalide\n>");
+                                return;
+                            }
+                            
+                            let playerid = this.#players[currentPlayer].getPlayerId();
+                            this.#players[currentPlayer].bet(betAmount);
+                            this.#bets += betAmount;
+                            this.#lastBet = betAmount;
+                            this.#betHistory.push({id : playerid, amount : betAmount});
+                            
+                            process.stdout.write("il vous reste : " + this.#players[currentPlayer].getPlayerMoney() + "\n");
+
+                            nextActions = [this.#CALL, this.#RAISE, this.#FOLD];
+                            break;
+
+                        case "v":
+                            nextActions = [this.#CHECK, this.#BET, this.#FOLD];
+                            break ;
+
+                        case "r":
+                            let betAmount1 = 0;
+                            
+                            if (amount) {
+                                if ((amount + this.#lastBet) < playerDisponibleFound) {
+                                    betAmount1 = amount + this.#lastBet;
+                                } else {
+                                    if (this.#lastBet < playerDisponibleFound){
+                                        // le joueur peut suivre
+                                        betAmount1 = playerDisponibleFound;
+                                    } else {
+                                        // le joueur n'a plus asse de fond pour suivre on l' elimine
+                                        process.stdout.write("Vous ne disposez plus d'assez de fond pour continuer.\n");
+                                        process.stdout.write("Joueur " + cPlayer.getPlayerId() + " est elimine\n");
+                                        cPlayer.setPlayerState('passive');
+                                    }
+                                }
+                            } else {
+                                process.stdout.write("somme a parier invalide\n>");
+                                return;
+                            }
+
+                            if (betAmount1) {
+                                cPlayer.bet(betAmount1);
+                                this.#bets += betAmount1;
+                                this.#lastBet = betAmount1;
+                                this.#betHistory.push({id : cPlayer.getPlayerId(), amount : betAmount1});
+
+                                process.stdout.write("il vous reste : "+ cPlayer.getPlayerMoney() + "\n");
+                            }
+                            nextActions = [this.#CALL, this.#RAISE, this.#FOLD];
+                            break ;
+
+                        default:
+                            process.stdout.write("commande invalide veuille reessayer\n>");
+                            return;
+                    }
+
+                    if (this.checkBetEqualisation()) {
+                        nextActions = [this.#CHECK, this.#BET, this.#FOLD];
+                    }
+
+                    currentPlayer = (currentPlayer + 1) % nbPlayers;
+                    if (currentPlayer === 0) {
+                        this.#revolution++;
+                    }
+
+                }else {
+                    process.stdout.write("commande invalide veuille reessayer\n>");
+                    return;
+                }
+            }
+
+            process.stdout.write("----------------------------------------------------------------------");
+            process.stdout.write("\n\nbets : " + this.#bets + "\n");
+            process.stdout.write("side bets : " + this.#sideBets + "\n\n");
+            process.stdout.write("tour de jeu : joeur " + this.#players[currentPlayer].getPlayerId() + "\n");
+            process.stdout.write("Vous disposez de : " + this.#players[currentPlayer].getPlayerMoney() + "\n");
+            process.stdout.write(this.proposeAction(nextActions) + "\n\n>");
+
+        });
+
+    }
+
+    checkBetEqualisation () {
+        /* verifie si tous les joueurs ont tous parie la meme somme */
+        let first = this.#players[0].getPlayerTotalBet();
+        for (let i = 1; i < this.#players.length; i++) {
+            if (this.#players[i].getPlayerTotalBet() !== first) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // test (currentPlayer) {
+    //     console.log("bets : ", this.#bets);
+    //     console.log("history : ", this.#betHistory);
+    //     console.log("reste : ", this.#players[currentPlayer].getPlayerMoney());
+    // }
+
+    // async getBet(self, currentPlayer) {
+    //     let betAmount = 0;
+    //     let playerDisponibleFound = self.#players[currentPlayer].getPlayerMoney();
+
+    //     await self.consoleQuery(`quelle somme souaitez vous parier ?\n
+    //     somme disponible : ` + playerDisponibleFound +`\n`,
+    //     (amount) => {
+    //         let newAmount = parseInt(amount);
+    //         if (newAmount) {
+    //             betAmount = newAmount;
+    //         } else {
+    //             console.log("entree invalide !");
+    //             this.getBet(self, currentPlayer);
+    //         }
+    //     });
+
+    //     return betAmount;
+    // }
+
+    proposeAction(actions){
+        let command = "";
+        for (let i=0; i < actions.length; i++) {
+            command += actions[i].command + " : " + actions[i].action + "    ";
+        }
+        return command;
+    }
+
+    // consoleQuery(query, callback) {
+    //     'use strict';
+    //     process.stdin.resume();
+    //     process.stdout.write(query);
+    //     process.stdin.once("data", function (data) {
+    //         callback(data.toString().trim());
+    //     });
+    // }
 }
 
 
@@ -1221,17 +1461,19 @@ let p = new partie;
 //     {number : 8, color : "C"}
 // ]));
 
-// let pls = [
-//     new Player('1', 'active'),
-//     new Player('2', 'active'),
-//     new Player('3', 'active'),
-//     new Player('4', 'active')
-// ];
+let pls = [
+    new Player('1', 'active', 1000),
+    new Player('2', 'active', 1000),
+    new Player('3', 'active', 1000),
+    new Player('4', 'active', 1000)
+];
 
-// p.addPlayers(pls);
-// p.distribuer();
+p.addPlayers(pls);
+p.distribuer();
 
 // console.log(p.gagnant());
 // let activePlayer = p.listeJoueursActifs();
 // let res = p.listeCombinaison(activePlayer);
 // res.map((elem) => console.log(elem));
+
+p.deroulerPartie();
