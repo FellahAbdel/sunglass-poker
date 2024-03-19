@@ -18,7 +18,7 @@
   right:0;
   left:0;
 
-  transition: top 1s ease, bottom 1s ease, right 1s ease,left 1s ease;
+  transition: top 1s ease, bottom 1s ease, right 1s ease,left 1s ease,opacity 1s ease;
 }
 
 .logo-tutorial{
@@ -42,4 +42,17 @@
 
 .logo-login img{
   width: 13vw;
+}
+
+.logo-success{
+  left:0;
+  right:0;
+  bottom: 0;
+  top:0;
+  opacity: 0;
+}
+
+.logo-success img{
+  width: 5000vw;
+
 }

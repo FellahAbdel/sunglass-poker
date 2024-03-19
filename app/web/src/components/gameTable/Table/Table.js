@@ -81,11 +81,11 @@ const Table = ({
       ${windowType == "settings" && "container-settings"}
       ${!isLogged && "container-acceuil"}
       ${windowType == "tutorial" && !isLogged && "container-tutorial"}
+      ${windowType == "success" && "container-success"}
       ${
         (windowType == "login" ||
           windowType == "register" ||
           windowType == "forgot" ||
-          windowType == "success" ||
           windowType == "reset") &&
         !isLogged &&
         "container-logIn"
@@ -131,11 +131,11 @@ const Table = ({
               ${windowType == "profil" && "logo-profile"}
               ${windowType == "tutorial" && "logo-tutorial"}
               ${windowType == "settings" && "logo-login"}
+              ${windowType == "success" && "logo-success"}
               ${
                 (windowType == "login" ||
                   windowType == "register" ||
                   windowType == "forgot" ||
-                  windowType == "success" ||
                   windowType == "reset") &&
                 "logo-login"
               }
