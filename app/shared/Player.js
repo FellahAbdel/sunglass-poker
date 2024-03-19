@@ -39,6 +39,14 @@ class Player {
     return this.#playerState;
   }
 
+  getPlayerMoney() {
+    return this.#playerMoney;
+  }
+
+  getPlayerActionLog() {
+    return this.#playerActionLog;
+  }
+
   /*
    * IN : "actif", "passif"
    * OUT : rien
