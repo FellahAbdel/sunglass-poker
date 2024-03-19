@@ -48,5 +48,6 @@
 | Date | Temps passé | Description | Ressources|
 |:-------|:--:|:----: |--:|
 | 8 mars | 4 Heures | Ajout de sessions persistante avec socketio et express-session.| -- 
-| 9 mars | 5 Heures | Refactorisation des fichiers, de codes et de certaines nomenclature. Préparations de la fusion des branches pour la base de données et les serveurs backend / frontend. Setup de roles basique pour mongodb (Afin de prévoir la sécurité) | -- 
-| TOTAL | 9 Heures |  | ...
+| 9 mars | 5 Heures | Refactorisation des fichiers, de codes et de certaines nomenclature. Préparations de la fusion des branches pour la base de données et les serveurs backend / frontend. Setup de roles basique pour mongodb (Afin de prévoir la sécurité) | --
+| 10 mars | 3 Heures | Fusion des branches des fonctionnalités lié au jeu en backend. Adaptation des nominations des fichiers et reconstitutions du code dans une structure cohérentes. | -- 
+| TOTAL | 12 Heures |  | ...
