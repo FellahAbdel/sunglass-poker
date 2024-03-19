@@ -14,7 +14,7 @@ class Game {
 
   start() {
     // Reset deck and shuffle
-    this.deck.reset();
+    this.deck.initCards();
     this.deck.shuffle();
 
     // Deal cards to each player
@@ -69,11 +69,18 @@ class Game {
     return this.players.filter((player) => player.isPlayerActive());
   }
 
+  make7Cards(player) {
+    return {
+      cards: [...this.pokerTable.communityCards, ...player.getPlayerCards()],
+      id: player.getPlayerId(),
+    };
+  }
+
   showHands() {
     this.players.forEach((player) => {
       console.log(`${player.name}'s hand:`);
       player.getPlayerCards().forEach((card) => {
-        console.log(`${card.value} of ${card.suit}`);
+        console.log(card);
       });
       console.log();
     });
@@ -94,4 +101,7 @@ class Game {
 // game.turn();
 
 // game.river();
+
+// game.make7Cards(game.players[0]);
+
 module.exports = Game;
