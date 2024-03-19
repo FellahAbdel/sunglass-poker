@@ -11,7 +11,7 @@ import AvatarWindow from "./WindowContent/AvatarWindow";
 import TutorialWindow from "./WindowContent/TutorialWindow";
 import SettingsWindow from "./WindowContent/SettingsWindow";
 import ProfileWindow from "./WindowContent/ProfileWindow";
-
+import AcceuilWindow from "./WindowContent/AcceuilWindow";
 
 import { useWindowContext } from "../WindowContext";
 
@@ -87,6 +87,10 @@ const Window = ({ onClose, logingIn }) => {
         {windowType === "profil" && (
           <ProfileWindow/>
         )}
+        {windowType === "acceuil" && (
+          <AcceuilWindow/>
+        )}
+        
         
       </div>
     </div>

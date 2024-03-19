@@ -16,9 +16,9 @@ const SuccessWindow = ({ }) => {
   } = useWindowContext();
   
   return (
-    <div className="box">
-      Success!
-      {successMessage}
+    <div className="main-SuccessWindow">
+      <p>{successMessage}</p>
+
       <Button
         style="buttonconnexion login-button google-button"
         label="OK"

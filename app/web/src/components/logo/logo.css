@@ -18,7 +18,7 @@
   right:0;
   left:0;
 
-  transition: top 1s ease, bottom 1s ease, right 1s ease,left 1s ease,opacity 1s ease;
+  transition: top 1s ease, bottom 1s ease, right 1s ease,left 1s ease,opacity 0.5s ease;
 }
 
 .logo-tutorial{
@@ -29,6 +29,7 @@
 .logo-login{
   left:-90%;
   z-index: -1;
+  opacity: 100%;
 }
 
 
@@ -56,3 +57,13 @@
   width: 5000vw;
 
 }
+
+.logo-acceuil.disappear{    
+  opacity: 0;
+}
+
+.logo-profile{
+  bottom:110%;
+  z-index: -1;
+}
+

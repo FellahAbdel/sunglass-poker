@@ -152,16 +152,13 @@ const GameTable = ({}) => {
           className={`
           comp-table 
           ${
-            (windowType == "login" ||
-              windowType == "register" ||
-              windowType == "forgot" ||
-              windowType == "success" ||
-              windowType == "reset") &&
+            (windowType == ("login" || "register" || "forgot"  || "reset")) 
+            &&
             "comp-table-login"
           }
-          ${windowType == "profil" && "comp-table-tutorial"}
+          ${windowType == "settings" && "comp-table-login"}
           ${windowType == "tutorial" && "comp-table-tutorial"}
-          ${isLogged && "comp-table-inGame"}
+          ${windowType == "" && isLogged && "comp-table-inGame"}
          
       `}
         >
@@ -190,14 +187,14 @@ const GameTable = ({}) => {
         <>
           <div
             className={`comp-bonus  ${
-              profileMenu || settingsMenu ? "slideDown" : "slideUp"
+              isWindowOpen ? "slideDown" : "slideUp"
             }`}
           >
             <BonusPanel />
           </div>
           <div
             className={`comp-gameAction ${
-              profileMenu || settingsMenu ? "slideDown" : "slideUp"
+              isWindowOpen ? "slideDown" : "slideUp"
             }`}
           >
             <GameActionPanel
@@ -209,7 +206,7 @@ const GameTable = ({}) => {
 
           <div
             className={`comp-handCards ${
-              profileMenu || settingsMenu ? "slideDown" : "slideUp"
+              isWindowOpen ? "slideDown" : "slideUp"
             }`}
           >
             <HandCards

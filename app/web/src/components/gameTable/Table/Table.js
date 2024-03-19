@@ -99,7 +99,7 @@ const Table = ({
           <CardsPlacements
             moneyPot={moneyPot}
             dealingFlop={dealingFlop}
-            disappear={profileMenuActive || settingsMenuActive  || isWindowOpen }
+            disappear={isWindowOpen}
             playersCardDistributedProp={playersCardDistributedProp}
           />
 
@@ -107,7 +107,7 @@ const Table = ({
           <PlayersPlacements
             playersCardDistributedProp={playersCardDistributedProp}
             playersCardsShowProp={playersCardsShowProp}
-            disappear={profileMenuActive || settingsMenuActive|| isWindowOpen}
+            disappear={isWindowOpen}
           />
 
           {/* Profile menu panel */}
@@ -124,46 +124,44 @@ const Table = ({
           {/* Acceuil */}
 
           {/* dynamique logo , moves according to the menu that is open */}
-          <LogoComponent
-            onClick={logoOnClick}
-            style={`
-              logo-acceuil
-              ${windowType == "profil" && "logo-profile"}
-              ${windowType == "tutorial" && "logo-tutorial"}
-              ${windowType == "settings" && "logo-login"}
-              ${windowType == "success" && "logo-success"}
-              ${
-                (windowType == "login" ||
-                  windowType == "register" ||
-                  windowType == "forgot" ||
-                  windowType == "reset") &&
-                "logo-login"
-              }
-            `}
-          />
 
           {isWindowOpen ? (
             <Window />
           ) : (
             <>
-              {tutorialMenuActive ? null : (
-                <>
-                  <TextGlitch
-                    children={"SunGlassPoker"}
-                    style={"glitch-accueil"}
-                    glitchStyle={"glitchStyle-accueil"}
-                  />
-                  <Button
-                    style={"btn-gameStart"}
-                    label={isLogged ? "Start Playing" : "Login to Play"}
-                    onClick={onClickStartGame}
-                  />
-                </>
-              )}
+              
+                <TextGlitch
+                  children={"SunGlassPoker"}
+                  style={"glitch-accueil"}
+                  glitchStyle={"glitchStyle-accueil"}
+                />
+                <Button
+                  style={"btn-gameStart"}
+                  label={isLogged ? "Start Playing" : "Login to Play"}
+                  onClick={onClickStartGame}
+                />
+                
             </>
           )}
         </>
       )}
+
+      <LogoComponent
+            onClick={logoOnClick}
+            style={`
+            logo-acceuil
+              ${windowType == "" && "disappear"}
+              ${windowType == "profil" && "logo-profile"}
+              ${windowType == "tutorial" && "logo-tutorial"}
+              ${windowType == "settings" && "logo-login"}
+              ${windowType == "success" && "logo-success"}
+              ${
+                (windowType == ("acceuil" || "login" || "register" || "forgot" || "reset")) 
+                &&
+                "logo-login"
+              }
+            `}
+          />
     </div>
   );
 };
