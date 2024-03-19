@@ -1,3 +1,5 @@
+const isStraight = require("./straight");
+
 /*
  * IN : tableau de 7 cartes
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
@@ -28,7 +30,7 @@ function isStraightFlush(tableau7cartes) {
   );
 
   // Étape 3: Vérifier si ces cartes forment une suite
-  let quinteFlush = self.isStraight(cartesMemeCouleur);
+  let quinteFlush = isStraight(cartesMemeCouleur);
   if (quinteFlush !== false) {
     return quinteFlush; // Renvoie les cartes de la quinte flush si elles forment une suite
   } else {
