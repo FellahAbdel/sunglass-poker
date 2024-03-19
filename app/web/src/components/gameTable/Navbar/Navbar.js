@@ -11,7 +11,7 @@ import Button from "../../button/Button.tsx";
 
 const Navbar = ({
   profileOnClick,
-  exitOnClick,
+  logOutOnClick,
   settingsOnClick,
   isLoggedNavbar,
   logInOnClick,
@@ -28,7 +28,7 @@ const Navbar = ({
       {isLogged && (
         <>
           <ChipsCash currentChips={9999999999} style={`box-chips`} />
-          <Button label={"LogOut"} onClick={logingOut} style="btn-exit" />
+          <Button label={"LogOut"} onClick={logOutOnClick} style="btn-exit" />
         </>
       )}
 
@@ -37,7 +37,7 @@ const Navbar = ({
       <Button
         label={isLogged ? "Profile" : "LogIn"}
         onClick={() =>
-            isLogged ? profileOnClick() : openWindow("login")
+            isLogged ? profileOnClick() : logInOnClick() 
         }
         style={`${isLogged ? "btn-profile" : "btn-logIn"}`}
         iconStyle="icon-profile"
@@ -47,7 +47,7 @@ const Navbar = ({
       {/* Settings/Tutorial Buttons */}
       <Button
         label={isLogged ? "Settings" : "Tutorial"}
-        onClick={() => isLogged ? settingsOnClick() : openWindow("tutorial")}
+        onClick={() => isLogged ? settingsOnClick() : tutorialOnClick()}
         style={`${isLogged ? "btn-settings" : "btn-tutorial"}`}
         iconStyle={`${isLogged ? "icon-settings" : "icon-tutorial"}`}
         iconSrc={

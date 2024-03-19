@@ -120,6 +120,7 @@ const Table = ({
 
           {/* dynamique logo , moves according to the menu that is open */}
           <LogoComponent
+            onClick={logoOnClick}
             style={`
               logo-acceuil
               ${windowType == "tutorial" && "logo-tutorial"}

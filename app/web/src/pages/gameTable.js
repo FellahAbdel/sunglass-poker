@@ -46,36 +46,6 @@ const GameTable = () => {
   //   console.log("isLogged");
   // };
 
-  const handleLogOut = () => {
-    logingOut();
-    setProfileMenu(false);
-    setSettingsMenu(false);
-    closeWindow();
-  };
-
-  const handleLogInButton = () => {
-    setTutorialMenu(false);
-    setLogInMenu(!logInMenu);
-    console.log("handleLogInButton function called from parent component");
-  };
-
-  const handleTutorialButton = () => {
-    setLogInMenu(false);
-    setTutorialMenu(!tutorialMenu);
-  };
-
-  const handleShowHandCard = () => {
-    setShowHandCard(!showHandCard);
-  };
-
-  const handleProfileMenu = () => {
-    setProfileMenu(!profileMenu);
-    setSettingsMenu(false);
-  };
-  const handleSettingsMenu = () => {
-    setSettingsMenu(!settingsMenu);
-    setProfileMenu(false);
-  };
   const handleClickStartGame = () => {
     if (isLogged) {
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
@@ -86,6 +56,45 @@ const GameTable = () => {
     }
   };
 
+
+  //Navbar buttons handles-----------------------------------------
+  const handleCloseWindow = () => {
+    closeWindow();
+  }
+  const handleLogOutButton = () => {
+    logingOut();
+    setProfileMenu(false);
+    setSettingsMenu(false);
+    // closeWindow();
+  };
+  const handleLogInButton = () => {
+    openWindow("login");
+    // setTutorialMenu(false);
+    // setLogInMenu(!logInMenu);
+    console.log("handleLogInButton function called from parent component");
+  };
+  const handleTutorialButton = () => {
+    openWindow("tutorial");
+    // setLogInMenu(false);
+    // setTutorialMenu(!tutorialMenu);
+    console.log("handleTutorialButton function called from parent component");
+  };
+  const handleProfileButton = () => {
+    setProfileMenu(!profileMenu);
+    setSettingsMenu(false);
+  };
+  const handleSettingsButton = () => {
+    setSettingsMenu(!settingsMenu);
+    setProfileMenu(false);
+  };
+  //-----------------------------------------Navbar buttons handles
+
+
+
+  //inGame Fonctions to test-----------------------------------------
+  const handleShowHandCard = () => {
+    setShowHandCard(!showHandCard);
+  };
   const handleFold = () => {
     console.log("handleFold function called from parent component");
     setDealingFlop([!dealingFlop[0], !dealingFlop[1], !dealingFlop[2]]);
@@ -109,16 +118,15 @@ const GameTable = () => {
       !playersCardsShow[2],
     ]);
   };
-
   const handleCloseOnClickOutside = (event) => {
     if (isWindowOpen) {
       closeWindow();
     }
   };
-
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
+  //-----------------------------------------inGame functions to test
 
   return (
     <div className="container-main" /*onClick={handleCloseOnClickOutside}*/>
@@ -129,9 +137,9 @@ const GameTable = () => {
       {/* Navbar or header */}
       <div className="comp-navbar">
         <Navbar
-          exitOnClick={handleLogOut}
-          settingsOnClick={handleSettingsMenu}
-          profileOnClick={handleProfileMenu}
+          exitOnClick={handleLogOutButton}
+          settingsOnClick={handleSettingsButton}
+          profileOnClick={handleProfileButton}
           //navbar changes for loggedIn
           isLoggedNavbar={isLogged}
           logInOnClick={handleLogInButton}
@@ -172,6 +180,7 @@ const GameTable = () => {
             //isLoggedOnClick={handleIsLogged}
             //isLogged={isLogged}
             onClick={(e) => handleBoxClick}
+            logoOnClick={handleCloseWindow}
           />
         </div>
       </AuthProvider>
