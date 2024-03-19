@@ -1,5 +1,4 @@
-const isStraight = required("./straight");
->>>>>>> Stashed changes
+const isStraight = require("./straight");
 /*
  * IN : tableau de 7 cartes
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
