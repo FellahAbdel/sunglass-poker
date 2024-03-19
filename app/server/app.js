@@ -42,7 +42,7 @@ app.use(Middleware);
 const io = require('./controller/socket.io')(server,Middleware,corsSettings);
 
 // Port du server
-const port = 3001;
+const port = ENV_CONST_COMM.ENV_PORT_SERVER;
 
 
 // router
