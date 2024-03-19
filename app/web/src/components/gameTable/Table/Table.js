@@ -44,12 +44,16 @@ const Table = ({
     console.log("isWindowOpen a changé :", isWindowOpen);
   }, [isWindowOpen]);
 
+  useEffect(() => {
+    console.log("isLogged Table:", isLogged)
+  }, [isLogged]);
+
   //name , user ID , level , games played , winning ratio , joined Date
   const userInfo = ["Mostafa", "otsuno", "100", "5", "30%", "10/march/2024"];
 
   const onClickStartGame = () => {
     console.log(
-      "isLogged Table : ",
+      "isLogged Table onClickStartGame : ",
       isLogged ? "true" : "false"
     );
     if (isLogged) {

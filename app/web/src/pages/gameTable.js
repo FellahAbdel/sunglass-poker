@@ -1,11 +1,9 @@
 //react imports
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link, useHistory } from "react-router-dom";
-import {
-  useAuth,
-  getUserInfo,
-  AuthProvider,
-} from "./../components/AuthProvider";
+
+import { useAuth, getUserInfo, AuthProvider } from "./../components/AuthProvider";
+
 import { useWindowContext } from "./../components/WindowContext";
 
 //css imports
@@ -18,7 +16,7 @@ import Table from "../components/gameTable/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 
-const GameTable = () => {
+const GameTable = ({}) => {
   const [dealingFlop, setDealingFlop] = useState([false, false, false]);
   const [handGuide, setHandGuide] = useState("");
   const [profileMenu, setProfileMenu] = useState(false);
@@ -55,7 +53,9 @@ const GameTable = () => {
       openWindow("login");
     }
   };
-
+  useEffect(() => {
+    console.log("isLogged gameTable:", isLogged)
+  }, [isLogged]);
 
   //Navbar buttons handles-----------------------------------------
   const handleCloseWindow = () => {
@@ -148,7 +148,6 @@ const GameTable = () => {
       </div>
 
       {/* Menu/Table */}
-      <AuthProvider>
         <div
           className={`
           comp-table 
@@ -183,7 +182,7 @@ const GameTable = () => {
             logoOnClick={handleCloseWindow}
           />
         </div>
-      </AuthProvider>
+
 
       {/* playing elements opens when logged in */}
       {isGameTableVisible && (

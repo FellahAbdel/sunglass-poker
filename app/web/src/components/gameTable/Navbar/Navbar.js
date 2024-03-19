@@ -1,7 +1,6 @@
 //react imports
-import React, { useState } from "react";
-import { useAuth, getUserInfo } from "./../../AuthProvider.jsx";
-import { useWindowContext } from "../../WindowContext";
+import React, { useState, useEffect} from "react";
+
 
 //css
 import "./navbar.css";
@@ -17,15 +16,11 @@ const Navbar = ({
   logInOnClick,
   tutorialOnClick,
 }) => {
-  const { isLogged, logingIn, logingOut, getUserInfo } = useAuth();
-
-  const { openWindow, closeWindow, isWindowOpen, windowType } =
-    useWindowContext();
 
   return (
     <div className="container-nav">
       {/* Current Chips inventory and LogOut Button */}
-      {isLogged && (
+      {isLoggedNavbar && (
         <>
           <ChipsCash currentChips={9999999999} style={`box-chips`} />
           <Button label={"LogOut"} onClick={logOutOnClick} style="btn-exit" />
@@ -35,23 +30,23 @@ const Navbar = ({
       {/* Profile/LogIn Button */}
 
       <Button
-        label={isLogged ? "Profile" : "LogIn"}
+        label={isLoggedNavbar ? "Profile" : "LogIn"}
         onClick={() =>
-            isLogged ? profileOnClick() : logInOnClick() 
+            isLoggedNavbar ? profileOnClick() : logInOnClick() 
         }
-        style={`${isLogged ? "btn-profile" : "btn-logIn"}`}
+        style={`${isLoggedNavbar ? "btn-profile" : "btn-logIn"}`}
         iconStyle="icon-profile"
         iconSrc={require("./../../assets/images/icons/profile-icon.png")}
       />
 
       {/* Settings/Tutorial Buttons */}
       <Button
-        label={isLogged ? "Settings" : "Tutorial"}
-        onClick={() => isLogged ? settingsOnClick() : tutorialOnClick()}
-        style={`${isLogged ? "btn-settings" : "btn-tutorial"}`}
-        iconStyle={`${isLogged ? "icon-settings" : "icon-tutorial"}`}
+        label={isLoggedNavbar ? "Settings" : "Tutorial"}
+        onClick={() => isLoggedNavbar ? settingsOnClick() : tutorialOnClick()}
+        style={`${isLoggedNavbar ? "btn-settings" : "btn-tutorial"}`}
+        iconStyle={`${isLoggedNavbar ? "icon-settings" : "icon-tutorial"}`}
         iconSrc={
-            isLogged
+            isLoggedNavbar
             ? require("./../../assets/images/icons/settings-icon.png")
             : require("./../../assets/images/icons/tutorial-icon.png")
         }
