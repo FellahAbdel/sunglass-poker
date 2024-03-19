@@ -155,8 +155,9 @@ const Table = ({
               ${windowType == "tutorial" && "logo-tutorial"}
               ${windowType == "settings" && "logo-login"}
               ${windowType == "success" && "logo-success"}
+              ${windowType == "acceuil" && "logo-acceuil"}
               ${
-                (windowType == ("acceuil" || "login" || "register" || "forgot" || "reset")) 
+                (windowType == ( "login" || "register" || "forgot" || "reset")) 
                 &&
                 "logo-login"
               }
