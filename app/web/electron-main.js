@@ -7,7 +7,7 @@ const localServerApp = express();
 const PORT = 8088;
 const startLocalServer = (done) => {
     localServerApp.use(express.json({ limit: "100mb" }));
-    localServerApp.use(express.static(path.join(__dirname, "public")));
+    localServerApp.use(express.static(path.join(__dirname, "build")));
     /*Le probleme viens du faite que je donne pas la racine ici mais jsp ou elle est en vrai 
     il faut trouver la bonen arborescence et cela devait fonctionner */
 
@@ -20,14 +20,15 @@ const startLocalServer = (done) => {
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1920,
+    height: 1080,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
     },
   });
 
+  mainWindow.setMenu(null);
   // and load the index.html of the app.
   //   mainWindow.loadFile('index.html')
   mainWindow.loadURL("http://localhost:" + PORT);
