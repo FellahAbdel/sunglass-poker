@@ -18,3 +18,6 @@
 - 3h le 02/03 (implémentation fonction secondPaire + tests )
 - 3h le 07/03 (correction et modification de la fonction secondpaire + tests)
 - 2h30 le 08/03 (fonction distribuer + fix bug estFull + update test.js)
+- 2h le réunion Backend (Merge de tout les branches)
+- 4h séance du 12/03 (fonction estquinteFlush + tests + merge + test d'integration )
+- 2h le 15/03 (fonction reset())

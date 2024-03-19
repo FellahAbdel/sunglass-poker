@@ -12,7 +12,7 @@ export const WindowProvider = ({ children }) => {
 
   const [isGameTableVisible, setIsGameTableVisible] = useState(() => {
     const saved = localStorage.getItem("isGameTableVisible");
-    return saved === "true" ? true : false;
+    return saved === "true" ? false : false;
   });
 
   useEffect(() => {

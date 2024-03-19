@@ -44,4 +44,16 @@
 
 * 2024/03/08 : <b> 4h </b> <br/>        Travail individuel: <i>animation de distribution des card + correction de placement des cards sur table + liste pour selection des distribution des card + association des buttons pour tester les fonctionnement des animation </i>
 
-total: 73h15min
+* 2024/03/12 : <b> 3h </b> <br/>        Travail en cours TP: <i>merger des 3 pages acceuil , login et gameTable et bdd , debuggage </i>
+
+* 2024/03/13 : <b> 4h </b> <br/>        Travail individuel: <i>table pot ajouté + toggles et range ajouté dans les Settings + fusion des branches de front + resoudre des conflis </i>
+
+* 2024/03/14 : <b> 1h </b> <br/>        Travail en groupe Front-End : <i>s'expliquer des codes et clarification </i>
+
+* 2024/03/14 : <b> 5h </b> <br/>        Travail individuel: <i>implimentation de l'acceuil et login avec la table + des animations de logo floatant </i>
+
+* 2024/03/15 : <b> 2h </b> <br/>        Travail individuel: <i>correctoion de animation , exit button handle , css petits fixes , language selector input   </i>
+
+* 2024/03/16 : <b> 2h </b> <br/>        Travail avec Noe: <i>sujet: organisation des fichier , simplification , fusion des components , debuggage </i>
+
+total: 90h15min

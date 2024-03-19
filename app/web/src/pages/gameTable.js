@@ -63,9 +63,9 @@ const GameTable = () => {
   }
   const handleLogOutButton = () => {
     logingOut();
-    setProfileMenu(false);
-    setSettingsMenu(false);
-    // closeWindow();
+    //setProfileMenu(false);
+    //setSettingsMenu(false);
+    closeWindow();
   };
   const handleLogInButton = () => {
     openWindow("login");
@@ -137,7 +137,7 @@ const GameTable = () => {
       {/* Navbar or header */}
       <div className="comp-navbar">
         <Navbar
-          exitOnClick={handleLogOutButton}
+          logOutOnClick={handleLogOutButton}
           settingsOnClick={handleSettingsButton}
           profileOnClick={handleProfileButton}
           //navbar changes for loggedIn
