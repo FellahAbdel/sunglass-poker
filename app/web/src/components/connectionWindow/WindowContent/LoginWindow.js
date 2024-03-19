@@ -1,12 +1,20 @@
 //LoginWindow.js
 import React, { useState } from "react";
-import Button from "../../button/Buttons";
+import Button from "../../button/Button.tsx";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
-import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
+import { useWindowContext } from "../../WindowContext";
 
-const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
+const LoginWindow = ({}) => {
+  const {
+    closeWindow,
+    isWindowOpen,
+    windowType,
+    openSuccessWindow,
+    openWindow,
+  } = useWindowContext();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -31,7 +39,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
       const loginResult = await login(formData);
 
       if (loginResult === true) {
-        showSuccess("Logged with success!");
+        openSuccessWindow("Logged with success!");
       } else if (loginResult || loginResult.error === "invalid_credentials") {
         // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
         setValidationErrors({
@@ -50,8 +58,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
 
   return (
     <div className="box">
-      <Text className="title" content="Sign in to your account" />
-      <LogoComponent className="logoconnexion" />
+      {/* <LogoComponent className="logoconnexion" /> */}
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="username"
@@ -59,6 +66,7 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
           onChange={handleChange}
           placeholder="Username"
           errorMessage={validationErrors.username}
+          style={"input-login"}
         />
         <TextInputComponent
           name="password"
@@ -67,27 +75,26 @@ const LoginWindow = ({ openSignUpWindow, openForgotPassword, showSuccess }) => {
           type="password"
           placeholder="Password"
           errorMessage={validationErrors.password}
+          style={"input-login"}
         />
         <Button
-          className="buttonconnexion login-button"
+          style="buttonconnexion login-button"
           type="submit"
           label="Login"
         />
       </form>
       <Button
-        onClick={openForgotPassword}
-        className="buttonconnexion forgot-button"
-        label="I forgot my password. Click here to reset"
+        onClick={() => openWindow("forgot")}
+        style="buttonconnexion forgot-button"
+        label="I forgot my password"
       />
-      <p></p>
       <Button
-        onClick={openSignUpWindow}
-        className="buttonconnexion register-button"
+        onClick={() => openWindow("register")}
+        style="buttonconnexion register-button"
         label="Register New Account"
       />
-      <Text className="littletext" content="or" />
       <Button
-        className="buttonconnexion login-button google-button"
+        style="buttonconnexion login-button google-button"
         label="Sign in with google"
       />
     </div>

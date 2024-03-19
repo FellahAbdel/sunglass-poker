@@ -1,16 +1,24 @@
 import React, { useState } from "react";
-import Button from "../../button/Buttons";
+import Button from "../../button/Button.tsx";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
-import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
 import {
   validateEmail,
   validatePassword,
   validatePasswordMatch,
 } from "../../ValidationUtils";
+import { useWindowContext } from "../../WindowContext";
+
 
 const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
+  const {
+    closeWindow,
+    isWindowOpen,
+    windowType,
+    openSuccessWindow,
+    openWindow,
+  } = useWindowContext();
   const { updateUserData } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -105,9 +113,8 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
 
   return (
     <div className="box">
-      <Text className="title" content="Reset your password" />
-      <LogoComponent className="logoconnexion" />
-      <Text className="littletext" content="Enter your new password here" />
+      {/* <LogoComponent className="logoconnexion" /> */}
+      Enter your new password here
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent //Temporaire, il faudrait que l'e-mail soit passé en parametre et récupéré dans le mail du user
           name="email"
@@ -115,6 +122,7 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           onChange={handleChange}
           placeholder="Mail (temporary)"
           errorMessage={validationErrors.email}
+          style={"input-login"}
         />
         <TextInputComponent
           name="password"
@@ -123,6 +131,7 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           type="password"
           placeholder="Password"
           errorMessage={validationErrors.password}
+          style={"input-login"}
         />
         <TextInputComponent
           name="repeatPassword"
@@ -131,16 +140,17 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           type="password"
           placeholder="Repeat your password"
           errorMessage={validationErrors.repeatPassword}
+          style={"input-login"}
         />
         <Button
-          className="buttonconnexion button login-button"
+          style="buttonconnexion button login-button"
           type="submit"
           label="Send"
         />
       </form>
       <Button
-        className="buttonconnexion forgot-button"
-        onClick={openLoginWindow}
+        style="buttonconnexion forgot-button"
+        onClick={() => openWindow("login")}
         label="Return to connection menu"
       />
       <p></p>

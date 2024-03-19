@@ -1,9 +1,8 @@
 // forgotPassword.jsx
 import React, { useState } from "react";
-import Button from "../../button/Buttons";
+import Button from "../../button/Button.tsx";
 import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
-import Text from "../../text/Text";
 import { useAuth } from "../../AuthProvider";
 import {
   validateUsername,
@@ -11,8 +10,17 @@ import {
   validatePassword,
   validatePasswordMatch,
 } from "../../ValidationUtils";
+import { useWindowContext } from "../../WindowContext";
 
-const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
+
+const SignUpWindow = ({}) => {
+  const {
+    closeWindow,
+    isWindowOpen,
+    windowType,
+    openSuccessWindow,
+    openWindow,
+  } = useWindowContext();
   const { registerUser } = useAuth();
   const [formData, setFormData] = useState({
     pseudo: "",
@@ -90,7 +98,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
         const result = await registerUser(formData);
 
         if (result === true) {
-          showSuccess("Account created with success!");
+          openSuccessWindow("Account created with success!");
         } else if (result && result.error) {
           if (result.error === "user_exists") {
             // Affichez un message d'erreur indiquant que l'utilisateur existe déjà
@@ -116,8 +124,8 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
 
   return (
     <div className="box">
-      <Text className="title" content="Create your account" />
-      <LogoComponent className="logoconnexion" />
+      Create your account
+      {/* <LogoComponent className="logoconnexion" /> */}
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="pseudo"
@@ -125,6 +133,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           onChange={handleChange}
           placeholder="Username"
           errorMessage={validationErrors.pseudo}
+          style={"input-login"}
         />
         <TextInputComponent
           name="email"
@@ -132,6 +141,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           onChange={handleChange}
           placeholder="Email"
           errorMessage={validationErrors.email}
+          style={"input-login"}
         />
         <TextInputComponent
           name="password"
@@ -140,6 +150,7 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           placeholder="Password"
           type={"password"}
           errorMessage={validationErrors.password}
+          style={"input-login"}
         />
         <TextInputComponent
           name="repeatPassword"
@@ -148,22 +159,23 @@ const SignUpWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           placeholder="Repeat your password"
           type={"password"}
           errorMessage={validationErrors.repeatPassword}
+          style={"input-login"}
         />
         <Button
-          className="buttonconnexion login-button"
+          style="buttonconnexion login-button"
           type="submit"
           label="Register"
         />
       </form>
-      <p></p>
+      
       <Button
-        className="buttonconnexion login-button google-button"
+        style="buttonconnexion login-button google-button"
         label="Register with google"
       />
-      <p> </p>
+      
       <Button
-        onClick={openLoginWindow}
-        className="buttonconnexion forgot-button"
+        onClick={() => openWindow("login")}
+        style="buttonconnexion forgot-button"
         label="Already have an account ?"
       />
     </div>
