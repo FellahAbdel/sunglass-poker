@@ -24,6 +24,7 @@ console.log("Active players:");
 activePlayers.forEach((player) => {
   console.log(player.name);
 });
+
 // Start the game
 console.log("Starting the poker game...");
 pokerGame.start();
@@ -39,3 +40,19 @@ console.log("Simulating gameplay...");
 // After the gameplay, show hands again
 console.log("Hands after gameplay:");
 pokerGame.showHands();
+
+// Simulate the flop
+console.log("Simulating the flop...");
+pokerGame.flop();
+console.log("Community cards after flop:");
+console.log(pokerGame.pokerTable.communityCards);
+
+console.log("Simulating the turn...");
+pokerGame.turn();
+console.log("Community cards after turn:");
+console.log(pokerGame.pokerTable.communityCards);
+
+console.log("Simulating the river...");
+pokerGame.river();
+console.log("Community cards after river:");
+console.log(pokerGame.pokerTable.communityCards);
