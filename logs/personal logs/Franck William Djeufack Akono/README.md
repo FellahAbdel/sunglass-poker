@@ -13,3 +13,4 @@ travail de groupe sur la finalisation de la specifications des fonctions du back
 | 27/02/24 | travail sur les fonctions secondCarre secondBrelan, et second carteHaute | 4h |
 | 05/03/24 | travail sur la fonction gagnant et refactoration de la nomonclature des variables du code | 2h |
 | 12/03/24 - 14/03/24 | integrations des differentes fonctionnalites sur les fonctions de terminaison et choix d'un gagnant sur une partie | 11h |
+| 16/03/24 - 19/03/24 | travail sur la version console de derouler_partie qui est desormais fonctionnelle | 6h30 |
