@@ -27,6 +27,7 @@ const Table = ({
   logingInMenuActive, // to see if the page is logged in
   tutorialMenuActive,
   selectedLanguage,
+  logoOnClick,
 }) => {
   const {
     openWindow,
