@@ -1,11 +1,11 @@
 class Card {
-  constructor(value, suit) {
-    this.suit = suit;
-    this.value = value;
+  constructor(number, color) {
+    this.color = color;
+    this.number = number;
   }
 
   getCardString() {
-    return `${this.value} of ${this.suit}`;
+    return `${this.number} of ${this.color}`;
   }
 }
 
