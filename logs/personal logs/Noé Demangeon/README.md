@@ -70,4 +70,8 @@
 
 2024/03/18 : 2h00           Ajout isGameTableVisible pour voir si on affiche accueil ou gametable, ajout successwindow. Problème avec isLogged.
 
-TEMPS TOTAL: 64h00min 
+2024/03/19 : 3H30           Réunion, correction bug, version desktop, simplification code.
+
+2024/03/21 : 2h00           Modification fonctionnement bdd, reducer, dispatch (package : npm install jsonwebtoken)
+
+TEMPS TOTAL: 69h30min 
