@@ -2,12 +2,15 @@
 const mongoose = require("mongoose");
 const UserModel = require("./User");
 const StatModel = require("./Stat");
+const jwt = require('jsonwebtoken');
 
 
-module.exports = function (app,bdd) {
+module.exports = function (app, bdd) {
+  console.log("LA BDD EST BIEN LANCEE");
+
   console.log(bdd);
   // Connexion à la base de données MongoDB
-  mongoose.connect("mongodb://pokerBackEndServer:azerty@"+bdd+"/Poker", {});
+  mongoose.connect("mongodb://pokerBackEndServer:azerty@" + bdd + "/Poker", {});
   const db = mongoose.connection;
 
   db.on(
@@ -18,12 +21,11 @@ module.exports = function (app,bdd) {
     console.log("Connecté à la base de données MongoDB");
   });
 
-
   //file to create a user
   app.get("/view/createUser", (req, res) => {
-    const filepath = 'test.html';
+    const filepath = "test.html";
     res.sendFile(filepath, { root: __dirname });
-  })
+  });
 
   app.post("/api/users", async (req, res) => {
     res.header("Access-Control-Allow-Credentials", "true");
@@ -79,28 +81,25 @@ module.exports = function (app,bdd) {
   });
 
   app.post("/api/login", async (req, res) => {
-
     res.header("Access-Control-Allow-Credentials", "true");
     try {
       const { username, password } = req.body;
-
-      // Recherche d'un utilisateur dans la base de données avec la combinaison pseudo/mot de passe
       const user = await UserModel.findOne({ pseudo: username, password });
 
       if (user) {
-        // La combinaison de pseudo et de mot de passe est correcte
-
-        // Envoyer toutes les informations de l'utilisateur dans la réponse
-        res.json({ success: true, message: "Login successful", userData: user });
+        console.log(`Login réussi pour l'utilisateur : ${username}`);
+        const token = jwt.sign({ id: user._id }, "votre_secret", {
+          expiresIn: "1h",
+        });
+        res.json({ success: true, token: token });
       } else {
-        // La combinaison de pseudo et de mot de passe n'est pas correcte
         res.json({ success: false, message: "Invalid credentials" });
       }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error);
       res.status(500).json({ success: false, message: "Server error" });
     }
-  });
+});
 
   app.post("/api/check-email", async (req, res) => {
     res.header("Access-Control-Allow-Credentials", "true");
@@ -128,7 +127,6 @@ module.exports = function (app,bdd) {
   });
 
   app.put("/api/update-user-data", async (req, res) => {
-
     res.header("Access-Control-Allow-Credentials", "true");
     try {
       const { field, value, identifierType, identifierValue } = req.body;
@@ -146,7 +144,10 @@ module.exports = function (app,bdd) {
           message: `${field} updated successfully`,
         });
       } else {
-        return res.json({ success: false, message: `Failed to update ${field}` });
+        return res.json({
+          success: false,
+          message: `Failed to update ${field}`,
+        });
       }
     } catch (error) {
       console.error(`Error updating ${field}:`, error);
@@ -155,4 +156,4 @@ module.exports = function (app,bdd) {
   });
 
   return db;
-}
+};

@@ -1,5 +1,5 @@
 // AuthProvider.js
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { useWindowContext } from "./WindowContext";
 
 const AuthContext = createContext();
@@ -12,47 +12,40 @@ const CORSSETTINGS = {
   },
 };
 
+const initialState = { isLogged: false, user: null };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "LOGIN":
+      return { ...state, isLogged: true, user: action.payload };
+    case "LOGOUT":
+      return { ...state, isLogged: false, user: null };
+    case "UPDATE_USER_DATA":
+      return { ...state, user: action.payload };
+    default:
+      return state;
+  }
+}
+
 export const AuthProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { showHome } = useWindowContext();
-  const [isLogged, setIsLogged] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    console.log(
-      "isLogged AuthProvider : ",
-      isLogged ? "true" : "false"
-    );
-  }, [isLogged]);
-
-  useEffect(() => {
-    // Récupérer les informations de l'utilisateur depuis le localStorage lors du chargement de la page
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-      setIsLogged(true);
-    }
-  }, []);
+  const { isLogged, user } = state;
 
   const login = async (credentials) => {
     try {
       const response = await fetch("http://localhost:3001/api/login", {
         ...CORSSETTINGS,
+
         body: JSON.stringify(credentials),
       });
-
       const data = await response.json();
-
       if (data.success) {
-        // Utilisez les données récupérées de la base de données
-        const fullUserData = { ...credentials, ...data.userData };
-
-        setIsLogged(true);
-        setUser(fullUserData);
-
-        // Stocker les informations de l'utilisateur dans le localStorage
-        localStorage.setItem("user", JSON.stringify(fullUserData));
-
-        console.log(data.message);
+        sessionStorage.setItem("authToken", data.token); // Stocker le token en mémoire ou gérer via headers
+        dispatch({
+          type: "LOGIN",
+          payload: { ...data.userData, token: data.token },
+        });
         return true;
       } else {
         console.error(data.message);
@@ -65,18 +58,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logingOut = () => {
-    setIsLogged(false);
-    setUser(null);
+    dispatch({ type: "LOGOUT" });
     showHome();
 
-    // Supprimer les informations de l'utilisateur du localStorage lors de la déconnexion
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("authToken"); // nettoyer le token
   };
 
   const getUserInfo = () => {
-    // Fonction pour récupérer les informations de l'utilisateur
-    return user;
+    return state.user;
   };
+
   const updateUserData = async (
     field,
     value,
@@ -84,22 +75,19 @@ export const AuthProvider = ({ children }) => {
     identifierValue
   ) => {
     try {
-      // Vérifiez si l'e-mail est utilisé comme identifiant
       const isEmailIdentifier = identifierType === "email";
-
-      // Si l'e-mail est utilisé comme identifiant, ne vérifiez pas si l'utilisateur est connecté
-      if (!isEmailIdentifier && (!isLogged || !user)) {
+      // Utilisation de state.isLogged et state.user pour vérifier la connexion et accéder aux informations utilisateur
+      if (!isEmailIdentifier && (!state.isLogged || !state.user)) {
         console.error("User not logged in.");
         return;
       }
 
-      // Déterminez quel champ utiliser pour rechercher l'utilisateur dans la base de données
       const identifierField = isEmailIdentifier ? "email" : "pseudo";
+      // Utilisation de state.user pour déterminer la valeur d'identifiant si nécessaire
       const identifier = isEmailIdentifier
         ? identifierValue
-        : user[identifierField];
+        : state.user[identifierField];
 
-      // Mettez à jour le champ spécifié dans la base de données
       const response = await fetch(
         "http://localhost:3001/api/update-user-data",
         {
@@ -116,17 +104,11 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (data.success) {
-        // Mettez à jour le champ dans le contexte local si l'e-mail n'est pas utilisé comme identifiant
-        if (!isEmailIdentifier) {
-          setUser((prevUser) => ({ ...prevUser, [field]: value }));
-
-          // Mettez à jour les informations dans le stockage local si nécessaire
-          localStorage.setItem(
-            "user",
-            JSON.stringify({ ...user, [field]: value })
-          );
-        }
-
+        // Dispatch d'une action pour mettre à jour l'état utilisateur si la mise à jour est réussie
+        dispatch({
+          type: "UPDATE_USER_DATA",
+          payload: { ...state.user, [field]: value },
+        });
         console.log(`${field} updated successfully.`);
         return true;
       } else {
@@ -192,6 +174,8 @@ export const AuthProvider = ({ children }) => {
         updateUserData,
         checkEmail,
         registerUser,
+        state,
+        dispatch,
       }}
     >
       {children}
