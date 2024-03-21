@@ -61,3 +61,10 @@
 | 16 mars | 5 Heures | Création d'un serveur fonctionnel à distance pour simplifier l'utilisation de la base de donnée et répondre aux besoin du frontend. | --
 | 17 mars | 1 Heure | Rédaction de documentation sur les commandes possible. Les commandes précédentes étant par défaut le meilleur environnement sur Pc personnel. Fusion sur develop. || --
 | TOTAL | 14 Heures || --
+
+## Huitième semaine
+
+| Date | Temps passé | Description | Ressources |
+|:-------|:--:|:----: |--:|
+| 19 mars | 4 Heures | Expliquations des derniers changements effectuer. Debuguage des branches. Executions des vm et améliorations du choix d'environnement. Recherche pour faire fonctionner le frontend au travers du reverse proxy unistra | --
+| TOTAL | 4 Heures || --
