@@ -17,5 +17,6 @@
 - 12/03 , Reunion TP | finition de la fusion des diffèrentes fonctions de jeux avec le autres membres du backend, réalisations de plusieurs tests et etudes de diffèrents cas de figure et correction des erreurs : 5H 
 - 13/03 , corrections erreurs fichier Partie.js : 1H
 - 15/03 , Réunion equipe Back-end | avancement dans les fonctions de jeux : 2H
+- 19/03 , Réunuin TP | avancement tests unitaire et Split des diffèrentes classes et fonctions du jeu : 4H
 
-- TOTAL:41H
+- TOTAL:45H
