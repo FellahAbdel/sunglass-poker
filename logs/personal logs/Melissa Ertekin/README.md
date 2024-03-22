@@ -90,6 +90,8 @@
 
 ### Semaine 7 : 18 Mars - 25 Mars | Temps Totale:
 
-* 2024/03/19 : <b>3h30</b> <br/> Réunion du mardi en groupe :  <i> Réunions hebdomadaires avec le mentor, revue de code, réunion en groupe, réorganisation des tâches de la semaine afin d'éviter les retards. </i>
+* 2024/03/19 : <b>3h30</b> <br/> Réunion du mardi en groupe :  <i> Réunions hebdomadaires avec le mentor, revue de code, réunion en groupe, réorganisation des tâches de la semaine afin d'éviter les retards. </i> 
 
-* Durant la semaine : <b>0h</b> <br/> Discussions en directe: <i> </i> 
+* 2024/03/22 : <b>2h</b> <br/> Travail individuel : <i> Mis à jours de Gantt. Surveillance des journaux. </i>
+
+* Durant la semaine : <b>1h</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
