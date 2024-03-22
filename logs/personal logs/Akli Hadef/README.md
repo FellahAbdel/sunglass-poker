@@ -18,5 +18,6 @@
 - 13/03 , corrections erreurs fichier Partie.js : 1H
 - 15/03 , Réunion equipe Back-end | avancement dans les fonctions de jeux : 2H
 - 19/03 , Réunuin TP | avancement tests unitaire et Split des diffèrentes classes et fonctions du jeu : 4H
+- 22/03 , Rajout de tests unitaires : 2H
 
-- TOTAL:45H
+- TOTAL:47H
