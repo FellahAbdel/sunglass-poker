@@ -24,10 +24,6 @@ const Table = ({
   playersCardDistributedProp, // a list of 10 booleans to distribute to choosen players
   playersCardsShowProp, // a list of 10 booleans to show the cards of choosen players
   moneyPot, // money on the table
-  logingInMenuActive, // to see if the page is logged in
-  tutorialMenuActive,
-  selectedLanguage,
-  logoOnClick,
 }) => {
   const {
     openWindow,
@@ -147,7 +143,6 @@ const Table = ({
       )}
 
       <LogoComponent
-            onClick={logoOnClick}
             style={`
             logo-acceuil
               ${windowType == "" && "disappear"}

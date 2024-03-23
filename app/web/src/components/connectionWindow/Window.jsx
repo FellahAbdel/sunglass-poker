@@ -25,6 +25,10 @@ const Window = ({ onClose, logingIn }) => {
     openWindow,
   } = useWindowContext();
 
+  const handleWindowClick = (event) => {
+    event.stopPropagation();
+  };
+
   const [successMessage, setSuccessMessage] = useState("");
 
   const handleBoxClick = (event) => {
@@ -37,7 +41,7 @@ const Window = ({ onClose, logingIn }) => {
   };
 
   return (
-    <div className="component-login">
+    <div className="component-login" onClick={handleWindowClick}>
       <div className="login-box" onClick={() => handleBoxClick}>
         {windowType === "login" && <LoginWindow />}
         {windowType === "register" && <SignUpWindow />}

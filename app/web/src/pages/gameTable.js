@@ -58,9 +58,6 @@ const GameTable = ({}) => {
   }, [isLogged]);
 
   //Navbar buttons handles-----------------------------------------
-  const handleCloseWindow = () => {
-    closeWindow();
-  }
   const handleLogOutButton = () => {
     logingOut();
     //setProfileMenu(false);
@@ -123,13 +120,15 @@ const GameTable = ({}) => {
       closeWindow();
     }
   };
+
+  
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
   //-----------------------------------------inGame functions to test
 
   return (
-    <div className="container-main" /*onClick={handleCloseOnClickOutside}*/>
+    <div className="container-main" onClick={handleCloseOnClickOutside}>
       {/* css Pattern background */}
       <div className="background"></div>
       <div className="backdrop"></div>
@@ -177,7 +176,6 @@ const GameTable = ({}) => {
             //isLoggedOnClick={handleIsLogged}
             //isLogged={isLogged}
             onClick={(e) => handleBoxClick}
-            logoOnClick={handleCloseWindow}
           />
         </div>
 

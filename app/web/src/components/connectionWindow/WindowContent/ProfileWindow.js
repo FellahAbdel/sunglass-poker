@@ -4,11 +4,11 @@ import ClientsProfile from "./../../gameTable/PlayersProfile/PlayersProfile";
 import Button from "../../button/Button.tsx";
 import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../WindowContext";
+import { useUserData } from "../../useUserData";
 
-const ProfileWindow = ({}) => {
-  const { openWindow } = useWindowContext();
-
-  const { user } = useAuth();
+const ProfileWindow = () => {
+    const { openWindow } = useWindowContext();
+    const { user } = useUserData();
 
   const userInfoProp = [
     user?.pseudo || "Pseudo par défaut",
@@ -39,13 +39,13 @@ const ProfileWindow = ({}) => {
       />
 
       <div className="userInfo">
-        <span>Name: {userInfoProp[0]}</span>
+        <span>Name: {user?.pseudo || "Pseudo par défaut"}</span>
         <br />
-        Mail: {userInfoProp[1]}
+        Mail: {user?.email || "email inconnu"}
         <br />
-        Coins: {userInfoProp[2]}
+        Coins: {user?.coins || "0"}
         <br />
-        Joined Date: {userInfoProp[3]}
+        Joined Date: {user?.joinedDate || "Date inconnue"} 
         <br />
         <Button
           style={"btn-gameStart"}
