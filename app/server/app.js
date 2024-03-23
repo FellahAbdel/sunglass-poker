@@ -3,7 +3,7 @@ const app = express();
 const session = require("express-session");
 const cors = require("cors");
 const ENV_CONST_COMM = require('./controller/envConstants')();
-const gameController = require('./controller/gameController')();
+const gameController = require('./controller/roomController')();
 console.log(ENV_CONST_COMM);
 
 
