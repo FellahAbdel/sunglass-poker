@@ -16,7 +16,7 @@ import { SettingsProvider } from "./components/SettingsContext";
 function App() {
   return (
     <WindowProvider>
-      <Router>
+      <Router basename={'/vmProjetIntegrateurgrp9-1'}>
         <AuthProvider>
           <SettingsProvider>
             <Routes>

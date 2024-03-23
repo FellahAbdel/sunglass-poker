@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /vmProjetIntegrateurgrp9
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /vmProjetIntegrateurgrp9/index.html [L]
+

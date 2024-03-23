@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await fetch("http://localhost:3001/api/login", {
+      const response = await fetch("api/login", {
         ...CORSSETTINGS,
         body: JSON.stringify(credentials),
       });
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
 
       // Mettez à jour le champ spécifié dans la base de données
       const response = await fetch(
-        "http://localhost:3001/api/update-user-data",
+        "/api/update-user-data",
         {
           ...CORSSETTINGS,
           body: JSON.stringify({
@@ -140,7 +140,7 @@ export const AuthProvider = ({ children }) => {
   const checkEmail = async (email) => {
     try {
       // Envoyer l'e-mail à l'utilisateur avec un lien pour réinitialiser le mot de passe
-      const response = await fetch("http://localhost:3001/api/check-email", {
+      const response = await fetch("api/check-email", {
         ...CORSSETTINGS,
         body: JSON.stringify({ email }),
       });
@@ -161,7 +161,7 @@ export const AuthProvider = ({ children }) => {
   const registerUser = async (userData) => {
     try {
       // Effectuer la requête POST vers votre API
-      const response = await fetch("http://localhost:3001/api/users", {
+      const response = await fetch("api/users", {
         ...CORSSETTINGS,
         body: JSON.stringify(userData),
       });

@@ -12,7 +12,7 @@ console.log(ENV_CONST_COMM);
  * origin -> Fixer sur le front-end. Il n'y a que le serveur front end avec qui la communication est autoriser.
  *  */
 const corsSettings = {
-    origin: "http://localhost:"+ENV_CONST_COMM.ENV_PORT_WEB,
+	origin: 'http://localhost:'+ENV_CONST_COMM.ENV_PORT_WEB,
     methods: ["GET", "POST", "PUT"],
     allowedHeaders: ["my-custom-header", "Content-Type"],
     credentials: true

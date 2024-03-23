@@ -9,7 +9,7 @@ const getEnvironmentConstants = () => {
     API_URL: 'http://localhost',
     ENV_PORT_BDD: 1049,
     ENV_IP_BDD: 'jeedom.guillaumehugot.fr',
-    // Define other common constants here
+    ENV_IP_WEB: 'http://localhost',
   };
 
   // Setup pour faire tourner les serveurs sur les machines de l'unistra.
@@ -17,6 +17,7 @@ const getEnvironmentConstants = () => {
   const vmCONST = {
     ...sharedCONST,
     ENV_TYPE: 'VM',
+    ENV_IP_WEB: 'https://mai-projet-integrateur.u-strasbg.fr',
     ENV_PORT_WEB: 80,
     ENV_PORT_SERVER: 10002,
   };
