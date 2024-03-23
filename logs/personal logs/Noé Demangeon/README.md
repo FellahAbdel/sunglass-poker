@@ -76,4 +76,6 @@
 
 2024/03/23 : 2h00           Récupération info bdd pour page profil et stats. Css à faire.
 
-TEMPS TOTAL: 71h30min 
+2024/03/23 : 1h00           Modification fonctionnement user et stats, fichier qui les gère à part. Window se ferme quand on clique en dehors.
+
+TEMPS TOTAL: 72h30min 
