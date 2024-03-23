@@ -3,10 +3,16 @@ const app = express();
 const session = require("express-session");
 const cors = require("cors");
 const ENV_CONST_COMM = require('./controller/envConstants')();
-
-
+const gameController = require('./controller/gameController')();
 console.log(ENV_CONST_COMM);
 
+
+A = gameController.createGame('mon id', {type:'normal',bid:2});
+B = gameController.createGame('autre id', {type:'special',bid:20});
+console.log(A);
+console.log(B);
+console.log(A.isPlaying(1))
+console.log(B.isPlaying(0))
 /** Paramètres cors du serveur.
  * 
  * origin -> Fixer sur le front-end. Il n'y a que le serveur front end avec qui la communication est autoriser.
