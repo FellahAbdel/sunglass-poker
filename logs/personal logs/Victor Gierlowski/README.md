@@ -67,4 +67,5 @@
 | Date | Temps passé | Description | Ressources |
 |:-------|:--:|:----: |--:|
 | 19 mars | 4 Heures | Expliquations des derniers changements effectuer. Debuguage des branches. Executions des vm et améliorations du choix d'environnement. Recherche pour faire fonctionner le frontend au travers du reverse proxy unistra | --
-| TOTAL | 4 Heures || --
+| 19 mars | 4 Heures | Avancement sur une branche expérimentale pour le portage de l'application par le domaine unistra.| --
+| TOTAL | 8 Heures || --
