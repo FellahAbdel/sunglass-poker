@@ -74,4 +74,6 @@
 
 2024/03/21 : 2h00           Modification fonctionnement bdd, reducer, dispatch (package : npm install jsonwebtoken)
 
-TEMPS TOTAL: 69h30min 
+2024/03/23 : 2h00           Récupération info bdd pour page profil et stats. Css à faire.
+
+TEMPS TOTAL: 71h30min 
