@@ -77,7 +77,7 @@ const Table = ({
     <div
       className={`
       container-table 
-      ${windowType == "profil" && "container-profile"}
+      ${(windowType == "profil" || windowType == "stats")&& "container-profile"}
       ${windowType == "settings" && "container-settings"}
       ${!isLogged && "container-acceuil"}
       ${windowType == "tutorial" && !isLogged && "container-tutorial"}
@@ -151,7 +151,7 @@ const Table = ({
             style={`
             logo-acceuil
               ${windowType == "" && "disappear"}
-              ${windowType == "profil" && "logo-profile"}
+              ${(windowType == "profil" || windowType == "stats") && "logo-profile"}
               ${windowType == "tutorial" && "logo-tutorial"}
               ${windowType == "settings" && "logo-login"}
               ${windowType == "success" && "logo-success"}
