@@ -14,7 +14,7 @@ console.log(ENV_CONST_COMM);
 const corsSettings = {
     origin: "http://localhost:"+ENV_CONST_COMM.ENV_PORT_WEB,
     methods: ["GET", "POST", "PUT"],
-    allowedHeaders: ["my-custom-header", "Content-Type"],
+    allowedHeaders: ["my-custom-header", "Content-Type", "Authorization"],
     credentials: true
   }
 app.use(cors(corsSettings))

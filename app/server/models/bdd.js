@@ -2,12 +2,11 @@
 const mongoose = require("mongoose");
 const UserModel = require("./User");
 const StatModel = require("./Stat");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
+const cors = require("cors");
 
 module.exports = function (app, bdd) {
-  console.log("LA BDD EST BIEN LANCEE");
-
   console.log(bdd);
   // Connexion à la base de données MongoDB
   mongoose.connect("mongodb://pokerBackEndServer:azerty@" + bdd + "/Poker", {});
@@ -17,7 +16,7 @@ module.exports = function (app, bdd) {
     "error",
     console.error.bind(console, "Erreur de connexion à la base de données :")
   );
-  db.once("open", () => {
+  db.once("open", async () => {
     console.log("Connecté à la base de données MongoDB");
   });
 
@@ -99,7 +98,7 @@ module.exports = function (app, bdd) {
       console.error("Erreur lors de la connexion :", error);
       res.status(500).json({ success: false, message: "Server error" });
     }
-});
+  });
 
   app.post("/api/check-email", async (req, res) => {
     res.header("Access-Control-Allow-Credentials", "true");
@@ -152,6 +151,45 @@ module.exports = function (app, bdd) {
     } catch (error) {
       console.error(`Error updating ${field}:`, error);
       return res.status(500).json({ success: false, message: "Server error" });
+    }
+  });
+
+  app.get("/api/userInfo", async (req, res) => {
+    const token = req.headers.authorization.split(" ")[1]; // Supposons que le token soit envoyé en tant que "Bearer <token>"
+    try {
+      const decoded = jwt.verify(token, "votre_secret");
+      const user = await UserModel.findById(decoded.id);
+      if (!user) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Utilisateur non trouvé" });
+      }
+      res.json({ success: true, user });
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des informations de l'utilisateur :",
+        error
+      );
+      res.status(500).json({ success: false, message: "Erreur serveur" });
+    }
+  });
+
+  //route pour récupérer les statistiques d'un utilisateur
+  app.get("/api/user-stats/:userId", async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const stats = await StatModel.findOne({ user: userId }).populate(
+        "user",
+        "pseudo"
+      );
+      if (stats) {
+        res.json({ success: true, stats });
+      } else {
+        res.status(404).json({ success: false, message: "Stats not found" });
+      }
+    } catch (error) {
+      console.error("Error retrieving user stats:", error);
+      res.status(500).json({ success: false, message: "Server error" });
     }
   });
 

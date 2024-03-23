@@ -32,6 +32,19 @@ export const AuthProvider = ({ children }) => {
   const { showHome } = useWindowContext();
   const { isLogged, user } = state;
 
+  useEffect(() => {
+    const authToken = sessionStorage.getItem("authToken"); // Ou localStorage selon votre préférence
+    if (authToken) {
+      fetchUserInfo(authToken); // Récupérer les informations de l'utilisateur à partir du token
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          token: authToken,
+        },
+      });
+    }
+  }, []);
+
   const login = async (credentials) => {
     try {
       const response = await fetch("http://localhost:3001/api/login", {
@@ -46,6 +59,7 @@ export const AuthProvider = ({ children }) => {
           type: "LOGIN",
           payload: { ...data.userData, token: data.token },
         });
+        fetchUserInfo(data.token); //Charger les info de l'utilisateur
         return true;
       } else {
         console.error(data.message);
@@ -163,6 +177,63 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const fetchUserInfo = async (token) => {
+    try {
+      const response = await fetch("http://localhost:3001/api/userInfo", {
+        // Assurez-vous que cette route existe dans votre backend et qu'elle renvoie les informations de l'utilisateur basé sur le token
+        method: "GET",
+        headers: {
+          ...CORSSETTINGS.headers,
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+
+      console.log("Réponse de /api/userInfo:", data); // Log pour voir la réponse
+
+      if (data.success) {
+        dispatch({
+          type: "LOGIN",
+          payload: { ...data.user, token: token }, // Supposons que `data.user` contient les informations de l'utilisateur
+        });
+      } else {
+        console.error(
+          "Impossible de récupérer les informations de l'utilisateur"
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des informations de l'utilisateur :",
+        error
+      );
+    }
+  };
+
+  const fetchStats = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/user-stats/${user._id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            // Incluez d'autres headers comme le token si nécessaire
+          },
+        }
+      );
+      const data = await response.json();
+      if (data.success) {
+        return data.stats; // Supposons que la réponse contient un objet stats dans data.stats
+      } else {
+        console.error("Failed to fetch user stats");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching user stats:", error);
+      return null;
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -176,6 +247,7 @@ export const AuthProvider = ({ children }) => {
         registerUser,
         state,
         dispatch,
+        fetchStats,
       }}
     >
       {children}
