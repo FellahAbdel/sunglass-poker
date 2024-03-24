@@ -78,4 +78,6 @@
 
 2024/03/23 : 1h00           Modification fonctionnement user et stats, fichier qui les gère à part. Window se ferme quand on clique en dehors.
 
-TEMPS TOTAL: 72h30min 
+2024/03/24 : 1h00           Modification css, création component backArrow
+
+TEMPS TOTAL: 73h30min 
