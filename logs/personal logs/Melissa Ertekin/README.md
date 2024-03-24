@@ -1,4 +1,4 @@
-# Melissa Ertekin | Temps Totale : 50h
+# Melissa Ertekin | Temps Totale : 62h30
 
 
 ### Semaine 0 : 30 Janvier - 05 Février  | Temps Totale: 5h
@@ -74,7 +74,7 @@
 
 * 2024/03/11 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Rédaction du compte-rendu hebdomadaire. </i> 
 
-### Semaine 6 : 11 Mars - 18 Mars | Temps Totale: 
+### Semaine 6 : 11 Mars - 18 Mars | Temps Totale: 12h30
 
 * 2024/03/12 : <b>3h30</b> <br/> Réunion du mardi en groupe :  <i> Réunions hebdomadaires avec le mentor, revue de code, réunion en groupe pour améliorer notre projet en fonction des retours du mentor, réorganisation des tâches de la semaine afin d'éviter les retards. </i>
 
@@ -82,4 +82,16 @@
 
 * 2024/03/14 : <b>1h</b> <br/> Travail individuel : <i>Rédaction du documents avec les liens utiles. Surveillance des journaux.</i> 
 
-* Durant la semaine : <b>2h</b> <br/> Discussions en directe sur Discord: <i>Échanges sur les réunions réalisées et leur avancement.  </i> 
+* 2024/03/16 : <b>2h30</b> <br/> Travail individuel : <i>Mis à jours de planning & répartitions des taches.</i> 
+
+* 2024/03/18 : <b>2h</b> <br/> Travail individuel : <i> Surveillance des journaux. Demandes de feedback personnalisé. Rédaction du compte-rendu hebdomadaire. </i> 
+
+* Durant la semaine : <b>3h</b> <br/> Discussions en directe: <i>Échanges sur les réunions réalisées et leur avancement. </i> 
+
+### Semaine 7 : 18 Mars - 25 Mars | Temps Totale:
+
+* 2024/03/19 : <b>3h30</b> <br/> Réunion du mardi en groupe :  <i> Réunions hebdomadaires avec le mentor, revue de code, réunion en groupe, réorganisation des tâches de la semaine afin d'éviter les retards. </i> 
+
+* 2024/03/22 : <b>2h30</b> <br/> Travail individuel : <i> Mis à jours de Gantt. Mis à jours des taches sur Trello. Surveillance des journaux. </i>
+
+* Durant la semaine : <b>1h</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 

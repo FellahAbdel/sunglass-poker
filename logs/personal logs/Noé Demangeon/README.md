@@ -66,4 +66,18 @@
 
 2024/03/16 : 1h30           Réunion Mostafa, Simplification code, Reste a faire content window et variable pour gérer page accueil/gametable
 
-TEMPS TOTAL: 61h00min 
+2024/03/17 : 1h00           Recherche et début du desktop avec electron.
+
+2024/03/18 : 2h00           Ajout isGameTableVisible pour voir si on affiche accueil ou gametable, ajout successwindow. Problème avec isLogged.
+
+2024/03/19 : 3H30           Réunion, correction bug, version desktop, simplification code.
+
+2024/03/21 : 2h00           Modification fonctionnement bdd, reducer, dispatch (package : npm install jsonwebtoken)
+
+2024/03/23 : 2h00           Récupération info bdd pour page profil et stats. Css à faire.
+
+2024/03/23 : 1h00           Modification fonctionnement user et stats, fichier qui les gère à part. Window se ferme quand on clique en dehors.
+
+2024/03/24 : 1h00           Modification css, création component backArrow
+
+TEMPS TOTAL: 73h30min 

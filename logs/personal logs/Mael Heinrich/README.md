@@ -36,6 +36,10 @@
 
 2024/03/12: 4h30    Réunion, fusion de banches, test de la bdd, correction de multiple bug ou problémes.
 
+2024/03/17: 1h      Recherche sur le fonctionnement de express pour la version desktop
 
+2024/03/19: 1h      Poursuite des recherches et mise en place de la fenetre du desktop pas encore valide
 
-TEMPS TOTAL: 35h45min 
+2024/03/19: 45min   Recherche complémentaires pour le desktop 
+
+TEMPS TOTAL: 38h30min 
