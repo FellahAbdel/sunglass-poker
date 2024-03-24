@@ -12,7 +12,6 @@ import {
 } from "../../ValidationUtils";
 import { useWindowContext } from "../../WindowContext";
 
-
 const SignUpWindow = ({}) => {
   const {
     closeWindow,
@@ -124,8 +123,7 @@ const SignUpWindow = ({}) => {
 
   return (
     <div className="box">
-      Create your account
-      {/* <LogoComponent className="logoconnexion" /> */}
+      <div className="login-page-title">Create your account</div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="pseudo"
@@ -167,12 +165,12 @@ const SignUpWindow = ({}) => {
           label="Register"
         />
       </form>
-      
+
       <Button
         style="buttonconnexion login-button google-button"
         label="Register with google"
       />
-      
+
       <Button
         onClick={() => openWindow("login")}
         style="buttonconnexion forgot-button"

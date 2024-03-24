@@ -145,14 +145,14 @@ const Table = ({
       <LogoComponent
             style={`
             logo-acceuil
-              ${windowType == "" && "disappear"}
+              ${(windowType == "" && isGameTableVisible) && "disappear"}
               ${(windowType == "profil" || windowType == "stats") && "logo-profile"}
               ${windowType == "tutorial" && "logo-tutorial"}
               ${windowType == "settings" && "logo-login"}
               ${windowType == "success" && "logo-success"}
               ${windowType == "acceuil" && "logo-acceuil"}
               ${
-                (windowType == ( "login" || "register" || "forgot" || "reset")) 
+                (windowType == "login" || windowType == "register" || windowType == "forgot" || windowType == "reset") 
                 &&
                 "logo-login"
               }

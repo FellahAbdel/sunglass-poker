@@ -151,7 +151,7 @@ const GameTable = ({}) => {
           className={`
           comp-table 
           ${
-            (windowType == ("login" || "register" || "forgot"  || "reset")) 
+            (windowType == "login" || windowType == "register" || windowType == "forgot" || windowType == "reset") 
             &&
             "comp-table-login"
           }

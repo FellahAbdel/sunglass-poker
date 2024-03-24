@@ -5,17 +5,24 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-radius: 15px;
-  transition: width 0.5s ease , height 0.5s ease,font-size 0.5s ease;
   font-size: 1.5vw;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .forgot-button {
-  color: grey;
-  cursor: pointer;
-  border: 0px;
-  background-color: white;
-  padding: 10px;
-  margin-bottom: 30px;
+  color: rgb(115, 122, 16);
+  background-color: transparent;
+  margin: 0px;
+}
+
+.login-button {
+  color: black;
+  background-color: rgb(115, 122, 16);
+}
+
+.login-button:hover {
+  background-color: rgba(150, 150, 100, 1);
 }
 
 .google-button {
@@ -53,17 +60,6 @@
   display: flex;
   align-items: center;
 }
-
-.login-button {
-  color: black;
-  background-color: rgb(115, 122, 16);
-  margin-bottom:10px ;
-}
-
-.login-button:hover {
-  background-color: rgba(150, 150, 100, 1);
-}
-
 
 .wrapper {
   display: flex;

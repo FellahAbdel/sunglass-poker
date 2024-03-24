@@ -113,8 +113,8 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
 
   return (
     <div className="box">
-      {/* <LogoComponent className="logoconnexion" /> */}
-      Enter your new password here
+      <div className="login-page-title">Reset your password</div>
+      <div className="login-page-text">Enter your new password here :</div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent //Temporaire, il faudrait que l'e-mail soit passé en parametre et récupéré dans le mail du user
           name="email"

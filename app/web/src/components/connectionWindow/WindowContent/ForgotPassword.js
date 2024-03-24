@@ -5,14 +5,12 @@ import TextInputComponent from "../../textInput/TextInput";
 import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../WindowContext";
 
-
 const ForgotPassword = ({
-  
   openResetPassword,
   openLoginWindow,
   showSuccess,
 }) => {
-    const {
+  const {
     closeWindow,
     isWindowOpen,
     windowType,
@@ -62,7 +60,8 @@ const ForgotPassword = ({
 
   return (
     <div className="box">
-      {/* <LogoComponent className="logoconnexion" /> */}
+      <div className="login-page-title">Forgot your password ?</div>
+      <div className="login-page-text">Enter your Email to receive a password reset link.</div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="email"

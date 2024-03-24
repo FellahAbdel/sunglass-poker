@@ -13,6 +13,7 @@ import SettingsWindow from "./WindowContent/SettingsWindow";
 import ProfileWindow from "./WindowContent/ProfileWindow";
 import AcceuilWindow from "./WindowContent/AcceuilWindow";
 import StatsWindow from "./WindowContent/StatsWindow";
+import BackArrow from "../backArrow/BackArrow.js";
 
 import { useWindowContext } from "../WindowContext";
 
@@ -43,6 +44,14 @@ const Window = ({ onClose, logingIn }) => {
   return (
     <div className="component-login" onClick={handleWindowClick}>
       <div className="login-box" onClick={() => handleBoxClick}>
+        <div>
+          {(windowType === "login" ||
+            windowType === "signup" ||
+            windowType === "forgot" ||
+            windowType === "reset") && (
+            <BackArrow onClick={() => openWindow("login")} />
+          )}
+        </div>
         {windowType === "login" && <LoginWindow />}
         {windowType === "register" && <SignUpWindow />}
         {windowType === "forgot" && <ForgotPassword />}

@@ -58,7 +58,7 @@ const LoginWindow = ({}) => {
 
   return (
     <div className="box">
-      {/* <LogoComponent className="logoconnexion" /> */}
+      <div className="login-page-title">Login to your account</div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="username"
@@ -78,16 +78,17 @@ const LoginWindow = ({}) => {
           style={"input-login"}
         />
         <Button
+          onClick={() => openWindow("forgot")}
+          style="forgot-button"
+          label="I forgot my password"
+        />
+        <Button
           style="buttonconnexion login-button"
           type="submit"
           label="Login"
         />
       </form>
-      <Button
-        onClick={() => openWindow("forgot")}
-        style="buttonconnexion forgot-button"
-        label="I forgot my password"
-      />
+
       <Button
         onClick={() => openWindow("register")}
         style="buttonconnexion register-button"
