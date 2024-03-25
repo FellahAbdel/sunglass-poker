@@ -127,7 +127,7 @@
 
     box-shadow: 
     inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-    0 0 1vw 0.8vW rgb(79, 83, 16),
+    0 0 1vw 0.8vW #4D6478,
     0 0 0 1vW rgb(0, 0, 0),
     0 0 0 2vW rgb(31, 33, 36),
     inset 0 0 0 2vW rgb(43, 41, 41),
@@ -144,9 +144,12 @@
 }
 
 .container-success{
+    width: 50vw;
+    height: 40vh;
+    border-radius: 200px;
     box-shadow: 
     inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-    0 0 1vw 0.8vW rgb(115, 122, 16),
+    0 0 1vw 0.8vW #033F61,
     0 0 0 1vW rgb(0, 0, 0),
     0 0 0 2vW rgb(31, 33, 36),
     inset 0 0 0 2vW rgb(43, 41, 41),

@@ -20,7 +20,7 @@ const SuccessWindow = ({ }) => {
       <p>{successMessage}</p>
 
       <Button
-        style="buttonconnexion login-button google-button"
+        style="buttonconnexion login-button"
         label="OK"
         onClick={closeWindow}
       />
