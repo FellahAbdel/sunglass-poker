@@ -98,6 +98,7 @@ const LoginWindow = ({}) => {
         style="buttonconnexion google-button"
         label="Sign in with google"
         iconSrc={require("./../../assets/images/icons/google.png")}
+        iconStyle={true}
       />
     </div>
   );

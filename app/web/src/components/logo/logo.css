@@ -56,8 +56,6 @@
 }
 
 .logo-success img{
-  width: 5000vw;
-
 }
 
 .logo-acceuil.disappear{    
@@ -67,5 +65,9 @@
 .logo-profile{
   bottom:110%;
   z-index: -1;
+}
+
+.logo-profile img{
+  width: 9vw;
 }
 

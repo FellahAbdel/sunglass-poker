@@ -28,6 +28,14 @@
   font-weight: bold;
   background-color: #4D6478;
 }
+.google-button img{
+  width: 3vh;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  padding-left: 5px;
+}
 
 .register-button {
   margin-top: 5%;
