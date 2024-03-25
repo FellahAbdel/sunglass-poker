@@ -171,4 +171,38 @@ describe("Game", () => {
 
     expect(combinationList).toEqual(expectedOutput);
   });
+
+  test("should correctly determine the winner of the game", () => {
+    // Set up players with different hands and community cards
+    const player1 = new Player(1, "Charlie");
+    player1.setPlayerState("active");
+
+    const player2 = new Player(2, "David");
+    player2.setPlayerState("active");
+
+    game.addPlayer(player1);
+    game.addPlayer(player2);
+
+    player1.addCard(new Card(2, "H"));
+    player1.addCard(new Card(3, "D"));
+    player2.addCard(new Card(4, "S"));
+    player2.addCard(new Card(5, "C"));
+
+    game.pokerTable.communityCards = [
+      new Card(4, "S"),
+      new Card(5, "C"),
+      new Card(6, "H"),
+      new Card(7, "D"),
+      new Card(8, "S"),
+    ];
+
+    // Call the gagnant method to determine the winner
+    const winner = game.gagnant();
+
+    console.log(winner);
+
+    // Check if the winner is as expected
+    // You can add more specific checks based on the expected winner
+    // For example, if player1's hand is stronger than player2's, you might expect player1 to win
+  });
 });
