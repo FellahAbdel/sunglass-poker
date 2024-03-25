@@ -73,10 +73,10 @@
     bottom: 30%;
 }
 .glitchStyle-accueil::before{
-    color: rgba(255, 242, 0, 0.238);
+    color: #4D6478;
 
 }
 .glitchStyle-accueil::after{
-    color: rgba(106, 255, 0, 0.238);
+    color: #4D6478;
 
 }

@@ -78,14 +78,14 @@ const LoginWindow = ({}) => {
           style={"input-login"}
         />
         <Button
-          onClick={() => openWindow("forgot")}
-          style="forgot-button"
-          label="I forgot my password"
-        />
-        <Button
           style="buttonconnexion login-button"
           type="submit"
           label="Login"
+        />
+          <Button
+          onClick={() => openWindow("forgot")}
+          style="buttonconnexion forgot-button"
+          label="I forgot my password"
         />
       </form>
 
@@ -95,8 +95,9 @@ const LoginWindow = ({}) => {
         label="Register New Account"
       />
       <Button
-        style="buttonconnexion login-button google-button"
+        style="buttonconnexion google-button"
         label="Sign in with google"
+        iconSrc={require("./../../assets/images/icons/google.png")}
       />
     </div>
   );
