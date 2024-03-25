@@ -54,3 +54,9 @@
 | 14/03 | Keep working on splitting Partie.js into more class & adapt the code                                                                             |                     | 2h30       |           |
 |       | Advance on the Partie.js split and was block durant hours on the jest config files but finally manage to make some unit testing on some function | Jest (unit testing) | 3h00       |           |
 | 16/03 | Got updated on back-end codes and re-applied it on my work + Ziad help through unit testing of those updated functions                           |                     | 2h         |           |
+
+## Week 7 - _Total: 16,9_
+
+| Date  | Description                                    | Skills developed | Time Spent | Resources |
+| ----- | ---------------------------------------------- | ---------------- | ---------- | --------- |
+| 19/03 | Keep working on the class split + Unit testing |                  | 4h00       |           |
