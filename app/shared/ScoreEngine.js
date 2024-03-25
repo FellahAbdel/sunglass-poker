@@ -1,5 +1,3 @@
-const hands = require("./score-engine/index");
-
 class ScoreEngine {
   /*
    * IN : tableau de tableau contenant les 5 cartes composant les mains main [{[], id}, {[], id}, ...]
