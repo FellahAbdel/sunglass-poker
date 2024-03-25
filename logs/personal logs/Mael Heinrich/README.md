@@ -42,4 +42,10 @@
 
 2024/03/19: 45min   Recherche complémentaires pour le desktop 
 
-TEMPS TOTAL: 38h30min 
+2024/03/19: 4h      Reunion, fusion de branche...
+
+2024/03/25: 1h      Recherche redux et mise en place partiel du redux
+
+
+
+TEMPS TOTAL: 43h30min 
