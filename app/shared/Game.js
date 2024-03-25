@@ -108,6 +108,25 @@ class Game {
       }
     }
   }
+
+  /*
+   * IN : [j1, ...] liste des joueurs actifs
+   * OUT : [{ poid, main, type }, ...] tableau des poids des mains des joueurs
+   * FUNCTION : renvoi le tableau des poids des combinaisons de chaque joueur
+   */
+  listeCombinaison(activePlayers) {
+    let res = [];
+
+    for (let i = 0; i < activePlayers.length; i++) {
+      let f7c = this.game.make7Cards(activePlayers[i]);
+      let c = this.combinaison(f7c.cards);
+      c.id = f7c.id;
+      res.push(c);
+    }
+
+    return res;
+  }
+
   showHands() {
     this.players.forEach((player) => {
       console.log(`${player.name}'s hand:`);
