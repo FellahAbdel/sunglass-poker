@@ -46,7 +46,7 @@ const Window = ({ onClose, logingIn }) => {
       <div className="login-box" onClick={() => handleBoxClick}>
         <div>
           {(windowType === "login" ||
-            windowType === "signup" ||
+            windowType === "register" ||
             windowType === "forgot" ||
             windowType === "reset") && (
             <BackArrow onClick={() => openWindow("login")} />
