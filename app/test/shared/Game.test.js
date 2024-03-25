@@ -119,4 +119,56 @@ describe("Game", () => {
     // Check if combination object matches the expected output
     expect(combination).toEqual(expectedOutput);
   });
+
+  test("should correctly evaluate hand combinations for all active players", () => {
+    const player1 = new Player("Alice");
+    const player2 = new Player("Bob");
+    player1.addCard(new Card(2, "H"));
+    player1.addCard(new Card(3, "D"));
+    player2.addCard(new Card(4, "S"));
+    player2.addCard(new Card(5, "C"));
+
+    game.pokerTable.communityCards = [
+      new Card(4, "S"),
+      new Card(5, "C"),
+      new Card(6, "H"),
+      new Card(7, "D"),
+      new Card(8, "S"),
+    ];
+
+    const activePlayers = [player1, player2];
+    const combinationList = game.listeCombinaison(activePlayers);
+
+    // Check if combinationList contains the expected number of combinations
+    expect(combinationList.length).toBe(2);
+
+    const expectedOutput = [
+      {
+        hand: [
+          new Card(8, "S"),
+          new Card(7, "D"),
+          new Card(6, "H"),
+          new Card(5, "C"),
+          new Card(4, "S"),
+        ],
+        type: "Straight",
+        weight: 5,
+        id: "Alice",
+      },
+      {
+        hand: [
+          new Card(5, "C"),
+          new Card(5, "C"),
+          new Card(4, "S"),
+          new Card(4, "S"),
+          new Card(8, "S"),
+        ],
+        type: "TwoPair",
+        weight: 3,
+        id: "Bob",
+      },
+    ];
+
+    expect(combinationList).toEqual(expectedOutput);
+  });
 });
