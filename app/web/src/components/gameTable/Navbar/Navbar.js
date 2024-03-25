@@ -1,6 +1,5 @@
 //react imports
-import React, { useState, useEffect} from "react";
-
+import React, { useState, useEffect } from "react";
 
 //css
 import "./navbar.css";
@@ -16,9 +15,12 @@ const Navbar = ({
   logInOnClick,
   tutorialOnClick,
 }) => {
+  const handleClick = (e) => {
+    e.stopPropagation();
+  };
 
   return (
-    <div className="container-nav">
+    <div className="container-nav" onClick={handleClick}>
       {/* Current Chips inventory and LogOut Button */}
       {isLoggedNavbar && (
         <>
@@ -31,9 +33,7 @@ const Navbar = ({
 
       <Button
         label={isLoggedNavbar ? "Profile" : "LogIn"}
-        onClick={() =>
-            isLoggedNavbar ? profileOnClick() : logInOnClick() 
-        }
+        onClick={() => (isLoggedNavbar ? profileOnClick() : logInOnClick())}
         style={`${isLoggedNavbar ? "btn-profile" : "btn-logIn"}`}
         iconStyle="icon-profile"
         iconSrc={require("./../../assets/images/icons/profile-icon.png")}
@@ -42,11 +42,11 @@ const Navbar = ({
       {/* Settings/Tutorial Buttons */}
       <Button
         label={isLoggedNavbar ? "Settings" : "Tutorial"}
-        onClick={() => isLoggedNavbar ? settingsOnClick() : tutorialOnClick()}
+        onClick={() => (isLoggedNavbar ? settingsOnClick() : tutorialOnClick())}
         style={`${isLoggedNavbar ? "btn-settings" : "btn-tutorial"}`}
         iconStyle={`${isLoggedNavbar ? "icon-settings" : "icon-tutorial"}`}
         iconSrc={
-            isLoggedNavbar
+          isLoggedNavbar
             ? require("./../../assets/images/icons/settings-icon.png")
             : require("./../../assets/images/icons/tutorial-icon.png")
         }

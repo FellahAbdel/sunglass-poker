@@ -1,8 +1,12 @@
 //react imports
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { useAuth, getUserInfo, AuthProvider } from "./../components/AuthProvider";
+import {
+  useAuth,
+  getUserInfo,
+  AuthProvider,
+} from "./../components/AuthProvider";
 
 import { useWindowContext } from "./../components/WindowContext";
 
@@ -32,8 +36,13 @@ const GameTable = ({}) => {
   const [tutorialMenu, setTutorialMenu] = useState();
 
   const { logingIn, logingOut, getUserInfo, isLogged } = useAuth();
-  const { windowType, isWindowOpen, closeWindow, openWindow, isGameTableVisible } =
-    useWindowContext();
+  const {
+    windowType,
+    isWindowOpen,
+    closeWindow,
+    openWindow,
+    isGameTableVisible,
+  } = useWindowContext();
 
   const handleLanguageChange = (language) => {
     console.log("Selected Language:", language);
@@ -54,7 +63,7 @@ const GameTable = ({}) => {
     }
   };
   useEffect(() => {
-    console.log("isLogged gameTable:", isLogged)
+    console.log("isLogged gameTable:", isLogged);
   }, [isLogged]);
 
   //Navbar buttons handles-----------------------------------------
@@ -85,8 +94,6 @@ const GameTable = ({}) => {
     console.log("handleSettingsButton function called from parent component");
   };
   //-----------------------------------------Navbar buttons handles
-
-
 
   //inGame Fonctions to test-----------------------------------------
   const handleShowHandCard = () => {
@@ -121,7 +128,6 @@ const GameTable = ({}) => {
     }
   };
 
-  
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
@@ -147,12 +153,14 @@ const GameTable = ({}) => {
       </div>
 
       {/* Menu/Table */}
-        <div
-          className={`
+      <div
+        className={`
           comp-table 
           ${
-            (windowType == "login" || windowType == "register" || windowType == "forgot" || windowType == "reset") 
-            &&
+            (windowType == "login" ||
+              windowType == "register" ||
+              windowType == "forgot" ||
+              windowType == "reset") &&
             "comp-table-login"
           }
           ${windowType == "settings" && "comp-table-login"}
@@ -160,33 +168,30 @@ const GameTable = ({}) => {
           ${windowType == "" && isLogged && "comp-table-inGame"}
          
       `}
-        >
-          <Table
-            onClickStartGame={handleClickStartGame}
-            selectedLanguage={handleLanguageChange}
-            dealingFlop={dealingFlop}
-            showCards={[0, 1, 2, 3, 4]}
-            playersCardDistributedProp={playersCardDistributed}
-            playersCardsShowProp={playersCardsShow}
-            moneyPot={9999999999}
-            // to open the profile and setting menus
-            profileMenuActive={profileMenu}
-            settingsMenuActive={settingsMenu}
-            // LogIn panel
-            //isLoggedOnClick={handleIsLogged}
-            //isLogged={isLogged}
-            onClick={(e) => handleBoxClick}
-          />
-        </div>
-
+      >
+        <Table
+          onClickStartGame={handleClickStartGame}
+          selectedLanguage={handleLanguageChange}
+          dealingFlop={dealingFlop}
+          showCards={[0, 1, 2, 3, 4]}
+          playersCardDistributedProp={playersCardDistributed}
+          playersCardsShowProp={playersCardsShow}
+          moneyPot={9999999999}
+          // to open the profile and setting menus
+          profileMenuActive={profileMenu}
+          settingsMenuActive={settingsMenu}
+          // LogIn panel
+          //isLoggedOnClick={handleIsLogged}
+          //isLogged={isLogged}
+          onClick={(e) => handleBoxClick}
+        />
+      </div>
 
       {/* playing elements opens when logged in */}
       {isGameTableVisible && (
         <>
           <div
-            className={`comp-bonus  ${
-              isWindowOpen ? "slideDown" : "slideUp"
-            }`}
+            className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
           >
             <BonusPanel />
           </div>
