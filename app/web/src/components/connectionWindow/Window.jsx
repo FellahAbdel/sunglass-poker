@@ -44,14 +44,14 @@ const Window = ({ onClose, logingIn }) => {
   return (
     <div className="component-login" onClick={handleWindowClick}>
       <div className="login-box" onClick={() => handleBoxClick}>
-        <div>
+        {/* <div>
           {(windowType === "login" ||
             windowType === "register" ||
             windowType === "forgot" ||
             windowType === "reset") && (
             <BackArrow onClick={() => openWindow("login")} />
           )}
-        </div>
+        </div> */}
         {windowType === "login" && <LoginWindow />}
         {windowType === "register" && <SignUpWindow />}
         {windowType === "forgot" && <ForgotPassword />}
