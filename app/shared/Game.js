@@ -1,12 +1,14 @@
 const hands = require("./score-engine/index");
 const Deck = require("./Deck");
 const PokerTable = require("./PokerTable");
+const ScoreEngineUtils = require("./ScoreEngineUtils");
 
 class Game {
   constructor() {
     this.players = [];
     this.deck = new Deck();
     this.pokerTable = new PokerTable();
+    this.scoreEngineUtils = new ScoreEngineUtils();
   }
 
   addPlayer(player) {
@@ -118,7 +120,7 @@ class Game {
     let res = [];
 
     for (let i = 0; i < activePlayers.length; i++) {
-      let f7c = this.game.make7Cards(activePlayers[i]);
+      let f7c = this.make7Cards(activePlayers[i]);
       let c = this.combinaison(f7c.cards);
       c.id = f7c.id;
       res.push(c);
@@ -133,40 +135,43 @@ class Game {
    * FUNCTION : identifie le joueur gagnant de la partie et la main avec laquelle il a gagne
    */
   gagnant() {
-    let activeUsers = this.listeJoueursActifs();
+    let activeUsers = this.getActivePlayers();
     let combinationList = this.listeCombinaison(activeUsers);
-    let maxList = this.maximums(combinationList, (x) => x.weight);
+    let maxList = this.scoreEngineUtils.maximums(
+      combinationList,
+      (x) => x.weight
+    );
 
     if (maxList.length > 1) {
       let winners = [];
 
       switch (maxList[0].type) {
         case "StraightFlush":
-          winners = this.secondCarteHaute(maxList);
+          winners = this.scoreEngineUtils.secondCarteHaute(maxList);
           break;
         case "FourOfAKind":
-          winners = this.secondCarre(maxList);
+          winners = this.scoreEngineUtils.secondCarre(maxList);
           break;
         case "FullHouse":
-          winners = this.secondFull(maxList);
+          winners = this.scoreEngineUtils.secondFull(maxList);
           break;
         case "Flush":
-          winners = this.secondCarteHaute(maxList);
+          winners = this.scoreEngineUtils.secondCarteHaute(maxList);
           break;
         case "Straight":
-          winners = this.secondSuite(maxList);
+          winners = this.scoreEngineUtils.secondSuite(maxList);
           break;
         case "ThreeOfAKind":
-          winners = this.secondBrelan(maxList);
+          winners = this.scoreEngineUtils.secondBrelan(maxList);
           break;
         case "TwoPair":
-          winners = this.secondDoublePaire(maxList);
+          winners = this.scoreEngineUtils.secondDoublePaire(maxList);
           break;
         case "OnePair":
-          winners = this.secondPaire(maxList);
+          winners = this.scoreEngineUtils.secondPaire(maxList);
           break;
         case "HighCard":
-          winners = this.secondCarteHaute(maxList);
+          winners = this.scoreEngineUtils.secondCarteHaute(maxList);
           break;
       }
 
