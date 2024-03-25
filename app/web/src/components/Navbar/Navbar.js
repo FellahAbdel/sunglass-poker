@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import "./navbar.css";
 //components
 import ChipsCash from "./ChipsCash";
-import Button from "../../button/Button.tsx";
+import Button from "../button/Button.tsx";
 
 const Navbar = ({
   profileOnClick,
@@ -36,7 +36,7 @@ const Navbar = ({
         onClick={() => (isLoggedNavbar ? profileOnClick() : logInOnClick())}
         style={`${isLoggedNavbar ? "btn-profile" : "btn-logIn"}`}
         iconStyle="icon-profile"
-        iconSrc={require("./../../assets/images/icons/profile-icon.png")}
+        iconSrc={require("./../assets/images/icons/profile-icon.png")}
       />
 
       {/* Settings/Tutorial Buttons */}
@@ -47,8 +47,8 @@ const Navbar = ({
         iconStyle={`${isLoggedNavbar ? "icon-settings" : "icon-tutorial"}`}
         iconSrc={
           isLoggedNavbar
-            ? require("./../../assets/images/icons/settings-icon.png")
-            : require("./../../assets/images/icons/tutorial-icon.png")
+            ? require("./../assets/images/icons/settings-icon.png")
+            : require("./../assets/images/icons/tutorial-icon.png")
         }
       />
     </div>

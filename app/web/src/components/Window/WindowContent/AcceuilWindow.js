@@ -1,6 +1,6 @@
 import Reaact, { useState } from 'react';
 // import './acceuilWindow.css'
-import TextGlitch from '../../gameTable/TextGlitch/TextGlitch.js';
+import TextGlitch from '../../TextGlitch/TextGlitch.js';
 import Button from "../../button/Button.tsx";
 import { useAuth, getUserInfo, AuthProvider } from "../../AuthProvider";
 

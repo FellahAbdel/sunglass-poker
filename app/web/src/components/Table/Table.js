@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useAuth, getUserInfo, AuthProvider } from "../../AuthProvider";
-import { useWindowContext } from "../../WindowContext";
+import { useAuth, getUserInfo, AuthProvider } from "./../AuthProvider.jsx";
+import { useWindowContext } from "../WindowContext.jsx";
 
 //CSS
 import "./table.css";
 import "./tableCards.css";
 //Components
-import ProfileMenu from "../../connectionWindow/WindowContent/ProfileWindow";
-import SettingsMenu from "../../connectionWindow/WindowContent/SettingsWindow";
-import Window from "../../connectionWindow/Window";
+import ProfileMenu from "../Window/WindowContent/ProfileWindow";
+import SettingsMenu from "../Window/WindowContent/SettingsWindow";
+import Window from "../Window/Window";
 import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import TextGlitch from "./../TextGlitch/TextGlitch";
-import LogoComponent from "../../logo/Logo";
-import Button from "../../button/Button.tsx";
-import HandCards from "../HandCards/HandCards";
+import LogoComponent from "../logo/Logo";
+import Button from "../button/Button.tsx";
+import HandCards from "./../gameTable/HandCards/HandCards";
 
 const Table = ({
   dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
@@ -73,16 +73,16 @@ const Table = ({
     <div
       className={`
       container-table 
-      ${(windowType == "profil" || windowType == "stats")&& "container-profile"}
-      ${windowType == "settings" && "container-settings"}
+      ${(windowType === "profil" || windowType === "stats")&& "container-profile"}
+      ${windowType === "settings" && "container-settings"}
       ${!isLogged && "container-acceuil"}
-      ${windowType == "tutorial" && !isLogged && "container-tutorial"}
-      ${windowType == "success" && "container-success"}
+      ${windowType === "tutorial" && !isLogged && "container-tutorial"}
+      ${windowType === "success" && "container-success"}
       ${
-        (windowType == "login" ||
-          windowType == "register" ||
-          windowType == "forgot" ||
-          windowType == "reset") &&
+        (windowType === "login" ||
+          windowType === "register" ||
+          windowType === "forgot" ||
+          windowType === "reset") &&
         !isLogged &&
         "container-logIn"
       }  
@@ -145,14 +145,14 @@ const Table = ({
       <LogoComponent
             style={`
             logo-acceuil
-              ${(windowType == "" && isGameTableVisible) && "disappear"}
-              ${(windowType == "profil" || windowType == "stats") && "logo-profile"}
-              ${windowType == "tutorial" && "logo-tutorial"}
-              ${windowType == "settings" && "logo-login"}
-              ${windowType == "success" && "logo-success"}
-              ${windowType == "acceuil" && "logo-acceuil"}
+              ${(windowType === "" && isGameTableVisible) && "disappear"}
+              ${(windowType === "profil" || windowType === "stats") && "logo-profile"}
+              ${windowType === "tutorial" && "logo-tutorial"}
+              ${windowType === "settings" && "logo-login"}
+              ${windowType === "success" && "logo-success"}
+              ${windowType === "acceuil" && "logo-acceuil"}
               ${
-                (windowType == "login" || windowType == "register" || windowType == "forgot" || windowType == "reset") 
+                (windowType === "login" || windowType === "register" || windowType === "forgot" || windowType === "reset") 
                 &&
                 "logo-login"
               }

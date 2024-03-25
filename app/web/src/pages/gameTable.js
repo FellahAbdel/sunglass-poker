@@ -12,11 +12,11 @@ import { useWindowContext } from "./../components/WindowContext";
 
 //css imports
 import "./gameTable.css";
-import "../components/gameTable/Utiles/animations.css";
+import "../components/Utiles/animations.css";
 //components imports
-import Navbar from "../components/gameTable/Navbar/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
-import Table from "../components/gameTable/Table/Table";
+import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 
@@ -157,15 +157,15 @@ const GameTable = ({}) => {
         className={`
           comp-table 
           ${
-            (windowType == "login" ||
-              windowType == "register" ||
-              windowType == "forgot" ||
-              windowType == "reset") &&
+            (windowType === "login" ||
+              windowType === "register" ||
+              windowType === "forgot" ||
+              windowType === "reset") &&
             "comp-table-login"
           }
-          ${windowType == "settings" && "comp-table-login"}
-          ${windowType == "tutorial" && "comp-table-tutorial"}
-          ${windowType == "" && isLogged && "comp-table-inGame"}
+          ${windowType === "settings" && "comp-table-login"}
+          ${windowType === "tutorial" && "comp-table-tutorial"}
+          ${windowType === "" && isLogged && "comp-table-inGame"}
          
       `}
       >

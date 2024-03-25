@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../Card/Card'
+import Card from '../gameTable/Card/Card'
 import TextGlitch from './../TextGlitch/TextGlitch'
 
 const CardsPlacements = ({

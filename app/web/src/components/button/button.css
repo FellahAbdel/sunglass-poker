@@ -20,7 +20,7 @@
 }
 
 .login-button:hover {
-  background-color: brightness(50%);
+  background-color:#4D6478 ;
 }
 
 .google-button {
@@ -44,5 +44,5 @@
 }
 
 .register-button:hover {
-  background-color: brightness(50%);
+  background-color: #033F61;
 }

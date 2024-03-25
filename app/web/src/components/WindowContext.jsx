@@ -37,7 +37,7 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openWindow = (type) => {
-    if (isWindowOpen && (windowType == type) ) { //for the buttons to act as a back button too
+    if (isWindowOpen && (windowType === type) ) { //for the buttons to act as a back button too
        closeWindow(type);
     } else {
       console.log(`Ouverture de la fenêtre : ${type}`);

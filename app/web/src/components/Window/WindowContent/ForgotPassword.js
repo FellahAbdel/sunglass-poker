@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "../../button/Button.tsx";
-import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../WindowContext";

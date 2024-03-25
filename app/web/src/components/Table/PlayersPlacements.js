@@ -1,5 +1,5 @@
 import React from 'react'
-import PlayersProfile from '../PlayersProfile/PlayersProfile'
+import PlayersProfile from '../gameTable/PlayersProfile/PlayersProfile'
 
 const PlayersPlacements = ({playersCardsShowProp,playersCardDistributedProp,disappear}) => {
   return (

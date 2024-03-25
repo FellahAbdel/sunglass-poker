@@ -1,6 +1,6 @@
 import React from 'react';
 import './playersProfile.css';
-import ProgressBar from '../Utiles/ProgressBar';
+import ProgressBar from '../../Utiles/ProgressBar';
 import Card from '../Card/Card';
 
 const  PlayersProfile=({status, chips, name , cards , flippingPlayerCards , gotCards}) =>{
