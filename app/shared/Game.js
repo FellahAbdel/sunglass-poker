@@ -77,6 +77,37 @@ class Game {
     };
   }
 
+  /*
+   * IN : tableau de 7 cartes
+   * OUT : objet { poid : NUMBER, type : STRING }
+   * FUNCTION : trouve dans les 7 cartes la main la plus puissante
+   */
+  combinaison(tableau7cartes) {
+    // Appelez des fonctions pour vérifier chaque type de main dans l'ordre de puissance
+    const functionsToCall = [
+      { fn: hands.royalFlush, type: "RoyalFlush" },
+      { fn: hands.straightFlush, type: "StraightFlush" },
+      { fn: hands.fourOfAKind, type: "FourOfAKind" },
+      { fn: hands.fullHouse, type: "FullHouse" },
+      { fn: hands.flush, type: "Flush" },
+      { fn: hands.straight, type: "Straight" },
+      { fn: hands.threeOfAKind, type: "ThreeOfAKind" },
+      { fn: hands.twoPair, type: "TwoPair" },
+      { fn: hands.onePair, type: "OnePair" },
+      { fn: hands.highCard, type: "HighCard" },
+    ];
+
+    for (let i = 0; i < functionsToCall.length; i++) {
+      const hand = functionsToCall[i].fn(tableau7cartes);
+      if (hand) {
+        return {
+          hand: hand,
+          type: functionsToCall[i].type,
+          weight: 10 - i,
+        };
+      }
+    }
+  }
   showHands() {
     this.players.forEach((player) => {
       console.log(`${player.name}'s hand:`);
