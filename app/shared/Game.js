@@ -127,6 +127,64 @@ class Game {
     return res;
   }
 
+  /*
+   * IN : rien
+   * OUT : { [c1, ..., c5], playerId } tableau de combinaison et identifiant du gagnant
+   * FUNCTION : identifie le joueur gagnant de la partie et la main avec laquelle il a gagne
+   */
+  gagnant() {
+    let activeUsers = this.listeJoueursActifs();
+    let combinationList = this.listeCombinaison(activeUsers);
+    let maxList = this.maximums(combinationList, (x) => x.weight);
+
+    if (maxList.length > 1) {
+      let winners = [];
+
+      switch (maxList[0].type) {
+        case "StraightFlush":
+          winners = this.secondCarteHaute(maxList);
+          break;
+        case "FourOfAKind":
+          winners = this.secondCarre(maxList);
+          break;
+        case "FullHouse":
+          winners = this.secondFull(maxList);
+          break;
+        case "Flush":
+          winners = this.secondCarteHaute(maxList);
+          break;
+        case "Straight":
+          winners = this.secondSuite(maxList);
+          break;
+        case "ThreeOfAKind":
+          winners = this.secondBrelan(maxList);
+          break;
+        case "TwoPair":
+          winners = this.secondDoublePaire(maxList);
+          break;
+        case "OnePair":
+          winners = this.secondPaire(maxList);
+          break;
+        case "HighCard":
+          winners = this.secondCarteHaute(maxList);
+          break;
+      }
+
+      let res = [];
+      for (let i = 0; i < winners.length; i++) {
+        for (let j = 0; j < maxList.length; j++) {
+          if (winners[i] === maxList[j].id) {
+            res.push(maxList[j]);
+          }
+        }
+      }
+
+      return res;
+    } else {
+      return maxList;
+    }
+  }
+
   showHands() {
     this.players.forEach((player) => {
       console.log(`${player.name}'s hand:`);
