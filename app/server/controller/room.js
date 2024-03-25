@@ -41,6 +41,7 @@ module.exports = ({id, rules, players = []}) => {
          * playerTurn  => tour d'un joueur
          * end         => timer de fin de tour
          * finished    => timer de fin de partie
+         * destroyed   => Partie n'existe plus pour les joueurs
         */
        status: "closed",       // Status de la partie
        

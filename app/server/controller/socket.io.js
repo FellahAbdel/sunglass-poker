@@ -43,6 +43,5 @@ module.exports = function(server,Middleware,corsSettings) {
         session.save();
     });
 
-
     return io;
 }
