@@ -85,4 +85,38 @@ describe("Game", () => {
     expect(sevenCards.cards).toContainEqual(new Card(7, "D"));
     expect(sevenCards.cards).toContainEqual(new Card(8, "S"));
   });
+
+  test("should correctly evaluate hand combinations", () => {
+    const communityCards = [
+      new Card(2, "H"),
+      new Card(3, "D"),
+      new Card(4, "S"),
+      new Card(5, "C"),
+      new Card(6, "H"),
+      new Card(7, "D"),
+      new Card(8, "S"),
+    ];
+
+    const expectedOutput = {
+      hand: [
+        new Card(8, "S"),
+        new Card(7, "D"),
+        new Card(6, "H"),
+        new Card(5, "C"),
+        new Card(4, "S"),
+      ],
+      type: "Straight",
+      weight: 5,
+    };
+
+    const combination = game.combinaison(communityCards);
+
+    // Check if combination object has been correctly generated
+    expect(combination).toHaveProperty("hand");
+    expect(combination).toHaveProperty("type");
+    expect(combination).toHaveProperty("weight");
+
+    // Check if combination object matches the expected output
+    expect(combination).toEqual(expectedOutput);
+  });
 });
