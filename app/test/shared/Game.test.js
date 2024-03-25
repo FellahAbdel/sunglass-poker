@@ -197,12 +197,9 @@ describe("Game", () => {
     ];
 
     // Call the gagnant method to determine the winner
-    const winner = game.gagnant();
+    const winners = game.gagnant();
 
-    console.log(winner);
-
-    // Check if the winner is as expected
-    // You can add more specific checks based on the expected winner
-    // For example, if player1's hand is stronger than player2's, you might expect player1 to win
+    // Assert that the winner is player1
+    expect(winners[0].id).toBe(player1.getPlayerId());
   });
 });
