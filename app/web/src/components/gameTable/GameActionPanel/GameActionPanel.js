@@ -14,7 +14,7 @@ const GameActionButtons = ({ }) => {
   //sliderValue text -> percentage of the raise
   const [sliderValueText, setSliderValueText] = useState("");
   const dispatch = useDispatch()
-  const pot = useSelector(state.gameState.pot)
+  //const pot = useSelector(state.gameState.pot)
 
   let checkOrCall = checkValue ? "Check" : "Call";
 
@@ -22,7 +22,7 @@ const GameActionButtons = ({ }) => {
     setSliderValueText(value);
   };
 
-  console.log(pot)
+  //console.log(pot)
 
 const handleCheckOrCall = () => {
   dispatch({
@@ -31,7 +31,7 @@ const handleCheckOrCall = () => {
   })
 };
 
-console.log(pot)
+//console.log(pot)
 
   return (
     <div className="container-gameAction">
@@ -43,17 +43,17 @@ console.log(pot)
         <Button
           styleClass={"btn-raise"}
           onClick={() => {
-            handleRaiseProp();
+            //handleRaiseProp();
             setShowPopup(!showPopup);
           }}
           label={`Raise ${sliderValueText ? sliderValueText + "%" : ""}`}
         />
         <Button
           style={"btn-checkOrCall"}
-          onClick={handle}
+          //onClick={handle}
           label={checkOrCall}
         />
-        <Button styleClass={"btn-fold"} onClick={handleFoldProp} label={"Fold"} />
+        {/* <Button styleClass={"btn-fold"} onClick={handleFoldProp} label={"Fold"} /> */}
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
         <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />

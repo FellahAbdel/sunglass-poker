@@ -194,9 +194,9 @@ const GameTable = () => {
             }`}
           >
             <GameActionPanel
-              handleFoldProp={handleFold}
-              handleRaiseProp={handleRaise}
-              handleCheckOrCallProp={handleCheckOrCall}
+              // handleFoldProp={handleFold}
+              // handleRaiseProp={handleRaise}
+              // handleCheckOrCallProp={handleCheckOrCall}
             />
           </div>
 
