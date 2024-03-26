@@ -46,6 +46,9 @@
 
 2024/03/25: 1h      Recherche redux et mise en place partiel du redux
 
+2024/03/25: 30min   Reunio avec Victor pour voir tout ce qu il a fait pour le réseau etc...
 
 
-TEMPS TOTAL: 43h30min 
+
+
+TEMPS TOTAL: 44h 
