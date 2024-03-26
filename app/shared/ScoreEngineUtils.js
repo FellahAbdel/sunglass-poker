@@ -114,7 +114,7 @@ function secondFull(tableauxAvecId) {
     }
   }
 
-  return [meilleursIds];
+  return meilleursIds;
 }
 
 /*
@@ -185,7 +185,7 @@ function secondBrelan(listeJoueurCombinaison, self = this) {
       id: playerHand.id,
     };
 
-    let cards = trier(playerHand.hand, (x) => x.number);
+    let cards = playerHand.hand.sort((a, b) => b.number - a.number)//trier(playerHand.hand, (x) => x.number);
     type.type = cards[2].number;
 
     if (cards[1].number === cards[2].number) {
@@ -259,7 +259,7 @@ function secondDoublePaire(tableauxAvecId) {
     }
   }
 
-  return [meilleursIds];
+  return meilleursIds;
 }
 /*
  * ...
@@ -356,4 +356,4 @@ module.exports = {
   secondDoublePaire,
   secondPaire,
   secondCarteHaute,
-};
+};   
