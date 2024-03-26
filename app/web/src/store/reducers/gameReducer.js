@@ -26,12 +26,6 @@ const gameState = (state = defaultState, action) => {
         gameStarted: true
         // TODO : Back end needs to map all playerStates and give each player to card 
       }
-
-    case 'JOIN_TABLE':
-        return {
-          ...defaultState,
-          players: {...players, payload }   // Payload = {user: id, cards:[] // cards empty par default}
-      }
       
     case 'RAISE':
       let newTurnRaise = state.turn === players.length - 1 ? 0 : state.turn+1 
