@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 
 import {
   useAuth,
-} from "./../components/AuthProvider";
+} from "./../components/Utiles/AuthProvider";
 
-import { useWindowContext } from "./../components/WindowContext";
+import { useWindowContext } from "./../components/Utiles/WindowContext";
 
 //css imports
 import "./gameTable.css";

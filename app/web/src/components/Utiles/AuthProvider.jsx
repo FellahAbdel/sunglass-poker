@@ -1,7 +1,7 @@
 // AuthProvider.js
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { useWindowContext } from "./WindowContext";
-import { userReducer, initialState } from "../store/reducers/userReducer";
+import { userReducer, initialState } from "../../store/reducers/userReducer";
 
 const AuthContext = createContext();
 const CORSSETTINGS = {

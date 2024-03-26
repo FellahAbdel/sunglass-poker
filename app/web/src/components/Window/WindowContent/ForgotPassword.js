@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from "../../button/Button.tsx";
 import TextInputComponent from "../../textInput/TextInput";
-import { useAuth } from "../../AuthProvider";
-import { useWindowContext } from "../../WindowContext";
+import { useAuth } from "../../Utiles/AuthProvider";
+import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
 const ForgotPassword = ({
   showSuccess,

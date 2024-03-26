@@ -1,6 +1,6 @@
 import React from 'react';
 import './settingsMenu.css'
-import { useSettings } from '../../SettingsContext';
+import { useSettings } from '../../Utiles/SettingsContext';
 
 const SettingsWindow = () => {
   const { darkMode, mute, language, toggleDarkMode, toggleMute, changeLanguage } = useSettings();

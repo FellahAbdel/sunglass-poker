@@ -10,10 +10,9 @@ import SuccessWindow from "./WindowContent/SuccessWindow";
 import TutorialWindow from "./WindowContent/TutorialWindow";
 import SettingsWindow from "./WindowContent/SettingsWindow";
 import ProfileWindow from "./WindowContent/ProfileWindow";
-import AcceuilWindow from "./WindowContent/AcceuilWindow";
 import StatsWindow from "./WindowContent/StatsWindow";
 
-import { useWindowContext } from "../WindowContext";
+import { useWindowContext } from "../Utiles/WindowContext";
 
 const Window = () => {
   const {
@@ -43,7 +42,6 @@ const Window = () => {
         {windowType === "tutorial" && <TutorialWindow />}
         {windowType === "settings" && <SettingsWindow />}
         {windowType === "profile" && <ProfileWindow />}
-        {windowType === "acceuil" && <AcceuilWindow />}
         {windowType === "stats" && <StatsWindow />}
       </div>
     </div>
