@@ -44,19 +44,19 @@ const AvatarWindow = () => {
         <Button
           onClick={handlePrevAvatar}
           label="Previous"
-          style="Next-Previous"
+          styleClass="Next-Previous"
         />
         <Button
           onClick={handleNextAvatar}
           label="Next"
-          style="Next-Previous"
+          styleClass="Next-Previous"
         />
       </div>
 
       <Button
         onClick={handleSave}
         label="Save"
-        style="buttonconnexion login-button"
+        styleClass="buttonconnexion login-button"
       />
     </div>
   );

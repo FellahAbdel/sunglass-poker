@@ -1,7 +1,6 @@
 // forgotPassword.jsx
 import React, { useState } from "react";
 import Button from "../../button/Button.tsx";
-import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import { useAuth } from "../../AuthProvider";
 import {
@@ -12,11 +11,8 @@ import {
 } from "../../ValidationUtils";
 import { useWindowContext } from "../../WindowContext";
 
-const SignUpWindow = ({}) => {
+const SignUpWindow = () => {
   const {
-    closeWindow,
-    isWindowOpen,
-    windowType,
     openSuccessWindow,
     openWindow,
   } = useWindowContext();
@@ -131,7 +127,7 @@ const SignUpWindow = ({}) => {
           onChange={handleChange}
           placeholder="Username"
           errorMessage={validationErrors.pseudo}
-          style={"input-login"}
+          styleClass={"input-login"}
         />
         <TextInputComponent
           name="email"
@@ -139,7 +135,7 @@ const SignUpWindow = ({}) => {
           onChange={handleChange}
           placeholder="Email"
           errorMessage={validationErrors.email}
-          style={"input-login"}
+          styleClass={"input-login"}
         />
         <TextInputComponent
           name="password"
@@ -148,7 +144,7 @@ const SignUpWindow = ({}) => {
           placeholder="Password"
           type={"password"}
           errorMessage={validationErrors.password}
-          style={"input-login"}
+          styleClass={"input-login"}
         />
         <TextInputComponent
           name="repeatPassword"
@@ -157,25 +153,25 @@ const SignUpWindow = ({}) => {
           placeholder="Repeat your password"
           type={"password"}
           errorMessage={validationErrors.repeatPassword}
-          style={"input-login"}
+          styleClass={"input-login"}
         />
         <Button
-          style="buttonconnexion login-button"
+          styleClass="buttonconnexion login-button"
           type="submit"
-          label="Register"
+          label="Register"  
         />
       </form>
 
       <Button
-        style="buttonconnexion login-button google-button"
-        label="Register with google"
+        styleClass="buttonconnexion google-button"
+        label="Sign in with google"
         iconSrc={require("./../../assets/images/icons/google.png")}
         iconStyle={true}
       />
 
       <Button
         onClick={() => openWindow("login")}
-        style="buttonconnexion forgot-button"
+        styleClass="buttonconnexion forgot-button"
         label="Already have an account ?"
       />
     </div>

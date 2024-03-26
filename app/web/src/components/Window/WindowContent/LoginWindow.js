@@ -1,16 +1,12 @@
 //LoginWindow.js
 import React, { useState } from "react";
 import Button from "../../button/Button.tsx";
-import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
 import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../WindowContext";
 
-const LoginWindow = ({}) => {
+const LoginWindow = () => {
   const {
-    closeWindow,
-    isWindowOpen,
-    windowType,
     openSuccessWindow,
     openWindow,
   } = useWindowContext();
@@ -66,7 +62,7 @@ const LoginWindow = ({}) => {
           onChange={handleChange}
           placeholder="Username"
           errorMessage={validationErrors.username}
-          style={"input-login"}
+          styleClass={"input-login"}
         />
         <TextInputComponent
           name="password"
@@ -75,27 +71,27 @@ const LoginWindow = ({}) => {
           type="password"
           placeholder="Password"
           errorMessage={validationErrors.password}
-          style={"input-login"}
+          styleClass={"input-login"}
         />
         <Button
-          style="buttonconnexion login-button"
+          styleClass="buttonconnexion login-button"
           type="submit"
           label="Login"
         />
           <Button
           onClick={() => openWindow("forgot")}
-          style="buttonconnexion forgot-button"
+          styleClass="buttonconnexion forgot-button"
           label="I forgot my password"
         />
       </form>
 
       <Button
         onClick={() => openWindow("register")}
-        style="buttonconnexion register-button"
+        styleClass="buttonconnexion register-button"
         label="Register New Account"
       />
       <Button
-        style="buttonconnexion google-button"
+        styleClass="buttonconnexion google-button"
         label="Sign in with google"
         iconSrc={require("./../../assets/images/icons/google.png")}
         iconStyle={true}

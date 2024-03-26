@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Styles from './raiseSlider.module.css';
 
 
-const RaiseSlider = ({initialValue, onSliderChange}) =>{
+const RaiseSlider = ({onSliderChange}) =>{
 
-    const [sliderValue, setSliderValue] = useState(initialValue);
+    //const [sliderValue, setSliderValue] = useState(initialValue);
 
     const handleSliderChange = (event) => {
       const value = event.target.value;
-      setSliderValue(value);
+      //setSliderValue(value);
       onSliderChange(value);
     };
     

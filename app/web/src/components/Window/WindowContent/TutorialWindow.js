@@ -1,8 +1,6 @@
 // TutorialWindow.jsx
 import React from "react";
-import Button from "../../button/Button.tsx";
 import './tutorial.css'
-
 
 const TutorialWindow = ({ onClose }) => {
   return (

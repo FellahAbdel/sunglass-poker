@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './settingsMenu.css'
-import Button from "../../button/Button.tsx";
 import { useSettings } from '../../SettingsContext';
 
 const SettingsWindow = () => {

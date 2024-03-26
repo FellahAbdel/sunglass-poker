@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./profileMenu.css";
-import ClientsProfile from "./../../gameTable/PlayersProfile/PlayersProfile";
-import Button from "../../button/Button.tsx";
-import { useAuth } from "../../AuthProvider";
-import { useWindowContext } from "../../WindowContext";
+// import ClientsProfile from "./../../gameTable/PlayersProfile/PlayersProfile";
+// import Button from "../../button/Button.tsx";
+// import { useAuth } from "../../AuthProvider";
+// import { useWindowContext } from "../../WindowContext";
 import { useUserData } from "../../useUserData";
 
 const StatsContent = () => {

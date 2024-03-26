@@ -5,15 +5,9 @@ import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../WindowContext";
 
 const ForgotPassword = ({
-  openResetPassword,
-  openLoginWindow,
   showSuccess,
 }) => {
   const {
-    closeWindow,
-    isWindowOpen,
-    windowType,
-    openSuccessWindow,
     openWindow,
   } = useWindowContext();
   const { checkEmail } = useAuth();
@@ -68,22 +62,22 @@ const ForgotPassword = ({
           onChange={handleChange}
           placeholder="Email"
           errorMessage={validationError}
-          style={"input-login"}
+          styleClass={"input-login"}
         />
         <Button
-          style="buttonconnexion button login-button"
+          styleClass="buttonconnexion button login-button"
           type="submit"
           label="Send"
         />
         <Button
-          style="buttonconnexion button login-button"
+          styleClass="buttonconnexion button login-button"
           type="temporary"
           onClick={() => openWindow("reset")}
           label="TEMPORARY BUTTON"
         />
       </form>
       <Button
-        style="buttonconnexion forgot-button"
+        styleClass="buttonconnexion forgot-button"
         onClick={() => openWindow("login")}
         label="Return to connection menu"
       />

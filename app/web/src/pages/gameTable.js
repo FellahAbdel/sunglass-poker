@@ -1,11 +1,8 @@
 //react imports
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
 
 import {
   useAuth,
-  getUserInfo,
-  AuthProvider,
 } from "./../components/AuthProvider";
 
 import { useWindowContext } from "./../components/WindowContext";
@@ -20,11 +17,11 @@ import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 
-const GameTable = ({}) => {
+const GameTable = () => {
   const [dealingFlop, setDealingFlop] = useState([false, false, false]);
   const [handGuide, setHandGuide] = useState("");
-  const [profileMenu, setProfileMenu] = useState(false);
-  const [settingsMenu, setSettingsMenu] = useState(false);
+  const [profileMenu] = useState(false);
+  const [settingsMenu] = useState(false);
   const [showHandCard, setShowHandCard] = useState(false);
   const [playersCardsShow, setPlayersCardsShow] = useState([
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -32,17 +29,14 @@ const GameTable = ({}) => {
   const [playersCardDistributed, setPlayersCardDistributed] = useState([
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
-  const [logInMenu, setLogInMenu] = useState();
-  const [tutorialMenu, setTutorialMenu] = useState();
 
-  const { logingIn, logingOut, getUserInfo, isLogged } = useAuth();
+  const { logingOut, isLogged } = useAuth();
   const {
     windowType,
     isWindowOpen,
     closeWindow,
     openWindow,
     isGameTableVisible,
-    connectionWindowOpen,
   } = useWindowContext();
 
   const handleLanguageChange = (language) => {
@@ -97,9 +91,7 @@ const GameTable = ({}) => {
   //-----------------------------------------Navbar buttons handles
 
   //inGame Fonctions to test-----------------------------------------
-  const handleShowHandCard = () => {
-    setShowHandCard(!showHandCard);
-  };
+
   const handleFold = () => {
     console.log("handleFold function called from parent component");
     setDealingFlop([!dealingFlop[0], !dealingFlop[1], !dealingFlop[2]]);
@@ -158,7 +150,10 @@ const GameTable = ({}) => {
         className={`
           comp-table 
           ${
-            connectionWindowOpen &&
+            (windowType === "login" ||
+              windowType === "register" ||
+              windowType === "forgot" ||
+              windowType === "reset") &&
             "comp-table-login"
           }
           ${windowType === "settings" && "comp-table-login"}

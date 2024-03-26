@@ -25,8 +25,8 @@ const  PlayersProfile=({status, chips, name , cards , flippingPlayerCards , gotC
         </div>
         
 
-        <Card style={`showCardPlayers1 ${gotCards ? "playerCardAppear" : "" }`} card={["a","clubs"]} flippedStyle={"flippedPlayerCards"} flippingCard={flippingPlayerCards}/>
-        <Card style={`showCardPlayers2 ${gotCards ? "playerCardAppear" : "" }`} card={["a","clubs"]} flippedStyle={"flippedPlayerCards"} flippingCard={flippingPlayerCards}/>
+        <Card styleClass={`showCardPlayers1 ${gotCards ? "playerCardAppear" : "" }`} card={["a","clubs"]} flippedStyle={"flippedPlayerCards"} flippingCard={flippingPlayerCards}/>
+        <Card styleClass={`showCardPlayers2 ${gotCards ? "playerCardAppear" : "" }`} card={["a","clubs"]} flippedStyle={"flippedPlayerCards"} flippingCard={flippingPlayerCards}/>
 
 
         <img className={`profilePic ${status}`} src={status === "Empty" ? require('./../../assets/images/pp_empty.png') : require('./../../assets/images/pp_simple.jpg')} alt='profilePic'/>

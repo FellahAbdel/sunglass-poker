@@ -30,7 +30,7 @@ const GameActionButtons = ({
         }`}
       >
         <Button
-          style={"btn-raise"}
+          styleClass={"btn-raise"}
           onClick={() => {
             handleRaiseProp();
             setShowPopup(!showPopup);
@@ -38,11 +38,11 @@ const GameActionButtons = ({
           label={`Raise ${sliderValueText ? sliderValueText + "%" : ""}`}
         />
         <Button
-          style={"btn-checkOrCall"}
+          styleClass={"btn-checkOrCall"}
           onClick={handleCheckOrCallProp}
           label={checkOrCall}
         />
-        <Button style={"btn-fold"} onClick={handleFoldProp} label={"Fold"} />
+        <Button styleClass={"btn-fold"} onClick={handleFoldProp} label={"Fold"} />
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
         <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />
