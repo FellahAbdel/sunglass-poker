@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 const cors = require("cors");
 
-module.exports = function (app, bdd) {
+module.exports = function (app ,bdd) {
   console.log(bdd);
   // Connexion à la base de données MongoDB
   mongoose.connect("mongodb://pokerBackEndServer:azerty@" + bdd + "/Poker", {});
@@ -87,6 +87,8 @@ module.exports = function (app, bdd) {
 
       if (user) {
         console.log(`Login réussi pour l'utilisateur : ${username}`);
+        req.session.userId = user._id;
+        console.log("reqsesid:",req.session.userId);
         const token = jwt.sign({ id: user._id }, "votre_secret", {
           expiresIn: "1h",
         });
@@ -101,6 +103,7 @@ module.exports = function (app, bdd) {
   });
 
   app.post("/api/check-email", async (req, res) => {
+    
     res.header("Access-Control-Allow-Credentials", "true");
 
     try {
@@ -155,6 +158,7 @@ module.exports = function (app, bdd) {
   });
 
   app.get("/api/userInfo", async (req, res) => {
+    
     const token = req.headers.authorization.split(" ")[1]; // Supposons que le token soit envoyé en tant que "Bearer <token>"
     try {
       const decoded = jwt.verify(token, "votre_secret");
@@ -176,6 +180,7 @@ module.exports = function (app, bdd) {
 
   //route pour récupérer les statistiques d'un utilisateur
   app.get("/api/user-stats/:userId", async (req, res) => {
+    console.log("user:",req.session);
     try {
       const userId = req.params.userId;
       const stats = await StatModel.findOne({ user: userId }).populate(

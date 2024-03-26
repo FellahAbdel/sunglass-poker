@@ -11,8 +11,10 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { WindowProvider } from "./components/WindowContext";
 import { SettingsProvider } from "./components/SettingsContext";
+import comm from './services/socket.js';
 
-
+comm.Init();
+comm.joinRoom(2);
 function App() {
   return (
     <WindowProvider>

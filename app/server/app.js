@@ -3,16 +3,12 @@ const app = express();
 const session = require("express-session");
 const cors = require("cors");
 const ENV_CONST_COMM = require('./controller/envConstants')();
-const gameController = require('./controller/roomController')();
+const gameController = require('./controller/gameController');
+const socketIOSession = require('socket.io-express-session');
+console.log(gameController);
+console.log(gameController.hashRoom(3));
 console.log(ENV_CONST_COMM);
 
-
-A = gameController.createGame('mon id', {type:'normal',bid:2});
-B = gameController.createGame('autre id', {type:'special',bid:20});
-console.log(A);
-console.log(B);
-console.log(A.isPlaying(1))
-console.log(B.isPlaying(0))
 /** Paramètres cors du serveur.
  * 
  * origin -> Fixer sur le front-end. Il n'y a que le serveur front end avec qui la communication est autoriser.
@@ -25,27 +21,31 @@ const corsSettings = {
   }
 app.use(cors(corsSettings))
 
-const server = require('http').createServer(app);
 app.use(express.json());
-const db = require('./models/bdd')(app,ENV_CONST_COMM.ENV_IP_BDD+':'+ENV_CONST_COMM.ENV_PORT_BDD);
 /** Paramètres de session
  * 
  * 
- */
+*/
 const Middleware = session({
     secret:'secretKeyForSession',
     cookie: {
-        secure:false,
+        secure:true,
         maxAge: 1e7 // 10 seconds
     },
-    resave: false,
+    userId:-1,
+    resave: true,
     saveUninitialized: true
 });
 
 app.use(Middleware);
 
+const db = require('./models/bdd')(app,ENV_CONST_COMM.ENV_IP_BDD+':'+ENV_CONST_COMM.ENV_PORT_BDD);
+
+const server = require('http').createServer(app);
+
 // socketIo
-const io = require('./controller/socket.io')(server,Middleware,corsSettings);
+const io = require('./controller/socket.io')(server,Middleware,corsSettings,gameController);
+
 
 // Port du server
 const port = ENV_CONST_COMM.ENV_PORT_SERVER;

@@ -1,7 +1,7 @@
 // Durée d'une session en millisecondes.
-const SESSION_DURATION = 2 * 1e3;
+const SESSION_DURATION = 200 * 1e3;
 
-module.exports = function(server,Middleware,corsSettings) {
+module.exports = function(server,Middleware,corsSettings,gameController) {
 
     const io = require('socket.io')(server, {cors:corsSettings});
     io.engine.use(Middleware);
@@ -17,7 +17,7 @@ module.exports = function(server,Middleware,corsSettings) {
     io.on('connection', (socket) => {
     
         // On récupère la session lié à la connexion.
-        const session = socket.request.session;
+        session = socket.request.session;
         // On rejoint la session déjà existante.
         socket.join(session.id);
         console.log('a user connected n: '+socket.id + ' | session : '+session.id); 
@@ -26,6 +26,26 @@ module.exports = function(server,Middleware,corsSettings) {
             io.in(session.id).disconnectSockets(true);
             session.destroy();
         }, SESSION_DURATION);
+        socket.on('joinRoom', (data) => {
+            console.log("sessionHs:",session);
+            console.log('data:',data);
+            // console.log('userId = ', socket.handshake.session.userId);
+            if(typeof data === 'object' && data.id !== undefined){
+                answer = gameController.join(data.id,session.userId);
+                if(answer.status === false)
+                    socket.emit('joinRoom',answer);
+                else{
+                    roomHash = gameController.hashRoom(data.id);
+                    socket.join(roomHash);
+                    socket.emit('joinRoom',answer);
+                    socket.to(roomHash).emit('newPlayer',answer);
+                }
+            }
+            else{
+                console.log('User tried to join wrong room.');
+                socket.emit('jointRoom', {status:failed,mes:'Invalid data'});
+            }
+        });
 
         // Fonction test
         socket.on('hello', (data) => {
@@ -38,6 +58,8 @@ module.exports = function(server,Middleware,corsSettings) {
         socket.on('disconnect',() => {
             console.log('user disconnected n:' + socket.id + ' | session : ' + session.id);
         });
+
+        
 
 
         session.save();

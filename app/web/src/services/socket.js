@@ -15,17 +15,28 @@ const socket =  io("http://localhost:3001", {
  */
 const comm = {
     
-    Hello: () => {
+    Hello: function() {
         console.log("Emit hello");
         socket.emit('hello', 'Hello world');
     },
     
-    Init: () => { 
+    Init: function() { 
         console.log("Init of socketio client side");
         this.Hello();
         socket.on('world', (data) => {
             console.log(data);
+        });
+
+        socket.on('joinRoom', (data) => {
+            if(data.status === false)
+                console.error(data.mes);
+            console.log(data);
         })
+    },
+
+    joinRoom: function(id){
+        socket.emit('joinRoom',{id:id});
+        console.log('joining room id');
     }
 }
 
