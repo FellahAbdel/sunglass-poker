@@ -87,7 +87,7 @@
 
     box-shadow: 
     inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-    0 0 1vw 0.8vW rgb(181, 194, 5),
+    0 0 1vw 0.8vW #4D6478,
     0 0 0 1vW rgb(0, 0, 0),
     0 0 0 2vW rgb(31, 33, 36),
     inset 0 0 0 2vW rgb(43, 41, 41),
@@ -100,9 +100,15 @@
     radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
     background-color:#282828;
     background-size:16px 16px;
+
+    background-color:#282828;
+    background-size:16px 16px;
 }
 
 .container-acceuil{
+    width: 50vw;
+    height: 45vh;
+
     box-shadow: 
     inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
     0 0 1vw 0.8vW #4D6478,

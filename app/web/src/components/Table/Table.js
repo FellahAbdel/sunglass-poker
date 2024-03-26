@@ -75,7 +75,7 @@ const Table = ({
       container-table 
       ${(windowType === "profil" || windowType === "stats")&& "container-profile"}
       ${windowType === "settings" && "container-settings"}
-      ${!isLogged && "container-acceuil"}
+      ${windowType === "" && !isGameTableVisible && "container-acceuil"}
       ${windowType === "tutorial" && !isLogged && "container-tutorial"}
       ${windowType === "success" && "container-success"}
       ${
@@ -162,13 +162,18 @@ const Table = ({
             style={`
             logo-acceuil
               ${(windowType === "" && isGameTableVisible) && "disappear"}
-              ${(windowType === "profil" || windowType === "stats") && "logo-profile"}
+              ${(windowType === "profil" ||
+                 windowType === "stats") && "logo-profile"}
+
               ${windowType === "tutorial" && "logo-tutorial"}
               ${windowType === "settings" && "logo-login"}
               ${windowType === "success" && "logo-success"}
               ${windowType === "acceuil" && "logo-acceuil"}
-              ${
-                (windowType === "login" || windowType === "register" || windowType === "forgot" || windowType === "reset") 
+
+              ${(windowType === "login" ||
+                  windowType === "register" ||
+                  windowType === "forgot" ||
+                  windowType === "reset") 
                 &&
                 "logo-login"
               }
