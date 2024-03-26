@@ -74,7 +74,7 @@ const Table = ({
       className={`
       container-table
       ${isLogged ? "table-isLogged" : "table-notLogged"}
-      ${(windowType === "profil" || windowType === "stats")&& "container-profile"}
+      ${(windowType === "profile" || windowType === "stats")&& "container-profile"}
       ${windowType === "settings" && "container-settings"}
       ${windowType === "" && !isGameTableVisible && "container-acceuil"}
       ${windowType === "tutorial" && !isLogged && "container-tutorial"}
@@ -163,7 +163,7 @@ const Table = ({
             style={`
             logo-acceuil
               ${(windowType === "" && isGameTableVisible) && "disappear"}
-              ${(windowType === "profil" ||
+              ${(windowType === "profile" ||
                  windowType === "stats") && "logo-profile"}
 
               ${windowType === "tutorial" && "logo-tutorial"}

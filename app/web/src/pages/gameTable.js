@@ -86,7 +86,7 @@ const GameTable = ({}) => {
     console.log("handleTutorialButton function called from parent component");
   };
   const handleProfileButton = () => {
-    openWindow("profil");
+    openWindow("profile");
     console.log("handleProfileButton function called from parent component");
   };
   const handleSettingsButton = () => {

@@ -59,7 +59,7 @@ const Window = ({ onClose, logingIn }) => {
         {windowType === "success" && <SuccessWindow />}
         {windowType === "tutorial" && <TutorialWindow />}
         {windowType === "settings" && <SettingsWindow />}
-        {windowType === "profil" && <ProfileWindow />}
+        {windowType === "profile" && <ProfileWindow />}
         {windowType === "acceuil" && <AcceuilWindow />}
         {windowType === "stats" && <StatsWindow />}
       </div>
