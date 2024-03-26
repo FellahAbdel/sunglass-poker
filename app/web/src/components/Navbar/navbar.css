@@ -2,8 +2,6 @@
     width: 100%;
 }
 
-
-
 /*PROFILE BUTTON*/
 .btn-profile {
     border-style: unset;
@@ -30,15 +28,6 @@
 .btn-profile:hover {
     cursor: pointer;
     color: rgb(255, 255, 255);
-    text-shadow:
-    0 0 5px #fff, /* Neon glow */
-    0 0 10px #fff, /* Neon glow */
-    0 0 15px #fff, /* Neon glow */
-    0 0 20px rgb(0, 51, 255), /* Neon glow color */
-    0 0 30px rgb(0, 51, 255), /* Neon glow color */
-    0 0 40px rgb(0, 51, 255), /* Neon glow color */
-    0 0 55px #0ff, /* Neon glow color */
-    0 0 75px #0ff; /* Neon glow color */
 }
 .btn-profile img{
     width: 15px;
@@ -52,7 +41,7 @@
 }
 
 .btn-profile:hover img{
-    filter: invert(0%);
+    filter: invert(100%);
 }
 
 /*SETTINGS BUTTON*/
@@ -85,13 +74,6 @@
     filter:brightness(90%);
     cursor: pointer;
     color: #fff; /* Neon color */
-    text-shadow:
-      0 0 5px #fff, /* Neon glow */
-      0 0 10px #fff, /* Neon glow */
-      0 0 15px #fff, /* Neon glow */
-
-      0 0 55px #0ff, /* Neon glow color */
-      0 0 75px #0ff; /* Neon glow color */
 }
 
 .btn-settings img {
@@ -108,8 +90,6 @@
 
 /*CHIPS CSS*/
 .box-chips{
-    all:unset;
-
     position: absolute;
     top:28px;
     left:0;
@@ -170,15 +150,6 @@
     color: black;
 
     color: #fff; /* Neon color */
-    text-shadow:
-      0 0 5px #fff, /* Neon glow */
-      0 0 10px #fff, /* Neon glow */
-      0 0 15px #fff, /* Neon glow */
-      0 0 20px #f0f, /* Neon glow color */
-      0 0 30px #f0f, /* Neon glow color */
-      0 0 40px #f0f, /* Neon glow color */
-      0 0 55px #0ff, /* Neon glow color */
-      0 0 75px #0ff; /* Neon glow color */
 }
 
 /*Log in button in acceuil*/
@@ -277,6 +248,30 @@
     filter: invert(0%);
 }
 
+/*chat button*/
+.btn-chat{
+    position: absolute;
+    top:60px;
+    left:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px 14px 4px 14px;
+
+    height: 50px;
+    width: fit-content;
+    min-width: 70px;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    background-color: rgba(255, 255, 255, 0.458); 
+    color: #000000;
+    box-shadow: 2px 2px 10px black;
+    border-radius: 0 14px 14px 14px;
+    cursor: pointer;
+}
 
 @media (max-width: 1000px) {
     .btn-profile{

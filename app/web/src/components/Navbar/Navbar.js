@@ -24,8 +24,9 @@ const Navbar = ({
       {/* Current Chips inventory and LogOut Button */}
       {isLoggedNavbar && (
         <>
-          <ChipsCash currentChips={9999999999} styleClass={`box-chips`} />
-          <Button label={"LogOut"} onClick={logOutOnClick} styleClass="btn-exit" />
+          <Button label={"Chat"} onClick={null} style="btn-chat" />
+          <ChipsCash currentChips={9999999999} style={`box-chips`} />
+          <Button label={"LogOut"} onClick={logOutOnClick} style="btn-exit" />
         </>
       )}
 
