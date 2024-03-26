@@ -6,8 +6,13 @@ export const useWindowContext = () => useContext(WindowContext);
 
 export const WindowProvider = ({ children }) => {
 
-  const [isWindowOpen, setIsWindowOpen] = useState(false);
-  const [windowType, setWindowType] = useState("");
+  const [isWindowOpen, setIsWindowOpen] = useState(() => {
+    const saved = localStorage.getItem("isWindowOpen");
+    return saved === "true" ? true : false;
+  });
+
+  const [windowType, setWindowType] = useState(() => localStorage.getItem("windowType") || "");
+  const [connectionWindowOpen, setconnectionWindowOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
   const [isGameTableVisible, setIsGameTableVisible] = useState(() => {
@@ -16,9 +21,24 @@ export const WindowProvider = ({ children }) => {
   });
 
   useEffect(() => {
+    const isConnectionType = ["login", "register", "forgot", "reset"].includes(windowType);
+    setconnectionWindowOpen(isConnectionType);
+    console.log("window connection ?  ", isConnectionType ? "Oui" : "Non");
+  }, [windowType]);
+
+  useEffect(() => {
     console.log("Gametable visible ? ", isGameTableVisible ? "Oui" : "Non");
   }, [isGameTableVisible]);
 
+
+  useEffect(() => {
+    localStorage.setItem("isWindowOpen", isWindowOpen.toString());
+  }, [isWindowOpen]);
+  
+  useEffect(() => {
+    localStorage.setItem("windowType", windowType);
+  }, [windowType]);
+  
 
   useEffect(() => {
     localStorage.setItem("isGameTableVisible", isGameTableVisible);
@@ -86,6 +106,7 @@ export const WindowProvider = ({ children }) => {
         toggleGameTableVisibility,
         showHome,
         showGameTable,
+        connectionWindowOpen,
       }}
     >
       {children}

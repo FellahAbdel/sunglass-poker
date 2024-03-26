@@ -42,6 +42,7 @@ const GameTable = ({}) => {
     closeWindow,
     openWindow,
     isGameTableVisible,
+    connectionWindowOpen,
   } = useWindowContext();
 
   const handleLanguageChange = (language) => {
@@ -157,10 +158,7 @@ const GameTable = ({}) => {
         className={`
           comp-table 
           ${
-            (windowType === "login" ||
-              windowType === "register" ||
-              windowType === "forgot" ||
-              windowType === "reset") &&
+            connectionWindowOpen &&
             "comp-table-login"
           }
           ${windowType === "settings" && "comp-table-login"}
