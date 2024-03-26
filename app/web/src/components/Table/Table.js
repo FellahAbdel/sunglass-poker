@@ -118,9 +118,6 @@ const Table = ({
 
         <>
           {/* Acceuil */}
-
-          {/* dynamique logo , moves according to the menu that is open */}
-
           {isWindowOpen ? (
             <Window />
           ) : (
@@ -131,17 +128,36 @@ const Table = ({
                   style={"glitch-accueil"}
                   glitchStyle={"glitchStyle-accueil"}
                 />
-                <Button
-                  style={"btn-gameStart"}
-                  label={isLogged ? "Start Playing" : "Login to Play"}
-                  onClick={onClickStartGame}
-                />
+                <div className="container-startButtons">
+                  {isLogged ? (<>
+                    <Button
+                    style={"btn-gameStart btn-gameJoin"}
+                    label={"Start a game"}
+                    onClick={onClickStartGame}
+                    />
+                    <Button
+                    style={"btn-gameStart btn-gameJoin"}
+                    label={"Join a game"}
+                    onClick={onClickStartGame}
+                    />
+                  </>) : (<>
+                  {/* */}
+                    <Button 
+                    style={"btn-gameStart"}
+                    label={"Login to Play"}
+                    onClick={onClickStartGame}
+                    />
+                  </>)}
+
+
+                </div>
                 
             </>
           )}
         </>
       )}
 
+      {/* dynamique logo , moves according to the menu that is open */}
       <LogoComponent
             style={`
             logo-acceuil

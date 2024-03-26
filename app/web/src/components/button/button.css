@@ -27,6 +27,9 @@
   color: rgb(255, 255, 255);
   font-weight: bold;
   background-color: #4D6478;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 .google-button img{
   width: 3vh;

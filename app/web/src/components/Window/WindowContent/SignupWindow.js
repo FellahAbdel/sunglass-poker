@@ -169,6 +169,8 @@ const SignUpWindow = ({}) => {
       <Button
         style="buttonconnexion login-button google-button"
         label="Register with google"
+        iconSrc={require("./../../assets/images/icons/google.png")}
+        iconStyle={true}
       />
 
       <Button
