@@ -72,7 +72,8 @@ const Table = ({
     // container-tutorial : for tuto
     <div
       className={`
-      container-table 
+      container-table
+      ${isLogged ? "table-isLogged" : "table-notLogged"}
       ${(windowType === "profil" || windowType === "stats")&& "container-profile"}
       ${windowType === "settings" && "container-settings"}
       ${windowType === "" && !isGameTableVisible && "container-acceuil"}
@@ -178,6 +179,7 @@ const Table = ({
                 "logo-login"
               }
             `}
+            label={`${windowType === "tutorial" ? "Tutorial" : ""}`}
           />
     </div>
   );

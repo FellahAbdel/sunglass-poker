@@ -20,10 +20,7 @@
   transition: width 1s ease;
 }
 
-.logo-tutorial{
-  bottom:110%;
-  z-index: -1;
-}
+
 
 .logo-login{
   left:-90%;
@@ -32,9 +29,18 @@
 }
 
 
-
+.logo-tutorial{
+  bottom:110%;
+  left:-6%;
+  z-index: -1;
+}
 .logo-tutorial img{
   width: 10vw;
+}
+.logo-tutorial h1{
+  color: white;
+  position: absolute;
+  left:60%;
 }
 
 .logo-login img{
@@ -63,4 +69,3 @@
 .logo-profile img{
   width: 9vw;
 }
-
