@@ -1,6 +1,7 @@
 // AuthProvider.js
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { useWindowContext } from "./WindowContext";
+import { userReducer, initialState } from "../store/reducers/userReducer";
 
 const AuthContext = createContext();
 const CORSSETTINGS = {
@@ -12,23 +13,8 @@ const CORSSETTINGS = {
   },
 };
 
-const initialState = { isLogged: false, user: null };
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "LOGIN":
-      return { ...state, isLogged: true, user: action.payload };
-    case "LOGOUT":
-      return { ...state, isLogged: false, user: null };
-    case "UPDATE_USER_DATA":
-      return { ...state, user: action.payload };
-    default:
-      return state;
-  }
-}
-
 export const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(userReducer, initialState);
   const { showHome } = useWindowContext();
   const { isLogged, user } = state;
 
