@@ -35,7 +35,6 @@ const Navbar = ({
         label={isLoggedNavbar ? "Profile" : "LogIn"}
         onClick={() => (isLoggedNavbar ? profileOnClick() : logInOnClick())}
         style={`${isLoggedNavbar ? "btn-profile" : "btn-logIn"}`}
-        iconStyle="icon-profile"
         iconSrc={require("./../assets/images/icons/profile-icon.png")}
       />
 
@@ -44,7 +43,6 @@ const Navbar = ({
         label={isLoggedNavbar ? "Settings" : "Tutorial"}
         onClick={() => (isLoggedNavbar ? settingsOnClick() : tutorialOnClick())}
         style={`${isLoggedNavbar ? "btn-settings" : "btn-tutorial"}`}
-        iconStyle={`${isLoggedNavbar ? "icon-settings" : "icon-tutorial"}`}
         iconSrc={
           isLoggedNavbar
             ? require("./../assets/images/icons/settings-icon.png")

@@ -136,7 +136,7 @@ const Table = ({
                     <Button
                     style={"btn-gameStart btn-gameJoin"}
                     label={"Join a game"}
-                    onClick={onClickStartGame}
+                    onClick={null}
                     />
                   </>) : (<>
                   {/* */}
