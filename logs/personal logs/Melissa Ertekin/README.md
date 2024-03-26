@@ -99,3 +99,9 @@
 * 2024/03/25 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Demandes de feedback personnalisé. Rédaction du compte-rendu hebdomadaire. </i>
 
 * Durant la semaine : <b>1h</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
+
+### Semaine 8 : 25 Mars - 1 Avril | Temps Totale:
+
+* 2024/03/25 : <b>3h</b> <br/> Travail individuel : <i> Lecture du code. Recherche sur Redux et Socket.io. Création d'un code Redux expliquant quel type de données il faut envoyer pour modifier l'état avec quelles types d'actions, ainsi qu'un exemple de récupération de l'état du jeu et de le modifier. Ce travail est fait pour résoudre la mauvaise compréhension de la conception. </i>
+
+* Durant la semaine : <b>30 mins</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
