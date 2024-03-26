@@ -1,18 +1,22 @@
 //react imports
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { useAuth, getUserInfo, AuthProvider } from "./../components/AuthProvider";
+import {
+  useAuth,
+  getUserInfo,
+  AuthProvider,
+} from "./../components/AuthProvider";
 
 import { useWindowContext } from "./../components/WindowContext";
 
 //css imports
 import "./gameTable.css";
-import "../components/gameTable/Utiles/animations.css";
+import "../components/Utiles/animations.css";
 //components imports
-import Navbar from "../components/gameTable/Navbar/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
-import Table from "../components/gameTable/Table/Table";
+import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 
@@ -32,8 +36,13 @@ const GameTable = ({}) => {
   const [tutorialMenu, setTutorialMenu] = useState();
 
   const { logingIn, logingOut, getUserInfo, isLogged } = useAuth();
-  const { windowType, isWindowOpen, closeWindow, openWindow, isGameTableVisible } =
-    useWindowContext();
+  const {
+    windowType,
+    isWindowOpen,
+    closeWindow,
+    openWindow,
+    isGameTableVisible,
+  } = useWindowContext();
 
   const handleLanguageChange = (language) => {
     console.log("Selected Language:", language);
@@ -54,13 +63,10 @@ const GameTable = ({}) => {
     }
   };
   useEffect(() => {
-    console.log("isLogged gameTable:", isLogged)
+    console.log("isLogged gameTable:", isLogged);
   }, [isLogged]);
 
   //Navbar buttons handles-----------------------------------------
-  const handleCloseWindow = () => {
-    closeWindow();
-  }
   const handleLogOutButton = () => {
     logingOut();
     //setProfileMenu(false);
@@ -80,7 +86,7 @@ const GameTable = ({}) => {
     console.log("handleTutorialButton function called from parent component");
   };
   const handleProfileButton = () => {
-    openWindow("profil");
+    openWindow("profile");
     console.log("handleProfileButton function called from parent component");
   };
   const handleSettingsButton = () => {
@@ -88,8 +94,6 @@ const GameTable = ({}) => {
     console.log("handleSettingsButton function called from parent component");
   };
   //-----------------------------------------Navbar buttons handles
-
-
 
   //inGame Fonctions to test-----------------------------------------
   const handleShowHandCard = () => {
@@ -123,13 +127,14 @@ const GameTable = ({}) => {
       closeWindow();
     }
   };
+
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
   //-----------------------------------------inGame functions to test
 
   return (
-    <div className="container-main" /*onClick={handleCloseOnClickOutside}*/>
+    <div className="container-main" onClick={handleCloseOnClickOutside}>
       {/* css Pattern background */}
       <div className="background"></div>
       <div className="backdrop"></div>
@@ -148,47 +153,45 @@ const GameTable = ({}) => {
       </div>
 
       {/* Menu/Table */}
-        <div
-          className={`
+      <div
+        className={`
           comp-table 
           ${
-            (windowType == ("login" || "register" || "forgot"  || "reset")) 
-            &&
+            (windowType === "login" ||
+              windowType === "register" ||
+              windowType === "forgot" ||
+              windowType === "reset") &&
             "comp-table-login"
           }
-          ${windowType == "settings" && "comp-table-login"}
-          ${windowType == "tutorial" && "comp-table-tutorial"}
-          ${windowType == "" && isLogged && "comp-table-inGame"}
+          ${windowType === "settings" && "comp-table-login"}
+          ${windowType === "tutorial" && "comp-table-tutorial"}
+          ${windowType === "" && isLogged && "comp-table-inGame"}
          
       `}
-        >
-          <Table
-            onClickStartGame={handleClickStartGame}
-            selectedLanguage={handleLanguageChange}
-            dealingFlop={dealingFlop}
-            showCards={[0, 1, 2, 3, 4]}
-            playersCardDistributedProp={playersCardDistributed}
-            playersCardsShowProp={playersCardsShow}
-            moneyPot={9999999999}
-            // to open the profile and setting menus
-            profileMenuActive={profileMenu}
-            settingsMenuActive={settingsMenu}
-            // LogIn panel
-            //isLoggedOnClick={handleIsLogged}
-            //isLogged={isLogged}
-            onClick={(e) => handleBoxClick}
-            logoOnClick={handleCloseWindow}
-          />
-        </div>
-
+      >
+        <Table
+          onClickStartGame={handleClickStartGame}
+          selectedLanguage={handleLanguageChange}
+          dealingFlop={dealingFlop}
+          showCards={[0, 1, 2, 3, 4]}
+          playersCardDistributedProp={playersCardDistributed}
+          playersCardsShowProp={playersCardsShow}
+          moneyPot={9999999999}
+          // to open the profile and setting menus
+          profileMenuActive={profileMenu}
+          settingsMenuActive={settingsMenu}
+          // LogIn panel
+          //isLoggedOnClick={handleIsLogged}
+          //isLogged={isLogged}
+          onClick={(e) => handleBoxClick}
+        />
+      </div>
 
       {/* playing elements opens when logged in */}
       {isGameTableVisible && (
         <>
           <div
-            className={`comp-bonus  ${
-              isWindowOpen ? "slideDown" : "slideUp"
-            }`}
+            className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
           >
             <BonusPanel />
           </div>

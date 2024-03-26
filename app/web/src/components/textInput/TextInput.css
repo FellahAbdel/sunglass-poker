@@ -13,7 +13,7 @@
   border-radius: 15px;
   border: 2px solid #ccc;
   background-color: rgba(237, 242, 247, 1);
-  border-bottom: 2px solid rgb(115, 122, 16);
+  border-bottom: 2px solid #4D6478;
   margin-bottom: 10px;
   transition: width 0.5s ease , height 0.5s ease;
 }

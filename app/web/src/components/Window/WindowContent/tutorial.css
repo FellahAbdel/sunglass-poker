@@ -1,0 +1,18 @@
+.container-text-tutorial {
+    overflow: hidden; /* Hide any overflowing content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .text-tutorial {
+    color: #ffffff;
+    width: 95%; 
+    height: 90%; 
+    padding: 0%; 
+    resize: none; 
+    overflow: auto; 
+    border: none;
+    text-align: justify;
+  }

@@ -5,7 +5,7 @@ const Button = ({ label , iconStyle , iconSrc , style, onClick }) => {
   return (
     <button className={style} onClick={onClick}>
       {label}
-      {iconStyle && <img className={iconStyle} src={iconSrc}/>}
+      {iconSrc && <img className={iconStyle} src={iconSrc}/>}
     </button>
   );
 };
