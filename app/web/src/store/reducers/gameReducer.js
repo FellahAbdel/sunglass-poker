@@ -1,29 +1,42 @@
 // This file contains the reducer for game-related actions
-import { CALL_ACTION } from '../actions/gameActions';
+import * as actions from "../actions/actionTypes.js";
 
 const initialState = {
   // Initial state of game
-  user: {
-    // Initial state of user
-    chips: 1000,
-    // User's available chips
-    betAmount: 0
-    // User's current bet amount
-  }
+  players: [
+    {
+      id: 1,
+      chips: 1000,
+      betAmount: 0,
+    },
+    // Additional player objects can be added here as needed
+  ],
   // Other game state variables can be added here
+  communityCards: [], // array of card objects
+  currentPlayerIndex: 0,
+  round: 0,
 };
 
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CALL_ACTION:
+    case actions.CALL:
+      const currentPlayer = state.players[state.currentPlayerIndex];
+      const callAmount = action.payload;
+      const chipsAfterCall = currentPlayer.chips - callAmount;
+      const betAmountAfterCall = currentPlayer.betAmount + callAmount;
+
       return {
-        // ! Attention on modifie pas directement state : 
-        ...state, 
-        user: {
-          ...state.user,
-          chips: state.user.chips - action.payload,
-          betAmount: state.user.betAmount + action.payload
-        }
+        ...state,
+        players: state.players.map((player, index) => {
+          if (index === state.currentPlayerIndex) {
+            return {
+              ...player,
+              chips: chipsAfterCall,
+              betAmount: betAmountAfterCall,
+            };
+          }
+          return player;
+        }),
       };
     // Other game actions can be handled here
     default:
