@@ -1,6 +1,6 @@
 import React, {useEffect } from "react";
-import { useAuth} from "./../AuthProvider.jsx";
-import { useWindowContext } from "../WindowContext.jsx";
+import { useAuth} from "./../Utiles/AuthProvider.jsx";
+import { useWindowContext } from "../Utiles/WindowContext.jsx";
 
 //CSS
 import "./table.css";

@@ -4,7 +4,7 @@ import "./profileMenu.css";
 // import Button from "../../button/Button.tsx";
 // import { useAuth } from "../../AuthProvider";
 // import { useWindowContext } from "../../WindowContext";
-import { useUserData } from "../../useUserData";
+import { useUserData } from "../../Utiles/useUserData";
 
 const StatsContent = () => {
     const { user, stats } = useUserData();

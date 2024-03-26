@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Button from "../../button/Button.tsx";
 import TextInputComponent from "../../textInput/TextInput";
-import { useAuth } from "../../AuthProvider";
+import { useAuth } from "../../Utiles/AuthProvider";
 import {
   validateEmail,
   validatePassword,
   validatePasswordMatch,
-} from "../../ValidationUtils";
-import { useWindowContext } from "../../WindowContext";
+} from "../../Utiles/ValidationUtils.jsx";
+import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
 
 const ResetPasswordWindow = ({ showSuccess }) => {

@@ -1,7 +1,7 @@
 // SuccessWindow.jsx
 import React from "react";
 import Button from "../../button/Button.tsx";
-import { useWindowContext } from "../../WindowContext";
+import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
 const SuccessWindow = () => {
   const {
