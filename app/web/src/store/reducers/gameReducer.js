@@ -1,58 +1,53 @@
-// This file contains the reducer for game-related actions
-import { CALL_ACTION } from '../actions/gameActions';
 
-const initialState = {
-  // Initial state of game
-  user: {
-    // Initial state of user
-    chips: 1000,
-    // User's available chips
-    betAmount: 0,
-    // User's current bet amount
+const defaultState = {
+  gameStarted: false,
+  player : [], // List of user objects with ids and cards in one gameTable
+  pot : 0,
+  pot2: 0,
+  turn : 0, // index of players table to tell which users turn 
+  timer:0
+    // TODO : More states can be added
+  
+}
+const gameState = (state = defaultState, action) => {
+  const { payload, type } = action
 
-    //User card
-    cards:[]
+  switch (type) {
 
+    case 'GET_DECK':
+      return {
+        ...defaultState,
+        deck: payload // Payload suffled deck
+      }
+    case 'DEAL_CARDS':
+      return {
+        ...defaultState,
+        player : payload,
+        gameStarted: true
+        // TODO : Back end needs to map all playerStates and give each player to card 
+      }
+
+    case 'JOIN_TABLE':
+        return {
+          ...defaultState,
+          players: {...players, payload }   // Payload = {user: id, cards:[] // cards empty par default}
+      }
+      
+    case 'RAISE':
+      let newTurnRaise = state.turn === players.length - 1 ? 0 : state.turn+1 
+      return {
+        ...defaultState,
+        pot: pot + payload, // Payload = money chiped in 
+        turn: players[newTurnRaise].id
+      }
+
+    case 'CHECK':
+      let newTurnCheck = state.turn === players.length - 1 ? 0 : state.turn+1
+      return {
+        ...defaultState,
+        turn: players[newTurnCheck].id
+      }
   }
-  // Other game state variables can be added here
-};
+}
 
-const gameReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case CALL_ACTION:
-      return {
-        // ! Attention on modifie pas directement state : 
-        ...state, 
-        user: {
-          ...state.user,
-          chips: state.user.chips - action.payload,
-          betAmount: state.user.betAmount + action.payload
-        }
-        
-      };
-    case DISTRIBUTE_CARDS:
-      // Logique pour distribuer les cartes
-      return {
-        ...state,
-        cards: state.user.cards + action.payload
-      };
-    case MISER:
-      // Logique pour distribuer les cartes
-      return {
-        ...state,
-        betAmount: state.user.betAmount + action.payload
-      };
-    case WIN:
-      // Logique pour distribuer les cartes
-      return {
-        ...state.user,
-        chips: state.user.chips + action.payload, //en gros on ajoute le pot
-      };
-
-    // Other game actions can be handled here
-    default:
-      return state;
-  }
-};
-
-export default gameReducer;
+export default gameReducer
