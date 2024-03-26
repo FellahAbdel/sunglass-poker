@@ -55,7 +55,7 @@
 }
 
 
-.container-profile{
+.container-profile ,.container-stats{
     width: 65vw;
     height: 50vh;
 

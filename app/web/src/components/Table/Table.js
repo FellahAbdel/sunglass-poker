@@ -74,11 +74,8 @@ const Table = ({
       className={`
       container-table
       ${isLogged ? "table-isLogged" : "table-notLogged"}
-      ${(windowType === "profile" || windowType === "stats")&& "container-profile"}
-      ${windowType === "settings" && "container-settings"}
+      container-${windowType}
       ${windowType === "" && !isGameTableVisible && "container-acceuil"}
-      ${windowType === "tutorial" && !isLogged && "container-tutorial"}
-      ${windowType === "success" && "container-success"}
       ${
         (windowType === "login" ||
           windowType === "register" ||
@@ -162,14 +159,8 @@ const Table = ({
       <LogoComponent
             style={`
             logo-acceuil
+            logo-${windowType}
               ${(windowType === "" && isGameTableVisible) && "disappear"}
-              ${(windowType === "profile" ||
-                 windowType === "stats") && "logo-profile"}
-
-              ${windowType === "tutorial" && "logo-tutorial"}
-              ${windowType === "settings" && "logo-login"}
-              ${windowType === "success" && "logo-success"}
-              ${windowType === "acceuil" && "logo-acceuil"}
 
               ${(windowType === "login" ||
                   windowType === "register" ||
