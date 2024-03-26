@@ -1,11 +1,11 @@
 import React  from "react";
 
-const ChipsCash = ({style,currentChips}) =>{
+const ChipsCash = ({styleClass,currentChips}) =>{
     const chips = currentChips;
     const formattedChips = chips.toLocaleString();
     const dollarSign = '$';
     return (
-        <div className={style}>
+        <div className={styleClass}>
             {formattedChips}{dollarSign}
         </div>
     )
