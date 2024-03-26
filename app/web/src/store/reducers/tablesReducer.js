@@ -17,10 +17,11 @@ const defaultState = {
                 player:{...player,payload}
             }
         case 'STAND_UP':
+            const updatedPlayers = player.filter(player => player.id !== payload.id);
             return {
                 ...defaultState,
-                player:
-            }
+                players: updatedPlayers
+            };
     }
 }
 
