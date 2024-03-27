@@ -1,9 +1,7 @@
 //react imports
 import React, { useState, useEffect } from "react";
 
-import {
-  useAuth,
-} from "./../components/Utiles/AuthProvider";
+import { useAuth } from "./../components/Utiles/AuthProvider";
 
 import { useWindowContext } from "./../components/Utiles/WindowContext";
 
@@ -27,7 +25,7 @@ const GameTable = () => {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
 
   const { logingOut, isLogged } = useAuth();
@@ -194,9 +192,9 @@ const GameTable = () => {
             }`}
           >
             <GameActionPanel
-              // handleFoldProp={handleFold}
-              // handleRaiseProp={handleRaise}
-              // handleCheckOrCallProp={handleCheckOrCall}
+            // handleFoldProp={handleFold}
+            // handleRaiseProp={handleRaise}
+            // handleCheckOrCallProp={handleCheckOrCall}
             />
           </div>
 

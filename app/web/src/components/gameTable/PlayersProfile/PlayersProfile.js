@@ -34,13 +34,13 @@ const PlayersProfile = ({
       </div>
 
       <Card
-        style={`showCardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
+        styleClass={`showCardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
         card={["a", "clubs"]}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />
       <Card
-        style={`showCardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
+        styleClass={`showCardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
         card={["a", "clubs"]}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
