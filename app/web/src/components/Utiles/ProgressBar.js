@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function Progressbar({ durationInSeconds }) {
     const [filled, setFilled] = useState(0);
-    const [isRunning, setIsRunning] = useState(true);
+    const [isRunning] = useState(true);
 
     useEffect(() => {
         let timeout;

@@ -8,7 +8,7 @@ const TextInputComponent = ({
   value,
   onChange,
   errorMessage,
-  style
+  styleClass
 }) => {
   const hasError = errorMessage !== "";
   return (
@@ -17,7 +17,7 @@ const TextInputComponent = ({
         type={type}
         name={name}
         placeholder={placeholder}
-        className={`${style} ${hasError ? "input-component-error" : ""}`}
+        className={`${styleClass} ${hasError ? "input-component-error" : ""}`}
         value={value}
         onChange={(e) => onChange(e)}
       />

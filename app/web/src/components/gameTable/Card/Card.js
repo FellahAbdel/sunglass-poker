@@ -2,7 +2,7 @@ import React from "react";
 import "./card.css";
 import cardBack from "./../../assets/images/card-design.png";
 
-const Card = ({ card, style, flippingCard, flippedStyle }) => {
+const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
   return (
     <div
       className={`${style} ${

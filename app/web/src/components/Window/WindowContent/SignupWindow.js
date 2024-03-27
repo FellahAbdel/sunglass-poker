@@ -1,22 +1,18 @@
 // forgotPassword.jsx
 import React, { useState } from "react";
 import Button from "../../button/Button.tsx";
-import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
-import { useAuth } from "../../AuthProvider";
+import { useAuth } from "../../Utiles/AuthProvider";
 import {
   validateUsername,
   validateEmail,
   validatePassword,
   validatePasswordMatch,
-} from "../../ValidationUtils";
-import { useWindowContext } from "../../WindowContext";
+} from "../../Utiles/ValidationUtils.jsx";
+import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
-const SignUpWindow = ({}) => {
+const SignUpWindow = () => {
   const {
-    closeWindow,
-    isWindowOpen,
-    windowType,
     openSuccessWindow,
     openWindow,
   } = useWindowContext();
@@ -131,7 +127,7 @@ const SignUpWindow = ({}) => {
           onChange={handleChange}
           placeholder="Username"
           errorMessage={validationErrors.pseudo}
-          style={"input-login"}
+          styleClass={"input-connectionDefault input-icon-profile"}
         />
         <TextInputComponent
           name="email"
@@ -139,7 +135,7 @@ const SignUpWindow = ({}) => {
           onChange={handleChange}
           placeholder="Email"
           errorMessage={validationErrors.email}
-          style={"input-login"}
+          styleClass={"input-connectionDefault input-icon-email"}
         />
         <TextInputComponent
           name="password"
@@ -148,7 +144,7 @@ const SignUpWindow = ({}) => {
           placeholder="Password"
           type={"password"}
           errorMessage={validationErrors.password}
-          style={"input-login"}
+          styleClass={"input-connectionDefault input-icon-password"}
         />
         <TextInputComponent
           name="repeatPassword"
@@ -157,25 +153,25 @@ const SignUpWindow = ({}) => {
           placeholder="Repeat your password"
           type={"password"}
           errorMessage={validationErrors.repeatPassword}
-          style={"input-login"}
+          styleClass={"input-connectionDefault input-icon-passwordRepeat"}
         />
         <Button
-          style="buttonconnexion login-button"
+          styleClass="btn-connectionDefault login-button"
           type="submit"
-          label="Register"
+          label="Register"  
         />
       </form>
 
       <Button
-        style="buttonconnexion login-button google-button"
-        label="Register with google"
-        iconSrc={require("./../../assets/images/icons/google.png")}
+        styleClass="btn-connectionDefault google-button"
+        label="Sign in with google"
+        iconSrc={require("./../../assets/images/icons/white/google.png")}
         iconStyle={true}
       />
 
       <Button
         onClick={() => openWindow("login")}
-        style="buttonconnexion forgot-button"
+        styleClass="btn-connectionDefault forgot-button"
         label="Already have an account ?"
       />
     </div>

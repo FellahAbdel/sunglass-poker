@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useAuth, getUserInfo, AuthProvider } from "./../AuthProvider.jsx";
-import { useWindowContext } from "../WindowContext.jsx";
+import React, {useEffect } from "react";
+import { useAuth} from "./../Utiles/AuthProvider.jsx";
+import { useWindowContext } from "../Utiles/WindowContext.jsx";
 
 //CSS
 import "./table.css";
 import "./tableCards.css";
 //Components
 import ProfileMenu from "../Window/WindowContent/ProfileWindow";
-import SettingsMenu from "../Window/WindowContent/SettingsWindow";
 import Window from "../Window/Window";
 import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import TextGlitch from "./../TextGlitch/TextGlitch";
 import LogoComponent from "../logo/Logo";
 import Button from "../button/Button.tsx";
-import HandCards from "./../gameTable/HandCards/HandCards";
+//import HandCards from "./../gameTable/HandCards/HandCards";
 
 const Table = ({
   dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
@@ -27,14 +26,12 @@ const Table = ({
 }) => {
   const {
     openWindow,
-    closeWindow,
     isWindowOpen,
     windowType,
     isGameTableVisible,
-    toggleGameTableVisibility,
     showGameTable,
   } = useWindowContext();
-  const { logingIn, logingOut, getUserInfo, isLogged } = useAuth();
+  const {isLogged} = useAuth();
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
@@ -74,11 +71,8 @@ const Table = ({
       className={`
       container-table
       ${isLogged ? "table-isLogged" : "table-notLogged"}
-      ${(windowType === "profile" || windowType === "stats")&& "container-profile"}
-      ${windowType === "settings" && "container-settings"}
+      container-${windowType}
       ${windowType === "" && !isGameTableVisible && "container-acceuil"}
-      ${windowType === "tutorial" && !isLogged && "container-tutorial"}
-      ${windowType === "success" && "container-success"}
       ${
         (windowType === "login" ||
           windowType === "register" ||
@@ -126,25 +120,25 @@ const Table = ({
               
                 <TextGlitch
                   children={"SunGlassPoker"}
-                  style={"glitch-accueil"}
+                  styleClass={"glitch-accueil"}
                   glitchStyle={"glitchStyle-accueil"}
                 />
                 <div className="container-startButtons">
                   {isLogged ? (<>
                     <Button
-                    style={"btn-gameStart btn-gameJoin"}
+                    styleClass={"btn-gameStart btn-gameJoin"}
                     label={"Start a game"}
                     onClick={onClickStartGame}
                     />
                     <Button
-                    style={"btn-gameStart btn-gameJoin"}
+                    styleClass={"btn-gameStart btn-gameJoin"}
                     label={"Join a game"}
-                    onClick={onClickStartGame}
+                    onClick={null}
                     />
                   </>) : (<>
                   {/* */}
                     <Button 
-                    style={"btn-gameStart"}
+                    styleClass={"btn-gameStart"}
                     label={"Login to Play"}
                     onClick={onClickStartGame}
                     />
@@ -160,16 +154,10 @@ const Table = ({
 
       {/* dynamique logo , moves according to the menu that is open */}
       <LogoComponent
-            style={`
+            styleClass={`
             logo-acceuil
+            logo-${windowType}
               ${(windowType === "" && isGameTableVisible) && "disappear"}
-              ${(windowType === "profile" ||
-                 windowType === "stats") && "logo-profile"}
-
-              ${windowType === "tutorial" && "logo-tutorial"}
-              ${windowType === "settings" && "logo-login"}
-              ${windowType === "success" && "logo-success"}
-              ${windowType === "acceuil" && "logo-acceuil"}
 
               ${(windowType === "login" ||
                   windowType === "register" ||

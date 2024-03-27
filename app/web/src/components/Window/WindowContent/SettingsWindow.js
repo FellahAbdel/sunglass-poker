@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './settingsMenu.css'
-import Button from "../../button/Button.tsx";
-import { useSettings } from '../../SettingsContext';
+import { useSettings } from '../../Utiles/SettingsContext';
 
 const SettingsWindow = () => {
   const { darkMode, mute, language, toggleDarkMode, toggleMute, changeLanguage } = useSettings();

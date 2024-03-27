@@ -1,21 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import "./profileMenu.css";
-import ClientsProfile from "./../../gameTable/PlayersProfile/PlayersProfile";
+//import ClientsProfile from "./../../gameTable/PlayersProfile/PlayersProfile";
 import Button from "../../button/Button.tsx";
-import { useAuth } from "../../AuthProvider";
-import { useWindowContext } from "../../WindowContext";
-import { useUserData } from "../../useUserData";
+//import { useAuth } from "../../AuthProvider";
+import { useWindowContext } from "../../Utiles/WindowContext";
+import { useUserData } from "../../Utiles/useUserData";
 
 const ProfileWindow = () => {
     const { openWindow } = useWindowContext();
     const { user } = useUserData();
-
-  const userInfoProp = [
-    user?.pseudo || "Pseudo par défaut",
-    user?.email || "email inconnu",
-    user?.coins || "0",
-    user?.joinedDate || "Date inconnue", 
-  ];
 
   // const handleEditName = () => {
   //     setEditingName(true);
@@ -48,7 +41,7 @@ const ProfileWindow = () => {
         Joined Date: {user?.joinedDate || "Date inconnue"} 
         <br />
         <Button
-          style={"btn-gameStart"}
+          styleClass={"btn-gameStart"}
           label={"User Stats"}
           onClick={() => openWindow("stats")}
         />

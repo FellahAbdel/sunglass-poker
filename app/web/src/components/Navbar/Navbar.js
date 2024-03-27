@@ -1,5 +1,5 @@
 //react imports
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 //css
 import "./navbar.css";
@@ -24,8 +24,9 @@ const Navbar = ({
       {/* Current Chips inventory and LogOut Button */}
       {isLoggedNavbar && (
         <>
-          <ChipsCash currentChips={9999999999} style={`box-chips`} />
-          <Button label={"LogOut"} onClick={logOutOnClick} style="btn-exit" />
+          <Button label={"Chat"} onClick={null} styleClass="btn-chat" />
+          <ChipsCash currentChips={9999999999} styleClass={`box-chips`} />
+          <Button label={"LogOut"} onClick={logOutOnClick} styleClass="btn-exit" />
         </>
       )}
 
@@ -34,21 +35,19 @@ const Navbar = ({
       <Button
         label={isLoggedNavbar ? "Profile" : "LogIn"}
         onClick={() => (isLoggedNavbar ? profileOnClick() : logInOnClick())}
-        style={`${isLoggedNavbar ? "btn-profile" : "btn-logIn"}`}
-        iconStyle="icon-profile"
-        iconSrc={require("./../assets/images/icons/profile-icon.png")}
+        styleClass={`${isLoggedNavbar ? "btn-profile" : "btn-logIn"}`}
+        iconSrc={require("./../assets/images/icons/black/profile.png")}
       />
 
       {/* Settings/Tutorial Buttons */}
       <Button
         label={isLoggedNavbar ? "Settings" : "Tutorial"}
         onClick={() => (isLoggedNavbar ? settingsOnClick() : tutorialOnClick())}
-        style={`${isLoggedNavbar ? "btn-settings" : "btn-tutorial"}`}
-        iconStyle={`${isLoggedNavbar ? "icon-settings" : "icon-tutorial"}`}
+        styleClass={`${isLoggedNavbar ? "btn-settings" : "btn-tutorial"}`}
         iconSrc={
           isLoggedNavbar
-            ? require("./../assets/images/icons/settings-icon.png")
-            : require("./../assets/images/icons/tutorial-icon.png")
+            ? require("./../assets/images/icons/white/settings.png")
+            : require("./../assets/images/icons/white/tutorial.png")
         }
       />
     </div>

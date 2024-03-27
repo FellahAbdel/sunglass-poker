@@ -22,10 +22,13 @@
 
 
 
-.logo-login{
+.logo-login, .logo-settings{
   left:-90%;
   z-index: -1;
   opacity: 100%;
+}
+.logo-login img, .logo-settings img{
+  width: 13vw;
 }
 
 
@@ -43,9 +46,7 @@
   left:60%;
 }
 
-.logo-login img{
-  width: 13vw;
-}
+
 
 .logo-success{
   bottom:110%;
@@ -61,11 +62,10 @@
   opacity: 0;
 }
 
-.logo-profile{
+.logo-profile , .logo-stats{
   bottom:110%;
   z-index: -1;
 }
-
-.logo-profile img{
+.logo-profile img , .logo-stats img{
   width: 9vw;
 }

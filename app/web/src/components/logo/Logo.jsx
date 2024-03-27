@@ -3,9 +3,9 @@ import React from "react";
 import "./logo.css";
 import logo from "../assets/SunGameStudio_logo.png";
 
-const LogoComponent = ({style , onClick, label}) => {
+const LogoComponent = ({styleClass , onClick, label}) => {
   return (
-    <div className={style} >
+    <div className={styleClass} >
       <img onClick={onClick} src={logo} alt="Logo du site"/>
       <h1>{label}</h1>
     </div>
