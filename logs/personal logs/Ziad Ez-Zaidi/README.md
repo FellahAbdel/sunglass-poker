@@ -21,3 +21,5 @@
 - 2h le réunion Backend (Merge de tout les branches)
 - 4h séance du 12/03 (fonction estquinteFlush + tests + merge + test d'integration )
 - 2h le 15/03 (fonction reset())
+- 3h le 19/03 (application du split + fonction test straightFlush.test.js + threeOfAKind.test.js + twoPair.test.js)
+- 2h le 22/03 (split de la classe Partie implémentation de ScorEngine équivalent de la fonction combinaisons)

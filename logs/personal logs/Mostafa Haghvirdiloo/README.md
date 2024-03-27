@@ -54,6 +54,17 @@
 
 * 2024/03/15 : <b> 2h </b> <br/>        Travail individuel: <i>correctoion de animation , exit button handle , css petits fixes , language selector input   </i>
 
-* 2024/03/16 : <b> 2h </b> <br/>        Travail avec Noe: <i>sujet: organisation des fichier , simplification , fusion des components , debuggage </i>
+* 2024/03/16 : <b> 2h </b> <br/>        Travail avec Noe: <i>organisation des fichier , simplification , fusion des components , debuggage </i>
 
-total: 90h15min
+* 2024/03/19 : <b> 4h </b> <br/>        Travail en cours TP: <i>logo css change , acceuil window , debuggage useauth , debuggage mis a jours des donnée  </i>
+
+* 2024/03/24 : <b> 3h </b> <br/>        Travail individuel: <i>figma , prototypage</i>
+
+* 2024/03/25 : <b> 1h </b> <br/>        Travail individuel: <i>figma , prototypage</i>
+
+* 2024/03/25 : <b> 1h </b> <br/>        Travail individuel: <i>debuggage de css et simplifications</i>
+
+* 2024/03/25 : <b> 1h </b> <br/>        Travail avec Noe: <i>debuggage</i>
+
+
+total: 100h15min
