@@ -1,5 +1,7 @@
 // import { useAuth, getUserInfo } from "../AuthProvider";
 // import React, { useState } from 'react';
+import store from "./store/configureStore";
+import { Provider } from "react-redux";
 import "./App.css";
 // import { BrowserRouter as Router, Route, Routes }from 'react-router-dom';
 import GameTable from "./pages/gameTable";
@@ -14,17 +16,19 @@ import { SettingsProvider } from "./components/SettingsContext";
 
 function App() {
   return (
-    <WindowProvider>
-      <Router>
-        <AuthProvider>
-          <SettingsProvider>
-            <Routes>
-              <Route path="/" Component={GameTable} />
-            </Routes>
-          </SettingsProvider>
-        </AuthProvider>
-      </Router>
-    </WindowProvider>
+    <Provider store={store}>
+      <WindowProvider>
+        <Router>
+          <AuthProvider>
+            <SettingsProvider>
+              <Routes>
+                <Route path="/" Component={GameTable} />
+              </Routes>
+            </SettingsProvider>
+          </AuthProvider>
+        </Router>
+      </WindowProvider>
+    </Provider>
   );
 }
 
