@@ -27,127 +27,123 @@ module.exports = function (app) {
     const filepath = 'test.html';
     res.sendFile(filepath, { root: __dirname });
   })
+  const dao = {
+    CreateUser: async function (body) {
+      try {
+        const { pseudo, email, password } = body;
 
-  app.post("/api/users", async (req, res) => {
-    try {
-      const { pseudo, email, password } = req.body;
+        // Vérification si le pseudo existe déjà
+        const existingPseudo = await UserModel.findOne({ pseudo });
+        if (existingPseudo) {
+          return {error:true,code:400, data:{ error: "user_exists", field: "pseudo" }};
+        }
 
-      // Vérification si le pseudo existe déjà
-      const existingPseudo = await UserModel.findOne({ pseudo });
-      if (existingPseudo) {
-        return res.status(400).json({ error: "user_exists", field: "pseudo" });
-      }
+        // Vérification si l'email existe déjà
+        const existingEmail = await UserModel.findOne({ email });
+        if (existingEmail) {
+          return {error:true,code:400, data:{ error: "user_exists", field: "email" }};
+        }
 
-      // Vérification si l'email existe déjà
-      const existingEmail = await UserModel.findOne({ email });
-      if (existingEmail) {
-        return res.status(400).json({ error: "user_exists", field: "email" });
-      }
-
-      // Création d'un nouvel utilisateur
-      const nouveauUtilisateur = new UserModel({
-        pseudo,
-        email,
-        password,
-      });
-
-      // Enregistrement dans la base de données
-      const utilisateurEnregistre = await nouveauUtilisateur.save();
-
-      // Création d'une nouvelle instance de Stat
-      const nouvelleStat = new StatModel({
-        maxCoins: 0,
-        maxGain: 0,
-        totalGain: 0,
-        experience: 0,
-        user: utilisateurEnregistre._id, // Associez l'ID de l'utilisateur
-      });
-
-      // Enregistrement de la statistique dans la base de données
-      await nouvelleStat.save();
-
-      // Mettre à jour la propriété 'stat' de l'utilisateur avec l'ID de la nouvelle stat
-      utilisateurEnregistre.stat = nouvelleStat._id;
-      await utilisateurEnregistre.save();
-
-      res.status(201).json(utilisateurEnregistre);
-    } catch (error) {
-      console.error("Erreur lors de la création de l'utilisateur :", error);
-      res
-        .status(500)
-        .json({ error: "Erreur lors de la création de l'utilisateur" });
-    }
-  });
-
-  app.post("/api/login", async (req, res) => {
-    try {
-      const { username, password } = req.body;
-
-      // Recherche d'un utilisateur dans la base de données avec la combinaison pseudo/mot de passe
-      const user = await UserModel.findOne({ pseudo: username, password });
-
-      if (user) {
-        // La combinaison de pseudo et de mot de passe est correcte
-
-        // Envoyer toutes les informations de l'utilisateur dans la réponse
-        res.json({ success: true, message: "Login successful", userData: user });
-      } else {
-        // La combinaison de pseudo et de mot de passe n'est pas correcte
-        res.json({ success: false, message: "Invalid credentials" });
-      }
-    } catch (error) {
-      console.error("Erreur lors de la connexion :", error);
-      res.status(500).json({ success: false, message: "Server error" });
-    }
-  });
-
-  app.post("/api/check-email", async (req, res) => {
-    try {
-      const { email } = req.body;
-
-      // Recherche d'un utilisateur dans la base de données avec l'e-mail fourni
-      const user = await UserModel.findOne({ email });
-
-      if (user) {
-        // L'e-mail existe dans la base de données
-        res.json({ exists: true, message: "E-mail exists in the database" });
-      } else {
-        // L'e-mail n'existe pas dans la base de données
-        res.json({
-          exists: false,
-          message: "E-mail does not exist in the database",
+        // Création d'un nouvel utilisateur
+        const nouveauUtilisateur = new UserModel({
+          pseudo,
+          email,
+          password,
         });
-      }
-    } catch (error) {
-      console.error("Erreur lors de la vérification de l'e-mail :", error);
-      res.status(500).json({ error: "Server error" });
-    }
-  });
 
-  app.put("/api/update-user-data", async (req, res) => {
-    try {
-      const { field, value, identifierType, identifierValue } = req.body;
+        // Enregistrement dans la base de données
+        const utilisateurEnregistre = await nouveauUtilisateur.save();
 
-      // Mettez à jour le champ de l'utilisateur dans la base de données
-      const updatedUser = await UserModel.findOneAndUpdate(
-        { [identifierType]: identifierValue },
-        { $set: { [field]: value } },
-        { new: true }
-      );
-
-      if (updatedUser) {
-        return res.json({
-          success: true,
-          message: `${field} updated successfully`,
+        // Création d'une nouvelle instance de Stat
+        const nouvelleStat = new StatModel({
+          maxCoins: 0,
+          maxGain: 0,
+          totalGain: 0,
+          experience: 0,
+          user: utilisateurEnregistre._id, // Associez l'ID de l'utilisateur
         });
-      } else {
-        return res.json({ success: false, message: `Failed to update ${field}` });
-      }
-    } catch (error) {
-      console.error(`Error updating ${field}:`, error);
-      return res.status(500).json({ success: false, message: "Server error" });
-    }
-  });
 
-  return db;
+        // Enregistrement de la statistique dans la base de données
+        await nouvelleStat.save();
+
+        // Mettre à jour la propriété 'stat' de l'utilisateur avec l'ID de la nouvelle stat
+        utilisateurEnregistre.stat = nouvelleStat._id;
+        await utilisateurEnregistre.save();
+
+        return  {error:false,code:201,data:utilisateurEnregistre};
+      } catch (error) {
+        console.error("Erreur lors de la création de l'utilisateur :", error);
+        return {error:true, code:500,data:{error:"Erreur lors de la création de l'utilisateur"} };
+      }
+    },
+
+    LoginUser: async function (body) {
+      try {
+        const { username, password } =body;
+        const res = {error:true, code:400};
+        // Recherche d'un utilisateur dans la base de données avec la combinaison pseudo/mot de passe
+        const user = await UserModel.findOne({ pseudo: username, password });
+        if (user) {
+          // La combinaison de pseudo et de mot de passe est correcte
+
+          // Envoyer toutes les informations de l'utilisateur dans la réponse
+          res = {...res, data:{ success: true, message: "Login successful", userData: user }};
+        } else {
+          // La combinaison de pseudo et de mot de passe n'est pas correcte
+          res= {...res,data:{ success: false, message: "Invalid credentials" }};
+        }
+      } catch (error) {
+        console.error("Erreur lors de la connexion :", error);
+        res= {...res,code:500,data:{ success: false, message: "Server error" }};
+      }
+      return res;
+    },
+
+    checkEmail: async function (body) {
+      try {
+        const { email } = body;
+        const res = {error:true, code:400};
+        // Recherche d'un utilisateur dans la base de données avec l'e-mail fourni
+        const user = await UserModel.findOne({ email });
+
+        if (user) {
+          // L'e-mail existe dans la base de données
+          res = {...res, data:{ exists: true, message: "E-mail exists in the database" }};
+        } else {
+          // L'e-mail n'existe pas dans la base de données
+          res  ={...res,code:200,data:{exists: false,message: "E-mail does not exist in the database"}};
+        }
+      } catch (error) {
+        console.error("Erreur lors de la vérification de l'e-mail :", error);
+        res =  {...res,code:500,data:{ error: "Server error" }};
+      }
+      return res;
+    },
+
+    updateUserData: async function(body) {
+      try {
+        const { field, value, identifierType, identifierValue } = body;
+        const res = {error:true, code:400};
+
+        // Mettez à jour le champ de l'utilisateur dans la base de données
+        const updatedUser = await UserModel.findOneAndUpdate(
+          { [identifierType]: identifierValue },
+          { $set: { [field]: value } },
+          { new: true }
+        );
+
+        if (updatedUser) {
+          res = {...res,code:200, data:{success: true,message: `${field} updated successfully`}};
+        } else {
+          res = {...res,data:{ success: false, message: `Failed to update ${field}` }};
+        }
+      } catch (error) {
+        console.error(`Error updating ${field}:`, error);
+        res = {...res,code:500,data:{ success: false, message: "Server error" }};
+      }
+      return res;
+    }
+
+  }
+  return dao;
 }
