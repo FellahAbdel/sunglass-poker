@@ -118,7 +118,7 @@ const ResetPasswordWindow = ({ showSuccess }) => {
           onChange={handleChange}
           placeholder="Mail (temporary)"
           errorMessage={validationErrors.email}
-          styleClass={"input-login"}
+          styleClass={"input-connectionDefault input-icon-email"}
         />
         <TextInputComponent
           name="password"
@@ -127,7 +127,7 @@ const ResetPasswordWindow = ({ showSuccess }) => {
           type="password"
           placeholder="Password"
           errorMessage={validationErrors.password}
-          styleClass={"input-login"}
+          styleClass={"input-connectionDefault input-icon-password"}
         />
         <TextInputComponent
           name="repeatPassword"
@@ -136,16 +136,16 @@ const ResetPasswordWindow = ({ showSuccess }) => {
           type="password"
           placeholder="Repeat your password"
           errorMessage={validationErrors.repeatPassword}
-          styleClass={"input-login"}
+          styleClass={"input-connectionDefault input-icon-passwordRepeat"}
         />
         <Button
-          styleClass="buttonconnexion button login-button"
+          styleClass="btn-connectionDefault button login-button"
           type="submit"
           label="Send"
         />
       </form>
       <Button
-        styleClass="buttonconnexion forgot-button"
+        styleClass="btn-connectionDefault forgot-button"
         onClick={() => openWindow("login")}
         label="Return to connection menu"
       />

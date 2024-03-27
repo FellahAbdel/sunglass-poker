@@ -1,9 +1,9 @@
-.buttonconnexion {
-  width: 21.5vw;
+.btn-connectionDefault {
+  width: 24.5vw;
   height: 6vh;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  border-radius: 15px;
+  border-radius: 10px;
   font-size: 3vh;
   margin-bottom: 5px;
   margin-top: 5px;

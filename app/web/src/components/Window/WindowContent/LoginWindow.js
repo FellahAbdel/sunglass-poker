@@ -62,7 +62,7 @@ const LoginWindow = () => {
           onChange={handleChange}
           placeholder="Username"
           errorMessage={validationErrors.username}
-          styleClass={"input-login"}
+          styleClass={"input-connectionDefault input-icon-profile"}
         />
         <TextInputComponent
           name="password"
@@ -71,29 +71,29 @@ const LoginWindow = () => {
           type="password"
           placeholder="Password"
           errorMessage={validationErrors.password}
-          styleClass={"input-login"}
+          styleClass={"input-connectionDefault input-icon-password"}
         />
         <Button
-          styleClass="buttonconnexion login-button"
+          styleClass="btn-connectionDefault login-button"
           type="submit"
           label="Login"
         />
           <Button
           onClick={() => openWindow("forgot")}
-          styleClass="buttonconnexion forgot-button"
+          styleClass="btn-connectionDefault forgot-button"
           label="I forgot my password"
         />
       </form>
 
       <Button
         onClick={() => openWindow("register")}
-        styleClass="buttonconnexion register-button"
+        styleClass="btn-connectionDefault register-button"
         label="Register New Account"
       />
       <Button
-        styleClass="buttonconnexion google-button"
+        styleClass="btn-connectionDefault google-button"
         label="Sign in with google"
-        iconSrc={require("./../../assets/images/icons/google.png")}
+        iconSrc={require("./../../assets/images/icons/white/google.png")}
         iconStyle={true}
       />
     </div>

@@ -36,7 +36,7 @@ const Navbar = ({
         label={isLoggedNavbar ? "Profile" : "LogIn"}
         onClick={() => (isLoggedNavbar ? profileOnClick() : logInOnClick())}
         styleClass={`${isLoggedNavbar ? "btn-profile" : "btn-logIn"}`}
-        iconSrc={require("./../assets/images/icons/profile-icon.png")}
+        iconSrc={require("./../assets/images/icons/black/profile.png")}
       />
 
       {/* Settings/Tutorial Buttons */}
@@ -46,8 +46,8 @@ const Navbar = ({
         styleClass={`${isLoggedNavbar ? "btn-settings" : "btn-tutorial"}`}
         iconSrc={
           isLoggedNavbar
-            ? require("./../assets/images/icons/settings-icon.png")
-            : require("./../assets/images/icons/tutorial-icon.png")
+            ? require("./../assets/images/icons/white/settings.png")
+            : require("./../assets/images/icons/white/tutorial.png")
         }
       />
     </div>
