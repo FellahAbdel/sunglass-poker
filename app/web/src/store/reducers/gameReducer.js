@@ -1,6 +1,7 @@
 // This file contains the reducer for game-related actions
 import * as actions from "../actions/actionTypes.js";
-import * as Deck from "../../shared/Deck.js";
+import Deck from "../../shared/Deck.js";
+import Player from "../../shared/Player.js";
 
 const initialState = {
   table: {
@@ -16,27 +17,38 @@ const initialState = {
   ),
 };
 
+const begin = (state) => {
+  const deck = state.table.deck;
+  deck.initCards();
+  deck.shuffle();
+
+  const player = state.player;
+  player.clearHand();
+  player.setCards(deck.deal(2));
+
+  const opponents = state.opponents.map((opponent) => {
+    opponent.clearHand();
+    opponent.setCards(deck.deal(2));
+    return opponent;
+  });
+
+  return {
+    ...state,
+    table: {
+      ...state.table,
+      deck,
+      stake: 0,
+    },
+    player,
+    opponents,
+    controlsMode: "roundOne",
+  };
+};
+
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.CALL:
-      const currentPlayer = state.players[state.currentPlayerIndex];
-      const callAmount = action.payload;
-      const chipsAfterCall = currentPlayer.chips - callAmount;
-      const betAmountAfterCall = currentPlayer.betAmount + callAmount;
-
-      return {
-        ...state,
-        players: state.players.map((player, index) => {
-          if (index === state.currentPlayerIndex) {
-            return {
-              ...player,
-              chips: chipsAfterCall,
-              betAmount: betAmountAfterCall,
-            };
-          }
-          return player;
-        }),
-      };
+    case actions.START_GAME:
+      return begin(state);
     // Other game actions can be handled here
     default:
       return state;
