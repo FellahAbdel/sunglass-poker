@@ -5,6 +5,7 @@ import { useWindowContext } from "../Utiles/WindowContext.jsx";
 //CSS
 import "./table.css";
 import "./tableCards.css";
+import { getStyles } from "../Utiles/useStyles.jsx";
 //Components
 import ProfileMenu from "../Window/WindowContent/ProfileWindow";
 import Window from "../Window/Window";
@@ -67,6 +68,7 @@ const Table = ({
       openWindow("login");
     }
   };
+  const classes = getStyles(windowType, isLogged, isGameTableVisible);
 
   return (
     // Table that becomes a container for the menus when they are activated
@@ -75,28 +77,7 @@ const Table = ({
     // container-logIn : css for when user click on logIn button for table menu to open
     // container-acceuil : for the table to show up in acceuil when game opens
     // container-tutorial : for tuto
-    <div
-      className={`
-      container-table
-      ${isLogged ? "table-isLogged" : "table-notLogged"}
-      container-${windowType}
-      ${windowType === "" && !isGameTableVisible && "container-acceuil"}
-      ${
-        (windowType === "login" ||
-          windowType === "register" ||
-          windowType === "forgot" ||
-          windowType === "reset") &&
-        !isLogged &&
-        "container-logIn"
-      }
-      ${
-        windowType === "list_table" &&
-        !isGameTableVisible &&
-        "container-list_table"
-      }
-  
-      `}
-    >
+    <div className={classes.containerTable}>
       {/* Acceuil table if not logged in and game table if logged in */}
       {isGameTableVisible ? (
         <>
@@ -164,24 +145,7 @@ const Table = ({
       )}
 
       {/* dynamique logo , moves according to the menu that is open */}
-      <LogoComponent
-        styleClass={`
-            logo-acceuil
-            logo-${windowType}
-              ${windowType === "" && isGameTableVisible && "disappear"}
-
-              ${
-                (windowType === "login" ||
-                  windowType === "register" ||
-                  windowType === "forgot" ||
-                  windowType === "reset") &&
-                "logo-login"
-              }
-              ${windowType === "list_table" && "logo-profile"}
-            `}
-        label={`${windowType === "tutorial" ? "Tutorial" : ""}
-        ${windowType === "list_table" ? "JOIN A GAME : " : ""}`}
-      />
+      <LogoComponent styleClass={classes.logoComponent} />
     </div>
   );
 };

@@ -8,6 +8,8 @@ import { useWindowContext } from "./../components/Utiles/WindowContext";
 //css imports
 import "./gameTable.css";
 import "../components/Utiles/animations.css";
+import { getStyles } from "../components/Utiles/useStyles.jsx";
+
 //components imports
 import Navbar from "../components/Navbar/Navbar";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
@@ -125,6 +127,8 @@ const GameTable = () => {
   };
   //-----------------------------------------inGame functions to test
 
+  const classes = getStyles(windowType, isLogged, isGameTableVisible);
+
   return (
     <div className="container-main" onClick={handleCloseOnClickOutside}>
       {/* css Pattern background */}
@@ -145,22 +149,7 @@ const GameTable = () => {
       </div>
 
       {/* Menu/Table */}
-      <div
-        className={`
-          comp-table 
-          ${
-            (windowType === "login" ||
-              windowType === "register" ||
-              windowType === "forgot" ||
-              windowType === "reset") &&
-            "comp-table-login"
-          }
-          ${windowType === "settings" && "comp-table-login"}
-          ${windowType === "tutorial" && "comp-table-tutorial"}
-          ${windowType === "" && isLogged && "comp-table-inGame"}
-         
-      `}
-      >
+      <div className={classes.compTable}>
         <Table
           showGameList={handleClickStartGame}
           selectedLanguage={handleLanguageChange}
