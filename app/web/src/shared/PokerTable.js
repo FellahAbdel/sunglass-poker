@@ -1,4 +1,4 @@
-export class PokerTable {
+export default class PokerTable {
   constructor() {
     this.communityCards = [];
   }

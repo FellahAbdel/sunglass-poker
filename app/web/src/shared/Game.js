@@ -1,10 +1,9 @@
 import * as hands from "./score-engine/index.js";
-import {Deck} from "./Deck.js";
-import {PokerTable} from "./PokerTable.js";
+import Deck from "./Deck.js";
+import PokerTable from "./PokerTable.js";
 import * as scoreEngineUtils from "./ScoreEngineUtils.js";
 
-
-export class Game {
+export default class Game {
   constructor() {
     this.players = [];
     this.deck = new Deck();

@@ -1,4 +1,4 @@
-export class Player {
+export default class Player {
   #playerId = 0;
   #playerState = "";
   #playerMoney = 1000;

@@ -1,6 +1,6 @@
-import {Card} from "./Card.js";
+import { Card } from "./Card.js";
 
-export class Deck {
+export default class Deck {
   #cardsGame = [];
 
   constructor() {
