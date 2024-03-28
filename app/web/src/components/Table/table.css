@@ -14,38 +14,83 @@
   align-self: center;
   flex-wrap: wrap;
 
+
   transition: width 1s ease, height 1s ease, box-shadow 0.5s ease,
-    border-radius 1s ease;
+    border-radius 1s ease, background-color 0.5s ease;
 }
 
 /*table color when logged in and logged out*/
-.table-isLogged {
-  box-shadow: inset 0 0 50px rgb(0, 0, 0),
-    /*inner table shadow*/ 0 0 1vw 0.8vw #164f81, 0 0 0 1vw rgb(0, 0, 0),
-    0 0 0 2vw rgb(31, 33, 36), inset 0 0 0 2vw rgb(43, 41, 41),
+#dark .table-isLogged {
+  box-shadow:
+    inset 0 0 50px rgb(0, 0, 0),
+    0 0 1vw 0.8vw #164f81,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw rgb(31, 33, 36),
+    inset 0 0 0 2vw rgb(43, 41, 41),
     0 0 5vw 3vw black;
   background-color: #164f81;
 
-  background: radial-gradient(black 15%, transparent 16%) 0 0,
+  background:
+    radial-gradient(black 15%, transparent 16%) 0 0,
     radial-gradient(black 15%, transparent 16%) 8px 8px,
     radial-gradient(#164f81 15%, transparent 20%) 0 1px,
     radial-gradient(#164f81 15%, transparent 20%) 8px 9px;
   background-color: #282828;
   background-size: 16px 16px;
 }
-.table-notLogged {
-  box-shadow: inset 0 0 50px rgb(0, 0, 0),
-    /*inner table shadow*/ 0 0 1vw 0.8vw #4d6478, 0 0 0 1vw rgb(0, 0, 0),
-    0 0 0 2vw rgb(31, 33, 36), inset 0 0 0 2vw rgb(43, 41, 41),
+#dark .table-notLogged {
+  box-shadow:
+    inset 0 0 50px rgb(0, 0, 0),
+    0 0 1vw 0.8vw #4d6478,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw rgb(31, 33, 36),
+    inset 0 0 0 2vw rgb(43, 41, 41),
     0 0 5vw 3vw black;
 
-  background: radial-gradient(black 15%, transparent 16%) 0 0,
+  background:
+    radial-gradient(black 15%, transparent 16%) 0 0,
     radial-gradient(black 15%, transparent 16%) 8px 8px,
     radial-gradient(#a5a5a56c 15%, transparent 20%) 0 1px,
     radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
   background-color: #282828;
   background-size: 16px 16px;
 }
+#light .table-isLogged {
+  box-shadow:
+    inset 0 0 50px rgb(0, 0, 0),
+    0 0 1vw 0.8vw #164f81,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw #424242,
+    inset 0 0 0 2vw #424242,
+    0 0 5vw 3vw black;
+  background-color: #164f81;
+
+  background:
+    radial-gradient(rgb(0, 0, 0) 15%, transparent 16%) 0 0,
+    radial-gradient(rgb(0, 0, 0) 15%, transparent 16%) 8px 8px,
+    radial-gradient(#164f81 15%, transparent 20%) 0 1px,
+    radial-gradient(#164f81 15%, transparent 20%) 8px 9px;
+  background-color: #424242;
+  background-size: 16px 16px;
+}
+#light .table-notLogged {
+  box-shadow:
+    inset 0 0 50px rgb(0, 0, 0),
+    0 0 1vw 0.8vw #4d6478,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw rgb(31, 33, 36),
+    inset 0 0 0 2vw rgb(43, 41, 41),
+    0 0 5vw 3vw black;
+
+  background:
+    radial-gradient(black 15%, transparent 16%) 0 0,
+    radial-gradient(black 15%, transparent 16%) 8px 8px,
+    radial-gradient(#a5a5a56c 15%, transparent 20%) 0 1px,
+    radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
+  background-color: #282828;
+  background-size: 16px 16px;
+}
+
 
 .container-profile,
 .container-stats {

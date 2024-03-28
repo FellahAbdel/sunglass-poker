@@ -40,6 +40,7 @@ const Navbar = ({
       {/* Current Chips inventory and LogOut Button */}
       {isLoggedNavbar && (
         <>
+        {isGameTable && 
           <div  className={`chatBox ${isChatOpen && "chatBoxOpen"}`} >
             
             {!isChatOpen && 
@@ -67,7 +68,7 @@ const Navbar = ({
                 />
 
                 </>)}
-          </div>
+          </div>}
           <ChipsCash currentChips={9999999999} styleClass={`box-chips`} />
           <Button label={"LogOut"} onClick={logOutOnClick} styleClass="btn-exit" />
         </>

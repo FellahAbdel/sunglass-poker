@@ -1,9 +1,9 @@
-import React from 'react';
+import React , {useState} from 'react';
 import './settingsMenu.css'
 import { useSettings } from '../../Utiles/SettingsContext';
 
 const SettingsWindow = () => {
-  const { darkMode, mute, language, toggleDarkMode, toggleMute, changeLanguage } = useSettings();
+  const { theme, mute, language, toggleTheme, toggleMute, changeLanguage } = useSettings();
 
   const handleLanguageChange = (event) => {
     changeLanguage(event.target.value);
@@ -23,7 +23,7 @@ const SettingsWindow = () => {
           <span className='container-switch'>
             <p>DARK MODE</p>
             <label className="switch">
-              <input type="checkbox" checked={darkMode} onChange={toggleDarkMode}/>
+              <input type="checkbox" checked={theme} onChange={toggleTheme}/>
               <span className="slider"/>
             </label>
           </span>

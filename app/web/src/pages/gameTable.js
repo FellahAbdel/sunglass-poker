@@ -1,5 +1,5 @@
 //react imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { useAuth } from "./../components/Utiles/AuthProvider";
 
@@ -17,7 +17,11 @@ import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 
+import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
+
 const GameTable = () => {
+  const {theme} = useSettings();
+
   const [dealingFlop, setDealingFlop] = useState([false, false, false]);
   const [handGuide, setHandGuide] = useState("");
   const [profileMenu] = useState(false);
@@ -129,80 +133,81 @@ const GameTable = () => {
 
   const classes = getStyles(windowType, isLogged, isGameTableVisible);
 
+
   return (
-    <div className="container-main" onClick={handleCloseOnClickOutside}>
-      {/* css Pattern background */}
-      <div className="background"></div>
-      <div className="backdrop"></div>
+      <div className="container-main" id={theme} onClick={handleCloseOnClickOutside}>
+        {/* css Pattern background */}
+        <div className="background"></div>
+        <div className="backdrop"></div>
 
-      {/* Navbar or header */}
-      <div className="comp-navbar">
-        <Navbar
-          logOutOnClick={handleLogOutButton}
-          settingsOnClick={handleSettingsButton}
-          profileOnClick={handleProfileButton}
-          //navbar changes for loggedIn
-          isLoggedNavbar={isLogged}
-          logInOnClick={handleLogInButton}
-          tutorialOnClick={handleTutorialButton}
-        />
+        {/* Navbar or header */}
+        <div className="comp-navbar">
+          <Navbar
+            logOutOnClick={handleLogOutButton}
+            settingsOnClick={handleSettingsButton}
+            profileOnClick={handleProfileButton}
+            //navbar changes for loggedIn
+            isLoggedNavbar={isLogged}
+            logInOnClick={handleLogInButton}
+            tutorialOnClick={handleTutorialButton}
+          />
+        </div>
+
+        {/* Menu/Table */}
+        <div className={classes.compTable}>
+          <Table
+            showGameList={handleClickStartGame}
+            selectedLanguage={handleLanguageChange}
+            dealingFlop={dealingFlop}
+            showCards={[0, 1, 2, 3, 4]}
+            playersCardDistributedProp={playersCardDistributed}
+            playersCardsShowProp={playersCardsShow}
+            moneyPot={9999999999}
+            // to open the profile and setting menus
+            profileMenuActive={profileMenu}
+            settingsMenuActive={settingsMenu}
+            // LogIn panel
+            //isLoggedOnClick={handleIsLogged}
+            //isLogged={isLogged}
+            onClick={(e) => handleBoxClick}
+          />
+        </div>
+
+        {/* playing elements opens when logged in */}
+        {isGameTableVisible && (
+          <>
+            <div
+              className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
+            >
+              <BonusPanel />
+            </div>
+            <div
+              className={`comp-gameAction ${
+                isWindowOpen ? "slideDown" : "slideUp"
+              }`}
+            >
+              <GameActionPanel
+              // handleFoldProp={handleFold}
+              // handleRaiseProp={handleRaise}
+              // handleCheckOrCallProp={handleCheckOrCall}
+              />
+            </div>
+
+            <div
+              className={`comp-handCards ${
+                isWindowOpen ? "slideDown" : "slideUp"
+              }`}
+            >
+              <HandCards
+                card1={["a", "hearts"]}
+                card2={["a", "diamonds"]}
+                showHandCardProp={showHandCard}
+                handGuideProp={handGuide}
+              />
+            </div>
+          </>
+        )}
       </div>
-
-      {/* Menu/Table */}
-      <div className={classes.compTable}>
-        <Table
-          showGameList={handleClickStartGame}
-          selectedLanguage={handleLanguageChange}
-          dealingFlop={dealingFlop}
-          showCards={[0, 1, 2, 3, 4]}
-          playersCardDistributedProp={playersCardDistributed}
-          playersCardsShowProp={playersCardsShow}
-          moneyPot={9999999999}
-          // to open the profile and setting menus
-          profileMenuActive={profileMenu}
-          settingsMenuActive={settingsMenu}
-          // LogIn panel
-          //isLoggedOnClick={handleIsLogged}
-          //isLogged={isLogged}
-          onClick={(e) => handleBoxClick}
-        />
-      </div>
-
-      {/* playing elements opens when logged in */}
-      {isGameTableVisible && (
-        <>
-          <div
-            className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
-          >
-            <BonusPanel />
-          </div>
-          <div
-            className={`comp-gameAction ${
-              isWindowOpen ? "slideDown" : "slideUp"
-            }`}
-          >
-            <GameActionPanel
-            // handleFoldProp={handleFold}
-            // handleRaiseProp={handleRaise}
-            // handleCheckOrCallProp={handleCheckOrCall}
-            />
-          </div>
-
-          <div
-            className={`comp-handCards ${
-              isWindowOpen ? "slideDown" : "slideUp"
-            }`}
-          >
-            <HandCards
-              card1={["a", "hearts"]}
-              card2={["a", "diamonds"]}
-              showHandCardProp={showHandCard}
-              handGuideProp={handGuide}
-            />
-          </div>
-        </>
-      )}
-    </div>
   );
 };
 
