@@ -11,11 +11,18 @@
   right: 0;
   left: 0;
 
-  filter: saturate(0);
-
   transition: top 1s ease, bottom 1s ease, right 1s ease, left 1s ease,
-    opacity 0.5s ease;
+    opacity 0.5s ease, filter 2s ease;
 }
+
+#light .logo-acceuil{
+  filter: saturate(100%);
+}
+#dark .logo-acceuil{
+  filter: saturate(0%);
+}
+
+
 .logo-acceuil img {
   width: 11vw;
   transition: width 1s ease;
@@ -32,19 +39,23 @@
   width: 13vw;
 }
 
+.logo-profile,
 .logo-tutorial {
   bottom: 110%;
   left: -6%;
   z-index: -1;
 }
+.logo-profile img,
 .logo-tutorial img {
-  width: 10vw;
+  width: 9vw;
 }
-.logo-tutorial h1 {
+.logo-tutorial h1 ,
+.logo-profile h1 {
   color: white;
   position: absolute;
   left: 60%;
 }
+
 
 .logo-success {
   bottom: 110%;
@@ -60,12 +71,12 @@
   opacity: 0;
 }
 
-.logo-profile,
+
 .logo-stats {
   bottom: 110%;
   z-index: -1;
 }
-.logo-profile img,
+
 .logo-stats img {
   width: 9vw;
 }

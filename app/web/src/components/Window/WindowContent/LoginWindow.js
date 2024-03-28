@@ -74,24 +74,24 @@ const LoginWindow = () => {
           styleClass={"input-connectionDefault input-icon-password"}
         />
         <Button
-          styleClass="btn-connectionDefault login-button"
+          styleClass="btn-connectionDefault login-button back-color1"
           type="submit"
           label="Login"
         />
           <Button
           onClick={() => openWindow("forgot")}
-          styleClass="btn-connectionDefault forgot-button"
+          styleClass="btn-connectionDefault forgot-button back-color3"
           label="I forgot my password"
         />
       </form>
 
       <Button
         onClick={() => openWindow("register")}
-        styleClass="btn-connectionDefault register-button"
+        styleClass="btn-connectionDefault register-button back-color1"
         label="Register New Account"
       />
       <Button
-        styleClass="btn-connectionDefault google-button"
+        styleClass="btn-connectionDefault google-button back-color3"
         label="Sign in with google"
         iconSrc={require("./../../assets/images/icons/white/google.png")}
         iconStyle={true}

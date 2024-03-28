@@ -1,3 +1,29 @@
+#dark Button, #light Button{
+  transition: background-color 1s ease;
+}
+
+
+#dark .back-color1 {
+  background-color: #004577;
+}
+#dark .back-color2 {
+  background-color: #4D6478; 
+}
+#dark .back-color3{
+  background-color: #303b44; 
+
+}
+
+#light .back-color1 {
+  background-color: #777100; 
+}
+#light .back-color2 {
+  background-color: #78754d; 
+}
+#light .back-color3{
+  background-color: #414430; 
+}
+
 .btn-connectionDefault {
   width: 24.5vw;
   height: 6vh;

@@ -72,11 +72,20 @@
     position:absolute;
     bottom: 23%;
 }
-.glitchStyle-accueil::before{
+#light .glitchStyle-accueil::before{
+    color: #75784d;
+
+}
+#light .glitchStyle-accueil::after{
+    color: #70784d;
+
+}
+
+#dark .glitchStyle-accueil::before{
     color: #4D6478;
 
 }
-.glitchStyle-accueil::after{
+#dark .glitchStyle-accueil::after{
     color: #4D6478;
 
 }

@@ -118,12 +118,12 @@ const Table = ({
                 {isLogged ? (
                   <>
                     <Button
-                      styleClass={"btn-gameStart btn-gameJoin"}
+                      styleClass={"btn-gameStart btn-gameJoin back-color1"}
                       label={"Start a game"}
                       onClick={onClickStartGame}
                     />
                     <Button
-                      styleClass={"btn-gameStart btn-gameJoin"}
+                      styleClass={"btn-gameStart btn-gameJoin back-color1"}
                       label={"Join a game"}
                       onClick={showGameList}
                     />
@@ -132,7 +132,7 @@ const Table = ({
                   <>
                     {/* Bouton affiché si l'utilisateur n'est pas connecté */}
                     <Button
-                      styleClass={"btn-gameStart"}
+                      styleClass={"btn-gameStart back-color1"}
                       label={"Login to Play"}
                       onClick={onClickStartGame}
                     />
@@ -145,7 +145,12 @@ const Table = ({
       )}
 
       {/* dynamique logo , moves according to the menu that is open */}
-      <LogoComponent styleClass={classes.logoComponent} label={`${windowType === "tutorial" ? "Tutorial" : ""}`}/>
+      <LogoComponent
+        styleClass={classes.logoComponent}
+        label={`
+          ${windowType === "tutorial" ? "Tutorial" : ""}
+          ${windowType === "profile" ? "Profile" : ""}
+        `}/>
     </div>
   );
 };
