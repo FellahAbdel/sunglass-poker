@@ -132,7 +132,7 @@ const Table = ({
                   <>
                     {/* Bouton affiché si l'utilisateur n'est pas connecté */}
                     <Button
-                      styleClass={"btn-gameStart back-color1"}
+                      styleClass={"btn-gameStart back-color2"}
                       label={"Login to Play"}
                       onClick={onClickStartGame}
                     />

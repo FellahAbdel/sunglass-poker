@@ -6,6 +6,7 @@ import { useAuth } from "./../components/Utiles/AuthProvider";
 import { useWindowContext } from "./../components/Utiles/WindowContext";
 
 //css imports
+import "./reset.css"
 import "./gameTable.css";
 import "../components/Utiles/animations.css";
 import { getStyles } from "../components/Utiles/useStyles.jsx";
@@ -135,7 +136,7 @@ const GameTable = () => {
 
 
   return (
-      <div className="container-main" id={theme} onClick={handleCloseOnClickOutside}>
+      <div className="container-main resetall" id={theme} onClick={handleCloseOnClickOutside}>
         {/* css Pattern background */}
         <div className="background"></div>
         <div className="backdrop"></div>

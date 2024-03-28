@@ -17,7 +17,7 @@
     /* background-image: url('./../components/gameTable/images/backdrop.png'); 
     background-size:cover;  */
     filter: blur(1px) ;
-    filter: brightness(30%);
+    transition: filter 1s ease;
 
 }
 #dark .backdrop{
@@ -27,15 +27,17 @@
         linear-gradient(135deg, #333 50%, transparent 0) 0 0,
         linear-gradient(45deg, #4d4d4d 50%, #666 0) 0 0 #666;
     background-size: 16px 16px; */
+
+    filter: brightness(100%);
+
     --s: 30px; /* control the size */
-        
-    --_g: #00611500 83%,#888888 85% 99%,#00611500 101%;
+    --_g: #00611500 83%,#2c2c2c 85% 99%,#00611500 101%;
     background:
       radial-gradient(27% 29% at right ,var(--_g)) calc(var(--s)/ 2) var(--s),
       radial-gradient(27% 29% at left  ,var(--_g)) calc(var(--s)/-2) var(--s),
       radial-gradient(29% 27% at top   ,var(--_g)) 0 calc(var(--s)/ 2),
       radial-gradient(29% 27% at bottom,var(--_g)) 0 calc(var(--s)/-2)
-      #575757;
+      #1d1d1d;
     background-size: calc(2*var(--s)) calc(2*var(--s));
 }
 #light .backdrop{
@@ -45,7 +47,8 @@
         linear-gradient(135deg, #909090 50%, transparent 0) 0 0,
         linear-gradient(45deg, #d5d5d5 50%, #a3a3a3 0) 0 0 #a3a3a3;
     background-size: 16px 16px; */
-    --s: 30px; /* control the size */
+
+    /* --s: 30px; 
         
     --_g: #00611500 83%,#6f6f6f 85% 99%,#00611500 101%;
     background:
@@ -54,8 +57,12 @@
       radial-gradient(29% 27% at top   ,var(--_g)) 0 calc(var(--s)/ 2),
       radial-gradient(29% 27% at bottom,var(--_g)) 0 calc(var(--s)/-2)
       #9d9d9d;
-    background-size: calc(2*var(--s)) calc(2*var(--s));
-
+    background-size: calc(2*var(--s)) calc(2*var(--s)); */
+    filter: brightness(35%);
+    background: unset;
+    background-color: unset;
+    background-image: url("./../components/assets/images/backdrop.jpg");
+    background-size: unset;
 }
 
 .background{

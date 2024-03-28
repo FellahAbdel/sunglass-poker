@@ -56,13 +56,28 @@
     padding: 0 10% 0 10%;
     box-shadow: 0  0 20px black;
     border-radius: 20px;
-    background-color: rgb(0, 0, 0);
     z-index: 1;
-    box-shadow: inset 0 0 10px 1px rgb(0, 132, 255),
-                0 0 10px 1px rgb(0, 132, 255);
+
     border-style: solid;
     border-width: 2px;
+}
+
+
+#dark .box-status{
+    box-shadow: 
+        inset 0 0 10px 1px rgb(0, 132, 255),
+        0 0 10px 1px rgb(0, 132, 255);
+    background-color: rgb(0, 0, 0);
     border-color: aliceblue;
+
+}
+#light .box-status{
+    box-shadow: 
+    inset 0 0 10px 1px rgb(24, 146, 176),
+    0 0 10px 1px rgb(24, 146, 176);
+    border: unset;
+    background-color: rgb(24, 146, 176);
+    border-color: rgb(89, 89, 89);
 }
 
 .box-statusText{
@@ -70,27 +85,49 @@
     z-index: -1;
     color:rgb(255, 255, 255);
 }
-.box-statusText.Fold{
+#light .box-statusText{
+    color: rgb(0, 0, 0);
+}
+#dark .box-statusText.Fold{
     color: rgb(255, 255, 255);
 }
 
-.box-status.Fold{
+
+#dark .box-status.Fold{
     filter: brightness(30%);
-    box-shadow: inset 0 0 10px 1px rgb(0, 0, 0),
-                0 0 10px 1px rgb(0, 0, 0);
+    box-shadow:
+        inset 0 0 10px 1px rgb(0, 0, 0),
+        0 0 10px 1px rgb(0, 0, 0);
     background-color: rgb(0, 0, 0) ;
 }
-.box-status.Waiting{
-    box-shadow: inset 0 0 10px 1px rgb(0, 255, 98),
-                0 0 10px 1px rgb(0 , 255, 98);
+#light .box-status.Fold{
+    filter: brightness(30%);
+    box-shadow:unset;
 }
-.box-status.Raised{
+
+#dark .box-status.Waiting{
+    box-shadow:
+        inset 0 0 10px 1px rgb(0, 255, 98),
+        0 0 10px 1px rgb(0 , 255, 98);
+}
+#light .box-status.Waiting{
+    box-shadow:unset;
+    background-color: #00a674;
+}
+#dark .box-status.Raised{
     box-shadow: inset 0 0 10px 1px rgb(255, 0, 0),
                 0 0 10px 1px rgb(255, 0, 0);
 }
+#light .box-status.Raised{
+    background-color: rgb(254, 111, 68);
+    box-shadow: inset 0 0 10px 1px rgb(255, 0, 0),
+    0 0 10px 1px rgb(255, 0, 0);
+}
+
 .box-status.Empty{
-    box-shadow: inset 0 0 10px 0px rgb(255, 255, 255),
-    0 0 10px 0px rgb(255, 255, 255);
+    box-shadow:
+        inset 0 0 10px 0px rgb(255, 255, 255),
+        0 0 10px 0px rgb(255, 255, 255);
     filter: brightness(30%);
 }
 .profilePic.Fold{
@@ -132,8 +169,8 @@
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%,-50%);
-	color: #00a674;
-	text-shadow: 0px 0px 10px #ffffff;
+	color:black;
+	text-shadow: unset;
 }
 
 
@@ -156,11 +193,21 @@
     border-style: solid;
     border-color: #000000;
     border-width: 1px;
+
+}
+
+#dark .box-playerInfo{
     color: rgb(198, 198, 198);
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow:  0 0 20px 10px black;
 }
 
+#light .box-playerInfo{
+    border: unset;
+    color: rgb(36, 36, 36);
+    background-color: rgba(255, 255, 255, 0.761);
+    box-shadow: 0px -23px 25px 0px rgba(0, 0, 0, 0.17) inset, 0px -36px 30px 0px rgba(0, 0, 0, 0.15) inset, 0px -79px 40px 0px rgba(0, 0, 0, 0.1) inset, 0px 2px 1px rgba(0, 0, 0, 0.06), 0px 4px 2px rgba(0, 0, 0, 0.09), 0px 8px 4px rgba(0, 0, 0, 0.09), 0px 16px 8px rgba(0, 0, 0, 0.09);
+}
 .profilePic{
     position: absolute;
     bottom: 0;
@@ -168,10 +215,15 @@
     width:3.3vw;
     border-style:solid;
     border-width: 0.3vw;
-    border-color: black;
     box-shadow: 0 0 10px black;
 }
-
+#dark .profilePic{
+    border-color: black;
+}
+#light .profilePic{
+    border-color: rgba(0, 0, 0, 0.204);
+    border-width: 0.2vw;
+}
 
 .showCardPlayers1 img ,.showCardPlayers2 img{
     width:2.5vw;

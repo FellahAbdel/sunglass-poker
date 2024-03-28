@@ -70,7 +70,7 @@ const Navbar = ({
                 </>)}
           </div>}
           <ChipsCash currentChips={9999999999} styleClass={`box-chips`} />
-          <Button label={"LogOut"} onClick={logOutOnClick} styleClass="btn-exit back-color3" />
+          <Button label={"Exit"} onClick={logOutOnClick} styleClass="btn-exit back-color3" />
         </>
       )}
 
@@ -85,15 +85,18 @@ const Navbar = ({
 
       {/* Settings/Tutorial Buttons */}
       <Button
-        label={isLoggedNavbar ? "Settings" : "Tutorial"}
-        onClick={() => (isLoggedNavbar ? settingsOnClick() : tutorialOnClick())}
-        styleClass={`${isLoggedNavbar ? "btn-settings back-color1" : "btn-tutorial back-color2"}`}
-        iconSrc={
-          isLoggedNavbar
-            ? require("./../assets/images/icons/white/settings.png")
-            : require("./../assets/images/icons/white/tutorial.png")
-        }
+        label={"Tutorial"}
+        onClick={() => (tutorialOnClick())}
+        styleClass={`${isLoggedNavbar ? "btn-tutorial back-color2" : "btn-tutorial back-color3"}`}
+        iconSrc={require("./../assets/images/icons/white/tutorial.png")}
       />
+      <Button
+        label={"Settings"}
+        onClick={() => (settingsOnClick())}
+        styleClass={`${isLoggedNavbar ? "btn-settings back-color1" : "btn-settings back-color2"}`}
+        iconSrc={require("./../assets/images/icons/white/settings.png")}
+      />
+
     </div>
   );
 };
