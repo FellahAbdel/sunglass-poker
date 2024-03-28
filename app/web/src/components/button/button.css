@@ -49,3 +49,23 @@
 .register-button:hover {
   background-color: #033F61;
 }
+
+.btn-list_table{
+  width: 4.5vw;
+  height: 3vh;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 10px;
+  font-size: 2vh;
+  margin-bottom: 5px;
+  margin-top: 5px;
+
+}
+
+.btn-list_table_join{
+  background-color : #033e60;
+}
+
+.btn-list_table_full{
+  background-color : red;
+}

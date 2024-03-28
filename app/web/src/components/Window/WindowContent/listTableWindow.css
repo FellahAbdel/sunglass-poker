@@ -1,0 +1,53 @@
+.listTableWindow {
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+
+.listTableHeader,
+.tableRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerItem,
+.rowItem {
+  flex: 1;
+  text-align: center;
+}
+
+.headerItem:first-child,
+.rowItem:first-child {
+  flex: 2;
+}
+
+.listTableHeader .headerItem {
+  padding: 10px;
+  background: #333;
+  border: 1px solid #444;
+}
+
+.tableRow {
+  padding: 10px 0;
+  border-bottom: 1px solid #444;
+}
+
+.logo-profile {
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-top: -50vh;
+}
+
+.tableRow img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30px;
+  height: auto;
+}
