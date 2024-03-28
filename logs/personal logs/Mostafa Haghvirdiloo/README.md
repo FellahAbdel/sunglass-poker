@@ -70,6 +70,6 @@
 
 * 2024/03/27 : <b> 1h </b> <br/>        Travail individuel: <i>input icons css et implimentation sur tout les inputs</i>
 
-* 2024/03/26 : <b> 3h </b> <br/>        Travail individuel: <i>chat box, implimentation dark/light mode , css de dark/light mode</i>
+* 2024/03/26 : <b> 5h </b> <br/>        Travail individuel: <i>chat box, implimentation dark/light mode , css de dark/light mode , theme toggle , settings panel css , light mode colors , card en light mode , backdrop en lightmode , list_table css </i>
 
-total: 106h15min
+total: 108h15min
