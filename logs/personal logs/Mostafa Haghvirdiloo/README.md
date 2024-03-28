@@ -66,5 +66,10 @@
 
 * 2024/03/25 : <b> 1h </b> <br/>        Travail avec Noe: <i>debuggage</i>
 
+* 2024/03/26 : <b> 2h </b> <br/>        Travail en cours TP: <i>brain storming avec group , chat button , expliquer le front à team de back </i>
 
-total: 100h15min
+* 2024/03/27 : <b> 1h </b> <br/>        Travail individuel: <i>input icons css et implimentation sur tout les inputs</i>
+
+* 2024/03/26 : <b> 3h </b> <br/>        Travail individuel: <i>chat box, implimentation dark/light mode , css de dark/light mode</i>
+
+total: 106h15min
