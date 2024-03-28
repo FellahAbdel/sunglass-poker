@@ -1,5 +1,9 @@
 import * as actions from "./actionTypes.js";
 
+export const startGame = () => ({
+  type: actions.START_GAME,
+});
+
 export const dealCards = () => ({
   type: actions.DEAL_CARDS,
 });

@@ -1,3 +1,4 @@
+export const START_GAME = "START_GAME";
 export const DEAL_CARDS = "DEAL_CARDS";
 export const BET = "BET";
 export const FOLD = "FOLD";
