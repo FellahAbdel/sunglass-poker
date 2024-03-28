@@ -51,7 +51,7 @@ const PlayersProfile = ({
         src={
           status === "Empty"
             ? require("./../../assets/images/pp_empty.png")
-            : require("./../../assets/images/pp_simple.jpg")
+            : require("./../../assets/images/pp_empty.png")
         }
         alt="profilePic"
       />
