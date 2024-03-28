@@ -1,4 +1,4 @@
-class ScoreEngine {
+export class ScoreEngine {
   /*
    * IN : tableau de tableau contenant les 5 cartes composant les mains main [{[], id}, {[], id}, ...]
    * OUT : STRING ==> identifiant d' un joueur
@@ -334,5 +334,3 @@ class ScoreEngine {
     return res;
   }
 }
-
-module.exports = ScoreEngine;

@@ -1,4 +1,4 @@
-class PokerTable {
+export class PokerTable {
   constructor() {
     this.communityCards = [];
   }
@@ -11,5 +11,3 @@ class PokerTable {
     console.log();
   }
 }
-
-module.exports = PokerTable;

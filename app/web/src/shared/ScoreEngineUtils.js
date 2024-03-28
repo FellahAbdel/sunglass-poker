@@ -3,7 +3,7 @@
  * OUT : [{ poid, main, type }, ...] tableau du/des maximum(s) des poids
  * FUNCTION : tri et renvoi le ou les maximums des poids
  */
-function maximums(playerHandWeightList, getter) {
+export function maximums(playerHandWeightList, getter) {
   let maximums = [];
   let maxWeight = getter(playerHandWeightList[0]);
 
@@ -25,7 +25,7 @@ function maximums(playerHandWeightList, getter) {
  * OUT : STRING ==> identifiant d' un joueur
  * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des carres
  */
-function secondCarre(listeJoueurCombinaison, self = this) {
+export function secondCarre(listeJoueurCombinaison, self = this) {
   // je sais que cette liste contient deux elements
 
   let typeCarre = function (playerHand) {
@@ -87,7 +87,7 @@ function secondCarre(listeJoueurCombinaison, self = this) {
  * OUT : STRING ==> identifiant d' un joueur
  * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des full
  */
-function secondFull(tableauxAvecId) {
+export function secondFull(tableauxAvecId) {
   let meilleurId = tableauxAvecId[0].id;
   let meilleurTableau = tableauxAvecId[0].hand;
   let meilleursIds = [meilleurId];
@@ -120,7 +120,7 @@ function secondFull(tableauxAvecId) {
 /*
  * ...
  */
-function secondSuite(listeJoueurCombinaison) {
+export function secondSuite(listeJoueurCombinaison) {
   const valeurs = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   const mainsTriees = [];
   let joueursAvecCartePlusHaute = [];
@@ -177,7 +177,7 @@ function secondSuite(listeJoueurCombinaison) {
 /*
  * ...
  */
-function secondBrelan(listeJoueurCombinaison, self = this) {
+export function secondBrelan(listeJoueurCombinaison, self = this) {
   let typeBrelan = function (playerHand, trier) {
     let type = {
       type: null,
@@ -232,7 +232,7 @@ function secondBrelan(listeJoueurCombinaison, self = this) {
 /*
  * ...
  */
-function secondDoublePaire(tableauxAvecId) {
+export function secondDoublePaire(tableauxAvecId) {
   let meilleurId = tableauxAvecId[0].id;
   let meilleurTableau = tableauxAvecId[0].hand;
   let meilleursIds = [meilleurId];
@@ -264,7 +264,7 @@ function secondDoublePaire(tableauxAvecId) {
 /*
  * ...
  */
-function secondPaire(listeJoueurCombinaison, self = this) {
+export function secondPaire(listeJoueurCombinaison, self = this) {
   let tab = [...listeJoueurCombinaison];
   let hautesPaires = []; // Stockage des paires les plus hautes
   let plusHauteValeur = -1; // Valeur numérique de la plus haute paire
@@ -324,7 +324,7 @@ function secondPaire(listeJoueurCombinaison, self = this) {
 /*
  * ...
  */
-function secondCarteHaute(listeJoueurCombinaison, self = this) {
+export function secondCarteHaute(listeJoueurCombinaison, self = this) {
   let tab = [...listeJoueurCombinaison];
 
   for (let i = 0; i < tab.length; i++) {
@@ -346,14 +346,3 @@ function secondCarteHaute(listeJoueurCombinaison, self = this) {
 
   return res;
 }
-
-module.exports = {
-  maximums,
-  secondCarre,
-  secondFull,
-  secondSuite,
-  secondBrelan,
-  secondDoublePaire,
-  secondPaire,
-  secondCarteHaute,
-};

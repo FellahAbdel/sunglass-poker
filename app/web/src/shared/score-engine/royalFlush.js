@@ -3,7 +3,7 @@
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
  * FUNCTION : determine si les 7 possedent une quinte flush royale et renvoi la combianaison si elle est trouve.
  */
-function isRoyalFlush(cards) {
+export function isRoyalFlush(cards) {
   // Définir les symboles et valeurs des cartes royales
   const royalValues = new Set([10, 11, 12, 13, 14]);
   const royalSymbols = new Set(["C", "D", "H", "S"]); // C: Club, D: Diamond, H: Heart, S: Spade
@@ -33,5 +33,3 @@ function isRoyalFlush(cards) {
   // Si aucune quinte flush royale n'est trouvée, renvoyer false
   return false;
 }
-
-module.exports = isRoyalFlush;

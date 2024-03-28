@@ -1,4 +1,4 @@
-class Card {
+export class Card {
   constructor(number, color) {
     this.color = color;
     this.number = number;
@@ -8,5 +8,3 @@ class Card {
     return `${this.number} of ${this.color}`;
   }
 }
-
-module.exports = Card;

@@ -42,3 +42,6 @@ typings/
 
 
 .gitignore
+
+package-lock.json
+package.json

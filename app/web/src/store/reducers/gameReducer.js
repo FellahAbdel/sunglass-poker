@@ -1,5 +1,6 @@
 // This file contains the reducer for game-related actions
 import * as actions from "../actions/actionTypes.js";
+import * as Deck from "../../shared/Deck.js";
 
 const initialState = {
   // Initial state of game

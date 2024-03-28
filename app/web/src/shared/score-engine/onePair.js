@@ -1,7 +1,7 @@
 /*
  * ...
  */
-function isOnePair(tableau7cartes) {
+export function isOnePair(tableau7cartes) {
   let tab = [...tableau7cartes];
   // Ordonne le tableau
   tab.sort(function (a, b) {
@@ -45,5 +45,3 @@ function isOnePair(tableau7cartes) {
     return false;
   }
 }
-
-module.exports = isOnePair;
