@@ -1,5 +1,5 @@
-import Deck from require("../../shared/Deck");
-import Card from require("../../shared/Card");
+import { Deck } from "../../shared/Deck";
+import { Card } from "../../shared/Card";
 
 describe("Deck", () => {
   let deck;

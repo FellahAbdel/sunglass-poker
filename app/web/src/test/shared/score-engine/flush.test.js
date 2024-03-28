@@ -1,5 +1,5 @@
-import Card from "../../shared/Card";
-import isFlush from "../../shared/score-engine/flush";
+import Card from "../../../shared/Card.js";
+import isFlush from "../../../shared/score-engine/flush.js";
 
 describe("isFlush", () => {
   test("should return an array of at most 5 cards if a flush is found", () => {

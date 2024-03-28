@@ -1,5 +1,5 @@
-import Card from "../../../shared/Card";
-import isFullHouse from "../../../shared/score-engine/fullHouse";
+import Card from "../../../shared/Card.js";
+import isFullHouse from "../../../shared/score-engine/fullHouse.js";
 
 describe("isFullHouse", () => {
   test("should return an array of at most 5 cards if a full house is found", () => {

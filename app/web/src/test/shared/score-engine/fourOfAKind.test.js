@@ -1,5 +1,5 @@
-import Card from "../../../shared/Card";
-import isFourOfAKind from "../../../shared/score-engine/fourOfAKind";
+import Card from "../../../shared/Card.js";
+import isFourOfAKind from "../../../shared/score-engine/fourOfAKind.js";
 
 describe("isFourOfAKind", () => {
   test("should return an array of at most 5 cards if a four of kind is found", () => {

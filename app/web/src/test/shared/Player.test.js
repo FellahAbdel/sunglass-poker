@@ -1,5 +1,5 @@
-import Player  from ("../../shared/Player");
-import Card  from ("../../shared/Card");
+import Player from "../../shared/Player";
+import Card from "../../shared/Card";
 
 describe("Player", () => {
   let player;
