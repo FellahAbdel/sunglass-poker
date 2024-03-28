@@ -1,20 +1,22 @@
 // This file contains the reducer for game-related actions
 import * as actions from "../actions/actionTypes.js";
+const Game = require("Game.js");
+// const Deck = require("Deck.js");
+// const Game = require("../../../../shared/Game.js");
+// const Player = require("../../../../shared/Player.js");
 
 const initialState = {
-  // Initial state of game
-  players: [
-    {
-      id: 1,
-      chips: 1000,
-      betAmount: 0,
-    },
-    // Additional player objects can be added here as needed
-  ],
-  // Other game state variables can be added here
-  communityCards: [], // array of card objects
-  currentPlayerIndex: 0,
-  round: 0,
+  table: {
+    deck: new Deck(),
+    cards: [],
+    chips: 0,
+    stake: 0,
+  },
+  player: new Player(0, "diallo"),
+  opponents: Array.from(
+    { length: 8 },
+    (_, index) => new Player(index + 1, "Player" + index)
+  ),
 };
 
 const gameReducer = (state = initialState, action) => {
