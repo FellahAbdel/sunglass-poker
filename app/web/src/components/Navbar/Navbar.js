@@ -1,11 +1,12 @@
 //react imports
-import React from "react";
+import React, {useState} from "react";
 
 //css
 import "./navbar.css";
 //components
 import ChipsCash from "./ChipsCash";
 import Button from "../button/Button.tsx";
+import TextInputComponent from "../textInput/TextInput.jsx";
 
 const Navbar = ({
   profileOnClick,
@@ -19,12 +20,54 @@ const Navbar = ({
     e.stopPropagation();
   };
 
+
+  const [isChatOpen, setisChatOpen] = useState(false);
+
+  const handleChatOpen = () => {
+    setisChatOpen(true);
+  };
+
+  const handleChatClose = () => {
+    setisChatOpen(false);
+  };
+
+  const handleNull = () => {
+
+  }
+
   return (
     <div className="container-nav" onClick={handleClick}>
       {/* Current Chips inventory and LogOut Button */}
       {isLoggedNavbar && (
         <>
-          <Button label={"Chat"} onClick={null} styleClass="btn-chat" />
+          <div  className={`chatBox ${isChatOpen && "chatBoxOpen"}`} >
+            
+            {!isChatOpen && 
+            <Button
+              label={"Chat"}
+              onClick={handleChatOpen}
+              style={{}}
+            />}
+
+            {isChatOpen && (<>
+              <img
+                className={"btn-chatClose"}
+                onClick={handleChatClose}
+                src={require("./../assets/images/icons/white/cross.png")}
+                style={{
+                  opacity: isChatOpen ? '100' : '0',
+                }}
+                />
+                <TextInputComponent 
+                  name="Message"
+                  value={handleNull}
+                  onChange={handleNull}
+                  placeholder={"Message"}
+                  styleClass={"input-chatBox"}
+                />
+
+                </>)}
+          </div>
           <ChipsCash currentChips={9999999999} styleClass={`box-chips`} />
           <Button label={"LogOut"} onClick={logOutOnClick} styleClass="btn-exit" />
         </>
