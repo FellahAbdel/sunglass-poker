@@ -40,7 +40,7 @@ const Navbar = ({
       {/* Current Chips inventory and LogOut Button */}
       {isLoggedNavbar && (
         <>
-        {isGameTable && 
+        {isLoggedNavbar && 
           <div  className={`chatBox ${isChatOpen && "chatBoxOpen"}`} >
             
             {!isChatOpen && 
