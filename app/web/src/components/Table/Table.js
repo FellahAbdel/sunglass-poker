@@ -145,7 +145,7 @@ const Table = ({
       )}
 
       {/* dynamique logo , moves according to the menu that is open */}
-      <LogoComponent styleClass={classes.logoComponent} />
+      <LogoComponent styleClass={classes.logoComponent} label={`${windowType === "tutorial" ? "Tutorial" : ""}`}/>
     </div>
   );
 };
