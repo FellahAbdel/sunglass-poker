@@ -49,11 +49,17 @@
 .logo-tutorial img {
   width: 9vw;
 }
+
 .logo-tutorial h1 ,
 .logo-profile h1 {
   color: white;
   position: absolute;
   left: 60%;
+}
+.logo-list_table h1{
+  color: white;
+  position: absolute;
+  left: 56%;
 }
 
 
@@ -84,3 +90,8 @@
 .logo-list_table {
   bottom: 100%;
 }
+
+.logo-list_table img{
+  width: 7vw;
+}
+
