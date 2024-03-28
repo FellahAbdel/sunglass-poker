@@ -1,7 +1,7 @@
 /*
  * ...
  */
-function isThreeOfAKind(tableau7cartes) {
+export function isThreeOfAKind(tableau7cartes) {
   let tab = [...tableau7cartes];
   const valeurs = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1];
 
@@ -29,5 +29,3 @@ function isThreeOfAKind(tableau7cartes) {
   // Combinaison des 3 cartes de même numéro et des 2 cartes les plus hautes parmi les restantes
   return [...brelan, ...resteCartes.slice(0, 2)];
 }
-
-module.exports = isThreeOfAKind;

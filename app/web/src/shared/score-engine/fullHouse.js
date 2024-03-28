@@ -3,7 +3,7 @@
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
  * FUNCTION : determine si les 7 possedent un full et renvoi la combianaison si elle est trouve.
  */
-function isFullHouse(tableau7cartes) {
+export function isFullHouse(tableau7cartes) {
   let tab = [...tableau7cartes];
   const valeurs = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
@@ -48,5 +48,3 @@ function isFullHouse(tableau7cartes) {
   // Si on a trouvé un brelan et une paire, renvoyer la combinaison complète (full house)
   return [...brelan, ...paire.slice(0, 2)];
 }
-
-module.exports = isFullHouse;

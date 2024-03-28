@@ -1,4 +1,4 @@
-class Player {
+export class Player {
   #playerId = 0;
   #playerState = "";
   #playerMoney = 1000;
@@ -95,5 +95,3 @@ class Player {
     return this.#playerState === "active";
   }
 }
-
-module.exports = Player;

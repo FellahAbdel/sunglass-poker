@@ -1,9 +1,6 @@
 // This file contains the reducer for game-related actions
 import * as actions from "../actions/actionTypes.js";
-const Game = require("Game.js");
-// const Deck = require("Deck.js");
-// const Game = require("../../../../shared/Game.js");
-// const Player = require("../../../../shared/Player.js");
+import * as Deck from "../../shared/Deck.js";
 
 const initialState = {
   table: {

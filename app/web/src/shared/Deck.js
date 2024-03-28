@@ -1,6 +1,6 @@
-const Card = require("./Card");
+import {Card} from "./Card.js";
 
-class Deck {
+export class Deck {
   #cardsGame = [];
 
   constructor() {
@@ -58,5 +58,3 @@ class Deck {
     return threeCards;
   }
 }
-
-module.exports = Deck;

@@ -1,9 +1,10 @@
-const hands = require("./score-engine/index");
-const Deck = require("./Deck");
-const PokerTable = require("./PokerTable");
-const scoreEngineUtils = require("./ScoreEngineUtils");
+import * as hands from "./score-engine/index.js";
+import {Deck} from "./Deck.js";
+import {PokerTable} from "./PokerTable.js";
+import * as scoreEngineUtils from "./ScoreEngineUtils.js";
 
-class Game {
+
+export class Game {
   constructor() {
     this.players = [];
     this.deck = new Deck();
@@ -213,5 +214,3 @@ class Game {
 // game.river();
 
 // game.make7Cards(game.players[0]);
-
-module.exports = Game;

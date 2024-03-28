@@ -1,7 +1,7 @@
 /*
  * ...
  */
-function isTwoPair(tableau7cartes) {
+export function isTwoPair(tableau7cartes) {
   let tab = [...tableau7cartes];
   // Ordonne le tableau
   tab.sort(function (a, b) {
@@ -95,5 +95,3 @@ function isTwoPair(tableau7cartes) {
     return false;
   }
 }
-
-module.exports = isTwoPair;

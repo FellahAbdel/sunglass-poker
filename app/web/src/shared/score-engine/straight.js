@@ -1,9 +1,8 @@
 /*
  * ...
  */
-const Card = require("../Card");
 
-function isStraight(sevenCardsTab, refact = false) {
+export function isStraight(sevenCardsTab, refact = false) {
   const refactor = function (cardList, undo = false) {
     for (let i = 0; i < cardList.length; i++) {
       if (!undo) {
@@ -47,5 +46,3 @@ function isStraight(sevenCardsTab, refact = false) {
   }
   return hand.length === 5 ? hand : isStraight(sevenCardsTab, true);
 }
-
-module.exports = isStraight;
