@@ -1,5 +1,5 @@
-import React, {useEffect } from "react";
-import { useAuth} from "./../Utiles/AuthProvider.jsx";
+import React, { useEffect } from "react";
+import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 
 //CSS
@@ -31,14 +31,14 @@ const Table = ({
     isGameTableVisible,
     showGameTable,
   } = useWindowContext();
-  const {isLogged} = useAuth();
+  const { isLogged } = useAuth();
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
   }, [isWindowOpen]);
 
   useEffect(() => {
-    console.log("isLogged Table:", isLogged)
+    console.log("isLogged Table:", isLogged);
   }, [isLogged]);
 
   //name , user ID , level , games played , winning ratio , joined Date
@@ -51,11 +51,19 @@ const Table = ({
     );
     if (isLogged) {
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
-      console.log("Utilisateur connecté, on montre la table")
+      console.log("Utilisateur connecté, on montre la table");
       showGameTable();
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
-      console.log("Utilisateur déconnecté, login page")
+      console.log("Utilisateur déconnecté, login page");
+      openWindow("login");
+    }
+  };
+
+  const showGameList = () => {
+    if (isLogged) {
+      openWindow("list_table");
+    } else {
       openWindow("login");
     }
   };
@@ -80,7 +88,13 @@ const Table = ({
           windowType === "reset") &&
         !isLogged &&
         "container-logIn"
-      }  
+      }
+      ${
+        windowType === "list_table" &&
+        !isGameTableVisible &&
+        "container-list_table"
+      }
+  
       `}
     >
       {/* Acceuil table if not logged in and game table if logged in */}
@@ -105,48 +119,45 @@ const Table = ({
           {profileMenuActive ? <ProfileMenu userInfoProp={userInfo} /> : null}
 
           {/* Settings menu panel */}
-          {isWindowOpen ? (
-            <Window />
-          ) : null}
+          {isWindowOpen ? <Window /> : null}
         </>
       ) : (
-
         <>
           {/* Acceuil */}
           {isWindowOpen ? (
             <Window />
           ) : (
             <>
-              
-                <TextGlitch
-                  children={"SunGlassPoker"}
-                  styleClass={"glitch-accueil"}
-                  glitchStyle={"glitchStyle-accueil"}
-                />
-                <div className="container-startButtons">
-                  {isLogged ? (<>
+              <TextGlitch
+                children={"SunGlassPoker"}
+                styleClass={"glitch-accueil"}
+                glitchStyle={"glitchStyle-accueil"}
+              />
+              <div className="container-startButtons">
+                {isLogged ? (
+                  <>
                     <Button
-                    styleClass={"btn-gameStart btn-gameJoin"}
-                    label={"Start a game"}
-                    onClick={onClickStartGame}
+                      styleClass={"btn-gameStart btn-gameJoin"}
+                      label={"Start a game"}
+                      onClick={onClickStartGame}
                     />
                     <Button
-                    styleClass={"btn-gameStart btn-gameJoin"}
-                    label={"Join a game"}
-                    onClick={null}
+                      styleClass={"btn-gameStart btn-gameJoin"}
+                      label={"Join a game"}
+                      onClick={showGameList}
                     />
-                  </>) : (<>
-                  {/* */}
-                    <Button 
-                    styleClass={"btn-gameStart"}
-                    label={"Login to Play"}
-                    onClick={onClickStartGame}
+                  </>
+                ) : (
+                  <>
+                    {/* Bouton affiché si l'utilisateur n'est pas connecté */}
+                    <Button
+                      styleClass={"btn-gameStart"}
+                      label={"Login to Play"}
+                      onClick={onClickStartGame}
                     />
-                  </>)}
-
-
-                </div>
-                
+                  </>
+                )}
+              </div>
             </>
           )}
         </>
@@ -154,21 +165,23 @@ const Table = ({
 
       {/* dynamique logo , moves according to the menu that is open */}
       <LogoComponent
-            styleClass={`
+        styleClass={`
             logo-acceuil
             logo-${windowType}
-              ${(windowType === "" && isGameTableVisible) && "disappear"}
+              ${windowType === "" && isGameTableVisible && "disappear"}
 
-              ${(windowType === "login" ||
+              ${
+                (windowType === "login" ||
                   windowType === "register" ||
                   windowType === "forgot" ||
-                  windowType === "reset") 
-                &&
+                  windowType === "reset") &&
                 "logo-login"
               }
+              ${windowType === "list_table" && "logo-profile"}
             `}
-            label={`${windowType === "tutorial" ? "Tutorial" : ""}`}
-          />
+        label={`${windowType === "tutorial" ? "Tutorial" : ""}
+        ${windowType === "list_table" ? "JOIN A GAME : " : ""}`}
+      />
     </div>
   );
 };

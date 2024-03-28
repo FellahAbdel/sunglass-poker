@@ -1,9 +1,7 @@
 //react imports
 import React, { useState, useEffect } from "react";
 
-import {
-  useAuth,
-} from "./../components/Utiles/AuthProvider";
+import { useAuth } from "./../components/Utiles/AuthProvider";
 
 import { useWindowContext } from "./../components/Utiles/WindowContext";
 
@@ -51,7 +49,8 @@ const GameTable = () => {
   const handleClickStartGame = () => {
     if (isLogged) {
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
-      console.log("Démarrer le jeu");
+      console.log("Montrer la window des différentes tables");
+      openWindow("list_table");
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
       openWindow("login");
@@ -163,7 +162,7 @@ const GameTable = () => {
       `}
       >
         <Table
-          onClickStartGame={handleClickStartGame}
+          showGameList={handleClickStartGame}
           selectedLanguage={handleLanguageChange}
           dealingFlop={dealingFlop}
           showCards={[0, 1, 2, 3, 4]}
@@ -194,9 +193,9 @@ const GameTable = () => {
             }`}
           >
             <GameActionPanel
-              // handleFoldProp={handleFold}
-              // handleRaiseProp={handleRaise}
-              // handleCheckOrCallProp={handleCheckOrCall}
+            // handleFoldProp={handleFold}
+            // handleRaiseProp={handleRaise}
+            // handleCheckOrCallProp={handleCheckOrCall}
             />
           </div>
 
