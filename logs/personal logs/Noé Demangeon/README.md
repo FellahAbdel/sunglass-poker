@@ -86,4 +86,8 @@
 
 2024/03/28 : 2h00           Début page liste tables.
 
-TEMPS TOTAL: 79h30min 
+2024/03/28 : 0h30           Réorganisation
+
+2024/03/29 : 1h00           Début window création table
+
+TEMPS TOTAL: 81h00min 
