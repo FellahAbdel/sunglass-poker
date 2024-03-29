@@ -67,7 +67,7 @@ const ListTableWindow = () => {
       </div>
       <div className="button-container">
         <Button
-          styleClass={"btn-gameStart"}
+          styleClass={"btn-gameStart back-color1"}
           label={"Create a new game"}
           onClick={() => openWindow("create_table")}
         />

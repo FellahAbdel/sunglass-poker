@@ -87,7 +87,7 @@
     color:rgb(255, 255, 255);
 }
 #light .box-statusText{
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 #dark .box-statusText.Fold{
     color: rgb(255, 255, 255);
@@ -125,11 +125,18 @@
     0 0 10px 1px rgb(255, 0, 0);
 }
 
-.box-status.Empty{
+#dark .box-status.Empty{
     box-shadow:
         inset 0 0 10px 0px rgb(255, 255, 255),
         0 0 10px 0px rgb(255, 255, 255);
     filter: brightness(30%);
+}
+#light .box-status.Empty{
+    box-shadow:
+        inset 0 0 10px 0px rgb(255, 255, 255),
+        0 0 10px 0px rgb(255, 255, 255);
+    filter: brightness(30%);
+    background-color: black;
 }
 .profilePic.Fold{
     filter:saturate(0);
@@ -166,14 +173,15 @@
     position: absolute;
     align-self: center;
 
-	font-weight: 600;
+	font-weight: unset;
+    font-size: 1vw;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%,-50%);
-	color:black;
 	text-shadow: unset;
-}
+    color:rgb(255, 255, 255);
 
+}
 
 
 .box-playerInfo{

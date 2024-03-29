@@ -171,8 +171,9 @@
   border-radius: 200px;
 }
 .container-create_table{
-  width: 40vw;
-  height: 60vh;
+  width: 35vw;
+  height: 55vh;
+  border-radius: 100px;
 }
 
 /*cards and users disappearing animation*/
