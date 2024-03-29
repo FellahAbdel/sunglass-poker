@@ -1,9 +1,8 @@
 import React from "react";
 import "./listTableWindow.css";
 import Button from "../../button/Button.tsx";
-import locked from "../../assets/images/icons/white/password.png";
-import unlocked from "../../assets/images/icons/white/unlock.png";
-import ListTableItem from './SpecificComponentWindow/ListTableItem';
+import ListTableItem from "./SpecificComponentWindow/ListTableItem";
+import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
 const ListTableWindow = () => {
   const fakeTables = [
@@ -39,9 +38,10 @@ const ListTableWindow = () => {
     },
   ];
 
-  
+  const { openWindow } = useWindowContext();
+
   const handleJoinTable = () => {
-    // Logique pour rejoindre une table à faire 
+    // Logique pour rejoindre une table à faire
   };
 
   return (
@@ -66,7 +66,11 @@ const ListTableWindow = () => {
         ))}
       </div>
       <div className="button-container">
-        <Button styleClass={"btn-gameStart"} label={"Create a new game"} />
+        <Button
+          styleClass={"btn-gameStart"}
+          label={"Create a new game"}
+          onClick={() => openWindow("create_table")}
+        />
       </div>
     </div>
   );

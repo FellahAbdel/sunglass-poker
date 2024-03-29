@@ -55,6 +55,12 @@
   background-size: 2.5vh;
 }
 
+.input-icon-GameName{
+  background:  url("./../assets/images/icons/black/name.png") no-repeat , rgb(255, 255, 255);
+  background-position: 15px;
+  background-size: 2.5vh;
+}
+
 
 .input-chatBox{
   position: absolute;

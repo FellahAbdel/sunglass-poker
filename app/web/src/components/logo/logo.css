@@ -95,3 +95,8 @@
   width: 7vw;
 }
 
+.logo-create_table{
+  bottom : 95%;
+  color : white;
+  z-index: -1;
+}

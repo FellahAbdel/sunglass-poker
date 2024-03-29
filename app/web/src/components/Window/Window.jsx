@@ -12,6 +12,8 @@ import SettingsWindow from "./WindowContent/SettingsWindow";
 import ProfileWindow from "./WindowContent/ProfileWindow";
 import StatsWindow from "./WindowContent/StatsWindow";
 import ListTableWindow from "./WindowContent/ListTableWindow";
+import CreateTableWindow from "./WindowContent/CreateTableWindow";
+
 
 import { useWindowContext } from "../Utiles/WindowContext";
 
@@ -39,6 +41,8 @@ const Window = () => {
         {windowType === "profile" && <ProfileWindow />}
         {windowType === "stats" && <StatsWindow />}
         {windowType === "list_table" && <ListTableWindow />}
+        {windowType === "create_table" && <CreateTableWindow />}
+        
       </div>
     </div>
   );

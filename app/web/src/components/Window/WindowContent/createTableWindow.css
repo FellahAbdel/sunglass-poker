@@ -1,0 +1,18 @@
+.container-select-rank label {
+  margin-right: 10px;
+  font-size: 16px;
+  color: white;
+}
+
+.select-rank {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  background-color: white;
+  color: #333333;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}

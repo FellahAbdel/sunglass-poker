@@ -153,6 +153,10 @@
   height: 40vh;
   border-radius: 200px;
 }
+.container-create_table{
+  width: 40vw;
+  height: 60vh;
+}
 
 /*cards and users disappearing animation*/
 .profiles.disappear,

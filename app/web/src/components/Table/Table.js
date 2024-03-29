@@ -151,6 +151,7 @@ const Table = ({
           ${windowType === "tutorial" ? "Tutorial" : ""}
           ${windowType === "profile" ? "Profile" : ""}
           ${windowType === "list_table" ? "JOIN A GAME" : ""}
+          ${windowType === "create_table" ? "CREATE A NEW GAME" : ""}
         `}/>
     </div>
   );
