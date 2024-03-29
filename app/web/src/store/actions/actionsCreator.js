@@ -37,3 +37,18 @@ export const endRound = () => ({
 export const resetGame = () => ({
   type: actions.RESET_GAME,
 });
+
+// Actions creators for user authentication
+export const login = (user) => ({
+  type: actions.LOGIN,
+  payload: user,
+});
+
+export const logout = () => ({
+  type: actions.LOGOUT,
+});
+
+export const updateUserData = (data) => ({
+  type: actions.UPDATE_USER_DATA,
+  payload: data,
+});
