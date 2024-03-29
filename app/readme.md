@@ -17,6 +17,10 @@ Pour travailler entièrement localement sur VOS machines (pas les vm) en utilisa
 
 ** ⚠ Vous devez avoir mongodb sur 127.0.0.1:27017 les paramètres par défaut de mongodb. **
 
+## REDUX LOGGER
+
+- `npm i redux-logger`
+
 ## REDUX Dev Tools
 
 - Installe l'extension sur google chrome
