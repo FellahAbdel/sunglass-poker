@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
-import React, { useEffect } from "react";
-import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 
 //CSS
@@ -20,7 +18,6 @@ import Button from "../button/Button.tsx";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { startGame } from "../../store/actions/actionsCreator";
-//import HandCards from "./../gameTable/HandCards/HandCards";
 
 const Table = ({
   dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
@@ -39,14 +36,12 @@ const Table = ({
     showGameTable,
   } = useWindowContext();
   const { isLogged } = useAuth();
-  const { isLogged } = useAuth();
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
   }, [isWindowOpen]);
 
   useEffect(() => {
-    console.log("isLogged Table:", isLogged);
     console.log("isLogged Table:", isLogged);
   }, [isLogged]);
 
@@ -64,11 +59,9 @@ const Table = ({
       dispatch(startGame());
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
       console.log("Utilisateur connecté, on montre la table");
-      console.log("Utilisateur connecté, on montre la table");
       showGameTable();
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
-      console.log("Utilisateur déconnecté, login page");
       console.log("Utilisateur déconnecté, login page");
       openWindow("login");
     }
@@ -110,8 +103,7 @@ const Table = ({
           />
 
           {/* Settings menu panel */}
-          {isWindowOpen ? <Window /> : null}
-          {isWindowOpen ? <Window /> : null}
+          {isWindowOpen && <Window />}
         </>
       ) : (
         <>
@@ -120,14 +112,6 @@ const Table = ({
             <Window />
           ) : (
             <>
-              <TextGlitch
-                children={"SunGlassPoker"}
-                styleClass={"glitch-accueil"}
-                glitchStyle={"glitchStyle-accueil"}
-              />
-              <div className="container-startButtons">
-                {isLogged ? (
-                  <>
               <TextGlitch
                 children={"SunGlassPoker"}
                 styleClass={"glitch-accueil"}
@@ -158,9 +142,6 @@ const Table = ({
                   </>
                 )}
               </div>
-                  </>
-                )}
-              </div>
             </>
           )}
         </>
@@ -174,7 +155,8 @@ const Table = ({
           ${windowType === "profile" ? "Profile" : ""}
           ${windowType === "list_table" ? "JOIN A GAME" : ""}
           ${windowType === "create_table" ? "CREATE A NEW GAME" : ""}
-        `}/>
+        `}
+      />
     </div>
   );
 };

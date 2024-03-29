@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { useAuth } from "./../components/Utiles/AuthProvider";
-import { useAuth } from "./../components/Utiles/AuthProvider";
 
 import { useWindowContext } from "./../components/Utiles/WindowContext";
 
