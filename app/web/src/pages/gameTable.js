@@ -24,10 +24,10 @@ const GameTable = () => {
   const {theme} = useSettings();
 
   const [dealingFlop, setDealingFlop] = useState([true , true, true]);
-  const [handGuide, setHandGuide] = useState("");
+  const [handGuide, setHandGuide] = useState("Full house");
   const [profileMenu] = useState(false);
   const [settingsMenu] = useState(false);
-  const [showHandCard, setShowHandCard] = useState(false);
+  const [showHandCard, setShowHandCard] = useState(true);
   const [playersCardsShow, setPlayersCardsShow] = useState([
     1, 0, 0, 1, 1, 0, 0, 0, 0,1,
   ]);
