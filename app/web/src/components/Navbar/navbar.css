@@ -114,7 +114,7 @@
     font-size: 18px;
     font-weight:600;
     color: #fff;
-    text-shadow:0 0 5px #fff , 0 0 10px #fff , 0 0 15px #fff; 
+    text-shadow:unset; 
 }
 
 /*EXIT BUTTON*/

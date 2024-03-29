@@ -69,7 +69,7 @@ const Navbar = ({
 
                 </>)}
           </div>}
-          <ChipsCash currentChips={9999999999} styleClass={`box-chips`} />
+          <ChipsCash currentChips={9999999999} styleClass={`box-chips back-color3`} />
           <Button label={"Exit"} onClick={logOutOnClick} styleClass="btn-exit back-color3" />
         </>
       )}

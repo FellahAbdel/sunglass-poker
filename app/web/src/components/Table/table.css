@@ -57,38 +57,55 @@
 }
 #light .table-isLogged {
   box-shadow:
-    inset 0 0 50px rgb(0, 0, 0),
+    inset 0 0 50px 30px #000000,
+    inset 0 0 0 40px #424242,
     0 0 1vw 0.8vw #817f16,
     0 0 0 1vw rgb(0, 0, 0),
     0 0 0 2vw #424242,
-    inset 0 0 0 2vw #424242,
     0 0 5vw 3vw black;
   background-color: #164f81;
 
-  background:
-    radial-gradient(rgb(0, 0, 0) 15%, transparent 16%) 0 0,
-    radial-gradient(rgb(0, 0, 0) 15%, transparent 16%) 8px 8px,
-    radial-gradient(#817f42 15%, transparent 20%) 0 1px,
-    radial-gradient(#817f42 15%, transparent 20%) 8px 9px;
-  background-color: #424242;
-  background-size: 16px 16px;
-}
+
+      --s: 10px; /* control the size */
+      --c1:#57570c;
+      --c2:#424242;
+      
+      --c:#0000 79%,var(--c1) 81% 99%,var(--c2) 101% 150%,#0000 0;
+      background:
+        radial-gradient(var(--s) at 100% 100%,var(--c)),
+        radial-gradient(var(--s) at 100% 0   ,var(--c)) calc(3*var(--s)/2) 0,
+        radial-gradient(var(--s) at 0    100%,var(--c)) calc(  var(--s)/2) 0,
+        radial-gradient(var(--s) at 0    0   ,var(--c)) calc(2*var(--s)) 0,
+        repeating-linear-gradient(90deg,
+          var(--c1) 0 calc(20%/3),#0000 0 calc(70%/3),
+          var(--c1) 0 30%,#0000 0 50%) calc(var(--s)/-5) 0 var(--c2);
+      background-size: calc(3*var(--s)) calc(5*var(--s)/2); 
+ }
+
 #light .table-notLogged {
   box-shadow:
     inset 0 0 50px rgb(0, 0, 0),
-    0 0 1vw 0.8vw #817f42,
+    inset 0 0 0 2vw rgb(43, 41, 41),
+    0 0 1vw 0.8vw #fff70083,
     0 0 0 1vw rgb(0, 0, 0),
     0 0 0 2vw rgb(31, 33, 36),
-    inset 0 0 0 2vw rgb(43, 41, 41),
     0 0 5vw 3vw black;
 
-  background:
-    radial-gradient(black 15%, transparent 16%) 0 0,
-    radial-gradient(black 15%, transparent 16%) 8px 8px,
-    radial-gradient(#a5a5a56c 15%, transparent 20%) 0 1px,
-    radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
-  background-color: #282828;
-  background-size: 16px 16px;
+
+    --s: 10px; /* control the size */
+    --c1:#494913;
+    --c2:rgb(43, 41, 41);
+    
+    --c:#0000 79%,var(--c1) 81% 99%,var(--c2) 101% 150%,#0000 0;
+    background:
+      radial-gradient(var(--s) at 100% 100%,var(--c)),
+      radial-gradient(var(--s) at 100% 0   ,var(--c)) calc(3*var(--s)/2) 0,
+      radial-gradient(var(--s) at 0    100%,var(--c)) calc(  var(--s)/2) 0,
+      radial-gradient(var(--s) at 0    0   ,var(--c)) calc(2*var(--s)) 0,
+      repeating-linear-gradient(90deg,
+        var(--c1) 0 calc(20%/3),#0000 0 calc(70%/3),
+        var(--c1) 0 30%,#0000 0 50%) calc(var(--s)/-5) 0 var(--c2);
+    background-size: calc(3*var(--s)) calc(5*var(--s)/2); 
 }
 
 
