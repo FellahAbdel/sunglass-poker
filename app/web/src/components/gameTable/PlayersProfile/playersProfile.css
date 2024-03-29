@@ -2,21 +2,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 7vw;
+    width: 8vw;
     min-width: 40px;
-    height: 17vh;
+    height: 9vh;
 }
 
 
 @media (max-height:300px){
     .container-onGameProfile{
-        height: 16vh;
+        height: 10vh;
     }
 }
 
 @media (max-height:600px){
     .container-onGameProfile{
-        height: 20vh;
+        height: 10vh;
     }
 }
 
@@ -32,13 +32,13 @@
 
 @media (max-width:600px){
     .container-onGameProfile{
-        height: 15vh;
+        height: 10vh;
     }
 }
 
 @media (max-width:700px){
     .container-onGameProfile{
-        height: 20vh;
+        height: 10vh;
     }
 
 }
@@ -50,11 +50,12 @@
     align-items: center;
     justify-content: center;
     position: absolute;
+    top:6%;
 
     width:100%;
-    height: 20%;
-    padding: 0 10% 0 10%;
-    box-shadow: 0  0 20px black;
+    height: 25%;
+    padding: 0;
+    box-shadow: 0  0 10px black;
     border-radius: 20px;
     z-index: 1;
 
@@ -177,29 +178,30 @@
 
 .box-playerInfo{
     display:flex;
-    align-items: center;
+    align-items:end;
     justify-content: center;
     text-align: center;
-    margin-top: 10%;
 
-    height:40%;
+
+    height:100%;
     width: 100%;
-    padding: 1vw 0.5vw 1vw 0.5vw;
+    padding: 7px;
+    margin: 0;
 
-    border-radius: 20% 20% 100% 100%;
+    text-align: left;
+
+
+    border-radius: 13px;
 
     font-size: 1vw;
 
-    border-style: solid;
-    border-color: #000000;
-    border-width: 1px;
-
+    border: unset;
 }
 
 #dark .box-playerInfo{
     color: rgb(198, 198, 198);
     background-color: rgba(0, 0, 0, 0.5);
-    box-shadow:  0 0 20px 10px black;
+    box-shadow:  unset;
 }
 
 #light .box-playerInfo{
@@ -210,7 +212,8 @@
 }
 .profilePic{
     position: absolute;
-    bottom: 0;
+    left:-35%;
+    bottom: -15%;
     border-radius:50%;
     width:3.3vw;
     border-style:solid;

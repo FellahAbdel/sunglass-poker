@@ -209,49 +209,49 @@
   display: flex;
 }
 .profile0 {
-  top: -30%;
+  top: -25%;
 }
 
 .profile1 {
-  top: -30%;
+  top: -25%;
   right: 20%;
 }
 
 .profile2 {
-  top: -5%;
-  right: -5%;
+  top: 10%;
+  right: -10%;
 }
 
 .profile3 {
-  bottom: 15%;
-  right: -5%;
+  bottom: 25%;
+  right: -10%;
 }
 .profile4 {
-  bottom: -25%;
+  bottom: -10%;
   right: 20%;
 }
 
 .profile5 {
-  bottom: -25%;
+  bottom: -10%;
 }
 
 .profile6 {
-  bottom: -25%;
+  bottom: -10%;
   left: 20%;
 }
 
 .profile7 {
-  bottom: 15%;
+  bottom: 25%;
   left: -5%;
 }
 
 .profile8 {
-  top: -5%;
+  top: 10%;
   left: -5%;
 }
 
 .profile9 {
-  top: -30%;
+  top: -25%;
   left: 20%;
 }
 

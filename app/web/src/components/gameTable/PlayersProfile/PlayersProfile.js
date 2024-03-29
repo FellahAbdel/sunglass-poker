@@ -28,9 +28,9 @@ const PlayersProfile = ({
       </div>
 
       <div className={`box-playerInfo ${status}`}>
-        {formattedChips} {status === "Empty" ? null : dollarSign}
+        {name}  
         <br />
-        {name}
+        {formattedChips}{status === "Empty" ? null : dollarSign}
       </div>
 
       <Card
