@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
+import React, { useEffect } from "react";
+import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 
 //CSS
@@ -14,6 +16,10 @@ import CardsPlacements from "./CardsPlacements";
 import TextGlitch from "./../TextGlitch/TextGlitch";
 import LogoComponent from "../logo/Logo";
 import Button from "../button/Button.tsx";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { startGame } from "../../store/actions/actionsCreator";
 //import HandCards from "./../gameTable/HandCards/HandCards";
 
 const Table = ({
@@ -33,6 +39,7 @@ const Table = ({
     showGameTable,
   } = useWindowContext();
   const { isLogged } = useAuth();
+  const { isLogged } = useAuth();
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
@@ -40,10 +47,13 @@ const Table = ({
 
   useEffect(() => {
     console.log("isLogged Table:", isLogged);
+    console.log("isLogged Table:", isLogged);
   }, [isLogged]);
 
+  const dispatch = useDispatch();
+
   //name , user ID , level , games played , winning ratio , joined Date
-  const userInfo = ["Mostafa", "otsuno", "100", "5", "30%", "10/march/2024"];
+  const player = useSelector((state) => state.game.player);
 
   const onClickStartGame = () => {
     console.log(
@@ -51,11 +61,14 @@ const Table = ({
       isLogged ? "true" : "false"
     );
     if (isLogged) {
+      dispatch(startGame());
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
+      console.log("Utilisateur connecté, on montre la table");
       console.log("Utilisateur connecté, on montre la table");
       showGameTable();
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
+      console.log("Utilisateur déconnecté, login page");
       console.log("Utilisateur déconnecté, login page");
       openWindow("login");
     }
@@ -96,10 +109,8 @@ const Table = ({
             disappear={isWindowOpen}
           />
 
-          {/* Profile menu panel */}
-          {profileMenuActive ? <ProfileMenu userInfoProp={userInfo} /> : null}
-
           {/* Settings menu panel */}
+          {isWindowOpen ? <Window /> : null}
           {isWindowOpen ? <Window /> : null}
         </>
       ) : (
@@ -109,6 +120,14 @@ const Table = ({
             <Window />
           ) : (
             <>
+              <TextGlitch
+                children={"SunGlassPoker"}
+                styleClass={"glitch-accueil"}
+                glitchStyle={"glitchStyle-accueil"}
+              />
+              <div className="container-startButtons">
+                {isLogged ? (
+                  <>
               <TextGlitch
                 children={"SunGlassPoker"}
                 styleClass={"glitch-accueil"}
@@ -136,6 +155,9 @@ const Table = ({
                       label={"Login to Play"}
                       onClick={onClickStartGame}
                     />
+                  </>
+                )}
+              </div>
                   </>
                 )}
               </div>
