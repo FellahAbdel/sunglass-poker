@@ -26,14 +26,19 @@
 
     font-size: calc(5px + 1vw);
     color: white;
-    background:linear-gradient(to top, black, #0045776c) ;
-    
+
     text-shadow:
     0 0 5px #fff,
     0 0 10px #fff,
     0 0 15px #fff,
     0 0 20px rgb(255, 255, 255),
     0 0 30px rgb(255, 255, 255);
+}
+#dark .hand-guide{
+    background:linear-gradient(to top, black, #0045776c) ;
+}
+#light .hand-guide{
+    background:linear-gradient(to top, black, #7771006c) ;
 }
 
 .container-handCard{
