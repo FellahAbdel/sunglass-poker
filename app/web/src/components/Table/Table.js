@@ -49,7 +49,6 @@ const Table = ({
 
   //name , user ID , level , games played , winning ratio , joined Date
   const player = useSelector((state) => state.game.player);
-  const userInfo = [player.name, "otsuno", "100", "5", "30%", "10/march/2024"];
 
   const onClickStartGame = () => {
     console.log(
@@ -108,9 +107,6 @@ const Table = ({
             playersCardsShowProp={playersCardsShowProp}
             disappear={isWindowOpen}
           />
-
-          {/* Profile menu panel */}
-          {profileMenuActive ? <ProfileMenu userInfoProp={userInfo} /> : null}
 
           {/* Settings menu panel */}
           {isWindowOpen ? <Window /> : null}
