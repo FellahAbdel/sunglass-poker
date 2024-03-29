@@ -15,7 +15,7 @@ import LogoComponent from "../logo/Logo";
 import Button from "../button/Button.tsx";
 
 //Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startGame } from "../../store/actions/actionsCreator";
 //import HandCards from "./../gameTable/HandCards/HandCards";
 
@@ -48,7 +48,8 @@ const Table = ({
   const dispatch = useDispatch();
 
   //name , user ID , level , games played , winning ratio , joined Date
-  const userInfo = ["Mostafa", "otsuno", "100", "5", "30%", "10/march/2024"];
+  const player = useSelector((state) => state.game.player);
+  const userInfo = [player.name, "otsuno", "100", "5", "30%", "10/march/2024"];
 
   const onClickStartGame = () => {
     console.log(
