@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import "./createTableWindow.css";
 import Button from "../../button/Button.tsx"; // Assurez-vous que le chemin est correct
 import TextInputComponent from "../../textInput/TextInput";
-const CreateGameWindow = ({ openWindow }) => {
+import { useWindowContext } from "../../Utiles/WindowContext.jsx";
+
+const CreateGameWindow = () => {
+
+  const { openWindow } = useWindowContext();
+
+
   const [gameData, setGameData] = useState({
     serverName: "",
     password: "",
@@ -62,7 +68,14 @@ const CreateGameWindow = ({ openWindow }) => {
         <Button
           styleClass="btn-connectionDefault start-button back-color1"
           type="submit"
-          label="Create Game"
+          label="Create the Game"
+        />
+        <br/>
+          <Button
+          styleClass="btn-connectionDefault start-button back-color2"
+          type="submit"
+          label="Join a Game"
+          onClick={() => openWindow("list_table")}
         />
       </form>
     </div>
