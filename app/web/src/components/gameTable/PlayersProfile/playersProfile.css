@@ -228,6 +228,8 @@
     border-width: 0.2vw;
 }
 
+
+
 .showCardPlayers1 img ,.showCardPlayers2 img{
     width:2.5vw;
     height: auto;
@@ -245,12 +247,12 @@
     opacity: 100;
 }
 .showCardPlayers1{
-    left: 0;
-    bottom: 30%;
+    left: 35%;
+    bottom: -5%;
 }
 .showCardPlayers2{
-    left: 15%;
-    bottom: 30%;
+    left: 45%;
+    bottom: -5%;
 }
 .flippedPlayerCards{
     transform: rotateY(180deg);

@@ -23,16 +23,16 @@ import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 const GameTable = () => {
   const {theme} = useSettings();
 
-  const [dealingFlop, setDealingFlop] = useState([false, false, false]);
+  const [dealingFlop, setDealingFlop] = useState([true , true, true]);
   const [handGuide, setHandGuide] = useState("");
   const [profileMenu] = useState(false);
   const [settingsMenu] = useState(false);
   const [showHandCard, setShowHandCard] = useState(false);
   const [playersCardsShow, setPlayersCardsShow] = useState([
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 0, 0, 1, 1, 0, 0, 0, 0,1,
   ]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
   ]);
 
   const { logingOut, isLogged } = useAuth();
