@@ -52,3 +52,8 @@ export const updateUserData = (data) => ({
   type: actions.UPDATE_USER_DATA,
   payload: data,
 });
+
+export const playerJoined = (playerData) => ({
+  type: actions.PLAYER_JOINED,
+  payload: playerData,
+});
