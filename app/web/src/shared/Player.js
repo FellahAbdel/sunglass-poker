@@ -10,6 +10,16 @@ export default class Player {
   constructor(playerId, name) {
     this.#playerId = playerId;
     this.name = name;
+    this.status = "Empty";
+  }
+
+  // Methods to get and set status
+  setStatus(status) {
+    this.status = status;
+  }
+
+  getStatus() {
+    return this.status;
   }
 
   /*
