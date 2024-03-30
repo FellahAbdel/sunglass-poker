@@ -58,6 +58,7 @@ const Navbar = ({
                 style={{
                   opacity: isChatOpen ? '100' : '0',
                 }}
+                alt="exit-chat"
                 />
                 <TextInputComponent 
                   name="Message"
