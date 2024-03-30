@@ -1,0 +1,107 @@
+.panel-bonus{  
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  width:17vw;
+  border-radius: 10px;
+  background-color: unset;
+  box-shadow: 0px 0px 20px 5px black;
+}
+
+.container-bonusCards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+  margin: 5% 0 0 0;
+  width: 100%;
+}
+
+.container-cardType{
+  padding: 10px;
+  width: 2vw;
+  height: auto;
+
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: black;
+  background-color:aliceblue;
+  box-shadow: 0 0 4px black;
+
+  margin: 4px ;
+}
+
+  /* for smaller screens */
+  @media (max-width: 1300px) {
+    .panel-bonus {
+      width: 12vw;
+      min-width: fit-content;
+    }
+  }
+  @media (max-width : 710px ){
+    .panel-bonus{
+      width: 7vw;
+      min-width: fit-content;
+
+    }
+  }
+
+
+
+#dark .box-1{
+  background-image: linear-gradient(0deg, rgb(0, 166, 169) 20%, rgb(240, 248, 255) 50%);
+  transition: background-image 1s ease;
+}
+#dark .box-2{
+  background-image: linear-gradient(0deg, rgb(0, 166, 169) 50%, rgb(240, 248, 255) 70%);
+  transition: background-image 1s ease;
+}
+#dark .box-3{
+  background-color: rgb(0, 166, 169);
+  transition: background-color 1s ease;
+}
+
+#light .box-1{
+  background-image: linear-gradient(0deg, #777100 20%, rgb(240, 248, 255) 50%);
+  transition: background-image 1s ease;
+}
+#light .box-2{
+  background-image: linear-gradient(0deg, #777100 50%, rgb(240, 248, 255) 70%);
+  transition: background-image 1s ease;
+}
+#light .box-3{
+  background-color: #777100;
+  transition: background-color 1s ease;
+}
+
+
+.btn-bonus{
+  height: 5vh;
+  min-height: 20px;
+  width: 100%;
+
+  margin: 5%;
+
+
+  border-radius: 10px;
+  border-style: unset;
+
+  box-shadow: 
+    0px 0px 0 2px rgba(0, 0, 0, 0.3),
+    inset 0px 0px 10px 0px rgb(0, 0, 0);
+
+  font-size: 1vw;
+  color: aliceblue;
+  text-align: center;
+  font-weight: bold;
+  font-style: italic;
+
+  cursor: pointer;
+}
+
+
+.btn-bonus:hover{
+  box-shadow: inset 0 0 10px black;
+}
+
+

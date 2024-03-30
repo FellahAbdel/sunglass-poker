@@ -1,0 +1,317 @@
+.container-nav{
+    width: 100%;
+}
+/*PROFILE BUTTON*/
+.btn-profile {
+    border-style: unset;
+    padding: 5px;
+    min-width: 150px;
+    height: 40px;
+
+    position: absolute;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    color: aliceblue;   
+    box-shadow: 2px 2px 10px black;
+    border-radius: 0 14px 14px 14px;
+    cursor: pointer;
+}
+.btn-profile:hover {
+    filter:brightness(150%);
+    cursor: pointer;
+    text-shadow: unset;
+}
+.btn-profile img{
+    width: 15px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding-left: 5px;
+
+    filter: invert(100%);
+}
+
+.btn-profile:hover img{
+    filter: invert(100%);
+}
+
+/*SETTINGS BUTTON*/
+.btn-settings {
+    border-style: unset;
+    padding: 5px;
+    width: auto;
+    min-width: 150px;
+    height: 40px;
+
+    position: absolute;
+    top:0;
+    right:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    color: aliceblue;   
+    box-shadow: -2px 2px 10px black;
+    border-radius: 14px 0px 14px 14px;
+
+    cursor: pointer;
+
+}
+.btn-settings:hover {
+    filter:brightness(150%);
+    cursor: pointer;
+    color: black;
+    text-shadow: unset;
+}
+
+.btn-settings img {
+    width: 15px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding-left: 5px;
+    filter: invert(0%);
+    color: #fff; /* Neon color */
+}
+.btn-settings:hover img {
+    filter: invert(100%);
+}
+
+
+/*CHIPS CSS*/
+.box-chips{
+    position: absolute;
+    top:28px;
+    left:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 13px 14px 4px 14px;
+
+    height: 35px;
+    width: fit-content;
+    min-width: 70px;
+
+    border-style: unset;
+    border-radius: 0 20px 20px 20px;
+
+    box-shadow: 2px 2px 10px black;
+
+    text-align: center;
+    font-size: 18px;
+    font-weight:600;
+    color: #fff;
+    text-shadow:unset; 
+}
+
+/*EXIT BUTTON*/
+.btn-exit {
+    all:unset;
+
+    position: absolute;
+    top:63px;
+    right:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 13px 14px 0px 14px;
+    
+    height: 35px;
+    min-width: 70px;
+
+    border-style: unset;
+    border-radius: 20px 0px 20px 20px;
+
+    box-shadow: -2px 2px 10px black;
+
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);   
+}
+
+.btn-exit:hover {
+    filter:brightness(200%);
+    cursor: pointer;
+    color: black;
+    text-shadow: unset;
+}
+
+/*Log in button in acceuil*/
+.btn-logIn {
+    border-style: unset;
+    padding: 5px;
+    min-width: 150px;
+    height: 40px;
+
+    position: absolute;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    color: aliceblue;   
+    box-shadow: 2px 2px 10px black;
+    border-radius: 0 14px 14px 14px;
+    cursor: pointer;
+}
+.btn-logIn:hover {
+    filter:brightness(200%);
+    cursor: pointer;
+    color: black;
+    text-shadow: unset;
+}
+.btn-logIn img{
+    width: 15px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding-left: 5px;
+
+    filter: invert(100%);
+}
+
+.btn-logIn:hover img {
+    filter: invert(0%);
+}
+/*tutorial button in acceuil*/
+.btn-tutorial {
+    all:unset;
+
+    position: absolute;
+    top:30px;
+    right:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 13px 14px 4px 14px;
+    
+    height: 30px;
+    min-width: 100px;
+
+    border-style: unset;
+    border-radius: 20px 0px 20px 20px;
+
+    box-shadow: -2px 2px 10px black;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    color: aliceblue;   
+    box-shadow: -2px 2px 10px black;
+    border-radius: 14px 0px 14px 14px;
+
+    cursor: pointer;
+
+}
+.btn-tutorial:hover {
+    filter:brightness(150%);
+    cursor: pointer;
+    color: black;
+    text-shadow: unset;
+}
+
+.btn-tutorial img {
+    width: 15px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding-left: 5px;
+    filter: invert(0%);
+    color: #fff; /* Neon color */
+}
+.btn-tutorial:hover img  {
+    filter: invert(100%);
+}
+
+/*chat button*/
+.chatBox{
+    position: absolute;
+    top:60px;
+    left:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px 14px 4px 14px;
+
+    height: 35px;
+    width: 1vw;
+    min-width: 70px;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    color: #000000;
+    box-shadow: 2px 2px 10px black;
+    border-radius: 0 14px 14px 14px;
+    cursor: pointer;
+
+    transition: width 1s ease , height 1s ease ;
+}
+#dark .chatBox{
+    background-color: rgba(151, 151, 151, 0.458); 
+}
+#light .chatBox{
+    background-color: rgba(26, 26, 26, 0.458)
+}
+.chatBoxOpen{
+    width:15vw;
+    height: 50vh;
+}
+.chatBox Button{
+    all: unset;
+    color: white;
+}
+.btn-chatClose {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 20px;
+    height: auto;
+ 
+    transition: opacity 1s ease;
+}
+
+@media (max-width: 1000px) {
+    .btn-profile{
+        transform: scale(70%);
+        transform-origin: left top;
+    }
+    .box-chips{
+        transform: scale(70%);
+        transform-origin: left top;
+        top:20px;
+    }
+    .btn-settings{
+        transform: scale(70%);
+        transform-origin: right top;
+    }
+    .btn-exit{
+        transform: scale(70%);
+        transform-origin: right top;
+        top:20px;
+    }
+}
+

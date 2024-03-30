@@ -1,4 +1,4 @@
-# Melissa Ertekin | Temps Totale : 62h30
+# Melissa Ertekin | Temps Totale : 72h
 
 
 ### Semaine 0 : 30 Janvier - 05 Février  | Temps Totale: 5h
@@ -88,10 +88,20 @@
 
 * Durant la semaine : <b>3h</b> <br/> Discussions en directe: <i>Échanges sur les réunions réalisées et leur avancement. </i> 
 
-### Semaine 7 : 18 Mars - 25 Mars | Temps Totale:
+### Semaine 7 : 18 Mars - 25 Mars | Temps Totale: 9h30
 
 * 2024/03/19 : <b>3h30</b> <br/> Réunion du mardi en groupe :  <i> Réunions hebdomadaires avec le mentor, revue de code, réunion en groupe, réorganisation des tâches de la semaine afin d'éviter les retards. </i> 
 
 * 2024/03/22 : <b>2h30</b> <br/> Travail individuel : <i> Mis à jours de Gantt. Mis à jours des taches sur Trello. Surveillance des journaux. </i>
 
+* 2024/03/23 : <b>1h30</b> <br/> Travail individuel : <i> Recherche et préparation d'un brouillon pour la planification sur partie communucation du projet </i>
+
+* 2024/03/25 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Demandes de feedback personnalisé. Rédaction du compte-rendu hebdomadaire. </i>
+
 * Durant la semaine : <b>1h</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
+
+### Semaine 8 : 25 Mars - 1 Avril | Temps Totale:
+
+* 2024/03/25 : <b>3h</b> <br/> Travail individuel : <i> Lecture du code. Recherche sur Redux et Socket.io. Création d'un code Redux expliquant quel type de données il faut envoyer pour modifier l'état avec quelles types d'actions, ainsi qu'un exemple de récupération de l'état du jeu et de le modifier. Ce travail est fait pour résoudre la mauvaise compréhension de la conception. </i>
+
+* Durant la semaine : <b>30 mins</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
