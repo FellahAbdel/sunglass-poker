@@ -80,4 +80,14 @@
 
 2024/03/24 : 1h00           Modification css, création component backArrow
 
-TEMPS TOTAL: 73h30min 
+2024/03/25 : 1h00           Réunion Mostafa, correction bugs, simplification code
+
+2024/03/26 : 3h00           Réunion mardi, reducer, correction des warnings
+
+2024/03/28 : 2h00           Début page liste tables.
+
+2024/03/28 : 0h30           Réorganisation
+
+2024/03/29 : 1h00           Début window création table
+
+TEMPS TOTAL: 81h00min 
