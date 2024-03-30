@@ -2,49 +2,41 @@
 import * as actions from "../actions/actionTypes.js";
 import Deck from "../../shared/Deck.js";
 import Player from "../../shared/Player.js";
+import Game from "../../shared/Game.js";
 
 const initialState = {
-  table: {
-    deck: new Deck(),
-    cards: [],
-    chips: 0,
-    stake: 0,
-  },
+  gameClass: new Game(),
+  // Initialy the game is in the preGame state and players can join
   players: [
+    // Should be empty at the beginning
     new Player(0, "diallo"),
     ...Array.from(
       { length: 9 },
       (_, index) => new Player(index + 1, "Player" + index)
     ),
   ],
+  controlsMode: "preGame", // Can be "preGame", "roundOne", "roundTwo", "roundThree", "endGame
 };
 
-const begin = (state) => {
-  const deck = state.table.deck;
-  deck.initCards();
-  deck.shuffle();
+const begin = (gameState) => {
+  // Initialize players
+  const players = gameState.players;
+  players.forEach((player) => gameState.gameClass.addPlayer(player));
 
-  const updatedPlayers = state.players.map((player) => {
-    player.clearHand();
-    player.setCards(deck.deal(2));
-    player.setStatus("Playing"); // Set status to "Playing" during gameplay
-    return player;
-  });
+  // Start the game
+  gameState.gameClass.start();
 
-  return {
-    ...state,
-    table: {
-      ...state.table,
-      deck,
-      stake: 0,
-    },
-    players: updatedPlayers,
-    controlsMode: "roundOne",
-  };
+  return gameState;
 };
 
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actions.PLAYER_JOINED:
+      return {
+        ...state,
+        players: [...state.players, action.payload], // Add the new player to the list
+      };
+
     case actions.START_GAME:
       return begin(state);
     // Other game actions can be handled here
