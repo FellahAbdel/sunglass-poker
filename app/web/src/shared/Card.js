@@ -4,7 +4,11 @@ export class Card {
     this.number = number;
   }
 
+  getNumberAndColor() {
+    return [this.number.toString(), this.color];
+  }
+
   getCardString() {
-    return `${this.number} of ${this.color}`;
+    return `${this.number}_of_${this.color}`;
   }
 }
