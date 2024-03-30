@@ -69,3 +69,4 @@
 | 28/03 | Make the react dev tools works                                  |                  | 4h00       |           |
 | 29/03 | Where block because of shared directory (it was outside of src) |                  | 4h00       |           |
 | 30/03 | Connect the store to the front                                  |                  | 4h00       |           |
+| 31/03 | use the store to make a dynamic rendering                       |                  | 8h00       |           |
