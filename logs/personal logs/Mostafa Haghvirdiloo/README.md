@@ -14,13 +14,7 @@
 
 * 2024/02/13 : <b> 3h </b> <br/>        Travail en groupe A: <i> Designé des concept pour interface </i>
 
-<<<<<<< HEAD
-* 2024/02/20 : <b> 3h </b> <br/>        Travail individuel: <i> Apprentissage </i>
-=======
 * 2024/02/13 : <b> 2h </b> <br/>        Travail individuel: <i> Refining the concept design </i>
-<<<<<<< HEAD
->>>>>>> 15d59f6 (README)
-=======
 
 * 2024/02/20 : <b> 3h </b> <br/>        Travail en TP: <i> Apprentissage de REACT et creation de base de front </i>
 
