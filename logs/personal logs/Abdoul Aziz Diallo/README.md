@@ -55,8 +55,17 @@
 |       | Advance on the Partie.js split and was block durant hours on the jest config files but finally manage to make some unit testing on some function | Jest (unit testing) | 3h00       |           |
 | 16/03 | Got updated on back-end codes and re-applied it on my work + Ziad help through unit testing of those updated functions                           |                     | 2h         |           |
 
-## Week 7 - _Total: 16,9_
+## Week 7 - _Total: 4_
 
 | Date  | Description                                    | Skills developed | Time Spent | Resources |
 | ----- | ---------------------------------------------- | ---------------- | ---------- | --------- |
 | 19/03 | Keep working on the class split + Unit testing |                  | 4h00       |           |
+
+## Week 8 - _Total: 0_
+
+| Date  | Description                                                     | Skills developed | Time Spent | Resources |
+| ----- | --------------------------------------------------------------- | ---------------- | ---------- | --------- |
+| 25/03 | Class split + test Unit                                         |                  | 6h         |           |
+| 28/03 | Make the react dev tools works                                  |                  | 4h00       |           |
+| 29/03 | Where block because of shared directory (it was outside of src) |                  | 4h00       |           |
+| 30/03 | Connect the store to the front                                  |                  | 4h00       |           |
