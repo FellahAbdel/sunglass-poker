@@ -41,182 +41,33 @@ const CardsPlacements = ({
       </div>
 
       <div className="container-dealerDuck">
-        {/* <Card
+        <Card
           styleClass={"cardDuck"}
           card={null}
           flippedStyle={null}
           flippingCard={false}
         />
 
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[0] ? "transition1 profile0cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[0] ? "transition2 profile0cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[1] ? "transition1 profile1cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[1] ? "transition2 profile1cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[2] ? "transition1 profile2cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[2] ? "transition2 profile2cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[3] ? "transition1 profile3cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[3] ? "transition2 profile3cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[4] ? "transition1 profile4cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[4] ? "transition2 profile4cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[5] ? "transition1 profile5cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[5] ? "transition2 profile5cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[6] ? "transition1 profile6cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[6] ? "transition2 profile6cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[7] ? "transition1 profile7cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[7] ? "transition2 profile7cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[8] ? "transition1 profile8cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[8] ? "transition2 profile8cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[9] ? "transition1 profile9cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributedProp[9] ? "transition2 profile9cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        /> */}
+        {playersCardDistributedProp.map((player, index) => (
+          <React.Fragment key={index}>
+            <Card
+              styleClass={`cardPlayer ${
+                player ? `transition1 profile${index}cards` : ""
+              }`}
+              card={null}
+              flippedStyle={null}
+              flippingCard={false}
+            />
+            <Card
+              styleClass={`cardPlayer ${
+                player ? `transition2 profile${index}cards` : ""
+              }`}
+              card={null}
+              flippedStyle={null}
+              flippingCard={false}
+            />
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
