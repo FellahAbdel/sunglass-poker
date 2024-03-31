@@ -139,9 +139,21 @@ const GameTable = () => {
 
   // Redux
   const currentPlayer = useSelector((state) => state.game.gameClass.players[0]);
-  const cards = currentPlayer.getPlayerCards();
-  const card1 = cards[0].getNumberAndColor();
-  const card2 = cards[1].getNumberAndColor();
+  let card1, card2;
+
+  if (currentPlayer) {
+    const cards = currentPlayer.getPlayerCards();
+    if (cards && cards.length >= 2) {
+      card1 = cards[0].getNumberAndColor();
+      card2 = cards[1].getNumberAndColor();
+    } else {
+      // Handle case where player has fewer than 2 cards
+      // or cards array is undefined/null
+    }
+  } else {
+    // Handle case where currentPlayer is undefined/null
+  }
+
   //   console.log("currentPlayer", currentPlayer);
 
   return (
