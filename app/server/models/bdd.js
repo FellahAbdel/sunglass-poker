@@ -4,7 +4,6 @@ const UserModel = require("./User");
 const StatModel = require("./Stat");
 const jwt = require("jsonwebtoken");
 
-const cors = require("cors");
 
 module.exports = function (app, bdd) {
   console.log(bdd);
@@ -83,16 +82,18 @@ module.exports = function (app, bdd) {
         const user = await UserModel.findOne({ pseudo: username, password });
         if (user) {
           // La combinaison de pseudo et de mot de passe est correcte
-
+          const token = jwt.sign({ id: user._id }, "secretKeyForSession", {
+            expiresIn: "1h",
+          });  
           // Envoyer toutes les informations de l'utilisateur dans la réponse
-          res = { ...res, error: false, data: { success: true, message: "Login successful", userData: user } };
+          return { ...res, error: false, data: { success: true, message: "Login successful", token:token }, user:user._id};
         } else {
           // La combinaison de pseudo et de mot de passe n'est pas correcte
-          res = { ...res, data: { success: false, message: "Invalid credentials" } };
+          return  { ...res, data: { success: false, message: "Invalid credentials" } };
         }
       } catch (error) {
         console.error("Erreur lors de la connexion :", error);
-        res = { ...res, code: 500, data: { success: false, message: "Server error" } };
+        return { ...res, code: 500, data: { success: false, message: "Server error" } };
       }
       return res;
     },
@@ -106,14 +107,14 @@ module.exports = function (app, bdd) {
 
         if (user) {
           // L'e-mail existe dans la base de données
-          res = { ...res, data: { exists: true, message: "E-mail exists in the database" } };
+          return { ...res, data: { exists: true, message: "E-mail exists in the database" } };
         } else {
           // L'e-mail n'existe pas dans la base de données
-          res = { ...res, error: false, code: 200, data: { exists: false, message: "E-mail does not exist in the database" } };
+          return { ...res, error: false, code: 200, data: { exists: false, message: "E-mail does not exist in the database" } };
         }
       } catch (error) {
         console.error("Erreur lors de la vérification de l'e-mail :", error);
-        res = { ...res, code: 500, data: { error: "Server error" } };
+        return { ...res, code: 500, data: { error: "Server error" } };
       }
       return res;
     },
@@ -131,13 +132,13 @@ module.exports = function (app, bdd) {
         );
 
         if (updatedUser) {
-          res = { ...res, error: false, code: 200, data: { success: true, message: `${field} updated successfully` } };
+          return { ...res, error: false, code: 200, data: { success: true, message: `${field} updated successfully` } };
         } else {
-          res = { ...res, data: { success: false, message: `Failed to update ${field}` } };
+          return { ...res, data: { success: false, message: `Failed to update ${field}` } };
         }
       } catch (error) {
         console.error(`Error updating ${field}:`, error);
-        res = { ...res, code: 500, data: { success: false, message: "Server error" } };
+        return { ...res, code: 500, data: { success: false, message: "Server error" } };
       }
       return res;
     },
@@ -145,18 +146,18 @@ module.exports = function (app, bdd) {
     userInfo: async function (token) {
       const res = { error: true, code: 400 };
       try {
-        const decoded = jwt.verify(token, "votre_secret");
+        const decoded = jwt.verify(token, "secretKeyForSession");
         const user = await UserModel.findById(decoded.id);
         if (!user) {
-          res = { ...res, code: 404, data: { success: false, message: "Utilisateur non trouvé" } };
+          return  { ...res, code: 404, data: { success: false, message: "Utilisateur non trouvé" } };
         }
-        res = { ...res, error: false, code: 200, data: { success: true, user } };
+        return { ...res, error: false, code: 200, data: { success: true, user } };
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des informations de l'utilisateur :",
           error
         );
-        res = { ...res, code: 500, data: { success: false, message: "Erreur serveur" } };
+        return { ...res, code: 500, data: { success: false, message: "Erreur serveur" } };
       }
       return res;
     },
@@ -170,13 +171,13 @@ module.exports = function (app, bdd) {
           "pseudo"
         );
         if (stats) {
-          res = { ...res, error: false, code: 200, data: { success: true, stats } }s;
+          return { ...res, error: false, code: 200, data: { success: true, stats } };
         } else {
-          res = { ...res, code: 404, data: { success: false, message: "Stats not found" } };
+          return { ...res, code: 404, data: { success: false, message: "Stats not found" } };
         }
       } catch (error) {
         console.error("Error retrieving user stats:", error);
-        res = { ...res, code: 500, data: { success: false, message: "Server error" } };
+        return { ...res, code: 500, data: { success: false, message: "Server error" } };
       }
       return res;
     },
