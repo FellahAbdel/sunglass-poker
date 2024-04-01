@@ -4,6 +4,12 @@ import RaiseSlider from "../Range/RaiseSlider";
 import Button from "../../button/Button.tsx";
 //import { useDispatch } from 'react-redux'
 
+export const handlesitPlayer=(player)=>{
+  return{
+    type:"SIT",
+    payload:player,
+  };
+};
 
 const GameActionButtons = ({ }) => {
   //checkValue = true -> Check
@@ -22,12 +28,6 @@ const GameActionButtons = ({ }) => {
     setSliderValueText(value);
   };
 
-  const handlesitPlayer=(player)=>{
-    return{
-      type:"SIT",
-      payload:player,
-    };
-  };
 
 // const handleCheckOrCall = () => {
 //   dispatch({

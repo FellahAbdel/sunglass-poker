@@ -1,6 +1,6 @@
 const defaultState = {
   // Initial state of game
-  player: [], //ajouter ici lors de l'ajout a la table
+  players: [], //ajouter ici lors de l'ajout a la table
 };
 
 const gameTableReducer = (state = defaultState, action) => {
@@ -10,13 +10,13 @@ const gameTableReducer = (state = defaultState, action) => {
     case "SIT":
       return {
         ...state,
-        player: { ...state.player, payload },
+        players: [ ...state.players, payload ],
       };
-      case "STAND_UP":
-        return {
-          ...state,
-          players: state.player.filter(player => player.id !== payload.id), // Retirer le joueur de la table
-      };
+      // case "STAND_UP":
+      //   return {
+      //     ...state,
+      //     players: state.players.filter(player => player.id !== payload.id), // Retirer le joueur de la table
+      // };
     default:
       return state;
   }

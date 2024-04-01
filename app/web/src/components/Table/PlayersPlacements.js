@@ -7,8 +7,13 @@ const PlayersPlacements = ({
   playersCardDistributedProp,
   disappear,
 }) => {
-  const playersInTable = useSelector((state) => state.table.player);
+  const playersInTable = useSelector((state) => state.table.players);
 
+  /*
+  EN GROS le pb c est que chuis censé ajouter des joeur vide en attente
+  mais je ne sais pas comment remplir els variables en vide sans avoir d'erreur
+  
+  */
   return (
     <span className={`profiles ${disappear ? "disappear" : ""}`}>
       {playersInTable.map((player, index) => (

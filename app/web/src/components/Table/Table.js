@@ -58,6 +58,13 @@ const Table = ({
     );
     if (isLogged) {
       dispatch(startGame());
+
+      const player={
+        name:"feur",
+        chips:0,
+
+      };
+      dispatch(handlesitPlayer(player));
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
       console.log("Utilisateur connecté, on montre la table");
       showGameTable();
@@ -70,10 +77,7 @@ const Table = ({
 
   const showGameList = () => {
     if (isLogged) {
-      const player={
-        name:"TESTTTE"
-      };
-      dispatch(handlesitPlayer(player));
+      
       openWindow("list_table");
     } else {
       openWindow("login");
