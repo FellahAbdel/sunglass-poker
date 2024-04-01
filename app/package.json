@@ -1,0 +1,17 @@
+{
+  "jest": {
+    "collectCoverage": true,
+    "roots": [
+      "<rootDir>./web/src/test/"
+    ]
+  },
+  "scripts": {
+    "test": "jest --coverage --verbose"
+  },
+  "dependencies": {
+    "react-router-dom": "^6.22.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

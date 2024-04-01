@@ -32,20 +32,37 @@ const ProfileWindow = () => {
       />
 
       <div className="userInfo">
-        <span>Name: {user?.pseudo || "Pseudo par défaut"}</span>
+
+      <div className="userInfo-items">
+        Name
         <br />
-        Mail: {user?.email || "email inconnu"}
+        Mail
         <br />
-        Coins: {user?.coins || "0"}
+        Coins
         <br />
-        Joined Date: {user?.joinedDate || "Date inconnue"} 
+        Joined Date
         <br />
-        <Button
+      </div>
+
+      <div className="vertical-line"/>
+
+      <div className="userInfo-Info">{user?.pseudo || "Pseudo par défaut"}
+        <br />
+        {user?.email || "email inconnu"}
+        <br />
+        {user?.coins || "0"}
+        <br />
+        {user?.joinedDate || "Date inconnue"} 
+        <br />
+      </div>
+
+
+      </div>
+      <Button
           styleClass={"btn-gameStart"}
           label={"User Stats"}
           onClick={() => openWindow("stats")}
         />
-      </div>
     </div>
   );
 };

@@ -33,7 +33,7 @@ const BonusPanel = () => {
                 <img src={Clubs} alt="Club" className={`container-cardType box-${handleChangeClubs}`}/>
             </div>
 
-            <Button styleClass={"btn-bonus"} label={"BONUS"}/>
+            <Button styleClass={"btn-bonus back-color1"} label={"BONUS"}/>
         </div>
     );
 };

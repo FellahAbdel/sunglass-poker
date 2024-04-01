@@ -4,9 +4,8 @@
   height: auto;
   width:17vw;
   border-radius: 10px;
-  background-color: rgba(0, 225, 255, 0.094);
+  background-color: unset;
   box-shadow: 0px 0px 20px 5px black;
-
 }
 
 .container-bonusCards{
@@ -19,7 +18,6 @@
 }
 
 .container-cardType{
-
   padding: 10px;
   width: 2vw;
   height: auto;
@@ -31,8 +29,6 @@
   box-shadow: 0 0 4px black;
 
   margin: 4px ;
-
-
 }
 
   /* for smaller screens */
@@ -52,16 +48,29 @@
 
 
 
-.box-1{
+#dark .box-1{
   background-image: linear-gradient(0deg, rgb(0, 166, 169) 20%, rgb(240, 248, 255) 50%);
   transition: background-image 1s ease;
 }
-.box-2{
+#dark .box-2{
   background-image: linear-gradient(0deg, rgb(0, 166, 169) 50%, rgb(240, 248, 255) 70%);
   transition: background-image 1s ease;
 }
-.box-3{
+#dark .box-3{
   background-color: rgb(0, 166, 169);
+  transition: background-color 1s ease;
+}
+
+#light .box-1{
+  background-image: linear-gradient(0deg, #777100 20%, rgb(240, 248, 255) 50%);
+  transition: background-image 1s ease;
+}
+#light .box-2{
+  background-image: linear-gradient(0deg, #777100 50%, rgb(240, 248, 255) 70%);
+  transition: background-image 1s ease;
+}
+#light .box-3{
+  background-color: #777100;
   transition: background-color 1s ease;
 }
 
@@ -77,11 +86,9 @@
   border-radius: 10px;
   border-style: unset;
 
-  background-color: rgb(0, 132, 169);
   box-shadow: 
-    0px 0px 10px rgb(0, 0, 0),
     0px 0px 0 2px rgba(0, 0, 0, 0.3),
-    inset 0px 0px 5px 1px rgb(0, 0, 0);
+    inset 0px 0px 10px 0px rgb(0, 0, 0);
 
   font-size: 1vw;
   color: aliceblue;

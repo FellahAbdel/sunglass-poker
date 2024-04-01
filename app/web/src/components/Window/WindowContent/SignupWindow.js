@@ -127,7 +127,7 @@ const SignUpWindow = () => {
           onChange={handleChange}
           placeholder="Username"
           errorMessage={validationErrors.pseudo}
-          styleClass={"input-login"}
+          styleClass={"input-connectionDefault input-icon-profile"}
         />
         <TextInputComponent
           name="email"
@@ -135,7 +135,7 @@ const SignUpWindow = () => {
           onChange={handleChange}
           placeholder="Email"
           errorMessage={validationErrors.email}
-          styleClass={"input-login"}
+          styleClass={"input-connectionDefault input-icon-email"}
         />
         <TextInputComponent
           name="password"
@@ -144,7 +144,7 @@ const SignUpWindow = () => {
           placeholder="Password"
           type={"password"}
           errorMessage={validationErrors.password}
-          styleClass={"input-login"}
+          styleClass={"input-connectionDefault input-icon-password"}
         />
         <TextInputComponent
           name="repeatPassword"
@@ -153,25 +153,25 @@ const SignUpWindow = () => {
           placeholder="Repeat your password"
           type={"password"}
           errorMessage={validationErrors.repeatPassword}
-          styleClass={"input-login"}
+          styleClass={"input-connectionDefault input-icon-passwordRepeat"}
         />
         <Button
-          styleClass="buttonconnexion login-button"
+          styleClass="btn-connectionDefault login-button"
           type="submit"
           label="Register"  
         />
       </form>
 
       <Button
-        styleClass="buttonconnexion google-button"
+        styleClass="btn-connectionDefault google-button"
         label="Sign in with google"
-        iconSrc={require("./../../assets/images/icons/google.png")}
+        iconSrc={require("./../../assets/images/icons/white/google.png")}
         iconStyle={true}
       />
 
       <Button
         onClick={() => openWindow("login")}
-        styleClass="buttonconnexion forgot-button"
+        styleClass="btn-connectionDefault forgot-button"
         label="Already have an account ?"
       />
     </div>

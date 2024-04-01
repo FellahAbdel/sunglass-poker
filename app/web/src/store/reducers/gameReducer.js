@@ -1,47 +1,58 @@
+// This file contains the reducer for game-related actions
+import * as actions from "../actions/actionTypes.js";
+import Deck from "../../shared/Deck.js";
+import Player from "../../shared/Player.js";
 
-const defaultState = {
-  gameStarted: false,
-  player : [], // List of user objects with ids and cards in one gameTable
-  pot : 0,
-  pot2: 0,
-  turn : 0, // index of players table to tell which users turn 
-  timer:0
-    // TODO : More states can be added
-  
-}
-const gameState = (state = defaultState, action) => {
-  const { payload, type } = action
+const initialState = {
+  table: {
+    deck: new Deck(),
+    cards: [],
+    chips: 0,
+    stake: 0,
+  },
+  player: new Player(0, "diallo"),
+  opponents: Array.from(
+    { length: 8 },
+    (_, index) => new Player(index + 1, "Player" + index)
+  ),
+};
 
-  switch (type) {
+const begin = (state) => {
+  const deck = state.table.deck;
+  deck.initCards();
+  deck.shuffle();
 
-    case 'GET_DECK':
-      return {
-        ...defaultState,
-        deck: payload // Payload suffled deck
-      }
-    case 'DEAL_CARDS':
-      return {
-        ...defaultState,
-        player : payload,
-        gameStarted: true
-        // TODO : Back end needs to map all playerStates and give each player to card 
-      }
-      
-    case 'RAISE':
-      let newTurnRaise = state.turn === players.length - 1 ? 0 : state.turn+1 
-      return {
-        ...defaultState,
-        pot: pot + payload, // Payload = money chiped in 
-        turn: players[newTurnRaise].id
-      }
+  const player = state.player;
+  player.clearHand();
+  player.setCards(deck.deal(2));
 
-    case 'CHECK':
-      let newTurnCheck = state.turn === players.length - 1 ? 0 : state.turn+1
-      return {
-        ...defaultState,
-        turn: players[newTurnCheck].id
-      }
+  const opponents = state.opponents.map((opponent) => {
+    opponent.clearHand();
+    opponent.setCards(deck.deal(2));
+    return opponent;
+  });
+
+  return {
+    ...state,
+    table: {
+      ...state.table,
+      deck,
+      stake: 0,
+    },
+    player,
+    opponents,
+    controlsMode: "roundOne",
+  };
+};
+
+const gameReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actions.START_GAME:
+      return begin(state);
+    // Other game actions can be handled here
+    default:
+      return state;
   }
-}
+};
 
-export default gameReducer
+export default gameReducer;

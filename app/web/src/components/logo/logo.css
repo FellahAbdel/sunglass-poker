@@ -3,69 +3,104 @@
   align-items: center;
   justify-content: center;
   align-self: center;
-  
-  width:100%;
+
+  width: 100%;
 
   position: absolute;
   bottom: 33%;
-  right:0;
-  left:0;
+  right: 0;
+  left: 0;
 
-  filter: saturate(0);
-
-  transition: top 1s ease, bottom 1s ease, right 1s ease,left 1s ease,opacity 0.5s ease;
+  transition: top 1s ease, bottom 1s ease, right 1s ease, left 1s ease,
+    opacity 0.5s ease, filter 2s ease;
 }
-.logo-acceuil img{
-  width:11vw;
+
+#light .logo-acceuil{
+  filter: saturate(100%);
+}
+#dark .logo-acceuil{
+  filter: saturate(0%);
+}
+
+
+.logo-acceuil img {
+  width: 11vw;
   transition: width 1s ease;
 }
 
-
-
-.logo-login, .logo-settings{
-  left:-90%;
+.logo-login,
+.logo-settings {
+  left: -90%;
   z-index: -1;
   opacity: 100%;
 }
-.logo-login img, .logo-settings img{
+.logo-login img,
+.logo-settings img {
   width: 13vw;
 }
 
-
-.logo-tutorial{
-  bottom:110%;
-  left:-6%;
+.logo-profile,
+.logo-tutorial {
+  bottom: 110%;
+  left: -6%;
   z-index: -1;
 }
-.logo-tutorial img{
-  width: 10vw;
-}
-.logo-tutorial h1{
-  color: white;
-  position: absolute;
-  left:60%;
-}
-
-
-
-.logo-success{
-  bottom:110%;
-  z-index: -1;
-  opacity: 100;
-}
-
-.logo-success img{
+.logo-profile img,
+.logo-tutorial img {
   width: 9vw;
 }
 
-.logo-acceuil.disappear{    
+.logo-tutorial h1 ,
+.logo-profile h1 {
+  color: white;
+  position: absolute;
+  left: 60%;
+}
+.logo-list_table h1{
+  position: absolute;
+  left: 56%;
+}
+
+
+.logo-success {
+  bottom: 110%;
+  z-index: -1;
+  opacity: 100;
+}
+.logo-success img {
+  width: 9vw;
+}
+
+
+.logo-acceuil.disappear {
   opacity: 0;
 }
 
-.logo-profile , .logo-stats{
-  bottom:110%;
+
+.logo-stats {
+  bottom: 110%;
   z-index: -1;
 }
-.logo-profile img , .logo-stats img{
+.logo-stats img {
+  width: 9vw;
+}
+
+
+.logo-list_table {
+  left: -8%;
+  bottom: 100%;
+}
+.logo-list_table img{
+  width: 7vw;
+}
+
+
+.logo-create_table{
+  bottom : 100%;
+  left: 0;
+  color : white;
+  z-index: -1;
+}
+.logo-create_table img{
   width: 9vw;
 }

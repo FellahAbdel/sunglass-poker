@@ -14,9 +14,11 @@ const CardsPlacements = ({
           
           <div className={`container-moneyPot`}>{moneyPot.toLocaleString()}$</div>
 
-          {dealingFlop[0] ? false : 
+          {/* {dealingFlop[0] ? false : 
+          
             <TextGlitch children={"SunGlassPoker"}/>
-          }
+          } */}
+          
           <div className="container-tableCards">
             {/* first three flops -> dealingFlop[0]
             first forth flops -> dealingFlop[1]

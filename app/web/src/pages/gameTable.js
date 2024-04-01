@@ -1,15 +1,16 @@
 //react imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-import {
-  useAuth,
-} from "./../components/Utiles/AuthProvider";
+import { useAuth } from "./../components/Utiles/AuthProvider";
 
 import { useWindowContext } from "./../components/Utiles/WindowContext";
 
 //css imports
+import "./reset.css";
 import "./gameTable.css";
 import "../components/Utiles/animations.css";
+import { getStyles } from "../components/Utiles/useStyles.jsx";
+
 //components imports
 import Navbar from "../components/Navbar/Navbar";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
@@ -17,17 +18,21 @@ import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 
+import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
+
 const GameTable = () => {
-  const [dealingFlop, setDealingFlop] = useState([false, false, false]);
-  const [handGuide, setHandGuide] = useState("");
+  const { theme } = useSettings();
+
+  const [dealingFlop, setDealingFlop] = useState([true, true, true]);
+  const [handGuide, setHandGuide] = useState("Full house");
   const [profileMenu] = useState(false);
   const [settingsMenu] = useState(false);
-  const [showHandCard, setShowHandCard] = useState(false);
+  const [showHandCard, setShowHandCard] = useState(true);
   const [playersCardsShow, setPlayersCardsShow] = useState([
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 0, 0, 1, 1, 0, 0, 0, 0, 1,
   ]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
   ]);
 
   const { logingOut, isLogged } = useAuth();
@@ -51,7 +56,8 @@ const GameTable = () => {
   const handleClickStartGame = () => {
     if (isLogged) {
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
-      console.log("Démarrer le jeu");
+      console.log("Montrer la window des différentes tables");
+      openWindow("list_table");
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
       openWindow("login");
@@ -126,8 +132,14 @@ const GameTable = () => {
   };
   //-----------------------------------------inGame functions to test
 
+  const classes = getStyles(windowType, isLogged, isGameTableVisible);
+
   return (
-    <div className="container-main" onClick={handleCloseOnClickOutside}>
+    <div
+      className="container-main resetall"
+      id={theme}
+      onClick={handleCloseOnClickOutside}
+    >
       {/* css Pattern background */}
       <div className="background"></div>
       <div className="backdrop"></div>
@@ -146,24 +158,9 @@ const GameTable = () => {
       </div>
 
       {/* Menu/Table */}
-      <div
-        className={`
-          comp-table 
-          ${
-            (windowType === "login" ||
-              windowType === "register" ||
-              windowType === "forgot" ||
-              windowType === "reset") &&
-            "comp-table-login"
-          }
-          ${windowType === "settings" && "comp-table-login"}
-          ${windowType === "tutorial" && "comp-table-tutorial"}
-          ${windowType === "" && isLogged && "comp-table-inGame"}
-         
-      `}
-      >
+      <div className={classes.compTable}>
         <Table
-          onClickStartGame={handleClickStartGame}
+          showGameList={handleClickStartGame}
           selectedLanguage={handleLanguageChange}
           dealingFlop={dealingFlop}
           showCards={[0, 1, 2, 3, 4]}
@@ -194,9 +191,9 @@ const GameTable = () => {
             }`}
           >
             <GameActionPanel
-              // handleFoldProp={handleFold}
-              // handleRaiseProp={handleRaise}
-              // handleCheckOrCallProp={handleCheckOrCall}
+            // handleFoldProp={handleFold}
+            // handleRaiseProp={handleRaise}
+            // handleCheckOrCallProp={handleCheckOrCall}
             />
           </div>
 

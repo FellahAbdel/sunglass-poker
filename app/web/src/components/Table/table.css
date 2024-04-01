@@ -1,236 +1,286 @@
 /*the table*/
-.container-table{
-    border-radius: 150px;
+.container-table {
+  border-radius: 150px;
 
-    width: 65vw;
-    min-width: 400px;
-    height: 45vh;
+  width: 65vw;
+  min-width: 400px;
+  height: 45vh;
 
-    position: relative;
+  position: relative;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    flex-wrap: wrap;
-    
-    transition: width 1s ease, height 1s ease, box-shadow 0.5s ease , border-radius 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-wrap: wrap;
+
+
+  transition: width 1s ease, height 1s ease, box-shadow 0.5s ease,
+    border-radius 1s ease, background-color 0.5s ease;
 }
 
 /*table color when logged in and logged out*/
-.table-isLogged{
-    box-shadow: 
-        inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-        0 0 1vw 0.8vW #164F81,
-        0 0 0 1vW rgb(0, 0, 0),
-        0 0 0 2vW rgb(31, 33, 36),
-        inset 0 0 0 2vW rgb(43, 41, 41),
-        0 0 5vw 3vw black;
-    background-color: #164F81;
+#dark .table-isLogged {
+  box-shadow:
+    inset 0 0 50px rgb(0, 0, 0),
+    0 0 1vw 0.8vw #164f81,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw rgb(31, 33, 36),
+    inset 0 0 0 2vw rgb(43, 41, 41),
+    0 0 5vw 3vw black;
+  background-color: #164f81;
 
-    background:
-        radial-gradient(black 15%, transparent 16%) 0 0,
-        radial-gradient(black 15%, transparent 16%) 8px 8px,
-        radial-gradient(#164F81 15%, transparent 20%) 0 1px,
-        radial-gradient(#164F81 15%, transparent 20%) 8px 9px;
-    background-color:#282828;
-    background-size:16px 16px;
+  background:
+    radial-gradient(black 15%, transparent 16%) 0 0,
+    radial-gradient(black 15%, transparent 16%) 8px 8px,
+    radial-gradient(#164f81 15%, transparent 20%) 0 1px,
+    radial-gradient(#164f81 15%, transparent 20%) 8px 9px;
+  background-color: #282828;
+  background-size: 16px 16px;
 }
-.table-notLogged{
-    box-shadow: 
-    inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-    0 0 1vw 0.8vW #4D6478,
-    0 0 0 1vW rgb(0, 0, 0),
-    0 0 0 2vW rgb(31, 33, 36),
-    inset 0 0 0 2vW rgb(43, 41, 41),
+#dark .table-notLogged {
+  box-shadow:
+    inset 0 0 50px rgb(0, 0, 0),
+    0 0 1vw 0.8vw #4d6478,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw rgb(31, 33, 36),
+    inset 0 0 0 2vw rgb(43, 41, 41),
     0 0 5vw 3vw black;
 
-    background:
+  background:
     radial-gradient(black 15%, transparent 16%) 0 0,
     radial-gradient(black 15%, transparent 16%) 8px 8px,
     radial-gradient(#a5a5a56c 15%, transparent 20%) 0 1px,
     radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
-    background-color:#282828;
-    background-size:16px 16px;
+  background-color: #282828;
+  background-size: 16px 16px;
+}
+#light .table-isLogged {
+  box-shadow:
+    inset 0 0 50px 30px #000000,
+    inset 0 0 0 40px #424242,
+    0 0 1vw 0.8vw #817f16,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw #424242,
+    0 0 5vw 3vw black;
+  background-color: #164f81;
+
+
+      --s: 10px; /* control the size */
+      --c1:#57570c;
+      --c2:#424242;
+      
+      --c:#0000 79%,var(--c1) 81% 99%,var(--c2) 101% 150%,#0000 0;
+      background:
+        radial-gradient(var(--s) at 100% 100%,var(--c)),
+        radial-gradient(var(--s) at 100% 0   ,var(--c)) calc(3*var(--s)/2) 0,
+        radial-gradient(var(--s) at 0    100%,var(--c)) calc(  var(--s)/2) 0,
+        radial-gradient(var(--s) at 0    0   ,var(--c)) calc(2*var(--s)) 0,
+        repeating-linear-gradient(90deg,
+          var(--c1) 0 calc(20%/3),#0000 0 calc(70%/3),
+          var(--c1) 0 30%,#0000 0 50%) calc(var(--s)/-5) 0 var(--c2);
+      background-size: calc(3*var(--s)) calc(5*var(--s)/2); 
+ }
+
+#light .table-notLogged {
+  box-shadow:
+    inset 0 0 50px rgb(0, 0, 0),
+    inset 0 0 0 2vw rgb(43, 41, 41),
+    0 0 1vw 0.8vw #fff70083,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw rgb(31, 33, 36),
+    0 0 5vw 3vw black;
+
+
+    --s: 10px; /* control the size */
+    --c1:#494913;
+    --c2:rgb(43, 41, 41);
+    
+    --c:#0000 79%,var(--c1) 81% 99%,var(--c2) 101% 150%,#0000 0;
+    background:
+      radial-gradient(var(--s) at 100% 100%,var(--c)),
+      radial-gradient(var(--s) at 100% 0   ,var(--c)) calc(3*var(--s)/2) 0,
+      radial-gradient(var(--s) at 0    100%,var(--c)) calc(  var(--s)/2) 0,
+      radial-gradient(var(--s) at 0    0   ,var(--c)) calc(2*var(--s)) 0,
+      repeating-linear-gradient(90deg,
+        var(--c1) 0 calc(20%/3),#0000 0 calc(70%/3),
+        var(--c1) 0 30%,#0000 0 50%) calc(var(--s)/-5) 0 var(--c2);
+    background-size: calc(3*var(--s)) calc(5*var(--s)/2); 
 }
 
 
-.container-profile ,.container-stats{
-    width: 65vw;
-    height: 50vh;
+.container-profile,
+.container-stats {
+  width: 65vw;
+  height: 50vh;
 
-    box-shadow: 
-    inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-    0 0 1vw 0.8vW rgb(146, 146, 146),
-    0 0 0 1vW rgb(0, 0, 0),
-    0 0 0 2vW rgb(31, 33, 36),
-    inset 0 0 0 2vW rgb(43, 41, 41),
-    0 0 5vw 3vw black;
+  box-shadow: inset 0 0 50px rgb(0, 0, 0),
+    /*inner table shadow*/ 0 0 1vw 0.8vw rgb(146, 146, 146),
+    0 0 0 1vw rgb(0, 0, 0), 0 0 0 2vw rgb(31, 33, 36),
+    inset 0 0 0 2vw rgb(43, 41, 41), 0 0 5vw 3vw black;
 
-    background:
-    radial-gradient(black 15%, transparent 16%) 0 0,
+  background: radial-gradient(black 15%, transparent 16%) 0 0,
     radial-gradient(black 15%, transparent 16%) 8px 8px,
     radial-gradient(#a5a5a56c 15%, transparent 20%) 0 1px,
     radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
-    background-color:#282828;
-    background-size:16px 16px;
+  background-color: #282828;
+  background-size: 16px 16px;
 }
 
-.container-settings{
-    width:45vw;
-    height: 70vh;
+.container-settings {
+  width: 30vw;
+  height: 30vw;
 
-    box-shadow: 
-    inset 0 0 50px rgb(0, 0, 0), /*inner table shadow*/
-    0 0 1vw 0.8vW rgb(146, 146, 146),
-    0 0 0 1vW rgb(0, 0, 0),
-    0 0 0 2vW rgb(31, 33, 36),
-    inset 0 0 0 2vW rgb(43, 41, 41),
-    0 0 5vw 3vw black;
+  box-shadow: inset 0 0 50px rgb(0, 0, 0),
+    /*inner table shadow*/ 0 0 1vw 0.8vw rgb(146, 146, 146),
+    0 0 0 1vw rgb(0, 0, 0), 0 0 0 2vw rgb(31, 33, 36),
+    inset 0 0 0 2vw rgb(43, 41, 41), 0 0 5vw 3vw black;
 
-    background:
-    radial-gradient(black 15%, transparent 16%) 0 0,
+  background: radial-gradient(black 15%, transparent 16%) 0 0,
     radial-gradient(black 15%, transparent 16%) 8px 8px,
     radial-gradient(#a5a5a56c 15%, transparent 20%) 0 1px,
     radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
-    background-color:#282828;
-    background-size:16px 16px;
+  background-color: #282828;
+  background-size: 16px 16px;
 }
 
 /*container for the logIn*/
-.container-logIn{
-    border-radius: 100px;
-    width: 40vw;
-    height: 80vh;
+.container-logIn {
+  border-radius: 100px;
+  width: 40vw;
+  height: 80vh;
 }
 
-.container-acceuil{
-    width: 50vw;
-    height: 45vh;
+.container-list_table {
+  border-radius: 60px;
+  width: 80vw;
+  height: 70vh;
 }
 
-.container-tutorial{
-    border-radius: 50px;
-}
-.container-success{
-    width: 50vw;
-    height: 40vh;
-    border-radius: 200px;
+.container-acceuil {
+  width: 50vw;
+  height: 45vh;
 }
 
-
-
-
-
+.container-tutorial {
+  border-radius: 50px;
+}
+.container-success {
+  width: 50vw;
+  height: 40vh;
+  border-radius: 200px;
+}
+.container-create_table{
+  width: 35vw;
+  height: 55vh;
+  border-radius: 100px;
+}
 
 /*cards and users disappearing animation*/
-.profiles.disappear, .container-cards.disappear{    
-    opacity: 0;
-    transition: opacity 0.1s ease-out;
+.profiles.disappear,
+.container-cards.disappear {
+  opacity: 0;
+  transition: opacity 0.1s ease-out;
 }
-.profiles{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 1s ease-out;
+.profiles {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s ease-out;
 }
 
 /*main center table cards container*/
-.container-cards{
-    position: absolute;
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    height: fit-content;
-    color: aliceblue;
-    width: 30vw;
-    height: 20vh;
-    transition: opacity 1s ease-out;
+.container-cards {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+  color: aliceblue;
+  width: 30vw;
+  height: 20vh;
+  transition: opacity 1s ease-out;
 }
-
 
 /*users placements around the table*/
-.profile{
-    position: absolute;
-    display: flex;
+.profile {
+  position: absolute;
+  display: flex;
 }
-.profile0{
-   top:-30%; 
-}
-
-.profile1{
-    top:-30%;
-    right:20%;
+.profile0 {
+  top: -25%;
 }
 
-.profile2{
-    top:-5%;
-    right:-5%;
+.profile1 {
+  top: -25%;
+  right: 20%;
 }
 
-.profile3{
-    bottom: 15%;
-    right:-5%;
-}
-.profile4{
-    bottom:-25%;
-    right:20%;
+.profile2 {
+  top: 10%;
+  right: -10%;
 }
 
-.profile5{
-    bottom: -25%;
+.profile3 {
+  bottom: 25%;
+  right: -10%;
+}
+.profile4 {
+  bottom: -10%;
+  right: 20%;
 }
 
-.profile6{
-    bottom: -25%;
-    left:20%;
+.profile5 {
+  bottom: -10%;
 }
 
-.profile7{
-    bottom: 15%;
-    left:-5%;
+.profile6 {
+  bottom: -10%;
+  left: 20%;
 }
 
-.profile8{
-    top: -5%;
-    left: -5%;
+.profile7 {
+  bottom: 25%;
+  left: -5%;
 }
 
-.profile9{
-    top:-30%;
-    left:20%;
-}
- 
-
-.container-startButtons{
-    z-index: -1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: -30%;
+.profile8 {
+  top: 10%;
+  left: -5%;
 }
 
-.btn-gameStart{
-    width: 15vw;
-    height: 4vh;
-    margin-top: 10px;
-    position: absolute;
-    bottom: 13%;
-    background-color: #4D6478;
-    border-radius: 20px;
-    box-shadow: 0 5px 20px black;
-    font-size: 1vw;
-    font-weight: bold;
+.profile9 {
+  top: -25%;
+  left: 20%;
 }
 
-.btn-gameJoin{
-    position: unset;
-    margin-left: 5%;
-    margin-right: 5%;
-    background-color: #033F61;
+.container-startButtons {
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: -30%;
 }
 
+.btn-gameStart {
+  width: 15vw;
+  height: 4vh;
+  margin-top: 10px;
+  position: absolute;
+  bottom: 13%;
+  background-color: #4d6478;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px black;
+  font-size: 1vw;
+  font-weight: bold;
+}
 
+.btn-gameJoin {
+  position: unset;
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: #033f61;
+}

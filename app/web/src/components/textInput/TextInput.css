@@ -5,22 +5,22 @@
   justify-content: center;
 }
 
-.input-login {
-  width: 20vw;
-  height: 4.5vh;
+.input-connectionDefault {
+  width: 19.5vw;
+  height: 5vh;
   font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 15px;
+  padding-left: 60px; /* Adjust this value as needed */
+  border-radius: 10px;
   border: 2px solid #ccc;
   background-color: rgba(237, 242, 247, 1);
   border-bottom: 2px solid #4D6478;
   margin-bottom: 10px;
   transition: width 0.5s ease , height 0.5s ease;
+}
 
-  /*icon*/
-  background:  url("./../assets/images/icons/email.png") no-repeat , rgb(255, 255, 255);
-  background-position: 15px;
-  background-size: 20px;
+.input-connectionDefault::placeholder {
+  color: #999; 
+  font-size: 2vh;
 }
 
 .container-textInputComponent p {
@@ -32,4 +32,49 @@
 
 .input-component-error{
     border-bottom: 2px solid #f63e3e;
+}
+
+.input-icon-email{
+    background:  url("./../assets/images/icons/black/email.png") no-repeat , rgb(255, 255, 255);
+    background-position: 20px;
+    background-size: 2.5vh;
+}
+.input-icon-profile{
+  background:  url("./../assets/images/icons/black/profile.png") no-repeat , rgb(255, 255, 255);
+  background-position: 20px;
+  background-size: 2.5vh;
+}
+.input-icon-password{
+  background:  url("./../assets/images/icons/black/password.png") no-repeat , rgb(255, 255, 255);
+  background-position: 15px;
+  background-size: 2.5vh;
+}
+.input-icon-passwordRepeat{
+  background:  url("./../assets/images/icons/black/password-repeat.png") no-repeat , rgb(255, 255, 255);
+  background-position: 15px;
+  background-size: 2.5vh;
+}
+
+.input-icon-GameName{
+  background:  url("./../assets/images/icons/black/name.png") no-repeat , rgb(255, 255, 255);
+  background-position: 15px;
+  background-size: 2.5vh;
+}
+
+
+.input-chatBox{
+  position: absolute;
+  bottom: 2%;
+  width: 85%;
+  height: 10%;
+  padding: 0 10px 0 10px;
+  font-size: 2vh;
+  border-radius: 10px;
+  border: unset;
+  box-shadow: inset 0 0 5px black;
+  background-color: rgba(237, 242, 247, 1);
+  transition: width 0.5s ease , height 0.5s ease , font-size 1s ease;
+}
+.input-chatBox::placeholder{
+
 }

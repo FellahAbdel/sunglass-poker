@@ -12,7 +12,6 @@ import { useHistory } from "react-router-dom";
 import { WindowProvider } from "./components/Utiles/WindowContext";
 import { SettingsProvider } from "./components/Utiles/SettingsContext";
 
-
 function App() {
   return (
     <WindowProvider>

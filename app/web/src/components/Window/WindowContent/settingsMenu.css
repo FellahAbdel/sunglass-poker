@@ -21,58 +21,14 @@
 }
 
 
-
-.container-ranges{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width:70%
+/* The slider--------------------------------- */
+.container-switch-theme , .container-switch-mute{
+  display: flex;
+  align-items: center;
 }
-
-.rangeContainer-blah{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
+.container-switch-mute p, .container-switch-theme p{
+  margin-right: 10px;
 }
-
-/*ranger*/
-.slider-blah {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 10px;
-    border-radius: 5px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-  }
-  
-  .slider-blah:hover {
-    opacity: 1;
-  }
-  
-  .slider-blah::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 23px;
-    height: 24px;
-    border: 0;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-  }
-  
-  .slider-blah::-moz-range-thumb {
-    width: 23px;
-    height: 24px;
-    border: 0;
-    background: white;
-    cursor: pointer;
-  }
 
 /* The switch - the box around the slider */
 .switch {
@@ -148,4 +104,66 @@
   }
 
 
-  /*CheckBox DARKMODE*/
+
+
+
+  /* theme switch */
+.container-switch-theme .switch {
+  position: relative;
+  display: flex;
+  width: 60px;
+  height: 34px;
+}
+
+.container-switch-theme .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #595400;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.container-switch-theme .slider:before {
+position: absolute;
+/* content: ""; */
+height: 26px;
+width: 26px;
+left: 4px;
+bottom: 4px;
+/* background-color: white; */
+-webkit-transition: .4s;
+transition: .4s;
+border-radius: unset;
+background: url(./../../assets/SunGameStudio_logo.png) no-repeat ;
+background-size: 100%;
+background-position: center;  
+}
+
+.container-switch-theme input:checked + .slider {
+  background-color: #1a5aae;
+
+}
+
+.container-switch-theme input:checked + .slider:before{  
+  background: url(./../../assets/SunGameStudio_logo_dark.png) no-repeat ;
+  background-size: 100%;
+  background-position: center;  
+}
+
+
+
+
+/*language selector*/
+.container-select-lang{
+display: flex;
+align-items: center;
+flex-direction: row;
+}
+.container-select-lang p{
+margin-right: 10px;
+}
