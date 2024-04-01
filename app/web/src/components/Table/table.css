@@ -107,7 +107,7 @@
 
 
 #dark .container-inGame{
-  border-radius: 200px 200px 170px 170px;
+  border-radius: 250px 250px 180px 180px;
   box-shadow:
     inset 0px 10px 5vw 1vw rgb(0, 0, 0),
     inset 0 -5px 0 2vw rgb(43, 41, 41),
@@ -136,7 +136,7 @@
 }
 
 #light .container-inGame{
-  border-radius: 200px 200px 170px 170px;
+  border-radius: 250px 250px 180px 180px;
   box-shadow:
     inset 0px 10px 5vw 1vw rgb(0, 0, 0),
     inset 0 -5px 0 2vw #424242,
@@ -181,21 +181,35 @@
   background-size: 16px 16px;
 }
 
-.container-settings {
+#dark .container-settings {
+  border-radius: 150px;
   width: 30vw;
   height: 30vw;
 
-  box-shadow: inset 0 0 50px rgb(0, 0, 0),
-    /*inner table shadow*/ 0 0 1vw 0.8vw rgb(146, 146, 146),
-    0 0 0 1vw rgb(0, 0, 0), 0 0 0 2vw rgb(31, 33, 36),
-    inset 0 0 0 2vw rgb(43, 41, 41), 0 0 5vw 3vw black;
+  box-shadow: 
+    inset 0 0 50px rgb(0, 0, 0),
+    inset 0 0 0 2vw rgb(43, 41, 41),
+    0 0 1vw 0.8vw #164f81,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw rgb(31, 33, 36),
+    0 0 5vw 3vw black;
 
-  background: radial-gradient(black 15%, transparent 16%) 0 0,
-    radial-gradient(black 15%, transparent 16%) 8px 8px,
-    radial-gradient(#a5a5a56c 15%, transparent 20%) 0 1px,
-    radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 9px;
-  background-color: #282828;
-  background-size: 16px 16px;
+    background-size: 16px 16px; 
+}
+#light .container-settings {
+  border-radius: 150px;
+  width: 30vw;
+  height: 30vw;
+
+  box-shadow: 
+    inset 0 0 50px rgb(0, 0, 0),
+    inset 0 0 0 2vw rgb(43, 41, 41),
+    0 0 1vw 0.8vw #817f16,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw rgb(31, 33, 36),
+    0 0 5vw 3vw black;
+
+    background-size: 16px 16px; 
 }
 
 /*container for the logIn*/
