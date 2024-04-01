@@ -7,7 +7,7 @@ const PlayersPlacements = ({
   playersCardDistributedProp,
   disappear,
 }) => {
-  const playersInTable = useSelector((state) => state.game.gameClass.players);
+  const playersInTable = useSelector((state) => state.table.player);
 
   return (
     <span className={`profiles ${disappear ? "disappear" : ""}`}>
