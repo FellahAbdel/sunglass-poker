@@ -61,6 +61,9 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
             }
         })
 
+        // New socket session try to tell who is the user logged in with the token.
+        // If token is valid add the socket to  the auth room to allow talk to session
+        // otherwise close the room.
         socket.on('myNameIs',(token) => {
             // console.log('Sets rooms',socket.rooms);
             if(token===null){

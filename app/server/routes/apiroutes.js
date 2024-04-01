@@ -1,7 +1,13 @@
 module.exports = (app, dao,gameController) => {
 
     app.get('/rooms', (req,res)=> {
-        res.status(200).json(gameController.rooms);
+        var roomsInfos = [];
+        for(var room in gameController.rooms){
+            r = gameController.rooms[room];
+            console.log(room);
+            roomsInfos.push({...r,refresh:(r.refresh !== undefined)?true:false});
+        }
+        res.send(roomsInfos);
     })
 
     app.post("/api/users", async (req, res) => {

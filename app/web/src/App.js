@@ -9,8 +9,8 @@ import React, { useState } from "react";
 import { AuthProvider } from "./components/Utiles/AuthProvider";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { WindowProvider } from "./components/WindowContext";
-import { SettingsProvider } from "./components/SettingsContext";
+import { WindowProvider } from "./components/Utiles/WindowContext";
+import { SettingsProvider } from "./components/Utiles/SettingsContext";
 import comm from './services/socket.js';
 
 comm.Init();
