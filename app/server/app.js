@@ -8,6 +8,7 @@ const socketIOSession = require('socket.io-express-session');
 const MemoryStore = require('memorystore')(session)
 console.log(gameController);
 console.log("HashRoom 3 : ",gameController.hashRoom(3));
+gameController.makeRefreshCall(2);
 console.log(ENV_CONST_COMM);
 
 /** Paramètres cors du serveur.
@@ -62,7 +63,7 @@ const port = ENV_CONST_COMM.ENV_PORT_SERVER;
 
 
 // router
-const router = require('./routes/apiroutes')(app,db);
+const router = require('./routes/apiroutes')(app,db,gameController);
 
 
 /** Démarrage du serveur.

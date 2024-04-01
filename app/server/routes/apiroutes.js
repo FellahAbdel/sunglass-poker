@@ -1,4 +1,9 @@
-module.exports = (app, dao) => {
+module.exports = (app, dao,gameController) => {
+
+    app.get('/rooms', (req,res)=> {
+        res.status(200).json(gameController.rooms);
+    })
+
     app.post("/api/users", async (req, res) => {
         const answer = await dao.CreateUser(req.body);
         res.status(answer.code).json(answer.data);
