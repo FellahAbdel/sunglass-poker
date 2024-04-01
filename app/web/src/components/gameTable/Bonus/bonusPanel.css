@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   height: auto;
-  width:17vw;
+  width:12vw;
   border-radius: 10px;
   background-color: unset;
   box-shadow: 0px 0px 20px 5px black;
@@ -14,12 +14,12 @@
   justify-content: center;
   flex-direction: row;
   margin: 5% 0 0 0;
-  width: 100%;
+  width: unset;
 }
 
 .container-cardType{
   padding: 10px;
-  width: 2vw;
+  width: 10%;
   height: auto;
 
   border-radius: 5px;
@@ -30,6 +30,10 @@
 
   margin: 4px ;
 }
+.container-cardType img{
+  width: 80%;
+}
+
 
   /* for smaller screens */
   @media (max-width: 1300px) {
@@ -76,21 +80,20 @@
 
 
 .btn-bonus{
-  height: 5vh;
-  min-height: 20px;
+  height: 3vh;
+  min-height: unset;
   width: 100%;
 
   margin: 5%;
-
 
   border-radius: 10px;
   border-style: unset;
 
   box-shadow: 
-    0px 0px 0 2px rgba(0, 0, 0, 0.3),
-    inset 0px 0px 10px 0px rgb(0, 0, 0);
+    0px 0px 10px black,
+    inset 0px 0px 5px 0px rgb(0, 0, 0);
 
-  font-size: 1vw;
+  font-size: 90%;
   color: aliceblue;
   text-align: center;
   font-weight: bold;
