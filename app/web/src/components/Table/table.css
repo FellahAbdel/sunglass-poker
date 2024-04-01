@@ -124,7 +124,7 @@
     0 15px 0 2vw rgb(31, 33, 36),
     0 0px 0 -2vw rgb(31, 33, 36),
 
-    0 40px 5vw 5vw black;
+    0 80px 10vw 3vw black;
 
   background:
     radial-gradient(black 15%, transparent 16%) 0 0,
@@ -152,7 +152,7 @@
     0 15px 0 2vw #212121,
     0 0px 0 -2vw #212121,
 
-    0 40px 5vw 5vw black;
+    0 80px 10vw 3vw black;
 
     --s: 10px; /* control the size */
     --c1:#57570c;
