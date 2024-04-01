@@ -3,14 +3,15 @@
     /*FOR ANIMATION ADD THIS TO YOUR CARD WHEN USING*/
     /* transition: transform 2s ease;
     transform-style: preserve-3d; */
-    
 }
 
 .flippedCard {
     transform: rotateY(180deg);
     transform-origin: center;
+    
 }
 .CardBack , .CardFront{
+    background-color: unset;
     position: absolute;
     width: 100%;
     height: 100%;

@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import Button from "../../button/Button.tsx";
 import TextInputComponent from "../../textInput/TextInput";
-import { useAuth } from "../../AuthProvider";
-import { useWindowContext } from "../../WindowContext";
+import { useAuth } from "../../Utiles/AuthProvider";
+import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
 const ForgotPassword = ({
-  openResetPassword,
-  openLoginWindow,
   showSuccess,
 }) => {
   const {
-    closeWindow,
-    isWindowOpen,
-    windowType,
-    openSuccessWindow,
     openWindow,
   } = useWindowContext();
   const { checkEmail } = useAuth();
@@ -68,22 +62,22 @@ const ForgotPassword = ({
           onChange={handleChange}
           placeholder="Email"
           errorMessage={validationError}
-          style={"input-login"}
+          styleClass={"input-connectionDefault input-icon-email"}
         />
         <Button
-          style="buttonconnexion button login-button"
+          styleClass="btn-connectionDefault button login-button"
           type="submit"
           label="Send"
         />
         <Button
-          style="buttonconnexion button login-button"
+          styleClass="btn-connectionDefault button login-button"
           type="temporary"
           onClick={() => openWindow("reset")}
           label="TEMPORARY BUTTON"
         />
       </form>
       <Button
-        style="buttonconnexion forgot-button"
+        styleClass="btn-connectionDefault forgot-button"
         onClick={() => openWindow("login")}
         label="Return to connection menu"
       />

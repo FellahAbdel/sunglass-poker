@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from './AuthProvider';
 import { useWindowContext } from './WindowContext';
 
@@ -20,7 +20,7 @@ export const useUserData = () => {
     };
 
     loadUserStats();
-  }, [windowType, user?._id]);
+  }, [windowType, user?._id, fetchStats]);
 
   return { user, stats };
 };

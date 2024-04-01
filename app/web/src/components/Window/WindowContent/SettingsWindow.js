@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React , {useState, useEffect} from 'react';
 import './settingsMenu.css'
-import Button from "../../button/Button.tsx";
-import { useSettings } from '../../SettingsContext';
+import { useSettings } from '../../Utiles/SettingsContext';
 
 const SettingsWindow = () => {
-  const { darkMode, mute, language, toggleDarkMode, toggleMute, changeLanguage } = useSettings();
+  const { theme, mute, language, toggleTheme, toggleMute, changeLanguage } = useSettings();
 
+  const [themeDark,setThemeDark] = useState();
+  useEffect(() => {
+    setThemeDark(theme === "dark");
+  }, [theme]);
   const handleLanguageChange = (event) => {
     changeLanguage(event.target.value);
   };
@@ -13,7 +16,7 @@ const SettingsWindow = () => {
   return (
     <div className="settingsMenu">
           <h1>SETTINGS</h1>
-          <span className='container-switch'>
+          <span className='container-switch-mute'>
             <p>Mute</p>
             <label className="switch">
               <input type="checkbox" checked={mute} onChange={toggleMute}/>
@@ -21,16 +24,18 @@ const SettingsWindow = () => {
             </label>
           </span>
 
-          <span className='container-switch'>
-            <p>DARK MODE</p>
+          <span className='container-switch-theme'>
+            <p>Theme</p>
             <label className="switch">
-              <input type="checkbox" checked={darkMode} onChange={toggleDarkMode}/>
+              <input type="checkbox" checked={themeDark} onChange={toggleTheme}/>
               <span className="slider"/>
             </label>
           </span>
 
-          <span>Select Language:</span>
+          <span className='container-select-lang'>
+          <p>Select Language</p>
           <select
+              className='select-lang'
               id="language-select"
               value={language}
               onChange={handleLanguageChange}
@@ -39,6 +44,7 @@ const SettingsWindow = () => {
               <option value="fr">French</option>
               <option value="es">Spanish</option>
           </select>
+          </span>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 .container-hand{
-    width: 20vw;
-    height: 14vw;
+    width: 15vw;
+    height: 10vw;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -16,7 +16,7 @@
     flex:1;
     z-index: -1;
     bottom: 0;
-    padding: 10px 5px 0px 5px;
+    padding: 7px 5px 7px 5px;
     height: 100%;
     width: 60%;
 
@@ -24,10 +24,9 @@
     border-radius: 10px 10px 0 0;
     box-shadow: 0 0 10px black;
 
-    font-size: calc(5px + 1vw);
+    font-size: 1vw;
     color: white;
-    background:linear-gradient(to top, black, rgb(0, 41, 48)) ;
-    
+
     text-shadow:
     0 0 5px #fff,
     0 0 10px #fff,
@@ -35,11 +34,17 @@
     0 0 20px rgb(255, 255, 255),
     0 0 30px rgb(255, 255, 255);
 }
+#dark .hand-guide{
+    background:linear-gradient(to top, black, #0045776c) ;
+}
+#light .hand-guide{
+    background:linear-gradient(to top, black, #7771006c) ;
+}
 
 .container-handCard{
     display: flex;
     position: absolute;
-    bottom:0;
+    bottom:10%;
     width: 85%;
     height: 80%;
     flex-direction:row;
@@ -50,6 +55,7 @@
 
 .handCard{
     align-self: center;
+    margin-bottom: 0%;
     width: 45%;
     height: 100%;
     box-shadow: 0 0 10px black;

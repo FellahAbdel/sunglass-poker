@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import './bonusPanel.css';
 import Button from "../../button/Button.tsx";
 import Clubs from './../../assets/images/card_type/Clubs.png';
@@ -33,7 +33,7 @@ const BonusPanel = () => {
                 <img src={Clubs} alt="Club" className={`container-cardType box-${handleChangeClubs}`}/>
             </div>
 
-            <Button style={"btn-bonus"} label={"BONUS"}/>
+            <Button styleClass={"btn-bonus back-color1"} label={"BONUS"}/>
         </div>
     );
 };

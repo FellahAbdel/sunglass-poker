@@ -1,11 +1,12 @@
 //react imports
-import React, { useState, useEffect } from "react";
+import React, {useState} from "react";
 
 //css
 import "./navbar.css";
 //components
 import ChipsCash from "./ChipsCash";
 import Button from "../button/Button.tsx";
+import TextInputComponent from "../textInput/TextInput.jsx";
 
 const Navbar = ({
   profileOnClick,
@@ -19,13 +20,58 @@ const Navbar = ({
     e.stopPropagation();
   };
 
+
+  const [isChatOpen, setisChatOpen] = useState(false);
+
+  const handleChatOpen = () => {
+    setisChatOpen(true);
+  };
+
+  const handleChatClose = () => {
+    setisChatOpen(false);
+  };
+
+  const handleNull = () => {
+
+  }
+
   return (
     <div className="container-nav" onClick={handleClick}>
       {/* Current Chips inventory and LogOut Button */}
       {isLoggedNavbar && (
         <>
-          <ChipsCash currentChips={9999999999} style={`box-chips`} />
-          <Button label={"LogOut"} onClick={logOutOnClick} style="btn-exit" />
+        {isLoggedNavbar && 
+          <div  className={`chatBox ${isChatOpen && "chatBoxOpen"}`} >
+            
+            {!isChatOpen && 
+            <Button
+              label={"Chat"}
+              onClick={handleChatOpen}
+              style={{}}
+            />}
+
+            {isChatOpen && (<>
+              <img
+                className={"btn-chatClose"}
+                onClick={handleChatClose}
+                src={require("./../assets/images/icons/white/cross.png")}
+                style={{
+                  opacity: isChatOpen ? '100' : '0',
+                }}
+                alt="exit-chat"
+                />
+                <TextInputComponent 
+                  name="Message"
+                  value={handleNull}
+                  onChange={handleNull}
+                  placeholder={"Message"}
+                  styleClass={"input-chatBox"}
+                />
+
+                </>)}
+          </div>}
+          <ChipsCash currentChips={9999999999} styleClass={`box-chips back-color3`} />
+          <Button label={"Exit"} onClick={logOutOnClick} styleClass="btn-exit back-color3" />
         </>
       )}
 
@@ -34,23 +80,24 @@ const Navbar = ({
       <Button
         label={isLoggedNavbar ? "Profile" : "LogIn"}
         onClick={() => (isLoggedNavbar ? profileOnClick() : logInOnClick())}
-        style={`${isLoggedNavbar ? "btn-profile" : "btn-logIn"}`}
-        iconStyle="icon-profile"
-        iconSrc={require("./../assets/images/icons/profile-icon.png")}
+        styleClass={`${isLoggedNavbar ? "btn-profile back-color1" : "btn-logIn back-color2"}`}
+        iconSrc={require("./../assets/images/icons/black/profile.png")}
       />
 
       {/* Settings/Tutorial Buttons */}
       <Button
-        label={isLoggedNavbar ? "Settings" : "Tutorial"}
-        onClick={() => (isLoggedNavbar ? settingsOnClick() : tutorialOnClick())}
-        style={`${isLoggedNavbar ? "btn-settings" : "btn-tutorial"}`}
-        iconStyle={`${isLoggedNavbar ? "icon-settings" : "icon-tutorial"}`}
-        iconSrc={
-          isLoggedNavbar
-            ? require("./../assets/images/icons/settings-icon.png")
-            : require("./../assets/images/icons/tutorial-icon.png")
-        }
+        label={"Tutorial"}
+        onClick={() => (tutorialOnClick())}
+        styleClass={`${isLoggedNavbar ? "btn-tutorial back-color2" : "btn-tutorial back-color3"}`}
+        iconSrc={require("./../assets/images/icons/white/tutorial.png")}
       />
+      <Button
+        label={"Settings"}
+        onClick={() => (settingsOnClick())}
+        styleClass={`${isLoggedNavbar ? "btn-settings back-color1" : "btn-settings back-color2"}`}
+        iconSrc={require("./../assets/images/icons/white/settings.png")}
+      />
+
     </div>
   );
 };

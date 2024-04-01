@@ -70,4 +70,24 @@
 
 2024/03/18 : 2h00           Ajout isGameTableVisible pour voir si on affiche accueil ou gametable, ajout successwindow. Problème avec isLogged.
 
-TEMPS TOTAL: 64h00min 
+2024/03/19 : 3H30           Réunion, correction bug, version desktop, simplification code.
+
+2024/03/21 : 2h00           Modification fonctionnement bdd, reducer, dispatch (package : npm install jsonwebtoken)
+
+2024/03/23 : 2h00           Récupération info bdd pour page profil et stats. Css à faire.
+
+2024/03/23 : 1h00           Modification fonctionnement user et stats, fichier qui les gère à part. Window se ferme quand on clique en dehors.
+
+2024/03/24 : 1h00           Modification css, création component backArrow
+
+2024/03/25 : 1h00           Réunion Mostafa, correction bugs, simplification code
+
+2024/03/26 : 3h00           Réunion mardi, reducer, correction des warnings
+
+2024/03/28 : 2h00           Début page liste tables.
+
+2024/03/28 : 0h30           Réorganisation
+
+2024/03/29 : 1h00           Début window création table
+
+TEMPS TOTAL: 81h00min 

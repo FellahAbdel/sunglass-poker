@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import Button from "../../button/Button.tsx";
-import LogoComponent from "../../logo/Logo";
 import TextInputComponent from "../../textInput/TextInput";
-import { useAuth } from "../../AuthProvider";
+import { useAuth } from "../../Utiles/AuthProvider";
 import {
   validateEmail,
   validatePassword,
   validatePasswordMatch,
-} from "../../ValidationUtils";
-import { useWindowContext } from "../../WindowContext";
+} from "../../Utiles/ValidationUtils.jsx";
+import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
 
-const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
+const ResetPasswordWindow = ({ showSuccess }) => {
   const {
-    closeWindow,
-    isWindowOpen,
-    windowType,
-    openSuccessWindow,
+
     openWindow,
   } = useWindowContext();
   const { updateUserData } = useAuth();
@@ -84,7 +80,7 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { email, password, repeatPassword } = formData;
+    const { email, password } = formData;
 
     if (validateForm()) {
       try {
@@ -122,7 +118,7 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           onChange={handleChange}
           placeholder="Mail (temporary)"
           errorMessage={validationErrors.email}
-          style={"input-login"}
+          styleClass={"input-connectionDefault input-icon-email"}
         />
         <TextInputComponent
           name="password"
@@ -131,7 +127,7 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           type="password"
           placeholder="Password"
           errorMessage={validationErrors.password}
-          style={"input-login"}
+          styleClass={"input-connectionDefault input-icon-password"}
         />
         <TextInputComponent
           name="repeatPassword"
@@ -140,16 +136,16 @@ const ResetPasswordWindow = ({ openLoginWindow, onClose, showSuccess }) => {
           type="password"
           placeholder="Repeat your password"
           errorMessage={validationErrors.repeatPassword}
-          style={"input-login"}
+          styleClass={"input-connectionDefault input-icon-passwordRepeat"}
         />
         <Button
-          style="buttonconnexion button login-button"
+          styleClass="btn-connectionDefault button login-button"
           type="submit"
           label="Send"
         />
       </form>
       <Button
-        style="buttonconnexion forgot-button"
+        styleClass="btn-connectionDefault forgot-button"
         onClick={() => openWindow("login")}
         label="Return to connection menu"
       />

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function Progressbar({ durationInSeconds }) {
     const [filled, setFilled] = useState(0);
-    const [isRunning, setIsRunning] = useState(true);
+    const [isRunning] = useState(true);
 
     useEffect(() => {
         let timeout;
@@ -25,7 +25,7 @@ export default function Progressbar({ durationInSeconds }) {
                 <div style={{
                     height: "100%",
                     width: `${filled}%`,
-                    backgroundColor: "rgb(0, 69, 59)",
+                    backgroundColor: "#00a674",
                     boxShadow: "inset 0 0 10px 1px rgb(0, 255, 98)",
                     transition: "width 0.5s"    
                 }}></div>

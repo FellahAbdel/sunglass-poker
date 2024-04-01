@@ -1,17 +1,11 @@
 // SuccessWindow.jsx
 import React from "react";
 import Button from "../../button/Button.tsx";
-import { useWindowContext } from "../../WindowContext";
+import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
-
-
-const SuccessWindow = ({ }) => {
+const SuccessWindow = () => {
   const {
     closeWindow,
-    isWindowOpen,
-    windowType,
-    openSuccessWindow,
-    openWindow,
     successMessage,
   } = useWindowContext();
   
@@ -20,7 +14,7 @@ const SuccessWindow = ({ }) => {
       <p>{successMessage}</p>
 
       <Button
-        style="buttonconnexion login-button"
+        styleClass="buttonconnexion login-button back-color1"
         label="OK"
         onClick={closeWindow}
       />
