@@ -141,8 +141,9 @@ const GameTable = () => {
       onClick={handleCloseOnClickOutside}
     >
       {/* css Pattern background */}
-      <div className="background"></div>
-      <div className="backdrop"></div>
+      
+      <div className="backdrop"/>
+      <div className="backdrop2"/>
 
       {/* Navbar or header */}
       <div className="comp-navbar">

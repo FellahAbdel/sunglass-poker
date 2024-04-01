@@ -12,13 +12,11 @@
     position:absolute;
     width: 100%;
     height: 100%;
-    top:0 ;
+    top:unset;
     z-index: -999;
-    /* background-image: url('./../components/gameTable/images/backdrop.png'); 
-    background-size:cover;  */
-    filter: blur(1px) ;
+    filter: blur(1px);
     transition: filter 1s ease;
-
+    background: unset;
 }
 #dark .backdrop{
     /* background: 
@@ -41,37 +39,26 @@
     background-size: calc(2*var(--s)) calc(2*var(--s));
 }
 #light .backdrop{
-    /* background: 
-        linear-gradient(315deg, transparent 75%, #2e2e2e 0)-8px 0,
-        linear-gradient(45deg, transparent 75%, #2e2e2e 0) 8px 0,
-        linear-gradient(135deg, #909090 50%, transparent 0) 0 0,
-        linear-gradient(45deg, #d5d5d5 50%, #a3a3a3 0) 0 0 #a3a3a3;
-    background-size: 16px 16px; */
-
-    /* --s: 30px; 
-        
-    --_g: #00611500 83%,#6f6f6f 85% 99%,#00611500 101%;
-    background:
-      radial-gradient(27% 29% at right ,var(--_g)) calc(var(--s)/ 2) var(--s),
-      radial-gradient(27% 29% at left  ,var(--_g)) calc(var(--s)/-2) var(--s),
-      radial-gradient(29% 27% at top   ,var(--_g)) 0 calc(var(--s)/ 2),
-      radial-gradient(29% 27% at bottom,var(--_g)) 0 calc(var(--s)/-2)
-      #9d9d9d;
-    background-size: calc(2*var(--s)) calc(2*var(--s)); */
-    filter: brightness(35%);
-    background: unset;
-    background-color: unset;
-    background-image: url("./../components/assets/images/backdrop.jpg");
-    background-size: unset;
+    filter: brightness(50%);   
+    margin: 0;
+    padding: 0;
+    background-image: url("./../components/assets/images/backdrop2.jpg");
+    background-size: cover; /* Scale the background image to cover the entire container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */ 
 }
 
-.background{
+#dark .backdrop2{
     position:absolute;
     width: 100%;
     height: 100%;
-    top:0 ;
-    z-index: -1000;
-    background-color: black;
+    background: radial-gradient(#ffffff02 50%, #000000e1);
+}
+#light .backdrop2{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(#ffffff10 70%, #00000070);
 }
 
 .comp-navbar{

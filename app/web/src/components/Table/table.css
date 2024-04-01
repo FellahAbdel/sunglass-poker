@@ -199,7 +199,14 @@
     0 0 0 2vw rgb(31, 33, 36),
     0 0 5vw 3vw black;
 
-    background-size: 16px 16px; 
+    --s: 10px; /* control the size */
+    --c1:#57570c;
+    --c2:#424242;
+    --c:var(--c2) 79%,var(--c1) 81% 99%,var(--c2) 101% 150%,var(--c2) 0;
+    
+    background: radial-gradient(var(--s) at 80%    100%,var(--c)) calc(  var(--s)/2) 0;
+    background-color: #424242;
+    background-size: calc(2*var(--s)) calc(5*var(--s)/2);
 }
 
 /*container for the logIn*/
