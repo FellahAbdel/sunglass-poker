@@ -22,7 +22,12 @@ const GameActionButtons = ({ }) => {
     setSliderValueText(value);
   };
 
-  //console.log(pot)
+  const handlesitPlayer=(player)=>{
+    return{
+      type:"SIT",
+      payload:player,
+    };
+  };
 
 // const handleCheckOrCall = () => {
 //   dispatch({

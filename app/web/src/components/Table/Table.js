@@ -18,6 +18,7 @@ import Button from "../button/Button.tsx";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { startGame } from "../../store/actions/actionsCreator";
+import {handlesitPlayer} from "../gameTable/GameActionPanel/GameActionPanel";
 
 const Table = ({
   dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
@@ -69,6 +70,10 @@ const Table = ({
 
   const showGameList = () => {
     if (isLogged) {
+      const player={
+        name:"TESTTTE"
+      };
+      dispatch(handlesitPlayer(player));
       openWindow("list_table");
     } else {
       openWindow("login");

@@ -9,13 +9,13 @@ const gameTableReducer = (state = defaultState, action) => {
   switch (type) {
     case "SIT":
       return {
-        ...defaultState,
+        ...state,
         player: { ...state.player, payload },
       };
       case "STAND_UP":
         return {
           ...state,
-          players: state.players.filter(player => player.id !== payload.id), // Retirer le joueur de la table
+          players: state.player.filter(player => player.id !== payload.id), // Retirer le joueur de la table
       };
     default:
       return state;
