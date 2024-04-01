@@ -61,7 +61,7 @@
 | ----- | ---------------------------------------------- | ---------------- | ---------- | --------- |
 | 19/03 | Keep working on the class split + Unit testing |                  | 4h00       |           |
 
-## Week 8 - _Total: 0_
+## Week 8 - _Total: 28h_
 
 | Date  | Description                                                     | Skills developed | Time Spent | Resources |
 | ----- | --------------------------------------------------------------- | ---------------- | ---------- | --------- |
@@ -70,3 +70,4 @@
 | 29/03 | Where block because of shared directory (it was outside of src) |                  | 4h00       |           |
 | 30/03 | Connect the store to the front                                  |                  | 4h00       |           |
 | 31/03 | use the store to make a dynamic rendering                       |                  | 8h00       |           |
+| 01/03 | front code analyzing                                            |                  | 2h00       |           |
