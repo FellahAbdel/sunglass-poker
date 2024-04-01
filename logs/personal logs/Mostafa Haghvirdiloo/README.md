@@ -74,5 +74,7 @@
 
 * 2024/03/29 : <b> 45m </b> <br/>        Travail individuel: <i>des petites ameliorations de css</i>
 
+* 2024/04/01 : <b> 1h </b> <br/>        Travail individuel: <i>table effet 3D , ameliorations css</i>
 
-total: 109h00min
+
+total: 110h00min

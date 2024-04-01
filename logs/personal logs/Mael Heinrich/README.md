@@ -48,7 +48,9 @@
 
 2024/03/25: 30min   Reunio avec Victor pour voir tout ce qu il a fait pour le réseau etc...
 
+2024/03/26: 4h
+
+2024/04/01: 3H30    Redux, comprehension de tout/ tentatives de faire fonctionner ... 
 
 
-
-TEMPS TOTAL: 44h 
+TEMPS TOTAL: 51h30 
