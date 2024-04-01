@@ -67,5 +67,25 @@
 | Date | Temps passé | Description | Ressources |
 |:-------|:--:|:----: |--:|
 | 19 mars | 4 Heures | Expliquations des derniers changements effectuer. Debuguage des branches. Executions des vm et améliorations du choix d'environnement. Recherche pour faire fonctionner le frontend au travers du reverse proxy unistra | --
-| 19 mars | 4 Heures | Avancement sur une branche expérimentale pour le portage de l'application par le domaine unistra.| --
-| TOTAL | 8 Heures || --
+| 21 mars | 4 Heures | Avancement sur une branche expérimentale pour le portage de l'application par le domaine unistra.| --
+| 23 mars | 6 Heures | Derniers progrès sur la version VM. Début de travail sur interactions spécifique au jeu et tentative d'unification des sessions. | --
+| TOTAL | 14 Heures || --
+
+## Neuvième semaine
+
+| Date | Temps passé | Description | Ressources |
+|:-------|:--:|:----: |--:|
+| 25 mars | 4 Heures | Travail sur une branche pour implémenter l'objet de jeu et les gameType.| --
+| 26 mars | 5 Heures | Réorganisation de la structure à implémenter, explications des attentes et des fonctions necessaire au interactions du jeu pour le réseau. Résolutions de bugs divers| --
+| 27 mars | 4 Heures | Corrections de l'implémentation de la BDD en module. Ajout du router pour l'app.| --
+| 28 - 29 mars | 5 Heures | Recherche sur les socket et multis serveurs pour résoudre les bugs. Travail sur les sessions pour faire fonctionner les socket les logins des joueurs | --
+| 30 mars | 4 Heures | Résolutions de bugs, avancer sur les fonctionnalités du socket. Corrections de quelques fonctions BDD en plus | --
+| 31 mars | 4 Heures | Finalisation des liaisons par token sur les sockets, ajout de fonctionnalité sur le socket et le gameController | --
+| TOTAL | 26 Heures || --
+
+## Dixième semaine
+
+| Date | Temps passé | Description | Ressources |
+|:-------|:--:|:----: |--:|
+| 1 avril | 4 Heures | Finalisations de fonctionnalités primaire avec le broadcast, refresh, status etc... .| --
+| TOTAL | 4 Heures || --
