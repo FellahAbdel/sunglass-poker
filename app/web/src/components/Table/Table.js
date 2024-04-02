@@ -58,7 +58,7 @@ const Table = ({
     );
     if (isLogged) {
       dispatch(startGame());
-
+      
       const player={
         name:"feur",
         chips:0,

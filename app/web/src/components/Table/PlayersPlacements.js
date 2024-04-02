@@ -19,12 +19,12 @@ const PlayersPlacements = ({
       {playersInTable.map((player, index) => (
         <div key={`profile${index}`} className={`profile profile${index}`}>
           <PlayersProfile
-            status={player.status}
-            chips={player.getPlayerMoney()}
-            name={player.name}
-            cards={player.getPlayerCards()}
-            flippingPlayerCards={playersCardsShowProp[index]}
-            gotCards={playersCardDistributedProp[index]}
+             //status={player.status}
+             chips= "1000"//{player?.getPlayerMoney() || null}
+             name={player.name}
+             cards= {null} //{player.getPlayerCards() || null} 
+            // flippingPlayerCards={playersCardsShowProp[index]}
+            // gotCards={playersCardDistributedProp[index]}
           />
         </div>
       ))}
