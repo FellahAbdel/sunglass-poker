@@ -69,6 +69,12 @@ const comm = {
         this.preFun();
         socket.emit('joinRoom',{id:id});
         console.log('joining room id',id);
+    },
+
+    startGame: function(){
+        // socket.emit('startGame',{room:sessionStorage.getItem('room')});
+        console.log("Emit startGame from comm");
+        socket.emit('startGame');
     }
 }
 

@@ -127,9 +127,11 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
             console.log('user disconnected n:' + socket.id + ' | session : ' + session.id);
         });
 
-        
+        socket.on('startGame', () => {
+            console.log("startGame called (from socket.io.js)");
+        });   
 
-
+    
         session.save();
     });
 

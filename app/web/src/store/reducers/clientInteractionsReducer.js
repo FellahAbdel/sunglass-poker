@@ -9,6 +9,7 @@ const clientInteractionsReducer = (state = initialState, action) => {
         default:
             comm.Hello();
             console.log("Client is trying to interact with server");
+            comm.startGame();
             return state;
     }
 }
