@@ -1,6 +1,12 @@
 export default class PokerTable {
   constructor() {
     this.communityCards = [];
+    this.stack = 0;
+  }
+
+  playerBet(player, amount) {
+    player.bet(amount);
+    this.stack += amount;
   }
 
   showCommunityCards() {
