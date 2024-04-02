@@ -19,6 +19,9 @@ export default class Game {
     this.deck.initCards();
     this.deck.shuffle();
 
+    // juste for testing
+    this.flop();
+
     // Deal cards to each player
     this.players.forEach((player) => {
       player.clearHand();
