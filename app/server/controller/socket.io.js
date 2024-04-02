@@ -30,7 +30,21 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
     io.on('connection', (socket) => {
         socket.on('startGame', () => {
             console.log("startGame called (from socket.io.js)");
+              // Handle the start game event
+            // For example, you can start the game here
+            console.log("startGame event received on the server");
+
+            // Perform any necessary game initialization or logic here
+         
+            
+            // We can dispatch an action to update the Redux state
+            store.dispatch({ type: "GAME_STARTED" });
         });   
+
+                // Server-side logic
+        socket.on("startGame", () => {
+          // Dispatch an action to update the Redux state
+        });
 
         // On récupère la session lié à la connexion.
         session = socket.request.session;
