@@ -5,8 +5,12 @@ import Button from "../../button/Button.tsx";
 //import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../Utiles/WindowContext";
 import { useUserData } from "../../Utiles/useUserData";
+import { useTranslation } from '../../Utiles/Translations';
+
 
 const ProfileWindow = () => {
+  const { getTranslatedWord } = useTranslation();
+
     const { openWindow } = useWindowContext();
     const { user } = useUserData();
 
@@ -34,13 +38,13 @@ const ProfileWindow = () => {
       <div className="userInfo">
 
       <div className="userInfo-items">
-        Name
+      {getTranslatedWord("profil.name")}
         <br />
-        Mail
+        {getTranslatedWord("profil.mail")}
         <br />
-        Coins
+        {getTranslatedWord("profil.coins")}
         <br />
-        Joined Date
+        {getTranslatedWord("profil.date")}
         <br />
       </div>
 

@@ -3,8 +3,11 @@ import React from 'react';
 import Button from '../../../button/Button.tsx';
 import locked from '../../../assets/images/icons/white/password.png';
 import unlocked from '../../../assets/images/icons/white/unlock.png';
+import { useTranslation } from '../../../Utiles/Translations';
+
 
 const ListTableItem = ({ nom, rang, nombreDeJoueurs, ouvert, onJoinClick }) => {
+  const { getTranslatedWord } = useTranslation();
   return (
     <div className="tableRow">
       <div className="rowItem">{nom}</div>
@@ -20,13 +23,13 @@ const ListTableItem = ({ nom, rang, nombreDeJoueurs, ouvert, onJoinClick }) => {
       <div className="rowItem">
         {nombreDeJoueurs < 10 ? (
           <Button
-            label="Join"
+            label={getTranslatedWord("serverPanel.join")}
             styleClass="btn-list_table btn-list_table_join"
             onClick={onJoinClick}
           />
         ) : (
           <Button
-            label="Full"
+            label={getTranslatedWord("serverPanel.full")}
             styleClass="btn-list_table btn-list_table_full"
             disabled
           />

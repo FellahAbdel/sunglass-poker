@@ -10,11 +10,13 @@ const initialState = {
     chips: 0,
     stake: 0,
   },
-  player: new Player(0, "diallo"),
-  opponents: Array.from(
-    { length: 8 },
-    (_, index) => new Player(index + 1, "Player" + index)
-  ),
+  players: [
+    new Player(0, "diallo"),
+    ...Array.from(
+      { length: 9 },
+      (_, index) => new Player(index + 1, "Player" + index)
+    ),
+  ],
 };
 
 const begin = (state) => {
@@ -22,14 +24,11 @@ const begin = (state) => {
   deck.initCards();
   deck.shuffle();
 
-  const player = state.player;
-  player.clearHand();
-  player.setCards(deck.deal(2));
-
-  const opponents = state.opponents.map((opponent) => {
-    opponent.clearHand();
-    opponent.setCards(deck.deal(2));
-    return opponent;
+  const updatedPlayers = state.players.map((player) => {
+    player.clearHand();
+    player.setCards(deck.deal(2));
+    player.setStatus("Playing"); // Set status to "Playing" during gameplay
+    return player;
   });
 
   return {
@@ -39,8 +38,7 @@ const begin = (state) => {
       deck,
       stake: 0,
     },
-    player,
-    opponents,
+    players: updatedPlayers,
     controlsMode: "roundOne",
   };
 };

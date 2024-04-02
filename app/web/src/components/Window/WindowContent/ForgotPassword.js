@@ -3,6 +3,7 @@ import Button from "../../button/Button.tsx";
 import TextInputComponent from "../../textInput/TextInput";
 import { useAuth } from "../../Utiles/AuthProvider";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
+import { useTranslation } from '../../Utiles/Translations';
 
 const ForgotPassword = ({
   showSuccess,
@@ -14,6 +15,7 @@ const ForgotPassword = ({
   const [formData, setFormData] = useState({
     email: "",
   });
+  const { getTranslatedWord } = useTranslation();
 
   const [validationError, setValidationError] = useState("");
 
@@ -53,21 +55,21 @@ const ForgotPassword = ({
 
   return (
     <div className="box">
-      <div className="login-page-title">Forgot your password ?</div>
-      <div className="login-page-text">Enter your Email to receive a password reset link.</div>
+      <div className="login-page-title">{getTranslatedWord("connection.forgotPassQuestion")}</div>
+      <div className="login-page-text">{getTranslatedWord("connection.forgotPassEnter")}</div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="Email"
+          placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationError}
           styleClass={"input-connectionDefault input-icon-email"}
         />
         <Button
           styleClass="btn-connectionDefault button login-button"
           type="submit"
-          label="Send"
+          label={getTranslatedWord("connection.send")}
         />
         <Button
           styleClass="btn-connectionDefault button login-button"
@@ -79,7 +81,7 @@ const ForgotPassword = ({
       <Button
         styleClass="btn-connectionDefault forgot-button"
         onClick={() => openWindow("login")}
-        label="Return to connection menu"
+        label={getTranslatedWord("connection.returnConnection")}
       />
       <p></p>
     </div>

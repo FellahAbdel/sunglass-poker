@@ -8,11 +8,11 @@ import {
   validatePasswordMatch,
 } from "../../Utiles/ValidationUtils.jsx";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
-
+import { useTranslation } from '../../Utiles/Translations';
 
 const ResetPasswordWindow = ({ showSuccess }) => {
+  const { getTranslatedWord } = useTranslation();
   const {
-
     openWindow,
   } = useWindowContext();
   const { updateUserData } = useAuth();
@@ -116,7 +116,7 @@ const ResetPasswordWindow = ({ showSuccess }) => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="Mail (temporary)"
+          placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationErrors.email}
           styleClass={"input-connectionDefault input-icon-email"}
         />
@@ -125,7 +125,7 @@ const ResetPasswordWindow = ({ showSuccess }) => {
           value={formData.password}
           onChange={handleChange}
           type="password"
-          placeholder="Password"
+          placeholder={getTranslatedWord("connection.password")}
           errorMessage={validationErrors.password}
           styleClass={"input-connectionDefault input-icon-password"}
         />
@@ -134,7 +134,7 @@ const ResetPasswordWindow = ({ showSuccess }) => {
           value={formData.repeatPassword}
           onChange={handleChange}
           type="password"
-          placeholder="Repeat your password"
+          placeholder={getTranslatedWord("connection.repeatPass")}
           errorMessage={validationErrors.repeatPassword}
           styleClass={"input-connectionDefault input-icon-passwordRepeat"}
         />

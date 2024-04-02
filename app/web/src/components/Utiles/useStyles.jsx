@@ -18,9 +18,13 @@ export function getStyles(windowType, isLogged, isGameTableVisible) {
       ${windowType === "list_table" ? "logo-profile" : ""}
       ${windowType === "create_table" ? "logo-create_table" : ""}`,
 
-    containerTable: `container-table ${
+    containerTable: `container-table 
+    ${
       isLogged ? "table-isLogged" : "table-notLogged"
-    } container-${windowType}
+    } 
+    ${isGameTableVisible && "container-inGame"}
+     
+      container-${windowType}  
       ${windowType === "" && !isGameTableVisible && "container-acceuil"}
       ${
         ["login", "register", "forgot", "reset"].includes(windowType) &&

@@ -10,8 +10,10 @@ import {
   validatePasswordMatch,
 } from "../../Utiles/ValidationUtils.jsx";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
+import { useTranslation } from '../../Utiles/Translations';
 
 const SignUpWindow = () => {
+  const { getTranslatedWord } = useTranslation();
   const {
     openSuccessWindow,
     openWindow,
@@ -119,13 +121,13 @@ const SignUpWindow = () => {
 
   return (
     <div className="box">
-      <div className="login-page-title">Create your account</div>
+      <div className="login-page-title">{getTranslatedWord("connection.registerMessage")}</div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="pseudo"
           value={formData.pseudo}
           onChange={handleChange}
-          placeholder="Username"
+          placeholder={getTranslatedWord("connection.username")}
           errorMessage={validationErrors.pseudo}
           styleClass={"input-connectionDefault input-icon-profile"}
         />
@@ -133,7 +135,7 @@ const SignUpWindow = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="Email"
+          placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationErrors.email}
           styleClass={"input-connectionDefault input-icon-email"}
         />
@@ -141,7 +143,7 @@ const SignUpWindow = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="Password"
+          placeholder={getTranslatedWord("connection.password")}
           type={"password"}
           errorMessage={validationErrors.password}
           styleClass={"input-connectionDefault input-icon-password"}
@@ -150,7 +152,7 @@ const SignUpWindow = () => {
           name="repeatPassword"
           value={formData.repeatPassword}
           onChange={handleChange}
-          placeholder="Repeat your password"
+          placeholder={getTranslatedWord("connection.repeatPass")}
           type={"password"}
           errorMessage={validationErrors.repeatPassword}
           styleClass={"input-connectionDefault input-icon-passwordRepeat"}
@@ -158,13 +160,13 @@ const SignUpWindow = () => {
         <Button
           styleClass="btn-connectionDefault login-button"
           type="submit"
-          label="Register"  
+          label={getTranslatedWord("connection.signin")} 
         />
       </form>
 
       <Button
         styleClass="btn-connectionDefault google-button"
-        label="Sign in with google"
+        label={getTranslatedWord("connection.signinG")}
         iconSrc={require("./../../assets/images/icons/white/google.png")}
         iconStyle={true}
       />
@@ -172,7 +174,7 @@ const SignUpWindow = () => {
       <Button
         onClick={() => openWindow("login")}
         styleClass="btn-connectionDefault forgot-button"
-        label="Already have an account ?"
+        label={getTranslatedWord("connection.haveAccQuestion")}
       />
     </div>
   );

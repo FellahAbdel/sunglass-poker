@@ -1,11 +1,14 @@
-import React, { useState, useSelector } from "react";
+import React, { useState } from "react";
 import "./gameActionPanel.css";
 import RaiseSlider from "../Range/RaiseSlider";
 import Button from "../../button/Button.tsx";
+import { useTranslation } from '../../Utiles/Translations';
+
 //import { useDispatch } from 'react-redux'
 
 
 const GameActionButtons = ({ }) => {
+  const { getTranslatedWord } = useTranslation();
   //checkValue = true -> Check
   //checkValue = False -> Call
   const checkValue = useState(true);
@@ -16,7 +19,7 @@ const GameActionButtons = ({ }) => {
   //const dispatch = useDispatch()
   //const pot = useSelector(state.gameState.pot)
 
-  let checkOrCall = checkValue ? "Check" : "Call";
+  let checkOrCall = checkValue ? getTranslatedWord("gameActionPanel.check") : getTranslatedWord("gameActionPanel.call");
 
   const handleSliderChange = (value) => {
     setSliderValueText(value);
@@ -41,23 +44,24 @@ const GameActionButtons = ({ }) => {
         }`}
       >
         <Button
-          styleClass={"btn-raise"}
+          styleClass={"btn-raise back-color3"}
           onClick={() => {
             //handleRaiseProp();
             setShowPopup(!showPopup);
           }}
-          label={`Raise ${sliderValueText ? sliderValueText + "%" : ""}`}
-        />
+          label={`${getTranslatedWord("gameActionPanel.raise")} ${sliderValueText ? sliderValueText + "%" : ""}`}        />
         <Button
-          style={"btn-checkOrCall"}
-          //onClick={handle}
+          styleClass={"btn-checkOrCall back-color3"}
+          onClick={null}
           label={checkOrCall}
         />
-        {/* <Button styleClass={"btn-fold"} onClick={handleFoldProp} label={"Fold"} /> */}
+        <Button styleClass={"btn-fold back-color3"} onClick={null} label={getTranslatedWord("gameActionPanel.fold")} />
       </div>
+    {showPopup &&
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
         <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />
       </div>
+    }
     </div>
   );
 };

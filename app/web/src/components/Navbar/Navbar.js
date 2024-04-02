@@ -1,12 +1,15 @@
 //react imports
 import React, {useState} from "react";
 
+// import { useTranslation } from "react-i18next";
+
 //css
 import "./navbar.css";
 //components
 import ChipsCash from "./ChipsCash";
 import Button from "../button/Button.tsx";
 import TextInputComponent from "../textInput/TextInput.jsx";
+import { useTranslation } from '../Utiles/Translations';
 
 const Navbar = ({
   profileOnClick,
@@ -19,9 +22,11 @@ const Navbar = ({
   const handleClick = (e) => {
     e.stopPropagation();
   };
-
+  const { getTranslatedWord } = useTranslation();
 
   const [isChatOpen, setisChatOpen] = useState(false);
+
+  // const [t,i18n]= useTranslation("global");
 
   const handleChatOpen = () => {
     setisChatOpen(true);
@@ -35,6 +40,8 @@ const Navbar = ({
 
   }
 
+
+
   return (
     <div className="container-nav" onClick={handleClick}>
       {/* Current Chips inventory and LogOut Button */}
@@ -45,7 +52,7 @@ const Navbar = ({
             
             {!isChatOpen && 
             <Button
-              label={"Chat"}
+              label={getTranslatedWord("navbar.chat")}
               onClick={handleChatOpen}
               style={{}}
             />}
@@ -58,26 +65,27 @@ const Navbar = ({
                 style={{
                   opacity: isChatOpen ? '100' : '0',
                 }}
+                alt="exit-chat"
                 />
                 <TextInputComponent 
                   name="Message"
                   value={handleNull}
                   onChange={handleNull}
-                  placeholder={"Message"}
+                  placeholder={"Messages"}
                   styleClass={"input-chatBox"}
                 />
 
                 </>)}
           </div>}
           <ChipsCash currentChips={9999999999} styleClass={`box-chips back-color3`} />
-          <Button label={"Exit"} onClick={logOutOnClick} styleClass="btn-exit back-color3" />
+          <Button label={getTranslatedWord("navbar.exit")} onClick={logOutOnClick} styleClass="btn-exit back-color3" />
         </>
       )}
 
       {/* Profile/LogIn Button */}
 
       <Button
-        label={isLoggedNavbar ? "Profile" : "LogIn"}
+        label={isLoggedNavbar ? getTranslatedWord("navbar.profile") : getTranslatedWord("navbar.login")}
         onClick={() => (isLoggedNavbar ? profileOnClick() : logInOnClick())}
         styleClass={`${isLoggedNavbar ? "btn-profile back-color1" : "btn-logIn back-color2"}`}
         iconSrc={require("./../assets/images/icons/black/profile.png")}
@@ -85,19 +93,19 @@ const Navbar = ({
 
       {/* Settings/Tutorial Buttons */}
       <Button
-        label={"Tutorial"}
+        label={getTranslatedWord("navbar.tutorial")}
         onClick={() => (tutorialOnClick())}
         styleClass={`${isLoggedNavbar ? "btn-tutorial back-color2" : "btn-tutorial back-color3"}`}
         iconSrc={require("./../assets/images/icons/white/tutorial.png")}
       />
       <Button
-        label={"Settings"}
+        label={getTranslatedWord("navbar.settings")}
         onClick={() => (settingsOnClick())}
         styleClass={`${isLoggedNavbar ? "btn-settings back-color1" : "btn-settings back-color2"}`}
         iconSrc={require("./../assets/images/icons/white/settings.png")}
       />
 
-    </div>
+    </div>                                                                                                                                                                          
   );
 };
 

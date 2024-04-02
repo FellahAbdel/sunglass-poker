@@ -11,7 +11,7 @@ import TutorialWindow from "./WindowContent/TutorialWindow";
 import SettingsWindow from "./WindowContent/SettingsWindow";
 import ProfileWindow from "./WindowContent/ProfileWindow";
 import StatsWindow from "./WindowContent/StatsWindow";
-import ListTableWindow from "./WindowContent/ListTableWindow";
+import ServerPanelWindow from "./WindowContent/ServerPanel";
 import CreateTableWindow from "./WindowContent/CreateTableWindow";
 
 
@@ -40,7 +40,7 @@ const Window = () => {
         {windowType === "settings" && <SettingsWindow />}
         {windowType === "profile" && <ProfileWindow />}
         {windowType === "stats" && <StatsWindow />}
-        {windowType === "list_table" && <ListTableWindow />}
+        {windowType === "list_table" && <ServerPanelWindow />}
         {windowType === "create_table" && <CreateTableWindow />}
         
       </div>

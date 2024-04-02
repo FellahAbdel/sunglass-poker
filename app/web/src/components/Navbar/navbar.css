@@ -296,22 +296,13 @@
 
 @media (max-width: 1000px) {
     .btn-profile{
-        transform: scale(70%);
-        transform-origin: left top;
-    }
+        transform: unset;    }
     .box-chips{
-        transform: scale(70%);
-        transform-origin: left top;
-        top:20px;
-    }
+        transform: unset;    }
     .btn-settings{
-        transform: scale(70%);
-        transform-origin: right top;
-    }
+        transform: unset;    }
     .btn-exit{
-        transform: scale(70%);
-        transform-origin: right top;
-        top:20px;
+        transform: unset;
     }
 }
 

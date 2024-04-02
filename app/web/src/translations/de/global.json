@@ -1,0 +1,99 @@
+{
+    "navbar":{
+    "profile":"Profil",
+    "chat":"Chat",
+    "message":"Nachricht",
+    "settings":"Einstellungen",
+    "tutorial":"Tutorial",
+    "exit":"Beenden",
+    "logout":"Ausloggen",
+    "login":"Einloggen",
+    "signin":"Registrieren"
+    },
+    "connection":{
+    "login":"Einloggen",
+    "signin":"Registrieren",
+    "username":"Benutzername",
+    "password":"Passwort",
+    "repeatPass":"Passwort wiederholen",
+    "email":"E-Mail",
+    "forgotPass":"Ich habe mein Passwort vergessen",
+    "forgotPassQuestion":"Passwort vergessen?",
+    "forgotPassEnter":"Geben Sie Ihre E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten.",
+    "registerNewAcc":"Neues Konto erstellen",
+    "signinG":"Mit Google anmelden",
+    "haveAccQuestion":"Sie haben bereits ein Konto?",
+    "optional":"Optional",
+    "loginMessage": "Melden Sie sich bei Ihrem Konto an",
+    "registerMessage" : "Erstellen Sie Ihr Konto",
+    "send" : "Senden",
+    "returnConnection" : "Zurück zum Anmeldebildschirm"
+    },
+    "messageBox":{
+    "loginSucces":"Erfolgreich angemeldet!",
+    "ok":"OK"
+    },
+    "game":{
+    "loginPlay":"Einloggen, um zu spielen",
+    "startGame":"Spiel starten",
+    "joinGame":"Spiel beitreten",
+    "createAgame":"Neues Spiel erstellen",
+    "status":"Status",
+    "name":"Name",
+    "gameName":"Spielname",
+    "ranked":"Eingestuft",
+    "players":"Spieler",
+    "selectRank":"Rang auswählen",
+    "join":"Beitreten",
+    "full":"Voll"
+    },
+    "handGuide":{
+    "highcard":"Höchste Karte",
+    "pair":"Paar",
+    "twoPair":"Zwei Paare",
+    "threeOfKind":"Drei Gleiche",
+    "straight":"Straße",
+    "flush":"Flush",
+    "fullHouse":"Full House",
+    "fourOfKind":"Vier Gleiche",
+    "straightFlush":"Straight Flush",
+    "royalFlush":"Royal Flush"
+    },
+    "gameActionPanel":{
+    "raise":"Erhöhen",
+    "call":"Mitgehen",
+    "check":"Checken",
+    "fold":"Passen"
+    },
+    "bonus":{
+    "bonus":"BONUS"
+    },
+    "serverPanel": {
+    "name": "Name",
+    "rank": "Rang",
+    "privacy": "Privatsphäre",
+    "join": "Beitreten",
+    "full": "Voll",
+    "status": "Status",
+    "action": "Aktion"
+    },
+    "playersStatus":{
+    "empty":"Leer",
+    "called":"Gecallt",
+    "fold":"Gepasst",
+    "raised":"Erhöht",
+    "checked":"Gecheckt",
+    "playing":"Spielt"
+    },
+    "settings":{
+    "mute":"Stummschalten",
+    "theme":"Thema",
+    "langSelect":"Sprache auswählen"
+    },
+    "profil":{
+    "name" : "Name",
+    "mail" : "E-Mail",
+    "coins" : "Münzen",
+    "date" : "Beitrittsdatum"
+    }
+    }
