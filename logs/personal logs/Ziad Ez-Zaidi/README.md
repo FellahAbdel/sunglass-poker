@@ -23,3 +23,5 @@
 - 2h le 15/03 (fonction reset())
 - 3h le 19/03 (application du split + fonction test straightFlush.test.js + threeOfAKind.test.js + twoPair.test.js)
 - 2h le 22/03 (split de la classe Partie implémentation de ScorEngine équivalent de la fonction combinaisons)
+- 4h séance du 26/03 (Réunion back : on s'est mis d'accord sur le schéma à suivre pour l'intégration back et front + monté en compétence REDUX)
+- 4h le 28/03 (Réunion back + front : résolution des conflits + erreurs + changement de l'hierarchie des fichiers afin de moduler le code pour implementer les composents REDUX)
