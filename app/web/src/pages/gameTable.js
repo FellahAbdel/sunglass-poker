@@ -32,7 +32,7 @@ const GameTable = () => {
   const [settingsMenu] = useState(false);
   const [showHandCard, setShowHandCard] = useState(true);
   const [playersCardsShow, setPlayersCardsShow] = useState([
-    1, 0, 0, 1, 1, 0, 0, 0, 0, 1,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
   const [playersCardDistributed, setPlayersCardDistributed] = useState([
     1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
