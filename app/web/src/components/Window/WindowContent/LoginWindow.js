@@ -4,8 +4,12 @@ import Button from "../../button/Button.tsx";
 import TextInputComponent from "../../textInput/TextInput";
 import { useAuth } from "../../Utiles/AuthProvider";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
+import { useTranslation } from '../../Utiles/Translations';
+
 
 const LoginWindow = () => {
+  const { getTranslatedWord } = useTranslation();
+
   const {
     openSuccessWindow,
     openWindow,
@@ -54,13 +58,13 @@ const LoginWindow = () => {
 
   return (
     <div className="box">
-      <div className="login-page-title">Login to your account</div>
+      <div className="login-page-title">{getTranslatedWord("connection.loginMessage")}</div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="username"
           value={formData.username}
           onChange={handleChange}
-          placeholder="Username"
+          placeholder={getTranslatedWord("connection.username")}
           errorMessage={validationErrors.username}
           styleClass={"input-connectionDefault input-icon-profile"}
         />
@@ -69,30 +73,30 @@ const LoginWindow = () => {
           value={formData.password}
           onChange={handleChange}
           type="password"
-          placeholder="Password"
+          placeholder={getTranslatedWord("connection.password")}
           errorMessage={validationErrors.password}
           styleClass={"input-connectionDefault input-icon-password"}
         />
         <Button
           styleClass="btn-connectionDefault login-button back-color1"
           type="submit"
-          label="Login"
+          label={getTranslatedWord("connection.login")}
         />
           <Button
           onClick={() => openWindow("forgot")}
           styleClass="btn-connectionDefault forgot-button back-color3"
-          label="I forgot my password"
+          label={getTranslatedWord("connection.forgotPass")}
         />
       </form>
 
       <Button
         onClick={() => openWindow("register")}
         styleClass="btn-connectionDefault register-button back-color1"
-        label="Register New Account"
+        label={getTranslatedWord("connection.registerNewAcc")}
       />
       <Button
         styleClass="btn-connectionDefault google-button back-color3"
-        label="Sign in with google"
+        label={getTranslatedWord("connection.signinG")}
         iconSrc={require("./../../assets/images/icons/white/google.png")}
         iconStyle={true}
       />

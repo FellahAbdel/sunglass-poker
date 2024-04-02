@@ -24,7 +24,12 @@
         "registerNewAcc":"Register new account",
         "signinG":"Sign in with google",
         "haveAccQuestion":"Already have an account ?",
-        "optional":"Optional"
+        "optional":"Optional",
+        "loginMessage": "Login to your account",
+        "registerMessage" : "Create your account",
+        "send" : "Send",
+        "returnConnection" : "Return to connection menu"
+
     },
     "messageBox":{
         "loginSucces":"Logged in with succes!",

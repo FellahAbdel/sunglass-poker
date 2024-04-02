@@ -23,7 +23,12 @@
         "registerNewAcc": "Créer un nouveau compte",
         "signinG": "Se connecter avec Google",
         "haveAccQuestion": "Vous avez déjà un compte ?",
-        "optional": "Optionnel"
+        "optional": "Optionnel",
+        "loginMessage": "Se connecter à son compte",
+        "registerMessage" : "Créer son compte",
+        "send" : "Envoyer",
+        "returnConnection" : "Retourner au menu de connection"
+
     },
     "messageBox": {
         "loginSucces": "Connecté avec succès !",
