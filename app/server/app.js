@@ -6,8 +6,8 @@ const ENV_CONST_COMM = require('./controller/envConstants')();
 const gameController = require('./controller/gameController');
 const socketIOSession = require('socket.io-express-session');
 const MemoryStore = require('memorystore')(session)
-console.log(gameController);
-console.log("HashRoom 3 : ",gameController.hashRoom(3));
+// console.log(gameController);
+// console.log("HashRoom 3 : ",gameController.hashRoom(3));
 console.log(ENV_CONST_COMM);
 
 /** Paramètres cors du serveur.

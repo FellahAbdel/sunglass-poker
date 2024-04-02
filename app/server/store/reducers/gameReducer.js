@@ -1,7 +1,7 @@
 // This file contains the reducer for game-related actions
-import * as actions from "../actions/actionTypes.js";
-import Deck from "../../shared/Deck.js";
-import Player from "../../shared/Player.js";
+const actions =  require("../actions/actionTypes.js");
+const Deck = require("../../shared/Deck.js");
+const Player = require("../../shared/Player.js");
 
 const initialState = {
   table: {
@@ -46,11 +46,13 @@ const begin = (state) => {
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.START_GAME:
+      console.log('start',action.type);
       return begin(state);
     // Other game actions can be handled here
     default:
+      console.log('default',action.type);
       return state;
   }
 };
 
-export default gameReducer;
+module.exports =  gameReducer;

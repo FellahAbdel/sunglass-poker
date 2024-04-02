@@ -1,5 +1,8 @@
+const gameReducer = require('../store/reducers/gameReducer');
+const actions =  require("../store/actions/actionTypes");
 const jwt = require("jsonwebtoken");
 const { clearInterval } = require("timers");
+console.log(gameReducer(undefined,{type:actions.START_GAME}));
 
 module.exports = gameController = {
     io: null,
