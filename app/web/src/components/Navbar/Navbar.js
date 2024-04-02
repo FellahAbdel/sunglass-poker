@@ -52,7 +52,7 @@ const Navbar = ({
             
             {!isChatOpen && 
             <Button
-              label={"Chat"}
+              label={getTranslatedWord("navbar.chat")}
               onClick={handleChatOpen}
               style={{}}
             />}
@@ -78,14 +78,14 @@ const Navbar = ({
                 </>)}
           </div>}
           <ChipsCash currentChips={9999999999} styleClass={`box-chips back-color3`} />
-          <Button label={"Exit"} onClick={logOutOnClick} styleClass="btn-exit back-color3" />
+          <Button label={getTranslatedWord("navbar.exit")} onClick={logOutOnClick} styleClass="btn-exit back-color3" />
         </>
       )}
 
       {/* Profile/LogIn Button */}
 
       <Button
-        label={isLoggedNavbar ? "Profile" : "LogIn"}
+        label={isLoggedNavbar ? getTranslatedWord("navbar.profile") : getTranslatedWord("navbar.login")}
         onClick={() => (isLoggedNavbar ? profileOnClick() : logInOnClick())}
         styleClass={`${isLoggedNavbar ? "btn-profile back-color1" : "btn-logIn back-color2"}`}
         iconSrc={require("./../assets/images/icons/black/profile.png")}
@@ -93,7 +93,7 @@ const Navbar = ({
 
       {/* Settings/Tutorial Buttons */}
       <Button
-        label={"Tutorial"}
+        label={getTranslatedWord("navbar.tutorial")}
         onClick={() => (tutorialOnClick())}
         styleClass={`${isLoggedNavbar ? "btn-tutorial back-color2" : "btn-tutorial back-color3"}`}
         iconSrc={require("./../assets/images/icons/white/tutorial.png")}
