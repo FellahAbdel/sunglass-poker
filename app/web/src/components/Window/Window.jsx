@@ -2,10 +2,10 @@
 
 import React from "react";
 import "./window.css";
-import LoginWindow from "./WindowContent/LoginWindow";
-import SignUpWindow from "./WindowContent/SignupWindow";
-import ResetPasswordWindow from "./WindowContent/ResetPassword";
-import ForgotPassword from "./WindowContent/ForgotPassword";
+import LoginWindow from "./WindowContent/connectionWindows/LoginWindow";
+import SignUpWindow from "./WindowContent/connectionWindows/SignupWindow";
+import ResetPasswordWindow from "./WindowContent/connectionWindows/ResetPassword";
+import ForgotPassword from "./WindowContent/connectionWindows/ForgotPassword";
 import SuccessWindow from "./WindowContent/SuccessWindow";
 import TutorialWindow from "./WindowContent/TutorialWindow";
 import SettingsWindow from "./WindowContent/SettingsWindow";
