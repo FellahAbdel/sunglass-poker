@@ -180,7 +180,7 @@ const GameTable = () => {
       </div>
 
       {/* playing elements opens when logged in */}
-      {isGameTableVisible && (
+      {isGameTableVisible && !isWindowOpen && (
         <>
           <div
             className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
