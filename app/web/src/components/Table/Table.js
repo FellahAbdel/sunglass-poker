@@ -56,10 +56,10 @@ const Table = ({
       isLogged ? "true" : "false"
     );
     if (isLogged) {
-      dispatch(startGame());
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
       console.log("Utilisateur connecté, on montre la table");
       showGameTable();
+      dispatch(startGame());
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
       console.log("Utilisateur déconnecté, login page");
