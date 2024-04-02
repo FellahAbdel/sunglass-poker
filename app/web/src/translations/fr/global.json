@@ -48,19 +48,14 @@
         "join": "Rejoindre",
         "full": "Complet"
     },
-    "listTables": {
-        "loginPlay": "Connectez-vous pour jouer",
-        "startGame": "Commencer une partie",
-        "joinGame": "Rejoindre une partie",
-        "createAgame": "Créer une nouvelle partie",
-        "status": "Statut",
+    "serverPanel": {
         "name": "Nom",
-        "gameName": "Nom de la partie",
-        "ranked": "Classé",
-        "players": "Joueurs",
-        "selectRank": "Sélectionnez le rang",
+        "rank": "Rang",
+        "privacy": "Privé",
         "join": "Rejoindre",
-        "full": "Complet"
+        "full": "Complet",
+        "status": "Statut",
+        "action": "Action"
     },
     "handGuide": {
         "highcard": "Carte haute",

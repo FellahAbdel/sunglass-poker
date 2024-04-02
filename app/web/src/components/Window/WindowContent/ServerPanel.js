@@ -3,8 +3,12 @@ import "./serverPanel.css";
 import Button from "../../button/Button.tsx";
 import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
+import { useTranslation } from '../../Utiles/Translations';
+
 
 const ServerPanelWindow = () => {
+  const { getTranslatedWord } = useTranslation();
+
   const fakeTables = [
     {
       nom: "Table des Champions",
@@ -47,11 +51,11 @@ const ServerPanelWindow = () => {
   return (
     <div className="listTableWindow">
       <div className="listTableHeader">
-        <div className="headerItem">Name</div>
-        <div className="headerItem">Ranked</div>
-        <div className="headerItem">Players</div>
-        <div className="headerItem">Status</div>
-        <div className="headerItem">Action</div>
+        <div className="headerItem">{getTranslatedWord("serverPanel.name")}</div>
+        <div className="headerItem">{getTranslatedWord("serverPanel.rank")}</div>
+        <div className="headerItem">{getTranslatedWord("serverPanel.privacy")}</div>
+        <div className="headerItem"></div>
+        <div className="headerItem"></div>
       </div>
       <div className="listTableBody">
         {fakeTables.map((table, index) => (

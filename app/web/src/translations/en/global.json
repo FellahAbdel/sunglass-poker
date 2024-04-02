@@ -7,13 +7,13 @@
         "settings":"Settings",
         "tutorial":"Tutorial",
         "exit":"Exit",
-        "logout":"Log-out",
-        "login":"Log-In",
-        "signin":"Sign-In"
+        "logout":"Log out",
+        "login":"Log In",
+        "signin":"Sign In"
     },
     "connection":{
-        "login":"Log-In",
-        "signin":"Sign-In",
+        "login":"Log In",
+        "signin":"Sign In",
         "username":"Username",
         "password":"Password",
         "repeatPass":"Repeat your password",
@@ -69,6 +69,15 @@
     },
     "bonus":{
         "bonus":"BONUS"
+    },
+    "serverPanel": {
+        "name": "Name",
+        "rank": "Rank",
+        "privacy": "privacy",
+        "join": "Join",
+        "full": "Full",
+        "status": "Statut",
+        "action": "Action"
     },
     "playersStatus":{
         "empty":"Empty",
