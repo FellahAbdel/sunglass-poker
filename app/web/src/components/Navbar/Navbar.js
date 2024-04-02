@@ -1,6 +1,8 @@
 //react imports
 import React, {useState} from "react";
 
+// import { useTranslation } from "react-i18next";
+
 //css
 import "./navbar.css";
 //components
@@ -20,8 +22,9 @@ const Navbar = ({
     e.stopPropagation();
   };
 
-
   const [isChatOpen, setisChatOpen] = useState(false);
+
+  // const [t,i18n]= useTranslation("global");
 
   const handleChatOpen = () => {
     setisChatOpen(true);
@@ -34,6 +37,8 @@ const Navbar = ({
   const handleNull = () => {
 
   }
+
+
 
   return (
     <div className="container-nav" onClick={handleClick}>
@@ -64,7 +69,7 @@ const Navbar = ({
                   name="Message"
                   value={handleNull}
                   onChange={handleNull}
-                  placeholder={"Message"}
+                  placeholder={"Messages"}
                   styleClass={"input-chatBox"}
                 />
 

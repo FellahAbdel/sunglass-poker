@@ -20,6 +20,7 @@ import HandCards from "../components/gameTable/HandCards/HandCards";
 
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
+
 const GameTable = () => {
   const { theme } = useSettings();
 

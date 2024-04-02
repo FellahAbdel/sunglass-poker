@@ -1,0 +1,81 @@
+
+{
+    "navbar":{
+        "profile":"Profile",
+        "chat":"Chat",
+        "message":"Message",
+        "settings":"Settings",
+        "tutorial":"Tutorial",
+        "exit":"Exit",
+        "logout":"Log-out",
+        "login":"Log-In",
+        "signin":"Sign-In"
+    },
+    "connection":{
+        "login":"Log-In",
+        "signin":"Sign-In",
+        "username":"Username",
+        "password":"Password",
+        "repeatPass":"Repeat your password",
+        "email":"email",
+        "forgotPass":"I forgot my password",
+        "forgotPassQuestion":"Forgot your password ?",
+        "forgotPassEnter":"Enter your email to recieve a password reset link.",
+        "registerNewAcc":"Register new account",
+        "signinG":"Sign in with google",
+        "haveAccQuestion":"Already have an account ?",
+        "optional":"Optional"
+    },
+    "messageBox":{
+        "loginSucces":"Logged in with succes!",
+        "ok":"Ok"
+    },
+    "game":{
+        "loginPlay":"login to play",
+        "startGame":"Start a game",
+        "joinGame":"Join a game",
+        "createAgame":"Create a new game",
+        "status":"Status",
+        "name":"Name",
+        "gameName":"Game name",
+        "ranked":"Ranked",
+        "players":"Players",
+        "selectRank":"Select Rank",
+        "join":"Join",
+        "full":"Full"
+    },
+    "handGuide":{
+        "highcard":"High Card",
+        "pair":"Pair",
+        "twoPair":"Two Pair",
+        "threeOfKind":"Three of a Kind",
+        "straight":"Straight",
+        "flush":"Flush",
+        "fullHouse":"Full house",
+        "fourOfKind":"Four of a Kind",
+        "straightFlush":"Straight Flush",
+        "royalFlush":"Royal Flush"
+    },
+    "gameActionPanel":{
+        "raise":"Raise",
+        "call":"Call",
+        "check":"Check",
+        "fold":"Fold"
+    },
+    "bonus":{
+        "bonus":"Bonus"
+    },
+    "playersStatus":{
+        "empty":"Empty",
+        "called":"Called",
+        "fold":"Fold",
+        "raised":"Raised",
+        "checked":"Checked"
+    },
+    "settings":{
+        "mute":"Mute",
+        "theme":"Theme",
+        "langSelect":"Select a language"
+    }
+
+}
