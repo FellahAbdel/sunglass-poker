@@ -11,11 +11,11 @@ const initialState = {
   // Initialy the game is in the preGame state and players can join
   players: [
     // Should be empty at the beginning
-    new Player(0, "diallo"),
-    ...Array.from(
-      { length: 9 },
-      (_, index) => new Player(index + 1, "Player" + index)
-    ),
+    // new Player(0, "diallo"),
+    // ...Array.from(
+    //   { length: 9 },
+    //   (_, index) => new Player(index + 1, "Player" + index)
+    // ),
   ],
   controlsMode: "preGame", // Can be "preGame", "roundOne", "roundTwo", "roundThree", "endGame
 };
