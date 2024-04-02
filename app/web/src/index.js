@@ -7,7 +7,7 @@ import store from "./store/configureStore";
 import { Provider } from "react-redux";
 
 import i18next from "./translations/i18next.js";
-import { I18nextProvider } from "react-i18next";
+import { I18nextProvider } from 'react-i18next';
 
 document.title = "SunGlassPoker"; // Remplacez 'Nouveau Titre' par le titre souhaité
 

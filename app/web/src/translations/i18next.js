@@ -2,7 +2,8 @@ import global_en from "./en/global.json";
 import global_fr from "./fr/global.json";
 
 import i18next from "i18next";
-import { initReactI18next, I18nextProvider } from "react-i18next";
+import { initReactI18next, I18nextProvider } from 'react-i18next';
+
 
 export const languageResources = {
   en:{ global: global_en },
@@ -20,6 +21,7 @@ i18next
     debug: true, // Enable debug mode for i18next
     nsSeparator: "::", // Separator used to define namespaces in translation keys
     keySeparator: ".", // Separator used to define nested keys in translation keys
+    supportedLngs: ['en', 'fr'],
     react: {
       wait: true, 
     },

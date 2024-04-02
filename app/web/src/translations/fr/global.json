@@ -1,80 +1,79 @@
 {
-    "navbar":{
-        "profile":"Profile",
-        "chat":"Chat",
-        "message":"Message",
-        "settings":"Settings",
-        "tutorial":"Tutorial",
-        "exit":"Exit",
-        "logout":"Log-out",
-        "login":"Log-In",
-        "signin":"Sign-In"
+    "navbar": {
+        "profile": "Profil",
+        "chat": "Chat",
+        "message": "Message",
+        "settings": "Paramètres",
+        "tutorial": "Tutoriel",
+        "exit": "Quitter",
+        "logout": "Déconnexion",
+        "login": "Connexion",
+        "signin": "Inscription"
     },
-    "connection":{
-        "login":"Log-In",
-        "signin":"Sign-In",
-        "username":"Username",
-        "password":"Password",
-        "repeatPass":"Repeat your password",
-        "email":"email",
-        "forgotPass":"I forgot my password",
-        "forgotPassQuestion":"Forgot your password ?",
-        "forgotPassEnter":"Enter your email to recieve a password reset link.",
-        "registerNewAcc":"Register new account",
-        "signinG":"Sign in with google",
-        "haveAccQuestion":"Already have an account ?",
-        "optional":"Optional"
+    "connection": {
+        "login": "Connexion",
+        "signin": "Inscription",
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "repeatPass": "Répéter votre mot de passe",
+        "email": "Email",
+        "forgotPass": "J'ai oublié mon mot de passe",
+        "forgotPassQuestion": "Mot de passe oublié ?",
+        "forgotPassEnter": "Entrez votre email pour recevoir un lien de réinitialisation de mot de passe.",
+        "registerNewAcc": "Créer un nouveau compte",
+        "signinG": "Se connecter avec Google",
+        "haveAccQuestion": "Vous avez déjà un compte ?",
+        "optional": "Optionnel"
     },
-    "messageBox":{
-        "loginSucces":"Logged in with succes!",
-        "ok":"Ok"
+    "messageBox": {
+        "loginSucces": "Connecté avec succès !",
+        "ok": "D'accord"
     },
-    "game":{
-        "loginPlay":"login to play",
-        "startGame":"Start a game",
-        "joinGame":"Join a game",
-        "createAgame":"Create a new game",
-        "status":"Status",
-        "name":"Name",
-        "gameName":"Game name",
-        "ranked":"Ranked",
-        "players":"Players",
-        "selectRank":"Select Rank",
-        "join":"Join",
-        "full":"Full"
+    "game": {
+        "loginPlay": "Connectez-vous pour jouer",
+        "startGame": "Commencer une partie",
+        "joinGame": "Rejoindre une partie",
+        "createAgame": "Créer une nouvelle partie",
+        "status": "Statut",
+        "name": "Nom",
+        "gameName": "Nom de la partie",
+        "ranked": "Classé",
+        "players": "Joueurs",
+        "selectRank": "Sélectionnez le rang",
+        "join": "Rejoindre",
+        "full": "Complet"
     },
-    "handGuide":{
-        "highcard":"High Card",
-        "pair":"Pair",
-        "twoPair":"Two Pair",
-        "threeOfKind":"Three of a Kind",
-        "straight":"Straight",
-        "flush":"Flush",
-        "fullHouse":"Full house",
-        "fourOfKind":"Four of a Kind",
-        "straightFlush":"Straight Flush",
-        "royalFlush":"Royal Flush"
+    "handGuide": {
+        "highcard": "Hauteur",
+        "pair": "Paire",
+        "twoPair": "Double Paire",
+        "threeOfKind": "Brelan",
+        "straight": "Suite",
+        "flush": "Couleur",
+        "fullHouse": "Full",
+        "fourOfKind": "Carré",
+        "straightFlush": "Suite Couleur",
+        "royalFlush": "Quinte Flush Royale"
     },
-    "gameActionPanel":{
-        "raise":"Raise",
-        "call":"Call",
-        "check":"Check",
-        "fold":"Fold"
+    "gameActionPanel": {
+        "raise": "Relancer",
+        "call": "Suivre",
+        "check": "Vérifier",
+        "fold": "Se coucher"
     },
-    "bonus":{
-        "bonus":"Bonus"
+    "bonus": {
+        "bonus": "Bonus"
     },
-    "playersStatus":{
-        "empty":"Empty",
-        "called":"Called",
-        "fold":"Fold",
-        "raised":"Raised",
-        "checked":"Checked"
+    "playersStatus": {
+        "empty": "Vide",
+        "called": "Suivi",
+        "fold": "Se couche",
+        "raised": "Relancé",
+        "checked": "Vérifié"
     },
-    "settings":{
-        "mute":"Mute",
-        "theme":"Theme",
-        "langSelect":"Select a language"
+    "settings": {
+        "mute": "Muet",
+        "theme": "Thème",
+        "langSelect": "Sélectionnez une langue"
     }
-
 }
