@@ -90,4 +90,8 @@
 
 2024/03/29 : 1h00           Début window création table
 
-TEMPS TOTAL: 81h00min 
+2024/04/02 : 5h30           Réunion redux, traductions
+
+2024/04/02 : 3h30           Fin traductions + Début page shop, page confirmation achat
+
+TEMPS TOTAL: 90h00min 
