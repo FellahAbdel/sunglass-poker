@@ -1,10 +1,10 @@
 import React from "react";
-import "./listTableWindow.css";
+import "./serverPanel.css";
 import Button from "../../button/Button.tsx";
 import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
-const ListTableWindow = () => {
+const ServerPanelWindow = () => {
   const fakeTables = [
     {
       nom: "Table des Champions",
@@ -76,4 +76,4 @@ const ListTableWindow = () => {
   );
 };
 
-export default ListTableWindow;
+export default ServerPanelWindow;

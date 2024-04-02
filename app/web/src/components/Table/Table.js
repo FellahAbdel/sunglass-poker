@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
+import { useTranslation } from '../Utiles/Translations';
+
 
 //CSS
 import "./table.css";
 import "./tableCards.css";
 import { getStyles } from "../Utiles/useStyles.jsx";
 //Components
-import ProfileMenu from "../Window/WindowContent/ProfileWindow";
 import Window from "../Window/Window";
 import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
@@ -22,8 +23,6 @@ import { startGame } from "../../store/actions/actionsCreator";
 const Table = ({
   dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
   showCards,
-  profileMenuActive, // a boolean to open the profile menu
-  settingsMenuActive, // a boolean to open the settings menu
   playersCardDistributedProp, // a list of 10 booleans to distribute to choosen players
   playersCardsShowProp, // a list of 10 booleans to show the cards of choosen players
   moneyPot, // money on the table
@@ -36,6 +35,7 @@ const Table = ({
     showGameTable,
   } = useWindowContext();
   const { isLogged } = useAuth();
+  const { getTranslatedWord } = useTranslation();
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
@@ -122,12 +122,12 @@ const Table = ({
                   <>
                     <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color1"}
-                      label={"Start a game"}
+                      label={getTranslatedWord("game.startGame")}
                       onClick={onClickStartGame}
                     />
                     <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color1"}
-                      label={"Join a game"}
+                      label={getTranslatedWord("game.joinGame")}
                       onClick={showGameList}
                     />
                   </>
@@ -136,7 +136,7 @@ const Table = ({
                     {/* Bouton affiché si l'utilisateur n'est pas connecté */}
                     <Button
                       styleClass={"btn-gameStart back-color2"}
-                      label={"Login to Play"}
+                      label={getTranslatedWord("game.loginPlay")}
                       onClick={onClickStartGame}
                     />
                   </>

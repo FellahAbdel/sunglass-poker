@@ -25,7 +25,7 @@ const GameTable = () => {
   const { theme } = useSettings();
 
   const [dealingFlop, setDealingFlop] = useState([true, true, true]);
-  const [handGuide, setHandGuide] = useState("Full house");
+  const [handGuide, setHandGuide] = useState("fullHouse");
   const [profileMenu] = useState(false);
   const [settingsMenu] = useState(false);
   const [showHandCard, setShowHandCard] = useState(true);

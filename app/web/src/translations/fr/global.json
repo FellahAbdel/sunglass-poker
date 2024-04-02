@@ -48,8 +48,22 @@
         "join": "Rejoindre",
         "full": "Complet"
     },
+    "listTables": {
+        "loginPlay": "Connectez-vous pour jouer",
+        "startGame": "Commencer une partie",
+        "joinGame": "Rejoindre une partie",
+        "createAgame": "Créer une nouvelle partie",
+        "status": "Statut",
+        "name": "Nom",
+        "gameName": "Nom de la partie",
+        "ranked": "Classé",
+        "players": "Joueurs",
+        "selectRank": "Sélectionnez le rang",
+        "join": "Rejoindre",
+        "full": "Complet"
+    },
     "handGuide": {
-        "highcard": "Hauteur",
+        "highcard": "Carte haute",
         "pair": "Paire",
         "twoPair": "Double Paire",
         "threeOfKind": "Brelan",
@@ -57,7 +71,7 @@
         "flush": "Couleur",
         "fullHouse": "Full",
         "fourOfKind": "Carré",
-        "straightFlush": "Suite Couleur",
+        "straightFlush": "Quinte Flush",
         "royalFlush": "Quinte Flush Royale"
     },
     "gameActionPanel": {
@@ -67,18 +81,26 @@
         "fold": "Se coucher"
     },
     "bonus": {
-        "bonus": "Bonus"
+        "bonus": "BONUS"
     },
     "playersStatus": {
         "empty": "Vide",
         "called": "Suivi",
         "fold": "Se couche",
         "raised": "Relancé",
-        "checked": "Vérifié"
+        "checked": "Vérifié",
+        "playing":"En jeu"
+
     },
     "settings": {
         "mute": "Muet",
         "theme": "Thème",
         "langSelect": "Sélectionnez une langue"
+    },
+    "profil":{
+        "name" : "Nom",
+        "mail" : "Mail",
+        "coins" : "Crédits",
+        "date" : "Date création compte"
     }
 }

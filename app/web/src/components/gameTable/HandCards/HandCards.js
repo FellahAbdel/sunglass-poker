@@ -1,12 +1,14 @@
 import React from 'react';
 import './handCards.css';
 import Card from '../Card/Card.js'
+import { useTranslation } from '../../Utiles/Translations';
 
 const HandCards = ({card1 , card2 , handGuideProp , showHandCardProp}) => {
+    const { getTranslatedWord } = useTranslation();
 
     return (
     <div className="container-hand">
-        {handGuideProp ? <div className="hand-guide slideUp">{handGuideProp}!</div> : null }
+        {handGuideProp ? <div className="hand-guide slideUp">{getTranslatedWord(`handGuide.${handGuideProp}`)}!</div> : null }
         <div className="container-handCard">     
             {/* <img className="handCard" src={require(`./images/card_front/${cardNumber1}_of_${cardType1}.png`)} alt="Card1"/>
             <img className="handCard" src={require(`./images/card_front/${cardNumber2}_of_${cardType2}.png`)} alt="Card2"/> */}

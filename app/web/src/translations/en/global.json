@@ -68,19 +68,26 @@
         "fold":"Fold"
     },
     "bonus":{
-        "bonus":"Bonus"
+        "bonus":"BONUS"
     },
     "playersStatus":{
         "empty":"Empty",
         "called":"Called",
         "fold":"Fold",
         "raised":"Raised",
-        "checked":"Checked"
+        "checked":"Checked",
+        "playing":"Playing"
     },
     "settings":{
         "mute":"Mute",
         "theme":"Theme",
         "langSelect":"Select a language"
+    },
+    "profil":{
+        "name" : "Name",
+        "mail" : "Mail",
+        "coins" : "Coins",
+        "date" : "Joined Date"
     }
 
 }

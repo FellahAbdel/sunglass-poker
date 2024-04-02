@@ -5,6 +5,8 @@ import Clubs from './../../assets/images/card_type/Clubs.png';
 import Diamonds from './../../assets/images/card_type/Diamons.png';
 import Hearts from './../../assets/images/card_type/Hearts.png';
 import Spades from './../../assets/images/card_type/Spades.png';
+import { useTranslation } from '../../Utiles/Translations';
+
 
 const BonusPanel = () => {
 //we can use a number divisable by all the different numbers that they need 
@@ -20,6 +22,8 @@ const BonusPanel = () => {
     const handleChangeSpades = (e) => {setSpadesNumber(parseInt(e.target.value));};
     const handleChangeClubs = (e) => {setClubsNumber(parseInt(e.target.value));}; */
 
+    const { getTranslatedWord } = useTranslation();
+
     const handleChangeHearts = 1;
     const handleChangeDiamonds = 0;
     const handleChangeSpades = 2;
@@ -33,7 +37,7 @@ const BonusPanel = () => {
                 <img src={Clubs} alt="Club" className={`container-cardType box-${handleChangeClubs}`}/>
             </div>
 
-            <Button styleClass={"btn-bonus back-color1"} label={"BONUS"}/>
+            <Button styleClass={"btn-bonus back-color1"} label={getTranslatedWord("bonus.bonus")}/>
         </div>
     );
 };
