@@ -13,7 +13,7 @@ const initialState = {
     // Should be empty at the beginning
     new Player(0, "diallo"),
     ...Array.from(
-      { length: 9 },
+      { length: 3 },
       (_, index) => new Player(index + 1, "Player" + index)
     ),
   ],
