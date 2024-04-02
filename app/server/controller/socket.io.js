@@ -28,7 +28,10 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
      *  En cas de déconnexion on log la session Id qui s'arrête.
      */
     io.on('connection', (socket) => {
-    
+        socket.on('startGame', () => {
+            console.log("startGame called (from socket.io.js)");
+        });   
+
         // On récupère la session lié à la connexion.
         session = socket.request.session;
         // On rejoint la session déjà existante.
@@ -127,10 +130,7 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
             console.log('user disconnected n:' + socket.id + ' | session : ' + session.id);
         });
 
-        socket.on('startGame', () => {
-            console.log("startGame called (from socket.io.js)");
-        });   
-
+        
     
         session.save();
     });

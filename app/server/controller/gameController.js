@@ -33,6 +33,7 @@ module.exports = gameController = {
     },
 
     makeRefreshCall: function (room, reset = false) {
+        return;
         console.trace(this);
         console.log('Set refresh call for ', room, '  reset: ', reset);
         const hroom = this.hashRoom(room);
@@ -87,7 +88,7 @@ module.exports = gameController = {
         } else console.error("Not a room, can't kick player", room, "  -:> ", id);
     },
 
-    timeOutPlayer: 3000,
+    timeOutPlayer: 3e10,
     broadcastStatus: function (room) {
         console.log("mon io:", this.io);
         console.log('called for broadcast room ', room);
