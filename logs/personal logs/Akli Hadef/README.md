@@ -21,4 +21,6 @@
 - 22/03 , Rajout de tests unitaires : 2H
 - 26/02, finition de tout les tests unitaires, Reunion brain storming : 4H
 - 30/02, apprentissage redux/react :2H
-- TOTAL:53H
+- 02/04 , Réunion mise à niveau et spec techniques :2H
+- 02/04 , Réunion TP | avancement dans les fonctions backend, démo de la Première version du jeu : 3H
+- TOTAL:58H
