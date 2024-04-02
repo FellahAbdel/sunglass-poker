@@ -60,8 +60,9 @@ const Table = ({
       dispatch(startGame());
       
       const player={
-        name:"feur",
-        chips:0,
+/*/!\*/ name:"untruc", // ET LA ON MET LE NOM DU PROFIL CONNECTER
+        chips:1000,
+        
 
       };
       dispatch(handlesitPlayer(player));

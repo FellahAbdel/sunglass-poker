@@ -7,10 +7,7 @@ import { useSettings } from "../../Utiles/SettingsContext";
 
 const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
   const { theme } = useSettings();
-  if (card===null){
-    card[0]="red";
-    card[1] = "joker";
-  }
+  
   return (
     <div
       className={`${styleClass} ${
