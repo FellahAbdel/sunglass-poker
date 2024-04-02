@@ -1,0 +1,87 @@
+.shop-window {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .shop-tabs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    padding: 10px;
+    color: white;
+    width: 32%;
+  }
+  
+  .items-display {
+    width: 67%;
+    overflow-y: auto;
+    background-color: #616161;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+
+
+  .shop-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
+  
+
+  .shop-tabs a {
+    padding: 10px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .shop-tabs button {
+    width: 100%; 
+  }
+  
+  .shop-tabs a:hover {
+    background-color: #555; 
+  }
+
+.shop-item {
+    width: calc(20% - 10px);
+    margin: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Pour les écrans moyens : 4 éléments par ligne */
+  @media (max-width: 1200px) {
+    .shop-item {
+      width: calc(25% - 10px);
+    }
+  }
+  
+  /* Pour les petits écrans : 3 éléments par ligne */
+  @media (max-width: 900px) {
+    .shop-item {
+      width: calc(33.33% - 10px);
+    }
+  }
+  
+  /* Pour les écrans très petits : 2 éléments par ligne */
+  @media (max-width: 600px) {
+    .shop-item {
+      width: calc(50% - 10px);
+    }
+  }
+  
+  /* Pour les écrans minuscules : 1 élément par ligne */
+  @media (max-width: 400px) {
+    .shop-item {
+      width: calc(100% - 10px);
+    }
+  }

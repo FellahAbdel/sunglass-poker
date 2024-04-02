@@ -6,10 +6,20 @@ export const useWindowContext = () => useContext(WindowContext);
 
 export const WindowProvider = ({ children }) => {
 
+  const [selectedItem, setSelectedItem] = useState(null);
+
   const [isWindowOpen, setIsWindowOpen] = useState(() => {
     const saved = localStorage.getItem("isWindowOpen");
     return saved === "true" ? true : false;
   });
+
+  const openValidationWindow = (item) => {
+    console.log(`Ouverture de la fenêtre de validation pour l'élément : ${item.imgSrc}`);
+    setIsWindowOpen(true);
+    setWindowType("validation");
+    setSelectedItem(item); // Stocke l'item sélectionné
+  };
+  
 
   const [windowType, setWindowType] = useState(() => localStorage.getItem("windowType") || "");
   const [connectionWindowOpen, setconnectionWindowOpen] = useState(false);
@@ -57,11 +67,11 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openWindow = (type) => {
-    if (isWindowOpen && (windowType === type) ) { //for the buttons to act as a back button too
+    if (isWindowOpen && (windowType === type) ) { 
        closeWindow(type);
     } else {
       console.log(`Ouverture de la fenêtre : ${type}`);
-      setIsWindowOpen(true); // Assurez-vous que cela est appelé pour ouvrir la fenêtre
+      setIsWindowOpen(true); 
       setWindowType(type);
     }
   };
@@ -69,7 +79,7 @@ export const WindowProvider = ({ children }) => {
 
   const closeWindow = () => {
     console.log("Fermeture de la fenêtre");
-    setIsWindowOpen(false); // Permet de fermer la fenêtre
+    setIsWindowOpen(false);
     setWindowType("");
     setSuccessMessage("");
   };
@@ -107,6 +117,8 @@ export const WindowProvider = ({ children }) => {
         showHome,
         showGameTable,
         connectionWindowOpen,
+        openValidationWindow,
+        selectedItem,
       }}
     >
       {children}

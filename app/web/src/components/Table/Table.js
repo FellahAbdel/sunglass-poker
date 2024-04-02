@@ -150,12 +150,14 @@ const Table = ({
       {/* dynamique logo , moves according to the menu that is open */}
       <LogoComponent
         styleClass={classes.logoComponent}
-        label={`
-          ${windowType === "tutorial" ? "Tutorial" : ""}
-          ${windowType === "profile" ? "Profile" : ""}
-          ${windowType === "list_table" ? "JOIN A GAME" : ""}
-          ${windowType === "create_table" ? "CREATE A NEW GAME" : ""}
-        `}
+        label={
+  `${windowType === "tutorial" ? getTranslatedWord("messageLogo.tutorial") : ""}` +
+  `${windowType === "profile" ? getTranslatedWord("messageLogo.profile") : ""}` +
+  `${windowType === "list_table" ? getTranslatedWord("messageLogo.listeTable") : ""}` +
+  `${windowType === "create_table" ? getTranslatedWord("messageLogo.createTable") : ""}` +
+  `${windowType === "validation" ? getTranslatedWord("messageLogo.validation") : ""}`
+}
+
       />
     </div>
   );

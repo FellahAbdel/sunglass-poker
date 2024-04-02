@@ -95,3 +95,16 @@
 .btn-list_table_full{
   background-color : rgb(107, 0, 0);
 }
+
+
+.btn_onglets_shop{
+  background-color : #004577;
+  border-radius: 20px;
+  height : 4vw;
+  width: 90%;
+  margin-top: 1vw;
+}
+
+.btn_onglets_shop_active{
+  background-color : #000435;
+}

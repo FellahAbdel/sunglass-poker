@@ -13,7 +13,8 @@ import ProfileWindow from "./WindowContent/ProfileWindow";
 import StatsWindow from "./WindowContent/StatsWindow";
 import ServerPanelWindow from "./WindowContent/ServerPanel";
 import CreateTableWindow from "./WindowContent/CreateTableWindow";
-
+import ShopWindow  from "./WindowContent/shopWindows/ShopWindow";
+import ValidationWindow  from "./WindowContent/shopWindows/ValidationWindow";
 
 import { useWindowContext } from "../Utiles/WindowContext";
 
@@ -42,6 +43,10 @@ const Window = () => {
         {windowType === "stats" && <StatsWindow />}
         {windowType === "list_table" && <ServerPanelWindow />}
         {windowType === "create_table" && <CreateTableWindow />}
+        {windowType === "shop" && <ShopWindow />}
+        {windowType === "validation" && <ValidationWindow />}
+
+
         
       </div>
     </div>

@@ -5,14 +5,13 @@ import Button from "../../button/Button.tsx";
 //import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../Utiles/WindowContext";
 import { useUserData } from "../../Utiles/useUserData";
-import { useTranslation } from '../../Utiles/Translations';
-
+import { useTranslation } from "../../Utiles/Translations";
 
 const ProfileWindow = () => {
   const { getTranslatedWord } = useTranslation();
 
-    const { openWindow } = useWindowContext();
-    const { user } = useUserData();
+  const { openWindow } = useWindowContext();
+  const { user } = useUserData();
 
   // const handleEditName = () => {
   //     setEditingName(true);
@@ -36,37 +35,35 @@ const ProfileWindow = () => {
       />
 
       <div className="userInfo">
+        <div className="userInfo-items">
+          {getTranslatedWord("profil.name")}
+          <br />
+          {getTranslatedWord("profil.mail")}
+          <br />
+          {getTranslatedWord("profil.coins")}
+          <br />
+          {getTranslatedWord("profil.date")}
+          <br />
+        </div>
 
-      <div className="userInfo-items">
-      {getTranslatedWord("profil.name")}
-        <br />
-        {getTranslatedWord("profil.mail")}
-        <br />
-        {getTranslatedWord("profil.coins")}
-        <br />
-        {getTranslatedWord("profil.date")}
-        <br />
-      </div>
+        <div className="vertical-line" />
 
-      <div className="vertical-line"/>
-
-      <div className="userInfo-Info">{user?.pseudo || "Pseudo par défaut"}
-        <br />
-        {user?.email || "email inconnu"}
-        <br />
-        {user?.coins || "0"}
-        <br />
-        {user?.joinedDate || "Date inconnue"} 
-        <br />
-      </div>
-
-
+        <div className="userInfo-Info">
+          {user?.pseudo || "Pseudo par défaut"}
+          <br />
+          {user?.email || "email inconnu"}
+          <br />
+          {user?.coins || "0"}
+          <br />
+          {user?.joinedDate || "Date inconnue"}
+          <br />
+        </div>
       </div>
       <Button
-          styleClass={"btn-gameStart"}
-          label={"User Stats"}
-          onClick={() => openWindow("stats")}
-        />
+        styleClass={"btn-gameStart"}
+        label={"Shop"}
+        onClick={() => openWindow("shop")}
+      />
     </div>
   );
 };

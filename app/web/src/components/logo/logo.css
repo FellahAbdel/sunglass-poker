@@ -10,18 +10,18 @@
   bottom: 33%;
   right: 0;
   left: 0;
+  color: white;
 
   transition: top 1s ease, bottom 1s ease, right 1s ease, left 1s ease,
     opacity 0.5s ease, filter 2s ease;
 }
 
-#light .logo-acceuil{
+#light .logo-acceuil {
   filter: saturate(100%);
 }
-#dark .logo-acceuil{
+#dark .logo-acceuil {
   filter: saturate(0%);
 }
-
 
 .logo-acceuil img {
   width: 11vw;
@@ -50,17 +50,16 @@
   width: 9vw;
 }
 
-.logo-tutorial h1 ,
+.logo-tutorial h1,
 .logo-profile h1 {
   color: white;
   position: absolute;
   left: 60%;
 }
-.logo-list_table h1{
+.logo-list_table h1 {
   position: absolute;
   left: 56%;
 }
-
 
 .logo-success {
   bottom: 110%;
@@ -71,11 +70,9 @@
   width: 9vw;
 }
 
-
 .logo-acceuil.disappear {
   opacity: 0;
 }
-
 
 .logo-stats {
   bottom: 110%;
@@ -85,22 +82,20 @@
   width: 9vw;
 }
 
-
 .logo-list_table {
   left: -8%;
   bottom: 100%;
 }
-.logo-list_table img{
+.logo-list_table img {
   width: 7vw;
 }
 
-
-.logo-create_table{
-  bottom : 100%;
+.logo-create_table {
+  bottom: 100%;
   left: 0;
-  color : white;
+  color: white;
   z-index: -1;
 }
-.logo-create_table img{
+.logo-create_table img {
   width: 9vw;
 }
