@@ -20,6 +20,8 @@ const initialState = {
   controlsMode: "preGame", // Can be "preGame", "roundOne", "roundTwo", "roundThree", "endGame
 };
 
+
+
 const begin = (gameState) => {
   // Initialize players
   const players = gameState.players;
@@ -63,9 +65,21 @@ const gameReducer = (state = initialState, action) => {
       };
     case actions.START_GAME:
       return begin(state);
+
+    case actions.FOLD:
+      const playerIdToFold = action.payload;
+      const updatedPlayers = state.players.filter(player => player.id !== playerIdToFold);
+      console.log("got clicked");
+      return {
+        ...state,
+        players: updatedPlayers,
+      };
+
+      
     // Other game actions can be handled here
     default:
       return state;
+
   }
 };
 
