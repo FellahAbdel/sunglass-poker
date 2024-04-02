@@ -138,6 +138,7 @@ const GameTable = () => {
   const classes = getStyles(windowType, isLogged, isGameTableVisible);
 
   // Redux
+  const stack = useSelector((state) => state.game.gameClass.pokerTable.stack);
   const currentPlayer = useSelector((state) => state.game.gameClass.players[0]);
   let card1, card2;
 
@@ -188,7 +189,7 @@ const GameTable = () => {
           showCards={[0, 1, 2, 3, 4]}
           playersCardDistributedProp={playersCardDistributed}
           playersCardsShowProp={playersCardsShow}
-          moneyPot={9999999999}
+          moneyPot={stack}
           // to open the profile and setting menus
           profileMenuActive={profileMenu}
           settingsMenuActive={settingsMenu}
