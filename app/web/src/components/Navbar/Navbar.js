@@ -9,6 +9,7 @@ import "./navbar.css";
 import ChipsCash from "./ChipsCash";
 import Button from "../button/Button.tsx";
 import TextInputComponent from "../textInput/TextInput.jsx";
+import { useTranslation } from '../Utiles/Translations';
 
 const Navbar = ({
   profileOnClick,
@@ -21,6 +22,7 @@ const Navbar = ({
   const handleClick = (e) => {
     e.stopPropagation();
   };
+  const { getTranslatedWord } = useTranslation();
 
   const [isChatOpen, setisChatOpen] = useState(false);
 
@@ -97,13 +99,13 @@ const Navbar = ({
         iconSrc={require("./../assets/images/icons/white/tutorial.png")}
       />
       <Button
-        label={"Settings"}
+        label={getTranslatedWord("navbar.settings")}
         onClick={() => (settingsOnClick())}
         styleClass={`${isLoggedNavbar ? "btn-settings back-color1" : "btn-settings back-color2"}`}
         iconSrc={require("./../assets/images/icons/white/settings.png")}
       />
 
-    </div>
+    </div>                                                                                                                                                                          
   );
 };
 

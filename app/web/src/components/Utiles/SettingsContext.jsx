@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { settingsReducer, initialState } from '../../store/reducers/settingsReducer'
 
-
 const SettingsContext = createContext();
 
 export const useSettings = () => useContext(SettingsContext);
@@ -9,7 +8,7 @@ export const useSettings = () => useContext(SettingsContext);
 export const SettingsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(settingsReducer, initialState);
 
-  // Effets pour mettre à jour sessionStorage
+  // Effets pour mettre jour sessionStorage
   useEffect(() => {
     sessionStorage.setItem('theme', state.theme);
   }, [state.theme]);
@@ -41,3 +40,4 @@ export const SettingsProvider = ({ children }) => {
     </SettingsContext.Provider>
   );
 };
+
