@@ -2,7 +2,8 @@ import React, { useState, useSelector } from "react";
 import "./gameActionPanel.css";
 import RaiseSlider from "../Range/RaiseSlider";
 import Button from "../../button/Button.tsx";
-//import { useDispatch } from 'react-redux'
+import * as actions from "../../../store/actions/clientInteractionsCreator.js";
+import { useDispatch } from 'react-redux'
 
 
 const GameActionButtons = ({ }) => {
@@ -13,7 +14,7 @@ const GameActionButtons = ({ }) => {
   const [showPopup, setShowPopup] = useState(false);
   //sliderValue text -> percentage of the raise
   const [sliderValueText, setSliderValueText] = useState("");
-  //const dispatch = useDispatch()
+  const dispatch = useDispatch()
   //const pot = useSelector(state.gameState.pot)
 
   let checkOrCall = checkValue ? "Check" : "Call";
@@ -21,6 +22,10 @@ const GameActionButtons = ({ }) => {
   const handleSliderChange = (value) => {
     setSliderValueText(value);
   };
+
+  const handleFold = () => {
+    dispatch(actions.fold());
+  }
 
   //console.log(pot)
 
@@ -30,6 +35,7 @@ const GameActionButtons = ({ }) => {
 //     payload: 10s
 //   })
 // };
+
 
 //console.log(pot)
 
@@ -53,7 +59,7 @@ const GameActionButtons = ({ }) => {
           //onClick={handle}
           label={checkOrCall}
         />
-        {/* <Button styleClass={"btn-fold"} onClick={handleFoldProp} label={"Fold"} /> */}
+        <Button styleClass={"btn-fold"} onClick={handleFold} label={"Fold"} />
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
         <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />

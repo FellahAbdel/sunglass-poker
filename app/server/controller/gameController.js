@@ -2,7 +2,9 @@ const gameReducer = require('../store/reducers/gameReducer');
 const actions =  require("../store/actions/actionTypes");
 const jwt = require("jsonwebtoken");
 const { clearInterval } = require("timers");
-console.log(gameReducer(undefined,{type:actions.START_GAME}));
+const createGame = require('./game');
+const { create } = require('domain');
+
 
 module.exports = gameController = {
     io: null,
@@ -126,6 +128,18 @@ module.exports = gameController = {
             }
         }
         return { status: false, mes: "Can't refresh status", payload: [] };
+    },
+
+    newGame: function(userId){
+        console.log("Create new game inside gameController");
+        const g = createGame();
+        const hroom = this.hashRoom(g.id);
+        this.rooms[hroom] = g;
+        this.join(g.id,userId);
+    },
+
+    dispatch:function(user, action, room){
+        console.log("user : ",user, " dispatch event : ", action, " for room : ", room);
     }
 
 

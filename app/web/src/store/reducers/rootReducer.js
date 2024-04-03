@@ -5,7 +5,7 @@ import tableReducer from './tableReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
-  game: tableReducer,//   user: userReducer,
+  game: tableReducer,
   action: clientInteractionsReducer,
 });
 

@@ -71,6 +71,12 @@ const comm = {
         console.log('joining room id',id);
     },
 
+    dispatch: function(data){
+        console.log('dispatch of socket');
+        this.preFun();
+        socket.emit('dispatch',data);
+    },
+
     startGame: function(){
         // socket.emit('startGame',{room:sessionStorage.getItem('room')});
         console.log("Emit startGame from comm");

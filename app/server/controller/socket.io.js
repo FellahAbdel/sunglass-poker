@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const actions = require('../store/actions/actionTypes');
+// console.log(actions);
 
 // Durée d'une session en millisecondes.
 const SESSION_DURATION = 200 * 1e3;
@@ -28,18 +30,7 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
      *  En cas de déconnexion on log la session Id qui s'arrête.
      */
     io.on('connection', (socket) => {
-        socket.on('startGame', () => {
-            console.log("startGame called (from socket.io.js)");
-              // Handle the start game event
-            // For example, you can start the game here
-            console.log("startGame event received on the server");
-
-            // Perform any necessary game initialization or logic here
-         
-            
-            // We can dispatch an action to update the Redux state
-            store.dispatch({ type: "GAME_STARTED" });
-        });   
+        
 
                 // Server-side logic
         socket.on("startGame", () => {
@@ -142,6 +133,34 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
         // Si le client quitte
         socket.on('disconnect',() => {
             console.log('user disconnected n:' + socket.id + ' | session : ' + session.id);
+        });
+
+        socket.on('dispatch', (data) => {
+            console.log('dispatch recevied : ',data);
+            const {action, room} = data;
+            const userId = session.userId;
+            // si login
+            if(userId){
+                gameController.dispatch(userId,action,room);
+            }
+        })
+
+        socket.on('startGame', () => {
+            console.log("startGame called (from socket.io.js)");
+              // Handle the start game event
+            // For example, you can start the game here
+            console.log("startGame event received on the server");
+
+            // Perform any necessary game initialization or logic here
+         
+            
+            // We can dispatch an action to update the Redux state
+            console.log('Who dispatch : ',session.userId);
+            // Si l'action vient de quelqu'un non connecter on ignore
+            if(session.userId){
+                gameController.newGame(session.userId);
+                // gameController.dispatch(session.userId,actions.START_GAME);
+            }
         });
 
         
