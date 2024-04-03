@@ -102,8 +102,7 @@
     
     width: 4vw;
     height: auto;
-    border-style: solid;
-    border-color: rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.468);
     border-radius: 5px;
     padding: 1%;
 }
