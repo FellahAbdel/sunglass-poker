@@ -94,4 +94,6 @@
 
 2024/04/02 : 3h30           Fin traductions + Début page shop, page confirmation achat
 
-TEMPS TOTAL: 90h00min 
+2024/04/03 : 4h00           Amélioration sécurité bdd user, ajout cryptage mdp, nouvelle table avatars, le shop utilise cette nouvelle table, début items possédé, ne fonctionne pas encore dans le shop. Reste a faire l'achat d'items (déja fait du coté back) et wallpapers et cardskins. Difficultés pour afficher les images depuis un lien de la bdd.
+
+TEMPS TOTAL: 94h00min 
