@@ -7,16 +7,19 @@ import "./shopWindow.css";
 import { useWindowContext } from "../../../Utiles/WindowContext";
 import Button from "../../../button/Button.tsx";
 import { useTranslation } from "../../../Utiles/Translations";
+import { useAvatars } from "./AvatarItem";
+import { useAuth } from "../../../Utiles/AuthProvider.jsx";
+import { useUserData } from "../../../Utiles/useUserData";
 
 const ShopWindow = () => {
   const { getTranslatedWord } = useTranslation();
 
+  const { user, stats } = useUserData();
+  console.log("Items possédés par l'utilisateur:", user?.itemsOwned);
+  const ownedItemIds = user?.itemsOwned?.map((item) => item._id) ?? [];
+
   const [activeTab, setActiveTab] = useState("avatars");
   const { openValidationWindow } = useWindowContext();
-
-  const avatars = AvatarComponent();
-  const cardSkins = CardSkinsComponent();
-  const wallpapers = WallpapersComponent();
 
   const tabNames = {
     avatars: getTranslatedWord("shop.avatars"),
@@ -25,11 +28,27 @@ const ShopWindow = () => {
     // Autres catégories
   };
 
+  const avatars = useAvatars();
+  const cardSkins = CardSkinsComponent();
+  const wallpapers = WallpapersComponent();
+
   const items = {
     avatars: avatars,
     cards: cardSkins,
     wallpapers: wallpapers,
     // Autres catégories
+  };
+
+  function resolveImagePath(relativePath) {
+    return `${process.env.PUBLIC_URL}${relativePath}`;
+  }
+
+  const itemsWithResolvedImagesAndOwnership = {
+    avatars: avatars.map((avatar) => ({
+      ...avatar,
+      imgSrc: resolveImagePath(avatar.imgSrc),
+      isOwned: ownedItemIds.includes(String(avatar.id)),
+    })),
   };
 
   return (
@@ -49,14 +68,17 @@ const ShopWindow = () => {
         ))}
       </div>
       <div className="items-display">
-        {items[activeTab] &&
-          items[activeTab].map((item) => (
-            <ShopItem
-              key={item.id}
-              item={item}
-              onClickItem={() => openValidationWindow(item)}
-            />
-          ))}
+        {itemsWithResolvedImagesAndOwnership[activeTab] &&
+          itemsWithResolvedImagesAndOwnership[activeTab]
+            .sort((a, b) => b.isOwned - a.isOwned)
+            .map((item) => (
+              <ShopItem
+                key={item.id}
+                item={item}
+                onClickItem={() => openValidationWindow(item)}
+                styleClass={item.isOwned ? "owned-item" : ""}
+              />
+            ))}
       </div>
     </div>
   );

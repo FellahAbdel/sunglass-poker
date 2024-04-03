@@ -1,35 +1,18 @@
-import avatar1 from '../../../assets/avatar/1.png';
-import avatar2 from '../../../assets/avatar/2.png';
-import avatar3 from '../../../assets/avatar/3.png';
-import avatar4 from '../../../assets/avatar/4.png';
-import avatar5 from '../../../assets/avatar/5.png';
+import React, { useEffect, useState, useContext } from 'react';
+import  { useAuth }  from '../../../Utiles/AuthProvider.jsx';
 
+export const useAvatars = () => {
+  const [avatars, setAvatars] = useState([]);
+  const { fetchAvatars } = useAuth();
 
-const AvatarComponent = () => {
-  const avatars = [
-    { id: 1, imgSrc: avatar1, price: 100 },
-    { id: 2, imgSrc: avatar2, price: 100 },
-    { id: 3, imgSrc: avatar3, price: 100 },
-    { id: 4, imgSrc: avatar4, price: 100 },
-    { id: 5, imgSrc: avatar5, price: 100 },
-    { id: 5, imgSrc: avatar5, price: 100 },
-    { id: 5, imgSrc: avatar5, price: 100 },
-    { id: 5, imgSrc: avatar5, price: 100 },
-    { id: 1, imgSrc: avatar1, price: 100 },
-    { id: 2, imgSrc: avatar2, price: 100 },
-    { id: 3, imgSrc: avatar3, price: 100 },
-    { id: 4, imgSrc: avatar4, price: 100 },
-    { id: 5, imgSrc: avatar5, price: 100 },
-    { id: 5, imgSrc: avatar5, price: 100 },
-    { id: 5, imgSrc: avatar5, price: 100 },
-    { id: 5, imgSrc: avatar5, price: 100 },
+  useEffect(() => {
+    const loadAvatars = async () => {
+      const loadedAvatars = await fetchAvatars();
+      setAvatars(loadedAvatars);
+    };
 
-    
-    // Nouveau avatar a ajouter
-  ];
-
+    loadAvatars();
+  }, [fetchAvatars]);
 
   return avatars;
 };
-
-export default AvatarComponent;

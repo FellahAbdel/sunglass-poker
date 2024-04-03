@@ -1,11 +1,12 @@
 import React from 'react';
 import './shopItem.css';
 
-const ShopItem = ({ item, onClickItem }) => {
+const ShopItem = ({ item, onClickItem, styleClass }) => {
   return (
-    <div className="shop-item" onClick={onClickItem}>
+    <div className={`shop-item ${styleClass}`} onClick={onClickItem}>
       <img src={item.imgSrc} alt="Item" />
-      <div className="price">{item.price} coins</div>
+      <p>{item.name}</p>
+      <p>Prix: {item.price}</p>
     </div>
   );
 };

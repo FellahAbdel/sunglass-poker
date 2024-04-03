@@ -1,10 +1,29 @@
-// index.js
+// bdd.js
 const mongoose = require("mongoose");
 const UserModel = require("./User");
 const StatModel = require("./Stat");
+const ItemModel = require("./Item");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const initItems = require("./initItems");
+
+require("dotenv").config();
 
 const cors = require("cors");
+
+const verifyToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) return res.sendStatus(403); 
+    req.userId = decoded.id; 
+    next();
+  });
+};
 
 module.exports = function (app, bdd) {
   console.log(bdd);
@@ -18,19 +37,21 @@ module.exports = function (app, bdd) {
   );
   db.once("open", async () => {
     console.log("Connecté à la base de données MongoDB");
+    initItems();
   });
 
-  //file to create a user
-  app.get("/view/createUser", (req, res) => {
+  app.get("/view/createUser", async (req, res, next) => {
     const filepath = "test.html";
     res.sendFile(filepath, { root: __dirname });
   });
 
-  app.post("/api/users", async (req, res) => {
+  app.post("/api/users", async (req, res, next) => {
     res.header("Access-Control-Allow-Credentials", "true");
     try {
       console.log(req.body);
       const { pseudo, email, password } = req.body;
+      // Hashage du mot de passe
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
 
       // Vérification si le pseudo existe déjà
       const existingPseudo = await UserModel.findOne({ pseudo });
@@ -44,11 +65,19 @@ module.exports = function (app, bdd) {
         return res.status(400).json({ error: "user_exists", field: "email" });
       }
 
-      // Création d'un nouvel utilisateur
+      const defaultAvatar = await ItemModel.findOne({ name: "Avatar1" });
+      if (!defaultAvatar) {
+        return res
+          .status(500)
+          .json({ error: "Avatar par défaut introuvable." });
+      }
+
       const nouveauUtilisateur = new UserModel({
         pseudo,
         email,
-        password,
+        password: hashedPassword,
+        itemsOwned: [defaultAvatar._id],
+        avatar: [defaultAvatar._id],
       });
 
       // Enregistrement dans la base de données
@@ -72,35 +101,36 @@ module.exports = function (app, bdd) {
 
       res.status(201).json(utilisateurEnregistre);
     } catch (error) {
-      console.error("Erreur lors de la création de l'utilisateur :", error);
-      res
-        .status(500)
-        .json({ error: "Erreur lors de la création de l'utilisateur" });
+      next(error);
     }
   });
 
-  app.post("/api/login", async (req, res) => {
+  app.post("/api/login", async (req, res, next) => {
     res.header("Access-Control-Allow-Credentials", "true");
     try {
       const { username, password } = req.body;
-      const user = await UserModel.findOne({ pseudo: username, password });
+      const user = await UserModel.findOne({ pseudo: username });
 
       if (user) {
-        console.log(`Login réussi pour l'utilisateur : ${username}`);
-        const token = jwt.sign({ id: user._id }, "votre_secret", {
-          expiresIn: "1h",
-        });
-        res.json({ success: true, token: token });
+        const match = await bcrypt.compare(password, user.password);
+        if (match) {
+          console.log(`Login réussi pour l'utilisateur : ${username}`);
+          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1h",
+          });
+          res.json({ success: true, token: token });
+        } else {
+          res.json({ success: false, message: "Invalid credentials" });
+        }
       } else {
-        res.json({ success: false, message: "Invalid credentials" });
+        res.json({ success: false, message: "User not found" });
       }
     } catch (error) {
-      console.error("Erreur lors de la connexion :", error);
-      res.status(500).json({ success: false, message: "Server error" });
+      next(error);
     }
   });
 
-  app.post("/api/check-email", async (req, res) => {
+  app.post("/api/check-email", async (req, res, next) => {
     res.header("Access-Control-Allow-Credentials", "true");
 
     try {
@@ -120,12 +150,11 @@ module.exports = function (app, bdd) {
         });
       }
     } catch (error) {
-      console.error("Erreur lors de la vérification de l'e-mail :", error);
-      res.status(500).json({ error: "Server error" });
+      next(error);
     }
   });
 
-  app.put("/api/update-user-data", async (req, res) => {
+  app.put("/api/update-user-data", verifyToken, async (req, res, next) => {
     res.header("Access-Control-Allow-Credentials", "true");
     try {
       const { field, value, identifierType, identifierValue } = req.body;
@@ -149,15 +178,14 @@ module.exports = function (app, bdd) {
         });
       }
     } catch (error) {
-      console.error(`Error updating ${field}:`, error);
-      return res.status(500).json({ success: false, message: "Server error" });
+      next(error);
     }
   });
 
-  app.get("/api/userInfo", async (req, res) => {
-    const token = req.headers.authorization.split(" ")[1]; // Supposons que le token soit envoyé en tant que "Bearer <token>"
+  app.get("/api/userInfo", verifyToken, async (req, res, next) => {
+    const token = req.headers.authorization.split(" ")[1];
     try {
-      const decoded = jwt.verify(token, "votre_secret");
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
       const user = await UserModel.findById(decoded.id);
       if (!user) {
         return res
@@ -166,16 +194,12 @@ module.exports = function (app, bdd) {
       }
       res.json({ success: true, user });
     } catch (error) {
-      console.error(
-        "Erreur lors de la récupération des informations de l'utilisateur :",
-        error
-      );
-      res.status(500).json({ success: false, message: "Erreur serveur" });
+      next(error);
     }
   });
 
   //route pour récupérer les statistiques d'un utilisateur
-  app.get("/api/user-stats/:userId", async (req, res) => {
+  app.get("/api/user-stats/:userId", verifyToken, async (req, res, next) => {
     try {
       const userId = req.params.userId;
       const stats = await StatModel.findOne({ user: userId }).populate(
@@ -188,10 +212,68 @@ module.exports = function (app, bdd) {
         res.status(404).json({ success: false, message: "Stats not found" });
       }
     } catch (error) {
-      console.error("Error retrieving user stats:", error);
-      res.status(500).json({ success: false, message: "Server error" });
+      next(error);
     }
   });
+
+  app.post("/api/buy-item", verifyToken, async (req, res, next) => {
+    const { userId, itemId } = req.body;
+
+    try {
+      // Trouver l'utilisateur par son ID
+      const user = await UserModel.findById(userId);
+
+      // Vérifier si l'utilisateur a assez de coins
+      const item = await ItemModel.findById(itemId);
+      if (user.coins < item.price) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Not enough coins" });
+      }
+
+      // Déduire le prix de l'item des coins de l'utilisateur
+      user.coins -= item.price;
+
+      // Ajouter l'item aux items possédés par l'utilisateur
+      user.itemsOwned.push(itemId);
+
+      // Sauvegarder les modifications de l'utilisateur
+      await user.save();
+
+      res
+        .status(200)
+        .json({ success: true, message: "Item bought successfully", user });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  app.get("/api/avatars", async (req, res) => {
+    try {
+      const avatars = await ItemModel.find();
+      res.json(avatars);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des avatars:", error);
+      res
+        .status(500)
+        .send("Erreur serveur lors de la récupération des avatars");
+    }
+  });
+
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ success: false, message: "Server error" });
+  });
+
+  async function updateUserAvatar(userId, newItemId) {
+    try {
+      // Mise à jour de l'utilisateur avec le nouvel avatar sélectionné
+      await UserModel.findByIdAndUpdate(userId, { avatar: newItemId });
+      console.log("Avatar de l'utilisateur mis à jour avec succès.");
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de l'avatar:", error);
+    }
+  }
 
   return db;
 };
