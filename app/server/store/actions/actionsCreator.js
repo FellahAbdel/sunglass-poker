@@ -1,54 +1,60 @@
-const actions require("./actionTypes.js");
+const actions = require("./actionTypes.js");
 
-export const startGame = () => ({
+module.exports.startGame = () => ({
   type: actions.START_GAME,
 });
 
-export const dealCards = () => ({
+module.exports.dealCards = () => ({
   type: actions.DEAL_CARDS,
 });
 
-export const bet = (amount) => ({
+module.exports.bet = (amount) => ({
   type: actions.BET,
   payload: amount,
 });
 
-export const fold = () => ({
+module.exports.fold = () => ({
   type: actions.FOLD,
 });
 
-export const check = () => ({
+module.exports.check = () => ({
   type: actions.CHECK,
 });
 
-export const call = () => ({
+module.exports.call = () => ({
   type: actions.CALL,
 });
 
-export const raise = (amount) => ({
+module.exports.raise = (amount) => ({
   type: actions.RAISE,
   payload: amount,
 });
 
-export const endRound = () => ({
+module.exports.endRound = () => ({
   type: actions.END_ROUND,
 });
 
-export const resetGame = () => ({
+module.exports.resetGame = () => ({
   type: actions.RESET_GAME,
 });
 
+// Rooms control
+
+module.exports.sit = () => ({
+  type: actions.SIT,
+})
+
 // Actions creators for user authentication
-export const login = (user) => ({
+module.exports.login = (user) => ({
   type: actions.LOGIN,
   payload: user,
 });
 
-export const logout = () => ({
+module.exports.logout = () => ({
   type: actions.LOGOUT,
 });
 
-export const updateUserData = (data) => ({
+module.exports.updateUserData = (data) => ({
   type: actions.UPDATE_USER_DATA,
   payload: data,
 });

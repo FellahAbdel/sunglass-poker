@@ -1,9 +1,11 @@
 const gameReducer = require('../store/reducers/gameReducer');
-const actions =  require("../store/actions/actionTypes");
+const actions =  require("../store/actions/actionsCreator");
 const jwt = require("jsonwebtoken");
 const { clearInterval } = require("timers");
 const createGame = require('./game');
 const { create } = require('domain');
+const store = require('../store/configStore');
+
 
 
 module.exports = gameController = {
@@ -12,34 +14,34 @@ module.exports = gameController = {
         return id;
     },
     rooms: {
-        2: {
-            id: 2,
-            players: [],
-            max: 5,
-            refresh: undefined,
-            joinGame: function (userId) {
-                // console.log(this.players, typeof this.players);
-                if (this.players !== undefined) {
-                    if (this.players.length === 0) {
-                        this.players.push({ id: userId, timeLastAnswer: Date.now() });
-                        return { status: true, mes: 'Join successfull', payloadRoom: { id: this.id, players: this.players, max: this.max } };
-                    }
-                    if (this.players.findIndex(player => player.id === userId) === -1 && this.players.length < this.max) {
-                        this.players.push({ id: userId, timeLastAnswer: Date.now() });
-                        return { status: true, mes: 'Join successfull', payloadRoom: { id: this.id, players: this.players, max: this.max } };
-                    }
-                }
-                return { status: false, mes: 'Either the room is full or player already in' };
-            }
-        }
+        // 2: {
+        //     id: 2,
+        //     players: [],
+        //     max: 5,
+        //     refresh: undefined,
+        //     joinGame: function (userId) {
+        //         // console.log(this.players, typeof this.players);
+        //         if (this.players !== undefined) {
+        //             if (this.players.length === 0) {
+        //                 this.players.push({ id: userId, timeLastAnswer: Date.now() });
+        //                 return { status: true, mes: 'Join successfull', payloadRoom: { id: this.id, players: this.players, max: this.max } };
+        //             }
+        //             if (this.players.findIndex(player => player.getPlayerId() === userId) === -1 && this.players.length < this.max) {
+        //                 this.players.push({ id: userId, timeLastAnswer: Date.now() });
+        //                 return { status: true, mes: 'Join successfull', payloadRoom: { id: this.id, players: this.players, max: this.max } };
+        //             }
+        //         }
+        //         return { status: false, mes: 'Either the room is full or player already in' };
+        //     }
+        // }
     },
 
     makeRefreshCall: function (room, reset = false) {
-        return;
-        console.trace(this);
-        console.log('Set refresh call for ', room, '  reset: ', reset);
+        // return;
+        // console.trace(this);
+        // console.log('Set refresh call for ', room, '  reset: ', reset);
         const hroom = this.hashRoom(room);
-        console.log(this.rooms, hroom);
+        // console.log(this.rooms, hroom);
         if (this.rooms.hasOwnProperty(hroom)) {
             if (this.rooms[hroom].refresh && !reset) {
                 console.error("RefreshCall already exist, reset set to false -> Action canceled");
@@ -61,6 +63,7 @@ module.exports = gameController = {
     },
 
     join: function (id, user) {
+        console.log(this);
         if (this.rooms !== undefined) {
             if (this.rooms.hasOwnProperty(id)) {
                 if (user === undefined) {
@@ -68,12 +71,16 @@ module.exports = gameController = {
                 }
                 const answer = this.rooms[id].joinGame(user);
                 if (answer.status) {
-                    console.log('New player, try to set refresh');
+                    console.log(actions.sit());
+                    // store.dispatch(this.rooms[id].state,actions.sit());
+                    console.log('nop at');
+                    this.rooms[id].state = store.getState();
+                    // console.log('New player, try to set refresh');
                     this.makeRefreshCall(id, false);
-                    console.log('Join call for broadcast ', answer);
-                    this.broadcastStatus(id);
-                    return answer;
+                    // console.log('Join call for broadcast ', answer);
+                    // this.broadcastStatus(id);
                 }
+                return answer;
             }
         }
         return { status: false, mes: 'No rooms' };
@@ -82,7 +89,7 @@ module.exports = gameController = {
         const hroom = this.hashRoom(room);
         if (this.rooms.hasOwnProperty(hroom)) {
             let index = -1;
-            if ((index = this.rooms[room].players.findIndex(player => player.id === id)) !== -1) {
+            if ((index = this.rooms[room].players.findIndex(player => player.getPlayerId() === id)) !== -1) {
                 console.log("Player : ", id, " removed from room : ", room);
                 this.rooms[room].players.splice(index, 1);
                 return;
@@ -101,41 +108,44 @@ module.exports = gameController = {
                 console.error("Room expired or does not exist");
                 return;
             }
-            const players = this.rooms[hroom].players;
+            const players = this.rooms[hroom].state.game.players;
             console.log('gameController call for broadcast on ', room, ' to io with hash :', hroom);
             if(players.length == 0){
                 console.log('No player in room, refreshcall will be remove if set.');
                 if(this.rooms[hroom].refresh !==undefined)
                     this.rooms[hroom].refresh=clearInterval(this.rooms[hroom].refresh);
             }
-            for (var i = 0; i < players.length; i++) {
-                timedPassed = (Date.now() - players[i].timeLastAnswer);
-                console.log('since last answer:', timedPassed);
-                if (timedPassed > this.timeOutPlayer) {
-                    this.removePlayer(room, players[i].id);
-                }
-            }
+            // for (var i = 0; i < players.length; i++) {
+            //     timedPassed = (Date.now() - players[i].gettimeLastAnswer());
+            //     console.log('since last answer:', timedPassed);
+            //     // if (timedPassed > this.timeOutPlayer) {
+            //     //     this.removePlayer(room, players[i].id);
+            //     // }
+            // }
             this.io.broadcastStatus(hroom);
         } else console.error('No io to broadcast');
     },
     status: function (room, id) {
         console.log('Status room:', room, ' for : ', id);
-        console.log(this.rooms, this.rooms.hasOwnProperty(room));
-        console.log(this.rooms[room].players.gameControllerindexOf(id));
+        // console.log(this.rooms, this.rooms.hasOwnProperty(room));
         if (this.rooms.hasOwnProperty(room)) {
-            if (this.rooms[room].players.indexOf(id) !== -1) {
-                return { status: true, mes: 'Refreshing status', payload: this.rooms[room] };
+            if (this.rooms[room].state.game.players.findIndex(player => player.getPlayerId() === id) !== -1) {
+                return { status: true, mes: 'Refreshing status', payload: this.rooms[room].state };
             }
         }
         return { status: false, mes: "Can't refresh status", payload: [] };
     },
 
-    newGame: function(userId){
+    newGame: function(userId =false){
         console.log("Create new game inside gameController");
         const g = createGame();
         const hroom = this.hashRoom(g.id);
         this.rooms[hroom] = g;
-        this.join(g.id,userId);
+        store.dispatch(actions.startGame());
+        this.rooms[hroom].state = store.getState();
+        if(userId !== false)
+            this.join(g.id,userId);
+        return g.id;
     },
 
     dispatch:function(user, action, room){

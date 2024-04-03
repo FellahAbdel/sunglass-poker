@@ -55,7 +55,7 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
                     id = decoded.id;
                     const answer = gameController.status(room,id);
                     console.log('status of ', id, ' : =', answer);
-                    io.to(data.id).emit('status', answer);
+                    io.to(data.id).emit('event', {payload:answer.payload, type:actions.REFRESH});
                 }catch(err){
                     if(err.name==='TokenExpiredError'){
                         console.log('token expired for status');
@@ -73,10 +73,10 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
         socket.on('myNameIs',(token) => {
             // console.log('Sets rooms',socket.rooms);
             if(token===null){
-                console.log('Destroy socket for ', socket.id);
-                io.in(session.id).disconnectSockets(true);
-                session.destroy();
-                socket.disconnect();
+                // console.log('Destroy socket for ', socket.id);
+                // io.in(session.id).disconnectSockets(true);
+                // session.destroy();
+                // socket.disconnect();
             }else{
                 if(!socket.rooms.has(token)){
                     try{
@@ -107,6 +107,9 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
                     roomHash = gameController.hashRoom(data.id);
                     socket.join(roomHash);
                     socket.emit('joinRoom',answer);
+                    if(answer.status){
+                        socket.emit('event',{payload:gameController.rooms[roomHash].state, type:answer.event});
+                    }
                     socket.to(roomHash).emit('newPlayer',answer);
                     session.userRoom = data.id;
                     session.save();
@@ -116,8 +119,6 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
                 console.log('User tried to join wrong room.');
                 socket.emit('jointRoom', {status:failed,mes:'Invalid data'});
             }
-            session.timeJoinRoomCalled = (session.timeJoinRoomCalled  || 0) +1;
-            console.log(session.timeJoinRoomCalled);
             session.save();
         });
 
@@ -148,22 +149,19 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
               // Handle the start game event
             // For example, you can start the game here
             console.log("startGame event received on the server");
-
             // Perform any necessary game initialization or logic here
-         
-            
             // We can dispatch an action to update the Redux state
             console.log('Who dispatch : ',session.userId);
             // Si l'action vient de quelqu'un non connecter on ignore
-            if(session.userId){
-                gameController.newGame(session.userId);
+            const id = gameController.newGame();
                 // gameController.dispatch(session.userId,actions.START_GAME);
-            }
             console.log('store dispatch');
             console.log(store.getState())
             store.dispatch({type:actions.GAME_STARTED});
             state = store.getState();
+            console.log(socket.rooms, session.id);
             socket.emit('event',{payload:state.game, type:actions.GAME_STARTED});
+            socket.emit('joinRoom',gameController.join(id,session.userId));
         });
 
         

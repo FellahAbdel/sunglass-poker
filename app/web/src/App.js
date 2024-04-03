@@ -14,7 +14,7 @@ import { SettingsProvider } from "./components/Utiles/SettingsContext";
 import comm from './services/socket.js';
 
 comm.Init();
-comm.joinRoom(2);
+comm.joinRoom(10);
 function App() {
   return (
     <WindowProvider>

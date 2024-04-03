@@ -1,4 +1,5 @@
 class Player {
+  #timeLastAnswer = 0;
   #playerId = 0;
   #playerState = "";
   #playerMoney = 1000;
@@ -11,6 +12,13 @@ class Player {
     this.#playerId = playerId;
     this.name = name;
     this.status = "Empty";
+  }
+
+  settimeLastAnswer(t){
+    this.#timeLastAnswer = t;
+  }
+  gettimeLastAnswer(){
+    return this.#timeLastAnswer;
   }
 
   // Methods to get and set status

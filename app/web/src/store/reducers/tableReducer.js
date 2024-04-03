@@ -21,6 +21,18 @@ const tableReducer = (state = initialState, action) => {
             table:action.payload.table,
             players:action.payload.players
           }
+        case actions.REFRESH:
+          return {
+            ...state,
+            ...action.payload,
+          };
+        case actions.SIT:
+          console.log("New player sit at the table");
+          return {
+            ...state,
+            table:action.payload.table,
+            players:action.payload.players
+          };
         default:
             console.log("Table reducer called");
             return state;

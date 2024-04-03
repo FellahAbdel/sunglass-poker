@@ -19,3 +19,9 @@ module.exports.START_GAME = "START_GAME";
 module.exports.GAME_STARTED = "GAME_STARTED";
 
 module.exports.FOLD = "FOLD";
+
+// room control
+
+module.exports.SIT = "SIT";
+
+module.exports.REFRESH = "REFRESH";
