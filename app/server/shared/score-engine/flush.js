@@ -3,7 +3,7 @@
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
  * FUNCTION : determine si les 7 possedent une couleur et renvoi la combianaison si elle est trouve.
  */
-export function isFlush(sevenCardsTab) {
+function isFlush(sevenCardsTab) {
   let tab = [...sevenCardsTab];
   let colors = [[], [], [], []];
 
@@ -48,3 +48,5 @@ export function isFlush(sevenCardsTab) {
 
   return false;
 }
+
+module.exports = isFlush;
