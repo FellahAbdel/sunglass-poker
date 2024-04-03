@@ -41,11 +41,6 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
             store.dispatch({ type: "GAME_STARTED" });
         });   
 
-                // Server-side logic
-        socket.on("startGame", () => {
-          // Dispatch an action to update the Redux state
-        });
-
         // On récupère la session lié à la connexion.
         session = socket.request.session;
         // On rejoint la session déjà existante.
