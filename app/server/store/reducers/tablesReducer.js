@@ -25,4 +25,4 @@ const gameTableReducer = (state = defaultState, action) => {
   }
 };
 
-export default gameTableReducer;
+module.exports =  gameTableReducer;

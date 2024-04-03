@@ -1,6 +1,6 @@
-import { combineReducers } from "redux";
-import gameReducer from "./gameReducer";
-import tablesReducer from "./tablesReducer";
+const { combineReducers } = require("redux");
+const gameReducer = require("./gameReducer");
+const tablesReducer = require("./tablesReducer");
 
 const rootReducer = combineReducers({
   game: gameReducer,
@@ -8,5 +8,5 @@ const rootReducer = combineReducers({
   table: tablesReducer,
 });
 
-export default rootReducer;
+module.exports = rootReducer;
 // Path: app/web/src/store/reducers/userReducer.js

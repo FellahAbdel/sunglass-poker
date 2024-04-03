@@ -1,4 +1,4 @@
-
+import *  as actions from "../actions/clientInteractionsType.js";
 
 const initialState = {
     table: {
@@ -13,6 +13,14 @@ const initialState = {
 
 const tableReducer = (state = initialState, action) => {
     switch(action.type) {
+        case actions.GAME_STARTED:
+          console.log(action);
+          console.log("game started");
+          return {
+            ...state,
+            table:action.payload.table,
+            players:action.payload.players
+          }
         default:
             console.log("Table reducer called");
             return state;

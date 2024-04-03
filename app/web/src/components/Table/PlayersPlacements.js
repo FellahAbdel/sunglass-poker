@@ -15,7 +15,7 @@ const PlayersPlacements = ({
         <div key={`profile${index}`} className={`profile profile${index}`}>
           <PlayersProfile
             status={player.status}
-            chips={player.getPlayerMoney()}
+            chips={player.playerMoney}
             name={player.name}
             flippingPlayerCards={playersCardsShowProp[index]}
             gotCards={playersCardDistributedProp[index]}

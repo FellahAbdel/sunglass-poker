@@ -1,5 +1,6 @@
 // Set up your Socket.io service here
 import io from 'socket.io-client';
+import store from '../store/configureStore';
 
 
 const socket =  io("http://localhost:3001", {
@@ -45,6 +46,11 @@ const comm = {
                 sessionStorage.setItem('room',data.payloadRoom.id);
             }
             console.log(data);
+        })
+
+        socket.on('event', (data) => {
+            console.log(data);
+            store.dispatch({type:data.type,payload:data.payload});
         })
 
         socket.on('status', (data) => this.getStatus(data));

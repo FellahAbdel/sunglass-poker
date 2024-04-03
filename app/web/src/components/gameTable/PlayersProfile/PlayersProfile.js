@@ -11,7 +11,7 @@ const PlayersProfile = ({
   flippingPlayerCards,
   gotCards,
 }) => {
-  const formattedChips = chips.toLocaleString();
+  const formattedChips = chips;
   const dollarSign = "$";
 
   return (

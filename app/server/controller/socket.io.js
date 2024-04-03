@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
 const actions = require('../store/actions/actionTypes');
-// console.log(actions);
+const store = require('../store/configStore');
+
+
+console.log(store);
 
 // Durée d'une session en millisecondes.
 const SESSION_DURATION = 200 * 1e3;
@@ -156,6 +159,11 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
                 gameController.newGame(session.userId);
                 // gameController.dispatch(session.userId,actions.START_GAME);
             }
+            console.log('store dispatch');
+            console.log(store.getState())
+            store.dispatch({type:actions.GAME_STARTED});
+            state = store.getState();
+            socket.emit('event',{payload:state.game, type:actions.GAME_STARTED});
         });
 
         

@@ -1,4 +1,4 @@
-import * as actions from "./actionTypes.js";
+const actions require("./actionTypes.js");
 
 export const startGame = () => ({
   type: actions.START_GAME,
@@ -52,3 +52,4 @@ export const updateUserData = (data) => ({
   type: actions.UPDATE_USER_DATA,
   payload: data,
 });
+
