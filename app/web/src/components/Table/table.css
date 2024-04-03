@@ -16,7 +16,7 @@
 
 
   transition: width 1s ease, height 1s ease, box-shadow 0.5s ease,
-    border-radius 1s ease, background-color 0.5s ease , background-size 0.5s ease, filter 1s ease;
+    border-radius 1s ease , background-size 0.5s ease, filter 1s ease;
 }
 
 /*table color when logged in and logged out*/
@@ -461,3 +461,20 @@ background:
   radial-gradient(#164f81 15%, transparent 20%) 8px 9px;
 background-color: #282828;
 background-size: 16px 12px; */
+
+
+#light .table-lineAround , #dark .table-lineAround{
+  box-shadow: unset;
+  background: unset;
+  background-image: unset;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.317);
+  width: 52vw;
+  height: 30vh;
+}
+#dark .disappear, #light .disappear{
+  opacity: 0;
+}

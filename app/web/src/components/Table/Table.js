@@ -84,9 +84,14 @@ const Table = ({
     // container-acceuil : for the table to show up in acceuil when game opens
     // container-tutorial : for tuto
     <div className={classes.containerTable}>
+      
+      {/*the white border line around the table in the middle*/}
+      <div className={`${classes.containerTable} ${!isWindowOpen && "table-lineAround"} ${isWindowOpen && "disappear"}`}/>
+
       {/* Acceuil table if not logged in and game table if logged in */}
-      {isGameTableVisible ? (
+      {isGameTableVisible && !isWindowOpen ? (
         <>
+
           {/* cards and the pot in the center of the table */}
           <CardsPlacements
             moneyPot={moneyPot}
@@ -156,8 +161,7 @@ const Table = ({
   `${windowType === "list_table" ? getTranslatedWord("messageLogo.listeTable") : ""}` +
   `${windowType === "create_table" ? getTranslatedWord("messageLogo.createTable") : ""}` +
   `${windowType === "validation" ? getTranslatedWord("messageLogo.validation") : ""}`
-}
-
+    }
       />
     </div>
   );
