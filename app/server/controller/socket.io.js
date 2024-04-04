@@ -157,9 +157,14 @@ module.exports = function(server,Middleware,corsSettings,gameController) {
                 // gameController.dispatch(session.userId,actions.START_GAME);
             console.log('store dispatch');
             console.log(store.getState())
+            console.log('dispatch the server store');
+            console.log("\n");
             store.dispatch({type:actions.GAME_STARTED});
+
+            // Get the new state of the game to the client.
             state = store.getState();
             console.log(socket.rooms, session.id);
+            // where to send this  event ?
             socket.emit('event',{payload:state.game, type:actions.GAME_STARTED});
             socket.emit('joinRoom',gameController.join(id,session.userId));
         });

@@ -4,7 +4,6 @@ class Deck {
   #cardsGame = [];
 
   constructor() {
-    this.communityCards = []; // Array of five cards.
     this.initCards();
     // Initialize the deck with all 52 cards
   }
