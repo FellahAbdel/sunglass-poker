@@ -7,7 +7,7 @@ const PlayersPlacements = ({
   playersCardDistributedProp,
   disappear,
 }) => {
-  const playersInTable = useSelector((state) => state.game.players);
+  const playersInTable = useSelector((state) => state.game.gameClass.players);
 
   return (
     <span className={`profiles ${disappear ? "disappear" : ""}`}>
@@ -17,6 +17,7 @@ const PlayersPlacements = ({
             status={player.status}
             chips={player.playerMoney}
             name={player.name}
+            cards={player.getPlayerCards()}
             flippingPlayerCards={playersCardsShowProp[index]}
             gotCards={playersCardDistributedProp[index]}
           />

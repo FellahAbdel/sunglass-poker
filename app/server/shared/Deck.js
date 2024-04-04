@@ -54,7 +54,7 @@ class Deck {
       threeCards.push(this.#cardsGame.pop());
     }
 
-    return threeCards;
+    return threeCards; // [new Cards(), new Cards(), new Cards()]
   }
 }
 
