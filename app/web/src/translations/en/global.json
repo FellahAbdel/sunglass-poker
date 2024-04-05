@@ -110,6 +110,7 @@
     "profile": "Profile",
     "listeTable": "JOIN A GAME ",
     "createTable": "CREATE A NEW GAME",
-    "validation": "Buying confirmation"
+    "validation": "Buying confirmation",
+    "shop": "Store"
   }
 }

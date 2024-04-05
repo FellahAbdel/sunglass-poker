@@ -41,11 +41,8 @@ const ShopWindow = () => {
           <Button
             key={tab}
             label={tabNames[tab]}
-            styleClass={
-              activeTab === tab
-                ? "btn_onglets_shop btn_onglets_shop_active"
-                : "btn_onglets_shop"
-            }
+            styleClass={`btn_onglets_shop ${
+              activeTab === tab ? "back-color1": "back-color3"}`}
             onClick={() => setActiveTab(tab)}
           />
         ))}

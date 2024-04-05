@@ -86,7 +86,7 @@ const Table = ({
     <div className={classes.containerTable}>
       
       {/*the white border line around the table in the middle*/}
-      <div className={`${classes.containerTable} ${!isWindowOpen && "table-lineAround"} ${isWindowOpen && "disappear"}`}/>
+      <div className={`${classes.containerTable} ${!isWindowOpen && "table-lineAround"} ${(windowType === "" && !isGameTableVisible || isWindowOpen) && "disappear" }`}/>
 
       {/* Acceuil table if not logged in and game table if logged in */}
       {isGameTableVisible && !isWindowOpen ? (
@@ -160,8 +160,9 @@ const Table = ({
   `${windowType === "profile" ? getTranslatedWord("messageLogo.profile") : ""}` +
   `${windowType === "list_table" ? getTranslatedWord("messageLogo.listeTable") : ""}` +
   `${windowType === "create_table" ? getTranslatedWord("messageLogo.createTable") : ""}` +
-  `${windowType === "validation" ? getTranslatedWord("messageLogo.validation") : ""}`
-    }
+  `${windowType === "validation" ? getTranslatedWord("messageLogo.validation") : ""}`+
+  `${windowType === "shop" ? getTranslatedWord("messageLogo.shop") : ""}`
+}
       />
     </div>
   );

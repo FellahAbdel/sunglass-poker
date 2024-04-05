@@ -99,3 +99,9 @@
 .logo-create_table img {
   width: 9vw;
 }
+
+.logo-validation {
+  bottom: 110%;
+  z-index: -1;
+  opacity: 100;
+}

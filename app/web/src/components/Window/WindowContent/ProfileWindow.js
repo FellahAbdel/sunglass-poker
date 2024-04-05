@@ -47,7 +47,7 @@ const ProfileWindow = () => {
         </div>
       </div>
       <Button
-        styleClass={"btn-gameStart"}
+        styleClass={"btn-gameStart back-color1"}
         label={"Shop"}
         onClick={() => openWindow("shop")}
       />

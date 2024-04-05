@@ -110,6 +110,7 @@
     "profile": "Profil",
     "listeTable": "REJOINDRE UNE PARTIE",
     "createTable": "CRÉER UNE NOUVELLE PARTIE",
-    "validation": "Confirmation d'achat"
+    "validation": "Confirmation d'achat",
+    "shop":"Boutique"
   }
 }

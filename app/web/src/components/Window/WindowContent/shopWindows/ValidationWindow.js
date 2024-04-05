@@ -27,12 +27,12 @@ const ValidationWindow = () => {
           <div>
             <Button
               label={getTranslatedWord("shop.confirm")}
-              styleClass="btn_onglets_shop"
+              styleClass="btn_onglets_shop back-color1"
               onClick={handleConfirm}
             />
             <Button
               label={getTranslatedWord("shop.cancel")}
-              styleClass="btn_onglets_shop"
+              styleClass="btn_onglets_shop back-color3"
               onClick={() => openWindow("shop")}
             />
           </div>
