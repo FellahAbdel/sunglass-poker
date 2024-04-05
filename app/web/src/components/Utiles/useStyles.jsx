@@ -16,7 +16,7 @@ export function getStyles(windowType, isLogged, isGameTableVisible) {
           ? "logo-login"
           : ""
       }
-      ${(windowType === "list_table" || windowType === "shop") ? "logo-profile" : ""}
+      ${(windowType === "servers" || windowType === "shop") ? "logo-profile" : ""}
       ${windowType === "create_table" ? "logo-create_table" : ""}`,
 
     containerTable: `container-table 
@@ -36,8 +36,8 @@ export function getStyles(windowType, isLogged, isGameTableVisible) {
           : ""
       }
       ${
-        (windowType === "list_table" || windowType === "shop") && !isGameTableVisible
-          ? "container-list_table"
+        (windowType === "servers" || windowType === "shop") && !isGameTableVisible
+          ? "container-servers"
           : ""
       }
       ${windowType === "create_table" && "container-create_table"}

@@ -69,7 +69,7 @@ const Table = ({
 
   const showGameList = () => {
     if (isLogged) {
-      openWindow("list_table");
+      openWindow("servers");
     } else {
       openWindow("login");
     }
@@ -158,7 +158,7 @@ const Table = ({
         label={
   `${windowType === "tutorial" ? getTranslatedWord("messageLogo.tutorial") : ""}` +
   `${windowType === "profile" ? getTranslatedWord("messageLogo.profile") : ""}` +
-  `${windowType === "list_table" ? getTranslatedWord("messageLogo.listeTable") : ""}` +
+  `${windowType === "servers" ? getTranslatedWord("messageLogo.listeTable") : ""}` +
   `${windowType === "create_table" ? getTranslatedWord("messageLogo.createTable") : ""}` +
   `${windowType === "validation" ? getTranslatedWord("messageLogo.validation") : ""}`+
   `${windowType === "shop" ? getTranslatedWord("messageLogo.shop") : ""}`

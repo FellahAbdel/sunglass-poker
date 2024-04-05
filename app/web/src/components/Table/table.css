@@ -285,13 +285,13 @@
   height: 80vh;
 }
 
-#dark .container-list_table {
+#dark .container-servers {
   border-radius: 60px;
   width: 80vw;
   height: 70vh;
   background-color: #282828;
 }
-#light .container-list_table {
+#light .container-servers {
   border-radius: 60px;
   width: 80vw;
   height: 70vh;

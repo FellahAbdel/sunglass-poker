@@ -58,7 +58,7 @@ const GameTable = () => {
     if (isLogged) {
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
       console.log("Montrer la window des différentes tables");
-      openWindow("list_table");
+      openWindow("servers");
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
       openWindow("login");

@@ -41,7 +41,7 @@ const Window = () => {
         {windowType === "settings" && <SettingsWindow />}
         {windowType === "profile" && <ProfileWindow />}
         {windowType === "stats" && <StatsWindow />}
-        {windowType === "list_table" && <ServerPanelWindow />}
+        {windowType === "servers" && <ServerPanelWindow />}
         {windowType === "create_table" && <CreateTableWindow />}
         {windowType === "shop" && <ShopWindow />}
         {windowType === "validation" && <ValidationWindow />}
