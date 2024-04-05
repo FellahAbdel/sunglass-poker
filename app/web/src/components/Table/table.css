@@ -285,10 +285,19 @@
   height: 80vh;
 }
 
-.container-list_table {
+#dark .container-list_table {
   border-radius: 60px;
   width: 80vw;
   height: 70vh;
+  background-color: #282828;
+}
+#light .container-list_table {
+  border-radius: 60px;
+  width: 80vw;
+  height: 70vh;
+  background: unset;
+  background-color: #282828;
+
 }
 
 .container-acceuil {
