@@ -153,7 +153,6 @@ const GameTable = () => {
           settingsOnClick={handleSettingsButton}
           profileOnClick={handleProfileButton}
           //navbar changes for loggedIn
-          isLoggedNavbar={isLogged}
           logInOnClick={handleLogInButton}
           tutorialOnClick={handleTutorialButton}
         />

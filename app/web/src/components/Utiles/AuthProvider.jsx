@@ -184,7 +184,10 @@ export const AuthProvider = ({ children }) => {
       if (data.success) {
         dispatch({
           type: "LOGIN",
-          payload: { ...data.user, token: token }, // Supposons que `data.user` contient les informations de l'utilisateur
+          payload: {
+            ...data.user,
+            token: token,
+          },
         });
       } else {
         console.error(
@@ -212,6 +215,7 @@ export const AuthProvider = ({ children }) => {
         }
       );
       const data = await response.json();
+      console.log("Data fetched from fetchStats:", data);
       if (data.success) {
         return data.stats; // Supposons que la réponse contient un objet stats dans data.stats
       } else {
@@ -224,14 +228,23 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const resolveImagePath = (relativePath) => {
+    return `${process.env.PUBLIC_URL}${relativePath}`;
+  };
+
   const fetchAvatars = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/avatars', {
+      const response = await fetch("http://localhost:3001/api/avatars", {
         ...CORSSETTINGS,
         method: "GET",
       });
-      const avatars = await response.json();
+      let avatars = await response.json();
       if (response.ok) {
+        // Résolvez le chemin de chaque avatar
+        avatars = avatars.map((avatar) => ({
+          ...avatar,
+          imgSrc: resolveImagePath(avatar.imgSrc),
+        }));
         console.log(avatars);
         return avatars;
       } else {

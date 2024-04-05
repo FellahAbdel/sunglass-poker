@@ -186,17 +186,27 @@ module.exports = function (app, bdd) {
     const token = req.headers.authorization.split(" ")[1];
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await UserModel.findById(decoded.id);
+      const user = await UserModel.findById(decoded.id)
+        .populate('avatar', 'imgSrc')
+        .exec();
+      
       if (!user) {
-        return res
-          .status(404)
-          .json({ success: false, message: "Utilisateur non trouvé" });
+        return res.status(404).json({ success: false, message: "Utilisateur non trouvé" });
       }
-      res.json({ success: true, user });
+      
+      const response = {
+        success: true,
+        user: {
+          ...user._doc,
+          avatar: user.avatar.imgSrc, // Inclure l'URL de l'image de l'avatar
+        }
+      };
+      
+      res.json(response);
     } catch (error) {
       next(error);
     }
-  });
+});
 
   //route pour récupérer les statistiques d'un utilisateur
   app.get("/api/user-stats/:userId", verifyToken, async (req, res, next) => {

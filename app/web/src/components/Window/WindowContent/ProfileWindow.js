@@ -13,24 +13,11 @@ const ProfileWindow = () => {
   const { openWindow } = useWindowContext();
   const { user } = useUserData();
 
-  // const handleEditName = () => {
-  //     setEditingName(true);
-  // }
-
-  // const handleSaveName = () => {
-  //     // Here you would typically update the user's name in your state or database
-  //     setEditingName(false);
-  // }
-
-  // const handleNameChange = (event) => {
-  //     setName(event.target.value);
-  // }
-
   return (
     <div className="profileMenu">
       <img
         className="userPP"
-        src={require("./../../assets/images/pp_simple.jpg")}
+        src={user.avatar}
         alt="User Profile"
       />
 
@@ -53,7 +40,7 @@ const ProfileWindow = () => {
           <br />
           {user?.email || "email inconnu"}
           <br />
-          {user?.coins || "0"}
+          {user?.coins}
           <br />
           {user?.joinedDate || "Date inconnue"}
           <br />
