@@ -5,7 +5,7 @@ import logo from "../assets/SunGameStudio_logo.png";
 
 const LogoComponent = ({styleClass , onClick, label}) => {
   return (
-    <div className={styleClass} >
+    <div className={`${styleClass} ${label && "logo-textPadding"}`} >
       <img onClick={onClick} src={logo} alt="Logo du site"/>
       <h1>{label}</h1>
     </div>

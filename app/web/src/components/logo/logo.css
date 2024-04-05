@@ -13,8 +13,12 @@
   color: white;
 
   transition: top 1s ease, bottom 1s ease, right 1s ease, left 1s ease,
-    opacity 0.5s ease, filter 2s ease;
+    opacity 0.5s ease, filter 2s ease , padding-left 1s ease;
 }
+.logo-textPadding h1{
+  padding-left: 1.5vw;
+}
+
 
 #light .logo-acceuil {
   filter: saturate(100%);
@@ -42,7 +46,6 @@
 .logo-profile,
 .logo-tutorial {
   bottom: 110%;
-  left: -6%;
   z-index: -1;
 }
 .logo-profile img,
@@ -50,16 +53,6 @@
   width: 9vw;
 }
 
-.logo-tutorial h1,
-.logo-profile h1 {
-  color: white;
-  position: absolute;
-  left: 60%;
-}
-.logo-list_table h1 {
-  position: absolute;
-  left: 56%;
-}
 
 .logo-success {
   bottom: 110%;
@@ -82,11 +75,11 @@
   width: 9vw;
 }
 
-.logo-list_table {
-  left: -8%;
+.logo-servers {
+  z-index: -1;
   bottom: 100%;
 }
-.logo-list_table img {
+.logo-servers img {
   width: 7vw;
 }
 
@@ -104,4 +97,12 @@
   bottom: 110%;
   z-index: -1;
   opacity: 100;
+}
+
+.logo-shop {
+  bottom: 110%;
+  z-index: -1;
+}
+.logo-shop img{
+  width: 9vw;
 }
