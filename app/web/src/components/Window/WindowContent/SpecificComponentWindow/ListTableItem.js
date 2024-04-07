@@ -12,7 +12,7 @@ const ListTableItem = ({ nom, rang, nombreDeJoueurs, ouvert, onJoinClick }) => {
     <div className="tableRow">
       <div className="rowItem">{nom}</div>
       <div className="rowItem">{rang}</div>
-      <div className="rowItem">{nombreDeJoueurs}</div>
+      <div className="rowItem">{nombreDeJoueurs}/10</div>
       <div className="rowItem">
         {ouvert ? (
           <img src={unlocked} alt="Open" />
@@ -24,7 +24,7 @@ const ListTableItem = ({ nom, rang, nombreDeJoueurs, ouvert, onJoinClick }) => {
         {nombreDeJoueurs < 10 ? (
           <Button
             label={getTranslatedWord("serverPanel.join")}
-            styleClass="btn-list_table btn-list_table_join"
+            styleClass="btn-list_table btn-list_table_join back-color2"
             onClick={onJoinClick}
           />
         ) : (

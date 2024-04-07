@@ -1,10 +1,10 @@
 //LoginWindow.js
 import React, { useState } from "react";
-import Button from "../../button/Button.tsx";
-import TextInputComponent from "../../textInput/TextInput";
-import { useAuth } from "../../Utiles/AuthProvider";
-import { useWindowContext } from "../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../Utiles/Translations';
+import Button from "../../../button/Button.tsx";
+import TextInputComponent from "../../../textInput/TextInput.jsx";
+import { useAuth } from "../../../Utiles/AuthProvider.jsx";
+import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
+import { useTranslation } from '../../../Utiles/Translations.jsx';
 
 
 const LoginWindow = () => {
@@ -97,7 +97,7 @@ const LoginWindow = () => {
       <Button
         styleClass="btn-connectionDefault google-button back-color3"
         label={getTranslatedWord("connection.signinG")}
-        iconSrc={require("./../../assets/images/icons/white/google.png")}
+        iconSrc={require("./../../../assets/images/icons/white/google.png")}
         iconStyle={true}
       />
     </div>

@@ -69,7 +69,7 @@ const Table = ({
 
   const showGameList = () => {
     if (isLogged) {
-      openWindow("list_table");
+      openWindow("servers");
     } else {
       openWindow("login");
     }
@@ -84,9 +84,14 @@ const Table = ({
     // container-acceuil : for the table to show up in acceuil when game opens
     // container-tutorial : for tuto
     <div className={classes.containerTable}>
+      
+      {/*the white border line around the table in the middle*/}
+      <div className={`${classes.containerTable} ${!isWindowOpen && "table-lineAround"} ${(windowType === "" && !isGameTableVisible || isWindowOpen) && "disappear" }`}/>
+
       {/* Acceuil table if not logged in and game table if logged in */}
-      {isGameTableVisible ? (
+      {isGameTableVisible && !isWindowOpen ? (
         <>
+
           {/* cards and the pot in the center of the table */}
           <CardsPlacements
             moneyPot={moneyPot}
@@ -150,12 +155,14 @@ const Table = ({
       {/* dynamique logo , moves according to the menu that is open */}
       <LogoComponent
         styleClass={classes.logoComponent}
-        label={`
-          ${windowType === "tutorial" ? "Tutorial" : ""}
-          ${windowType === "profile" ? "Profile" : ""}
-          ${windowType === "list_table" ? "JOIN A GAME" : ""}
-          ${windowType === "create_table" ? "CREATE A NEW GAME" : ""}
-        `}
+        label={
+  `${windowType === "tutorial" ? getTranslatedWord("messageLogo.tutorial") : ""}` +
+  `${windowType === "profile" ? getTranslatedWord("messageLogo.profile") : ""}` +
+  `${windowType === "servers" ? getTranslatedWord("messageLogo.listeTable") : ""}` +
+  `${windowType === "create_table" ? getTranslatedWord("messageLogo.createTable") : ""}` +
+  `${windowType === "validation" ? getTranslatedWord("messageLogo.validation") : ""}`+
+  `${windowType === "shop" ? getTranslatedWord("messageLogo.shop") : ""}`
+}
       />
     </div>
   );

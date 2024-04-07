@@ -14,11 +14,6 @@ const CardsPlacements = ({
           
           <div className={`container-moneyPot`}>{moneyPot.toLocaleString()}$</div>
 
-          {/* {dealingFlop[0] ? false : 
-          
-            <TextGlitch children={"SunGlassPoker"}/>
-          } */}
-          
           <div className="container-tableCards">
             {/* first three flops -> dealingFlop[0]
             first forth flops -> dealingFlop[1]
@@ -30,6 +25,8 @@ const CardsPlacements = ({
             <Card card={["6","clubs"]} styleClass={"tableCard"} flippedStyle={"dealingFlop4"} flippingCard={dealingFlop[2]}/>
           </div>  
         
+
+          
           <div className="container-dealerDuck">
             <Card  styleClass={"cardDuck"}  card={null} flippedStyle={null} flippingCard={false}/>
             

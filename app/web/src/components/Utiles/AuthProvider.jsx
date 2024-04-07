@@ -92,6 +92,10 @@ export const AuthProvider = ({ children }) => {
         "http://localhost:3001/api/update-user-data",
         {
           ...CORSSETTINGS,
+          headers: {
+            ...CORSSETTINGS.headers,
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Récupérer le token du sessionStorage
+          },
           body: JSON.stringify({
             field,
             value,
@@ -180,7 +184,10 @@ export const AuthProvider = ({ children }) => {
       if (data.success) {
         dispatch({
           type: "LOGIN",
-          payload: { ...data.user, token: token }, // Supposons que `data.user` contient les informations de l'utilisateur
+          payload: {
+            ...data.user,
+            token: token,
+          },
         });
       } else {
         console.error(
@@ -202,12 +209,13 @@ export const AuthProvider = ({ children }) => {
         {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
-            // Incluez d'autres headers comme le token si nécessaire
+            ...CORSSETTINGS.headers,
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Inclure le token JWT ici
           },
         }
       );
       const data = await response.json();
+      console.log("Data fetched from fetchStats:", data);
       if (data.success) {
         return data.stats; // Supposons que la réponse contient un objet stats dans data.stats
       } else {
@@ -217,6 +225,33 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Error fetching user stats:", error);
       return null;
+    }
+  };
+
+  const resolveImagePath = (relativePath) => {
+    return `${process.env.PUBLIC_URL}${relativePath}`;
+  };
+
+  const fetchAvatars = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/avatars", {
+        ...CORSSETTINGS,
+        method: "GET",
+      });
+      let avatars = await response.json();
+      if (response.ok) {
+        // Résolvez le chemin de chaque avatar
+        avatars = avatars.map((avatar) => ({
+          ...avatar,
+          imgSrc: resolveImagePath(avatar.imgSrc),
+        }));
+        console.log(avatars);
+        return avatars;
+      } else {
+        console.error("Erreur lors du chargement des avatars");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la connexion à l'API:", error);
     }
   };
 
@@ -234,6 +269,7 @@ export const AuthProvider = ({ children }) => {
         state,
         dispatch,
         fetchStats,
+        fetchAvatars,
       }}
     >
       {children}

@@ -102,8 +102,7 @@
     
     width: 4vw;
     height: auto;
-    border-style: solid;
-    border-color: rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.468);
     border-radius: 5px;
     padding: 1%;
 }
@@ -205,19 +204,23 @@
 
 /*Money pot container*/
 .container-moneyPot{
-    width: 100%;
-    height: 10%;
-    display: flex;
-    align-items: center;
-    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 1.1% 2% 1.3% 2%;
+
     text-align: center;
-    justify-content: center;
+
     position: absolute;
     top:0;
-    color: #fff; /* Neon color */
-    text-shadow:
-      0 0 5px #ffffff80, /* Neon glow */
-      0 0 10px #ffffff7f, /* Neon glow */
-      0 0 15px #ffffff75; /* Neon glow */
+    left: 50%;
+    transform: translateX(-50%);
 
+    color: #fff;
+    font-size: 2vh;
+    text-shadow:unset;
+    box-shadow: inset 0 0 8px 1px black;
+
+    background-color: #303b44;
+    border-radius: 30px;
+    z-index: 99;
 }

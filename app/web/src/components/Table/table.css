@@ -16,7 +16,7 @@
 
 
   transition: width 1s ease, height 1s ease, box-shadow 0.5s ease,
-    border-radius 1s ease, background-color 0.5s ease , background-size 0.5s ease, filter 1s ease;
+    border-radius 1s ease , background-size 0.5s ease, filter 1s ease;
 }
 
 /*table color when logged in and logged out*/
@@ -204,6 +204,41 @@
   background-size: calc(2*var(--s)) calc(5*var(--s)/2);
 }
 
+#dark .container-validation,
+#dark .container-shop{
+  width: 65vw;
+  height: 50vh;
+  border-radius: 50px;
+
+  box-shadow:
+    inset 0 0 50px rgb(0, 0, 0),
+    0 0 1vw 0.8vw #164f81,
+    0 0 0 1vw rgb(0, 0, 0),
+    0 0 0 2vw rgb(31, 33, 36),
+    inset 0 0 0 2vw rgb(43, 41, 41),
+    0 0 5vw 3vw black;
+
+  background: unset;
+  background-color: #282828;  
+}
+#light .container-validation,
+#light .container-shop{
+  width: 60vw;
+  height: 50vh;
+  border-radius: 50px;
+
+  box-shadow:
+  inset 0 0 50px rgb(0, 0, 0),
+  inset 0 0 0 2vw rgb(43, 41, 41),
+  0 0 1vw 0.8vw #a57423,
+  0 0 0 1vw rgb(0, 0, 0),
+  0 0 0 2vw rgb(31, 33, 36),
+  0 0 5vw 3vw black;
+
+  background-color: #282828;
+  background-image: unset;
+}
+
 #dark .container-settings {
   border-radius: 150px;
   width: 30vw;
@@ -250,10 +285,19 @@
   height: 80vh;
 }
 
-.container-list_table {
+#dark .container-servers {
   border-radius: 60px;
   width: 80vw;
   height: 70vh;
+  background-color: #282828;
+}
+#light .container-servers {
+  border-radius: 60px;
+  width: 80vw;
+  height: 70vh;
+  background: unset;
+  background-color: #282828;
+
 }
 
 .container-acceuil {
@@ -289,12 +333,28 @@
   0 0 5vw 3vw black;
 }
 
-#dark .container-success {
+#dark .container-success{
   width: 50vw;
   height: 40vh;
   border-radius: 200px;
+
+  box-shadow:
+  inset 0 0 50px rgb(0, 0, 0),
+  0 0 1vw 0.8vw #164f81,
+  0 0 0 1vw rgb(0, 0, 0),
+  0 0 0 2vw rgb(31, 33, 36),
+  inset 0 0 0 2vw rgb(43, 41, 41),
+  0 0 5vw 3vw black;
+  
+background:
+  radial-gradient(black 15%, transparent 16%) 0 0,
+  radial-gradient(black 15%, transparent 16%) 8px 8px,
+  radial-gradient(#164f81 15%, transparent 20%) 0 0.5px,
+  radial-gradient(#164f81 15%, transparent 20%) 8px 8.5px;
+background-color: #282828;
+background-size: 16px 16px;
 }
-#light .container-success {
+#light .container-success{
   width: 50vw;
   height: 40vh;
   border-radius: 200px;
@@ -317,6 +377,8 @@
   background-color: #424242;
   background-size: calc(2*var(--s)) calc(5*var(--s)/2);
 }
+
+
 
 .container-create_table{
   width: 35vw;
@@ -461,3 +523,22 @@ background:
   radial-gradient(#164f81 15%, transparent 20%) 8px 9px;
 background-color: #282828;
 background-size: 16px 12px; */
+
+
+#light .table-lineAround ,
+#dark .table-lineAround{
+  box-shadow: unset;
+  background: unset;
+  background-image: unset;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.317);
+  width: 52vw;
+  height: 30vh;
+}
+#dark .disappear,
+#light .disappear{
+  opacity: 0;
+}

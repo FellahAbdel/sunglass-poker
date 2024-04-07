@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Button from "../../button/Button.tsx";
-import TextInputComponent from "../../textInput/TextInput";
-import { useAuth } from "../../Utiles/AuthProvider";
+import Button from "../../../button/Button.tsx";
+import TextInputComponent from "../../../textInput/TextInput.jsx";
+import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import {
   validateEmail,
   validatePassword,
   validatePasswordMatch,
-} from "../../Utiles/ValidationUtils.jsx";
-import { useWindowContext } from "../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../Utiles/Translations';
+} from "../../../Utiles/ValidationUtils.jsx";
+import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
+import { useTranslation } from '../../../Utiles/Translations.jsx';
 
 const ResetPasswordWindow = ({ showSuccess }) => {
   const { getTranslatedWord } = useTranslation();

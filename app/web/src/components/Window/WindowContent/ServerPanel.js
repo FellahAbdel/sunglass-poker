@@ -53,7 +53,7 @@ const ServerPanelWindow = () => {
       <div className="listTableHeader">
         <div className="headerItem">{getTranslatedWord("serverPanel.name")}</div>
         <div className="headerItem">{getTranslatedWord("serverPanel.rank")}</div>
-        <div className="headerItem">{getTranslatedWord("serverPanel.privacy")}</div>
+        <div className="headerItem">{getTranslatedWord("game.players")}</div>
         <div className="headerItem"></div>
         <div className="headerItem"></div>
       </div>

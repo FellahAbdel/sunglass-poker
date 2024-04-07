@@ -1,0 +1,22 @@
+.skin-item {
+  width: 100%;
+  height: auto;
+}
+
+.skin-item img {
+  width: 100%;
+  height: auto;
+}
+
+.shop-item {
+  background-color: #004577;
+  text-align: center;
+  cursor: pointer;
+  width: calc(20% - 10px);
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+.owned-item {
+  background-color: unset;
+}
