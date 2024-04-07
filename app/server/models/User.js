@@ -22,7 +22,7 @@ const UserSchema = new Schema({
   coins: {
     type: Number,
     required: true,
-    default: 0,
+    default: 1000,
   },
   avatar: {
     type: Schema.Types.ObjectId,

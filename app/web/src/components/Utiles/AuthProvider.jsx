@@ -31,6 +31,14 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  const getAuthHeaders = () => {
+    const token = sessionStorage.getItem("authToken");
+    return {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+  };
+
   const login = async (credentials) => {
     try {
       const response = await fetch("http://localhost:3001/api/login", {
@@ -92,10 +100,7 @@ export const AuthProvider = ({ children }) => {
         "http://localhost:3001/api/update-user-data",
         {
           ...CORSSETTINGS,
-          headers: {
-            ...CORSSETTINGS.headers,
-            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Récupérer le token du sessionStorage
-          },
+          headers: getAuthHeaders(),
           body: JSON.stringify({
             field,
             value,
@@ -167,15 +172,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const fetchUserInfo = async (token) => {
+  const fetchUserInfo = async () => {
     try {
       const response = await fetch("http://localhost:3001/api/userInfo", {
-        // Assurez-vous que cette route existe dans votre backend et qu'elle renvoie les informations de l'utilisateur basé sur le token
         method: "GET",
-        headers: {
-          ...CORSSETTINGS.headers,
-          Authorization: `Bearer ${token}`,
-        },
+        headers: getAuthHeaders(),
       });
       const data = await response.json();
 
@@ -186,7 +187,6 @@ export const AuthProvider = ({ children }) => {
           type: "LOGIN",
           payload: {
             ...data.user,
-            token: token,
           },
         });
       } else {
@@ -208,10 +208,7 @@ export const AuthProvider = ({ children }) => {
         `http://localhost:3001/api/user-stats/${user._id}`,
         {
           method: "GET",
-          headers: {
-            ...CORSSETTINGS.headers,
-            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Inclure le token JWT ici
-          },
+          headers: getAuthHeaders(),
         }
       );
       const data = await response.json();
@@ -255,6 +252,54 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const buyItem = async (itemId) => {
+    try {
+      const response = await fetch("http://localhost:3001/api/buy-item", {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          userId: user._id,
+          itemId: itemId,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        console.log(data.message);
+        dispatch({ type: "UPDATE_USER", payload: data.user });
+        return true;
+      } else {
+        console.error(data.message);
+        return false;
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'achat de l'item :", error);
+      return false;
+    }
+  };
+
+  const activateAvatar = async (avatarId) => {
+    try {
+        const response = await fetch(`http://localhost:3001/api/activate-avatar`, {
+            method: 'POST',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({ userId: user._id, avatarId }),
+        });
+        const data = await response.json();
+        if (data.success) {
+            dispatch({ type: "UPDATE_USER_AVATAR", payload: avatarId });
+            console.log("Avatar changed successfully");
+            return true;
+        } else {
+            console.error("Failed to change avatar", data.message);
+            return false;
+        }
+    } catch (error) {
+        console.error("Error changing avatar:", error);
+        return false;
+    }
+};
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -270,6 +315,8 @@ export const AuthProvider = ({ children }) => {
         dispatch,
         fetchStats,
         fetchAvatars,
+        buyItem,
+        activateAvatar,
       }}
     >
       {children}

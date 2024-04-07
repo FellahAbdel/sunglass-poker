@@ -12,6 +12,7 @@ require("dotenv").config();
 
 const cors = require("cors");
 
+
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(" ")[1];
@@ -19,8 +20,8 @@ const verifyToken = (req, res, next) => {
   if (token == null) return res.sendStatus(401);
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) return res.sendStatus(403); 
-    req.userId = decoded.id; 
+    if (err) return res.sendStatus(403);
+    req.userId = decoded.id;
     next();
   });
 };
@@ -183,30 +184,30 @@ module.exports = function (app, bdd) {
   });
 
   app.get("/api/userInfo", verifyToken, async (req, res, next) => {
-    const token = req.headers.authorization.split(" ")[1];
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await UserModel.findById(decoded.id)
-        .populate('avatar', 'imgSrc')
+      const user = await UserModel.findById(req.userId)
+        .populate("avatar", "imgSrc")
         .exec();
-      
+
       if (!user) {
-        return res.status(404).json({ success: false, message: "Utilisateur non trouvé" });
+        return res
+          .status(404)
+          .json({ success: false, message: "Utilisateur non trouvé" });
       }
-      
+
       const response = {
         success: true,
         user: {
           ...user._doc,
           avatar: user.avatar.imgSrc, // Inclure l'URL de l'image de l'avatar
-        }
+        },
       };
-      
+
       res.json(response);
     } catch (error) {
       next(error);
     }
-});
+  });
 
   //route pour récupérer les statistiques d'un utilisateur
   app.get("/api/user-stats/:userId", verifyToken, async (req, res, next) => {
@@ -227,7 +228,9 @@ module.exports = function (app, bdd) {
   });
 
   app.post("/api/buy-item", verifyToken, async (req, res, next) => {
-    const { userId, itemId } = req.body;
+    const { itemId } = req.body;
+
+    const userId = req.userId;
 
     try {
       // Trouver l'utilisateur par son ID
@@ -275,15 +278,39 @@ module.exports = function (app, bdd) {
     res.status(500).json({ success: false, message: "Server error" });
   });
 
-  async function updateUserAvatar(userId, newItemId) {
+  app.post("/api/activate-avatar", verifyToken, async (req, res, next) => {
+    const { userId, avatarId } = req.body;
+
     try {
-      // Mise à jour de l'utilisateur avec le nouvel avatar sélectionné
-      await UserModel.findByIdAndUpdate(userId, { avatar: newItemId });
-      console.log("Avatar de l'utilisateur mis à jour avec succès.");
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        return res
+          .status(404)
+          .json({ success: false, message: "User not found" });
+      }
+
+      const itemExists = user.itemsOwned.some(
+        (item) => item.toString() === avatarId
+      );
+      if (!itemExists) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Avatar not owned" });
+      }
+
+      user.avatar = avatarId;
+      await user.save();
+
+      res.json({
+        success: true,
+        message: "Avatar activated successfully",
+        user: { ...user._doc, avatar: user.avatar },
+      });
     } catch (error) {
-      console.error("Erreur lors de la mise à jour de l'avatar:", error);
+      console.error("Error activating avatar:", error);
+      res.status(500).json({ success: false, message: "Server error" });
     }
-  }
+  });
 
   return db;
 };

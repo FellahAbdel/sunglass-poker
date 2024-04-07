@@ -8,12 +8,16 @@ import { useAvatars } from "./AvatarItem";
 import { useUserData } from "../../../Utiles/useUserData";
 import { useCardSkins } from "./CardSkins";
 import { useWallPapers } from "./wallpapers";
-
+import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 
 const ShopWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const { user } = useUserData();
-  const ownedItemIds = user?.itemsOwned?.map((item) => item._id) ?? [];
+  const { activateAvatar } = useAuth();
+  const ownedItemIds = user?.itemsOwned?.map((id) => id.toString()) ?? [];
+
+  const isOwned = (itemId) => ownedItemIds.includes(itemId.toString());
+
   const [activeTab, setActiveTab] = useState("avatars");
   const { openValidationWindow } = useWindowContext();
 
@@ -24,9 +28,19 @@ const ShopWindow = () => {
     // Autres catégories
   };
 
+  const handleActivateAvatar = async (itemId) => {
+    const success = await activateAvatar(itemId);
+    if (!success) {
+      console.error("Could not activate avatar");
+    }
+  };
+
   const avatars = useAvatars();
   const cards = useCardSkins();
   const wallpapers = useWallPapers();
+
+  console.log("Avatars:", avatars);
+  console.log("Owned Items IDs:", ownedItemIds);
 
   const items = {
     avatars: avatars,
@@ -42,7 +56,8 @@ const ShopWindow = () => {
             key={tab}
             label={tabNames[tab]}
             styleClass={`btn_onglets_shop ${
-              activeTab === tab ? "back-color1": "back-color3"}`}
+              activeTab === tab ? "back-color1" : "back-color3"
+            }`}
             onClick={() => setActiveTab(tab)}
           />
         ))}
@@ -50,10 +65,14 @@ const ShopWindow = () => {
       <div className="items-display">
         {items[activeTab]?.map((item) => (
           <ShopItem
-            key={item.id}
+            key={item._id}
             item={item}
-            onClickItem={() => openValidationWindow(item)}
-            styleClass={ownedItemIds.includes(item.id) ? "owned-item" : ""}
+            onClickItem={() =>
+              isOwned(item._id)
+                ? handleActivateAvatar(item._id)
+                : openValidationWindow(item)
+            }
+            styleClass={isOwned(item._id) ? "owned-item" : ""}
           />
         ))}
       </div>

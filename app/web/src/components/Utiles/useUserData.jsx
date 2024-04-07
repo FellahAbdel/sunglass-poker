@@ -11,23 +11,23 @@ export const useUserData = () => {
     return `${process.env.PUBLIC_URL}${relativePath}`;
   };
 
-  useEffect(() => {
-    const loadUserStats = async () => {
-      if (windowType === "stats" && user?._id) {
-        try {
-          const fetchedStats = await fetchStats();
-          setStats(fetchedStats);
-        } catch (error) {
-          console.error("Error fetching user stats:", error);
-        }
+  const loadUserStats = async () => {
+    if (windowType === "stats" && user?._id) {
+      try {
+        const fetchedStats = await fetchStats();
+        setStats(fetchedStats);
+      } catch (error) {
+        console.error("Error fetching user stats:", error);
       }
-    };
+    }
+  };
 
+  useEffect(() => {
     loadUserStats();
   }, [windowType, user?._id, fetchStats]);
 
   useEffect(() => {
-    console.log("Current user data:", user); // Ceci affichera les informations de l'utilisateur à chaque mise à jour
+    console.log("Current user data:", user);
 
     const loadUserStats = async () => {
       if (windowType === "stats" && user?._id) {
@@ -50,5 +50,5 @@ export const useUserData = () => {
       : "default_avatar_path",
   };
 
-  return { user: resolvedUser, stats };
+  return { user: resolvedUser, stats, loadUserStats };
 };

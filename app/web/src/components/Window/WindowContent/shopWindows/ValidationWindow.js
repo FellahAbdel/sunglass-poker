@@ -3,17 +3,31 @@ import { useWindowContext } from "../../../Utiles/WindowContext"; // Assure-toi 
 import "./validationWindow.css";
 import Button from "../../../button/Button.tsx";
 import { useTranslation } from "../../../Utiles/Translations";
+import { useAuth } from "../../../Utiles/AuthProvider.jsx";
+import { useUserData } from "../../../Utiles/useUserData";
+
+
 
 const ValidationWindow = () => {
   const { getTranslatedWord } = useTranslation();
+  const { buyItem, fetchUserInfo } = useAuth();
+  
+  const { loadUserStats } = useUserData();
+
+
 
   const { selectedItem, openSuccessWindow, openWindow } = useWindowContext();
 
   if (!selectedItem) return null;
 
-  const handleConfirm = () => {
-    // Logique de confirmation
-    openSuccessWindow("Achat réalisé avec succès !");
+  const handleConfirm = async () => {
+    const success = await buyItem(selectedItem._id);
+    if (success) {
+      openSuccessWindow("Achat réalisé avec succès !");
+      loadUserStats();
+    } else {
+      console.error("Erreur lors de l'achat");
+    }
   };
 
   return (
