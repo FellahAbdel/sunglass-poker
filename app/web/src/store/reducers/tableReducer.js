@@ -24,14 +24,15 @@ const tableReducer = (state = initialState, action) => {
         case actions.REFRESH:
           return {
             ...state,
-            ...action.payload,
+            table:action.payload.table,
+            players:action.payload.game.players
           };
         case actions.SIT:
           console.log("New player sit at the table");
           return {
             ...state,
             table:action.payload.table,
-            players:action.payload.players
+            players:action.payload.game.players
           };
         default:
             console.log("Table reducer called");

@@ -50,7 +50,7 @@ const comm = {
 
         socket.on('event', (data) => {
             console.log(data);
-            store.dispatch({type:data.type,payload:data.payload});
+            store.dispatch({payload:data.payload,type:data.type});
         })
 
         socket.on('status', (data) => this.getStatus(data));
