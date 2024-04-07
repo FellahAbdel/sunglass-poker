@@ -16,7 +16,7 @@
 
 
   transition: width 1s ease, height 1s ease, box-shadow 0.5s ease,
-    border-radius 1s ease , background-size 0.5s ease, filter 1s ease;
+    border-radius 1s ease , filter 1s ease;
 }
 
 /*table color when logged in and logged out*/
@@ -150,7 +150,7 @@
     0 80px 10vw 3vw black;
 
   background-image:url("./../assets/images/texture/carpet.jpg") ;
-  background-size: 100%; /* Scale the background image to cover the entire container */
+  background-size: 65vw; /* Scale the background image to cover the entire container */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat;
 
@@ -531,8 +531,6 @@ background-size: 16px 12px; */
   background: unset;
   background-image: unset;
   position: absolute;
-  top: 0;
-  bottom: 0;
 
   border: 1px solid rgba(255, 255, 255, 0.317);
   width: 52vw;

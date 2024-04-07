@@ -53,7 +53,6 @@ const Navbar = ({
                 <Button
                   label={getTranslatedWord("navbar.chat")}
                   onClick={handleChatOpen}
-                  style={{}}
                 />
               )}
 

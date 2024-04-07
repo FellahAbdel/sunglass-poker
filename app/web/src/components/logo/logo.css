@@ -65,6 +65,7 @@
 
 .logo-acceuil.disappear {
   opacity: 0;
+  z-index: -999;
 }
 
 .logo-stats {
