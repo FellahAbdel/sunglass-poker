@@ -4,37 +4,30 @@
 
 #dark .back-color1 {
   background-color: #004577;
-  color: white;
 }
 
 #dark .back-color2 {
   background-color: #4D6478; 
-  color: white;
 }
 
 #dark .back-color3{
   background-color: #303b44; 
-  color: white;
 }
 
+#light .back-color1 {
+  background-color: #a57423; 
+}
+#light .back-color2 {
+  background-color: #866839; 
+}
+#light .back-color3{
+  background-color: #35240a; 
+}
 .back-color1:hover, .back-color2:hover, .back-color3:hover {
   filter:brightness(150%);
   cursor: pointer;
   color: black;
   text-shadow: unset;
-}
-
-#light .back-color1 {
-  background-color: #a57423; 
-  color: white;
-}
-#light .back-color2 {
-  background-color: #866839; 
-  color: white;
-}
-#light .back-color3{
-  background-color: #35240a; 
-  color: white;
 }
 
 .btn-connectionDefault {
@@ -45,6 +38,7 @@
   font-size: 3vh;
   margin-bottom: 5px;
   margin-top: 5px;
+  color: white;
 }
 
 
