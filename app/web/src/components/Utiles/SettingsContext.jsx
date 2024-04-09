@@ -10,15 +10,15 @@ export const SettingsProvider = ({ children }) => {
 
   // Effets pour mettre jour sessionStorage
   useEffect(() => {
-    sessionStorage.setItem('theme', state.theme);
+    localStorage.setItem('theme', state.theme);
   }, [state.theme]);
 
   useEffect(() => {
-    sessionStorage.setItem('mute', state.mute);
+    localStorage.setItem('mute', state.mute);
   }, [state.mute]);
 
   useEffect(() => {
-    sessionStorage.setItem('language', state.language);
+    localStorage.setItem('language', state.language);
   }, [state.language]);
 
   // Fonctions pour dispatcher les actions
