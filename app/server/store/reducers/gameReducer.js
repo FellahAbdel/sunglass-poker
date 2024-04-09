@@ -14,6 +14,7 @@ const initialState = {
       (_, index) => new Player(index + 1, "Player" + index)
     ),
   ],
+  isGameStarted: false,
     controlsMode: "preGame", // Can be "preGame", "roundOne", "roundTwo", "roundThree", "endGame
 };
 
@@ -23,31 +24,34 @@ const begin = (gameState) => {
   const players = gameState.players;
   players.forEach((player) => gameState.gameClass.addPlayer(player));
 
-  // Distribute small and big blinds
-  const smallBlindPlayerId = 0; /* logic to determine small blind player id */
-  const bigBlindPlayerId = 1; /* logic to determine big blind player id */
-  const smallBlindAmount = 10; /* your small blind amount */
-  const bigBlindAmount = 20; /* your big blind amount */
+//   // Distribute small and big blinds
+//   const smallBlindPlayerId = 0; /* logic to determine small blind player id */
+//   const bigBlindPlayerId = 1; /* logic to determine big blind player id */
+//   const smallBlindAmount = 10; /* your small blind amount */
+//   const bigBlindAmount = 20; /* your big blind amount */
 
-  // Designate small and big blinds
-  gameState.gameClass.smallBlindPlayerId = smallBlindPlayerId;
-  gameState.gameClass.bigBlindPlayerId = bigBlindPlayerId;
+//   // Designate small and big blinds
+//   gameState.gameClass.smallBlindPlayerId = smallBlindPlayerId;
+//   gameState.gameClass.bigBlindPlayerId = bigBlindPlayerId;
 
-  // Distribute blinds
-  gameState.gameClass.pokerTable.playerBet(
-    gameState.gameClass.players[smallBlindPlayerId],
-    smallBlindAmount
-  );
-  gameState.gameClass.pokerTable.playerBet(
-    gameState.gameClass.players[bigBlindPlayerId],
-    bigBlindAmount
-  );
+//   // Distribute blinds
+//   gameState.gameClass.pokerTable.playerBet(
+//     gameState.gameClass.players[smallBlindPlayerId],
+//     smallBlindAmount
+//   );
+//   gameState.gameClass.pokerTable.playerBet(
+//     gameState.gameClass.players[bigBlindPlayerId],
+//     bigBlindAmount
+//   );
 
   // Start the game
-  gameState.gameClass.start();
-
+  gameState.gameClass.start(gameState.players);
+    
   return {
     ...gameState,
+    gameClass: gameState.gameClass,
+    players: gameState.players,
+    isGameStarted: true,
     controlsMode: "roundOne",
   };
 };
@@ -62,6 +66,7 @@ const gameReducer = (state = initialState, action) => {
     // Other game actions can be handled here
     default:
       console.log('default',action.type);
+    //   begin(state);
       return state;
   }
 };
