@@ -15,7 +15,18 @@ function createWindow() {
     }
   })
   win.setMenu(null);
-  win.loadURL("http://localhost:3000")
+
+  // Gérer les événements d'erreur de chargement de la page
+  win.webContents.on("did-fail-load", (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
+    // Afficher un message d'erreur à l'utilisateur
+    dialog.showErrorBox("Erreur de chargement de la page", `Code d'erreur: ${errorCode}\nDescription de l'erreur: ${errorDescription}`);
+  });
+
+  win.loadURL("http://localhost:3001")
+  //win.loadURL("https://httpstat.us/404");
+  //win.loadURL("http://example.com/non-existent");
+
+
 }
 
 app.whenReady().then(createWindow);
