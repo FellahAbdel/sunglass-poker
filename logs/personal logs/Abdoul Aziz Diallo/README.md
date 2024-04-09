@@ -71,3 +71,11 @@
 | 30/03 | Connect the store to the front                                  |                  | 4h00       |           |
 | 31/03 | use the store to make a dynamic rendering                       |                  | 8h00       |           |
 | 01/03 | front code analyzing                                            |                  | 2h00       |           |
+
+## Week 8 - _Total: h_
+
+| Date  | Description                                                                                             | Skills developed | Time Spent | Resources |
+| ----- | ------------------------------------------------------------------------------------------------------- | ---------------- | ---------- | --------- |
+| 02/04 | How to connect the react-redux and socket.io ? couldn't figure it out                                   |                  | 4h         |           |
+| 03/04 | Trying to understand front code and try to adapt mine with regards that I had forget to merge it before |                  | 4h         |           |
+| 04/04 | Players join the room without receiving the GAME_STARTED (Stuck)                                        |                  | 4h         |           |
