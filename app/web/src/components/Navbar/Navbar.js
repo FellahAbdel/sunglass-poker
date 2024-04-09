@@ -1,8 +1,6 @@
 //react imports
 import React, { useState } from "react";
 
-// import { useTranslation } from "react-i18next";
-
 //css
 import "./navbar.css";
 //components

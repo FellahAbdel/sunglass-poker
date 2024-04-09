@@ -72,7 +72,7 @@ const ShopWindow = () => {
                 ? handleActivateAvatar(item._id)
                 : openValidationWindow(item)
             }
-            styleClass={isOwned(item._id) ? "owned-item" : ""}
+            styleClass={isOwned(item._id) ? "owned-item back-color1" : "back-color3"}
           />
         ))}
       </div>

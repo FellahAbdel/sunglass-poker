@@ -9,7 +9,7 @@ export const WindowProvider = ({ children }) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const [isWindowOpen, setIsWindowOpen] = useState(() => {
-    const saved = localStorage.getItem("isWindowOpen");
+    const saved = sessionStorage.getItem("isWindowOpen");
     return saved === "true" ? true : false;
   });
 
@@ -21,12 +21,12 @@ export const WindowProvider = ({ children }) => {
   };
   
 
-  const [windowType, setWindowType] = useState(() => localStorage.getItem("windowType") || "");
+  const [windowType, setWindowType] = useState(() => sessionStorage.getItem("windowType") || "");
   const [connectionWindowOpen, setconnectionWindowOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
   const [isGameTableVisible, setIsGameTableVisible] = useState(() => {
-    const saved = localStorage.getItem("isGameTableVisible");
+    const saved = sessionStorage.getItem("isGameTableVisible");
     return saved === "true" ? true : false;
   });
 
@@ -42,16 +42,16 @@ export const WindowProvider = ({ children }) => {
 
 
   useEffect(() => {
-    localStorage.setItem("isWindowOpen", isWindowOpen.toString());
+    sessionStorage.setItem("isWindowOpen", isWindowOpen.toString());
   }, [isWindowOpen]);
   
   useEffect(() => {
-    localStorage.setItem("windowType", windowType);
+    sessionStorage.setItem("windowType", windowType);
   }, [windowType]);
   
 
   useEffect(() => {
-    localStorage.setItem("isGameTableVisible", isGameTableVisible);
+    sessionStorage.setItem("isGameTableVisible", isGameTableVisible);
   }, [isGameTableVisible]);
 
   const toggleGameTableVisibility = () => {
