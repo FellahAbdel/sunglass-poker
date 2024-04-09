@@ -74,7 +74,10 @@
 
 * 2024/03/29 : <b> 45m </b> <br/>        Travail individuel: <i>des petites ameliorations de css</i>
 
-* 2024/04/01 : <b> 1h </b> <br/>        Travail individuel: <i>table effet 3D , ameliorations css</i>
+* 2024/04/01 : <b> 3h </b> <br/>        Travail individuel: <i>table effet 3D , ameliorations css , second lang avec i18next , fichier json des deux langue </i>
 
+* 2024/04/02 : <b> 4h </b> <br/>        Travail en cours TP: <i>debuggage de la fonctionalité de multi langue avec NOE, demo de front-end pour le prof de TP </i>
 
-total: 110h00min
+* 2024/04/05 : <b> 1h </b> <br/>        Travail individuel: <i>des petit changement et ameliorations de css</i>
+
+total: 117h00min

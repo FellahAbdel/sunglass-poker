@@ -10,27 +10,28 @@ export function getStyles(windowType, isLogged, isGameTableVisible) {
 
     logoComponent: `logo-acceuil logo-${windowType}
       ${windowType === "" && isGameTableVisible && "disappear"}
+      ${windowType === "validation" && !isGameTableVisible && "logo-success"}
       ${
         ["login", "register", "forgot", "reset"].includes(windowType)
           ? "logo-login"
           : ""
       }
-      ${windowType === "list_table" ? "logo-profile" : ""}
       ${windowType === "create_table" ? "logo-create_table" : ""}`,
 
-    containerTable: `container-table ${
+    containerTable: `container-table 
+    ${
       isLogged ? "table-isLogged" : "table-notLogged"
-    } container-${windowType}
+    } 
+    ${isGameTableVisible && "container-inGame"}
+     
+      container-${windowType}  
       ${windowType === "" && !isGameTableVisible && "container-acceuil"}
+      ${windowType === "validation" && !isGameTableVisible && "container-success"}
+
       ${
         ["login", "register", "forgot", "reset"].includes(windowType) &&
         !isLogged
           ? "container-logIn"
-          : ""
-      }
-      ${
-        windowType === "list_table" && !isGameTableVisible
-          ? "container-list_table"
           : ""
       }
       ${windowType === "create_table" && "container-create_table"}

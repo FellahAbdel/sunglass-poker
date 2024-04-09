@@ -90,4 +90,16 @@
 
 2024/03/29 : 1h00           Début window création table
 
-TEMPS TOTAL: 81h00min 
+2024/04/02 : 5h30           Réunion redux, traductions
+
+2024/04/02 : 3h30           Fin traductions + Début page shop, page confirmation achat
+
+2024/04/03 : 4h00           Amélioration sécurité bdd user, ajout cryptage mdp, nouvelle table avatars, le shop utilise cette nouvelle table, début items possédé, ne fonctionne pas encore dans le shop. Reste a faire l'achat d'items (déja fait du coté back) et wallpapers et cardskins. Difficultés pour afficher les images depuis un lien de la bdd.
+
+2024/04/04 : 1h00           Nouvelle branche bddmodule pour travailler sur un changement de la bdd pour qu'elle corresponde à un module (la bdd se ferme au bout de 30 sec si on ne lance pas mongod, à voir avec Victor)
+
+2024/04/05 : 1h00           Modification bdd pour envoyer le lien de l'image plutot que son id, affichage avatar et pseudo en haut à gauche
+
+2024/04/07 : 2h00           Avancement shop, objets possédés visibles, achat possible, changement d'avatar possible. Réorganisation token backend
+
+TEMPS TOTAL: 98h00min 

@@ -1,0 +1,43 @@
+.modal-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  color: white;
+}
+
+.modal-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+  }
+  
+
+.modal-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-image img {
+  width: 60%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.modal-title {
+  color: white;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1vw;
+}
+
+.modal-message, .btn_onglets_shop {
+    width: 100%;
+    text-align: center;
+  }

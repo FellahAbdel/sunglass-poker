@@ -1,40 +1,43 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { settingsReducer, initialState } from '../../store/reducers/settingsReducer'
 
 const SettingsContext = createContext();
 
 export const useSettings = () => useContext(SettingsContext);
 
 export const SettingsProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => sessionStorage.getItem('theme') || "dark");
-  const [mute, setMute] = useState(() => sessionStorage.getItem('mute') === 'true');
-  const [language, setLanguage] = useState(() => sessionStorage.getItem('language') || 'en');
+  const [state, dispatch] = useReducer(settingsReducer, initialState);
+
+  // Effets pour mettre jour sessionStorage
+  useEffect(() => {
+    sessionStorage.setItem('theme', state.theme);
+  }, [state.theme]);
 
   useEffect(() => {
-    sessionStorage.setItem('theme', theme);
-  }, [theme]);
+    sessionStorage.setItem('mute', state.mute);
+  }, [state.mute]);
 
   useEffect(() => {
-    sessionStorage.setItem('mute', mute);
-  }, [mute]);
+    sessionStorage.setItem('language', state.language);
+  }, [state.language]);
 
-  useEffect(() => {
-    sessionStorage.setItem('language', language);
-  }, [language]);
-
+  // Fonctions pour dispatcher les actions
   const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+    dispatch({ type: "TOGGLE_THEME" });
   };
 
   const toggleMute = () => {
-    setMute((curr) => !curr);
+    dispatch({ type: "TOGGLE_MUTE" });
   };
 
   const changeLanguage = (lang) => {
-    setLanguage(lang);
+    dispatch({ type: "CHANGE_LANGUAGE", payload: lang });
   };
+
   return (
-    <SettingsContext.Provider value={{ theme, mute, language, toggleTheme, toggleMute, changeLanguage }}>
+    <SettingsContext.Provider value={{ ...state, toggleTheme, toggleMute, changeLanguage }}>
       {children}
     </SettingsContext.Provider>
   );
 };
+

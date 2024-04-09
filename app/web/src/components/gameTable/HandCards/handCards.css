@@ -1,6 +1,6 @@
 .container-hand{
-    width: 20vw;
-    height: 14vw;
+    width: 15vw;
+    height: 10vw;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -24,7 +24,7 @@
     border-radius: 10px 10px 0 0;
     box-shadow: 0 0 10px black;
 
-    font-size: calc(5px + 1vw);
+    font-size: 1vw;
     color: white;
 
     text-shadow:
@@ -44,7 +44,7 @@
 .container-handCard{
     display: flex;
     position: absolute;
-    bottom:0;
+    bottom:10%;
     width: 85%;
     height: 80%;
     flex-direction:row;
@@ -55,7 +55,7 @@
 
 .handCard{
     align-self: center;
-    margin-bottom: 10%;
+    margin-bottom: 0%;
     width: 45%;
     height: 100%;
     box-shadow: 0 0 10px black;

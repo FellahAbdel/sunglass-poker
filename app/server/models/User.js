@@ -25,15 +25,19 @@ const UserSchema = new Schema({
     default: 0,
   },
   avatar: {
-    type: Number,
-    required: true,
-    default: 1,
+    type: Schema.Types.ObjectId,
+    ref: "Item",
+    required: true
   },
   stat: {
     type: Schema.Types.ObjectId,
     ref: "Stat",
     unique: true,
   },
+  itemsOwned: [{
+    type: Schema.Types.ObjectId,
+    ref: "Item",
+  }],
 });
 
 const UserModel = model("User", UserSchema);

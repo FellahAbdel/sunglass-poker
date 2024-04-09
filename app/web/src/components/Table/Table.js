@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
+import { useTranslation } from '../Utiles/Translations';
+
 
 //CSS
 import "./table.css";
 import "./tableCards.css";
 import { getStyles } from "../Utiles/useStyles.jsx";
 //Components
-import ProfileMenu from "../Window/WindowContent/ProfileWindow";
 import Window from "../Window/Window";
 import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
@@ -22,8 +23,6 @@ import { startGame } from "../../store/actions/actionsCreator";
 const Table = ({
   dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
   showCards,
-  profileMenuActive, // a boolean to open the profile menu
-  settingsMenuActive, // a boolean to open the settings menu
   playersCardDistributedProp, // a list of 10 booleans to distribute to choosen players
   playersCardsShowProp, // a list of 10 booleans to show the cards of choosen players
   moneyPot, // money on the table
@@ -36,6 +35,7 @@ const Table = ({
     showGameTable,
   } = useWindowContext();
   const { isLogged } = useAuth();
+  const { getTranslatedWord } = useTranslation();
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
@@ -69,7 +69,7 @@ const Table = ({
 
   const showGameList = () => {
     if (isLogged) {
-      openWindow("list_table");
+      openWindow("servers");
     } else {
       openWindow("login");
     }
@@ -84,9 +84,14 @@ const Table = ({
     // container-acceuil : for the table to show up in acceuil when game opens
     // container-tutorial : for tuto
     <div className={classes.containerTable}>
+      
+      {/*the white border line around the table in the middle*/}
+      <div className={`${classes.containerTable} ${!isWindowOpen && "table-lineAround"} ${(windowType === "" && !isGameTableVisible || isWindowOpen) && "disappear" }`}/>
+
       {/* Acceuil table if not logged in and game table if logged in */}
-      {isGameTableVisible ? (
+      {isGameTableVisible && !isWindowOpen ? (
         <>
+
           {/* cards and the pot in the center of the table */}
           <CardsPlacements
             moneyPot={moneyPot}
@@ -122,12 +127,12 @@ const Table = ({
                   <>
                     <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color1"}
-                      label={"Start a game"}
+                      label={getTranslatedWord("game.startGame")}
                       onClick={onClickStartGame}
                     />
                     <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color1"}
-                      label={"Join a game"}
+                      label={getTranslatedWord("game.joinGame")}
                       onClick={showGameList}
                     />
                   </>
@@ -136,7 +141,7 @@ const Table = ({
                     {/* Bouton affiché si l'utilisateur n'est pas connecté */}
                     <Button
                       styleClass={"btn-gameStart back-color2"}
-                      label={"Login to Play"}
+                      label={getTranslatedWord("game.loginPlay")}
                       onClick={onClickStartGame}
                     />
                   </>
@@ -150,12 +155,14 @@ const Table = ({
       {/* dynamique logo , moves according to the menu that is open */}
       <LogoComponent
         styleClass={classes.logoComponent}
-        label={`
-          ${windowType === "tutorial" ? "Tutorial" : ""}
-          ${windowType === "profile" ? "Profile" : ""}
-          ${windowType === "list_table" ? "JOIN A GAME" : ""}
-          ${windowType === "create_table" ? "CREATE A NEW GAME" : ""}
-        `}
+        label={
+  `${windowType === "tutorial" ? getTranslatedWord("messageLogo.tutorial") : ""}` +
+  `${windowType === "profile" ? getTranslatedWord("messageLogo.profile") : ""}` +
+  `${windowType === "servers" ? getTranslatedWord("messageLogo.listeTable") : ""}` +
+  `${windowType === "create_table" ? getTranslatedWord("messageLogo.createTable") : ""}` +
+  `${windowType === "validation" ? getTranslatedWord("messageLogo.validation") : ""}`+
+  `${windowType === "shop" ? getTranslatedWord("messageLogo.shop") : ""}`
+}
       />
     </div>
   );

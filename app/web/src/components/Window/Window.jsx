@@ -2,18 +2,19 @@
 
 import React from "react";
 import "./window.css";
-import LoginWindow from "./WindowContent/LoginWindow";
-import SignUpWindow from "./WindowContent/SignupWindow";
-import ResetPasswordWindow from "./WindowContent/ResetPassword";
-import ForgotPassword from "./WindowContent/ForgotPassword";
+import LoginWindow from "./WindowContent/connectionWindows/LoginWindow";
+import SignUpWindow from "./WindowContent/connectionWindows/SignupWindow";
+import ResetPasswordWindow from "./WindowContent/connectionWindows/ResetPassword";
+import ForgotPassword from "./WindowContent/connectionWindows/ForgotPassword";
 import SuccessWindow from "./WindowContent/SuccessWindow";
 import TutorialWindow from "./WindowContent/TutorialWindow";
 import SettingsWindow from "./WindowContent/SettingsWindow";
 import ProfileWindow from "./WindowContent/ProfileWindow";
 import StatsWindow from "./WindowContent/StatsWindow";
-import ListTableWindow from "./WindowContent/ListTableWindow";
+import ServerPanelWindow from "./WindowContent/ServerPanel";
 import CreateTableWindow from "./WindowContent/CreateTableWindow";
-
+import ShopWindow  from "./WindowContent/shopWindows/ShopWindow";
+import ValidationWindow  from "./WindowContent/shopWindows/ValidationWindow";
 
 import { useWindowContext } from "../Utiles/WindowContext";
 
@@ -40,8 +41,12 @@ const Window = () => {
         {windowType === "settings" && <SettingsWindow />}
         {windowType === "profile" && <ProfileWindow />}
         {windowType === "stats" && <StatsWindow />}
-        {windowType === "list_table" && <ListTableWindow />}
+        {windowType === "servers" && <ServerPanelWindow />}
         {windowType === "create_table" && <CreateTableWindow />}
+        {windowType === "shop" && <ShopWindow />}
+        {windowType === "validation" && <ValidationWindow />}
+
+
         
       </div>
     </div>

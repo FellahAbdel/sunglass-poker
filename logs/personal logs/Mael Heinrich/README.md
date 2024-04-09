@@ -52,5 +52,8 @@
 
 2024/04/01: 3H30    Redux, comprehension de tout/ tentatives de faire fonctionner ... 
 
+2024/04/02: 3H30    Reunion générale avec démo...
 
-TEMPS TOTAL: 51h30 
+2024/04/09: 1h      Tentatives d'améliorations de la version desktop
+
+TEMPS TOTAL: 56h 

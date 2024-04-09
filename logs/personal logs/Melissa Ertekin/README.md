@@ -1,4 +1,4 @@
-# Melissa Ertekin | Temps Totale : 82h30
+# Melissa Ertekin | Temps Totale : 93h
 
 
 ### Semaine 0 : 30 Janvier - 05 Février  | Temps Totale: 5h
@@ -104,10 +104,20 @@
 
 * 2024/03/25 : <b>3h</b> <br/> Travail individuel : <i> Lecture du code. Recherche sur Redux et Socket.io. Création d'un code Redux expliquant quel type de données il faut envoyer pour modifier l'état avec quelles types d'actions, ainsi qu'un exemple de récupération de l'état du jeu et de le modifier. Ce travail est fait pour résoudre la mauvaise compréhension de la conception. </i>
 
-* 2024/03/26 : <b>4h</b> <br/> Travail individuel : <i> Lecture du code. Réunions hebdomadaires avec le mentor, revue de code, réunion en groupe, réorganisation des tâches de la semaine. Explications des fonctionnement et conception du code pour établir une communucation entre front end et back end. </i>
+* 2024/03/26 : <b>4h</b> <br/> Réunion du mardi en groupe : <i> Lecture du code. Réunions hebdomadaires avec le mentor, revue de code, réunion en groupe, réorganisation des tâches de la semaine. Explications des fonctionnement et conception du code pour établir une communucation entre front end et back end. </i>
 
 * 2024/03/30 : <b>1h</b> <br/> Travail individuel : <i> Redaction des explication détaillé sur la structure du code. Surveillance projet </i>
 
 * 2024/04/01 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Demandes de feedback personnalisé. Rédaction du compte-rendu hebdomadaire.</i>
 
 * Durant la semaine : <b>1h30</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
+
+### Semaine 9 : 1 Avril - 8 Avril | Temps Totale: 10h30
+
+* 2024/04/02 : <b>6h</b> <br/> Réunion du mardi en groupe : <i> Lecture du code. Réunions avec les développeurs pour clarifier l'architecture, ainsi qu'un exemple de récupération de l'état du jeu et de le modifier. Réunions hebdomadaires avec le mentor  </i>
+
+* 2024/04/03 : <b>2h</b> <br/> Travail individuel : <i> Réorganisation des tâches et les assignation. Rechercher et mettre en place des solutions pour éviter un retard  </i>
+
+* 2024/04/08 : <b>1h30</b> <br/> Travail individuel : <i> Surveillance des journaux. Demandes de feedback personnalisé. Rédaction du compte-rendu hebdomadaire.</i>
+
+* Durant la semaine : <b>1h</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 

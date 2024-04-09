@@ -20,11 +20,12 @@ import HandCards from "../components/gameTable/HandCards/HandCards";
 
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
+
 const GameTable = () => {
   const { theme } = useSettings();
 
   const [dealingFlop, setDealingFlop] = useState([true, true, true]);
-  const [handGuide, setHandGuide] = useState("Full house");
+  const [handGuide, setHandGuide] = useState("fullHouse");
   const [profileMenu] = useState(false);
   const [settingsMenu] = useState(false);
   const [showHandCard, setShowHandCard] = useState(true);
@@ -57,7 +58,7 @@ const GameTable = () => {
     if (isLogged) {
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
       console.log("Montrer la window des différentes tables");
-      openWindow("list_table");
+      openWindow("servers");
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
       openWindow("login");
@@ -141,8 +142,9 @@ const GameTable = () => {
       onClick={handleCloseOnClickOutside}
     >
       {/* css Pattern background */}
-      <div className="background"></div>
-      <div className="backdrop"></div>
+      
+      <div className="backdrop"/>
+      <div className="backdrop2"/>
 
       {/* Navbar or header */}
       <div className="comp-navbar">
@@ -151,7 +153,6 @@ const GameTable = () => {
           settingsOnClick={handleSettingsButton}
           profileOnClick={handleProfileButton}
           //navbar changes for loggedIn
-          isLoggedNavbar={isLogged}
           logInOnClick={handleLogInButton}
           tutorialOnClick={handleTutorialButton}
         />
@@ -178,7 +179,7 @@ const GameTable = () => {
       </div>
 
       {/* playing elements opens when logged in */}
-      {isGameTableVisible && (
+      {isGameTableVisible && !isWindowOpen && (
         <>
           <div
             className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
