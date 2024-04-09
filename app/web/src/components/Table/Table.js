@@ -47,8 +47,18 @@ const Table = ({
 
   const dispatch = useDispatch();
 
+  const isGameStarted = useSelector((state) => state.game.isGameStarted); // Assuming you have a slice of state to track if the game has started
   //name , user ID , level , games played , winning ratio , joined Date
-  const player = useSelector((state) => state.game.player);
+//   const player = useSelector((state) => state.game.player);
+
+  useEffect(() => {
+    if (isGameStarted) {
+      // L'utilisateur est connecté et a cliqué sur "Start Game"
+      // et on vérifie si le jeu a commencé
+      console.log("Utilisateur connecté, on montre la table");
+      showGameTable();
+    }
+  }, [isGameStarted, showGameTable]);
 
   const onClickStartGame = () => {
     console.log(
@@ -56,9 +66,6 @@ const Table = ({
       isLogged ? "true" : "false"
     );
     if (isLogged) {
-      // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
-      console.log("Utilisateur connecté, on montre la table");
-      showGameTable();
       dispatch(startGame());
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion

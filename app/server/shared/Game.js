@@ -15,7 +15,7 @@ class Game {
     this.players.push(player);
   }
 
-  start() {
+  start(players) {
     // Reset deck and shuffle
     this.deck.initCards();
     this.deck.shuffle();
@@ -24,7 +24,7 @@ class Game {
     this.flop();
 
     // Deal cards to each player
-    this.players.forEach((player) => {
+    players.forEach((player) => {
       player.clearHand();
       for (let i = 0; i < 2; i++) {
         player.addCard(this.deck.deal());

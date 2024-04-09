@@ -138,27 +138,28 @@ const GameTable = () => {
   const classes = getStyles(windowType, isLogged, isGameTableVisible);
 
   // Redux
-  const stack = useSelector((state) => state.game.gameClass.pokerTable.stack);
-  const currentPlayer = useSelector((state) => state.game.gameClass.players[0]);
-  let card1, card2;
+//   const stack = useSelector((state) => state.game?.gameClass?.pokerTable?.stack);
+// //   const stack = useSelector((state) => state.game.gameClass.pokerTable.stack);
+//   const currentPlayer = useSelector((state) => state.game?.players[0]);
+//   let card1, card2;
 
-  if (currentPlayer) {
-    const cards = currentPlayer.getPlayerCards();
-    if (cards && cards.length >= 2) {
-      card1 = cards[0].getNumberAndColor();
-      card2 = cards[1].getNumberAndColor();
-    } else {
-      // Handle case where player has fewer than 2 cards
-      // or cards array is undefined/null
-    }
-  } else {
-    // Handle case where currentPlayer is undefined/null
-  }
+//   if (currentPlayer) {
+//     const cards = currentPlayer.getPlayerCards();
+//     if (cards && cards.length >= 2) {
+//       card1 = cards[0]?.getNumberAndColor();
+//       card2 = cards[1]?.getNumberAndColor();
+//     } else {
+//       // Handle case where player has fewer than 2 cards
+//       // or cards array is undefined/null
+//     }
+//   } else {
+//     // Handle case where currentPlayer is undefined/null
+//   }
 
   //   console.log("currentPlayer", currentPlayer);
 
   return (
-    <div
+        <div
       className="container-main resetall"
       id={theme}
       onClick={handleCloseOnClickOutside}
@@ -189,7 +190,7 @@ const GameTable = () => {
           showCards={[0, 1, 2, 3, 4]}
           playersCardDistributedProp={playersCardDistributed}
           playersCardsShowProp={playersCardsShow}
-          moneyPot={stack}
+          moneyPot={9999999999}
           // to open the profile and setting menus
           profileMenuActive={profileMenu}
           settingsMenuActive={settingsMenu}
@@ -226,8 +227,8 @@ const GameTable = () => {
             }`}
           >
             <HandCards
-              card1={card1}
-              card2={card2}
+              card1={["14", "H"]}
+              card2={["14", "D"]}
               showHandCardProp={showHandCard}
               handGuideProp={handGuide}
             />
