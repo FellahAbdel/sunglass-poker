@@ -4,13 +4,19 @@
 
 #dark .back-color1 {
   background-color: #004577;
+  color: white;
 }
+
 #dark .back-color2 {
   background-color: #4D6478; 
+  color: white;
 }
+
 #dark .back-color3{
   background-color: #303b44; 
+  color: white;
 }
+
 .back-color1:hover, .back-color2:hover, .back-color3:hover {
   filter:brightness(150%);
   cursor: pointer;
