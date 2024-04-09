@@ -45,10 +45,21 @@ const Table = ({
     console.log("isLogged Table:", isLogged);
   }, [isLogged]);
 
+
+
   const dispatch = useDispatch();
 
   //name , user ID , level , games played , winning ratio , joined Date
   const player = useSelector((state) => state.game.player);
+  const isGameStarted = useSelector(state => state.game.gameStarted); // Get the gameStarted state from redux store
+  useEffect(() => {
+    console.log("IsGameStarted: ",isGameStarted)
+    // Check if the game has started whenever isGameStarted changes
+    if (isGameStarted) {
+      showGameTable();
+    }
+  }, [isGameStarted]);
+
 
   const onClickStartGame = () => {
     console.log(
@@ -59,7 +70,7 @@ const Table = ({
       dispatch(startGame());
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
       console.log("Utilisateur connecté, on montre la table");
-      showGameTable();
+      // showGameTable();
     } else {
       // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
       console.log("Utilisateur déconnecté, login page");

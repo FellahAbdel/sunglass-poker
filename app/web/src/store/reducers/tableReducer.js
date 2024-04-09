@@ -8,6 +8,7 @@ const initialState = {
       stake: 0,
     },
     players: [],
+    gameStarted:false,
   };
 
 
@@ -18,21 +19,22 @@ const tableReducer = (state = initialState, action) => {
           console.log("game started");
           return {
             ...state,
-            table:action.payload.table,
-            players:action.payload.players
+            gameStarted: true,
+            table:action.payload.rooms[10].table,
+            players:action.payload.rooms[10].players
           }
         case actions.REFRESH:
           return {
             ...state,
-            table:action.payload.table,
-            players:action.payload.game.players
+            table:action.payload.game.rooms[10].table,
+            players:action.payload.game.rooms[10].game.players
           };
         case actions.SIT:
           console.log("New player sit at the table");
           return {
             ...state,
-            table:action.payload.table,
-            players:action.payload.game.players
+            table:action.payload.rooms[10].table,
+            players:action.payload.rooms[10].game.players
           };
         default:
             console.log("Table reducer called");

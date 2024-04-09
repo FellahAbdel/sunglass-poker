@@ -8,7 +8,7 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
     switch(action.type){
         case actions.START_GAME:
             console.log("Emitting startGame event from socketMiddleware");
-            comm.startGame();
+            comm.createGame();
             // action = comm.reponseDispatch();
             break;
         case actions.FOLD:

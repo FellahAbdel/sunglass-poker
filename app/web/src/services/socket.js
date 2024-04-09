@@ -59,6 +59,7 @@ const comm = {
     },
 
     status: function(){
+        this.preFun();
         console.log('Call for status',sessionStorage.getItem('room'),sessionStorage.getItem('authToken'));
         socket.emit('status',{
             room:sessionStorage.getItem('room'),
@@ -83,10 +84,11 @@ const comm = {
         socket.emit('dispatch',data);
     },
 
-    startGame: function(){
+    createGame: function(){
+        this.preFun();
         // socket.emit('startGame',{room:sessionStorage.getItem('room')});
         console.log("Emit startGame from comm");
-        socket.emit('startGame');
+        socket.emit('createGame');
     }
 }
 

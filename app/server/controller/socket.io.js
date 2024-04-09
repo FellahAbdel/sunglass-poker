@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
 const actions = require('../store/actions/actionTypes');
+const actcrea  = require('../store/actions/actionsCreator');
 const store = require('../store/configStore');
+const Player = require("../shared/Player");
+const game = require("./game");
 
 
 console.log(store);
@@ -17,7 +20,7 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
     io.engine.use(Middleware);
     gameController.io = {
         broadcastStatus: function (room) {
-            console.log('socket io broadcast to room', room);
+            // console.log('socket io broadcast to room', room);
             io.to(room).emit('refresh', { status: true });
         },
     };
@@ -146,24 +149,38 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
             }
         })
 
-        socket.on('startGame', () => {
-            console.log("startGame called (from socket.io.js)");
+        socket.on('createGame', () => {
+            console.log("createGame called (from socket.io.js)");
             // Handle the start game event
             // For example, you can start the game here
-            console.log("startGame event received on the server");
+            console.log("createGame event received on the server");
             // Perform any necessary game initialization or logic here
             // We can dispatch an action to update the Redux state
             console.log('Who dispatch : ', session.userId);
             // Si l'action vient de quelqu'un non connecter on ignore
             const id = gameController.newGame();
+            console.log(id,' >- id game created');
+            if(id === undefined) {
+                console.error('Refused to create new game');
+                console.log('Join instead');
+                console.log(store.getState());
+                store.dispatch(actcrea.sit(10,session.userId));
+                io.emit('event', { payload: state.game, type: actions.GAME_STARTED });
+                console.log('rooms : ', gameController.rooms.state);
+                console.log('la room gc:',gameController.rooms[10].state.game.rooms[10].players);
+                return;
+            }
+            store.dispatch(actcrea.createGame(id,new Player(socket.id,"blabla")));
             // gameController.dispatch(session.userId,actions.START_GAME);
             console.log('store dispatch');
             console.log(store.getState())
             store.dispatch({ type: actions.GAME_STARTED });
             state = store.getState();
             console.log(socket.rooms, session.id);
+            const an = gameController.join(id, session.userId);
+            console.log(an);
+            socket.emit('joinRoom',an );
             socket.emit('event', { payload: state.game, type: actions.GAME_STARTED });
-            socket.emit('joinRoom', gameController.join(id, session.userId));
         });
 
 

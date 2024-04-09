@@ -6,7 +6,8 @@ const createGame = require('./game');
 const { create } = require('domain');
 const store = require('../store/configStore');
 
-
+const log_refresh = false;
+const log_broadcast = false;
 
 module.exports = gameController = {
     io: null,
@@ -44,22 +45,22 @@ module.exports = gameController = {
         // console.log(this.rooms, hroom);
         if (this.rooms.hasOwnProperty(hroom)) {
             if (this.rooms[hroom].refresh && !reset) {
-                console.error("RefreshCall already exist, reset set to false -> Action canceled");
+                if(log_refresh) console.error("RefreshCall already exist, reset set to false -> Action canceled");
                 return;
             } else {
                 if (this.rooms[hroom].refresh) {
-                    console.log('Refresh already in place, removed because reset is set to true');
+                    if(log_refresh) console.log('Refresh already in place, removed because reset is set to true');
                     clearInterval(this.rooms[hroom].refresh);
                 }
                 this.rooms[hroom].refresh = setInterval((room, gc) => {
-                    console.log('Refresh for room : ', room);
+                    if(log_refresh) console.log('Refresh for room : ', room);
                     gc.broadcastStatus(room);
                 }, 1000, room, this);
-                console.log("Refresh setup");
+                if(log_refresh) console.log("Refresh setup");
             }
         }
         else
-            console.error("Can't create refreshCall for inexistant room, make sure it's NOT the hash that's passed", hroom);
+            if(log_refresh) console.error("Can't create refreshCall for inexistant room, make sure it's NOT the hash that's passed", hroom);
     },
 
     join: function (id, user) {
@@ -71,7 +72,7 @@ module.exports = gameController = {
                 }
                 const answer = this.rooms[id].joinGame(user);
                 if (answer.status) {
-                    console.log(actions.sit());
+                    console.log(this.rooms[id].state);
                     // store.dispatch(this.rooms[id].state,actions.sit());
                     console.log('nop at');
                     this.rooms[id].state = store.getState();
@@ -99,19 +100,21 @@ module.exports = gameController = {
 
     timeOutPlayer: 3e10,
     broadcastStatus: function (room) {
-        console.log("mon io:", this.io);
-        console.log('called for broadcast room ', room);
+        if(log_broadcast){
+            console.log("mon io:", this.io);
+            console.log('called for broadcast room ', room);
+        }
         const hroom = this.hashRoom(room);
         // Si la room existe
         if (this.io !== null) {
             if (!this.rooms.hasOwnProperty(hroom)) {
-                console.error("Room expired or does not exist");
+                if(log_broadcast)console.error("Room expired or does not exist");
                 return;
             }
             const players = this.rooms[hroom].state.game.players;
-            console.log('gameController call for broadcast on ', room, ' to io with hash :', hroom);
+            if(log_broadcast) console.log('gameController call for broadcast on ', room, ' to io with hash :', hroom);
             if(players.length == 0){
-                console.log('No player in room, refreshcall will be remove if set.');
+                if(log_broadcast) console.log('No player in room, refreshcall will be remove if set.');
                 if(this.rooms[hroom].refresh !==undefined)
                     this.rooms[hroom].refresh=clearInterval(this.rooms[hroom].refresh);
             }
@@ -123,7 +126,7 @@ module.exports = gameController = {
             //     // }
             // }
             this.io.broadcastStatus(hroom);
-        } else console.error('No io to broadcast');
+        } else  if(log_broadcast)console.error('No io to broadcast');
     },
     status: function (room, id) {
         console.log('Status room:', room, ' for : ', id);
@@ -138,11 +141,13 @@ module.exports = gameController = {
 
     newGame: function(userId =false){
         console.log("Create new game inside gameController");
+        if(this.rooms[10] !== undefined) return undefined;
         const g = createGame();
         const hroom = this.hashRoom(g.id);
         this.rooms[hroom] = g;
         store.dispatch(actions.startGame());
         this.rooms[hroom].state = store.getState();
+        console.log(this.rooms);
         if(userId !== false)
             this.join(g.id,userId);
         return g.id;

@@ -14,7 +14,7 @@ module.exports.LOGOUT = "LOGOUT";
 module.exports.UPDATE_USER_DATA = "UPDATE_USER_DATA";
 
 
-module.exports.START_GAME = "START_GAME";
+module.exports.CREATE_GAME= "CREATE_GAME";
 
 module.exports.GAME_STARTED = "GAME_STARTED";
 

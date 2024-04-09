@@ -40,8 +40,9 @@ module.exports.resetGame = () => ({
 
 // Rooms control
 
-module.exports.sit = () => ({
+module.exports.sit = (table,playerid) => ({
   type: actions.SIT,
+  payload: {idTable:table, playerId:playerid},
 })
 
 // Actions creators for user authentication
@@ -59,3 +60,8 @@ module.exports.updateUserData = (data) => ({
   payload: data,
 });
 
+
+module.exports.createGame = (id,player=false) => ({
+  type:actions.CREATE_GAME,
+  payload:{id:id,player:player},
+});

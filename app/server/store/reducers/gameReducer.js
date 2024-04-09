@@ -2,9 +2,11 @@
 const actions =  require("../actions/actionTypes.js");
 const Deck = require("../../shared/Deck.js");
 const Player = require("../../shared/Player.js");
+// const game = require("../../shared/Game.js");
 
 
-const initialState = {
+const initialRoomState = {
+  game: false,//new game(),
   table: {
     deck: new Deck(),
     cards: [],
@@ -18,6 +20,10 @@ const initialState = {
       (_, index) => new Player(index + 1, "Player" + index)
     ),
   ],
+};
+
+const initialState = {
+  rooms : {},
 };
 
 const begin = (state) => {
@@ -45,10 +51,23 @@ const begin = (state) => {
 };
 
 const gameReducer = (state = initialState, action) => {
+  console.log(state,action);
   switch (action.type) {
+    case actions.CREATE_GAME:
+      console.log('CREATE GAME');
+      state.rooms[action.payload.id] = begin(initialRoomState);
+      if(!action.player)
+        state.rooms[action.payload.id].players = [...state.rooms[action.payload.id].players, action.payload.player];
+      return state;
     case actions.GAME_STARTED:
       console.log('start',action.type);
-      return begin(state);
+      return state;
+    case actions.SIT:
+      console.log('tableid: ',action.payload.idTable);
+      console.log('state.game : ',state);
+      console.log(state.rooms[action.payload.idTable]);
+      state.rooms[action.payload.idTable].players = [...state.rooms[action.payload.idTable].players, new Player(action.payload.playerId,action.payload.playerId)];
+      return state;
     // Other game actions can be handled here
     default:
       console.log('default',action.type);
