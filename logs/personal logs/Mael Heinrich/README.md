@@ -56,4 +56,8 @@
 
 2024/04/09: 1h      Tentatives d'améliorations de la version desktop
 
-TEMPS TOTAL: 56h 
+2024/04/09: 3H      Reunion habituel...
+
+2024/04/10: 1H30    Amélioration du desktop+netoyage branche+début de desktop en .exe
+
+TEMPS TOTAL: 60h30
