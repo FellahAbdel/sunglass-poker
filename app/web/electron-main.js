@@ -16,13 +16,21 @@ function createWindow() {
       devTools: false,
       enableRemoteModule: false,
       webSecurity: true,
-      transparent: true
     }
   });
 
   win.setMenu(null);
 
+  // Fonction pour afficher une image de remplacement en cas d'échec de chargement
+  function showImageOnError() {
+    win.loadFile("error.html"); // Charger le fichier HTML de l'image de remplacement
+  }
+
+  // Événement de chargement échoué
   win.webContents.on("did-fail-load", (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
+    // Affiche une image de remplacement en cas d'échec de chargement
+    showImageOnError();
+
     // Afficher une boîte de dialogue avec un message d'erreur et un bouton "Réessayer"
     const options = {
       type: "error",
@@ -31,15 +39,11 @@ function createWindow() {
       buttons: ["Réessayer", "Annuler"]
     };
 
-    dialog.showMessageBox(win, options).then((response) => {
-      if (response.response === 0) { // Si le bouton "Réessayer" est cliqué
-        win.reload(); // Recharger l'application
-      }
-    });
   });
 
   // Charger l'URL initiale
   win.loadURL("http://localhost:3000");
+  //win.loadURL("http://localhost:9999");
 }
 
 app.whenReady().then(createWindow);
