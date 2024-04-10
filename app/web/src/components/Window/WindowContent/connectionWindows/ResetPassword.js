@@ -139,13 +139,13 @@ const ResetPasswordWindow = ({ showSuccess }) => {
           styleClass={"input-connectionDefault input-icon-passwordRepeat"}
         />
         <Button
-          styleClass="btn-connectionDefault button login-button"
+          styleClass="btn-connectionDefault back-color1"
           type="submit"
           label="Send"
         />
       </form>
       <Button
-        styleClass="btn-connectionDefault forgot-button"
+        styleClass="btn-connectionDefault back-color3"
         onClick={() => openWindow("login")}
         label="Return to connection menu"
       />

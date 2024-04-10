@@ -1,8 +1,6 @@
 //react imports
 import React, { useState } from "react";
 
-// import { useTranslation } from "react-i18next";
-
 //css
 import "./navbar.css";
 //components
@@ -90,19 +88,21 @@ const Navbar = ({
         </>
       )}
 
-      {/* Profile/LogIn Button */}
+      {/* Profile/LogIn Button 
+      isLogged ? userData.user.avatar : 
+      */}
 
       <Button
         label={
           isLogged
-            ? userData.user.pseudo
+            ? getTranslatedWord("navbar.profile") 
             : getTranslatedWord("navbar.login")
         }
         onClick={() => (isLogged ? profileOnClick() : logInOnClick())}
         styleClass={`${
           isLogged ? "btn-profile back-color1" : "btn-logIn back-color2"
         }`}
-        iconSrc={isLogged ? userData.user.avatar : require("./../assets/images/icons/black/profile.png")}
+        iconSrc={require("./../assets/images/icons/black/profile.png")}
       />
 
       {/* Settings/Tutorial Buttons */}

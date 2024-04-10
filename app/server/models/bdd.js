@@ -40,6 +40,16 @@ module.exports = function (app, bdd) {
     console.log("Connecté à la base de données MongoDB");
     initItems();
   });
+/*try {
+
+    const users = await UserModel.find();
+    console.log("Affichage des utilisateurs dans la base de données :");
+    console.log(users); // Affichez le résultat dans la console
+  } catch (error) {
+    console.error("Erreur lors de la récupération des utilisateurs :", error);
+  
+  }
+});*/
 
   app.get("/view/createUser", async (req, res, next) => {
     const filepath = "test.html";

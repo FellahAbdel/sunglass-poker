@@ -2,16 +2,16 @@
   transition: background-color 1s ease;
 }
 
-
 #dark .back-color1 {
   background-color: #004577;
 }
+
 #dark .back-color2 {
   background-color: #4D6478; 
 }
+
 #dark .back-color3{
   background-color: #303b44; 
-
 }
 
 #light .back-color1 {
@@ -23,40 +23,32 @@
 #light .back-color3{
   background-color: #35240a; 
 }
+.back-color1:hover, .back-color2:hover, .back-color3:hover {
+  filter:brightness(150%);
+  cursor: pointer;
+  color: black;
+  text-shadow: unset;
+}
 
 .btn-connectionDefault {
   width: 24.5vw;
   height: 6vh;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   border-radius: 10px;
   font-size: 3vh;
   margin-bottom: 5px;
   margin-top: 5px;
+  color: white;
 }
 
-.forgot-button {
-  color: rgb(255, 255, 255);
-  background-color: #4D6478;
-}
-
-.login-button {
-  color: rgb(255, 255, 255);
-  background-color: #033F61;
-}
-
-.login-button:hover {
-  background-color:#4D6478 ;
-}
 
 .google-button {
-  color: rgb(255, 255, 255);
   font-weight: bold;
-  background-color: #4D6478;
   display:flex;
   justify-content: center;
   align-items: center;
 }
+
 .google-button img{
   width: 3vh;
   height: auto;
@@ -68,41 +60,29 @@
 
 .register-button {
   margin-top: 5%;
-  color: rgb(255, 255, 255);
-  background-color : #033F61 ;
 }
 
-.register-button:hover {
-  background-color: #033F61;
-}
 
 .btn-list_table{
   width: 100%;
   height: 3vh;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   border-radius: 10px;
   font-size: 2vh;
   margin-bottom: 5px;
   margin-top: 5px;
-
-}
-
-.btn-list_table_join{
-  background-color : #033e60;
 }
 
 .btn-list_table_full{
   background-color : rgb(107, 0, 0);
 }
 
-
 .btn_onglets_shop{
   border-radius: 10px;
-  height : 4vw;
+  height : 15%;
   width: 90%;
-  margin-top: 1vw;
+  margin-bottom: 4%;
   border-radius: 0 20px 20px 20px;
   box-shadow: inset 0 0 10px black;
-
+  font-size : 1.5vw;
 }

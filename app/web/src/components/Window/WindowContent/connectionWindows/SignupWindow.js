@@ -158,14 +158,14 @@ const SignUpWindow = () => {
           styleClass={"input-connectionDefault input-icon-passwordRepeat"}
         />
         <Button
-          styleClass="btn-connectionDefault login-button"
+          styleClass="btn-connectionDefault login-button back-color1"
           type="submit"
           label={getTranslatedWord("connection.signin")} 
         />
       </form>
 
       <Button
-        styleClass="btn-connectionDefault google-button"
+        styleClass="btn-connectionDefault google-button back-color3"
         label={getTranslatedWord("connection.signinG")}
         iconSrc={require("./../../../assets/images/icons/white/google.png")}
         iconStyle={true}
@@ -173,7 +173,7 @@ const SignUpWindow = () => {
 
       <Button
         onClick={() => openWindow("login")}
-        styleClass="btn-connectionDefault forgot-button"
+        styleClass="btn-connectionDefault forgot-button back-color1"
         label={getTranslatedWord("connection.haveAccQuestion")}
       />
     </div>

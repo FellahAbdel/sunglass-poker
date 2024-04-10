@@ -1,7 +1,7 @@
 export const initialState = {
-    theme: sessionStorage.getItem('theme') || "dark",
-    mute: sessionStorage.getItem('mute') === 'true',
-    language: sessionStorage.getItem('language') || 'en',
+    theme: localStorage.getItem('theme') || "dark",
+    mute: localStorage.getItem('mute') === 'true',
+    language: localStorage.getItem('language') || 'en',
   };
 
   

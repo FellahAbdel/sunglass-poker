@@ -67,19 +67,19 @@ const ForgotPassword = ({
           styleClass={"input-connectionDefault input-icon-email"}
         />
         <Button
-          styleClass="btn-connectionDefault button login-button"
+          styleClass="btn-connectionDefault button login-button back-color1"
           type="submit"
           label={getTranslatedWord("connection.send")}
         />
         <Button
-          styleClass="btn-connectionDefault button login-button"
+          styleClass="btn-connectionDefault button login-button back-color3"
           type="temporary"
           onClick={() => openWindow("reset")}
           label="TEMPORARY BUTTON"
         />
       </form>
       <Button
-        styleClass="btn-connectionDefault forgot-button"
+        styleClass="btn-connectionDefault forgot-button back-color1"
         onClick={() => openWindow("login")}
         label={getTranslatedWord("connection.returnConnection")}
       />

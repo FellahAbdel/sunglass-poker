@@ -23,21 +23,25 @@
     border-radius: 0 14px 14px 14px;
     cursor: pointer;
 }
+
 .btn-profile:hover {
     filter:brightness(150%);
     cursor: pointer;
     text-shadow: unset;
 }
+.btn-profile:hover img{
+    filter:invert(0);
+}
+
 .btn-profile img{
-    width: 25px;
+    width: 15px;
     height: auto;
     display: flex;
     align-items: center;
     justify-content:center;
-    margin-left: 5px;
+    padding-left: 5px;
 
-    border-radius: 50px;
-    border: 1px solid black;
+    filter: invert(100%);
 }
 
 /*SETTINGS BUTTON*/
@@ -63,13 +67,6 @@
     border-radius: 14px 0px 14px 14px;
 
     cursor: pointer;
-
-}
-.btn-settings:hover {
-    filter:brightness(150%);
-    cursor: pointer;
-    color: black;
-    text-shadow: unset;
 }
 
 .btn-settings img {
@@ -82,10 +79,10 @@
     filter: invert(0%);
     color: #fff; /* Neon color */
 }
+
 .btn-settings:hover img {
     filter: invert(100%);
 }
-
 
 /*CHIPS CSS*/
 .box-chips{
@@ -141,13 +138,6 @@
     color: rgb(255, 255, 255);   
 }
 
-.btn-exit:hover {
-    filter:brightness(200%);
-    cursor: pointer;
-    color: black;
-    text-shadow: unset;
-}
-
 /*Log in button in acceuil*/
 .btn-logIn {
     border-style: unset;
@@ -170,12 +160,7 @@
     border-radius: 0 14px 14px 14px;
     cursor: pointer;
 }
-.btn-logIn:hover {
-    filter:brightness(200%);
-    cursor: pointer;
-    color: black;
-    text-shadow: unset;
-}
+
 .btn-logIn img{
     width: 15px;
     height: auto;
@@ -190,6 +175,7 @@
 .btn-logIn:hover img {
     filter: invert(0%);
 }
+
 /*tutorial button in acceuil*/
 .btn-tutorial {
     all:unset;
