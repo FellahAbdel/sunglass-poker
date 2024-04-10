@@ -14,3 +14,6 @@ travail de groupe sur la finalisation de la specifications des fonctions du back
 | 05/03/24 | travail sur la fonction gagnant et refactoration de la nomonclature des variables du code | 2h |
 | 12/03/24 - 14/03/24 | integrations des differentes fonctionnalites sur les fonctions de terminaison et choix d'un gagnant sur une partie | 11h |
 | 16/03/24 - 19/03/24 | travail sur la version console de derouler_partie qui est desormais fonctionnelle | 6h30 |
+| 26/03/24 | prise en main de react redux et implementation d'action et reducers | 4h |
+| 28/03/24 | suite et integration des differents autres codes | 4h |
+| 02/04/24 | reecriture des actions de call, check et raise | 4h |
