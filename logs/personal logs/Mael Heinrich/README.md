@@ -60,4 +60,6 @@
 
 2024/04/10: 1H30    Amélioration du desktop+netoyage branche+début de desktop en .exe
 
-TEMPS TOTAL: 60h30
+2024/05/10: 1h15    Tentative de création de la version exécutable desktop, recherche sur le sujet...
+
+TEMPS TOTAL: 61h45
