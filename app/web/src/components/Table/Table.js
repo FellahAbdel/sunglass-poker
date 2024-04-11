@@ -17,12 +17,12 @@ import LogoComponent from "../logo/Logo";
 import Button from "../button/Button.tsx";
 
 //Redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { startGame } from "../../store/actions/actionsCreator";
 
 const Table = ({
   dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
-  showCards,
+  //showCards,
   playersCardDistributedProp, // a list of 10 booleans to distribute to choosen players
   playersCardsShowProp, // a list of 10 booleans to show the cards of choosen players
   moneyPot, // money on the table
@@ -48,7 +48,7 @@ const Table = ({
   const dispatch = useDispatch();
 
   //name , user ID , level , games played , winning ratio , joined Date
-  const player = useSelector((state) => state.game.player);
+  //const player = useSelector((state) => state.game.player);
 
   const onClickStartGame = () => {
     console.log(
@@ -137,12 +137,12 @@ const Table = ({
                     <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color2"}
                       label={getTranslatedWord("game.loginPlay")}
-                      onClick={openWindow("login")}
+                      onClick={() => openWindow("login")}
                     />
                    <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color2"}
                       label={getTranslatedWord("game.signupPlay")}
-                      onClick={openWindow("register")}
+                      onClick={() => openWindow("register")}
                     />
                   </>
                 )}
