@@ -1,0 +1,10 @@
+{
+    "directories": {
+        "output": "public"
+      },
+    "win": {
+      "target": "nsis",
+      "main": "electron-main.js" 
+    }
+  }
+  

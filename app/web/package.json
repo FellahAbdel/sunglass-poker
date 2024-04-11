@@ -35,7 +35,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "electron ."
+    "electron": "electron .",
+    "build-electron": "electron-builder"
   },
   "eslintConfig": {
     "extends": [
@@ -58,7 +59,15 @@
   "devDependencies": {
     "dotenv-cli": "^7.4.1",
     "electron": "^29.1.4",
+    "electron-builder": "^24.13.3",
     "mini-css-extract-plugin": "^2.8.0",
     "nodemon": "^3.0.3"
+  },
+  "build": {
+    "appId": "com.example.my-electron-app",
+    "productName": "My Electron App",
+    "directories": {
+      "output": "dist"
+    }
   }
 }
