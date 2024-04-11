@@ -20,6 +20,10 @@ const ItemSchema = new Schema({
     type: String,
     required: true,
   },
+  eyePosition: {
+    x: { type: Number, default: null },
+    y: { type: Number, default: null },
+  },
 });
 
 const ItemModel = model("Item", ItemSchema);

@@ -22,8 +22,8 @@ const ShopWindow = () => {
 
   const tabNames = {
     avatars: getTranslatedWord("shop.avatars"),
-    sunglasses: getTranslatedWord("shop.cards"),
-    color: getTranslatedWord("shop.wallpapers"),
+    sunglasses: getTranslatedWord("shop.sunglasses"),
+    color: getTranslatedWord("shop.color"),
   };
 
   const handleActivateAvatar = async (itemId) => {

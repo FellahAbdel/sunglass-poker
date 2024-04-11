@@ -4,32 +4,54 @@ import "./avatarDisplay.css";
 
 const AvatarDisplay = () => {
   const { user } = useAuth();
-  const [baseAvatar, setBaseAvatar] = useState(null);
-  const [sunglasses, setSunglasses] = useState(null);
-  const [colorAvatar, setColorAvatar] = useState("#FFFFFF");
+  const [baseAvatar, setBaseAvatar] = useState({});
+  const [sunglasses, setSunglasses] = useState({});
 
   useEffect(() => {
-    if (user) {
-      console.log("user.baseAvatarImgSrc:", user.baseAvatarImgSrc);
-      console.log("user.sunglassesImgSrc:", user.sunglassesImgSrc);
-      console.log("user.colorAvatar:", user.colorAvatar);
-
-      setBaseAvatar(user.baseAvatarImgSrc);
-      setSunglasses(user.sunglassesImgSrc);
-      setColorAvatar(user.colorAvatar);
+    if (
+      user &&
+      user.baseAvatarImgSrc &&
+      user.sunglassesImgSrc &&
+      user.colorAvatar
+    ) {
+      console.log("User data:", user);
+      setBaseAvatar({
+        imgSrc: user.baseAvatarImgSrc,
+        eyePosition: user.baseAvatar.eyePosition,
+      });
+      setSunglasses({
+        imgSrc: user.sunglassesImgSrc,
+      });
     }
   }, [user]);
 
+  const sunglassesStyle =
+    sunglasses.imgSrc && baseAvatar.eyePosition
+      ? {
+          position: "absolute",
+          top: `${baseAvatar.eyePosition.y}%`,
+          left: `${baseAvatar.eyePosition.x}%`,
+          transform: "translate(-50%, -50%)",
+        }
+      : {};
+
+  console.log("Les lunettes devraient s'afficher en :", baseAvatar.eyePosition);
+
+  const backgroundColor =
+    user && user.colorAvatar ? user.colorAvatar : "#FFFFFF";
+
   return (
-    <div
-      className="avatarContainer"
-      style={{ backgroundColor: colorAvatar }}
-    >
-      {baseAvatar && (
-        <img src={baseAvatar} alt="Base Avatar" className="baseAvatar" />
+    <div className="avatarContainer" style={{ backgroundColor }}>
+      {baseAvatar.imgSrc && (
+        <img src={baseAvatar.imgSrc} alt="Base Avatar" className="baseAvatar" />
       )}
-      {sunglasses && (
-        <img src={sunglasses} alt="Sunglasses" className="sunglasses" />
+      {sunglasses.imgSrc && (
+        <img
+          src={sunglasses.imgSrc}
+          alt="Sunglasses"
+          style={sunglassesStyle}
+          className="sunglasses"
+        />
       )}
     </div>
   );
