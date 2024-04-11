@@ -7,27 +7,15 @@
 }
 
 .btn-raise, .btn-checkOrCall, .btn-fold{
-
-
-    background-color: #2d2a2a;
     color: aliceblue;
-
-    border-style: unset;
-
-    border-radius: 15px;
-
+    border-radius: 10px;
     font-weight: 600;
     font-size: 2vh;
-
     height: 4vh;
     width: 8vw;
-
     cursor: pointer;
-
     margin-bottom: 10px;
-    box-shadow: 0 0 10px black;
-
-    
+    box-shadow: unset;
 }
 
 @media (max-height: 500px){
@@ -42,13 +30,9 @@
 }
 
 .btn-raise:hover, .btn-checkOrCall:hover, .btn-fold:hover{
-    filter:brightness(90%);
-    text-shadow:
-    0 0 5px #fff, /* Neon glow */
-    0 0 10px #fff, /* Neon glow */
-    0 0 15px #fff, /* Neon glow */
-    0 0 20px rgb(255, 255, 255), /* Neon glow color */
-    0 0 30px rgb(255, 255, 255);
+    filter:brightness(70%);
+    text-shadow:unset;
+    color:white;
 }
 
 
@@ -101,3 +85,4 @@
         transform: TranslateY(-100%);
     }
 }
+
