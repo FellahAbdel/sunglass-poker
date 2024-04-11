@@ -24,7 +24,7 @@ export const WindowProvider = ({ children }) => {
     const savedWindowType = sessionStorage.getItem("windowType");
     const isGameVisible = sessionStorage.getItem("isGameTableVisible") === "true";
   
-    return savedWindowType || (isGameVisible ? "game" : "accueil");
+    return savedWindowType || (isGameVisible ? "" : "accueil");
   });
   const [connectionWindowOpen, setconnectionWindowOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
