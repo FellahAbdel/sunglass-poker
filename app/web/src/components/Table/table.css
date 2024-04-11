@@ -11,38 +11,47 @@
     border-radius 1s ease , filter 1s ease;
 }
 
+:root{
+  --isLogged-dark-box-shadow:
+  inset 0 0 50px rgb(0, 0, 0),
+  0 0 1vw 0.8vw #164f81,
+  0 0 0 1vw rgb(0, 0, 0),
+  0 0 0 2vw rgb(31, 33, 36),
+  inset 0 0 0 2vw rgb(43, 41, 41),
+  0 0 5vw 3vw black;
+  --isLogged-dark-background:
+  radial-gradient(black 15%, transparent 16%) 0 0,
+  radial-gradient(black 15%, transparent 16%) 8px 8px,
+  radial-gradient(#164f81 15%, transparent 20%) 0 0.5px,
+  radial-gradient(#164f81 15%, transparent 20%) 8px 8.5px;
+  --notLogged-dark-box-shadow:
+  inset 0 0 50px rgb(0, 0, 0),
+  0 0 1vw 0.8vw #4d6478,
+  0 0 0 1vw rgb(0, 0, 0),
+  0 0 0 2vw rgb(31, 33, 36),
+  inset 0 0 0 2vw rgb(43, 41, 41),
+  0 0 5vw 3vw black;
+  --notLogged-dark-background:
+  radial-gradient(black 15%, transparent 16%) 0 0,
+  radial-gradient(black 15%, transparent 16%) 8px 8px,
+  radial-gradient(#a5a5a56c 15%, transparent 20%) 0 0.5px,
+  radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 8.5px;
+  --dark-background-color:#282828;
+  --dark-background-size: 16px 16px;
+}
+
 /*table color when logged in and logged out*/
 #dark .table-isLogged {
-  box-shadow:
-    inset 0 0 50px rgb(0, 0, 0),
-    0 0 1vw 0.8vw #164f81,
-    0 0 0 1vw rgb(0, 0, 0),
-    0 0 0 2vw rgb(31, 33, 36),
-    inset 0 0 0 2vw rgb(43, 41, 41),
-    0 0 5vw 3vw black;
-  background:
-    radial-gradient(black 15%, transparent 16%) 0 0,
-    radial-gradient(black 15%, transparent 16%) 8px 8px,
-    radial-gradient(#164f81 15%, transparent 20%) 0 0.5px,
-    radial-gradient(#164f81 15%, transparent 20%) 8px 8.5px;
-  background-color: #282828;
-  background-size: 16px 16px;
+  box-shadow:var(--isLogged-dark-box-shadow);
+  background:var(--isLogged-dark-background);
+  background-color: var(--dark-background-color);
+  background-size: var(--dark-background-size);
 }
 #dark .table-notLogged {
-  box-shadow:
-    inset 0 0 50px rgb(0, 0, 0),
-    0 0 1vw 0.8vw #4d6478,
-    0 0 0 1vw rgb(0, 0, 0),
-    0 0 0 2vw rgb(31, 33, 36),
-    inset 0 0 0 2vw rgb(43, 41, 41),
-    0 0 5vw 3vw black;
-  background:
-    radial-gradient(black 15%, transparent 16%) 0 0,
-    radial-gradient(black 15%, transparent 16%) 8px 8px,
-    radial-gradient(#a5a5a56c 15%, transparent 20%) 0 0.5px,
-    radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 8.5px;
-  background-color: #282828;
-  background-size: 16px 16px;
+  box-shadow:var(--notLogged-dark-box-shadow);
+  background:var(--notLogged-dark-background);
+  background-color: var(--dark-background-color);
+  background-size: var(--dark-background-size);
 }
 #light .table-isLogged {
   box-shadow:
