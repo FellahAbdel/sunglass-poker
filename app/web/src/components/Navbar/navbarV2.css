@@ -22,7 +22,7 @@
 }
 .container-navMain-V2 img{
     width: 2.2vw;
-    transition: width 0.2s ease;
+    transition: width 0.1s ease;
 }
 .container-navMain-V2 Button:hover img{
     width: 3vw;
@@ -34,15 +34,16 @@
 }
 .container-navMain-V2 span{
     opacity: 0.5;
+    font-size: 0;
     white-space: nowrap;
-    font-size: large;
     margin-right:5% ;
     text-align: right;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease, font-size 0.2s ease;
 }
 .container-navMain-V2 Button:hover span{
     text-align: right;
+    font-size: large;
     opacity: 100;
 }
 
