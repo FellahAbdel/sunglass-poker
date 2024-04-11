@@ -229,23 +229,22 @@ export const AuthProvider = ({ children }) => {
     return `${process.env.PUBLIC_URL}${relativePath}`;
   };
 
-  const fetchAvatars = async () => {
+  const fetchItems = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/avatars", {
-        ...CORSSETTINGS,
+      const response = await fetch("http://localhost:3001/api/items", {
         method: "GET",
       });
-      let avatars = await response.json();
+      let items = await response.json();
       if (response.ok) {
-        // Résolvez le chemin de chaque avatar
-        avatars = avatars.map((avatar) => ({
-          ...avatar,
-          imgSrc: resolveImagePath(avatar.imgSrc),
+        items = items.map((item) => ({
+          ...item,
+          imgSrc: resolveImagePath(item.imgSrc),
         }));
-        console.log(avatars);
-        return avatars;
+        console.log("Items chargés : ", items);
+
+        return items;
       } else {
-        console.error("Erreur lors du chargement des avatars");
+        console.error("Erreur lors du chargement des items");
       }
     } catch (error) {
       console.error("Erreur lors de la connexion à l'API:", error);
@@ -266,6 +265,7 @@ export const AuthProvider = ({ children }) => {
       if (data.success) {
         console.log(data.message);
         dispatch({ type: "UPDATE_USER", payload: data.user });
+        fetchUserInfo();
         return true;
       } else {
         console.error(data.message);
@@ -277,28 +277,31 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const activateAvatar = async (avatarId) => {
+  const activateAvatar = async (itemId, itemType) => {
     try {
-        const response = await fetch(`http://localhost:3001/api/activate-avatar`, {
-            method: 'POST',
-            headers: getAuthHeaders(),
-            body: JSON.stringify({ userId: user._id, avatarId }),
-        });
-        const data = await response.json();
-        if (data.success) {
-            dispatch({ type: "UPDATE_USER_AVATAR", payload: avatarId });
-            console.log("Avatar changed successfully");
-            return true;
-        } else {
-            console.error("Failed to change avatar", data.message);
-            return false;
+      const response = await fetch(
+        `http://localhost:3001/api/activate-avatar`,
+        {
+          method: "POST",
+          headers: getAuthHeaders(),
+          body: JSON.stringify({ userId: user._id, itemId, itemType }),
         }
-    } catch (error) {
-        console.error("Error changing avatar:", error);
+      );
+      const data = await response.json();
+      if (data.success) {
+        dispatch({ type: "UPDATE_USER_AVATAR", payload: { itemId, itemType } });
+        console.log("Avatar component activated successfully");
+        fetchUserInfo();
+        return true;
+      } else {
+        console.error("Failed to activate avatar component", data.message);
         return false;
+      }
+    } catch (error) {
+      console.error("Error activating avatar component:", error);
+      return false;
     }
-};
-
+  };
 
   return (
     <AuthContext.Provider
@@ -314,7 +317,7 @@ export const AuthProvider = ({ children }) => {
         state,
         dispatch,
         fetchStats,
-        fetchAvatars,
+        fetchItems,
         buyItem,
         activateAvatar,
       }}

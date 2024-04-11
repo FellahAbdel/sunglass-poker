@@ -12,7 +12,6 @@ require("dotenv").config();
 
 const cors = require("cors");
 
-
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(" ")[1];
@@ -40,7 +39,7 @@ module.exports = function (app, bdd) {
     console.log("Connecté à la base de données MongoDB");
     initItems();
   });
-/*try {
+  /*try {
 
     const users = await UserModel.find();
     console.log("Affichage des utilisateurs dans la base de données :");
@@ -83,12 +82,23 @@ module.exports = function (app, bdd) {
           .json({ error: "Avatar par défaut introuvable." });
       }
 
+      const defaultColor = await ItemModel.findOne({
+        name: "white",
+        category: "colorAvatar",
+      });
+      if (!defaultColor) {
+        return res
+          .status(500)
+          .json({ error: "Couleur par défaut introuvable." });
+      }
+
       const nouveauUtilisateur = new UserModel({
         pseudo,
         email,
         password: hashedPassword,
-        itemsOwned: [defaultAvatar._id],
-        avatar: [defaultAvatar._id],
+        itemsOwned: [defaultAvatar._id, defaultColor._id],
+        baseAvatar: defaultAvatar._id,
+        colorAvatar: defaultColor._id,
       });
 
       // Enregistrement dans la base de données
@@ -196,7 +206,9 @@ module.exports = function (app, bdd) {
   app.get("/api/userInfo", verifyToken, async (req, res, next) => {
     try {
       const user = await UserModel.findById(req.userId)
-        .populate("avatar", "imgSrc")
+        .populate("baseAvatar")
+        .populate("sunglasses")
+        .populate("colorAvatar")
         .exec();
 
       if (!user) {
@@ -205,11 +217,14 @@ module.exports = function (app, bdd) {
           .json({ success: false, message: "Utilisateur non trouvé" });
       }
 
+      // Construisez la réponse en utilisant les nouveaux champs
       const response = {
         success: true,
         user: {
           ...user._doc,
-          avatar: user.avatar.imgSrc, // Inclure l'URL de l'image de l'avatar
+          baseAvatarImgSrc: user.baseAvatar ? user.baseAvatar.imgSrc : null,
+          sunglassesImgSrc: user.sunglasses ? user.sunglasses.imgSrc : null,
+          colorAvatar: user.colorAvatar ? user.colorAvatar.imgSrc : "#FFFFFF",
         },
       };
 
@@ -271,15 +286,13 @@ module.exports = function (app, bdd) {
     }
   });
 
-  app.get("/api/avatars", async (req, res) => {
+  app.get("/api/items", async (req, res) => {
     try {
-      const avatars = await ItemModel.find();
-      res.json(avatars);
+      const items = await ItemModel.find();
+      res.json(items);
     } catch (error) {
-      console.error("Erreur lors de la récupération des avatars:", error);
-      res
-        .status(500)
-        .send("Erreur serveur lors de la récupération des avatars");
+      console.error("Erreur lors de la récupération des items:", error);
+      res.status(500).send("Erreur serveur lors de la récupération des items");
     }
   });
 
@@ -289,7 +302,7 @@ module.exports = function (app, bdd) {
   });
 
   app.post("/api/activate-avatar", verifyToken, async (req, res, next) => {
-    const { userId, avatarId } = req.body;
+    const { userId, itemId } = req.body;
 
     try {
       const user = await UserModel.findById(userId);
@@ -299,25 +312,51 @@ module.exports = function (app, bdd) {
           .json({ success: false, message: "User not found" });
       }
 
-      const itemExists = user.itemsOwned.some(
-        (item) => item.toString() === avatarId
-      );
+      const item = await ItemModel.findById(itemId);
+      if (!item) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Item not found" });
+      }
+
+      const itemExists = user.itemsOwned.some((id) => id.toString() === itemId);
       if (!itemExists) {
         return res
           .status(404)
-          .json({ success: false, message: "Avatar not owned" });
+          .json({ success: false, message: "Item not owned" });
       }
 
-      user.avatar = avatarId;
+      // Déterminer le itemType basé sur la catégorie de l'item
+      let itemType;
+      switch (item.category) {
+        case "baseAvatar":
+          itemType = "baseAvatar";
+          user.baseAvatar = itemId;
+          break;
+        case "sunglasses":
+          itemType = "sunglasses";
+          user.sunglasses = itemId;
+          break;
+        case "colorAvatar":
+          itemType = "colorAvatar";
+          user.colorAvatar = itemId; // Supposant que vous stockez l'ID ou la valeur directement
+          break;
+        default:
+          return res
+            .status(400)
+            .json({ success: false, message: "Invalid item category" });
+      }
+
       await user.save();
 
       res.json({
         success: true,
-        message: "Avatar activated successfully",
-        user: { ...user._doc, avatar: user.avatar },
+        message: "Avatar component activated successfully",
+        itemType: itemType,
+        itemId: itemId,
       });
     } catch (error) {
-      console.error("Error activating avatar:", error);
+      console.error("Error activating avatar component:", error);
       res.status(500).json({ success: false, message: "Server error" });
     }
   });

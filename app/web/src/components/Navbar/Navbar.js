@@ -10,7 +10,7 @@ import TextInputComponent from "../textInput/TextInput.jsx";
 import { useTranslation } from "../Utiles/Translations";
 import { useAuth } from "../Utiles/AuthProvider";
 import { useUserData } from "../Utiles/useUserData";
-
+import AvatarDisplay from "../AvatarDisplay/AvatarDisplay.jsx";
 
 const Navbar = ({
   profileOnClick,
@@ -21,7 +21,6 @@ const Navbar = ({
 }) => {
   const { user, isLogged } = useAuth();
   const userData = useUserData();
-
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -92,15 +91,16 @@ const Navbar = ({
 
       <Button
         label={
-          isLogged
-            ? userData.user.pseudo
-            : getTranslatedWord("navbar.login")
+          isLogged ? userData.user.pseudo : getTranslatedWord("navbar.login")
         }
         onClick={() => (isLogged ? profileOnClick() : logInOnClick())}
         styleClass={`${
           isLogged ? "btn-profile back-color1" : "btn-logIn back-color2"
         }`}
-        iconSrc={isLogged ? userData.user.avatar : require("./../assets/images/icons/black/profile.png")}
+        showAvatar={isLogged}
+        iconSrc={
+          isLogged ? null : require("../assets/images/icons/black/profile.png")
+        }
       />
 
       {/* Settings/Tutorial Buttons */}

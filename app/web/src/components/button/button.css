@@ -1,4 +1,5 @@
-#dark Button, #light Button{
+#dark Button,
+#light Button {
   transition: background-color 1s ease;
 }
 
@@ -7,24 +8,26 @@
 }
 
 #dark .back-color2 {
-  background-color: #4D6478; 
+  background-color: #4d6478;
 }
 
-#dark .back-color3{
-  background-color: #303b44; 
+#dark .back-color3 {
+  background-color: #303b44;
 }
 
 #light .back-color1 {
-  background-color: #a57423; 
+  background-color: #a57423;
 }
 #light .back-color2 {
-  background-color: #866839; 
+  background-color: #866839;
 }
-#light .back-color3{
-  background-color: #35240a; 
+#light .back-color3 {
+  background-color: #35240a;
 }
-.back-color1:hover, .back-color2:hover, .back-color3:hover {
-  filter:brightness(150%);
+.back-color1:hover,
+.back-color2:hover,
+.back-color3:hover {
+  filter: brightness(150%);
   cursor: pointer;
   color: black;
   text-shadow: unset;
@@ -41,20 +44,19 @@
   color: white;
 }
 
-
 .google-button {
   font-weight: bold;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.google-button img{
+.google-button img {
   width: 3vh;
   height: auto;
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   padding-left: 5px;
 }
 
@@ -62,8 +64,7 @@
   margin-top: 5%;
 }
 
-
-.btn-list_table{
+.btn-list_table {
   width: 100%;
   height: 3vh;
   cursor: pointer;
@@ -73,16 +74,16 @@
   margin-top: 5px;
 }
 
-.btn-list_table_full{
-  background-color : rgb(107, 0, 0);
+.btn-list_table_full {
+  background-color: rgb(107, 0, 0);
 }
 
-.btn_onglets_shop{
+.btn_onglets_shop {
   border-radius: 10px;
-  height : 15%;
+  height: 15%;
   width: 90%;
   margin-bottom: 4%;
   border-radius: 0 20px 20px 20px;
   box-shadow: inset 0 0 10px black;
-  font-size : 1.5vw;
+  font-size: min(1.5vw, 100px);
 }

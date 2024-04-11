@@ -15,7 +15,11 @@ const ItemSchema = new Schema({
   imgSrc: {
     type: String,
     required: true,
-  }
+  },
+  category: {
+    type: String,
+    required: true,
+  },
 });
 
 const ItemModel = model("Item", ItemSchema);
