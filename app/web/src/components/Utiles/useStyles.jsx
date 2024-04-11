@@ -1,6 +1,3 @@
-import React, { useEffect } from "react";
-
-
 export function getStyles(windowType, isLogged, isGameTableVisible, isWindowOpen ) {
   
   return {
