@@ -124,7 +124,7 @@ const Navbar = ({}) => {
         />
         {isLogged && (
           <Button
-            label={getTranslatedWord("navbar.exit")}
+            label={isGameTableVisible ? getTranslatedWord("navbar.exit") : getTranslatedWord("navbar.logout") }
             onClick={handleLogOutButton}
             styleClass="btn-exit-V2"
             iconSrc={require("./../assets/images/icons/white/exit.png")}
