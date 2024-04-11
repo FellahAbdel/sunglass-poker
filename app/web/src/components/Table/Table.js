@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import { useTranslation } from "../Utiles/Translations";
@@ -25,6 +25,7 @@ const Table = ({
   } = useWindowContext();
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
@@ -33,6 +34,14 @@ const Table = ({
   useEffect(() => {
     console.log("isLogged Table:", isLogged);
   }, [isLogged]);
+
+  useEffect(() => {
+    if (isWindowOpen && isGameTableVisible) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }, [isWindowOpen, isGameTableVisible]);
 
   const classes = getStyles(windowType, isLogged, isGameTableVisible, isWindowOpen);
 
@@ -66,7 +75,12 @@ const Table = ({
         </>
       }
       {/*All the panels other than game itself are included in window component*/}
-      <Window />
+      <Window/>
+
+
+        <div className={`box-onGameNotif ${isVisible ? 'visible' : ''}`}>You are still on the game table!</div>
+      
+      
 
       {/*the only use of logo component - dynamique*/}
       <LogoComponent

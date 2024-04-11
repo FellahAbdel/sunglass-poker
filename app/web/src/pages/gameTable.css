@@ -14,7 +14,6 @@
     height: 100%;
     top:unset;
     z-index: -999;
-    filter: blur(1px);
     transition: filter 1s ease;
     background: unset;
 }
