@@ -22,6 +22,7 @@ const Navbar = ({}) => {
       showHome();
     } else {
       logingOut();
+      closeWindow();
     }
   };
 
