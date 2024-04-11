@@ -67,7 +67,7 @@ const defaultItems = [
 
 async function initItems() {
   try {
-    await ItemModel.deleteMany({});
+    //await ItemModel.deleteMany({});
     // console.log(
     //   "Toutes les informations de la table Items ont été supprimées."
     // );
