@@ -55,21 +55,12 @@ const Table = ({
       "isLogged Table onClickStartGame : ",
       isLogged ? "true" : "false"
     );
-    if (isLogged) {
       dispatch(startGame());
       // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
       console.log("Utilisateur connecté, on montre la table");
       showGameTable();
-    } else {
-      // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
-      console.log("Utilisateur déconnecté, login page");
-      openWindow("login");
-    }
   };
 
-  const onClickStartGameSignUp= () => {
-    openWindow("register");
-  }
 
   const showGameList = () => {
     if (isLogged) {
@@ -146,12 +137,12 @@ const Table = ({
                     <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color2"}
                       label={getTranslatedWord("game.loginPlay")}
-                      onClick={onClickStartGame}
+                      onClick={openWindow("login")}
                     />
                    <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color2"}
                       label={getTranslatedWord("game.signupPlay")}
-                      onClick={onClickStartGameSignUp}
+                      onClick={openWindow("register")}
                     />
                   </>
                 )}
