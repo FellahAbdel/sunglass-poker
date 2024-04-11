@@ -44,6 +44,9 @@ function createWindow() {
   // Charger l'URL initiale
   win.loadURL("http://localhost:3000");
   //win.loadURL("http://localhost:9999");
+
+  //win.loadURL(`file://${path.join(__dirname, 'build/index.html')}`);
+
 }
 
 app.whenReady().then(createWindow);
