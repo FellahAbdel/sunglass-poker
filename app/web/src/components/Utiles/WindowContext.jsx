@@ -5,7 +5,6 @@ const WindowContext = createContext();
 export const useWindowContext = () => useContext(WindowContext);
 
 export const WindowProvider = ({ children }) => {
-
   const [selectedItem, setSelectedItem] = useState(null);
 
   const [isWindowOpen, setIsWindowOpen] = useState(() => {
@@ -14,14 +13,19 @@ export const WindowProvider = ({ children }) => {
   });
 
   const openValidationWindow = (item) => {
-    console.log(`Ouverture de la fenêtre de validation pour l'élément : ${item.imgSrc}`);
+    console.log(
+      `Ouverture de la fenêtre de validation pour l'élément : ${item.imgSrc}`
+    );
     setIsWindowOpen(true);
     setWindowType("validation");
     setSelectedItem(item); // Stocke l'item sélectionné
   };
+  const [windowType, setWindowType] = useState(() => {
+    const savedWindowType = sessionStorage.getItem("windowType");
+    const isGameVisible = sessionStorage.getItem("isGameTableVisible") === "true";
   
-
-  const [windowType, setWindowType] = useState(() => sessionStorage.getItem("windowType") || "accueil");
+    return savedWindowType || (isGameVisible ? "game" : "accueil");
+  });
   const [connectionWindowOpen, setconnectionWindowOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -31,7 +35,9 @@ export const WindowProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const isConnectionType = ["login", "register", "forgot", "reset"].includes(windowType);
+    const isConnectionType = ["login", "register", "forgot", "reset"].includes(
+      windowType
+    );
     setconnectionWindowOpen(isConnectionType);
     console.log("window connection ?  ", isConnectionType ? "Oui" : "Non");
   }, [windowType]);
@@ -40,15 +46,13 @@ export const WindowProvider = ({ children }) => {
     console.log("Gametable visible ? ", isGameTableVisible ? "Oui" : "Non");
   }, [isGameTableVisible]);
 
-
   useEffect(() => {
     sessionStorage.setItem("isWindowOpen", isWindowOpen.toString());
   }, [isWindowOpen]);
-  
+
   useEffect(() => {
     sessionStorage.setItem("windowType", windowType);
   }, [windowType]);
-  
 
   useEffect(() => {
     sessionStorage.setItem("isGameTableVisible", isGameTableVisible);
@@ -68,28 +72,25 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openWindow = (type) => {
-    if (isWindowOpen && (windowType === type) ) { 
-       closeWindow(type);
+    if (isWindowOpen && windowType === type) {
+      closeWindow(type);
     } else {
       console.log(`Ouverture de la fenêtre : ${type}`);
-      setIsWindowOpen(true); 
+      setIsWindowOpen(true);
       setWindowType(type);
     }
   };
-  
 
   const closeWindow = () => {
     console.log("Fermeture de la fenêtre");
-    if(isGameTableVisible){
+    if (isGameTableVisible) {
       setIsWindowOpen(false);
       setWindowType("");
-    }
-    else{
+    } else {
       setIsWindowOpen(true);
       setWindowType("accueil");
     }
     setSuccessMessage("");
-    
   };
 
   const openSuccessWindow = (message) => {
