@@ -35,6 +35,7 @@
   },
   "game": {
     "loginPlay": "Connectez-vous pour jouer",
+    "signupPlay":"Créer un compter pour jouer",
     "startGame": "Commencer une partie",
     "joinGame": "Rejoindre une partie",
     "createAgame": "Créer une nouvelle partie",

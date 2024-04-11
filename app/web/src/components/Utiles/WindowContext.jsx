@@ -95,7 +95,7 @@ export const WindowProvider = ({ children }) => {
 
   // Fonctions spécifiques pour chaque type de fenêtre
   const openLoginWindow = () => openWindow("login");
-  const openSignUpWindow = () => openWindow("signup");
+  const openSignUpWindow = () => openWindow("register");
   const openForgotPassword = () => openWindow("forgot");
   const openResetPassword = () => openWindow("reset");
 

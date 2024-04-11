@@ -67,6 +67,10 @@ const Table = ({
     }
   };
 
+  const onClickStartGameSignUp= () => {
+    openWindow("register");
+  }
+
   const showGameList = () => {
     if (isLogged) {
       openWindow("servers");
@@ -147,7 +151,7 @@ const Table = ({
                    <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color2"}
                       label={getTranslatedWord("game.signupPlay")}
-                      onClick={onClickStartGame}
+                      onClick={onClickStartGameSignUp}
                     />
                   </>
                 )}
