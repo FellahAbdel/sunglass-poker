@@ -8,12 +8,7 @@ const AvatarDisplay = () => {
   const [sunglasses, setSunglasses] = useState({});
 
   useEffect(() => {
-    if (
-      user &&
-      user.baseAvatarImgSrc &&
-      user.sunglassesImgSrc &&
-      user.colorAvatar
-    ) {
+    if (user && user.baseAvatarImgSrc && user.colorAvatar) {
       console.log("User data:", user);
       setBaseAvatar({
         imgSrc: user.baseAvatarImgSrc,
