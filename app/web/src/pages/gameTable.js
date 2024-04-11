@@ -24,7 +24,23 @@ import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
 const GameTable = () => {
   const { theme } = useSettings();
+  const { logingOut, isLogged } = useAuth();
+  const {
+    windowType,
+    isWindowOpen,
+    closeWindow,
+    openWindow,
+    isGameTableVisible,
+  } = useWindowContext();
+  const classes = getStyles(windowType, isLogged, isGameTableVisible , isWindowOpen);
 
+  useEffect(() => {
+    console.log("isLogged gameTable:", isLogged);
+  }, [isLogged]);
+
+
+
+  //inGame Fonctions to test-----------------------------------------
   const [dealingFlop, setDealingFlop] = useState([true, true, true]);
   const [handGuide, setHandGuide] = useState("fullHouse");
   const [profileMenu] = useState(false);
@@ -36,41 +52,6 @@ const GameTable = () => {
   const [playersCardDistributed, setPlayersCardDistributed] = useState([
     1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
   ]);
-
-  const { logingOut, isLogged } = useAuth();
-  const {
-    windowType,
-    isWindowOpen,
-    closeWindow,
-    openWindow,
-    isGameTableVisible,
-  } = useWindowContext();
-
-  const handleLanguageChange = (language) => {
-    console.log("Selected Language:", language);
-  };
-
-  // const handleIsLogged = () => {
-  //   setIsLogged(!isLogged);
-  //   console.log("isLogged");
-  // };
-
-  const handleClickStartGame = () => {
-    if (isLogged) {
-      // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
-      console.log("Montrer la window des différentes tables");
-      openWindow("servers");
-    } else {
-      // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
-      openWindow("login");
-    }
-  };
-  useEffect(() => {
-    console.log("isLogged gameTable:", isLogged);
-  }, [isLogged]);
-
-
-  //inGame Fonctions to test-----------------------------------------
 
   const handleFold = () => {
     console.log("handleFold function called from parent component");
@@ -100,13 +81,11 @@ const GameTable = () => {
       closeWindow();
     }
   };
+  //-----------------------------------------inGame functions to test
 
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
-  //-----------------------------------------inGame functions to test
-
-  const classes = getStyles(windowType, isLogged, isGameTableVisible , isWindowOpen);
 
   return (
     <div
@@ -127,19 +106,10 @@ const GameTable = () => {
       {/* Menu/Table */}
       <div className={classes.compTable}>
         <Table
-          showGameList={handleClickStartGame}
-          selectedLanguage={handleLanguageChange}
           dealingFlop={dealingFlop}
           showCards={[0, 1, 2, 3, 4]}
           playersCardDistributedProp={playersCardDistributed}
           playersCardsShowProp={playersCardsShow}
-          moneyPot={9999999999}
-          // to open the profile and setting menus
-          profileMenuActive={profileMenu}
-          settingsMenuActive={settingsMenu}
-          // LogIn panel
-          //isLoggedOnClick={handleIsLogged}
-          //isLogged={isLogged}
           onClick={(e) => handleBoxClick}
         />
       </div>

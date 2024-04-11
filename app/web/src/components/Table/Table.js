@@ -24,7 +24,6 @@ const Table = ({
   //showCards,
   playersCardDistributedProp, // a list of 10 booleans to distribute to choosen players
   playersCardsShowProp, // a list of 10 booleans to show the cards of choosen players
-  moneyPot, // money on the table
 }) => {
   const {
     openWindow,
@@ -92,7 +91,7 @@ const Table = ({
         <>
           {/* cards and the pot in the center of the table */}
           <CardsPlacements
-            moneyPot={moneyPot}
+            moneyPot={9999999}
             dealingFlop={dealingFlop}
             disappear={isWindowOpen}
             playersCardDistributedProp={playersCardDistributedProp}
