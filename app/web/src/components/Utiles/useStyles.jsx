@@ -1,4 +1,8 @@
-export function getStyles(windowType, isLogged, isGameTableVisible, isWindowOpen) {
+import React, { useEffect } from "react";
+
+
+export function getStyles(windowType, isLogged, isGameTableVisible, isWindowOpen ) {
+  
   return {
     //Table Placement
     compTable: `comp-table
@@ -18,6 +22,6 @@ export function getStyles(windowType, isLogged, isGameTableVisible, isWindowOpen
       logo-main
       logo-${windowType}
       ${isGameTableVisible && !isWindowOpen && "disappear"}
-    `,
+    `
   };
 }

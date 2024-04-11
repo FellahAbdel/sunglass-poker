@@ -109,8 +109,8 @@
   "messageLogo": {
     "tutorial": "Tutorial",
     "profile": "Profile",
-    "listeTable": "JOIN A GAME ",
-    "createTable": "CREATE A NEW GAME",
+    "servers": "JOIN A GAME ",
+    "create_table": "CREATE A NEW GAME",
     "validation": "Buying confirmation",
     "shop": "Store"
   }

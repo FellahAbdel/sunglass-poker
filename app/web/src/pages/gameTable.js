@@ -1,5 +1,5 @@
 //react imports
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useAuth } from "./../components/Utiles/AuthProvider";
 
@@ -12,7 +12,6 @@ import "../components/Utiles/animations.css";
 import { getStyles } from "../components/Utiles/useStyles.jsx";
 
 //components imports
-import Navbar from "../components/Navbar/Navbar";
 import NavbarV2 from "../components/Navbar/NavbarV2";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
@@ -24,13 +23,12 @@ import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
 const GameTable = () => {
   const { theme } = useSettings();
-  const { logingOut, isLogged } = useAuth();
+  const { isLogged } = useAuth();
   const {
     windowType,
     isWindowOpen,
     closeWindow,
-    openWindow,
-    isGameTableVisible,
+    isGameTableVisible
   } = useWindowContext();
   const classes = getStyles(windowType, isLogged, isGameTableVisible , isWindowOpen);
 
@@ -38,13 +36,21 @@ const GameTable = () => {
     console.log("isLogged gameTable:", isLogged);
   }, [isLogged]);
 
+  const handleCloseOnClickOutside = (event) => {
+    if (isWindowOpen) {
+      closeWindow();
+    }
+  };
+
+  const handleBoxClick = (event) => {
+    event.stopPropagation();
+  };
+
 
 
   //inGame Fonctions to test-----------------------------------------
   const [dealingFlop, setDealingFlop] = useState([true, true, true]);
   const [handGuide, setHandGuide] = useState("fullHouse");
-  const [profileMenu] = useState(false);
-  const [settingsMenu] = useState(false);
   const [showHandCard, setShowHandCard] = useState(true);
   const [playersCardsShow, setPlayersCardsShow] = useState([
     1, 0, 0, 1, 1, 0, 0, 0, 0, 1,
@@ -76,16 +82,10 @@ const GameTable = () => {
       !playersCardsShow[2],
     ]);
   };
-  const handleCloseOnClickOutside = (event) => {
-    if (isWindowOpen) {
-      closeWindow();
-    }
-  };
+
   //-----------------------------------------inGame functions to test
 
-  const handleBoxClick = (event) => {
-    event.stopPropagation();
-  };
+
 
   return (
     <div
