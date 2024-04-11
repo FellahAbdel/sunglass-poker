@@ -62,4 +62,6 @@
 
 2024/05/10: 1h15    Tentative de création de la version exécutable desktop, recherche sur le sujet...
 
-TEMPS TOTAL: 61h45
+2024/05/10: 45min   Recherche supplémentaire, marche toujours pas, problème avec electron quand on lance avec build
+
+TEMPS TOTAL: 62h30  
