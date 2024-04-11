@@ -37,6 +37,9 @@ module.exports = function (app, bdd) {
   );
   db.once("open", async () => {
     console.log("Connecté à la base de données MongoDB");
+    //await UserModel.deleteMany({});
+    //await StatModel.deleteMany({});
+
     initItems();
   });
   /*try {

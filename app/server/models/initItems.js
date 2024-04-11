@@ -7,14 +7,14 @@ const defaultItems = [
     price: 100,
     imgSrc: "/assets/avatar/1.png",
     category: "baseAvatar",
-    eyePosition: { x: 50, y: 40 },
+    eyePosition: { x: 10, y: 10 },
   },
   {
     name: "Avatar2",
     price: 100,
     imgSrc: "/assets/avatar/2.png",
     category: "baseAvatar",
-    eyePosition: { x: 50, y: 40 },
+    eyePosition: { x: 90, y: 90 },
   },
   {
     name: "Avatar3",
@@ -24,11 +24,25 @@ const defaultItems = [
     eyePosition: { x: 10, y: 40 },
   },
   {
-    name: "Avatar4",
+    name: "Avatar7",
     price: 100,
     imgSrc: "/assets/avatar/4.png",
     category: "baseAvatar",
-    eyePosition: { x: 50, y: 10 },
+    eyePosition: { x: 40, y: 40 },
+  },
+  {
+    name: "Avatar8",
+    price: 100,
+    imgSrc: "/assets/avatar/4.png",
+    category: "baseAvatar",
+    eyePosition: { x: 90, y: 10 },
+  },
+  {
+    name: "Avatar9",
+    price: 100,
+    imgSrc: "/assets/avatar/4.png",
+    category: "baseAvatar",
+    eyePosition: { x: 30, y: 10 },
   },
   {
     name: "Avatar5",
@@ -53,7 +67,7 @@ const defaultItems = [
 
 async function initItems() {
   try {
-    //await ItemModel.deleteMany({});
+    await ItemModel.deleteMany({});
     // console.log(
     //   "Toutes les informations de la table Items ont été supprimées."
     // );
