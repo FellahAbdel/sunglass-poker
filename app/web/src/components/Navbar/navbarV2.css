@@ -1,0 +1,131 @@
+.container-nav-V2{
+    width: 100%;
+}
+
+.container-nav-V2 Button{
+    background-color: unset;
+    color:white;
+    opacity: 0.5;
+}
+.container-nav-V2 Button:hover{
+    cursor: pointer;
+}
+
+
+.container-navMain-V2{
+    position: absolute;
+    right: 0.7vw;
+    top: 0.7vw;
+    display: flex;
+    flex-direction: column;
+    gap:1vh;
+}
+.container-navMain-V2 img{
+    width: 2.2vw;
+    transition: width 0.2s ease;
+}
+.container-navMain-V2 Button:hover img{
+    width: 3vw;
+}
+.container-navMain-V2 Button{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.container-navMain-V2 span{
+    opacity: 0.5;
+    white-space: nowrap;
+    font-size: large;
+    margin-right:5% ;
+    text-align: right;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.container-navMain-V2 Button:hover span{
+    text-align: right;
+    opacity: 100;
+}
+
+
+
+.box-chips-V2{
+    color:white;
+
+    width: fit-content;
+    height: fit-content;
+    padding:0.7vw;
+
+    display: flex;
+    align-items: center;
+
+    font-size:medium;
+    font-weight: bold;
+
+    border-radius: 0 0 1vw 1vw;
+    transition: box-shadow 1s ease;
+
+    backdrop-filter: blur(35px);
+}
+#dark .box-chips-V2{
+    box-shadow: inset 0 0 10px rgb(0, 162, 255),
+    0 0 10px rgb(0, 162, 255);
+}
+#light .box-chips-V2{
+    box-shadow: 
+        inset 0 0 10px rgb(232, 159, 0),
+         0 0 10px rgb(232, 159, 0);
+    }
+
+
+/*chat button*/
+.chatBox-V2{
+    width:3vw;
+    height: 3vw;
+    min-width: max-content;
+    min-height: max-content;
+    position: absolute;
+    left:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+
+    border-radius: 0 0 1vw 0;
+    background-color:rgba(10, 111, 200, 0);
+
+    transition: width 1s ease , height 1s ease ,background-color 1s ease;
+}
+.chatBoxOpen-V2{
+    width:20vw;
+    height: 50vh;
+    backdrop-filter:blur(35px);
+}
+
+.chatBox-V2 Button img{
+    transition: width 0.1s ease;
+    width: 2vw;
+}
+.chatBox-V2:hover Button img{
+    cursor: pointer;
+    width: 3vw;
+}
+
+
+
+#dark .chatBoxOpen-V2{
+    background-color: rgba(67, 67, 67, 0.458);
+}
+#light .chatBoxOpen-V2{
+    background-color: rgba(26, 26, 26, 0.458)
+}
+
+
+.btn-chatClose-V2 {
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+    width: 20px;
+    height: auto;
+}
+

@@ -5,14 +5,14 @@
     "message": "Message",
     "settings": "Settings",
     "tutorial": "Tutorial",
-    "exit": "Exit",
+    "exit": "Leave the table",
     "logout": "Log out",
-    "login": "Log In",
-    "signin": "Sign In"
+    "login": "Log in",
+    "signin": "Sign Up"
   },
   "connection": {
-    "login": "Log In",
-    "signin": "Sign In",
+    "login": "Log in",
+    "signin": "Sign Up",
     "username": "Username",
     "password": "Password",
     "repeatPass": "Repeat your password",

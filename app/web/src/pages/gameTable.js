@@ -13,6 +13,7 @@ import { getStyles } from "../components/Utiles/useStyles.jsx";
 
 //components imports
 import Navbar from "../components/Navbar/Navbar";
+import NavbarV2 from "../components/Navbar/NavbarV2";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
@@ -68,34 +69,6 @@ const GameTable = () => {
     console.log("isLogged gameTable:", isLogged);
   }, [isLogged]);
 
-  //Navbar buttons handles-----------------------------------------
-  const handleLogOutButton = () => {
-    logingOut();
-    //setProfileMenu(false);
-    //setSettingsMenu(false);
-    closeWindow();
-  };
-  const handleLogInButton = () => {
-    openWindow("login");
-    // setTutorialMenu(false);
-    // setLogInMenu(!logInMenu);
-    console.log("handleLogInButton function called from parent component");
-  };
-  const handleTutorialButton = () => {
-    openWindow("tutorial");
-    // setLogInMenu(false);
-    // setTutorialMenu(!tutorialMenu);
-    console.log("handleTutorialButton function called from parent component");
-  };
-  const handleProfileButton = () => {
-    openWindow("profile");
-    console.log("handleProfileButton function called from parent component");
-  };
-  const handleSettingsButton = () => {
-    openWindow("settings");
-    console.log("handleSettingsButton function called from parent component");
-  };
-  //-----------------------------------------Navbar buttons handles
 
   //inGame Fonctions to test-----------------------------------------
 
@@ -148,14 +121,7 @@ const GameTable = () => {
 
       {/* Navbar or header */}
       <div className="comp-navbar">
-        <Navbar
-          logOutOnClick={handleLogOutButton}
-          settingsOnClick={handleSettingsButton}
-          profileOnClick={handleProfileButton}
-          //navbar changes for loggedIn
-          logInOnClick={handleLogInButton}
-          tutorialOnClick={handleTutorialButton}
-        />
+        <NavbarV2/>
       </div>
 
       {/* Menu/Table */}
