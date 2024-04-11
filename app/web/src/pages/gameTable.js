@@ -106,7 +106,7 @@ const GameTable = () => {
   };
   //-----------------------------------------inGame functions to test
 
-  const classes = getStyles(windowType, isLogged, isGameTableVisible);
+  const classes = getStyles(windowType, isLogged, isGameTableVisible , isWindowOpen);
 
   return (
     <div

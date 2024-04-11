@@ -19,16 +19,9 @@
     background: unset;
 }
 #dark .backdrop{
-    /* background: 
-        linear-gradient(315deg, transparent 75%, #000000 0)-8px 0,
-        linear-gradient(45deg, transparent 75%, #000000 0) 8px 0,
-        linear-gradient(135deg, #333 50%, transparent 0) 0 0,
-        linear-gradient(45deg, #4d4d4d 50%, #666 0) 0 0 #666;
-    background-size: 16px 16px; */
-
     filter: brightness(100%);
 
-    --s: 30px; /* control the size */
+    --s: 30px; 
     --_g: #00611500 83%,#2c2c2c 85% 99%,#00611500 101%;
     background:
       radial-gradient(27% 29% at right ,var(--_g)) calc(var(--s)/ 2) var(--s),
@@ -43,9 +36,9 @@
     margin: 0;
     padding: 0;
     background-image: url("./../components/assets/images/backdrop2.jpg");
-    background-size: cover; /* Scale the background image to cover the entire container */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent the background image from repeating */ 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #dark .backdrop2{
@@ -61,44 +54,58 @@
     background: radial-gradient(#ffffff10 70%, #00000070);
 }
 
+/*components placements*/
 .comp-navbar{
     align-self: baseline;
     z-index: 3;
 }
-
 .comp-bonus{
     position: absolute;
     bottom:10px;  
     left:10px;  
 }
+.comp-gameAction{
+    position: absolute;
+    bottom: 10px;
+    z-index: 1;
+    flex:1;
+}
+.comp-handCards{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
 
+
+
+/*Table placement*/
 .comp-table{
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: center;
     flex:1;
-
     position: absolute;
     top:0;
     bottom:0;
     right:0;
     left: 0;
-    
     z-index: 0;
     margin: auto;
-
     transition: right 0.5s ease, left 0.5s ease, top 1s ease, bottom 0.5s ease;
 }
-
-.comp-table-login{
+.comp-table-login,
+.comp-table-register,
+.comp-table-forgot,
+.comp-table-reset,
+.comp-table-settings{
     right:10%;
     left:30%;
 }
 .comp-table-tutorial{
     top: 12%;
 }
-
 .comp-table-inGame{
     position: absolute;
     top:-10%;
@@ -106,20 +113,21 @@
     left:0;
     bottom:0;
 }
-
-.comp-gameAction{
-    position: absolute;
-    bottom: 10px;
-    z-index: 1;
-    flex:1;
+.comp-table-accueil{
+    top:-10%;
+    right:0;
+    left:0;
+    bottom:0;
 }
 
-.comp-handCards{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
-}
+
+
+
+
+
+
+
+
 
 
 .all-space{

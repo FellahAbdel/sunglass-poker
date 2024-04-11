@@ -67,7 +67,7 @@ const Table = ({
       openWindow("login");
     }
   };
-  const classes = getStyles(windowType, isLogged, isGameTableVisible);
+  const classes = getStyles(windowType, isLogged, isGameTableVisible, isWindowOpen);
 
   return (
     // Table that becomes a container for the menus when they are activated
@@ -79,7 +79,7 @@ const Table = ({
     <div className={classes.containerTable}>
       {/*the white border line around the table in the middle*/}
       <div
-        className={`${classes.containerTable} ${
+        className={`${
           !isWindowOpen && "table-lineAround"
         } ${
           ((windowType === "" && !isGameTableVisible) || isWindowOpen) &&
