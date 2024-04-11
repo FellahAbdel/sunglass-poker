@@ -39,6 +39,7 @@ const SettingsWindow = () => {
           <span className='container-select-lang'>
           <p>{getTranslatedWord("settings.langSelect")}</p>
           <select
+              name="lang"
               className='select-lang'
               id="language-select"
               value={language}

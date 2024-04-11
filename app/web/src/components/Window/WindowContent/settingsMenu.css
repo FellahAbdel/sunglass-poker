@@ -164,6 +164,34 @@ display: flex;
 align-items: center;
 flex-direction: row;
 }
-.container-select-lang p{
-margin-right: 10px;
+.container-select-lang label {
+  font-size: 1vw;
+  color: white;
 }
+.select-lang {
+  padding: 5px 25px 5px 10px;
+  font-size: 1vw;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  color: #000000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;   
+  background-image: url("./../../assets/images/icons/black/arrow-down.png"); /* SVG arrow */
+  background-repeat: no-repeat;
+  background-position: right 5px center; 
+  background-size: 12px; 
+}
+.select-lang::-ms-expand {
+  display: none;
+}
+.container-select-lang img{
+  width:1vw;
+}
+.container-select-lang p{
+  margin-right: 10px;
+  }

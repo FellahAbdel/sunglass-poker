@@ -1,10 +1,10 @@
 import React from "react";
 import './bonusPanel.css';
 import Button from "../../button/Button.tsx";
-import Clubs from './../../assets/images/card_type/Clubs.png';
-import Diamonds from './../../assets/images/card_type/Diamons.png';
-import Hearts from './../../assets/images/card_type/Hearts.png';
-import Spades from './../../assets/images/card_type/Spades.png';
+import Clubs from './../../assets/images/icons/white/club.png';
+import Diamonds from './../../assets/images/icons/white/diamon.png';
+import Hearts from './../../assets/images/icons/white/heart.png';
+import Spades from './../../assets/images/icons/white/spade.png';
 import { useTranslation } from '../../Utiles/Translations';
 
 
@@ -31,10 +31,10 @@ const BonusPanel = () => {
     return (
         <div className="panel-bonus">
             <div className="container-bonusCards">
-                <img src={Hearts} alt="Heart" className={`container-cardType box-${handleChangeHearts}`}/>
-                <img src={Diamonds} alt="Diamond" className={`container-cardType box-${handleChangeDiamonds}`}/>
-                <img src={Spades} alt="Spade" className={`container-cardType box-${handleChangeSpades}`}/>
-                <img src={Clubs} alt="Club" className={`container-cardType box-${handleChangeClubs}`}/>
+                <img src={Hearts} alt="Heart" className={`box-${handleChangeHearts}`}/>
+                <img src={Diamonds} alt="Diamond" className={`box-${handleChangeDiamonds}`}/>
+                <img src={Spades} alt="Spade" className={`box-${handleChangeSpades}`}/>
+                <img src={Clubs} alt="Club" className={`box-${handleChangeClubs}`}/>
             </div>
 
             <Button styleClass={"btn-bonus back-color1"} label={getTranslatedWord("bonus.bonus")}/>
