@@ -34,7 +34,8 @@
     "ok": "Ok"
   },
   "game": {
-    "loginPlay": "login to play",
+    "loginPlay": "Log In to play",
+    "signupPlay":"Sign Up to play",
     "startGame": "Start a game",
     "joinGame": "Join a game",
     "createAgame": "Create a new game",
