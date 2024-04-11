@@ -17,9 +17,18 @@ const Navbar = ({}) => {
     useWindowContext();
 
   const handleLogOutButton = () => {
-    if (windowType !== "") {
+    console.log("handleLogOutButton :", windowType);
+    console.log("isLogged :", isLogged);
+    if (windowType === "accueil"){
+      logingOut();
       closeWindow();
-    } else if (isGameTableVisible) {
+
+    }
+    else if (windowType !== "" ) {
+      closeWindow();
+    } 
+
+    else if (isGameTableVisible) {
       showHome();
     } else {
       logingOut();

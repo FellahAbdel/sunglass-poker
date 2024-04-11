@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
-import { useTranslation } from '../Utiles/Translations';
-
+import { useTranslation } from "../Utiles/Translations";
 
 //CSS
 import "./table.css";
@@ -55,12 +54,11 @@ const Table = ({
       "isLogged Table onClickStartGame : ",
       isLogged ? "true" : "false"
     );
-      dispatch(startGame());
-      // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
-      console.log("Utilisateur connecté, on montre la table");
-      showGameTable();
+    dispatch(startGame());
+    // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
+    console.log("Utilisateur connecté, on montre la table");
+    showGameTable();
   };
-
 
   const showGameList = () => {
     if (isLogged) {
@@ -79,14 +77,19 @@ const Table = ({
     // container-acceuil : for the table to show up in acceuil when game opens
     // container-tutorial : for tuto
     <div className={classes.containerTable}>
-      
       {/*the white border line around the table in the middle*/}
-      <div className={`${classes.containerTable} ${!isWindowOpen && "table-lineAround"} ${(windowType === "" && !isGameTableVisible || isWindowOpen) && "disappear" }`}/>
+      <div
+        className={`${classes.containerTable} ${
+          !isWindowOpen && "table-lineAround"
+        } ${
+          ((windowType === "" && !isGameTableVisible) || isWindowOpen) &&
+          "disappear"
+        }`}
+      />
 
       {/* Acceuil table if not logged in and game table if logged in */}
       {isGameTableVisible && !isWindowOpen ? (
         <>
-
           {/* cards and the pot in the center of the table */}
           <CardsPlacements
             moneyPot={moneyPot}
@@ -112,12 +115,7 @@ const Table = ({
             <Window />
           ) : (
             <>
-              <TextGlitch
-                children={"SunGlassPoker"}
-                styleClass={"glitch-accueil"}
-                glitchStyle={"glitchStyle-accueil"}
-              />
-              <div className="container-startButtons">
+              {/* <div className="container-startButtons">
                 {isLogged ? (
                   <>
                     <Button
@@ -133,20 +131,19 @@ const Table = ({
                   </>
                 ) : (
                   <>
-                    {/* Bouton affiché si l'utilisateur n'est pas connecté */}
                     <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color2"}
                       label={getTranslatedWord("game.loginPlay")}
                       onClick={() => openWindow("login")}
                     />
-                   <Button
+                    <Button
                       styleClass={"btn-gameStart btn-gameJoin back-color2"}
                       label={getTranslatedWord("game.signupPlay")}
                       onClick={() => openWindow("register")}
                     />
                   </>
                 )}
-              </div>
+              </div> */}
             </>
           )}
         </>
@@ -156,13 +153,35 @@ const Table = ({
       <LogoComponent
         styleClass={classes.logoComponent}
         label={
-  `${windowType === "tutorial" ? getTranslatedWord("messageLogo.tutorial") : ""}` +
-  `${windowType === "profile" ? getTranslatedWord("messageLogo.profile") : ""}` +
-  `${windowType === "servers" ? getTranslatedWord("messageLogo.listeTable") : ""}` +
-  `${windowType === "create_table" ? getTranslatedWord("messageLogo.createTable") : ""}` +
-  `${windowType === "validation" ? getTranslatedWord("messageLogo.validation") : ""}`+
-  `${windowType === "shop" ? getTranslatedWord("messageLogo.shop") : ""}`
-}
+          `${
+            windowType === "tutorial"
+              ? getTranslatedWord("messageLogo.tutorial")
+              : ""
+          }` +
+          `${
+            windowType === "profile"
+              ? getTranslatedWord("messageLogo.profile")
+              : ""
+          }` +
+          `${
+            windowType === "servers"
+              ? getTranslatedWord("messageLogo.listeTable")
+              : ""
+          }` +
+          `${
+            windowType === "create_table"
+              ? getTranslatedWord("messageLogo.createTable")
+              : ""
+          }` +
+          `${
+            windowType === "validation"
+              ? getTranslatedWord("messageLogo.validation")
+              : ""
+          }` +
+          `${
+            windowType === "shop" ? getTranslatedWord("messageLogo.shop") : ""
+          }`
+        }
       />
     </div>
   );

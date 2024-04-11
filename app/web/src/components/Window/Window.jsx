@@ -15,6 +15,8 @@ import ServerPanelWindow from "./WindowContent/ServerPanel";
 import CreateTableWindow from "./WindowContent/CreateTableWindow";
 import ShopWindow  from "./WindowContent/shopWindows/ShopWindow";
 import ValidationWindow  from "./WindowContent/shopWindows/ValidationWindow";
+import AcceuilWindow  from "./WindowContent/Acceuil";
+
 
 import { useWindowContext } from "../Utiles/WindowContext";
 
@@ -45,6 +47,7 @@ const Window = () => {
         {windowType === "create_table" && <CreateTableWindow />}
         {windowType === "shop" && <ShopWindow />}
         {windowType === "validation" && <ValidationWindow />}
+        {windowType === "accueil" && <AcceuilWindow />}
 
 
         

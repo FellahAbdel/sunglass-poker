@@ -21,7 +21,7 @@ export const WindowProvider = ({ children }) => {
   };
   
 
-  const [windowType, setWindowType] = useState(() => sessionStorage.getItem("windowType") || "");
+  const [windowType, setWindowType] = useState(() => sessionStorage.getItem("windowType") || "accueil");
   const [connectionWindowOpen, setconnectionWindowOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -60,6 +60,7 @@ export const WindowProvider = ({ children }) => {
 
   const showHome = () => {
     setIsGameTableVisible(false);
+    openWindow("accueil");
   };
 
   const showGameTable = () => {
@@ -79,9 +80,16 @@ export const WindowProvider = ({ children }) => {
 
   const closeWindow = () => {
     console.log("Fermeture de la fenêtre");
-    setIsWindowOpen(false);
-    setWindowType("");
+    if(isGameTableVisible){
+      setIsWindowOpen(false);
+      setWindowType("");
+    }
+    else{
+      setIsWindowOpen(true);
+      setWindowType("accueil");
+    }
     setSuccessMessage("");
+    
   };
 
   const openSuccessWindow = (message) => {
@@ -119,6 +127,8 @@ export const WindowProvider = ({ children }) => {
         connectionWindowOpen,
         openValidationWindow,
         selectedItem,
+        setWindowType,
+        setIsWindowOpen,
       }}
     >
       {children}
