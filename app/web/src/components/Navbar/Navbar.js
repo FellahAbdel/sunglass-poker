@@ -10,18 +10,19 @@ import TextInputComponent from "../textInput/TextInput.jsx";
 import { useTranslation } from "../Utiles/Translations";
 import { useAuth } from "../Utiles/AuthProvider";
 import { useUserData } from "../Utiles/useUserData";
+import { useWindowContext } from "../Utiles/WindowContext.jsx";
 
 
-const Navbar = ({
-  profileOnClick,
-  logOutOnClick,
-  settingsOnClick,
-  logInOnClick,
-  tutorialOnClick,
-}) => {
-  const { user, isLogged } = useAuth();
+const Navbar = ({}) => {
+  const { user, isLogged,logingOut } = useAuth();
+  const {isGameTableVisible,closeWindow,openWindow}= useWindowContext();
   const userData = useUserData();
 
+
+  const handleLogOutButton = () => {
+    logingOut();
+    closeWindow();
+  };
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -82,7 +83,7 @@ const Navbar = ({
           />
           <Button
             label={getTranslatedWord("navbar.exit")}
-            onClick={logOutOnClick}
+            onClick={handleLogOutButton}
             styleClass="btn-exit back-color3"
           />
         </>
@@ -98,7 +99,7 @@ const Navbar = ({
             ? getTranslatedWord("navbar.profile") 
             : getTranslatedWord("navbar.login")
         }
-        onClick={() => (isLogged ? profileOnClick() : logInOnClick())}
+        onClick={() => (isLogged ? openWindow("profile") : openWindow("login"))}
         styleClass={`${
           isLogged ? "btn-profile back-color1" : "btn-logIn back-color2"
         }`}
@@ -108,7 +109,7 @@ const Navbar = ({
       {/* Settings/Tutorial Buttons */}
       <Button
         label={getTranslatedWord("navbar.tutorial")}
-        onClick={() => tutorialOnClick()}
+        onClick={() => openWindow("tutoriel")}
         styleClass={`${
           isLogged ? "btn-tutorial back-color2" : "btn-tutorial back-color3"
         }`}
@@ -116,7 +117,7 @@ const Navbar = ({
       />
       <Button
         label={getTranslatedWord("navbar.settings")}
-        onClick={() => settingsOnClick()}
+        onClick={() => openWindow("settings")}
         styleClass={`${
           isLogged ? "btn-settings back-color1" : "btn-settings back-color2"
         }`}
