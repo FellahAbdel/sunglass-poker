@@ -99,8 +99,8 @@
   "shop": {
     "shop": "Magasin",
     "avatars": "Avatars",
-    "cards": "Cartes",
-    "wallpapers": "Fond d'écran",
+    "sunglasses": "Lunettes",
+    "color": "Couleur",
     "confirmationMessage": "Êtes-vous sûr de vouloir acheter cet élément pour ",
     "confirm": "Confirmer",
     "cancel": "Annuler"

@@ -100,8 +100,8 @@
   "shop": {
     "shop": "Shop",
     "avatars": "Avatars",
-    "cards": "Cards",
-    "wallpapers": "Wallpapers",
+    "sunglasses": "Sunglasses",
+    "color": "Color",
     "confirmationMessage": "You really want to buy this item for ",
     "confirm": "Confirm",
     "cancel": "Cancel"

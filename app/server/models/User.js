@@ -24,20 +24,32 @@ const UserSchema = new Schema({
     required: true,
     default: 1000,
   },
-  avatar: {
+  baseAvatar: {
     type: Schema.Types.ObjectId,
     ref: "Item",
-    required: true
+    required: true,
+  },
+  sunglasses: {
+    type: Schema.Types.ObjectId,
+    ref: "Item",
+    default: null,
+  },
+  colorAvatar: {
+    type: Schema.Types.ObjectId,
+    ref: "Item",
+    default: null,
   },
   stat: {
     type: Schema.Types.ObjectId,
     ref: "Stat",
     unique: true,
   },
-  itemsOwned: [{
-    type: Schema.Types.ObjectId,
-    ref: "Item",
-  }],
+  itemsOwned: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
 });
 
 const UserModel = model("User", UserSchema);

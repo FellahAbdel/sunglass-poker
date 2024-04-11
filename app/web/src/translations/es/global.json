@@ -99,8 +99,8 @@
   "shop": {
     "shop": "Tienda",
     "avatars": "Avatares",
-    "cards": "Cartas",
-    "wallpapers": "Fondos de pantalla",
+    "sunglasses": "Cartas",
+    "color": "Fondos de pantalla",
     "confirmationMessage": "¿Realmente quieres comprar este artículo por ",
     "confirm": "Confirmar",
     "cancel": "Cancelar"

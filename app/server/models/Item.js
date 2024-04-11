@@ -15,7 +15,15 @@ const ItemSchema = new Schema({
   imgSrc: {
     type: String,
     required: true,
-  }
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  eyePosition: {
+    x: { type: Number, default: null },
+    y: { type: Number, default: null },
+  },
 });
 
 const ItemModel = model("Item", ItemSchema);

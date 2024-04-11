@@ -6,6 +6,7 @@ import Button from "../../button/Button.tsx";
 import { useWindowContext } from "../../Utiles/WindowContext";
 import { useUserData } from "../../Utiles/useUserData";
 import { useTranslation } from "../../Utiles/Translations";
+import AvatarDisplay from "../../AvatarDisplay/AvatarDisplay.jsx";
 
 const ProfileWindow = () => {
   const { getTranslatedWord } = useTranslation();
@@ -15,11 +16,9 @@ const ProfileWindow = () => {
 
   return (
     <div className="profileMenu">
-      <img
-        className="userPP"
-        src={user.avatar}
-        alt="User Profile"
-      />
+      <div className="userPP">
+        <AvatarDisplay />
+      </div>
 
       <div className="userInfo">
         <div className="userInfo-items">

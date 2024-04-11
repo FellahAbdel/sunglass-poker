@@ -12,6 +12,7 @@ import { useAuth } from "../Utiles/AuthProvider";
 import { useUserData } from "../Utiles/useUserData";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 
+import AvatarDisplay from "../AvatarDisplay/AvatarDisplay.jsx";
 
 const Navbar = ({}) => {
   const { user, isLogged,logingOut } = useAuth();

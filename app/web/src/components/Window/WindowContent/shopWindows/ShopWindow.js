@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import ShopItem from "./ShopItem";
 import "./shopWindow.css";
 import { useWindowContext } from "../../../Utiles/WindowContext";
 import Button from "../../../button/Button.tsx";
 import { useTranslation } from "../../../Utiles/Translations";
-import { useAvatars } from "./AvatarItem";
+import { useItems } from "./AvatarItem";
 import { useUserData } from "../../../Utiles/useUserData";
-import { useCardSkins } from "./CardSkins";
-import { useWallPapers } from "./wallpapers";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
+import AvatarDisplay from "../../../AvatarDisplay/AvatarDisplay.jsx";
 
 const ShopWindow = () => {
   const { getTranslatedWord } = useTranslation();
@@ -23,9 +22,8 @@ const ShopWindow = () => {
 
   const tabNames = {
     avatars: getTranslatedWord("shop.avatars"),
-    cards: getTranslatedWord("shop.cards"),
-    wallpapers: getTranslatedWord("shop.wallpapers"),
-    // Autres catégories
+    sunglasses: getTranslatedWord("shop.sunglasses"),
+    color: getTranslatedWord("shop.color"),
   };
 
   const handleActivateAvatar = async (itemId) => {
@@ -35,18 +33,12 @@ const ShopWindow = () => {
     }
   };
 
-  const avatars = useAvatars();
-  const cards = useCardSkins();
-  const wallpapers = useWallPapers();
+  const items = useItems();
 
-  console.log("Avatars:", avatars);
-  console.log("Owned Items IDs:", ownedItemIds);
+  // console.log("Items recu par shopItem:", items);
+  // console.log("Owned Items IDs:", ownedItemIds);
 
-  const items = {
-    avatars: avatars,
-    cards: [],
-    wallpapers: [],
-  };
+  // console.log("Items for activeTab:", items[activeTab]);
 
   return (
     <div className="shop-window">
@@ -61,6 +53,9 @@ const ShopWindow = () => {
             onClick={() => setActiveTab(tab)}
           />
         ))}
+        <div className="avatar-display-container">
+          <AvatarDisplay />
+        </div>
       </div>
       <div className="items-display">
         {items[activeTab]?.map((item) => (
@@ -72,7 +67,9 @@ const ShopWindow = () => {
                 ? handleActivateAvatar(item._id)
                 : openValidationWindow(item)
             }
-            styleClass={isOwned(item._id) ? "owned-item back-color1" : "back-color3"}
+            styleClass={
+              isOwned(item._id) ? "owned-item back-color1" : "back-color3"
+            }
           />
         ))}
       </div>

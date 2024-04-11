@@ -6,19 +6,19 @@ import { useTranslation } from "../../../Utiles/Translations";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useUserData } from "../../../Utiles/useUserData";
 
-
-
 const ValidationWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const { buyItem, fetchUserInfo } = useAuth();
-  
+
   const { loadUserStats } = useUserData();
-
-
 
   const { selectedItem, openSuccessWindow, openWindow } = useWindowContext();
 
   if (!selectedItem) return null;
+
+  const isColor =
+    typeof selectedItem.imgSrc === "string" &&
+    selectedItem.imgSrc.startsWith("#");
 
   const handleConfirm = async () => {
     const success = await buyItem(selectedItem._id);
@@ -52,7 +52,14 @@ const ValidationWindow = () => {
           </div>
         </div>
         <div className="modal-image">
-          <img src={selectedItem.imgSrc} alt="Aperçu" />
+          {isColor ? (
+            <div
+              className="color-display "
+              style={{ backgroundColor: selectedItem.imgSrc }}
+            ></div>
+          ) : (
+            <img src={selectedItem.imgSrc} alt="Aperçu" />
+          )}
         </div>
       </div>
     </div>
