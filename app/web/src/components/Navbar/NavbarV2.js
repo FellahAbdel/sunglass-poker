@@ -4,21 +4,22 @@ import React, { useState } from "react";
 //css
 import "./navbarV2.css";
 //components
-import ChipsCash from "./ChipsCash";
+//import ChipsCash from "./ChipsCash";
 import Button from "../button/Button.tsx";
 import TextInputComponent from "../textInput/TextInput.jsx";
 import { useTranslation } from "../Utiles/Translations";
 import { useAuth } from "../Utiles/AuthProvider";
-import { useUserData } from "../Utiles/useUserData";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 
 const Navbar = ({}) => {
-  const { user, isLogged, logingOut } = useAuth();
-  const { isGameTableVisible, closeWindow, openWindow, showHome } = useWindowContext();
-  const userData = useUserData();
+  const { isLogged, logingOut } = useAuth();
+  const { isGameTableVisible, closeWindow, openWindow, showHome, windowType } =
+    useWindowContext();
 
   const handleLogOutButton = () => {
-    if (isGameTableVisible) {
+    if (windowType !== "") {
+      closeWindow();
+    } else if (isGameTableVisible) {
       showHome();
     } else {
       logingOut();
