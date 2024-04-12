@@ -5,20 +5,14 @@ const Player = require("../../shared/Player.js");
 const game = require("../../shared/Game.js");
 
 const initialRoomState = {
-  game: new game(),
+  gameClass: new game(),
   table: {
     deck: new Deck(),
     cards: [],
     chips: 0,
     stake: 0,
   },
-  players: [
-    new Player(0, "diallo"),
-    ...Array.from(
-      { length: 4 },
-      (_, index) => new Player(index + 1, "Player" + index)
-    ),
-  ],
+  players: [], // initial players
 };
 
 const initialState = {
