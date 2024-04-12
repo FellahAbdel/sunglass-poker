@@ -57,6 +57,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Créer une description de jeu d'un salon.
+  const createGameRoom = async (serverName, password, rank) => {
+    try {
+      const response = await fetch("http://localhost:3001/api/games", {
+        ...CORSSETTINGS,
+        body: JSON.stringify({ serverName, password, rank }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Game created successfully");
+        // Additional logic if needed
+        return true;
+      } else {
+        console.error("Error creating game:", data.message);
+        return false;
+      }
+    } catch (error) {
+      console.error("Error creating game:", error);
+      return false;
+    }
+  };
+
   const logingOut = () => {
     dispatch({ type: "LOGOUT" });
     showHome();
@@ -226,6 +248,7 @@ export const AuthProvider = ({ children }) => {
         isLogged,
         user,
         login,
+        createGameRoom,
         logingOut,
         getUserInfo,
         updateUserData,
