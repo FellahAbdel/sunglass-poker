@@ -5,23 +5,26 @@ const WindowContext = createContext();
 export const useWindowContext = () => useContext(WindowContext);
 
 export const WindowProvider = ({ children }) => {
-
   const [isWindowOpen, setIsWindowOpen] = useState(() => {
-    const saved = localStorage.getItem("isWindowOpen");
+    const saved = sessionStorage.getItem("isWindowOpen");
     return saved === "true" ? true : false;
   });
 
-  const [windowType, setWindowType] = useState(() => localStorage.getItem("windowType") || "");
+  const [windowType, setWindowType] = useState(
+    () => sessionStorage.getItem("windowType") || ""
+  );
   const [connectionWindowOpen, setconnectionWindowOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
   const [isGameTableVisible, setIsGameTableVisible] = useState(() => {
-    const saved = localStorage.getItem("isGameTableVisible");
+    const saved = sessionStorage.getItem("isGameTableVisible");
     return saved === "true" ? true : false;
   });
 
   useEffect(() => {
-    const isConnectionType = ["login", "register", "forgot", "reset"].includes(windowType);
+    const isConnectionType = ["login", "register", "forgot", "reset"].includes(
+      windowType
+    );
     setconnectionWindowOpen(isConnectionType);
     console.log("window connection ?  ", isConnectionType ? "Oui" : "Non");
   }, [windowType]);
@@ -30,18 +33,16 @@ export const WindowProvider = ({ children }) => {
     console.log("Gametable visible ? ", isGameTableVisible ? "Oui" : "Non");
   }, [isGameTableVisible]);
 
-
   useEffect(() => {
-    localStorage.setItem("isWindowOpen", isWindowOpen.toString());
+    sessionStorage.setItem("isWindowOpen", isWindowOpen.toString());
   }, [isWindowOpen]);
-  
-  useEffect(() => {
-    localStorage.setItem("windowType", windowType);
-  }, [windowType]);
-  
 
   useEffect(() => {
-    localStorage.setItem("isGameTableVisible", isGameTableVisible);
+    sessionStorage.setItem("windowType", windowType);
+  }, [windowType]);
+
+  useEffect(() => {
+    sessionStorage.setItem("isGameTableVisible", isGameTableVisible);
   }, [isGameTableVisible]);
 
   const toggleGameTableVisibility = () => {
@@ -57,15 +58,15 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openWindow = (type) => {
-    if (isWindowOpen && (windowType === type) ) { //for the buttons to act as a back button too
-       closeWindow(type);
+    if (isWindowOpen && windowType === type) {
+      //for the buttons to act as a back button too
+      closeWindow(type);
     } else {
       console.log(`Ouverture de la fenêtre : ${type}`);
       setIsWindowOpen(true); // Assurez-vous que cela est appelé pour ouvrir la fenêtre
       setWindowType(type);
     }
   };
-  
 
   const closeWindow = () => {
     console.log("Fermeture de la fenêtre");
