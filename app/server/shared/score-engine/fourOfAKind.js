@@ -3,7 +3,7 @@
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
  * FUNCTION : determine si les 7 possedent un carre et renvoi la combianaison si elle est trouve.
  */
-export function isFourOfAKind(tableau7cartes) {
+function isFourOfAKind(tableau7cartes) {
   // Ordonne le tableau
   let tab = [...tableau7cartes];
 
@@ -59,3 +59,5 @@ export function isFourOfAKind(tableau7cartes) {
 
   return false; // Retourner false si aucun carré n'est trouvé
 }
+
+module.exports = isFourOfAKind;

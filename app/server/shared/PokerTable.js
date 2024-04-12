@@ -1,4 +1,4 @@
-export default class PokerTable {
+class PokerTable {
   constructor() {
     this.communityCards = [];
   }
@@ -11,3 +11,5 @@ export default class PokerTable {
     console.log();
   }
 }
+
+module.exports = PokerTable;

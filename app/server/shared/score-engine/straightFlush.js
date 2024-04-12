@@ -1,10 +1,10 @@
-import { isStraight } from "./straight.js";
+const { isStraight } = require("./straight.js");
 /*
  * IN : tableau de 7 cartes
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
  * FUNCTION : determine si les 7 possedent une quinte flush et renvoi la combianaison si elle est trouve.
  */
-export function isStraightFlush(tableau7cartes) {
+function isStraightFlush(tableau7cartes) {
   // Étape 1: Vérifier si au moins 5 cartes sont de la même couleur
   let couleurMajoritaire = null;
   let compteurCouleurs = {}; // Compteur pour chaque couleur

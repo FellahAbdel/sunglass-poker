@@ -1,12 +1,11 @@
 // This file contains the reducer for game-related actions
-const actions =  require("../actions/actionTypes.js");
+const actions = require("../actions/actionTypes.js");
 const Deck = require("../../shared/Deck.js");
 const Player = require("../../shared/Player.js");
-// const game = require("../../shared/Game.js");
-
+const game = require("../../shared/Game.js");
 
 const initialRoomState = {
-  game: false,//new game(),
+  game: new game(),
   table: {
     deck: new Deck(),
     cards: [],
@@ -23,7 +22,7 @@ const initialRoomState = {
 };
 
 const initialState = {
-  rooms : {},
+  rooms: {},
 };
 
 const begin = (state) => {
@@ -51,28 +50,34 @@ const begin = (state) => {
 };
 
 const gameReducer = (state = initialState, action) => {
-  console.log(state,action);
+  console.log(state, action);
   switch (action.type) {
     case actions.CREATE_GAME:
-      console.log('CREATE GAME');
+      console.log("CREATE GAME");
       state.rooms[action.payload.id] = begin(initialRoomState);
-      if(!action.player)
-        state.rooms[action.payload.id].players = [...state.rooms[action.payload.id].players, action.payload.player];
+      if (!action.player)
+        state.rooms[action.payload.id].players = [
+          ...state.rooms[action.payload.id].players,
+          action.payload.player,
+        ];
       return state;
     case actions.GAME_STARTED:
-      console.log('start',action.type);
+      console.log("start", action.type);
       return state;
     case actions.SIT:
-      console.log('tableid: ',action.payload.idTable);
-      console.log('state.game : ',state);
+      console.log("tableid: ", action.payload.idTable);
+      console.log("state.game : ", state);
       console.log(state.rooms[action.payload.idTable]);
-      state.rooms[action.payload.idTable].players = [...state.rooms[action.payload.idTable].players, new Player(action.payload.playerId,action.payload.playerId)];
+      state.rooms[action.payload.idTable].players = [
+        ...state.rooms[action.payload.idTable].players,
+        new Player(action.payload.playerId, action.payload.playerId),
+      ];
       return state;
     // Other game actions can be handled here
     default:
-      console.log('default',action.type);
+      console.log("default", action.type);
       return state;
   }
 };
 
-module.exports =  gameReducer;
+module.exports = gameReducer;

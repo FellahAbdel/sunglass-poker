@@ -1,24 +1,23 @@
-import { isFlush as flush } from "./flush.js";
-import { isFourOfAKind as fourOfAKind } from "./fourOfAKind.js";
-import { isFullHouse as fullHouse } from "./fullHouse.js";
-import { isHighCard as highCard } from "./highCard.js";
-import { isOnePair as onePair } from "./onePair.js";
-import { isRoyalFlush as royalFlush } from "./royalFlush.js";
-import { isStraight as straight } from "./straight.js";
-import { isStraightFlush as straightFlush } from "./straightFlush.js";
-import { isThreeOfAKind as threeOfAKind } from "./threeOfAKind.js";
-import { isTwoPair as twoPair } from "./twoPair.js";
+const flush = require("./flush.js").isFlush;
+const fourOfAKind = require("./fourOfAKind.js").isFourOfAKind;
+const fullHouse = require("./fullHouse.js").isFullHouse;
+const highCard = require("./highCard.js").isHighCard;
+const onePair = require("./onePair.js").isOnePair;
+const royalFlush = require("./royalFlush.js").isRoyalFlush;
+const straight = require("./straight.js").isStraight;
+const straightFlush = require("./straightFlush.js").isStraightFlush;
+const threeOfAKind = require("./threeOfAKind.js").isThreeOfAKind;
+const twoPair = require("./twoPair.js").isTwoPair;
 
-
-
-export { flush };
-export { fourOfAKind };
-export { fullHouse };
-export { highCard };
-export { onePair };
-export { royalFlush };
-export { straight };
-export { straightFlush };
-export { threeOfAKind };
-export { twoPair };
-
+module.exports = {
+  flush,
+  fourOfAKind,
+  fullHouse,
+  highCard,
+  onePair,
+  royalFlush,
+  straight,
+  straightFlush,
+  threeOfAKind,
+  twoPair,
+};
