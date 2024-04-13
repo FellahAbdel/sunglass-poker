@@ -4,9 +4,11 @@ const actcrea  = require('../store/actions/actionsCreator');
 const store = require('../store/configStore');
 const Player = require("../shared/Player");
 const game = require("./game");
+const csl = require('./intelligentLogging');
+const fileType = 'socket.io.js';
+csl.silenced(fileType);
 
-
-console.log(store);
+csl.log(fileType,store);
 
 // Durée d'une session en millisecondes.
 const SESSION_DURATION = 200 * 1e3;
@@ -20,29 +22,29 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
     io.engine.use(Middleware);
     gameController.io = {
         broadcastStatus: function (room) {
-            // console.log('socket io broadcast to room', room);
+            // csl.log(fileType,'socket io broadcast to room', room);
             io.to(room).emit('refresh', { status: true });
         },
     };
 
     function playerRoomStatus(data) {
-        console.log('Try for status');
+        csl.log(fileType,'Try for status');
         try {
             room = data.room;
             try {
                 const decoded = jwt.verify(data.id, "secretKeyForSession");
                 id = decoded.id;
                 const answer = gameController.status(room, id);
-                console.log('status of ', id, ' : =', answer);
+                csl.log(fileType,'status of ', id, ' : =', answer);
                 io.to(data.id).emit('event', { payload: answer.payload, type: actions.REFRESH });
             } catch (err) {
                 if (err.name === 'TokenExpiredError') {
-                    console.log('token expired for status');
+                    csl.log(fileType,'token expired for status');
                     socket.disconnect();
                 }
             }
         } catch (err) {
-            console.log(err);
+            csl.log(fileType,err);
         }
     }
 
@@ -62,7 +64,7 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
         session = socket.request.session;
         // On rejoint la session déjà existante.
         socket.join(session.id);
-        console.log('a user connected n: ' + socket.id + ' | session : ' + session.id);
+        csl.log(fileType,'a user connected n: ' + socket.id + ' | session : ' + session.id);
         // Fixe un délais avec lequel la connexion est fermer.
         const session_timer = setInterval(() => {
             io.in(session.id).disconnectSockets(true);
@@ -75,9 +77,9 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
         // If token is valid add the socket to  the auth room to allow talk to session
         // otherwise close the room.
         socket.on('myNameIs', (token) => {
-            // console.log('Sets rooms',socket.rooms);
+            // csl.log(fileType,'Sets rooms',socket.rooms);
             if (token === null) {
-                // console.log('Destroy socket for ', socket.id);
+                // csl.log(fileType,'Destroy socket for ', socket.id);
                 // io.in(session.id).disconnectSockets(true);
                 // session.destroy();
                 // socket.disconnect();
@@ -87,12 +89,12 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
                         const decoded = jwt.verify(token, "secretKeyForSession");
                         session.userId = decoded.id;
                         session.save();
-                        console.log("Session id : ", socket.id, " join room session:", token);
+                        csl.log(fileType,"Session id : ", socket.id, " join room session:", token);
                         socket.join(token);
                     }
                     catch (err) {
                         if (err.name === 'TokenExpiredError') {
-                            console.log('token expired for status');
+                            csl.log(fileType,'token expired for status');
                             socket.disconnect();
                         }
                     }
@@ -100,9 +102,9 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
             }
         })
         socket.on('joinRoom', (data) => {
-            // console.log("sessionHs:",session);
-            // console.log('data:',data);
-            // console.log('userId = ', socket.handshake.session.userId);
+            // csl.log(fileType,"sessionHs:",session);
+            // csl.log(fileType,'data:',data);
+            // csl.log(fileType,'userId = ', socket.handshake.session.userId);
             if (typeof data === 'object' && data.id !== undefined) {
                 answer = gameController.join(data.id, session.userId);
                 if (answer.status === false)
@@ -111,7 +113,7 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
                     roomHash = gameController.hashRoom(data.id);
                     socket.join(roomHash);
                     socket.emit('joinRoom', answer);
-                    console.log(answer);
+                    csl.log(fileType,answer);
                     if (answer.status) {
                         socket.emit('event', { payload: gameController.rooms[roomHash].state, type: answer.type });
                     }
@@ -121,7 +123,7 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
                 }
             }
             else {
-                console.log('User tried to join wrong room.');
+                csl.log(fileType,'User tried to join wrong room.');
                 socket.emit('jointRoom', { status: failed, mes: 'Invalid data' });
             }
             session.save();
@@ -130,17 +132,17 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
         // Fonction test
         socket.on('hello', (data) => {
             session_timer.refresh();
-            // console.log('Received from client : ' + socket.id + ' data :' + data + ' | session : ' + session.id);
+            // csl.log(fileType,'Received from client : ' + socket.id + ' data :' + data + ' | session : ' + session.id);
             socket.emit('world', { responseData: 'The world salute you' });
         });
 
         // Si le client quitte
         socket.on('disconnect', () => {
-            console.log('user disconnected n:' + socket.id + ' | session : ' + session.id);
+            csl.log(fileType,'user disconnected n:' + socket.id + ' | session : ' + session.id);
         });
 
         socket.on('dispatch', (data) => {
-            console.log('dispatch recevied : ', data);
+            csl.log(fileType,'dispatch recevied : ', data);
             const { action, room } = data;
             const userId = session.userId;
             // si login
@@ -150,35 +152,35 @@ module.exports = function (server, Middleware, corsSettings, gameController) {
         })
 
         socket.on('createGame', () => {
-            console.log("createGame called (from socket.io.js)");
+            csl.log(fileType,"createGame called (from socket.io.js)");
             // Handle the start game event
             // For example, you can start the game here
-            console.log("createGame event received on the server");
+            csl.log(fileType,"createGame event received on the server");
             // Perform any necessary game initialization or logic here
             // We can dispatch an action to update the Redux state
-            console.log('Who dispatch : ', session.userId);
+            csl.log(fileType,'Who dispatch : ', session.userId);
             // Si l'action vient de quelqu'un non connecter on ignore
             const id = gameController.newGame();
-            console.log(id,' >- id game created');
+            csl.log(fileType,id,' >- id game created');
             if(id === undefined) {
-                console.error('Refused to create new game');
-                console.log('Join instead');
-                console.log(store.getState());
+                csl.error(fileType,'Refused to create new game');
+                csl.log(fileType,'Join instead');
+                csl.log(fileType,store.getState());
                 store.dispatch(actcrea.sit(10,session.userId));
                 io.emit('event', { payload: state.game, type: actions.GAME_STARTED });
-                console.log('rooms : ', gameController.rooms.state);
-                console.log('la room gc:',gameController.rooms[10].state.game.rooms[10].players);
+                csl.log(fileType,'rooms : ', gameController.rooms.state);
+                csl.log(fileType,'la room gc:',gameController.rooms[10].state.game.rooms[10].players);
                 return;
             }
             store.dispatch(actcrea.createGame(id,new Player(socket.id,"blabla")));
             // gameController.dispatch(session.userId,actions.START_GAME);
-            console.log('store dispatch');
-            console.log(store.getState())
+            csl.log(fileType,'store dispatch');
+            csl.log(fileType,store.getState())
             store.dispatch({ type: actions.GAME_STARTED });
             state = store.getState();
-            console.log(socket.rooms, session.id);
+            csl.log(fileType,socket.rooms, session.id);
             const an = gameController.join(id, session.userId);
-            console.log(an);
+            csl.log(fileType,an);
             socket.emit('joinRoom',an );
             socket.emit('event', { payload: state.game, type: actions.GAME_STARTED });
         });

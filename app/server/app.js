@@ -4,6 +4,7 @@ const session = require("express-session");
 const cors = require("cors");
 const ENV_CONST_COMM = require('./controller/envConstants')();
 const gameController = require('./controller/gameController');
+gameController.init();
 const socketIOSession = require('socket.io-express-session');
 const MemoryStore = require('memorystore')(session)
 // console.log(gameController);
