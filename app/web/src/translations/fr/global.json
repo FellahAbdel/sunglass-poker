@@ -5,7 +5,8 @@
     "message": "Message",
     "settings": "Paramètres",
     "tutorial": "Tutoriel",
-    "exit": "Quitter",
+    "exitTable": "Quitter La Table",
+    "exit": "Fermer La Fenêtre",
     "logout": "Déconnexion",
     "login": "Connexion",
     "signin": "Inscription"

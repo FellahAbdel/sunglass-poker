@@ -5,7 +5,8 @@
     "message": "Message",
     "settings": "Settings",
     "tutorial": "Tutorial",
-    "exit": "Leave the table",
+    "exitTable": "Leave the table",
+    "exit": "Close Window",
     "logout": "Log out",
     "login": "Log in",
     "signin": "Sign Up"

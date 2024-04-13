@@ -13,22 +13,24 @@ import { useWindowContext } from "../Utiles/WindowContext.jsx";
 
 const Navbar = ({}) => {
   const { isLogged, logingOut } = useAuth();
-  const { isGameTableVisible, closeWindow, openWindow, showHome, windowType } =
-    useWindowContext();
+  const {
+    isGameTableVisible,
+    closeWindow,
+    openWindow,
+    showHome,
+    windowType,
+    isWindowOpen,
+  } = useWindowContext();
 
   const handleLogOutButton = () => {
     console.log("handleLogOutButton :", windowType);
     console.log("isLogged :", isLogged);
-    if (windowType === "accueil"){
+    if (windowType === "accueil") {
       logingOut();
       closeWindow();
-
-    }
-    else if (windowType !== "" ) {
+    } else if (windowType !== "") {
       closeWindow();
-    } 
-
-    else if (isGameTableVisible) {
+    } else if (isGameTableVisible) {
       showHome();
     } else {
       logingOut();
@@ -52,6 +54,15 @@ const Navbar = ({}) => {
   };
 
   const handleNull = () => {};
+
+  let label;
+  if (windowType === "accueil") {
+    label = getTranslatedWord("navbar.logout");
+  } else if (isWindowOpen) {
+    label = getTranslatedWord("navbar.exit");
+  } else {
+    label = getTranslatedWord("navbar.exitTable");
+  }
 
   return (
     <div className="container-nav-V2" onClick={handleClick}>
@@ -133,7 +144,7 @@ const Navbar = ({}) => {
         />
         {isLogged && (
           <Button
-            label={isGameTableVisible ? getTranslatedWord("navbar.exit") : getTranslatedWord("navbar.logout") }
+            label={label}
             onClick={handleLogOutButton}
             styleClass="btn-exit-V2"
             iconSrc={require("./../assets/images/icons/white/exit.png")}
