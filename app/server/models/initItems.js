@@ -106,7 +106,6 @@ const defaultItems = [
     imgSrc: "#F68028",
     category: "colorAvatar",
   },
-  
 ];
 
 //await ItemModel.deleteMany({});
@@ -117,7 +116,9 @@ async function initOrUpdateItems() {
   for (const item of defaultItems) {
     const existingItem = await ItemModel.findOne({ name: item.name });
     if (existingItem) {
-      const isDifferent = Object.keys(item).some(key => item[key] !== existingItem[key]);
+      const isDifferent = Object.keys(item).some(
+        (key) => item[key] !== existingItem[key]
+      );
       if (isDifferent) {
         console.log(`Mise à jour de l'item: ${item.name}`);
         await ItemModel.updateOne({ _id: existingItem._id }, item);
@@ -131,4 +132,3 @@ async function initOrUpdateItems() {
 }
 
 module.exports = initOrUpdateItems;
-

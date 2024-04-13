@@ -6,6 +6,7 @@ export const useWindowContext = () => useContext(WindowContext);
 
 export const WindowProvider = ({ children }) => {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [redirectAfterSuccess, setRedirectAfterSuccess] = useState("");
 
   const [isWindowOpen, setIsWindowOpen] = useState(() => {
     const saved = sessionStorage.getItem("isWindowOpen");
@@ -90,16 +91,21 @@ export const WindowProvider = ({ children }) => {
       setIsWindowOpen(true);
       setWindowType("accueil");
     }
+    if (redirectAfterSuccess) {
+      openWindow(redirectAfterSuccess);
+      setRedirectAfterSuccess("");
+    }
     setSuccessMessage("");
   };
 
-  const openSuccessWindow = (message) => {
+  const openSuccessWindow = (message, redirect = "") => {
     console.log(
       `Ouverture de la fenêtre de succès avec le message : ${message}`
     );
     setIsWindowOpen(true);
     setWindowType("success");
     setSuccessMessage(message);
+    setRedirectAfterSuccess(redirect);
   };
 
   // Fonctions spécifiques pour chaque type de fenêtre
