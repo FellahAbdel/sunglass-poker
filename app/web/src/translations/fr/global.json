@@ -99,12 +99,14 @@
   },
   "shop": {
     "shop": "Magasin",
-    "avatars": "Avatars",
+    "baseAvatar": "Avatars",
     "sunglasses": "Lunettes",
-    "color": "Couleur",
+    "colorAvatar": "Couleur",
     "confirmationMessage": "Êtes-vous sûr de vouloir acheter cet élément pour ",
     "confirm": "Confirmer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "price":"prix"
+
   },
   "messageLogo": {
     "tutorial": "Tutoriel",

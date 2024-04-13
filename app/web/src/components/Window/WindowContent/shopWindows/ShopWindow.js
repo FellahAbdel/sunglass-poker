@@ -1,30 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ShopItem from "./ShopItem";
 import "./shopWindow.css";
 import { useWindowContext } from "../../../Utiles/WindowContext";
 import Button from "../../../button/Button.tsx";
 import { useTranslation } from "../../../Utiles/Translations";
 import { useItems } from "./AvatarItem";
-import { useUserData } from "../../../Utiles/useUserData";
-import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import AvatarDisplay from "../../../AvatarDisplay/AvatarDisplay.jsx";
+import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 
 const ShopWindow = () => {
   const { getTranslatedWord } = useTranslation();
-  const { user } = useUserData();
-  const { activateAvatar } = useAuth();
-  const ownedItemIds = user?.itemsOwned?.map((id) => id.toString()) ?? [];
-
-  const isOwned = (itemId) => ownedItemIds.includes(itemId.toString());
-
-  const [activeTab, setActiveTab] = useState("avatars");
   const { openValidationWindow } = useWindowContext();
-
-  const tabNames = {
-    avatars: getTranslatedWord("shop.avatars"),
-    sunglasses: getTranslatedWord("shop.sunglasses"),
-    color: getTranslatedWord("shop.color"),
-  };
+  const [activeTab, setActiveTab] = useState("baseAvatar");
+  const items = useItems();
+  const { activateAvatar } = useAuth();
 
   const handleActivateAvatar = async (itemId) => {
     const success = await activateAvatar(itemId);
@@ -32,21 +21,18 @@ const ShopWindow = () => {
       console.error("Could not activate avatar");
     }
   };
+  //console.log("Items recu par shopItem:", items);
+  //console.log("Owned Items IDs:", ownedItemIds);
 
-  const items = useItems();
-
-  // console.log("Items recu par shopItem:", items);
-  // console.log("Owned Items IDs:", ownedItemIds);
-
-  // console.log("Items for activeTab:", items[activeTab]);
+  //console.log("Items for activeTab:", items[activeTab]);
 
   return (
     <div className="shop-window">
       <div className="shop-tabs">
-        {Object.keys(tabNames).map((tab) => (
+        {Object.keys(items).map((tab) => (
           <Button
             key={tab}
-            label={tabNames[tab]}
+            label={getTranslatedWord(`shop.${tab}`)}
             styleClass={`btn_onglets_shop ${
               activeTab === tab ? "back-color1" : "back-color3"
             }`}
@@ -58,18 +44,17 @@ const ShopWindow = () => {
         </div>
       </div>
       <div className="items-display">
-        {items[activeTab]?.map((item) => (
+        {items[activeTab].owned.concat(items[activeTab].unowned).map((item) => (
           <ShopItem
             key={item._id}
             item={item}
+            isOwned={item.owned}
             onClickItem={() =>
-              isOwned(item._id)
+              item.owned
                 ? handleActivateAvatar(item._id)
                 : openValidationWindow(item)
             }
-            styleClass={
-              isOwned(item._id) ? "owned-item back-color1" : "back-color3"
-            }
+            styleClass={item.owned ? "owned-item back-color1" : "back-color3"}
           />
         ))}
       </div>

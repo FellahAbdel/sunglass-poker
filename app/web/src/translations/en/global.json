@@ -35,7 +35,7 @@
   },
   "game": {
     "loginPlay": "Log In to play",
-    "signupPlay":"Sign Up to play",
+    "signupPlay": "Sign Up to play",
     "startGame": "Start a game",
     "joinGame": "Join a game",
     "createAgame": "Create a new game",
@@ -99,12 +99,13 @@
   },
   "shop": {
     "shop": "Shop",
-    "avatars": "Avatars",
+    "baseAvatar": "Avatars",
     "sunglasses": "Sunglasses",
-    "color": "Color",
+    "colorAvatar": "Color",
     "confirmationMessage": "You really want to buy this item for ",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "price": "price"
   },
   "messageLogo": {
     "tutorial": "Tutorial",

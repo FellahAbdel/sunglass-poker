@@ -1,7 +1,11 @@
 import React from "react";
 import "./shopItem.css";
+import { useTranslation } from "../../../Utiles/Translations";
 
-const ShopItem = ({ item, onClickItem, styleClass }) => {
+
+const ShopItem = ({ item, onClickItem, styleClass, isOwned }) => {
+  const { getTranslatedWord } = useTranslation();
+
   const isColor = item.imgSrc && item.imgSrc.startsWith("#");
 
   return (
@@ -17,7 +21,7 @@ const ShopItem = ({ item, onClickItem, styleClass }) => {
         <img src={item.imgSrc} alt="Item" className="item-image" />
       )}
       <p>{item.name}</p>
-      <p>Prix: {item.price}</p>
+      {!isOwned && <p>{getTranslatedWord(`shop.price`)}: {item.price}</p>}
     </div>
   );
 };
