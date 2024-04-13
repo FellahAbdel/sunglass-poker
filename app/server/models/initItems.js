@@ -3,11 +3,11 @@ const ItemModel = require("./Item"); // Assurez-vous que le chemin d'accès est 
 
 const defaultItems = [
   {
-    name: "Avatar1",
-    price: 100,
-    imgSrc: "/assets/avatar/1.png",
+    name: "Sun",
+    price: 0,
+    imgSrc: "/assets/avatar/sun.png",
     category: "baseAvatar",
-    eyePosition: { x: 10, y: 10 },
+    eyePosition: { x: 50, y: 40 },
   },
   {
     name: "Crabe",

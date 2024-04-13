@@ -78,7 +78,7 @@ module.exports = function (app, bdd) {
         return res.status(400).json({ error: "user_exists", field: "email" });
       }
 
-      const defaultAvatar = await ItemModel.findOne({ name: "Avatar1" });
+      const defaultAvatar = await ItemModel.findOne({ name: "Sun" });
       if (!defaultAvatar) {
         return res
           .status(500)
