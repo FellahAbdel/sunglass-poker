@@ -6,7 +6,7 @@ const ItemModel = require("./Item");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const initItems = require("./initItems");
+const initOrUpdateItems = require("./initItems");
 
 require("dotenv").config();
 
@@ -40,7 +40,7 @@ module.exports = function (app, bdd) {
     //await UserModel.deleteMany({});
     //await StatModel.deleteMany({});
 
-    initItems();
+    initOrUpdateItems();
   });
   /*try {
 
@@ -95,12 +95,20 @@ module.exports = function (app, bdd) {
           .json({ error: "Couleur par défaut introuvable." });
       }
 
+      const defaultSunglasses = await ItemModel.findOne({ name: "Nothing" });
+      if (!defaultSunglasses) {
+        return res
+          .status(500)
+          .json({ error: "Avatar par défaut introuvable." });
+      }
+
       const nouveauUtilisateur = new UserModel({
         pseudo,
         email,
         password: hashedPassword,
-        itemsOwned: [defaultAvatar._id, defaultColor._id],
+        itemsOwned: [defaultAvatar._id, defaultColor._id, defaultSunglasses._id],
         baseAvatar: defaultAvatar._id,
+        sunglasses: defaultSunglasses._id,
         colorAvatar: defaultColor._id,
       });
 
