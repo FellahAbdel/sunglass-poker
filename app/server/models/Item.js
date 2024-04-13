@@ -4,9 +4,11 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const ItemSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+  names: {
+    en: { type: String, required: true },
+    fr: { type: String, required: false },
+    es: { type: String, required: false },
+    de: { type: String, required: false }
   },
   price: {
     type: Number,

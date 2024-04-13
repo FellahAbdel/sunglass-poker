@@ -3,132 +3,182 @@ const ItemModel = require("./Item"); // Assurez-vous que le chemin d'accès est 
 
 const defaultItems = [
   {
-    name: "Sun",
+    names: {
+      en: "Sun",
+      fr: "Soleil"
+    },
     price: 0,
     imgSrc: "/assets/avatar/sun.png",
     category: "baseAvatar",
     eyePosition: { x: 50, y: 40 },
   },
   {
-    name: "Crabe",
+    names: {
+      en: "Crab",
+      fr: "Crabe"
+    },
     price: 100,
     imgSrc: "/assets/avatar/crabe.png",
     category: "baseAvatar",
     eyePosition: { x: 50, y: 20 },
   },
   {
-    name: "Nothing",
+    names: {
+      en: "Nothing",
+      fr: "Rien"
+    },
     price: 0,
     imgSrc: "/assets/sunglasses/nothing.png",
     category: "sunglasses",
   },
   {
-    name: "Pixels",
+    names: {
+      en: "Pixels",
+      fr: "Pixels"
+    },
     price: 200,
     imgSrc: "/assets/sunglasses/pixels.png",
     category: "sunglasses",
   },
   {
-    name: "3D",
+    names: {
+      en: "3D",
+      fr: "3D"
+    },
     price: 200,
     imgSrc: "/assets/sunglasses/3dsunglasse.png",
     category: "sunglasses",
   },
   {
-    name: "Ski Green",
+    names: {
+      en: "Ski Green",
+      fr: "Ski Vert"
+    },
     price: 50,
     imgSrc: "/assets/sunglasses/skisunglassgreen.png",
     category: "sunglasses",
   },
   {
-    name: "Sous L'eau",
+    names: {
+      en: "Underwater",
+      fr: "Sous L'eau"
+    },
     price: 50,
     imgSrc: "/assets/sunglasses/sousleau.png",
     category: "sunglasses",
   },
   {
-    name: "Monocle",
+    names: {
+      en: "Monocle",
+      fr: "Monocle"
+    },
     price: 50,
     imgSrc: "/assets/sunglasses/monocle.png",
     category: "sunglasses",
   },
   {
-    name: "Double Monocle",
+    names: {
+      en: "Double Monocle",
+      fr: "Double Monocle"
+    },
     price: 50,
     imgSrc: "/assets/sunglasses/doublemonocle.png",
     category: "sunglasses",
   },
   {
-    name: "black",
+    names: {
+      en: "Black",
+      fr: "Noir"
+    },
     price: 100,
     imgSrc: "#000000",
     category: "colorAvatar",
   },
   {
-    name: "white",
+    names: {
+      en: "White",
+      fr: "Blanc"
+    },
     price: 100,
     imgSrc: "#FFFFFF",
     category: "colorAvatar",
   },
   {
-    name: "red",
+    names: {
+      en: "Red",
+      fr: "Rouge"
+    },
     price: 100,
     imgSrc: "#FF0000",
     category: "colorAvatar",
   },
   {
-    name: "Sand",
+    names: {
+      en: "Sand",
+      fr: "Sable"
+    },
     price: 10,
     imgSrc: "#F4BF6F",
     category: "colorAvatar",
   },
   {
-    name: "Vert sapin kaki",
+    names: {
+      en: "Pine Green Khaki",
+      fr: "Vert sapin kaki"
+    },
     price: 10,
     imgSrc: "#085E5B",
     category: "colorAvatar",
   },
   {
-    name: "Bleu éclair",
+    names: {
+      en: "Lightning Blue",
+      fr: "Bleu éclair"
+    },
     price: 10,
     imgSrc: "#53EABD",
     category: "colorAvatar",
   },
   {
-    name: "Bleu toxique",
+    names: {
+      en: "Toxic Blue",
+      fr: "Bleu toxique"
+    },
     price: 10,
     imgSrc: "#2353DB",
     category: "colorAvatar",
   },
   {
-    name: "Couché de soleil",
+    names: {
+      en: "Sunset",
+      fr: "Couché de soleil"
+    },
     price: 10,
     imgSrc: "#F68028",
     category: "colorAvatar",
-  },
+  }
 ];
 
 //await ItemModel.deleteMany({});
 
 async function initOrUpdateItems() {
   //await ItemModel.deleteMany({});
-
   for (const item of defaultItems) {
-    const existingItem = await ItemModel.findOne({ name: item.name });
+    const existingItem = await ItemModel.findOne({ "names.en": item.names.en }); // Trouver par nom en anglais
     if (existingItem) {
       const isDifferent = Object.keys(item).some(
-        (key) => item[key] !== existingItem[key]
+        (key) => JSON.stringify(item[key]) !== JSON.stringify(existingItem[key])
       );
       if (isDifferent) {
-        console.log(`Mise à jour de l'item: ${item.name}`);
+        console.log(`Updating item: ${item.names.en}`);
         await ItemModel.updateOne({ _id: existingItem._id }, item);
       }
     } else {
-      console.log(`Ajout de l'item: ${item.name}`);
+      console.log(`Adding new item: ${item.names.en}`);
       await ItemModel.create(item);
     }
   }
-  console.log("Les items ont été initialisés ou mis à jour avec succès.");
+  console.log("Items have been initialized or updated successfully.");
 }
 
 module.exports = initOrUpdateItems;

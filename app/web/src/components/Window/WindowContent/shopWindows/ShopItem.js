@@ -1,12 +1,16 @@
 import React from "react";
 import "./shopItem.css";
 import { useTranslation } from "../../../Utiles/Translations";
-
+import { useSettings } from "../../../Utiles/SettingsContext";
 
 const ShopItem = ({ item, onClickItem, styleClass, isOwned }) => {
+  const { language } = useSettings();
   const { getTranslatedWord } = useTranslation();
 
   const isColor = item.imgSrc && item.imgSrc.startsWith("#");
+
+  const itemName = item.names[language] || item.names['en'];
+
 
   return (
     <div className={`shop-item ${styleClass}`} onClick={onClickItem}>
@@ -18,10 +22,14 @@ const ShopItem = ({ item, onClickItem, styleClass, isOwned }) => {
         />
       ) : (
         // Affichage d'une image
-        <img src={item.imgSrc} alt="Item" className="item-image" />
+        <img src={item.imgSrc} alt={itemName} className="item-image" />
       )}
-      <p>{item.name}</p>
-      {!isOwned && <p>{getTranslatedWord(`shop.price`)}: {item.price}</p>}
+      <p>{itemName}</p> {/* Affiche le nom traduit de l'item */}
+      {!isOwned && (
+        <p>
+          {getTranslatedWord(`shop.price`)}: {item.price}
+        </p>
+      )}
     </div>
   );
 };

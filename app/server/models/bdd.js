@@ -62,78 +62,61 @@ module.exports = function (app, bdd) {
     res.header("Access-Control-Allow-Credentials", "true");
     try {
       console.log(req.body);
-      const { pseudo, email, password } = req.body;
-      // Hashage du mot de passe
+      const { pseudo, email, password, language = "en" } = req.body;
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-      // Vérification si le pseudo existe déjà
-      const existingPseudo = await UserModel.findOne({ pseudo });
-      if (existingPseudo) {
+      if (await UserModel.findOne({ pseudo })) {
         return res.status(400).json({ error: "user_exists", field: "pseudo" });
       }
-
-      // Vérification si l'email existe déjà
-      const existingEmail = await UserModel.findOne({ email });
-      if (existingEmail) {
+      if (await UserModel.findOne({ email })) {
         return res.status(400).json({ error: "user_exists", field: "email" });
       }
 
-      const defaultAvatar = await ItemModel.findOne({ name: "Sun" });
-      if (!defaultAvatar) {
-        return res
-          .status(500)
-          .json({ error: "Avatar par défaut introuvable." });
+      // Helper function to find default items
+      async function findDefaultItem(name, category = null) {
+        const query = category
+          ? { "names.en": name, category }
+          : { "names.en": name };
+        const item = await ItemModel.findOne(query);
+        if (!item) {
+          throw new Error(`Default item not found: ${name}`);
+        }
+        return item;
       }
 
-      const defaultColor = await ItemModel.findOne({
-        name: "white",
-        category: "colorAvatar",
-      });
-      if (!defaultColor) {
-        return res
-          .status(500)
-          .json({ error: "Couleur par défaut introuvable." });
-      }
+      const defaultAvatar = await findDefaultItem("Sun");
+      const defaultColor = await findDefaultItem("White", "colorAvatar");
+      const defaultSunglasses = await findDefaultItem("Nothing");
 
-      const defaultSunglasses = await ItemModel.findOne({ name: "Nothing" });
-      if (!defaultSunglasses) {
-        return res
-          .status(500)
-          .json({ error: "Avatar par défaut introuvable." });
-      }
-
-      const nouveauUtilisateur = new UserModel({
+      const newUser = new UserModel({
         pseudo,
         email,
         password: hashedPassword,
-        itemsOwned: [defaultAvatar._id, defaultColor._id, defaultSunglasses._id],
+        itemsOwned: [
+          defaultAvatar._id,
+          defaultColor._id,
+          defaultSunglasses._id,
+        ],
         baseAvatar: defaultAvatar._id,
         sunglasses: defaultSunglasses._id,
         colorAvatar: defaultColor._id,
       });
 
-      // Enregistrement dans la base de données
-      const utilisateurEnregistre = await nouveauUtilisateur.save();
-
-      // Création d'une nouvelle instance de Stat
-      const nouvelleStat = new StatModel({
+      const savedUser = await newUser.save();
+      const newStat = new StatModel({
         maxCoins: 0,
         maxGain: 0,
         totalGain: 0,
         experience: 0,
-        user: utilisateurEnregistre._id, // Associez l'ID de l'utilisateur
+        user: savedUser._id,
       });
+      savedUser.stat = await newStat.save();
+      await savedUser.save();
 
-      // Enregistrement de la statistique dans la base de données
-      await nouvelleStat.save();
-
-      // Mettre à jour la propriété 'stat' de l'utilisateur avec l'ID de la nouvelle stat
-      utilisateurEnregistre.stat = nouvelleStat._id;
-      await utilisateurEnregistre.save();
-
-      res.status(201).json(utilisateurEnregistre);
+      res.status(201).json(savedUser);
     } catch (error) {
-      next(error);
+      console.error(error.message);
+      res.status(500).json({ error: "Internal server error" });
     }
   });
 
