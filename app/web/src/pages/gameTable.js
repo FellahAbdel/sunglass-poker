@@ -20,17 +20,17 @@ import HandCards from "../components/gameTable/HandCards/HandCards";
 
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
-
 const GameTable = () => {
   const { theme } = useSettings();
   const { isLogged } = useAuth();
-  const {
+  const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
+    useWindowContext();
+  const classes = getStyles(
     windowType,
-    isWindowOpen,
-    closeWindow,
-    isGameTableVisible
-  } = useWindowContext();
-  const classes = getStyles(windowType, isLogged, isGameTableVisible , isWindowOpen);
+    isLogged,
+    isGameTableVisible,
+    isWindowOpen
+  );
 
   useEffect(() => {
     console.log("isLogged gameTable:", isLogged);
@@ -45,8 +45,6 @@ const GameTable = () => {
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
-
-
 
   //inGame Fonctions to test-----------------------------------------
   const [dealingFlop, setDealingFlop] = useState([true, true, true]);
@@ -85,8 +83,6 @@ const GameTable = () => {
 
   //-----------------------------------------inGame functions to test
 
-
-
   return (
     <div
       className="container-main resetall"
@@ -94,13 +90,13 @@ const GameTable = () => {
       onClick={handleCloseOnClickOutside}
     >
       {/* css Pattern background */}
-      
-      <div className="backdrop"/>
-      <div className="backdrop2"/>
+
+      <div className="backdrop" />
+      <div className="backdrop2" />
 
       {/* Navbar or header */}
       <div className="comp-navbar">
-        <NavbarV2/>
+        <NavbarV2 />
       </div>
 
       {/* Menu/Table */}

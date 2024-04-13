@@ -3,8 +3,7 @@ import "./serverPanel.css";
 import Button from "../../button/Button.tsx";
 import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../Utiles/Translations';
-
+import { useTranslation } from "../../Utiles/Translations";
 
 const ServerPanelWindow = () => {
   const { getTranslatedWord } = useTranslation();
@@ -51,8 +50,12 @@ const ServerPanelWindow = () => {
   return (
     <div className="listTableWindow">
       <div className="listTableHeader">
-        <div className="headerItem">{getTranslatedWord("serverPanel.name")}</div>
-        <div className="headerItem">{getTranslatedWord("serverPanel.rank")}</div>
+        <div className="headerItem">
+          {getTranslatedWord("serverPanel.name")}
+        </div>
+        <div className="headerItem">
+          {getTranslatedWord("serverPanel.rank")}
+        </div>
         <div className="headerItem">{getTranslatedWord("game.players")}</div>
         <div className="headerItem"></div>
         <div className="headerItem"></div>

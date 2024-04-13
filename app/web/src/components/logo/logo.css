@@ -13,7 +13,7 @@
   color: white;
 
   transition: top 1s ease, bottom 1s ease, right 1s ease, left 1s ease,
-    opacity 0.5s ease, filter 2s ease , padding-left 1s ease;
+    opacity 0.5s ease, filter 2s ease, padding-left 1s ease;
 }
 #light .logo-main {
   filter: saturate(100%);
@@ -30,7 +30,7 @@
   opacity: 0;
   z-index: -999;
 }
-.logo-textPadding h1{
+.logo-textPadding h1 {
   padding-left: 1.5vw;
 }
 .logo-login,
@@ -67,10 +67,9 @@
   opacity: 100;
 }
 .logo-success img,
-.logo-validation img{
+.logo-validation img {
   width: 9vw;
 }
-
 
 .logo-stats {
   bottom: 110%;
@@ -99,6 +98,6 @@
   bottom: 110%;
   z-index: -1;
 }
-.logo-shop img{
+.logo-shop img {
   width: 9vw;
 }

@@ -3,14 +3,10 @@ import Button from "../../../button/Button.tsx";
 import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../../Utiles/Translations.jsx';
+import { useTranslation } from "../../../Utiles/Translations.jsx";
 
-const ForgotPassword = ({
-  showSuccess,
-}) => {
-  const {
-    openWindow,
-  } = useWindowContext();
+const ForgotPassword = ({ showSuccess }) => {
+  const { openWindow } = useWindowContext();
   const { checkEmail } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
@@ -55,8 +51,12 @@ const ForgotPassword = ({
 
   return (
     <div className="box">
-      <div className="login-page-title">{getTranslatedWord("connection.forgotPassQuestion")}</div>
-      <div className="login-page-text">{getTranslatedWord("connection.forgotPassEnter")}</div>
+      <div className="login-page-title">
+        {getTranslatedWord("connection.forgotPassQuestion")}
+      </div>
+      <div className="login-page-text">
+        {getTranslatedWord("connection.forgotPassEnter")}
+      </div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="email"

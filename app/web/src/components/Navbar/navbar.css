@@ -29,19 +29,19 @@
   cursor: pointer;
   text-shadow: unset;
 }
-.btn-profile:hover img{
-    filter:invert(0);
+.btn-profile:hover img {
+  filter: invert(0);
 }
 
-.btn-profile img{
-    width: 15px;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content:center;
-    padding-left: 5px;
+.btn-profile img {
+  width: 15px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5px;
 
-    filter: invert(100%);
+  filter: invert(100%);
 }
 
 /*SETTINGS BUTTON*/
@@ -267,12 +267,12 @@
   color: white;
 }
 .btn-chatClose {
-    position: absolute;
-    top: 1vw;
-    right: 1vw;
-    width: 20px;
-    height: auto;
-    transition: opacity 1s ease;
+  position: absolute;
+  top: 1vw;
+  right: 1vw;
+  width: 20px;
+  height: auto;
+  transition: opacity 1s ease;
 }
 
 @media (max-width: 1000px) {

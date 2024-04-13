@@ -1,36 +1,36 @@
 /**/
 .container-tableCards {
-    height: 100%;
-    width: 80%;
+  height: 100%;
+  width: 80%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
-.container-tableCards img{
-    display: flex;
-    position: absolute;
-    right: 0;
-    height: auto;
-    width: 4vw;
-    z-index: 1;
-    margin:0 1% 0 1%; 
+.container-tableCards img {
+  display: flex;
+  position: absolute;
+  right: 0;
+  height: auto;
+  width: 4vw;
+  z-index: 1;
+  margin: 0 1% 0 1%;
 }
 
 /**/
 .tableCard {
-    display: flex;
-    align-items: center;
-    width: 4vw;
-    height: auto;
-    position: absolute;
-    right:0;
-    z-index: 1;
-    margin:0 1% 0 1%; 
-    transition: transform 2s, right 2s;
-    transform-style: preserve-3d;
-  }
+  display: flex;
+  align-items: center;
+  width: 4vw;
+  height: auto;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  margin: 0 1% 0 1%;
+  transition: transform 2s, right 2s;
+  transform-style: preserve-3d;
+}
 /*flipping animation*/
 /* .flipped {
     transform: rotateY(-180deg);
@@ -50,177 +50,172 @@
 
 } */
 .dealingFlop0 {
-    display: flex;
-    right:85%;
+  display: flex;
+  right: 85%;
 }
 .dealingFlop1 {
-    display: flex;
-    right: 70%;
+  display: flex;
+  right: 70%;
 }
 .dealingFlop2 {
-    display: flex;
-    right: 55%;
+  display: flex;
+  right: 55%;
 }
 .dealingFlop3 {
-    display: flex;
-    right: 40%;
+  display: flex;
+  right: 40%;
 }
 .dealingFlop4 {
-    display: flex;
-    right: 25%;    
+  display: flex;
+  right: 25%;
 }
 
 /*SunGlass Poker text*/
-.container-cards p{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    font: italic small-caps  1.5vw/2 cursive;
+.container-cards p {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font: italic small-caps 1.5vw/2 cursive;
 }
-
 
 /*table duck of cards*/
 .container-dealerDuck {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    height: 100%;
-    width:20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 100%;
+  width: 20%;
 }
-.cardDuck{
-    display: flex;
-    align-self: center; 
-    align-items: center;
-    justify-content: center;
-    align-items: center;
+.cardDuck {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
 }
-.cardDuck img{
-    position: absolute;
-    right:0;
-    
-    width: 4vw;
-    height: auto;
-    border: 1px solid rgba(255, 255, 255, 0.468);
-    border-radius: 5px;
-    padding: 1%;
+.cardDuck img {
+  position: absolute;
+  right: 0;
+
+  width: 4vw;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.468);
+  border-radius: 5px;
+  padding: 1%;
 }
 
 /*card distribution animation*/
-.cardPlayer{
-    display: flex;
-    align-self: center; 
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right:1%;
-    top:0%;
-    bottom: 0%;
+.cardPlayer {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 1%;
+  top: 0%;
+  bottom: 0%;
 }
-.transition1{
-    transition: right 1s ease,top 1s ease,opacity 1s ease;
+.transition1 {
+  transition: right 1s ease, top 1s ease, opacity 1s ease;
 }
-.transition2{
-    transition: right 1s ease 0.2s,top 1s ease 0.2s,opacity 1s ease 0.2s;
+.transition2 {
+  transition: right 1s ease 0.2s, top 1s ease 0.2s, opacity 1s ease 0.2s;
 }
-.cardPlayer img{
-    display: flex;
-    align-self: center; 
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    width: 4vw;
-    height: auto;
-    position: absolute;
-    right:0;
-    margin: 1%;
+.cardPlayer img {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  width: 4vw;
+  height: auto;
+  position: absolute;
+  right: 0;
+  margin: 1%;
 }
-.profile0cards{
-    top:-100%; 
-    right:43%;
-    opacity: 0;
+.profile0cards {
+  top: -100%;
+  right: 43%;
+  opacity: 0;
 }
-.profile1cards{
-    top:-100%;
-    right:-5%;
-    opacity: 0;
+.profile1cards {
+  top: -100%;
+  right: -5%;
+  opacity: 0;
 }
-.profile2cards{
-    top:-30%;
-    right:-55%;
-    opacity: 0;
+.profile2cards {
+  top: -30%;
+  right: -55%;
+  opacity: 0;
 }
-.profile3cards{
-    top:60%;
-    right:-55%;
-    opacity: 0;
+.profile3cards {
+  top: 60%;
+  right: -55%;
+  opacity: 0;
 }
-.profile4cards{
-    top: 120%;
-    right:-5%;
-    opacity: 0;
+.profile4cards {
+  top: 120%;
+  right: -5%;
+  opacity: 0;
 }
-.profile5cards{
-    top: 120%;
-    right:43%;
-    opacity: 0;
+.profile5cards {
+  top: 120%;
+  right: 43%;
+  opacity: 0;
 }
-.profile6cards{
-    top:120%;
-    right:91.5%;
-    opacity: 0;
+.profile6cards {
+  top: 120%;
+  right: 91.5%;
+  opacity: 0;
 }
-.profile7cards{
-    top:60%;
-    right:141%;
-    opacity: 0;
+.profile7cards {
+  top: 60%;
+  right: 141%;
+  opacity: 0;
 }
-.profile8cards{
-    top:-33%;
-    right:141%;
-    opacity: 0;
+.profile8cards {
+  top: -33%;
+  right: 141%;
+  opacity: 0;
 }
-.profile9cards{
-    top:-100%;
-    right:91.5%;
-    opacity: 0;
+.profile9cards {
+  top: -100%;
+  right: 91.5%;
+  opacity: 0;
 }
-
-
 
 /*responsive*/
-@media (max-width:600px) {
-    .container-dealerDuck img{
-        width: 5vw;
-    }
-    .container-tableCards img{
-        width: 5vw;
-    }
-
+@media (max-width: 600px) {
+  .container-dealerDuck img {
+    width: 5vw;
+  }
+  .container-tableCards img {
+    width: 5vw;
+  }
 }
 
-
 /*Money pot container*/
-.container-moneyPot{
-    width: fit-content;
-    height: fit-content;
-    padding: 1.1% 2% 1.3% 2%;
+.container-moneyPot {
+  width: fit-content;
+  height: fit-content;
+  padding: 1.1% 2% 1.3% 2%;
 
-    text-align: center;
+  text-align: center;
 
-    position: absolute;
-    top:0;
-    left: 50%;
-    transform: translateX(-50%);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 
-    color: #fff;
-    font-size: 2vh;
-    text-shadow:unset;
-    box-shadow: inset 0 0 8px 1px black;
+  color: #fff;
+  font-size: 2vh;
+  text-shadow: unset;
+  box-shadow: inset 0 0 8px 1px black;
 
-    background-color: #303b44;
-    border-radius: 30px;
-    z-index: 99;
+  background-color: #303b44;
+  border-radius: 30px;
+  z-index: 99;
 }

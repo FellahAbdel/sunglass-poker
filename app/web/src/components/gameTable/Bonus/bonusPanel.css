@@ -1,8 +1,8 @@
-.panel-bonus{ 
+.panel-bonus {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap:1vh;
+  gap: 1vh;
   padding: 5% 5% 7% 5%;
   height: fit-content;
   width: fit-content;
@@ -11,13 +11,13 @@
   box-shadow: unset;
   box-shadow: inset 0 0 5px black;
 }
-#dark .panel-bonus{
+#dark .panel-bonus {
   background-color: rgba(62, 62, 62, 0.3);
 }
-#light .panel-bonus{
+#light .panel-bonus {
   background-color: rgba(0, 0, 0, 0.3);
 }
-.container-bonusCards{
+.container-bonusCards {
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -27,73 +27,66 @@
   flex-wrap: nowrap;
 }
 
-.container-bonusCards img{
+.container-bonusCards img {
   padding: 10px;
   width: 1.5vw;
   height: auto;
   border-radius: 5px;
   border: 0.5px solid rgba(255, 255, 255, 0.5);
-  background-color:unset;
+  background-color: unset;
   box-shadow: 0 0 4px black;
-  margin: 4px ;
-
+  margin: 4px;
 }
 
-
-
-  /* for smaller screens */
-  @media (max-width: 1300px) {
-    .container-bonusCards img {
-      width: 1.5vw;
-      padding: 5px;
-    }
+/* for smaller screens */
+@media (max-width: 1300px) {
+  .container-bonusCards img {
+    width: 1.5vw;
+    padding: 5px;
   }
-  @media (max-width : 710px ){
-    .container-bonusCards img{
-      width: 1vw;
-      padding: 5px;
-    }
+}
+@media (max-width: 710px) {
+  .container-bonusCards img {
+    width: 1vw;
+    padding: 5px;
   }
+}
 
-
-
-#dark .box-1{
+#dark .box-1 {
   background-image: linear-gradient(0deg, #004577 20%, rgba(0, 0, 0, 0) 50%);
   transition: background-image 1s ease;
 }
-#dark .box-2{
+#dark .box-2 {
   background-image: linear-gradient(0deg, #004577 50%, rgba(0, 0, 0, 0) 70%);
   transition: background-image 1s ease;
 }
-#dark .box-3{
-  background-color: #004577 ;
+#dark .box-3 {
+  background-color: #004577;
   transition: background-color 1s ease;
 }
 
-#light .box-1{
+#light .box-1 {
   background-image: linear-gradient(0deg, #a57423 20%, rgba(0, 0, 0, 0) 50%);
   transition: background-image 1s ease;
 }
-#light .box-2{
+#light .box-2 {
   background-image: linear-gradient(0deg, #a57423 50%, rgba(0, 0, 0, 0) 70%);
   transition: background-image 1s ease;
 }
-#light .box-3{
+#light .box-3 {
   background-color: #a57423;
   transition: background-color 1s ease;
 }
 
-
-.btn-bonus{
+.btn-bonus {
   height: 3vh;
   min-height: unset;
   width: 100%;
   border-radius: 10px;
   border-style: unset;
-  margin:0;
+  margin: 0;
 
-  box-shadow: 
-    0px 0px 10px black;
+  box-shadow: 0px 0px 10px black;
   font-size: 1vw;
   color: aliceblue;
   text-align: center;
@@ -103,9 +96,6 @@
   cursor: pointer;
 }
 
-
-.btn-bonus:hover{
+.btn-bonus:hover {
   box-shadow: inset 0 0 10px black;
 }
-
-

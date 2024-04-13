@@ -5,9 +5,7 @@ import TextInputComponent from "../../textInput/TextInput";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
 const CreateGameWindow = () => {
-
   const { openWindow } = useWindowContext();
-
 
   const [gameData, setGameData] = useState({
     serverName: "",
@@ -70,8 +68,8 @@ const CreateGameWindow = () => {
           type="submit"
           label="Create the Game"
         />
-        <br/>
-          <Button
+        <br />
+        <Button
           styleClass="btn-connectionDefault start-button back-color2"
           type="submit"
           label="Join a Game"

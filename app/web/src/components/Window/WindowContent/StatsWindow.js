@@ -7,30 +7,30 @@ import "./profileMenu.css";
 import { useUserData } from "../../Utiles/useUserData";
 
 const StatsContent = () => {
-    const { user, stats } = useUserData();
-  
-    return (
-      <div className="profileMenu">
-        <img
-          className="userPP"
-          src={require("./../../assets/images/pp_simple.jpg")}
-          alt="User Profile"
-        />
-        <div className="userInfo">
-          {stats ? (
-            <>
-              <h3>Stats for {user?.pseudo}</h3>
-              <p>Max Coins: {stats.maxCoins}</p>
-              <p>Max Gain: {stats.maxGain}</p>
-              <p>Total Gain: {stats.totalGain}</p>
-              <p>Experience: {stats.experience}</p>
-            </>
-          ) : (
-            <p>Loading stats...</p>
-          )}
-        </div>
+  const { user, stats } = useUserData();
+
+  return (
+    <div className="profileMenu">
+      <img
+        className="userPP"
+        src={require("./../../assets/images/pp_simple.jpg")}
+        alt="User Profile"
+      />
+      <div className="userInfo">
+        {stats ? (
+          <>
+            <h3>Stats for {user?.pseudo}</h3>
+            <p>Max Coins: {stats.maxCoins}</p>
+            <p>Max Gain: {stats.maxGain}</p>
+            <p>Total Gain: {stats.totalGain}</p>
+            <p>Experience: {stats.experience}</p>
+          </>
+        ) : (
+          <p>Loading stats...</p>
+        )}
       </div>
-    );
-  };
-  
-  export default StatsContent;
+    </div>
+  );
+};
+
+export default StatsContent;

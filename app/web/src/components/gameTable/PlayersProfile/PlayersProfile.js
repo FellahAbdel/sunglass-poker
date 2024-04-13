@@ -2,7 +2,7 @@ import React from "react";
 import "./playersProfile.css";
 import ProgressBar from "../../Utiles/ProgressBar";
 import Card from "../Card/Card";
-import { useTranslation } from '../../Utiles/Translations';
+import { useTranslation } from "../../Utiles/Translations";
 
 const PlayersProfile = ({
   status,
@@ -25,7 +25,9 @@ const PlayersProfile = ({
             durationInSeconds={5}
           />
         ) : (
-          <div className={`box-statusText  ${status}`}>{getTranslatedWord(`playersStatus.${status.toLowerCase()}`)}</div>
+          <div className={`box-statusText  ${status}`}>
+            {getTranslatedWord(`playersStatus.${status.toLowerCase()}`)}
+          </div>
         )}
       </div>
 

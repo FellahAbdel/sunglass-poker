@@ -1,25 +1,25 @@
-.range{
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    background: none;
-    border-radius: 10px;
-    box-shadow: unset;
-    border: 2px solid rgba(251, 251, 251, 0.3);
+.range {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background: none;
+  border-radius: 10px;
+  box-shadow: unset;
+  border: 2px solid rgba(251, 251, 251, 0.3);
 }
 
-.range .field{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    height: 100%;
-    width: 90%;
+.range .field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  height: 100%;
+  width: 90%;
 }
 
- /* .range .field .minValue .maxValue{
+/* .range .field .minValue .maxValue{
     position: absolute;
     font-size: 2vh;
     font-weight: 600;
@@ -36,52 +36,50 @@
     left: -43px;
 }  */
 
-.minValue , .maxValue{
-    font-size: 100%;
-    color: rgb(255, 255, 255);
+.minValue,
+.maxValue {
+  font-size: 100%;
+  color: rgb(255, 255, 255);
 }
-.maxValue{
-    margin-left: 2%;
+.maxValue {
+  margin-left: 2%;
 }
-.minValue{
-    margin-right: 2%;
-}
-
-.range .field input{
-    appearance:unset;
-    height: 4px;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    border-radius: 5px;
+.minValue {
+  margin-right: 2%;
 }
 
-.range .field input::-webkit-slider-thumb{
-    -webkit-appearance: unset;
-    height: 20px;
-    width: 20px;
-    background:rgb(255, 255, 255);
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: unset;
+.range .field input {
+  appearance: unset;
+  height: 4px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
 }
 
-@media (max-width:900px){
-    
-    .range .field input::-webkit-slider-thumb{
-        height: 10px;
-        width: 10px;
-    }
-    .range .field input{
-        height: 2px;
-    }
-    .minValue , .maxValue{
-        font-size: 10px;
-        color: rgb(190, 190, 190);
-    }
-    
-
+.range .field input::-webkit-slider-thumb {
+  -webkit-appearance: unset;
+  height: 20px;
+  width: 20px;
+  background: rgb(255, 255, 255);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: unset;
 }
 
+@media (max-width: 900px) {
+  .range .field input::-webkit-slider-thumb {
+    height: 10px;
+    width: 10px;
+  }
+  .range .field input {
+    height: 2px;
+  }
+  .minValue,
+  .maxValue {
+    font-size: 10px;
+    color: rgb(190, 190, 190);
+  }
+}
 
 /* 
 .range .sliderValue{

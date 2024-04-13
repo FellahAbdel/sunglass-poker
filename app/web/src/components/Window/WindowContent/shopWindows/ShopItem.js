@@ -9,8 +9,7 @@ const ShopItem = ({ item, onClickItem, styleClass, isOwned }) => {
 
   const isColor = item.imgSrc && item.imgSrc.startsWith("#");
 
-  const itemName = item.names[language] || item.names['en'];
-
+  const itemName = item.names[language] || item.names["en"];
 
   return (
     <div className={`shop-item ${styleClass}`} onClick={onClickItem}>

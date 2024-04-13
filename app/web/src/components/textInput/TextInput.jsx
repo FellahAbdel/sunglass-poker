@@ -8,7 +8,7 @@ const TextInputComponent = ({
   value,
   onChange,
   errorMessage,
-  styleClass
+  styleClass,
 }) => {
   const hasError = errorMessage !== "";
   return (

@@ -10,7 +10,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .login-box {
@@ -48,28 +47,27 @@
   width: 100%;
 }
 
-.main-SuccessWindow{
+.main-SuccessWindow {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  color:aliceblue;
+  color: aliceblue;
   width: 100%;
 }
 
-.main-SuccessWindow p{
+.main-SuccessWindow p {
   font-size: 2vw;
   /* margin: 10%; */
 }
 
-
-.login-page-title{
-  color:white;
+.login-page-title {
+  color: white;
   font-size: 2vw;
   margin-bottom: 20px;
 }
 
-.login-page-text{
-  color:white;
+.login-page-text {
+  color: white;
   font-size: 1vw;
 }

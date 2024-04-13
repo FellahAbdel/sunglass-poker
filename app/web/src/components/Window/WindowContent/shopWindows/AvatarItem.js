@@ -15,7 +15,9 @@ export const useItems = () => {
     const loadItems = async () => {
       const loadedItems = await fetchItems();
       if (loadedItems && Array.isArray(loadedItems)) {
-        const ownedIds = new Set(user?.itemsOwned?.map(item => item.toString()));
+        const ownedIds = new Set(
+          user?.itemsOwned?.map((item) => item.toString())
+        );
 
         const sortedItems = {
           baseAvatar: { owned: [], unowned: [] },
@@ -23,7 +25,7 @@ export const useItems = () => {
           colorAvatar: { owned: [], unowned: [] },
         };
 
-        loadedItems.forEach(item => {
+        loadedItems.forEach((item) => {
           const isOwned = ownedIds.has(item._id);
           const newItem = { ...item, owned: isOwned };
           const categoryGroup = sortedItems[item.category];
@@ -37,7 +39,7 @@ export const useItems = () => {
         });
 
         // Trier chaque liste par prix
-        Object.values(sortedItems).forEach(category => {
+        Object.values(sortedItems).forEach((category) => {
           category.owned.sort((a, b) => a.price - b.price);
           category.unowned.sort((a, b) => a.price - b.price);
         });

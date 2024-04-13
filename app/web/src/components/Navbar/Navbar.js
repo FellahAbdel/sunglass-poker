@@ -15,10 +15,9 @@ import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import AvatarDisplay from "../AvatarDisplay/AvatarDisplay.jsx";
 
 const Navbar = ({}) => {
-  const { user, isLogged,logingOut } = useAuth();
-  const {isGameTableVisible,closeWindow,openWindow}= useWindowContext();
+  const { user, isLogged, logingOut } = useAuth();
+  const { isGameTableVisible, closeWindow, openWindow } = useWindowContext();
   const userData = useUserData();
-
 
   const handleLogOutButton = () => {
     logingOut();
@@ -97,7 +96,7 @@ const Navbar = ({}) => {
       <Button
         label={
           isLogged
-            ? getTranslatedWord("navbar.profile") 
+            ? getTranslatedWord("navbar.profile")
             : getTranslatedWord("navbar.login")
         }
         onClick={() => (isLogged ? openWindow("profile") : openWindow("login"))}

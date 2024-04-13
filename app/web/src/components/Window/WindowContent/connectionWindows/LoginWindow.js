@@ -4,16 +4,12 @@ import Button from "../../../button/Button.tsx";
 import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../../Utiles/Translations.jsx';
-
+import { useTranslation } from "../../../Utiles/Translations.jsx";
 
 const LoginWindow = () => {
   const { getTranslatedWord } = useTranslation();
 
-  const {
-    openSuccessWindow,
-    openWindow,
-  } = useWindowContext();
+  const { openSuccessWindow, openWindow } = useWindowContext();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -58,7 +54,9 @@ const LoginWindow = () => {
 
   return (
     <div className="box">
-      <div className="login-page-title">{getTranslatedWord("connection.loginMessage")}</div>
+      <div className="login-page-title">
+        {getTranslatedWord("connection.loginMessage")}
+      </div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="username"
@@ -82,7 +80,7 @@ const LoginWindow = () => {
           type="submit"
           label={getTranslatedWord("connection.login")}
         />
-          <Button
+        <Button
           onClick={() => openWindow("forgot")}
           styleClass="btn-connectionDefault forgot-button back-color3"
           label={getTranslatedWord("connection.forgotPass")}

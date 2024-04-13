@@ -1,64 +1,59 @@
-.container-hand{
-    width: 15vw;
-    height: 10vw;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex:1;
+.container-hand {
+  width: 15vw;
+  height: 10vw;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
-.hand-guide{
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    flex:1;
-    z-index: -1;
-    bottom: 0;
-    padding: 7px 5px 7px 5px;
-    height: 100%;
-    width: 60%;
+.hand-guide {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  flex: 1;
+  z-index: -1;
+  bottom: 0;
+  padding: 7px 5px 7px 5px;
+  height: 100%;
+  width: 60%;
 
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 0 10px black;
 
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 0 10px black;
+  font-size: 1vw;
+  color: white;
 
-    font-size: 1vw;
-    color: white;
-
-    text-shadow:
-    0 0 5px #fff,
-    0 0 10px #fff,
-    0 0 15px #fff,
-    0 0 20px rgb(255, 255, 255),
-    0 0 30px rgb(255, 255, 255);
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+    0 0 20px rgb(255, 255, 255), 0 0 30px rgb(255, 255, 255);
 }
-#dark .hand-guide{
-    background:linear-gradient(to top, black, #0045776c) ;
+#dark .hand-guide {
+  background: linear-gradient(to top, black, #0045776c);
 }
-#light .hand-guide{
-    background:linear-gradient(to top, black, #7771006c) ;
+#light .hand-guide {
+  background: linear-gradient(to top, black, #7771006c);
 }
 
-.container-handCard{
-    display: flex;
-    position: absolute;
-    bottom:10%;
-    width: 85%;
-    height: 80%;
-    flex-direction:row;
-    justify-content: space-evenly;
-    margin: 20px 0px 0px 0px;
-    z-index: 0;
+.container-handCard {
+  display: flex;
+  position: absolute;
+  bottom: 10%;
+  width: 85%;
+  height: 80%;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 20px 0px 0px 0px;
+  z-index: 0;
 }
 
-.handCard{
-    align-self: center;
-    margin-bottom: 0%;
-    width: 45%;
-    height: 100%;
-    box-shadow: 0 0 10px black;
-    transition: transform 2s ease;
-    transform-style: preserve-3d; 
+.handCard {
+  align-self: center;
+  margin-bottom: 0%;
+  width: 45%;
+  height: 100%;
+  box-shadow: 0 0 10px black;
+  transition: transform 2s ease;
+  transform-style: preserve-3d;
 }

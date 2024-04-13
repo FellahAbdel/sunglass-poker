@@ -10,14 +10,11 @@ import {
   validatePasswordMatch,
 } from "../../../Utiles/ValidationUtils.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../../Utiles/Translations.jsx';
+import { useTranslation } from "../../../Utiles/Translations.jsx";
 
 const SignUpWindow = () => {
   const { getTranslatedWord } = useTranslation();
-  const {
-    openSuccessWindow,
-    openWindow,
-  } = useWindowContext();
+  const { openSuccessWindow, openWindow } = useWindowContext();
   const { registerUser } = useAuth();
   const [formData, setFormData] = useState({
     pseudo: "",
@@ -121,7 +118,9 @@ const SignUpWindow = () => {
 
   return (
     <div className="box">
-      <div className="login-page-title">{getTranslatedWord("connection.registerMessage")}</div>
+      <div className="login-page-title">
+        {getTranslatedWord("connection.registerMessage")}
+      </div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="pseudo"
@@ -160,7 +159,7 @@ const SignUpWindow = () => {
         <Button
           styleClass="btn-connectionDefault login-button back-color1"
           type="submit"
-          label={getTranslatedWord("connection.signin")} 
+          label={getTranslatedWord("connection.signin")}
         />
       </form>
 

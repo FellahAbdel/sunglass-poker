@@ -1,4 +1,4 @@
-import React, { useEffect , useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import { useTranslation } from "../Utiles/Translations";
@@ -14,15 +14,11 @@ import CardsPlacements from "./CardsPlacements";
 import LogoComponent from "../logo/Logo";
 
 const Table = ({
-  dealingFlop, 
+  dealingFlop,
   playersCardDistributedProp,
   playersCardsShowProp,
 }) => {
-  const {
-    isWindowOpen,
-    windowType,
-    isGameTableVisible,
-  } = useWindowContext();
+  const { isWindowOpen, windowType, isGameTableVisible } = useWindowContext();
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
@@ -43,23 +39,25 @@ const Table = ({
     }
   }, [isWindowOpen, isGameTableVisible]);
 
-  const classes = getStyles(windowType, isLogged, isGameTableVisible, isWindowOpen);
+  const classes = getStyles(
+    windowType,
+    isLogged,
+    isGameTableVisible,
+    isWindowOpen
+  );
 
   return (
     // Table that becomes a container for the menus when they are activated
     <div className={classes.containerTable}>
       {/* the white border line around the table in the middle */}
       <div
-        className={`${
-          !isWindowOpen ? "table-lineAround" : ""
-        } ${
-          (!isGameTableVisible || isWindowOpen ) ?
-          "disappear" : ""
+        className={`${!isWindowOpen ? "table-lineAround" : ""} ${
+          !isGameTableVisible || isWindowOpen ? "disappear" : ""
         }`}
       />
 
       {/* Game Components */}
-      {isGameTableVisible && !isWindowOpen &&
+      {isGameTableVisible && !isWindowOpen && (
         <>
           <CardsPlacements
             moneyPot={9999999}
@@ -73,21 +71,30 @@ const Table = ({
             disappear={isWindowOpen}
           />
         </>
-      }
+      )}
       {/*All the panels other than game itself are included in window component*/}
-      <Window/>
+      <Window />
 
-
-        <div className={`box-onGameNotif ${isVisible ? 'visible' : ''}`}>You are still on the game table!</div>
-      
-      
+      <div className={`box-onGameNotif ${isVisible ? "visible" : ""}`}>
+        You are still on the game table!
+      </div>
 
       {/*the only use of logo component - dynamique*/}
       <LogoComponent
         styleClass={classes.logoComponent}
         label={`
-        ${["tutorial", "profile", "servers", "create_table", "validation", "shop"].some(type => windowType.includes(type))
-        ? getTranslatedWord(`messageLogo.${windowType}`) : "" }`}
+        ${
+          [
+            "tutorial",
+            "profile",
+            "servers",
+            "create_table",
+            "validation",
+            "shop",
+          ].some((type) => windowType.includes(type))
+            ? getTranslatedWord(`messageLogo.${windowType}`)
+            : ""
+        }`}
       />
     </div>
   );

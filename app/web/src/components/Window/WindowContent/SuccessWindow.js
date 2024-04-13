@@ -4,11 +4,8 @@ import Button from "../../button/Button.tsx";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
 const SuccessWindow = () => {
-  const {
-    closeWindow,
-    successMessage,
-  } = useWindowContext();
-  
+  const { closeWindow, successMessage } = useWindowContext();
+
   return (
     <div className="main-SuccessWindow">
       <p>{successMessage}</p>

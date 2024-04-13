@@ -8,13 +8,11 @@ import {
   validatePasswordMatch,
 } from "../../../Utiles/ValidationUtils.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../../Utiles/Translations.jsx';
+import { useTranslation } from "../../../Utiles/Translations.jsx";
 
 const ResetPasswordWindow = ({ showSuccess }) => {
   const { getTranslatedWord } = useTranslation();
-  const {
-    openWindow,
-  } = useWindowContext();
+  const { openWindow } = useWindowContext();
   const { updateUserData } = useAuth();
 
   const [formData, setFormData] = useState({

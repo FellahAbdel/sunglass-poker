@@ -1,5 +1,9 @@
-export function getStyles(windowType, isLogged, isGameTableVisible, isWindowOpen ) {
-  
+export function getStyles(
+  windowType,
+  isLogged,
+  isGameTableVisible,
+  isWindowOpen
+) {
   return {
     //Table Placement
     compTable: `comp-table
@@ -14,11 +18,11 @@ export function getStyles(windowType, isLogged, isGameTableVisible, isWindowOpen
       container-${windowType}
       ${isGameTableVisible && !isWindowOpen && "container-inGame"}  
       `,
-    //Logo 
+    //Logo
     logoComponent: `
       logo-main
       logo-${windowType}
       ${isGameTableVisible && !isWindowOpen && "disappear"}
-    `
+    `,
   };
 }

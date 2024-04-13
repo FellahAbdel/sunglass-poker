@@ -1,10 +1,9 @@
 // TableItem.js ou TableItem.jsx
-import React from 'react';
-import Button from '../../../button/Button.tsx';
-import locked from '../../../assets/images/icons/white/password.png';
-import unlocked from '../../../assets/images/icons/white/unlock.png';
-import { useTranslation } from '../../../Utiles/Translations';
-
+import React from "react";
+import Button from "../../../button/Button.tsx";
+import locked from "../../../assets/images/icons/white/password.png";
+import unlocked from "../../../assets/images/icons/white/unlock.png";
+import { useTranslation } from "../../../Utiles/Translations";
 
 const ListTableItem = ({ nom, rang, nombreDeJoueurs, ouvert, onJoinClick }) => {
   const { getTranslatedWord } = useTranslation();
