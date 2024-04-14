@@ -36,7 +36,7 @@
   },
   "game": {
     "loginPlay": "Connectez-vous pour jouer",
-    "signupPlay":"Créer un compter pour jouer",
+    "signupPlay": "Créer un compter pour jouer",
     "startGame": "Commencer une partie",
     "joinGame": "Rejoindre une partie",
     "createAgame": "Créer une nouvelle partie",
@@ -106,8 +106,7 @@
     "confirmationMessage": "Êtes-vous sûr de vouloir acheter cet élément pour ",
     "confirm": "Confirmer",
     "cancel": "Annuler",
-    "price":"prix"
-
+    "price": "prix"
   },
   "messageLogo": {
     "tutorial": "Tutoriel",
@@ -115,6 +114,6 @@
     "listeTable": "REJOINDRE UNE PARTIE",
     "createTable": "CRÉER UNE NOUVELLE PARTIE",
     "validation": "Confirmation d'achat",
-    "shop":"Boutique"
+    "shop": "Boutique"
   }
 }

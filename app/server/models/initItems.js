@@ -24,6 +24,46 @@ const defaultItems = [
   },
   {
     names: {
+      en: "Dolphin",
+      fr: "Dauphin"
+    },
+    price: 100,
+    imgSrc: "/assets/avatar/dauphin.png",
+    category: "baseAvatar",
+    eyePosition: { x: 50, y: 43 },
+  },
+  {
+    names: {
+      en: "Weird Fish",
+      fr: "Drole de Poisson"
+    },
+    price: 100,
+    imgSrc: "/assets/avatar/WeirdFish.png",
+    category: "baseAvatar",
+    eyePosition: { x: 50, y: 20 },
+  },
+  {
+    names: {
+      en: "Jellyfish",
+      fr: "Méduse"
+    },
+    price: 100,
+    imgSrc: "/assets/avatar/jellyfish.png",
+    category: "baseAvatar",
+    eyePosition: { x: 50, y: 43 },
+  },
+    {
+    names: {
+      en: "Shark",
+      fr: "Requin"
+    },
+    price: 100,
+    imgSrc: "/assets/avatar/shark.png",
+    category: "baseAvatar",
+    eyePosition: { x: 60, y: 34 },
+  },
+  {
+    names: {
       en: "Nothing",
       fr: "Rien"
     },
