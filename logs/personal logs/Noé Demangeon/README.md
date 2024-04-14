@@ -110,4 +110,6 @@
 
 2024/04/13 : 2h00           Génération Avatar et lunettes.
 
-TEMPS TOTAL: 107h00min
+2024/04/14 : 2h00           Téléchargement models, générations avatar
+
+TEMPS TOTAL: 109h00min
