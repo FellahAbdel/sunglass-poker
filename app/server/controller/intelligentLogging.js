@@ -5,17 +5,17 @@ module.exports = csl = {
     silenced: [],
     outLocaly: false,
     outLocal: function (type, out, ...args) {
-        var element = "<div class='" + out + "'><h2>" + type + "</h2>";
+        var element = "<div class='" + out + "'><h2>" + type + "</h2></br><section>";
         for (i in args) {
-            var subElement = "<pre>";
+            var subElement = "<span>";
             data = args[i];
             if (typeof data === 'object')
-                subElement += this.getObjString(data);
+                subElement += '<pre>' +this.getObjString(data) + '</pre>';
             else subElement += data;
-            subElement += "</pre>";
+            subElement += "</span>";
             element += subElement;
         }
-        element += "</div>";
+        element += "</section></div>";
         if (this.outputFile === false) {
             // this.outputFile = './log_'+Math.random()+'.html';
             this.outputFile = './log.html';
