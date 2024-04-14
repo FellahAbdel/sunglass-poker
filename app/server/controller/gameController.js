@@ -51,17 +51,17 @@ module.exports = gameController = {
         csl.log(fileType,this);
         if (this.rooms !== undefined) {
             if (this.rooms.hasOwnProperty(id)) {
+                csl.log(fileType,'User to add : ',user);
                 if (user === undefined) {
                     return { status: false, mes: 'User undefined' };
                 }
-                const answer = this.rooms[id].joinGame(user);
+                const answer = this.dispatch(user,actions.sit(id,user));
+                csl.log(fileType, answer);
                 if (answer.status) {
                     csl.log(fileType,this.rooms[id].state);
-                    // store.dispatch(this.rooms[id].state,actions.sit());
-                    csl.log(fileType,'nop at');
-                    this.rooms[id].state = store.getState();
+                    // csl.log(fileType,'nop at');
                     // csl.log(fileType,'New player, try to set refresh');
-                    this.makeRefreshCall(id, false);
+                    // this.makeRefreshCall(id, false);
                     // csl.log(fileType,'Join call for broadcast ', answer);
                     // this.broadcastStatus(id);
                 }
@@ -95,7 +95,7 @@ module.exports = gameController = {
                 if(log_broadcast)csl.error(fileType,"Room expired or does not exist");
                 return;
             }
-            const players = this.rooms[hroom].state.game.players;
+            const players = this.rooms[hroom].players;
             if(log_broadcast) csl.log(fileType,'gameController call for broadcast on ', room, ' to io with hash :', hroom);
             if(players.length == 0){
                 if(log_broadcast) csl.log(fileType,'No player in room, refreshcall will be remove if set.');
@@ -137,8 +137,14 @@ module.exports = gameController = {
         return g.id;
     },
 
-    dispatch:function(user, action, room){
-        csl.log(fileType,"user : ",user, " dispatch event : ", action, " for room : ", room);
+    dispatch: function(user, action){
+        csl.log(fileType,"user : ",user, " dispatch event : ", action);
+        store.dispatch(action);
+        const state = store.getState();
+        const answer = state.game.answer;
+        csl.log(fileType, "Answer: ", answer)
+        store.dispatch(actions.clearAnswer());
+        return answer;
     }
 
 

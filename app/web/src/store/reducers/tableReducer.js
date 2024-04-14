@@ -36,6 +36,14 @@ const tableReducer = (state = initialState, action) => {
             table:action.payload.rooms[10].table,
             players:action.payload.rooms[10].game.players
           };
+        case actions.SITTED:
+          console.log('You sit successfully');
+          return {
+            ...state,
+            gameStarted:true,
+            table:action.payload.table,
+            players:action.payload.players
+          }
         default:
             console.log("Table reducer called");
             return state;

@@ -1,6 +1,7 @@
 class Player {
   #timeLastAnswer = 0;
   #playerId = 0;
+  id = 0;
   #playerState = "";
   #playerMoney = 1000;
   #playerCards = []; // tableau de deux cartes au maximum
@@ -10,6 +11,7 @@ class Player {
 
   constructor(playerId, name) {
     this.#playerId = playerId;
+    this.id = playerId;
     this.name = name;
     this.status = "Empty";
   }

@@ -5,7 +5,7 @@ const tablesReducer = require("./tablesReducer");
 const rootReducer = combineReducers({
   game: gameReducer,
   //   user: userReducer,
-  table: tablesReducer,
+  // table: tablesReducer,
 });
 
 module.exports = rootReducer;

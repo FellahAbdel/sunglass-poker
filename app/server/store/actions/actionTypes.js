@@ -20,8 +20,22 @@ module.exports.GAME_STARTED = "GAME_STARTED";
 
 module.exports.FOLD = "FOLD";
 
-// room control
 
 module.exports.SIT = "SIT";
 
+/**
+ * _______________________________________
+ * 
+ *  Actions to send informations to player
+ * 
+ * _______________________________________
+ */
 module.exports.REFRESH = "REFRESH";
+module.exports.SITTED = "SITTED";
+
+
+//####################################
+
+// reducer controls
+
+module.exports.CLEARANSWER = "CLEAR_ANSWER";
