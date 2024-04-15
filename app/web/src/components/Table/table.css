@@ -174,13 +174,21 @@
   height: 40vh;
   border-radius: 200px;
 }
-#dark .container-validation,
-#light .container-validation,
+
 #dark .container-shop,
 #light .container-shop{
   width: 65vw;
   height: 50vh;
   border-radius: 50px;
+  background: unset;
+  background-color: #282828;  
+}
+
+#dark .container-validation,
+#light .container-validation{
+  width: 50vw;
+  height: 50vh;
+  border-radius: 250px;
   background: unset;
   background-color: #282828;  
 }
@@ -328,7 +336,7 @@
   bottom: 0;
   z-index: -1;
   color:white;
-  font-size: larger;
+  font-size: 1.5vw;
   transition: bottom 1s ease;
 }
 

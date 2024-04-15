@@ -1,5 +1,4 @@
 import React from "react";
-import "./shopItem.css";
 import { useTranslation } from "../../../Utiles/Translations";
 import { useSettings } from "../../../Utiles/SettingsContext";
 
@@ -14,21 +13,20 @@ const ShopItem = ({ item, onClickItem, styleClass, isOwned }) => {
   return (
     <div className={`shop-item ${styleClass}`} onClick={onClickItem}>
       {isColor ? (
-        // Affichage d'une couleur
+        // background color
         <div
-          className="color-display"
           style={{ backgroundColor: item.imgSrc }}
         />
       ) : (
-        // Affichage d'une image
-        <img src={item.imgSrc} alt={itemName} className="item-image" />
+        // avatar
+        <img src={item.imgSrc} alt={itemName}/>
       )}
-      <p>{itemName}</p> {/* Affiche le nom traduit de l'item */}
-      {!isOwned && (
+      <div>
         <p>
-          {getTranslatedWord(`shop.price`)}: {item.price}
+          {itemName}<br/>{/* name of the item */}
+          {!isOwned && <>{getTranslatedWord(`shop.price`)}: {item.price}</>}
         </p>
-      )}
+      </div> 
     </div>
   );
 };
