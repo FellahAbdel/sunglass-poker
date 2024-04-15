@@ -3,6 +3,8 @@ import "./listTableWindow.css";
 import Button from "../../button/Button.tsx";
 import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../Utiles/AuthProvider.jsx";
 
 const ListTableWindow = () => {
   const fakeTables = [
@@ -38,6 +40,28 @@ const ListTableWindow = () => {
     },
   ];
 
+  const { getRoomTableRecords } = useAuth();
+  const [roomTableRecords, setRoomTableRecords] = useState([]); // State to store fetched roomTableRecords data
+  useEffect(() => {
+    const authToken = sessionStorage.getItem("authToken"); // Ou localStorage selon votre préférence
+    // Function to fetch roomTableRecords data from server
+    const fetchRoomTableRecords = async () => {
+      try {
+        if (authToken) {
+          const data = await getRoomTableRecords(authToken); // Assuming this is your API endpoint
+          if (data) {
+            setRoomTableRecords(data); // Update state with fetched roomTableRecords data
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching roomTableRecords:", error);
+      }
+    };
+
+    fetchRoomTableRecords(); // Call the fetchTables function when the component mounts
+  }, []); // Empty dependency array to run this effect only once after the initial render
+
+  console.log("roomsTableRecords : ", roomTableRecords); // Log the fetched roomTableRecords data to the console
   const { openWindow } = useWindowContext();
 
   const handleJoinTable = () => {
@@ -54,13 +78,13 @@ const ListTableWindow = () => {
         <div className="headerItem">Action</div>
       </div>
       <div className="listTableBody">
-        {fakeTables.map((table, index) => (
+        {roomTableRecords.map((table, index) => (
           <ListTableItem
             key={index}
-            nom={table.nom}
-            rang={table.rang}
-            nombreDeJoueurs={table.nombreDeJoueurs}
-            ouvert={table.ouvert}
+            nom={table.serverName}
+            rang={table.rank}
+            nombreDeJoueurs={0}
+            ouvert={"ouvert"}
             onJoinClick={handleJoinTable}
           />
         ))}

@@ -79,6 +79,30 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getRoomTableRecords = async (token) => {
+    try {
+      const response = await fetch(
+        "http://localhost:3001/api/gameRoomDescription",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch roomTableRecords");
+      } else {
+        console.log("roomTableRecords fetched successfully");
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error("Error fetching roomTableRecords:", error);
+      return null;
+    }
+  };
+
   const logingOut = () => {
     dispatch({ type: "LOGOUT" });
     showHome();
@@ -249,6 +273,7 @@ export const AuthProvider = ({ children }) => {
         user,
         login,
         createGameRoom,
+        getRoomTableRecords,
         logingOut,
         getUserInfo,
         updateUserData,
