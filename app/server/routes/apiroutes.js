@@ -75,4 +75,24 @@ module.exports = (app, dao, gameController) => {
       res.status(500).json({ error: "Internal server error" });
     }
   });
+
+  app.get("/api/gameRoomDescription", async (req, res) => {
+    try {
+      // Call the gameDescription function from dao
+      const result = await dao.gameRoomDescription();
+
+      // Check if there was an error fetching game descriptions
+      if (result.error) {
+        // Send an error response
+        return res.status(result.code).json(result.data);
+      }
+
+      // Send a success response with the fetched game descriptions
+      res.status(result.code).json(result.data);
+    } catch (error) {
+      // Handle unexpected errors
+      console.error("Error fetching game descriptions:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
 };

@@ -4,6 +4,7 @@ const UserModel = require("./User");
 const StatModel = require("./Stat");
 const GameDescriptionModel = require("./GameDescription");
 const jwt = require("jsonwebtoken");
+const game = require("../controller/game");
 
 module.exports = function (app, bdd) {
   console.log(bdd);
@@ -17,6 +18,21 @@ module.exports = function (app, bdd) {
   );
   db.once("open", async () => {
     console.log("Connecté à la base de données MongoDB");
+
+    async function getAllRecords() {
+      try {
+        const records = await GameDescriptionModel.find({});
+        console.log("All records:", records);
+        // Process fetched records here
+      } catch (err) {
+        console.error("Error fetching records:", err);
+        // Handle error here
+      }
+    }
+
+    getAllRecords();
+
+    // console.log(bdd);
   });
 
   //file to create a user
@@ -271,6 +287,20 @@ module.exports = function (app, bdd) {
           error: true,
           code: 500,
           data: { error: "Error creating game description" },
+        };
+      }
+    },
+
+    gameRoomDescription: async function () {
+      try {
+        const gameDescriptions = await GameDescriptionModel.find({});
+        return { error: false, code: 200, data: gameDescriptions };
+      } catch (error) {
+        console.error("Error fetching game descriptions:", error);
+        return {
+          error: true,
+          code: 500,
+          data: { error: "Error fetching game descriptions" },
         };
       }
     },
