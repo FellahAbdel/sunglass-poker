@@ -6,7 +6,7 @@ import { useTranslation } from "../../Utiles/Translations";
 const SettingsWindow = () => {
   const { getTranslatedWord } = useTranslation();
 
-  const { theme, mute, language, toggleTheme, toggleMute, changeLanguage } =
+  const { theme, mute, animation,language, toggleTheme, toggleMute, toggleAnimation,changeLanguage } =
     useSettings();
 
   const [themeDark, setThemeDark] = useState();
@@ -27,6 +27,15 @@ const SettingsWindow = () => {
           <span className="slider" />
         </label>
       </span>
+
+      <span className="container-switch-mute">
+        <p>{getTranslatedWord("settings.animations")}</p>
+        <label className="switch">
+          <input type="checkbox" checked={animation} onChange={toggleAnimation} />
+          <span className="slider" />
+        </label>
+      </span>
+
 
       <span className="container-switch-theme">
         <p>{getTranslatedWord("settings.theme")}</p>

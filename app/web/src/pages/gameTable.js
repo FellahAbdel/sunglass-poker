@@ -21,7 +21,7 @@ import HandCards from "../components/gameTable/HandCards/HandCards";
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
 const GameTable = () => {
-  const { theme } = useSettings();
+  const { theme , animation } = useSettings();
   const { isLogged } = useAuth();
   const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
@@ -31,6 +31,7 @@ const GameTable = () => {
     isGameTableVisible,
     isWindowOpen
   );
+
 
   useEffect(() => {
     console.log("isLogged gameTable:", isLogged);
@@ -85,9 +86,10 @@ const GameTable = () => {
 
   return (
     <div
-      className="container-main resetall"
+      className={`container-main resetall ${animation ? "" : "no-animation"}`}
       id={theme}
       onClick={handleCloseOnClickOutside}
+      
     >
       {/* css Pattern background */}
 

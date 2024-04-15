@@ -21,6 +21,10 @@ export const SettingsProvider = ({ children }) => {
   }, [state.mute]);
 
   useEffect(() => {
+    localStorage.setItem("animation", state.animation);
+  }, [state.animation]);
+
+  useEffect(() => {
     localStorage.setItem("language", state.language);
   }, [state.language]);
 
@@ -33,13 +37,17 @@ export const SettingsProvider = ({ children }) => {
     dispatch({ type: "TOGGLE_MUTE" });
   };
 
+  const toggleAnimation = () => {
+    dispatch({ type: "TOGGLE_ANIMATION" });
+  };
+
   const changeLanguage = (lang) => {
     dispatch({ type: "CHANGE_LANGUAGE", payload: lang });
   };
 
   return (
     <SettingsContext.Provider
-      value={{ ...state, toggleTheme, toggleMute, changeLanguage }}
+      value={{ ...state, toggleTheme, toggleMute, toggleAnimation, changeLanguage }}
     >
       {children}
     </SettingsContext.Provider>

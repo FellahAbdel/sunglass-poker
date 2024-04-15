@@ -13,20 +13,22 @@ const AlertWindow = () => {
   return (
     <div className="main-SuccessWindow">
       <p>{getTranslatedWord(message)}</p>
+      <div className="container-leaveButtons">
       <Button
-        styleClass="buttonconnexion btn-connectionDefault login-button back-color3"
+        styleClass="btn-leaveConfirmation"
         label={getTranslatedWord("alert.confirm")}
         onClick={() => {
           onConfirm();
         }}
       />
       <Button
-        styleClass="buttonconnexion btn-connectionDefault login-button back-color1"
+        styleClass="btn-leaveCancel"
         label={getTranslatedWord("alert.cancel")}
         onClick={() => {
           onCancel();
         }}
       />
+      </div>
     </div>
   );
 };

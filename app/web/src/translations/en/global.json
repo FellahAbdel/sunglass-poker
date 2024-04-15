@@ -91,6 +91,7 @@
   "settings": {
     "mute": "Mute",
     "theme": "Theme",
+    "animations": "Animations",
     "langSelect": "Select a language"
   },
   "profil": {
