@@ -61,7 +61,7 @@ const ShopWindow = () => {
         ))}
       </div>
       <div className="user-coins-back back-color3">
-        <p>{user.coins} Coins</p>
+        <p>{user.coins} SC</p>
       </div>
       <div className="user-coins-text ">
         <p>{user.coins} SC</p>
