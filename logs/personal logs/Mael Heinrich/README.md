@@ -64,4 +64,8 @@
 
 2024/05/10: 45min   Recherche supplémentaire, marche toujours pas, problème avec electron quand on lance avec build
 
-TEMPS TOTAL: 62h30  
+2024/05/12: 30min   Recherche pour la création du desktop, le problème viens des buils, il a un pb de chemin mais je ne trouve pas la solution 
+
+2024/05/13: 1h30    Création de design pour la boutique
+
+TEMPS TOTAL: 64h30  
