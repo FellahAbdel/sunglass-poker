@@ -102,4 +102,14 @@
 
 2024/04/07 : 2h00           Avancement shop, objets possédés visibles, achat possible, changement d'avatar possible. Réorganisation token backend
 
-TEMPS TOTAL: 98h00min 
+2024/04/09 : 2h00           Réunion, amélioration css, corrections bugs.
+
+2024/04/11 : 4h00           Amélioration shop, avatar customable, modification bdd pour pourvoir faire cela, création nouvelle component pour afficher l'avatar, il faut encore faire les images et les sunglasses.
+
+2024/04/12 : 1h00           Recherche API Google compte
+
+2024/04/13 : 2h00           Génération Avatar et lunettes.
+
+2024/04/14 : 2h00           Téléchargement models, générations avatar
+
+TEMPS TOTAL: 109h00min

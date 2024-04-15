@@ -80,4 +80,6 @@
 
 * 2024/04/05 : <b> 1h </b> <br/>        Travail individuel: <i>des petit changement et ameliorations de css</i>
 
-total: 117h00min
+* 2024/04/11 : <b> 6h </b> <br/>       Travail individuel: <i>nouvelle NavbarV2 , optimisation de navbar , optimisations des components , optimisation de css de table et leur conditions , text input erreur taille correction ,changements de css de range et game action buttons , warning fixes </i>
+
+total: 123h00min
