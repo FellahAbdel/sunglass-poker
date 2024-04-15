@@ -61,12 +61,12 @@
   width: 9vw;
 }
 
-.logo-success, .logo-leaving_table {
+.logo-success, .logo-alert {
   bottom: 110%;
   z-index: -1;
   opacity: 100;
 }
-.logo-success img, .logo-leaving_table img{
+.logo-success img, .logo-alert img{
   width: 9vw;
 }
 

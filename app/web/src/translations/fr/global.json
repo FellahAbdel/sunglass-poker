@@ -47,10 +47,7 @@
     "players": "Joueurs",
     "selectRank": "Sélectionnez le rang",
     "join": "Rejoindre",
-    "full": "Complet",
-    "confirmExitMessage" : "Etes-vous sûr de vouloir quitter la table ? Vous allez perdre vos SC en jeu",
-    "confirm" : "Confirmer",
-    "cancel" : "Annuler"
+    "full": "Complet"
   },
   "serverPanel": {
     "name": "Nom",
@@ -118,5 +115,11 @@
     "createTable": "CRÉER UNE NOUVELLE PARTIE",
     "validation": "Confirmation d'achat",
     "shop": "Boutique"
+  },
+  "alert":{
+    "confirmExitMessage" : "Etes-vous sûr de vouloir quitter la table ? Vous allez perdre vos SC en jeu",
+    "confirm" : "Confirmer",
+    "cancel" : "Annuler",
+    "logout" : "Vous êtes sur le point de vous déconnecter"
   }
 }

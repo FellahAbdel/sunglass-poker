@@ -7,6 +7,11 @@ export const useWindowContext = () => useContext(WindowContext);
 export const WindowProvider = ({ children }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [redirectAfterSuccess, setRedirectAfterSuccess] = useState("");
+  const [alertParams, setAlertParams] = useState({
+    message: '',
+    onConfirm: () => {},
+    onCancel: () => {}
+  });
 
   const [isWindowOpen, setIsWindowOpen] = useState(() => {
     const saved = sessionStorage.getItem("isWindowOpen");
@@ -73,11 +78,19 @@ export const WindowProvider = ({ children }) => {
     setIsGameTableVisible(true);
   };
 
-  const openWindow = (type) => {
-    if (isWindowOpen && windowType === type) {
-      closeWindow(type);
+  const openWindow = (type, params = {}) => {
+    console.log(`Opening window: ${type}`, params);
+    if (type === 'alert') {
+      setAlertParams({
+        message: params.message || 'Default message',
+        onConfirm: params.onConfirm || (() => { console.log("No confirm action set"); }),
+        onCancel: params.onCancel || (() => { console.log("No cancel action set"); })
+      });
+      setIsWindowOpen(true);
+      setWindowType(type);
+    } else if (isWindowOpen && windowType === type) {
+      closeWindow();
     } else {
-      console.log(`Ouverture de la fenêtre : ${type}`);
       setIsWindowOpen(true);
       setWindowType(type);
     }
@@ -85,6 +98,7 @@ export const WindowProvider = ({ children }) => {
 
   const closeWindow = () => {
     console.log("Fermeture de la fenêtre");
+    setAlertParams({ message: '', onConfirm: () => {}, onCancel: () => {} });
     if (isGameTableVisible) {
       setIsWindowOpen(false);
       setWindowType("");
@@ -137,6 +151,7 @@ export const WindowProvider = ({ children }) => {
         selectedItem,
         setWindowType,
         setIsWindowOpen,
+        alertParams,
       }}
     >
       {children}

@@ -1,6 +1,5 @@
 // Dans Translations.jsx
-import { useContext } from "react";
-import { useSettings } from "./SettingsContext"; // Utilisez useSettings ici
+import { useSettings } from "./SettingsContext";
 import global_en from "../../translations/en/global.json";
 import global_fr from "../../translations/fr/global.json";
 import global_es from "../../translations/es/global.json";
@@ -18,14 +17,23 @@ export function useTranslation() {
 
   const getTranslatedWord = (keyPath) => {
     const keys = keyPath.split(".");
-    let result = translations[language];
+    
+    const findTranslation = (lang) => {
+      let result = translations[lang];
+      for (const key of keys) {
+        result = result ? result[key] : null;
+        if (!result) return null;
+      }
+      return result;
+    };
+    
+    let translation = findTranslation(language);
 
-    for (const key of keys) {
-      result = result ? result[key] : null;
-      if (!result) break;
+    if (!translation) {
+      translation = findTranslation('en');
     }
 
-    return result || keyPath;
+    return translation || keyPath;
   };
 
   return { getTranslatedWord };

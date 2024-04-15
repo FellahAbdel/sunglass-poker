@@ -28,16 +28,48 @@ const Navbar = ({}) => {
     console.log("handleLogOutButton :", windowType);
     console.log("isLogged :", isLogged);
     if (windowType === "accueil") {
-      logingOut();
-      closeWindow();
+      console.log("Open log out alert");
+      openWindow("alert", {
+        message: "alert.logout",
+        onConfirm: () => {
+          console.log("User confirms log out");
+          logingOut();
+          showHome();
+        },
+        onCancel: () => {
+          console.log("User cancels log out");
+          closeWindow();
+        },
+      });
     } else if (windowType !== "") {
       closeWindow();
     } else if (isGameTableVisible) {
-      openWindow("leaving_table");
-      //showHome();
+      console.log("Open leaving table alert");
+      openWindow("alert", {
+        message: "alert.confirmExitMessage",
+        onConfirm: () => {
+          console.log("L'utilisateur quitte la table");
+          showHome();
+        },
+        onCancel: () => {
+          closeWindow();
+          console.log("L'utilisateur a choisi de rester sur la table");
+        },
+      });
     } else {
-      logingOut();
-      closeWindow();
+      console.log("Open log out alert");
+      openWindow("alert", {
+        message: "alert.logout",
+        onConfirm: () => {
+          console.log("User confirms log out");
+          logingOut();
+          showHome();
+        },
+        onCancel: () => {
+          console.log("User cancels log out");
+          closeWindow();
+        },
+      });
     }
   };
 
@@ -140,20 +172,22 @@ const Navbar = ({}) => {
           styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
           iconSrc={require("./../assets/images/icons/white/tutorial.png")}
         />
-        {isLogged && (<>
-          <Button
-          label={getTranslatedWord("shop.shop")}
-          onClick={() => openWindow("shop")}
-          styleClass="btn-shop-V2"
-          iconSrc={require("./../assets/images/icons/white/shop.png")}
-          />
-          <Button
-            label={label}
-            onClick={handleLogOutButton}
-            styleClass="btn-exit-V2"
-            iconSrc={require("./../assets/images/icons/white/exit.png")}
-          />
-        </>)}
+        {isLogged && (
+          <>
+            <Button
+              label={getTranslatedWord("shop.shop")}
+              onClick={() => openWindow("shop")}
+              styleClass="btn-shop-V2"
+              iconSrc={require("./../assets/images/icons/white/shop.png")}
+            />
+            <Button
+              label={label}
+              onClick={handleLogOutButton}
+              styleClass="btn-exit-V2"
+              iconSrc={require("./../assets/images/icons/white/exit.png")}
+            />
+          </>
+        )}
       </div>
     </div>
   );

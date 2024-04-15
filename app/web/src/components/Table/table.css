@@ -217,13 +217,13 @@
   background-size: var(--dark-background-size);
 }
 
-#light .container-leaving_table{
+#light .container-alert{
   width: 60vw;
   height: 40vh;
   border-radius: 100px;
   box-shadow:var(--red-box-shadow);
 }
-#dark .container-leaving_table{
+#dark .container-alert{
   width: 60vw;
   height: 40vh;
   border-radius: 100px;

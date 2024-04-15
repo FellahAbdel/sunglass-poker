@@ -16,8 +16,7 @@ import CreateTableWindow from "./WindowContent/CreateTableWindow";
 import ShopWindow from "./WindowContent/shopWindows/ShopWindow";
 import ValidationWindow from "./WindowContent/shopWindows/ValidationWindow";
 import AcceuilWindow from "./WindowContent/Acceuil";
-import LeavingTableWindow from "./WindowContent/LeavingTable";
-
+import AlertWindow from "./WindowContent/AlertWindow";
 
 import { useWindowContext } from "../Utiles/WindowContext";
 
@@ -49,8 +48,7 @@ const Window = () => {
         {windowType === "shop" && <ShopWindow />}
         {windowType === "validation" && <ValidationWindow />}
         {windowType === "accueil" && <AcceuilWindow />}
-        {windowType === "leaving_table" && <LeavingTableWindow />}
-
+        {windowType === "alert" && <AlertWindow />}
       </div>
     </div>
   );

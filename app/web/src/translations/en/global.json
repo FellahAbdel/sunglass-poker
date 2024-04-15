@@ -47,11 +47,7 @@
     "players": "Players",
     "selectRank": "Select Rank",
     "join": "Join",
-    "full": "Full",
-    "confirmExitMessage": "Are you sure you want to leave the table? You will lose all SC in play.",
-    "leftTableSuccess": "You have successfully left the table.",
-    "confirm": "Confirm",
-    "cancel": "Cancel"
+    "full": "Full"
   },
   "handGuide": {
     "highcard": "High Card",
@@ -119,5 +115,12 @@
     "create_table": "CREATE A NEW GAME",
     "validation": "Buying confirmation",
     "shop": "Store"
+  },
+  "alert":{
+    "confirmExitMessage": "Are you sure you want to leave the table? You will lose all SC in play.",
+    "leftTableSuccess": "You have successfully left the table.",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "logout" : "You are about to log out"
   }
 }
