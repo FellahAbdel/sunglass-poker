@@ -2,7 +2,7 @@
   "name": "sunglass-poker-app",
   "version": "0.1.0",
   "private": true,
-  "main": "electron-main.js",
+  "main": "public/electron.js",
   "dependencies": {
     "@redux-devtools/extension": "^3.3.0",
     "@testing-library/jest-dom": "^5.17.0",
@@ -36,6 +36,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron": "electron electron-main.js",
+    "electron-pack": "build --em.main=build/electron.js",
     "build-electron": "electron-builder"
   },
   "eslintConfig": {
@@ -68,7 +69,14 @@
     "appId": "com.example.my-electron-app",
     "productName": "My Electron App",
     "directories": {
-      "output": "dist"
-    }
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "imgdesktop/*",
+      "error.html"
+    ]
   }
 }
