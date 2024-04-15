@@ -113,6 +113,12 @@
   border: 1vh solid rgba(0, 0, 0, 0.5);
   margin:10% 0 10% 0;  
 }
+.shop-item:hover{
+    filter: brightness(150%);
+    cursor: pointer;
+    color: black;
+    text-shadow: unset;
+  }
 .user-coins-display {
   position: absolute;
   left: 5%;

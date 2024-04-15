@@ -24,14 +24,6 @@
 #light .back-color3 {
   background-color: #35240a;
 }
-.back-color1:hover,
-.back-color2:hover,
-.back-color3:hover {
-  filter: brightness(150%);
-  cursor: pointer;
-  color: black;
-  text-shadow: unset;
-}
 
 .btn-connectionDefault {
   width: 24.5vw;
