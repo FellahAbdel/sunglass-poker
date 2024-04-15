@@ -1,24 +1,35 @@
-.container-hand {
-  width: 15vw;
-  height: 10vw;
+.container-handMain {
+  width: 23vw;
+  height: 12vw;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  gap:2vw;
+
+}
+.container-hand{
+  width: 15vw;
+  height: 100%;
+  margin-right: 1vw;
+}
+.container-showCardsButtons{
+  height: 100%;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  flex: 1;
+  gap:1.5vh;
 }
 
 .hand-guide {
   display: flex;
   justify-content: center;
   position: absolute;
-  flex: 1;
   z-index: -1;
   bottom: 0;
   padding: 7px 5px 7px 5px;
   height: 100%;
-  width: 60%;
+  width: 10vw;
 
   border-radius: 10px 10px 0 0;
   box-shadow: 0 0 10px black;
@@ -38,13 +49,13 @@
 
 .container-handCard {
   display: flex;
-  position: absolute;
-  bottom: 10%;
-  width: 85%;
-  height: 80%;
+  position: unset;
+  width: 100%;
+  height: 100%;
   flex-direction: row;
-  justify-content: space-evenly;
-  margin: 20px 0px 0px 0px;
+  justify-content: center;
+  gap:1vw;
+  margin: 0 0 10% 0;
   z-index: 0;
 }
 
@@ -52,8 +63,11 @@
   align-self: center;
   margin-bottom: 0%;
   width: 45%;
-  height: 100%;
-  box-shadow: 0 0 10px black;
+  height: 80%;
+  box-shadow: unset;
   transition: transform 2s ease;
   transform-style: preserve-3d;
+}
+.handCard img{
+  box-shadow: unset;
 }

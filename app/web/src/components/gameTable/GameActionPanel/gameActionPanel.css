@@ -46,41 +46,15 @@
   bottom: 0;
   transition: transform 1s ease;
 }
-.btn-mainAction {
-  color: aliceblue;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 2vh;
-  height: 4vh;
-  width:10vw;
-  padding: 0;
-  cursor: pointer;
-  margin-bottom: unset;
-  box-shadow: unset;
-  background-color: unset;
-  border: 1px solid white;
-  box-shadow: 1px 1px 10px black;
-  white-space: nowrap;
-  text-align: center;
-}
+
 
 @media (max-height: 500px) {
-  .btn-mainAction{
-    font-size: 2.5vh;
-    height: 7vh;
-    width: 9vw;
-  }
   .container-gameAction {
     width: none;
   }
 }
 
-.btn-mainAction:hover {
-  filter: brightness(150%);
-  text-shadow: unset;
-  background-color: white;
-  color: black;
-}
+
 
 
 
