@@ -60,8 +60,8 @@ const GameActionButtons = ({}) => {
   return (
     <div className="container-gameAction">
       <div className="container-cashSituation">
-        <div className="userCoinCashs">Your current SC: {coins}</div>
-        {showPopup && <div className="userCoinCashs">Your CS after raise: {coinsAfterRaise}</div>}
+        <div className="userCoinCashs">Your current SC: {Math.round(coins)}</div>
+        {showPopup && coinsAfterRaise ? <div className="userCoinCashs">Your CS after raise: {Math.round(coinsAfterRaise)}</div> : ""}
       </div>
       {showPopup && (<>
         <div className="container-raiseButtons">
@@ -79,7 +79,7 @@ const GameActionButtons = ({}) => {
           styleClass={"btn-mainAction"}
           onClick={() => togglePopupAndRaise()}
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
-            raiseCoin ? raiseCoin + " SC" : ""
+            raiseCoin ? Math.round(raiseCoin) + " SC" : ""
           }`}
         />
         <Button
