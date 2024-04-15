@@ -142,14 +142,20 @@ const Navbar = ({}) => {
           styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
           iconSrc={require("./../assets/images/icons/white/tutorial.png")}
         />
-        {isLogged && (
+        {isLogged && (<>
+          <Button
+          label={getTranslatedWord("shop.shop")}
+          onClick={() => openWindow("shop")}
+          styleClass="btn-shop-V2"
+          iconSrc={require("./../assets/images/icons/white/shop.png")}
+          />
           <Button
             label={label}
             onClick={handleLogOutButton}
             styleClass="btn-exit-V2"
             iconSrc={require("./../assets/images/icons/white/exit.png")}
           />
-        )}
+        </>)}
       </div>
     </div>
   );
