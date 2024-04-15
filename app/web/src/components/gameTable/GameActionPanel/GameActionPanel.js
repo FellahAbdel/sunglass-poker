@@ -13,24 +13,21 @@ const GameActionButtons = ({}) => {
   //to open the raise range
   const [showPopup, setShowPopup] = useState(false);
   //sliderValue text -> percentage of the raise
-  const [sliderValueText, setSliderValueText] = useState(1);
-  //const dispatch = useDispatch()
-  //const pot = useSelector(state.gameState.pot)
+  const [sliderValueText, setSliderValueText] = useState();
   const { user } = useUserData();
+  const [coins, setCoins] = useState(user.coins);
   const [raiseCoin, setRaiseCoin] = useState(0);
-  const [coins, setCoins] = useState(1200);
   const [coinsAfterRaise , setCoinsAfterRaise] = useState(coins);
-
-  useEffect(() => {
-    const newRaiseCoin = coins * sliderValueText / 100;
-    setRaiseCoin(newRaiseCoin);
-    setCoinsAfterRaise(coins - newRaiseCoin);
-}, [sliderValueText, coins]);
-
 
   let checkOrCall = checkValue
     ? getTranslatedWord("gameActionPanel.check")
     : getTranslatedWord("gameActionPanel.call");
+
+  useEffect(() => {
+    const newRaiseCoin = coins * sliderValueText/100 ;
+    setRaiseCoin(newRaiseCoin);
+    setCoinsAfterRaise(coins - newRaiseCoin);
+}, [sliderValueText, coins]);
 
   const handleSliderChange = (value) => {
     setSliderValueText(value);
@@ -39,9 +36,26 @@ const GameActionButtons = ({}) => {
   const handlePercentageButton = (percentage) => {
     const newValue = coins * percentage;
     setRaiseCoin(newValue);
-    setSliderValueText(percentage * 100);  // Convert fraction to percentage
+    setSliderValueText(percentage * 100);
   };
 
+  const togglePopupAndRaise = () => {
+    if (!showPopup) {
+      setShowPopup(true);
+    } else {
+      setShowPopup(false);
+      setRaiseCoin(0);
+      setCoins(coinsAfterRaise);
+    }
+  };
+  useEffect(() => {
+    if (!showPopup) {
+        setRaiseCoin(0);
+        console.log('sliderValueText :', sliderValueText);
+        console.log('coins :', coins);
+        console.log("raiseCoin :", raiseCoin);
+    }
+}, [raiseCoin]);
 
   return (
     <div className="container-gameAction">
@@ -63,10 +77,7 @@ const GameActionButtons = ({}) => {
       <div className={`container-ActionButtons`}>
         <Button
           styleClass={"btn-mainAction"}
-          onClick={() => {
-            //handleRaiseProp();
-            setShowPopup(!showPopup);
-          }}
+          onClick={() => togglePopupAndRaise()}
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
             raiseCoin ? raiseCoin + " SC" : ""
           }`}
