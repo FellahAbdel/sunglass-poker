@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "../gameTable/Card/Card";
 import TextGlitch from "./../TextGlitch/TextGlitch";
+import { useTranslation } from "../Utiles/Translations";
+
 
 const CardsPlacements = ({
   moneyPot,
@@ -8,9 +10,11 @@ const CardsPlacements = ({
   disappear,
   playersCardDistributedProp,
 }) => {
+  const { getTranslatedWord } = useTranslation();
+
   return (
     <div className={`container-cards ${disappear ? "disappear" : ""}`}>
-      <div className={`container-moneyPot`}>{moneyPot.toLocaleString()} SC</div>
+      <div className={`container-moneyPot`}>{getTranslatedWord("table.total")}: {moneyPot.toLocaleString()} SC</div>
 
       <div className="container-tableCards">
         {/* first three flops -> dealingFlop[0]

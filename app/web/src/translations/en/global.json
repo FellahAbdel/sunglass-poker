@@ -60,13 +60,17 @@
     "fullHouse": "Full house",
     "fourOfKind": "Four of a Kind",
     "straightFlush": "Straight Flush",
-    "royalFlush": "Royal Flush"
+    "royalFlush": "Royal Flush",
+    "show":"Show",
+    "showB":"Show both"
   },
   "gameActionPanel": {
     "raise": "Raise",
     "call": "Call",
     "check": "Check",
-    "fold": "Fold"
+    "fold": "Fold",
+    "currentSC": "Your current SC",
+    "afterSC": "Your CS after raise"
   },
   "bonus": {
     "bonus": "BONUS"
@@ -126,5 +130,8 @@
     "confirm": "Confirm",
     "cancel": "Cancel",
     "logout": "You are about to log out"
+  },
+  "table":{
+    "total": "Total Pot"
   }
 }

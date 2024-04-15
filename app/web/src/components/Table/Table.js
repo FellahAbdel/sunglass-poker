@@ -12,6 +12,7 @@ import Window from "../Window/Window";
 import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import LogoComponent from "../logo/Logo";
+import PlayersPots from "./PlayersPots" ;
 
 const Table = ({
   dealingFlop,
@@ -70,6 +71,7 @@ const Table = ({
             playersCardsShowProp={playersCardsShowProp}
             disappear={isWindowOpen}
           />
+          <PlayersPots/>
         </>
       )}
       {/*All the panels other than game itself are included in window component*/}

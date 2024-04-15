@@ -20,9 +20,9 @@ const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
   return (
     <div className="container-handMain">
       <div className="container-showCardsButtons">
-        <Button styleClass={"btn-showCard"} label={"show A of"} iconSrc={require("./../../assets/images/icons/white/heart.png")} onClick={handleShowCard1}/>
-        <Button styleClass={"btn-showCard"} label={"show A of"} iconSrc={require("./../../assets/images/icons/white/diamon.png")} onClick={handleShowCard2}/>
-        <Button styleClass={"btn-showCard"} label={"show both"} onClick={() => {handleShowCard1();  handleShowCard2();}}/>
+        <Button styleClass={"btn-showCard"} label={`${getTranslatedWord("handGuide.show")} A of`} iconSrc={require("./../../assets/images/icons/white/heart.png")} onClick={handleShowCard1}/>
+        <Button styleClass={"btn-showCard"} label={`${getTranslatedWord("handGuide.show")} A of`} iconSrc={require("./../../assets/images/icons/white/diamon.png")} onClick={handleShowCard2}/>
+        <Button styleClass={"btn-showCard"} label={`${getTranslatedWord("handGuide.showB")}`} onClick={() => {handleShowCard1();  handleShowCard2();}}/>
       </div>
       <div className="container-hand">
         {handGuideProp && (

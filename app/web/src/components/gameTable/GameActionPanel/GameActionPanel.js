@@ -60,8 +60,8 @@ const GameActionButtons = ({}) => {
   return (
     <div className="container-gameAction">
       <div className="container-cashSituation">
-        <div className="userCoinCashs">Your current SC: {Math.round(coins)}</div>
-        {showPopup && coinsAfterRaise ? <div className="userCoinCashs">Your CS after raise: {Math.round(coinsAfterRaise)}</div> : ""}
+        <div className="userCoinCashs">{getTranslatedWord("gameActionPanel.currentSC")}: {Math.round(coins)}</div>
+        {showPopup && coinsAfterRaise ? <div className="userCoinCashs">{getTranslatedWord("gameActionPanel.afterSC")}: {Math.round(coinsAfterRaise)}</div> : ""}
       </div>
       {showPopup && (<>
         <div className="container-raiseButtons">
