@@ -41,7 +41,7 @@ const ProfileWindow = () => {
           <br />
           {user?.coins}
           <br />
-          {user?.joinedDate || "Date inconnue"}
+          {user?.joinedDate || getTranslatedWord("profil.unknowDate")}
           <br />
         </div>
       </div>

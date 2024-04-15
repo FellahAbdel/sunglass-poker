@@ -28,7 +28,8 @@
     "loginMessage": "Login to your account",
     "registerMessage": "Create your account",
     "send": "Send",
-    "returnConnection": "Return to connection menu"
+    "returnConnection": "Return to connection menu",
+    "loginSuccess": "Logged with success !"
   },
   "messageBox": {
     "loginSucces": "Logged in with succes!",
@@ -96,7 +97,8 @@
     "name": "Name",
     "mail": "Mail",
     "coins": "Coins",
-    "date": "Joined Date"
+    "date": "Joined Date",
+    "unknowDate":"Unknown Date"
   },
   "shop": {
     "shop": "Shop",
@@ -106,7 +108,8 @@
     "confirmationMessage": "You really want to buy this item for ",
     "confirm": "Confirm",
     "cancel": "Cancel",
-    "price": "price"
+    "price": "price",
+    "success": "Purchase successfully completed !"
   },
   "messageLogo": {
     "tutorial": "Tutorial",
@@ -116,11 +119,11 @@
     "validation": "Buying confirmation",
     "shop": "Store"
   },
-  "alert":{
+  "alert": {
     "confirmExitMessage": "Are you sure you want to leave the table? You will lose all SC in play.",
     "leftTableSuccess": "You have successfully left the table.",
     "confirm": "Confirm",
     "cancel": "Cancel",
-    "logout" : "You are about to log out"
+    "logout": "You are about to log out"
   }
 }

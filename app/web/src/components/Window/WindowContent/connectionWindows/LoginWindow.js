@@ -35,7 +35,7 @@ const LoginWindow = () => {
       const loginResult = await login(formData);
 
       if (loginResult === true) {
-        openSuccessWindow("Logged with success!");
+        openSuccessWindow("connection.loginSuccess");
       } else if (loginResult || loginResult.error === "invalid_credentials") {
         // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
         setValidationErrors({

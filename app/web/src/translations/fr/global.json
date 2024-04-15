@@ -28,7 +28,8 @@
     "loginMessage": "Se connecter à son compte",
     "registerMessage": "Créer son compte",
     "send": "Envoyer",
-    "returnConnection": "Retourner au menu de connection"
+    "returnConnection": "Retourner au menu de connection",
+    "loginSuccess": "Connexion réussit !"
   },
   "messageBox": {
     "loginSucces": "Connecté avec succès !",
@@ -96,7 +97,9 @@
     "name": "Nom",
     "mail": "Mail",
     "coins": "Crédits",
-    "date": "Date création compte"
+    "date": "Date création compte",
+    "unknowDate":"Date inconnue"
+
   },
   "shop": {
     "shop": "Magasin",
@@ -106,7 +109,8 @@
     "confirmationMessage": "Êtes-vous sûr de vouloir acheter cet élément pour ",
     "confirm": "Confirmer",
     "cancel": "Annuler",
-    "price": "prix"
+    "price": "prix",
+    "success": "Achat réalisé avec succès !"
   },
   "messageLogo": {
     "tutorial": "Tutoriel",

@@ -23,7 +23,7 @@ const ValidationWindow = () => {
   const handleConfirm = async () => {
     const success = await buyItem(selectedItem._id);
     if (success) {
-      openSuccessWindow("Achat réalisé avec succès !", "shop");
+      openSuccessWindow("shop.success", "shop");
       loadUserStats();
     } else {
       console.error("Erreur lors de l'achat");
