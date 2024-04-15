@@ -19,7 +19,6 @@ const AcceuilWindow = () => {
     openWindow,
     showGameTable,
     setWindowType,
-    setIsWindowOpen,
   } = useWindowContext();
   const { getTranslatedWord } = useTranslation();
   const dispatch = useDispatch();
@@ -31,7 +30,6 @@ const AcceuilWindow = () => {
       showGameTable();
       closeWindow();
       setWindowType("");
-      setIsWindowOpen(false);
     } else {
       console.error("User not connected trying to start a game");
     }
