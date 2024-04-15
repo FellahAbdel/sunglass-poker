@@ -87,5 +87,18 @@
 
 | Date | Temps passé | Description | Ressources |
 |:-------|:--:|:----: |--:|
-| 1 avril | 4 Heures | Finalisations de fonctionnalités primaire avec le broadcast, refresh, status etc... .| --
-| TOTAL | 4 Heures || --
+| 1 avril | 3 Heures | Finalisations de fonctionnalités primaire avec le broadcast, refresh, status etc... .| --
+| 2 avril | 4 Heures | Réorganisation des fichier à implémenter, partage des idées et des taches et débuguage avec Aziz et les autres. Avancer sur les interactions server et joueur. Aide sur les différents aspect du projet.| --
+| 3 avril | 3 Heures | Tentative de débuguage des problèmes observer et implétation de nouvelles fonctionnalité avec Aziz sur discord .| --
+| 7 avril | 3 Heures | Interactions du joueur fonctionnelle. Découverte d'un soucis dans l'implémentation et recherche sur l'implémentation d'une solution  (Impossible de faire plusieurs parties simultanée actuellement).| --
+| TOTAL | 13 Heures || --
+
+
+## Onxième semaine
+
+| Date | Temps passé | Description | Ressources |
+|:-------|:--:|:----: |--:|
+| 9 avril | 4 Heures | Echanges avec Aziz sur la nouvelle implémentation et les corrections à apporter, les fonctionnalités à faire en premier. Echange avec le front end pour les ajouts des boutons et les interactions, soucis avec l'affichage très problématique| --
+| 13 avril | 2 Heures | Ajout d'un controller pour aider au débuguage, et tentative de refactorisations pour adapter à la possibilité de multi parties.| --
+| 14 avril | 7 Heures | Amélioration des logs. Interactions avec les joueurs correct, dispatch des deux côtés, refactorisation du code dans le socket.  correction de code résiduels inutile / dépasser par le nouveau code. | --
+| TOTAL | 13 Heures || --

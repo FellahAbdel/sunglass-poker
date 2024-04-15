@@ -106,4 +106,10 @@
 
 2024/04/11 : 4h00           Amélioration shop, avatar customable, modification bdd pour pourvoir faire cela, création nouvelle component pour afficher l'avatar, il faut encore faire les images et les sunglasses.
 
-TEMPS TOTAL: 104h00min
+2024/04/12 : 1h00           Recherche API Google compte
+
+2024/04/13 : 2h00           Génération Avatar et lunettes.
+
+2024/04/14 : 2h00           Téléchargement models, générations avatar
+
+TEMPS TOTAL: 109h00min
