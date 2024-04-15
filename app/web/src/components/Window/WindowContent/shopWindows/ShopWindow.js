@@ -7,8 +7,10 @@ import { useTranslation } from "../../../Utiles/Translations";
 import { useItems } from "./AvatarItem";
 import AvatarDisplay from "../../../AvatarDisplay/AvatarDisplay.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
+import { useUserData } from "../../../Utiles/useUserData";
 
 const ShopWindow = () => {
+  const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
   const { openValidationWindow } = useWindowContext();
   const [activeTab, setActiveTab] = useState("baseAvatar");
@@ -57,6 +59,9 @@ const ShopWindow = () => {
             styleClass={item.owned ? "owned-item back-color1" : "back-color3"}
           />
         ))}
+      </div>
+      <div className="user-coins-display">
+        <p>{user.coins} Coins</p>
       </div>
     </div>
   );

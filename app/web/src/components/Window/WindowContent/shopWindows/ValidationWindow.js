@@ -6,11 +6,12 @@ import { useTranslation } from "../../../Utiles/Translations";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useUserData } from "../../../Utiles/useUserData";
 
+
 const ValidationWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const { buyItem, fetchUserInfo } = useAuth();
 
-  const { loadUserStats } = useUserData();
+  const { loadUserStats, user } = useUserData();
 
   const { selectedItem, openSuccessWindow, openWindow } = useWindowContext();
 
@@ -30,6 +31,9 @@ const ValidationWindow = () => {
     }
   };
 
+  const finalCoins = user.coins - selectedItem.price;
+
+
   return (
     <div className="modal-overlay">
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -37,6 +41,8 @@ const ValidationWindow = () => {
           <p className="modal-message">
             {getTranslatedWord("shop.confirmationMessage")} {selectedItem.price}{" "}
             coins?
+            <p>{user.coins} Coins - {selectedItem.price} = {finalCoins} Coins après achat</p>
+
           </p>
           <div>
             <Button
