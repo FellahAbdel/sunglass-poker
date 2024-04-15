@@ -31,38 +31,36 @@ const ValidationWindow = () => {
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-text">
-          <p className="modal-message">
-            {getTranslatedWord("shop.confirmationMessage")} {selectedItem.price}{" "}
-            coins?
-          </p>
-          <div>
-            <Button
-              label={getTranslatedWord("shop.confirm")}
-              styleClass="btn_onglets_shop back-color1"
-              onClick={handleConfirm}
-            />
-            <Button
-              label={getTranslatedWord("shop.cancel")}
-              styleClass="btn_onglets_shop back-color3"
-              onClick={() => openWindow("shop")}
-            />
-          </div>
-        </div>
-        <div className="modal-image">
+      <div className="container-validationWindow" onClick={(e) => e.stopPropagation()}>
+
           {isColor ? (
             <div
               className="color-display "
               style={{ backgroundColor: selectedItem.imgSrc }}
             ></div>
           ) : (
-            <img src={selectedItem.imgSrc} alt="Aperçu" />
+            <img src={selectedItem.imgSrc} alt="avatar" />
           )}
+
+        <div className="container-validationMessage">
+          <p>
+            {getTranslatedWord("shop.confirmationMessage")} {selectedItem.price}{" "}
+            coins?
+          </p>
+          <div className="container-ValidationButtons">
+            <Button
+              label={getTranslatedWord("shop.confirm")}
+              styleClass="btn_onglets_shop2 back-color1"
+              onClick={handleConfirm}
+            />
+            <Button
+              label={getTranslatedWord("shop.cancel")}
+              styleClass="btn_onglets_shop2 back-color3"
+              onClick={() => openWindow("shop")}
+            />
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 

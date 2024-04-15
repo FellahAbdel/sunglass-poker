@@ -2,7 +2,7 @@
   display: flex;
   height: 95%;
   width: 95%;
-  border-radius: 40px;
+  border-radius: 0px;
   overflow: hidden;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .items-display {
-  width: 67%;
+  width: 100%;
   overflow-y: auto;
   background-color: unset;
   padding: 0px;
@@ -39,7 +39,7 @@
   display: block;
   color: white;
   text-decoration: none;
-  margin: 5px 0;
+  margin: 0;
   border-radius: 5px;
   text-align: center;
 }
@@ -62,36 +62,54 @@
   background-color: #555;
 }
 
+.skin-item {
+  width: 100%;
+  height: auto;
+}
+
+.skin-item img {
+  width: 100%;
+  height: auto;
+}
+
+
+.owned-item {
+  background-color: green;
+}
 .shop-item {
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  flex-direction: column;
   width: calc(20% - 10px);
   margin: 5px;
-  box-sizing: border-box;
+  height: 12vw;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: unset;
+  color: white;
+  border-radius: 10px;
 }
-
-/* Pour les écrans moyens : 4 éléments par ligne */
-@media (max-width: 1200px) {
-  .shop-item {
-    width: calc(25% - 10px);
-  }
+.shop-item p{
+  margin: 0;
+  font-size: calc(0.7vw + 0.5vh);
 }
-
-/* Pour les petits écrans : 3 éléments par ligne */
-@media (max-width: 900px) {
-  .shop-item {
-    width: calc(33.33% - 10px);
-  }
+/*for avatars*/
+.shop-item img{
+  width: 70%;
+  height: auto;
+  border-radius: 50%;
+  border: calc(0.3vw + 0.3vh) solid rgba(0, 0, 0, 0.5);
+  margin:10% 0 10% 0; 
 }
-
-/* Pour les écrans très petits : 2 éléments par ligne */
-@media (max-width: 600px) {
-  .shop-item {
-    width: calc(50% - 10px);
-  }
-}
-
-/* Pour les écrans minuscules : 1 élément par ligne */
-@media (max-width: 400px) {
-  .shop-item {
-    width: calc(100% - 10px);
-  }
+/*for colors*/
+.shop-item div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 1vh solid rgba(0, 0, 0, 0.5);
+  margin:10% 0 10% 0;  
 }

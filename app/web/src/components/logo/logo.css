@@ -60,16 +60,27 @@
   width: 9vw;
 }
 
-.logo-success,
-.logo-validation {
+.logo-success {
   bottom: 110%;
   z-index: -1;
   opacity: 100;
 }
-.logo-success img,
+.logo-success img{
+  width: 9vw;
+}
+
+.logo-validation {
+  bottom: 105%;
+  z-index: -1;
+  opacity: 100;
+}
 .logo-validation img {
   width: 9vw;
 }
+.logo-validation h1 {
+  font-size: 2vw;
+}
+
 
 .logo-stats {
   bottom: 110%;
