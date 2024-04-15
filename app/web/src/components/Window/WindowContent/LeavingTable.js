@@ -16,16 +16,18 @@ const LeavingTableWindow = () => {
   return (
     <div className="main-SuccessWindow">
       <p>{getTranslatedWord("game.confirmExitMessage")}</p>
-      <Button
-        styleClass="buttonconnexion login-button back-color3"
-        label={getTranslatedWord("game.confirm")}
-        onClick={handleConfirmLeave}
-      />
-      <Button
-        styleClass="buttonconnexion login-button back-color1"
-        label={getTranslatedWord("game.cancel")}
-        onClick={closeWindow}
-      />
+      <div className="container-leaveButtons">
+        <Button
+          styleClass="btn-leaveConfirmation"
+          label={getTranslatedWord("game.confirm")}
+          onClick={handleConfirmLeave}
+        />
+        <Button
+          styleClass="btn-leaveCancel"
+          label={getTranslatedWord("game.cancel")}
+          onClick={closeWindow}
+        />
+      </div>
     </div>
   );
 };

@@ -95,3 +95,23 @@ Button:hover{
   font-size: 1vw;
   box-shadow: 3px 2px 4px 1px rgba(0, 0, 0, 0.3);
 }
+.btn-successWindow{
+  background-color: var(--good-green);
+  width: 30%;
+  height: 4vh;
+  border-radius: 10px;
+}
+
+.btn-leaveConfirmation{
+  background-color: var(--error-red);
+  width: 20%;
+  height: 4vh;
+  border-radius: 10px;
+}
+.btn-leaveCancel{
+  background-color: var(--color-darkGray);
+  width: 20%;
+  height: 4vh;
+  border-radius: 10px;
+}
+

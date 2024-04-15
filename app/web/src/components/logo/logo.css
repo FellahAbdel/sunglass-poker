@@ -66,7 +66,7 @@
   z-index: -1;
   opacity: 100;
 }
-.logo-success, .logo-leaving_table img{
+.logo-success img, .logo-leaving_table img{
   width: 9vw;
 }
 

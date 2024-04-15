@@ -1,3 +1,15 @@
+:root{
+  --error-red:#811616;
+  --good-green:#2d8116;
+  --color1-dark:#004577;
+  --color2-dark:#4d6478;
+  --color3-dark:#303b44;
+  --color1-light:#a57423;
+  --color2-light:#866839;
+  --color3-light:#35240a;
+
+  --color-darkGray:rgb(54, 54, 54);
+}
 .container-main {
   position: fixed;
   bottom: 0;

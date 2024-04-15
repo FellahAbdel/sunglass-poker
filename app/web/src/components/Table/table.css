@@ -14,6 +14,7 @@
   --isLogged-dark-box-shadow:
   inset 0 0 50px rgb(0, 0, 0),
   inset 0 0 0 2vw rgb(43, 41, 41),
+  inset 0 0 0 0 transparent,
   0 0 1vw 0.8vw #164f81,
   0 0 0 1vw rgb(0, 0, 0),
   0 0 0 2vw rgb(31, 33, 36),
@@ -30,10 +31,11 @@
   0 0 0 0 transparent,0 0 0 0 transparent,0 0 0 0 transparent;
   --notLogged-dark-box-shadow:
   inset 0 0 50px rgb(0, 0, 0),
+  inset 0 0 0 2vw rgb(43, 41, 41),
+  inset 0 0 0 0 transparent,
   0 0 1vw 0.8vw #4d6478,
   0 0 0 1vw rgb(0, 0, 0),
   0 0 0 2vw rgb(31, 33, 36),
-  inset 0 0 0 2vw rgb(43, 41, 41),
   0 0 5vw 3vw black;
   --notLogged-light-box-shadow:
   inset 0 0 50px rgb(0, 0, 0),
@@ -52,11 +54,22 @@
   radial-gradient(black 15%, transparent 16%) 8px 8px,
   radial-gradient(#a5a5a56c 15%, transparent 20%) 0 0.5px,
   radial-gradient(#a5a5a56c 15%, transparent 20%) 8px 8.5px;
+  --green-dark-background:
+  radial-gradient(black 15%, transparent 16%) 0 0,
+  radial-gradient(black 15%, transparent 16%) 8px 8px,
+  radial-gradient(var(--good-green) 15%, transparent 20%) 0 0.5px,
+  radial-gradient(var(--good-green) 15%, transparent 20%) 8px 8.5px;
+  --red-dark-background:
+  radial-gradient(black 15%, transparent 16%) 0 0,
+  radial-gradient(black 15%, transparent 16%) 8px 8px,
+  radial-gradient(var(--error-red) 15%, transparent 20%) 0 0.5px,
+  radial-gradient(var(--error-red) 15%, transparent 20%) 8px 8.5px;
   --dark-background-color:#282828;
   --dark-background-size: 16px 16px;
   --inGame-dark-shadow-box:
   inset 0px 10px 5vw 1vw rgb(0, 0, 0),
   inset 0 -5px 0 2vw rgb(43, 41, 41),
+  inset 0 0 0 0 transparent,
   0 0px 1vw 0vw #0000005f,
   0 5px 1vw 1vw #164f81,    
   0 5px 0 1vw rgb(0, 0, 0),
@@ -75,6 +88,24 @@
   0 15px 0 2vw #2a1c00,
   0 0px 0 -2vw #2a1c00,
   0 80px 10vw 3vw black;
+  --red-box-shadow:
+  inset 0 0 50px rgb(0, 0, 0),
+  inset 0 0 0 2vw rgb(43, 41, 41),
+  inset 0 0 0 0 transparent,
+  0 0 1vw 0.8vw var(--error-red),
+  0 0 0 1vw rgb(0, 0, 0),
+  0 0 0 2vw rgb(31, 33, 36),
+  0 0 5vw 3vw black,
+  0 0 0 0 transparent,0 0 0 0 transparent,0 0 0 0 transparent;
+  --green-box-shadow:
+  inset 0 0 50px rgb(0, 0, 0),
+  inset 0 0 0 2vw rgb(43, 41, 41),
+  inset 0 0 0 0 transparent,
+  0 0 1vw 0.8vw var(--good-green),
+  0 0 0 1vw rgb(0, 0, 0),
+  0 0 0 2vw rgb(31, 33, 36),
+  0 0 5vw 3vw black,
+  0 0 0 0 transparent,0 0 0 0 transparent,0 0 0 0 transparent;
 }
 /*table color when logged in and logged out*/
 #dark .table-isLogged {
@@ -161,6 +192,7 @@
   background: unset;
   background-color: #282828;
 }
+
 #light .container-tutorial,
 #dark .container-tutorial{
   width: 60vw;
@@ -169,11 +201,38 @@
   background: unset;
   background-color:rgb(43, 41, 41);
 }
-.container-success, .container-leaving_table{
+#light .container-success{
   width: 50vw;
   height: 40vh;
-  border-radius: 200px;
+  border-radius: 100px;
+  box-shadow:var(--green-box-shadow);
 }
+#dark .container-success{
+  width: 50vw;
+  height: 40vh;
+  border-radius: 100px;
+  box-shadow:var(--green-box-shadow);
+  background:var(--green-dark-background);
+  background-color: var(--dark-background-color);
+  background-size: var(--dark-background-size);
+}
+
+#light .container-leaving_table{
+  width: 60vw;
+  height: 40vh;
+  border-radius: 100px;
+  box-shadow:var(--red-box-shadow);
+}
+#dark .container-leaving_table{
+  width: 60vw;
+  height: 40vh;
+  border-radius: 100px;
+  box-shadow:var(--red-box-shadow);
+  background:var(--red-dark-background);
+  background-color: var(--dark-background-color);
+  background-size: var(--dark-background-size);
+}
+
 
 #dark .container-shop,
 #light .container-shop{

@@ -18,12 +18,15 @@ const GameActionButtons = ({}) => {
   //const pot = useSelector(state.gameState.pot)
   const { user } = useUserData();
   const [raiseCoin, setRaiseCoin] = useState(0);
-  const [coins, setCoins] = useState(1200); 
+  const [coins, setCoins] = useState(1200);
+  const [coinsAfterRaise , setCoinsAfterRaise] = useState(coins);
 
   useEffect(() => {
     const newRaiseCoin = coins * sliderValueText / 100;
     setRaiseCoin(newRaiseCoin);
+    setCoinsAfterRaise(coins - newRaiseCoin);
 }, [sliderValueText, coins]);
+
 
   let checkOrCall = checkValue
     ? getTranslatedWord("gameActionPanel.check")
@@ -35,8 +38,10 @@ const GameActionButtons = ({}) => {
 
   return (
     <div className="container-gameAction">
-      <div className="raised-value">9999 SC Raised</div>
-
+      <div className="container-cashSituation">
+        <div className="userCoinCashs">Your current SC: {coins}</div>
+        {showPopup && <div className="userCoinCashs">Your CS after raise: {coinsAfterRaise}</div>}
+      </div>
       {showPopup && (<>
         <div className="container-raiseButtons">
           <Button styleClass={"btn-mainAction"} onClick={null} label={"Min"}/>

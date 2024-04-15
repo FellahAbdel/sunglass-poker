@@ -11,7 +11,7 @@ const SuccessWindow = () => {
       <p>{successMessage}</p>
 
       <Button
-        styleClass="buttonconnexion login-button back-color1"
+        styleClass="btn-successWindow"
         label="OK"
         onClick={closeWindow}
       />
