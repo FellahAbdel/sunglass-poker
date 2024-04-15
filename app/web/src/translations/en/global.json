@@ -47,7 +47,11 @@
     "players": "Players",
     "selectRank": "Select Rank",
     "join": "Join",
-    "full": "Full"
+    "full": "Full",
+    "confirmExitMessage": "Are you sure you want to leave the table? You will lose all SC in play.",
+    "leftTableSuccess": "You have successfully left the table.",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "handGuide": {
     "highcard": "High Card",

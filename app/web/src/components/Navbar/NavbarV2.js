@@ -33,7 +33,8 @@ const Navbar = ({}) => {
     } else if (windowType !== "") {
       closeWindow();
     } else if (isGameTableVisible) {
-      showHome();
+      openWindow("leaving_table");
+      //showHome();
     } else {
       logingOut();
       closeWindow();

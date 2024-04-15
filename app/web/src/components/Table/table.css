@@ -169,7 +169,7 @@
   background: unset;
   background-color:rgb(43, 41, 41);
 }
-.container-success{
+.container-success, .container-leaving_table{
   width: 50vw;
   height: 40vh;
   border-radius: 200px;

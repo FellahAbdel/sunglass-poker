@@ -47,7 +47,10 @@
     "players": "Joueurs",
     "selectRank": "Sélectionnez le rang",
     "join": "Rejoindre",
-    "full": "Complet"
+    "full": "Complet",
+    "confirmExitMessage" : "Etes-vous sûr de vouloir quitter la table ? Vous allez perdre vos SC en jeu",
+    "confirm" : "Confirmer",
+    "cancel" : "Annuler"
   },
   "serverPanel": {
     "name": "Nom",

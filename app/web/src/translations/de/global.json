@@ -45,7 +45,11 @@
     "players": "Spieler",
     "selectRank": "Rang auswählen",
     "join": "Beitreten",
-    "full": "Voll"
+    "full": "Voll",
+    "confirmExitMessage": "Sind Sie sicher, dass Sie den Tisch verlassen möchten? Sie werden alle SC im Spiel verlieren.",
+    "leftTableSuccess": "Sie haben den Tisch erfolgreich verlassen.",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen"
   },
   "handGuide": {
     "highcard": "Höchste Karte",

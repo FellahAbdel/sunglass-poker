@@ -5,7 +5,7 @@ const { Schema, model } = mongoose;
 
 const ItemSchema = new Schema({
   names: {
-    en: { type: String, required: true },
+    en: { type: String, required: true , unique: true,},
     fr: { type: String, required: false },
     es: { type: String, required: false },
     de: { type: String, required: false }

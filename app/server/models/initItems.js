@@ -202,7 +202,7 @@ const defaultItems = [
 //await ItemModel.deleteMany({});
 
 async function initOrUpdateItems() {
-  await ItemModel.deleteMany({});
+  //await ItemModel.deleteMany({});
   for (const item of defaultItems) {
     const existingItem = await ItemModel.findOne({ "names.en": item.names.en }); // Trouver par nom en anglais
     if (existingItem) {

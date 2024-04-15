@@ -33,6 +33,7 @@
 .logo-textPadding h1 {
   padding-left: 1.5vw;
 }
+
 .logo-login,
 .logo-register,
 .logo-forgot,
@@ -60,12 +61,12 @@
   width: 9vw;
 }
 
-.logo-success {
+.logo-success, .logo-leaving_table {
   bottom: 110%;
   z-index: -1;
   opacity: 100;
 }
-.logo-success img{
+.logo-success, .logo-leaving_table img{
   width: 9vw;
 }
 

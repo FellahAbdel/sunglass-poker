@@ -45,7 +45,11 @@
     "players": "Jugadores",
     "selectRank": "Seleccionar Rango",
     "join": "Unirse",
-    "full": "Lleno"
+    "full": "Lleno",
+    "confirmExitMessage": "¿Estás seguro de que quieres abandonar la mesa? Perderás todos los SC en juego.",
+    "leftTableSuccess": "Has abandonado la mesa con éxito.",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar"
   },
   "handGuide": {
     "highcard": "Carta Alta",
