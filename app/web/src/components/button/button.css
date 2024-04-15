@@ -25,6 +25,16 @@
   background-color: #35240a;
 }
 
+Button:hover{
+  cursor: pointer;
+  text-shadow: unset;
+  filter: brightness(150%);
+}
+/* Button:hover img,Button:hover span{
+  filter: invert(100%);
+} */
+
+
 .btn-connectionDefault {
   width: 24.5vw;
   height: 6vh;

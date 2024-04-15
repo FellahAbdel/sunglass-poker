@@ -78,10 +78,12 @@ const ShopWindow = () => {
           />
         ))}
       </div>
-      <div className="user-coins-display back-color3">
-        <p>{user.coins} Coins</p>
+      <div className="user-coins-back back-color3">
+        <p>{user.coins} SC</p>
       </div>
-      
+      <div className="user-coins-text ">
+        <p>{user.coins} SC</p>
+      </div>
     </div>
   );
 };
