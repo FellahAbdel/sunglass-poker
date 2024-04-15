@@ -1,4 +1,4 @@
-# Melissa Ertekin | Temps Totale : 93h
+# Melissa Ertekin | Temps Totale : 98h
 
 
 ### Semaine 0 : 30 Janvier - 05 Février  | Temps Totale: 5h
@@ -122,10 +122,12 @@
 
 * Durant la semaine : <b>1h</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
 
-### Semaine 9 : 8 Avril - 15 Avril | Temps Totale: 
+### Semaine 9 : 8 Avril - 15 Avril | Temps Totale: 5h
 
 * 2024/04/09 : <b>2h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Réunion avec les développeurs pour avoir des feedback sur l'avancement.  </i>
 
 * 2024/04/11 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Réorganisation des tâches et les assignation.</i>
 
-* Durant la semaine : <b>0h</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
+* 2024/04/15 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Demandes de feedback personnalisé. Rédaction du compte-rendu hebdomadaire.</i>
+
+* Durant la semaine : <b>1h</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
