@@ -10,6 +10,12 @@
 
   --color-darkGray:rgb(54, 54, 54);
 }
+.no-animation, .no-animation * {
+  animation: none !important;
+  transition: none !important;
+}
+
+
 .container-main {
   position: fixed;
   bottom: 0;

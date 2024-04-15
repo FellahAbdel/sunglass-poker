@@ -2,6 +2,7 @@ export const initialState = {
     theme: localStorage.getItem('theme') || "dark",
     mute: localStorage.getItem('mute') === 'true',
     language: localStorage.getItem('language') || 'en',
+    animation: localStorage.getItem('animation') === 'true' || true,
   };
 
   
@@ -19,6 +20,12 @@ export function settingsReducer(state = initialState, action) {
           mute: !state.mute,
         };
   
+      case "TOGGLE_ANIMATION":
+        return {
+          ...state,
+          animation: !state.animation,
+        };
+
       case "CHANGE_LANGUAGE":
         return {
           ...state,

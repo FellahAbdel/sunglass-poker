@@ -166,6 +166,15 @@ const Navbar = ({}) => {
           iconSrc={require("./../assets/images/icons/white/settings.png")}
         />
 
+
+        {isLogged && (
+          <Button
+            label={getTranslatedWord("shop.shop")}
+            onClick={() => openWindow("shop")}
+            styleClass="btn-shop-V2"
+            iconSrc={require("./../assets/images/icons/white/shop.png")}
+          />
+        )}
         <Button
           label={getTranslatedWord("navbar.tutorial")}
           onClick={() => openWindow("tutorial")}
@@ -173,21 +182,14 @@ const Navbar = ({}) => {
           iconSrc={require("./../assets/images/icons/white/tutorial.png")}
         />
         {isLogged && (
-          <>
-            <Button
-              label={getTranslatedWord("shop.shop")}
-              onClick={() => openWindow("shop")}
-              styleClass="btn-shop-V2"
-              iconSrc={require("./../assets/images/icons/white/shop.png")}
-            />
-            <Button
-              label={label}
-              onClick={handleLogOutButton}
-              styleClass="btn-exit-V2"
-              iconSrc={require("./../assets/images/icons/white/exit.png")}
-            />
-          </>
+          <Button
+            label={label}
+            onClick={handleLogOutButton}
+            styleClass="btn-exit-V2"
+            iconSrc={require("./../assets/images/icons/white/exit.png")}
+          />
         )}
+        
       </div>
     </div>
   );
