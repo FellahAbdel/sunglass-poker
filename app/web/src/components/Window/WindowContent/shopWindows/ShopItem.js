@@ -24,7 +24,7 @@ const ShopItem = ({ item, onClickItem, styleClass, isOwned }) => {
       <div>
         <p>
           {itemName}<br/>{/* name of the item */}
-          {!isOwned && <>{getTranslatedWord(`shop.price`)}: {item.price}</>}
+          {!isOwned && <>{getTranslatedWord(`shop.price`)}: {item.price} SC</>}
         </p>
       </div> 
     </div>
