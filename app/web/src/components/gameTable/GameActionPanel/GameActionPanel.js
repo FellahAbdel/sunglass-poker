@@ -9,11 +9,11 @@ const GameActionButtons = ({}) => {
   const { getTranslatedWord } = useTranslation();
   //checkValue = true -> Check
   //checkValue = False -> Call
-  const checkValue = useState(true);
+  const [checkValue] = useState(true); 
   //to open the raise range
   const [showPopup, setShowPopup] = useState(false);
   //sliderValue text -> percentage of the raise
-  const [sliderValueText, setSliderValueText] = useState("");
+  const [sliderValueText, setSliderValueText] = useState(1);
   //const dispatch = useDispatch()
   //const pot = useSelector(state.gameState.pot)
   const { user } = useUserData();
@@ -36,6 +36,13 @@ const GameActionButtons = ({}) => {
     setSliderValueText(value);
   };
 
+  const handlePercentageButton = (percentage) => {
+    const newValue = coins * percentage;
+    setRaiseCoin(newValue);
+    setSliderValueText(percentage * 100);  // Convert fraction to percentage
+  };
+
+
   return (
     <div className="container-gameAction">
       <div className="container-cashSituation">
@@ -45,12 +52,12 @@ const GameActionButtons = ({}) => {
       {showPopup && (<>
         <div className="container-raiseButtons">
           <Button styleClass={"btn-mainAction"} onClick={null} label={"Min"}/>
-          <Button styleClass={"btn-mainAction"} onClick={null} label={"1/2"}/>
-          <Button styleClass={"btn-mainAction"} onClick={null} label={"3/4"}/>
-          <Button styleClass={"btn-mainAction"} onClick={null} label={"All in"}/>
+          <Button styleClass={"btn-mainAction"} onClick={() => handlePercentageButton(0.5)} label={"1/2"}/>
+          <Button styleClass={"btn-mainAction"} onClick={() => handlePercentageButton(0.75)} label={"3/4"}/>
+          <Button styleClass={"btn-mainAction"} onClick={() => handlePercentageButton(1)} label={"All in"}/>
         </div>
         <div className={`rangeSlide`}>
-          <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />
+          <RaiseSlider initialValue={sliderValueText} onSliderChange={handleSliderChange} />
         </div>
         </>)}
       <div className={`container-ActionButtons`}>

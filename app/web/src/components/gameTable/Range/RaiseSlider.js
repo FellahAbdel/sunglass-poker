@@ -1,7 +1,7 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState, useEffect } from 'react'; // Import useState
 import Styles from "./raiseSlider.module.css";
 
-const RaiseSlider = ({ onSliderChange }) => {
+const RaiseSlider = ({ onSliderChange , initialValue }) => {
   const [sliderValue, setSliderValue] = useState(1); 
 
   const handleSliderChange = (event) => {
@@ -9,6 +9,9 @@ const RaiseSlider = ({ onSliderChange }) => {
     setSliderValue(value);
     onSliderChange(value); 
   };
+  useEffect(() => {
+    setSliderValue(initialValue); 
+  }, [initialValue]);
 
   return (
     <div className={`${Styles.range}`}>
