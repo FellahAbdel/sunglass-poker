@@ -10,7 +10,7 @@ const CardsPlacements = ({
 }) => {
   return (
     <div className={`container-cards ${disappear ? "disappear" : ""}`}>
-      <div className={`container-moneyPot`}>{moneyPot.toLocaleString()}$</div>
+      <div className={`container-moneyPot`}>{moneyPot.toLocaleString()} SC</div>
 
       <div className="container-tableCards">
         {/* first three flops -> dealingFlop[0]

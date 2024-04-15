@@ -10,6 +10,7 @@ import TextInputComponent from "../textInput/TextInput.jsx";
 import { useTranslation } from "../Utiles/Translations";
 import { useAuth } from "../Utiles/AuthProvider";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
+import { useUserData } from "../Utiles/useUserData.jsx";
 
 const Navbar = ({}) => {
   const { isLogged, logingOut } = useAuth();
@@ -21,6 +22,7 @@ const Navbar = ({}) => {
     windowType,
     isWindowOpen,
   } = useWindowContext();
+  const { user } = useUserData();
 
   const handleLogOutButton = () => {
     console.log("handleLogOutButton :", windowType);
@@ -68,7 +70,7 @@ const Navbar = ({}) => {
     <div className="container-nav-V2" onClick={handleClick}>
       {/* Current Chips inventory and LogOut Button */}
       {isLogged && (
-        <>
+        <div className="container-nav-lefttop">
           <div className={`chatBox-V2 ${isChatOpen && "chatBoxOpen-V2"}`}>
             {isGameTableVisible && (
               <>
@@ -100,13 +102,8 @@ const Navbar = ({}) => {
               </>
             )}
           </div>
-
-          {/* <ChipsCash
-            // currentChips={user?.coins}
-            currentChips={99999999}
-            styleClass={`box-chips-V2 `}
-          /> */}
-        </>
+          {/* {windowType === "shop" && <p  className={`box-chips-V2`}>{user.coins} SC</p>} */}
+        </div>
       )}
 
       {/* Profile/LogIn Button 

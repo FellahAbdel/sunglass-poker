@@ -50,10 +50,10 @@ const ValidationWindow = () => {
         <p>
           {getTranslatedWord("shop.confirmationMessage")} {selectedItem.price}{" "}
           coins?
-          <p>
-            {user.coins} Coins - {selectedItem.price} = {finalCoins} Coins après
-            achat
-          </p>
+          <br/>
+          {finalCoins} Coins après
+          achat
+
         </p>
         <div className="container-ValidationButtons">
           <Button
