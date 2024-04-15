@@ -68,4 +68,7 @@
 
 2024/05/13: 1h30    Création de design pour la boutique
 
-TEMPS TOTAL: 64h30  
+2024/05/15: 1h15    Recherche supplémentaire sur le build, maj de paquet, piste pour regler le probleme...
+
+
+TEMPS TOTAL: 65h45  
