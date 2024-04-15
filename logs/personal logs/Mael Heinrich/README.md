@@ -70,5 +70,6 @@
 
 2024/05/15: 1h15    Recherche supplémentaire sur le build, maj de paquet, piste pour regler le probleme...
 
+2024/05/15: 30min   Reunion avec Victor pour le problème du build, semble fonctionel sur windows mais pas encore sur linux
 
-TEMPS TOTAL: 65h45  
+TEMPS TOTAL: 66h15  
