@@ -1,28 +1,29 @@
-import React from "react";
+import React, { useState } from 'react'; // Import useState
 import Styles from "./raiseSlider.module.css";
 
 const RaiseSlider = ({ onSliderChange }) => {
-  //const [sliderValue, setSliderValue] = useState(initialValue);
+  const [sliderValue, setSliderValue] = useState(1); 
 
   const handleSliderChange = (event) => {
     const value = event.target.value;
-    //setSliderValue(value);
-    onSliderChange(value);
+    setSliderValue(value);
+    onSliderChange(value); 
   };
 
   return (
     <div className={`${Styles.range}`}>
       <div className={`${Styles.field}`}>
-        <div className={`${Styles.minValue}`}>1%</div>
+        {/* <div className={`${Styles.minValue}`}></div> */}
         <input
           className={`${Styles.rangeStyle}`}
           type="range"
           min={1}
           max={100}
           step={1}
+          value={sliderValue}
           onChange={handleSliderChange}
-        ></input>
-        <div className={`${Styles.maxValue}`}>100%</div>
+        />
+        <div className={`${Styles.maxValue}`}>{sliderValue}%</div> 
       </div>
     </div>
   );

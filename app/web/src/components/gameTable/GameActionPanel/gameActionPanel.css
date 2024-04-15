@@ -1,44 +1,30 @@
 .container-gameAction {
-  width: 30vw;
+  width: 40vw;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:2vh;
 }
-
-.btn-raise,
-.btn-checkOrCall,
-.btn-fold {
-  color: aliceblue;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 2vh;
+.raised-value{
+  color:rgb(254, 78, 78);
+  text-shadow: 0 0 15px black;
+}
+.container-raiseButtons{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+  flex-wrap: wrap;
+}
+.container-raiseButtons Button{
+  width:8vw;
+}
+.rangeSlide {
+  width: 100%;
   height: 4vh;
-  width: 8vw;
-  cursor: pointer;
-  margin-bottom: 10px;
-  box-shadow: unset;
 }
-
-@media (max-height: 500px) {
-  .btn-raise,
-  .btn-checkOrCall,
-  .btn-fold {
-    font-size: 2.5vh;
-    height: 7vh;
-    width: 9vw;
-  }
-  .container-gameAction {
-    width: none;
-  }
-}
-
-.btn-raise:hover,
-.btn-checkOrCall:hover,
-.btn-fold:hover {
-  filter: brightness(70%);
-  text-shadow: unset;
-  color: white;
-}
-
 .container-ActionButtons {
   width: 100%;
   height: auto;
@@ -48,24 +34,44 @@
   align-self: center;
   flex-wrap: wrap;
   z-index: 1;
-  position: absolute;
   bottom: 0;
   transition: transform 1s ease;
 }
-
-.container-ActionButtons-slideUp {
-  animation: unset;
-  transform: translateY(-4vh);
-}
-
-.rangeSlider {
-  position: absolute;
-  width: 100%;
-}
-.rangeSlider-open {
-  display: unset;
-  animation: unset;
+.btn-mainAction {
+  color: aliceblue;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 2vh;
   height: 4vh;
-  position: absolute;
-  bottom: 0;
+  width:10vw;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: unset;
+  box-shadow: unset;
+  background-color: unset;
+  border: 1px solid white;
+  box-shadow: 1px 1px 10px black;
+  white-space: nowrap;
+  text-align: center;
 }
+
+@media (max-height: 500px) {
+  .btn-mainAction{
+    font-size: 2.5vh;
+    height: 7vh;
+    width: 9vw;
+  }
+  .container-gameAction {
+    width: none;
+  }
+}
+
+.btn-mainAction:hover {
+  filter: brightness(150%);
+  text-shadow: unset;
+  background-color: white;
+  color: black;
+}
+
+
+
