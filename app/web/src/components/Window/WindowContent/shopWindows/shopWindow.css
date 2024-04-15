@@ -119,16 +119,21 @@
     color: black;
     text-shadow: unset;
   }
-.user-coins-display {
+
+.user-coins-back,.user-coins-text {
   position: absolute;
   left: 5%;
   top: -23%;
-  z-index: -1;
   width: fit-content;
   height: 20vh;
   padding: 0 1vw 0 1vw;
-  color: white;
-  
-  border-radius: 10px;
   font-size: calc(0.5vh + 1vw);
+}
+.user-coins-back{
+  border-radius: 10px;
+  z-index: -1;
+}
+.user-coins-text{
+  color: white;
+  text-shadow: 0 0 10px white;
 }
