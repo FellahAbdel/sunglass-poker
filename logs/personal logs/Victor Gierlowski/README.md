@@ -102,3 +102,5 @@
 | 13 avril | 2 Heures | Ajout d'un controller pour aider au débuguage, et tentative de refactorisations pour adapter à la possibilité de multi parties.| --
 | 14 avril | 7 Heures | Amélioration des logs. Interactions avec les joueurs correct, dispatch des deux côtés, refactorisation du code dans le socket.  correction de code résiduels inutile / dépasser par le nouveau code. | --
 | TOTAL | 13 Heures || --
+
+2024/05/15: 30min   Reunion avec Maël pour le problème du build, semble fonctionel sur windows mais pas encore sur linux
