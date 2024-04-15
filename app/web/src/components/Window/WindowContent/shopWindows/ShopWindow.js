@@ -23,10 +23,27 @@ const ShopWindow = () => {
       console.error("Could not activate avatar");
     }
   };
+
+  //console.log("user : ", user);
   //console.log("Items recu par shopItem:", items);
   //console.log("Owned Items IDs:", ownedItemIds);
 
   //console.log("Items for activeTab:", items[activeTab]);
+
+  //console.log("user.colorAvatar : ", user.colorAvatar);
+
+  const isActive = (item) => {
+    
+    if (item.category === "colorAvatar") {
+      //console.log("item.imgSrc : ", item.imgSrc);
+      return user.colorAvatar === item.imgSrc;
+    } else if (item.category === "sunglasses") {
+      return user.sunglasses?._id === item._id;
+    } else if (item.category === "baseAvatar") {
+      return user.baseAvatar?._id === item._id;
+    }
+    return false;
+  };
 
   return (
     <div className="shop-window">
@@ -51,6 +68,7 @@ const ShopWindow = () => {
             key={item._id}
             item={item}
             isOwned={item.owned}
+            isActive={isActive(item)}
             onClickItem={() =>
               item.owned
                 ? handleActivateAvatar(item._id)

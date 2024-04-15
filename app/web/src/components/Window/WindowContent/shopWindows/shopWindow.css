@@ -99,9 +99,17 @@
   width: 70%;
   height: auto;
   border-radius: 50%;
-  border: calc(0.3vw + 0.3vh) solid rgba(0, 0, 0, 0.5);
   margin:10% 0 10% 0; 
 }
+
+.shop-item.active-item img {
+  border: calc(0.3vw + 0.3vh) solid rgba(51, 253, 0, 0.5);
+}
+
+.shop-item.non-active-item img{
+  border: calc(0.3vw + 0.3vh) solid rgba(0, 0, 0, 0.5);
+}
+
 /*for colors*/
 .shop-item div:first-child {
   display: flex;
@@ -110,9 +118,17 @@
   width: 70%;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  border: 1vh solid rgba(0, 0, 0, 0.5);
   margin:10% 0 10% 0;  
 }
+
+.shop-item.active-item div:first-child {
+  border: calc(0.3vw + 0.3vh) solid rgba(51, 253, 0, 0.5);
+}
+
+.shop-item.non-active-item div:first-child{
+  border: calc(0.3vw + 0.3vh) solid rgba(0, 0, 0, 0.5);
+}
+
 .shop-item:hover{
     filter: brightness(150%);
     cursor: pointer;
