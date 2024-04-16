@@ -32,8 +32,9 @@ const AvatarDisplay = () => {
 
   console.log("Les lunettes devraient s'afficher en :", baseAvatar.eyePosition);
 
+
   const backgroundColor =
-    user && user.colorAvatar ? user.colorAvatar : "#FFFFFF";
+    user && user.colorAvatar ? user.colorAvatar.imgSrc : "#FFFFFF";
 
   return (
     <div className="avatarContainer" style={{ backgroundColor }}>

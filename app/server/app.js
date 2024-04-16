@@ -3,9 +3,25 @@ const app = express();
 const session = require("express-session");
 const cors = require("cors");
 const ENV_CONST_COMM = require('./controller/envConstants')();
+// const gameController = require('./controller/gameController');
+// gameController.init();
+const MemoryStore = require('memorystore')(session)
+// const console = require('./controller/intelligentLogging');
+console.outLocaly = true;
 
+gameController = 1
 
-console.log(ENV_CONST_COMM);
+console.log('app',ENV_CONST_COMM);
+/**
+ * Settings for output in the console.
+ * 
+ * 
+ */
+// const logsocket = 'socket.io.js';
+// const loggameController = 'gameController';
+// const loggameReducer = 'gameReducer';
+// console.silenced(logsocket)
+
 
 /** Paramètres cors du serveur.
  * 
@@ -19,34 +35,47 @@ const corsSettings = {
   }
 app.use(cors(corsSettings))
 
-const server = require('http').createServer(app);
 app.use(express.json());
-const db = require('./models/bdd')(app,ENV_CONST_COMM.ENV_IP_BDD+':'+ENV_CONST_COMM.ENV_PORT_BDD);
+
+const myStore = new MemoryStore({
+    checkPeriod: 3000 // prune expired entries every 24h
+ });
 /** Paramètres de session
  * 
  * 
- */
+*/
 const Middleware = session({
     secret:'secretKeyForSession',
+    name:'SunglassPokerSession',
+    credentials:'include',
+    secure:true,
+    resave: true,
+    proxy:true,
+    store:myStore,
+    saveUninitialized: true,
     cookie: {
-        secure:false,
-        maxAge: 1e7 // 10 seconds
+        httpOnly:false,
+        secure:true,
+        maxAge: 1e5, // 10 seconds
+        sameSite:'none',
     },
-    resave: false,
-    saveUninitialized: true
 });
-
 app.use(Middleware);
 
-// socketIo
-const io = require('./controller/socket.io')(server,Middleware,corsSettings);
+const db = require('./models/bdd')(app,ENV_CONST_COMM.ENV_IP_BDD+':'+ENV_CONST_COMM.ENV_PORT_BDD);
 
+const server = require('http').createServer(app);
+
+// socketIo
+const io = require('./controller/socket.io')(server,Middleware,corsSettings,gameController,db);
+
+io.engine.use(Middleware);
 // Port du server
 const port = ENV_CONST_COMM.ENV_PORT_SERVER;
 
 
 // router
-// const router = require('./routes/apiroutes')(app,db);
+const router = require('./routes/apiroutes')(app,db);
 
 
 /** Démarrage du serveur.
