@@ -80,12 +80,12 @@
     ]
   },
   "mac": {
-    "icon": "./imgdesktop/SunGameStudio_logo.png"
+    "icon": "./build/assets/icon/SunGameStudio_logo(1).ico"
   },
   "win": {
-    "icon": "./imgdesktop/SunGameStudio_logo.png"
+    "icon": "./build/assets/icon/SunGameStudio_logo(1).ico"
   },
   "linux": {
-    "icon": "./imgdesktop/SunGameStudio_logo.png"
+    "icon": "./build/assets/icon/SunGameStudio_logo(1).ico"
   }
 }
