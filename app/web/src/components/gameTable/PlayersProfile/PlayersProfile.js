@@ -2,6 +2,7 @@ import React from "react";
 import "./playersProfile.css";
 import ProgressBar from "../../Utiles/ProgressBar";
 import Card from "../Card/Card";
+import { useTranslation } from "../../Utiles/Translations";
 
 const PlayersProfile = ({
   status,
@@ -11,7 +12,8 @@ const PlayersProfile = ({
   flippingPlayerCards,
   gotCards,
 }) => {
-  const formattedChips = chips;
+  const { getTranslatedWord } = useTranslation();
+  const formattedChips = chips.toLocaleString();
   const dollarSign = "$";
 
   return (
@@ -23,7 +25,9 @@ const PlayersProfile = ({
             durationInSeconds={5}
           />
         ) : (
-          <div className={`box-statusText  ${status}`}>{status}</div>
+          <div className={`box-statusText  ${status}`}>
+            {getTranslatedWord(`playersStatus.${status.toLowerCase()}`)}
+          </div>
         )}
       </div>
 

@@ -1,97 +1,178 @@
-#dark Button, #light Button{
+#dark Button,
+#light Button {
   transition: background-color 1s ease;
 }
-
 
 #dark .back-color1 {
   background-color: #004577;
 }
-#dark .back-color2 {
-  background-color: #4D6478; 
-}
-#dark .back-color3{
-  background-color: #303b44; 
 
+#dark .back-color2 {
+  background-color: #4d6478;
+}
+
+#dark .back-color3 {
+  background-color: #303b44;
 }
 
 #light .back-color1 {
-  background-color: #777100; 
+  background-color: #a57423;
 }
 #light .back-color2 {
-  background-color: #78754d; 
+  background-color: #866839;
 }
-#light .back-color3{
-  background-color: #414430; 
+#light .back-color3 {
+  background-color: #35240a;
 }
+
+Button:hover{
+  cursor: pointer;
+  text-shadow: unset;
+  filter: brightness(150%);
+}
+/* Button:hover img,Button:hover span{
+  filter: invert(100%);
+} */
+
 
 .btn-connectionDefault {
   width: 24.5vw;
   height: 6vh;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   border-radius: 10px;
   font-size: 3vh;
   margin-bottom: 5px;
   margin-top: 5px;
-}
-
-.forgot-button {
-  color: rgb(255, 255, 255);
-  background-color: #4D6478;
-}
-
-.login-button {
-  color: rgb(255, 255, 255);
-  background-color: #033F61;
-}
-
-.login-button:hover {
-  background-color:#4D6478 ;
+  color: white;
 }
 
 .google-button {
-  color: rgb(255, 255, 255);
   font-weight: bold;
-  background-color: #4D6478;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
-.google-button img{
+
+.google-button img {
   width: 3vh;
   height: auto;
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   padding-left: 5px;
 }
 
 .register-button {
   margin-top: 5%;
-  color: rgb(255, 255, 255);
-  background-color : #033F61 ;
 }
 
-.register-button:hover {
-  background-color: #033F61;
-}
-
-.btn-list_table{
+.btn-list_table {
   width: 100%;
   height: 3vh;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   border-radius: 10px;
   font-size: 2vh;
   margin-bottom: 5px;
   margin-top: 5px;
-
 }
 
-.btn-list_table_join{
-  background-color : #033e60;
+.btn-list_table_full {
+  background-color: rgb(107, 0, 0);
 }
 
-.btn-list_table_full{
-  background-color : rgb(107, 0, 0);
+.btn_onglets_shop {
+  height: 15%;
+  width: 90%;
+  margin-bottom: 4%;
+  border-radius: 0 20px 20px 20px;
+  box-shadow: inset 0 0 10px black;
+  font-size: min(1.5vw, 100px);
+}
+.btn_onglets_shop2 {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 1vw;
+  box-shadow: 3px 2px 4px 1px rgba(0, 0, 0, 0.3);
+}
+.btn-successWindow{
+  background-color: var(--good-green);
+  width: 30%;
+  height: 4vh;
+  border-radius: 10px;
+}
+
+.btn-leaveConfirmation{
+  background-color: var(--error-red);
+  width: 20%;
+  height: 4vh;
+  border-radius: 10px;
+}
+.btn-leaveCancel{
+  background-color: var(--color-darkGray);
+  width: 20%;
+  height: 4vh;
+  border-radius: 10px;
+}
+.btn-mainAction {
+  color: aliceblue;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 2vh;
+  height: 4vh;
+  width:10vw;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: unset;
+  box-shadow: unset;
+  background-color: unset;
+  border: 1px solid white;
+  box-shadow: 1px 1px 10px black;
+  white-space: nowrap;
+  text-align: center;
+}
+.btn-mainAction:hover {
+  filter: brightness(150%);
+  text-shadow: unset;
+  background-color: white;
+  color: black;
+}
+@media (max-height: 500px) {
+  .btn-mainAction{
+    font-size: 2.5vh;
+    height: 7vh;
+    width: 9vw;
+  }}
+.btn-showCard{
+  color: aliceblue;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 4vh;
+  width:7vw;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: unset;
+  box-shadow: unset;
+  background-color: unset;
+  border: 1px solid white;
+  box-shadow: 1px 1px 10px black;
+  white-space: nowrap;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:5%;
+}
+.btn-showCard img{
+  width: 1.5vh;
+}
+.btn-showCard:hover {
+  filter: brightness(150%);
+  text-shadow: unset;
+  background-color: white;
+  color: black;
+}
+.btn-showCard:hover img{
+  filter: invert(100%);
 }

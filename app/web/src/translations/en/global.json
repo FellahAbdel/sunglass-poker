@@ -1,0 +1,137 @@
+{
+  "navbar": {
+    "profile": "Profile",
+    "chat": "Chat",
+    "message": "Message",
+    "settings": "Settings",
+    "tutorial": "Tutorial",
+    "exitTable": "Leave the table",
+    "exit": "Close Window",
+    "logout": "Log out",
+    "login": "Log in",
+    "signin": "Sign Up"
+  },
+  "connection": {
+    "login": "Log in",
+    "signin": "Sign Up",
+    "username": "Username",
+    "password": "Password",
+    "repeatPass": "Repeat your password",
+    "email": "email",
+    "forgotPass": "I forgot my password",
+    "forgotPassQuestion": "Forgot your password ?",
+    "forgotPassEnter": "Enter your email to recieve a password reset link.",
+    "registerNewAcc": "Register new account",
+    "signinG": "Sign in with google",
+    "haveAccQuestion": "Already have an account ?",
+    "optional": "Optional",
+    "loginMessage": "Login to your account",
+    "registerMessage": "Create your account",
+    "send": "Send",
+    "returnConnection": "Return to connection menu",
+    "loginSuccess": "Logged with success !"
+  },
+  "messageBox": {
+    "loginSucces": "Logged in with succes!",
+    "ok": "Ok"
+  },
+  "game": {
+    "loginPlay": "Log In to play",
+    "signupPlay": "Sign Up to play",
+    "startGame": "Start a game",
+    "joinGame": "Join a game",
+    "createAgame": "Create a new game",
+    "status": "Status",
+    "name": "Name",
+    "gameName": "Game name",
+    "ranked": "Ranked",
+    "players": "Players",
+    "selectRank": "Select Rank",
+    "join": "Join",
+    "full": "Full"
+  },
+  "handGuide": {
+    "highcard": "High Card",
+    "pair": "Pair",
+    "twoPair": "Two Pair",
+    "threeOfKind": "Three of a Kind",
+    "straight": "Straight",
+    "flush": "Flush",
+    "fullHouse": "Full house",
+    "fourOfKind": "Four of a Kind",
+    "straightFlush": "Straight Flush",
+    "royalFlush": "Royal Flush",
+    "show":"Show",
+    "showB":"Show both"
+  },
+  "gameActionPanel": {
+    "raise": "Raise",
+    "call": "Call",
+    "check": "Check",
+    "fold": "Fold",
+    "currentSC": "Your current SC",
+    "afterSC": "Your CS after raise"
+  },
+  "bonus": {
+    "bonus": "BONUS"
+  },
+  "serverPanel": {
+    "name": "Name",
+    "rank": "Rank",
+    "privacy": "privacy",
+    "join": "Join",
+    "full": "Full",
+    "status": "Statut",
+    "action": "Action"
+  },
+  "playersStatus": {
+    "empty": "Empty",
+    "called": "Called",
+    "fold": "Fold",
+    "raised": "Raised",
+    "checked": "Checked",
+    "playing": "Playing"
+  },
+  "settings": {
+    "mute": "Mute",
+    "theme": "Theme",
+    "animations": "Animations",
+    "langSelect": "Select a language"
+  },
+  "profil": {
+    "name": "Name",
+    "mail": "Mail",
+    "coins": "Coins",
+    "date": "Joined Date",
+    "unknowDate":"Unknown Date"
+  },
+  "shop": {
+    "shop": "Shop",
+    "baseAvatar": "Avatars",
+    "sunglasses": "Sunglasses",
+    "colorAvatar": "Color",
+    "confirmationMessage": "You really want to buy this item for ",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "price": "price",
+    "success": "Purchase successfully completed !"
+  },
+  "messageLogo": {
+    "tutorial": "Tutorial",
+    "profile": "Profile",
+    "servers": "JOIN A GAME ",
+    "create_table": "CREATE A NEW GAME",
+    "validation": "Buying confirmation",
+    "shop": "Store"
+  },
+  "alert": {
+    "confirmExitMessage": "Are you sure you want to leave the table? You will lose all SC in play.",
+    "leftTableSuccess": "You have successfully left the table.",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "logout": "You are about to log out"
+  },
+  "table":{
+    "total": "Total Pot"
+  }
+}

@@ -1,11 +1,15 @@
-import React , {useState, useEffect} from 'react';
-import './settingsMenu.css'
-import { useSettings } from '../../Utiles/SettingsContext';
+import React, { useState, useEffect } from "react";
+import "./settingsMenu.css";
+import { useSettings } from "../../Utiles/SettingsContext";
+import { useTranslation } from "../../Utiles/Translations";
 
 const SettingsWindow = () => {
-  const { theme, mute, language, toggleTheme, toggleMute, changeLanguage } = useSettings();
+  const { getTranslatedWord } = useTranslation();
 
-  const [themeDark,setThemeDark] = useState();
+  const { theme, mute, animation,language, toggleTheme, toggleMute, toggleAnimation,changeLanguage } =
+    useSettings();
+
+  const [themeDark, setThemeDark] = useState();
   useEffect(() => {
     setThemeDark(theme === "dark");
   }, [theme]);
@@ -15,38 +19,49 @@ const SettingsWindow = () => {
 
   return (
     <div className="settingsMenu">
-          <h1>SETTINGS</h1>
-          <span className='container-switch-mute'>
-            <p>Mute</p>
-            <label className="switch">
-              <input type="checkbox" checked={mute} onChange={toggleMute}/>
-              <span className="slider"/>
-            </label>
-          </span>
+      <h1>{getTranslatedWord("navbar.settings")}</h1>
+      <span className="container-switch-mute">
+        <p>{getTranslatedWord("settings.mute")}</p>
+        <label className="switch">
+          <input type="checkbox" checked={mute} onChange={toggleMute} />
+          <span className="slider" />
+        </label>
+      </span>
 
-          <span className='container-switch-theme'>
-            <p>Theme</p>
-            <label className="switch">
-              <input type="checkbox" checked={themeDark} onChange={toggleTheme}/>
-              <span className="slider"/>
-            </label>
-          </span>
+      <span className="container-switch-mute">
+        <p>{getTranslatedWord("settings.animations")}</p>
+        <label className="switch">
+          <input type="checkbox" checked={animation} onChange={toggleAnimation} />
+          <span className="slider" />
+        </label>
+      </span>
 
-          <span className='container-select-lang'>
-          <p>Select Language</p>
-          <select
-              className='select-lang'
-              id="language-select"
-              value={language}
-              onChange={handleLanguageChange}
-            >
-              <option value="en">English</option>
-              <option value="fr">French</option>
-              <option value="es">Spanish</option>
-          </select>
-          </span>
+
+      <span className="container-switch-theme">
+        <p>{getTranslatedWord("settings.theme")}</p>
+        <label className="switch">
+          <input type="checkbox" checked={themeDark} onChange={toggleTheme} />
+          <span className="slider" />
+        </label>
+      </span>
+
+      <span className="container-select-lang">
+        <p>{getTranslatedWord("settings.langSelect")}</p>
+        <select
+          name="lang"
+          className="select-lang"
+          id="language-select"
+          value={language}
+          onChange={handleLanguageChange}
+        >
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </span>
     </div>
   );
-}
+};
 
 export default SettingsWindow;

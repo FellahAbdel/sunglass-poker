@@ -1,0 +1,120 @@
+{
+  "navbar": {
+    "profile": "Perfil",
+    "chat": "Chat",
+    "message": "Mensaje",
+    "settings": "Ajustes",
+    "tutorial": "Tutorial",
+    "exit": "Salir",
+    "logout": "Cerrar sesión",
+    "login": "Iniciar sesión",
+    "signin": "Registrarse"
+  },
+  "connection": {
+    "login": "Iniciar sesión",
+    "signin": "Registrarse",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "repeatPass": "Repite tu contraseña",
+    "email": "correo electrónico",
+    "forgotPass": "Olvidé mi contraseña",
+    "forgotPassQuestion": "¿Olvidaste tu contraseña?",
+    "forgotPassEnter": "Ingresa tu correo electrónico para recibir un enlace de restablecimiento de contraseña.",
+    "registerNewAcc": "Registrar una nueva cuenta",
+    "signinG": "Iniciar sesión con Google",
+    "haveAccQuestion": "¿Ya tienes una cuenta?",
+    "optional": "Opcional",
+    "loginMessage": "Inicia sesión en tu cuenta",
+    "registerMessage": "Crea tu cuenta",
+    "send": "Enviar",
+    "returnConnection": "Volver al menú de conexión"
+  },
+  "messageBox": {
+    "loginSucces": "¡Sesión iniciada con éxito!",
+    "ok": "Ok"
+  },
+  "game": {
+    "loginPlay": "iniciar sesión para jugar",
+    "startGame": "Iniciar un juego",
+    "joinGame": "Unirse a un juego",
+    "createAgame": "Crear un nuevo juego",
+    "status": "Estado",
+    "name": "Nombre",
+    "gameName": "Nombre del juego",
+    "ranked": "Clasificado",
+    "players": "Jugadores",
+    "selectRank": "Seleccionar Rango",
+    "join": "Unirse",
+    "full": "Lleno",
+    "confirmExitMessage": "¿Estás seguro de que quieres abandonar la mesa? Perderás todos los SC en juego.",
+    "leftTableSuccess": "Has abandonado la mesa con éxito.",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar"
+  },
+  "handGuide": {
+    "highcard": "Carta Alta",
+    "pair": "Par",
+    "twoPair": "Doble Par",
+    "threeOfKind": "Trio",
+    "straight": "Escalera",
+    "flush": "Color",
+    "fullHouse": "Full",
+    "fourOfKind": "Póquer",
+    "straightFlush": "Escalera de Color",
+    "royalFlush": "Escalera Real"
+  },
+  "gameActionPanel": {
+    "raise": "Subir",
+    "call": "Igualar",
+    "check": "Pasar",
+    "fold": "Retirarse"
+  },
+  "bonus": {
+    "bonus": "BONO"
+  },
+  "serverPanel": {
+    "name": "Nombre",
+    "rank": "Rango",
+    "privacy": "Privacidad",
+    "join": "Unirse",
+    "full": "Lleno",
+    "status": "Estado",
+    "action": "Acción"
+  },
+  "playersStatus": {
+    "empty": "Vacío",
+    "called": "Igualado",
+    "fold": "Retirado",
+    "raised": "Subido",
+    "checked": "Pasado",
+    "playing": "Jugando"
+  },
+  "settings": {
+    "mute": "Silenciar",
+    "theme": "Tema",
+    "langSelect": "Seleccionar idioma"
+  },
+  "profil": {
+    "name": "Nombre",
+    "mail": "Correo",
+    "coins": "Monedas",
+    "date": "Fecha de Ingreso"
+  },
+  "shop": {
+    "shop": "Tienda",
+    "avatars": "Avatares",
+    "sunglasses": "Cartas",
+    "color": "Fondos de pantalla",
+    "confirmationMessage": "¿Realmente quieres comprar este artículo por ",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar"
+  },
+  "messageLogo": {
+    "tutorial": "Tutorial",
+    "profile": "Perfil",
+    "listeTable": "UNIRSE A UN JUEGO",
+    "createTable": "CREAR UN NUEVO JUEGO",
+    "validation": "Confirmación de compra",
+    "shop": "Comercio"
+  }
+}

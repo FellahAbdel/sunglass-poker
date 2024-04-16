@@ -17,3 +17,5 @@ db.createUser({
     pwd: "azerty",
     roles: ["pokerServer"]
 })
+
+//auth as root  :  'superuser' '123456789'

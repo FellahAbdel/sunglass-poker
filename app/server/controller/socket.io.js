@@ -14,7 +14,7 @@ const SESSION_DURATION = 200 * 1e3;
 
 
 
-module.exports = function (server, Middleware, corsSettings, gameController,dao) {
+module.exports = function (server, Middleware, corsSettings, gameController, dao) {
 
     const io = require('socket.io')(server, { cors: corsSettings });
     io.engine.use(Middleware);
@@ -36,7 +36,7 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
         csl.log(fileType, 'Try for status');
         try {
             room = data.room;
-            if(room === undefined || room === null){
+            if (room === undefined || room === null) {
                 csl.error(fileType, "Error in room number");
                 return;
             }
@@ -45,7 +45,7 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
                 id = decoded.id;
                 const answer = gameController.status(room, id);
                 csl.log(fileType, 'status of ', id, ' : =', answer);
-                io.to(data.id).emit('event', { payload: answer.payload, type: actions.REFRESH });
+                socket.emit('event', { payload: answer.payload, type: actions.REFRESH });
             } catch (err) {
                 if (err.name === 'TokenExpiredError') {
                     csl.log(fileType, 'token expired for status');
@@ -53,7 +53,7 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
                 }
             }
         } catch (err) {
-            csl.log(fileType,' err => ' ,err);
+            csl.log(fileType, ' err => ', err);
         }
     }
 
@@ -74,17 +74,17 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
             if (!socket.rooms.has(token)) {
                 try {
                     const decoded = jwt.verify(token, "secretKeyForSession");
-                    
+
                     session.save();
                     csl.log(fileType, "Session id : ", socket.id, " join room session:", token);
                     info = await dao.userInfo(token);
-                    if(!info.error){
-                        if(info.data.success){
+                    if (!info.error) {
+                        if (info.data.success) {
                             session.pseudo = info.data.user.pseudo;
                         }
                     }
                     session.userId = decoded.id;
-                    csl.log('Session','login out the session and pseudo of user', session.pseudo, ' id :', session.userId);
+                    csl.log('Session', 'login out the session and pseudo of user', session.pseudo, ' id :', session.userId);
                     socket.join(token);
                 }
                 catch (err) {
@@ -106,13 +106,13 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
      * session.userId must be defined. 
      */
 
-    function joinRoom(socket,data) {
+    function joinRoom(socket, data) {
         // csl.log(fileType,"sessionHs:",session);
         // csl.log(fileType,'data:',data);
         // csl.log(fileType,'userId = ', socket.handshake.session.userId);
         if (typeof data === 'object' && data.id !== undefined) {
-            answer = gameController.join(data.id, {id:session.userId,pseudo:session.pseudo});
-            if (answer.status === false){
+            answer = gameController.join(data.id, { id: session.userId, pseudo: session.pseudo });
+            if (answer.status === false) {
                 socket.emit('joinRoom', answer);
             }
             else {
@@ -120,7 +120,7 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
                 socket.join(roomHash);
                 socket.emit('joinRoom', answer);
                 csl.log(fileType, answer);
-                sendEvent(socket,actcrea.sitted(gameController.rooms[data.id].game.pokerTable.communityCards,gameController.rooms[data.id].players));
+                sendEvent(socket, actcrea.sitted(gameController.rooms[data.id].game.pokerTable.communityCards, gameController.rooms[data.id].players));
                 io.to(roomHash).emit('refresh');
                 session.userRoom = data.id;
                 session.save();
@@ -141,9 +141,9 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
      * @param {{type:STRING?actionType, payload:{}}} action 
      */
 
-    function sendEvent(socket,action){
+    function sendEvent(socket, action) {
         csl.log(fileType, 'send event to dispatch at user');
-        socket.emit('event',action)
+        socket.emit('event', action)
     }
 
 
@@ -152,7 +152,7 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
      * @param {socket} socket 
      * @param {{action:{}, room:id}} data 
      */
-    function dispatch(socket,data) {
+    function dispatch(socket, data) {
         csl.log(fileType, 'dispatch recevied : ', data);
         const { action, room } = data;
         const userId = session.userId;
@@ -182,7 +182,7 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
         if (id === undefined) {
             csl.error(fileType, 'Refused to create new game');
             csl.log(fileType, 'Join instead');
-            joinRoom(socket,{id:10});
+            joinRoom(socket, { id: 10 });
             // store.dispatch(actcrea.sit(10, session.userId));
             // io.emit('event', { payload: state.game, type: actions.GAME_STARTED });
             // csl.log(fileType, 'rooms : ', gameController.rooms.state);
@@ -195,7 +195,7 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
         csl.log(fileType, store.getState())
         store.dispatch({ type: actions.GAME_STARTED });
         state = store.getState();
-        const an =joinRoom(socket,{id:id});
+        const an = joinRoom(socket, { id: id });
         csl.log(fileType, an);
         socket.emit('joinRoom', an);
         socket.emit('event', { payload: state.game, type: actions.GAME_STARTED });
@@ -224,13 +224,21 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
             session.destroy();
         }, SESSION_DURATION);
 
-        socket.on('status', (data) => {if(session.userId) playerRoomStatus(socket,data) });
+        socket.on('status', (data) => {
+            if (session.userId){7
+                csl.log(fileType, "giving status to player : ", session.userId);
+                playerRoomStatus(socket, data)
+            }
+            else {
+                csl.log(fileType, "User not in session");
+            }
+        });
 
         // New socket session try to tell who is the user logged in with the token.
         // If token is valid add the socket to  the auth room to allow talk to session
         // otherwise close the room.
-        socket.on('myNameIs', (token) => { identify(socket,token) })
-        socket.on('joinRoom', (data) => { if(session.id) joinRoom(socket,data) });
+        socket.on('myNameIs', (token) => { identify(socket, token) })
+        socket.on('joinRoom', (data) => { if (session.id) joinRoom(socket, data) });
 
         // Fonction test
         socket.on('hello', (data) => {
@@ -244,9 +252,9 @@ module.exports = function (server, Middleware, corsSettings, gameController,dao)
             csl.log(fileType, 'user disconnected n:' + socket.id + ' | session : ' + session.id);
         });
 
-        socket.on('dispatch', (data) => {if(session.userId) dispatch(socket,data) })
+        socket.on('dispatch', (data) => { if (session.userId) dispatch(socket, data) })
 
-        socket.on('createGame', () => {if(session.userId) createGame(socket) });
+        socket.on('createGame', () => { if (session.userId) createGame(socket) });
 
         session.save();
     });
