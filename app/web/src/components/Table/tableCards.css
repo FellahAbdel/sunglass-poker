@@ -198,7 +198,26 @@
 }
 
 /*Money pot container*/
-.container-moneyPot {
+.container-playerPots{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  font-size: 0.7vw;
+  font-weight: 600;
+  z-index: 1;
+}
+#light .container-playerPots{
+  color: black;
+
+}
+#dark .container-playerPots{
+  color: white;
+}
+
+.container-totalPot {
   width: fit-content;
   height: fit-content;
   padding: 1.1% 2% 1.3% 2%;
@@ -206,16 +225,68 @@
   text-align: center;
 
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 28%;
+  left:50%;
 
-  color: #fff;
+  transform: translateX(-50%);
   font-size: 2vh;
   text-shadow: unset;
-  box-shadow: inset 0 0 8px 1px black;
-
-  background-color: #303b44;
-  border-radius: 30px;
-  z-index: 99;
+  box-shadow: inset 0 0 8px black;
+  z-index: 1;
+}
+#dark .container-totalPot{
+  color: #fff;
+}
+#light .container-totalPot{
+  color: #000000;
+}
+.container-playerPots div{
+  width: fit-content;
+  white-space: nowrap;
+  border-radius: 1vh;
+  padding: 0.3vw 0.4vw 0.3vw 0.4vw;
+  box-shadow: inset 0 0 5px 1px black;
+  position: absolute;
+  display: flex;
+}
+#light .container-playerPots div{
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.playerPot0{
+  top:18%;
+}
+.playerPot1{
+  top:18%;
+  right: 23%;
+}
+.playerPot2{
+  top:30%;
+  right: 14%;
+}
+.playerPot3{
+  bottom:30%;
+  right:12%;
+}
+.playerPot4{
+  bottom: 18%;
+  right: 23%;
+}
+.playerPot5{
+  bottom: 18%;
+}
+.playerPot6{
+  bottom: 18%;
+  left: 23%;
+}
+.playerPot7{
+  bottom: 30%;
+  left: 12%;
+}
+.playerPot8{
+  top: 30%;
+  left: 14%;
+}
+.playerPot9{
+  top:18%;
+  left: 23%;
 }

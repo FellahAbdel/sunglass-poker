@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "../Utiles/Translations";
 import "./table.css";
 
 const PlayersPots = ({}) => {
   const playersInTable = useSelector((state) => state.game.players);
+  const [moneyPot,setMoneyPot] = useState(9999999);
+  const { getTranslatedWord } = useTranslation();
 
   return (
     <div className="container-playerPots">
+        <div className={`container-totalPot`}>{getTranslatedWord("table.total")}: {moneyPot.toLocaleString()} SC</div>
+
         <div className="playerPot0">1000 SC</div>
         <div className="playerPot1">1000 SC</div>
         <div className="playerPot2">1000 SC</div>

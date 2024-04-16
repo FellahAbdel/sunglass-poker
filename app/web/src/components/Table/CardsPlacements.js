@@ -5,16 +5,13 @@ import { useTranslation } from "../Utiles/Translations";
 
 
 const CardsPlacements = ({
-  moneyPot,
   dealingFlop,
   disappear,
   playersCardDistributedProp,
 }) => {
-  const { getTranslatedWord } = useTranslation();
 
   return (
     <div className={`container-cards ${disappear ? "disappear" : ""}`}>
-      <div className={`container-moneyPot`}>{getTranslatedWord("table.total")}: {moneyPot.toLocaleString()} SC</div>
 
       <div className="container-tableCards">
         {/* first three flops -> dealingFlop[0]
