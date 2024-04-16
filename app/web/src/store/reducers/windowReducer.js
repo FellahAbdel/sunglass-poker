@@ -1,23 +1,32 @@
 // Définition de l'état initial basé sur le code existant
-const confirmFunctions = {
+const functionMapper = {
   defaultConfirm: () => console.log("Confirmed"),
+  defaultCancel: () => console.log("Cancelled"),
 };
 
-const cancelFunctions = {
-  defaultCancel: () => console.log("Cancelled"),
+const getInitialWindowType = () => {
+  const storedWindowType = sessionStorage.getItem("windowType");
+  const isGameTableVisible = sessionStorage.getItem("isGameTableVisible") === "true";
+
+  if (storedWindowType !== null) {
+    return storedWindowType;  // Utilisez la valeur stockée si elle est présente
+  } else {
+    // Utilisez "accueil" seulement si isGameTableVisible est false
+    return isGameTableVisible ? "" : "accueil";
+  }
 };
 
 export const initialState = {
   selectedItem: null,
   redirectAfterSuccess: sessionStorage.getItem("redirectAfterSuccess") || "",
   alertParams: {
-    message: "",
-    onConfirm: () => {},
-    onCancel: () => {},
+    message: sessionStorage.getItem("alertMessage") || "",
+    onConfirm: functionMapper[sessionStorage.getItem("alertOnConfirm")] || functionMapper.defaultConfirm,
+    onCancel: functionMapper[sessionStorage.getItem("alertOnCancel")] || functionMapper.defaultCancel,
   },
   isWindowOpen: sessionStorage.getItem("isWindowOpen") === "true",
-  windowType: sessionStorage.getItem("windowType") || "accueil",
-  connectionWindowOpen: false,
+  windowType: getInitialWindowType(), 
+    connectionWindowOpen: false,
   successMessage: sessionStorage.getItem("successMessage") || "",
   isGameTableVisible: sessionStorage.getItem("isGameTableVisible") === "true",
 };
@@ -34,6 +43,9 @@ const TOGGLE_GAME_TABLE_VISIBLE = "TOGGLE_GAME_TABLE_VISIBLE";
 
 // Reducer
 export function windowReducer(state = initialState, action) {
+  console.log("Action Received:", action);
+  console.log("Current State before update:", state);
+
   let nextState = { ...state };
 
   switch (action.type) {
@@ -50,9 +62,8 @@ export function windowReducer(state = initialState, action) {
       sessionStorage.setItem("alertOnConfirm", action.payload.onConfirm);
       sessionStorage.setItem("alertOnCancel", action.payload.onCancel);
       break;
-    case "TOGGLE_WINDOW_OPEN":
-      nextState.isWindowOpen =
-        action.payload !== undefined ? action.payload : !state.isWindowOpen;
+    case TOGGLE_WINDOW_OPEN:
+      nextState.isWindowOpen = action.payload !== undefined ? action.payload : !state.isWindowOpen;
       break;
     case SET_WINDOW_TYPE:
       nextState.windowType = action.payload;
@@ -68,13 +79,10 @@ export function windowReducer(state = initialState, action) {
       nextState.isGameTableVisible = !state.isGameTableVisible;
       break;
     default:
+      console.log("Unhandled action type in windowReducer:", action.type);
       return state;
   }
 
-  // Appliquer la logique conditionnelle pour 'windowType'
-  if (!nextState.isGameTableVisible && !nextState.windowType) {
-    nextState.windowType = "accueil";
-  }
-
+  console.log("New State after update:", nextState);
   return nextState;
 }

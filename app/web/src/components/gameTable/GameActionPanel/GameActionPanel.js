@@ -57,6 +57,10 @@ const GameActionButtons = ({}) => {
     }
 }, [raiseCoin]);
 
+useEffect(() => {
+  setCoins(user.coins);
+}, [user.coins]);
+
   return (
     <div className="container-gameAction">
       <div className="container-cashSituation">

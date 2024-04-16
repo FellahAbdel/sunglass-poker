@@ -12,6 +12,14 @@ export const WindowProvider = ({ children }) => {
   const [state, dispatch] = useReducer(windowReducer, initialState);
 
   useEffect(() => {
+    console.log("isWindowOpen:", state.isWindowOpen);
+    console.log("windowType:", state.windowType);
+    console.log("isGameTableVisible:", state.isGameTableVisible);
+    console.log("connectionWindowOpen:", state.connectionWindowOpen);
+  }, [state.isWindowOpen, state.windowType, state.isGameTableVisible, state.connectionWindowOpen]);
+
+
+  useEffect(() => {
     if (state.windowType === 'alert') {
       dispatch({ type: "SET_WINDOW_TYPE", payload: "accueil" });
     }
