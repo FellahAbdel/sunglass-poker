@@ -2,7 +2,7 @@ import React, { useState, useSelector } from "react";
 import "./gameActionPanel.css";
 import RaiseSlider from "../Range/RaiseSlider";
 import Button from "../../button/Button.tsx";
-//import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 
 const GameActionButtons = ({ }) => {
@@ -33,6 +33,10 @@ const GameActionButtons = ({ }) => {
 
 //console.log(pot)
 
+const handleFoldProp = ()=>{
+  // on doit recuperer l'id du joueu
+  useDispatch
+}
   return (
     <div className="container-gameAction">
       <div
@@ -53,7 +57,7 @@ const GameActionButtons = ({ }) => {
           //onClick={handle}
           label={checkOrCall}
         />
-        {/* <Button styleClass={"btn-fold"} onClick={handleFoldProp} label={"Fold"} /> */}
+        <Button styleClass={"btn-fold"} onClick={handleFoldProp} label={"Fold"} />
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
         <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />
