@@ -34,6 +34,7 @@ const CreateGameWindow = () => {
     if (success) {
       // Handle success
       console.log("Game created successfully");
+      openWindow("list_table");
     } else {
       // Handle failure
       console.error("Error creating game");
