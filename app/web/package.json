@@ -78,5 +78,14 @@
       "imgdesktop/*",
       "error.html"
     ]
+  },
+  "mac": {
+    "icon": "./imgdesktop/SunGameStudio_logo.png"
+  },
+  "win": {
+    "icon": "./imgdesktop/SunGameStudio_logo.png"
+  },
+  "linux": {
+    "icon": "./imgdesktop/SunGameStudio_logo.png"
   }
 }
