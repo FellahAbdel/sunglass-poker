@@ -25,6 +25,6 @@
 - 02/04 , Réunion TP | avancement dans les fonctions backend, démo de la Première version du jeu : 3H
 - 06/04 , apprentissage redux/react sur YouTube :2H
 - 11/04 , apprentissage et formation socket io : 1H30
-- 13/04  ,lecture code et mise au point avec equipe backend pour la partie chat du jeu : 1H
-
-- TOTAL:62H30
+- 13/04  ,lecturz code et mise au point avec equipe backend pour la partie chat du jeu : 1H
+- 15/04 , apprentissage socket.io pour faire le chat : 1H30
+- TOTAL:64H
