@@ -5,12 +5,84 @@
     ENV_TYPE:DefaultLocal,
     ENV_PORT_WEB:3000,
     ENV_PORT_SERVER:3001,
-    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: H18dXmLo0MdZho16AAAB | session : phX2pqrKFyd-PT2GeAy5wDdLDuDRixhq</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: b0QIOePyHc8_PTJhAAAD | session : MPTJXNkcPMfD6AYBkrzN5asrrO4izvJk</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: 9EjM714HTByfmPYpAAAF | session : BVMr992in3kWeXDWGZTRtjsg173KOW8m</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: WbNB4am9DxEhug8-AAAH | session : MnXbd7ttp-LSty9h2f9CazAUIpdAcHUY</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: 4OClrbAc4yk-GFP2AAAK | session : Od-f7qDiCxhgJCBTkbcLoU1zYX7lkltz</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: 0_D1n1Y4FpDP9MJzAAAL | session : Zn6eezL3tDOq8CcXr1biNcK7fPuBVJKu</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: n_vQfEb4p4EWcAEqAAAB | session : PMJGiSt4kUTH3Fodd6jOb1TOtYtqyzZI</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: Misy0C54YIvf_OazAAAD | session : d5n0Ejbuhj59GSncwpq1I03-DiMF0Q2s</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: jno7HNhHIep3rJP6AAAF | session : 6r0KJnHjym699CeUJNSIMB6VgWT5WWte</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: yfFV2hPt3LETB8WlAAAH | session : HrLc8-4ITFi7Z5EjqTuGpik6DDZbLu_o</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Session id : </span><span>Misy0C54YIvf_OazAAAD</span><span> join room session:</span><span>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWU3NTI0Mzg5YjZmNTQzODA5ODJmYSIsImlhdCI6MTcxMzI3MjM4MywiZXhwIjoxNzEzMjc1OTgzfQ.fbfWP6rmAPjIsLmGnjJ7vty5G1cjRgvpOiNMXFHZs_E</span></section></div><div class='log Session'><h2>Session</h2></br><section><span>login out the session and pseudo of user</span><span>kouzouke</span><span> id :</span><span>661e7524389b6f54380982fa</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>createGame called (from socket.io.js)</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>createGame event received on the server</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Who dispatch : </span><span>661e7524389b6f54380982fa</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Create new game inside gameController</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        id:10,
+        state:undefined,
+        players:[OBJECT],
+        rules:[OBJECT],
+        refresh:undefined,
+        joinGame:[function],
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:START_GAME,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>default</span><span>START_GAME</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    10: { 
+      id:10,
+      state: { 
+        game:[OBJECT],
+        },
+      players: {         },
+      rules: { 
+        max:10,
+        min:3,
+        },
+      refresh:undefined,
+      joinGame:[function],
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>10</span><span> >- id game created</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        id:10,
+        state:[OBJECT],
+        players:[OBJECT],
+        rules:[OBJECT],
+        refresh:undefined,
+        joinGame:[function],
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:CREATE_GAME,
+    payload: { 
+      id:10,
+      player:false,
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>CREATE GAME</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>store dispatch</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span><pre> { 
+    game: { 
+      rooms: { 
+        10:[OBJECT],
+        },
+      answer:false,
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:GAME_STARTED,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>start</span><span>GAME_STARTED</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
     io: { 
       broadcastStatus:[function],
       },
     hashRoom:[function],
-    rooms: {       },
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
     init:[function],
     makeRefreshCall:[function],
     join:[function],
@@ -20,4 +92,817 @@
     status:[function],
     newGame:[function],
     dispatch:[function],
-    }</pre></span></section></div>
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>User to add : </span><span><pre> { 
+    id:661e7524389b6f54380982fa,
+    pseudo:kouzouke,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>user : </span><span><pre> { 
+    id:661e7524389b6f54380982fa,
+    pseudo:kouzouke,
+    }</pre></span><span> dispatch event : </span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e7524389b6f54380982fa,
+        pseudo:kouzouke,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e7524389b6f54380982fa,
+        pseudo:kouzouke,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>output for sit</span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e7524389b6f54380982fa,
+        pseudo:kouzouke,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>wtf</span><span>661e7524389b6f54380982fa</span><span>  </span><span>kouzouke</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>(check for room length)</span><span><pre> {     }</pre></span><span>0</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>tableid: </span><span>10</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>state.game : </span><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    game: { 
+      players: {         },
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      pokerTable: { 
+        communityCards:[OBJECT],
+        },
+      },
+    players: {       },
+    table: { 
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      stake:0,
+      },
+    controlsMode:roundOne,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>Added player successfully</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Answer: </span><span><pre> { 
+    status:true,
+    mes:Successfully join room,
+    payload: { 
+      id:10,
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer: { 
+      status:true,
+      mes:Successfully join room,
+      payload: { 
+        id:10,
+        },
+      },
+    }</pre></span><span><pre> { 
+    type:CLEAR_ANSWER,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    status:true,
+    mes:Successfully join room,
+    payload: { 
+      id:10,
+      },
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>undefined</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span><pre> { 
+    status:true,
+    mes:Successfully join room,
+    payload: { 
+      id:10,
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>send event to dispatch at user</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>undefined</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>giving status to player : </span><span>661e7524389b6f54380982fa</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Try for status</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Status room:</span><span>10</span><span> for : </span><span>661e7524389b6f54380982fa</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>status of </span><span>661e7524389b6f54380982fa</span><span> : =</span><span><pre> { 
+    status:true,
+    mes:Refreshing status,
+    payload: { 
+      game: { 
+        players:[OBJECT],
+        deck:[OBJECT],
+        pokerTable:[OBJECT],
+        },
+      players: { 
+        0:[OBJECT],
+        },
+      table: { 
+        deck:[OBJECT],
+        stake:0,
+        },
+      controlsMode:roundOne,
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Session id : </span><span>n_vQfEb4p4EWcAEqAAAB</span><span> join room session:</span><span>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWU3NjY1MWRmZGQxOWYxN2RhMjJiNiIsImlhdCI6MTcxMzI3MjQyNywiZXhwIjoxNzEzMjc2MDI3fQ.uHVwIugr3UWAajOHhV3mYxdjhFyWJarauIkrzcYiPvg</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>createGame called (from socket.io.js)</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>createGame event received on the server</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Who dispatch : </span><span>661e7524389b6f54380982fa</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Create new game inside gameController</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>undefined</span><span> >- id game created</span></section></div><div class='error socket.io.js'><h2>socket.io.js</h2></br><section><span>Refused to create new game</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Join instead</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    io: { 
+      broadcastStatus:[function],
+      },
+    hashRoom:[function],
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    init:[function],
+    makeRefreshCall:[function],
+    join:[function],
+    removePlayer:[function],
+    timeOutPlayer:30000000000,
+    broadcastStatus:[function],
+    status:[function],
+    newGame:[function],
+    dispatch:[function],
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>User to add : </span><span><pre> { 
+    id:661e7524389b6f54380982fa,
+    pseudo:kouzouke,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>user : </span><span><pre> { 
+    id:661e7524389b6f54380982fa,
+    pseudo:kouzouke,
+    }</pre></span><span> dispatch event : </span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e7524389b6f54380982fa,
+        pseudo:kouzouke,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e7524389b6f54380982fa,
+        pseudo:kouzouke,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>output for sit</span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e7524389b6f54380982fa,
+        pseudo:kouzouke,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>(check for room length)</span><span><pre> { 
+    0: { 
+      id:661e7524389b6f54380982fa,
+      name:kouzouke,
+      status:Empty,
+      },
+    }</pre></span><span>1</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>wtf</span><span>661e7524389b6f54380982fa</span><span>  </span><span>kouzouke</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>tableid: </span><span>10</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>state.game : </span><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer: { 
+      status:false,
+      mes:Player already inside the room,
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    game: { 
+      players: {         },
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      pokerTable: { 
+        communityCards:[OBJECT],
+        },
+      },
+    players: { 
+      0: { 
+        id:661e7524389b6f54380982fa,
+        name:kouzouke,
+        status:Empty,
+        },
+      },
+    table: { 
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      stake:0,
+      },
+    controlsMode:roundOne,
+    }</pre></span></section></div><div class='error gameReducer'><h2>gameReducer</h2></br><section><span>Failed to sit player at the table.</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Answer: </span><span><pre> { 
+    status:false,
+    mes:Player already inside the room,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer: { 
+      status:false,
+      mes:Player already inside the room,
+      },
+    }</pre></span><span><pre> { 
+    type:CLEAR_ANSWER,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    status:false,
+    mes:Player already inside the room,
+    }</pre></span></section></div><div class='log Session'><h2>Session</h2></br><section><span>login out the session and pseudo of user</span><span>kouzouke2</span><span> id :</span><span>661e76651dfdd19f17da22b6</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>createGame called (from socket.io.js)</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>createGame event received on the server</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Create new game inside gameController</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Who dispatch : </span><span>661e76651dfdd19f17da22b6</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>undefined</span><span> >- id game created</span></section></div><div class='error socket.io.js'><h2>socket.io.js</h2></br><section><span>Refused to create new game</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Join instead</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>User to add : </span><span><pre> { 
+    id:661e76651dfdd19f17da22b6,
+    pseudo:kouzouke2,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    io: { 
+      broadcastStatus:[function],
+      },
+    hashRoom:[function],
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    init:[function],
+    makeRefreshCall:[function],
+    join:[function],
+    removePlayer:[function],
+    timeOutPlayer:30000000000,
+    broadcastStatus:[function],
+    status:[function],
+    newGame:[function],
+    dispatch:[function],
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>user : </span><span><pre> { 
+    id:661e76651dfdd19f17da22b6,
+    pseudo:kouzouke2,
+    }</pre></span><span> dispatch event : </span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e76651dfdd19f17da22b6,
+        pseudo:kouzouke2,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e76651dfdd19f17da22b6,
+        pseudo:kouzouke2,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>output for sit</span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e76651dfdd19f17da22b6,
+        pseudo:kouzouke2,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>wtf</span><span>661e76651dfdd19f17da22b6</span><span>  </span><span>kouzouke2</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>(check for room length)</span><span><pre> { 
+    0: { 
+      id:661e7524389b6f54380982fa,
+      name:kouzouke,
+      status:Empty,
+      },
+    }</pre></span><span>1</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>tableid: </span><span>10</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>state.game : </span><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    game: { 
+      players: {         },
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      pokerTable: { 
+        communityCards:[OBJECT],
+        },
+      },
+    players: { 
+      0: { 
+        id:661e7524389b6f54380982fa,
+        name:kouzouke,
+        status:Empty,
+        },
+      },
+    table: { 
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      stake:0,
+      },
+    controlsMode:roundOne,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>Added player successfully</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Answer: </span><span><pre> { 
+    status:true,
+    mes:Successfully join room,
+    payload: { 
+      id:10,
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer: { 
+      status:true,
+      mes:Successfully join room,
+      payload: { 
+        id:10,
+        },
+      },
+    }</pre></span><span><pre> { 
+    type:CLEAR_ANSWER,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    status:true,
+    mes:Successfully join room,
+    payload: { 
+      id:10,
+      },
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>undefined</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span><pre> { 
+    status:true,
+    mes:Successfully join room,
+    payload: { 
+      id:10,
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>send event to dispatch at user</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>giving status to player : </span><span>661e76651dfdd19f17da22b6</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Try for status</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Status room:</span><span>10</span><span> for : </span><span>661e76651dfdd19f17da22b6</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>status of </span><span>661e76651dfdd19f17da22b6</span><span> : =</span><span><pre> { 
+    status:true,
+    mes:Refreshing status,
+    payload: { 
+      game: { 
+        players:[OBJECT],
+        deck:[OBJECT],
+        pokerTable:[OBJECT],
+        },
+      players: { 
+        0:[OBJECT],
+        1:[OBJECT],
+        },
+      table: { 
+        deck:[OBJECT],
+        stake:0,
+        },
+      controlsMode:roundOne,
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>giving status to player : </span><span>661e76651dfdd19f17da22b6</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Try for status</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Status room:</span><span>10</span><span> for : </span><span>661e7524389b6f54380982fa</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>status of </span><span>661e7524389b6f54380982fa</span><span> : =</span><span><pre> { 
+    status:true,
+    mes:Refreshing status,
+    payload: { 
+      game: { 
+        players:[OBJECT],
+        deck:[OBJECT],
+        pokerTable:[OBJECT],
+        },
+      players: { 
+        0:[OBJECT],
+        1:[OBJECT],
+        },
+      table: { 
+        deck:[OBJECT],
+        stake:0,
+        },
+      controlsMode:roundOne,
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: v-Mlc05z3yJOKLQOAAAK | session : xJpFiIoDL_XuT_EVvUIpR_Qh9o0-G1WB</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>a user connected n: NKV3d2FYcAu7623fAAAL | session : m1t0oL4xCp_1FJmQ9t-v7pDI5ijG9AIn</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    io: { 
+      broadcastStatus:[function],
+      },
+    hashRoom:[function],
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    init:[function],
+    makeRefreshCall:[function],
+    join:[function],
+    removePlayer:[function],
+    timeOutPlayer:30000000000,
+    broadcastStatus:[function],
+    status:[function],
+    newGame:[function],
+    dispatch:[function],
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>User to add : </span><span><pre> { 
+    id:undefined,
+    pseudo:undefined,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>user : </span><span><pre> { 
+    id:undefined,
+    pseudo:undefined,
+    }</pre></span><span> dispatch event : </span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:undefined,
+        pseudo:undefined,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:undefined,
+        pseudo:undefined,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>output for sit</span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:undefined,
+        pseudo:undefined,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>wtf</span><span>undefined</span><span>  </span><span>undefined</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>(check for room length)</span><span><pre> { 
+    0: { 
+      id:661e7524389b6f54380982fa,
+      name:kouzouke,
+      status:Empty,
+      },
+    1: { 
+      id:661e76651dfdd19f17da22b6,
+      name:kouzouke2,
+      status:Empty,
+      },
+    }</pre></span><span>2</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>tableid: </span><span>10</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>state.game : </span><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer: { 
+      status:false,
+      mes:player empty,
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    game: { 
+      players: {         },
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      pokerTable: { 
+        communityCards:[OBJECT],
+        },
+      },
+    players: { 
+      0: { 
+        id:661e7524389b6f54380982fa,
+        name:kouzouke,
+        status:Empty,
+        },
+      1: { 
+        id:661e76651dfdd19f17da22b6,
+        name:kouzouke2,
+        status:Empty,
+        },
+      },
+    table: { 
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      stake:0,
+      },
+    controlsMode:roundOne,
+    }</pre></span></section></div><div class='error gameReducer'><h2>gameReducer</h2></br><section><span>Failed to sit player at the table.</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Answer: </span><span><pre> { 
+    status:false,
+    mes:player empty,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer: { 
+      status:false,
+      mes:player empty,
+      },
+    }</pre></span><span><pre> { 
+    type:CLEAR_ANSWER,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    status:false,
+    mes:player empty,
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Session id : </span><span>NKV3d2FYcAu7623fAAAL</span><span> join room session:</span><span>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWU2NDE0ODk5ZjM2YzAxOTJhYWI1YSIsImlhdCI6MTcxMzI3MjQ3NywiZXhwIjoxNzEzMjc2MDc3fQ.Kf9MntC3aqq6-jw-oJ-y9whQRxtr8LWkvRAKdjHQnhA</span></section></div><div class='log Session'><h2>Session</h2></br><section><span>login out the session and pseudo of user</span><span>fellah</span><span> id :</span><span>661e6414899f36c0192aab5a</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>createGame called (from socket.io.js)</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>createGame event received on the server</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Who dispatch : </span><span>661e6414899f36c0192aab5a</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Create new game inside gameController</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>undefined</span><span> >- id game created</span></section></div><div class='error socket.io.js'><h2>socket.io.js</h2></br><section><span>Refused to create new game</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Join instead</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    io: { 
+      broadcastStatus:[function],
+      },
+    hashRoom:[function],
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    init:[function],
+    makeRefreshCall:[function],
+    join:[function],
+    removePlayer:[function],
+    timeOutPlayer:30000000000,
+    broadcastStatus:[function],
+    status:[function],
+    newGame:[function],
+    dispatch:[function],
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>User to add : </span><span><pre> { 
+    id:661e6414899f36c0192aab5a,
+    pseudo:fellah,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>user : </span><span><pre> { 
+    id:661e6414899f36c0192aab5a,
+    pseudo:fellah,
+    }</pre></span><span> dispatch event : </span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e6414899f36c0192aab5a,
+        pseudo:fellah,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e6414899f36c0192aab5a,
+        pseudo:fellah,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>output for sit</span><span><pre> { 
+    type:SIT,
+    payload: { 
+      tableId:10,
+      player: { 
+        id:661e6414899f36c0192aab5a,
+        pseudo:fellah,
+        },
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>wtf</span><span>661e6414899f36c0192aab5a</span><span>  </span><span>fellah</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>(check for room length)</span><span><pre> { 
+    0: { 
+      id:661e7524389b6f54380982fa,
+      name:kouzouke,
+      status:Empty,
+      },
+    1: { 
+      id:661e76651dfdd19f17da22b6,
+      name:kouzouke2,
+      status:Empty,
+      },
+    }</pre></span><span>2</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>tableid: </span><span>10</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>state.game : </span><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    game: { 
+      players: {         },
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      pokerTable: { 
+        communityCards:[OBJECT],
+        },
+      },
+    players: { 
+      0: { 
+        id:661e7524389b6f54380982fa,
+        name:kouzouke,
+        status:Empty,
+        },
+      1: { 
+        id:661e76651dfdd19f17da22b6,
+        name:kouzouke2,
+        status:Empty,
+        },
+      },
+    table: { 
+      deck: { 
+        communityCards:[OBJECT],
+        },
+      stake:0,
+      },
+    controlsMode:roundOne,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>Added player successfully</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Answer: </span><span><pre> { 
+    status:true,
+    mes:Successfully join room,
+    payload: { 
+      id:10,
+      },
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer: { 
+      status:true,
+      mes:Successfully join room,
+      payload: { 
+        id:10,
+        },
+      },
+    }</pre></span><span><pre> { 
+    type:CLEAR_ANSWER,
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span><pre> { 
+    status:true,
+    mes:Successfully join room,
+    payload: { 
+      id:10,
+      },
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>undefined</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span><pre> { 
+    status:true,
+    mes:Successfully join room,
+    payload: { 
+      id:10,
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>send event to dispatch at user</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>giving status to player : </span><span>661e6414899f36c0192aab5a</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Try for status</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Status room:</span><span>10</span><span> for : </span><span>661e76651dfdd19f17da22b6</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>status of </span><span>661e76651dfdd19f17da22b6</span><span> : =</span><span><pre> { 
+    status:true,
+    mes:Refreshing status,
+    payload: { 
+      game: { 
+        players:[OBJECT],
+        deck:[OBJECT],
+        pokerTable:[OBJECT],
+        },
+      players: { 
+        0:[OBJECT],
+        1:[OBJECT],
+        2:[OBJECT],
+        },
+      table: { 
+        deck:[OBJECT],
+        stake:0,
+        },
+      controlsMode:roundOne,
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>giving status to player : </span><span>661e6414899f36c0192aab5a</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Try for status</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Status room:</span><span>10</span><span> for : </span><span>661e7524389b6f54380982fa</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>status of </span><span>661e7524389b6f54380982fa</span><span> : =</span><span><pre> { 
+    status:true,
+    mes:Refreshing status,
+    payload: { 
+      game: { 
+        players:[OBJECT],
+        deck:[OBJECT],
+        pokerTable:[OBJECT],
+        },
+      players: { 
+        0:[OBJECT],
+        1:[OBJECT],
+        2:[OBJECT],
+        },
+      table: { 
+        deck:[OBJECT],
+        stake:0,
+        },
+      controlsMode:roundOne,
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>giving status to player : </span><span>661e6414899f36c0192aab5a</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>Try for status</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Status room:</span><span>10</span><span> for : </span><span>661e6414899f36c0192aab5a</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>status of </span><span>661e6414899f36c0192aab5a</span><span> : =</span><span><pre> { 
+    status:true,
+    mes:Refreshing status,
+    payload: { 
+      game: { 
+        players:[OBJECT],
+        deck:[OBJECT],
+        pokerTable:[OBJECT],
+        },
+      players: { 
+        0:[OBJECT],
+        1:[OBJECT],
+        2:[OBJECT],
+        },
+      table: { 
+        deck:[OBJECT],
+        stake:0,
+        },
+      controlsMode:roundOne,
+      },
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>dispatch recevied : </span><span><pre> { 
+    action: { 
+      type:FOLD,
+      },
+    }</pre></span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>user : </span><span>661e6414899f36c0192aab5a</span><span> dispatch event : </span><span><pre> { 
+    type:FOLD,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:FOLD,
+    }</pre></span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span>default</span><span>FOLD</span></section></div><div class='log gameController'><h2>gameController</h2></br><section><span>Answer: </span><span>false</span></section></div><div class='log gameReducer'><h2>gameReducer</h2></br><section><span><pre> { 
+    rooms: { 
+      10: { 
+        game:[OBJECT],
+        players:[OBJECT],
+        table:[OBJECT],
+        controlsMode:roundOne,
+        },
+      },
+    answer:false,
+    }</pre></span><span><pre> { 
+    type:CLEAR_ANSWER,
+    }</pre></span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>user disconnected n:NKV3d2FYcAu7623fAAAL | session : m1t0oL4xCp_1FJmQ9t-v7pDI5ijG9AIn</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>user disconnected n:jno7HNhHIep3rJP6AAAF | session : m1t0oL4xCp_1FJmQ9t-v7pDI5ijG9AIn</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>user disconnected n:Misy0C54YIvf_OazAAAD | session : m1t0oL4xCp_1FJmQ9t-v7pDI5ijG9AIn</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>user disconnected n:n_vQfEb4p4EWcAEqAAAB | session : m1t0oL4xCp_1FJmQ9t-v7pDI5ijG9AIn</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>user disconnected n:yfFV2hPt3LETB8WlAAAH | session : m1t0oL4xCp_1FJmQ9t-v7pDI5ijG9AIn</span></section></div><div class='log socket.io.js'><h2>socket.io.js</h2></br><section><span>user disconnected n:v-Mlc05z3yJOKLQOAAAK | session : m1t0oL4xCp_1FJmQ9t-v7pDI5ijG9AIn</span></section></div>

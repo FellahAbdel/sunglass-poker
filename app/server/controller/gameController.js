@@ -115,10 +115,10 @@ module.exports = gameController = {
     status: function (room, id) {
         csl.log(fileType,'Status room:', room, ' for : ', id);
         // csl.log(fileType,this.rooms, this.rooms.hasOwnProperty(room));
-        if (this.rooms.hasOwnProperty(room)) {
-            if (this.rooms[room].state.game.players.findIndex(player => player.getPlayerId() === id) !== -1) {
-                return { status: true, mes: 'Refreshing status', payload: this.rooms[room].state };
-            }
+        if (this.rooms[room] !== undefined) {
+            // if (this.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
+                return { status: true, mes: 'Refreshing status', payload: this.rooms[room] };
+            // }
         }
         return { status: false, mes: "Can't refresh status", payload: [] };
     },
