@@ -4,11 +4,24 @@ const session = require("express-session");
 const cors = require("cors");
 const ENV_CONST_COMM = require('./controller/envConstants')();
 const gameController = require('./controller/gameController');
+gameController.init();
 const socketIOSession = require('socket.io-express-session');
 const MemoryStore = require('memorystore')(session)
-// console.log(gameController);
-// console.log("HashRoom 3 : ",gameController.hashRoom(3));
-console.log(ENV_CONST_COMM);
+const csl = require('./controller/intelligentLogging');
+csl.outLocaly = true;
+
+
+csl.log('app',ENV_CONST_COMM);
+/**
+ * Settings for output in the console.
+ * 
+ * 
+ */
+const logsocket = 'socket.io.js';
+const loggameController = 'gameController';
+const loggameReducer = 'gameReducer';
+csl.silenced(logsocket)
+
 
 /** Paramètres cors du serveur.
  * 
@@ -54,7 +67,7 @@ const db = require('./models/bdd')(app,ENV_CONST_COMM.ENV_IP_BDD+':'+ENV_CONST_C
 const server = require('http').createServer(app);
 
 // socketIo
-const io = require('./controller/socket.io')(server,Middleware,corsSettings,gameController);
+const io = require('./controller/socket.io')(server,Middleware,corsSettings,gameController,db);
 
 io.engine.use(Middleware);
 // Port du server

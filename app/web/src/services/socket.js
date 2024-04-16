@@ -40,12 +40,13 @@ const comm = {
             console.log(data);
         });
         socket.on('joinRoom', (data) => {
+            console.log('joinroom received : ',data);
+            if(data=== null || data === undefined) return;
             if(data.status === false)
                 console.error(data.mes);
             if(data.status===true){
-                sessionStorage.setItem('room',data.payloadRoom.id);
+                sessionStorage.setItem('room',data.payload.id);
             }
-            console.log(data);
         })
 
         socket.on('event', (data) => {
@@ -68,8 +69,12 @@ const comm = {
     },
 
     refresh: function(data){
-        console.log('Receive news to refresh room',data);
-        this.status();
+        console.log('Receive news to refresh room',data,'   ',sessionStorage.getItem('room'));
+        if(sessionStorage.getItem('room'))
+            this.status();
+        else{
+            console.log('No room no status');
+        }
     },
 
     joinRoom: function(id){

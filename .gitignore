@@ -45,3 +45,5 @@ typings/
 
 package-lock.json
 package.json
+
+app/server/log.html
