@@ -1,141 +1,139 @@
-.container-main{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
+:root{
+  --error-red:#811616;
+  --good-green:#2d8116;
+  --color1-dark:#004577;
+  --color2-dark:#4d6478;
+  --color3-dark:#303b44;
+  --color1-light:#a57423;
+  --color2-light:#866839;
+  --color3-light:#35240a;
+
+  --color-darkGray:rgb(54, 54, 54);
+}
+.no-animation, .no-animation * {
+  animation: none !important;
+  transition: none !important;
 }
 
-.backdrop{
-    position:absolute;
-    width: 100%;
-    height: 100%;
-    top:0 ;
-    z-index: -999;
-    /* background-image: url('./../components/gameTable/images/backdrop.png'); 
-    background-size:cover;  */
-    filter: blur(1px) ;
-    transition: filter 1s ease;
-
-}
-#dark .backdrop{
-    /* background: 
-        linear-gradient(315deg, transparent 75%, #000000 0)-8px 0,
-        linear-gradient(45deg, transparent 75%, #000000 0) 8px 0,
-        linear-gradient(135deg, #333 50%, transparent 0) 0 0,
-        linear-gradient(45deg, #4d4d4d 50%, #666 0) 0 0 #666;
-    background-size: 16px 16px; */
-
-    filter: brightness(100%);
-
-    --s: 30px; /* control the size */
-    --_g: #00611500 83%,#2c2c2c 85% 99%,#00611500 101%;
-    background:
-      radial-gradient(27% 29% at right ,var(--_g)) calc(var(--s)/ 2) var(--s),
-      radial-gradient(27% 29% at left  ,var(--_g)) calc(var(--s)/-2) var(--s),
-      radial-gradient(29% 27% at top   ,var(--_g)) 0 calc(var(--s)/ 2),
-      radial-gradient(29% 27% at bottom,var(--_g)) 0 calc(var(--s)/-2)
-      #1d1d1d;
-    background-size: calc(2*var(--s)) calc(2*var(--s));
-}
-#light .backdrop{
-    /* background: 
-        linear-gradient(315deg, transparent 75%, #2e2e2e 0)-8px 0,
-        linear-gradient(45deg, transparent 75%, #2e2e2e 0) 8px 0,
-        linear-gradient(135deg, #909090 50%, transparent 0) 0 0,
-        linear-gradient(45deg, #d5d5d5 50%, #a3a3a3 0) 0 0 #a3a3a3;
-    background-size: 16px 16px; */
-
-    /* --s: 30px; 
-        
-    --_g: #00611500 83%,#6f6f6f 85% 99%,#00611500 101%;
-    background:
-      radial-gradient(27% 29% at right ,var(--_g)) calc(var(--s)/ 2) var(--s),
-      radial-gradient(27% 29% at left  ,var(--_g)) calc(var(--s)/-2) var(--s),
-      radial-gradient(29% 27% at top   ,var(--_g)) 0 calc(var(--s)/ 2),
-      radial-gradient(29% 27% at bottom,var(--_g)) 0 calc(var(--s)/-2)
-      #9d9d9d;
-    background-size: calc(2*var(--s)) calc(2*var(--s)); */
-    filter: brightness(35%);
-    background: unset;
-    background-color: unset;
-    background-image: url("./../components/assets/images/backdrop.jpg");
-    background-size: unset;
+.container-main {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
-.background{
-    position:absolute;
-    width: 100%;
-    height: 100%;
-    top:0 ;
-    z-index: -1000;
-    background-color: black;
+.backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: unset;
+  z-index: -999;
+  transition: filter 1s ease;
+  background: unset;
+}
+#dark .backdrop {
+  filter: brightness(100%);
+
+  --s: 30px;
+  --_g: #00611500 83%, #2c2c2c 85% 99%, #00611500 101%;
+  background: radial-gradient(27% 29% at right, var(--_g)) calc(var(--s) / 2)
+      var(--s),
+    radial-gradient(27% 29% at left, var(--_g)) calc(var(--s) / -2) var(--s),
+    radial-gradient(29% 27% at top, var(--_g)) 0 calc(var(--s) / 2),
+    radial-gradient(29% 27% at bottom, var(--_g)) 0 calc(var(--s) / -2) #1d1d1d;
+  background-size: calc(2 * var(--s)) calc(2 * var(--s));
+}
+#light .backdrop {
+  filter: brightness(50%);
+  margin: 0;
+  padding: 0;
+  background-image: url("./../components/assets/images/backdrop2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.comp-navbar{
-    align-self: baseline;
-    z-index: 3;
+#dark .backdrop2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(#ffffff02 50%, #000000e1);
+}
+#light .backdrop2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(#ffffff10 70%, #00000070);
 }
 
-.comp-bonus{
-    position: absolute;
-    bottom:10px;  
-    left:10px;  
+/*components placements*/
+.comp-navbar {
+  align-self: baseline;
+  z-index: 3;
+}
+.comp-bonus {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+.comp-gameAction {
+  position: absolute;
+  bottom: 10px;
+  z-index: 1;
+  flex: 1;
+}
+.comp-handCards {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
 }
 
-.comp-table{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    flex:1;
-
-    position: absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left: 0;
-    
-    z-index: 0;
-    margin: auto;
-
-    transition: right 0.5s ease, left 0.5s ease, top 1s ease, bottom 0.5s ease;
+/*Table placement*/
+.comp-table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 0;
+  margin: auto;
+  transition: right 0.5s ease, left 0.5s ease, top 1s ease, bottom 0.5s ease;
+}
+.comp-table-login,
+.comp-table-register,
+.comp-table-forgot,
+.comp-table-reset,
+.comp-table-settings {
+  right: 10%;
+  left: 30%;
+}
+.comp-table-tutorial {
+  top: 0;
+}
+.comp-table-inGame {
+  position: absolute;
+  top: -20%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.comp-table-accueil {
+  top: -10%;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
-.comp-table-login{
-    right:10%;
-    left:30%;
-}
-.comp-table-tutorial{
-    top: 12%;
-}
-
-.comp-table-inGame{
-    position: absolute;
-    top:-10%;
-    right:0;
-    left:0;
-    bottom:0;
-}
-
-.comp-gameAction{
-    position: absolute;
-    bottom: 10px;
-    z-index: 1;
-    flex:1;
-}
-
-.comp-handCards{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
-}
-
-
-.all-space{
-    height: 100%;
-    width: 100%;
+.all-space {
+  height: 100%;
+  width: 100%;
 }

@@ -1,26 +1,54 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from './AuthProvider';
-import { useWindowContext } from './WindowContext';
+import { useState, useEffect } from "react";
+import { useAuth } from "./AuthProvider";
+import { useWindowContext } from "./WindowContext";
 
 export const useUserData = () => {
-  const [stats, setStats] = useState(null); 
+  const [stats, setStats] = useState(null);
   const { user, fetchStats } = useAuth();
-  const { windowType } = useWindowContext(); 
+  const { windowType } = useWindowContext();
+
+  const resolveImagePath = (relativePath) => {
+    return `${process.env.PUBLIC_URL}${relativePath}`;
+  };
+
+  const loadUserStats = async () => {
+    if (windowType === "stats" && user?._id) {
+      try {
+        const fetchedStats = await fetchStats();
+        setStats(fetchedStats);
+      } catch (error) {
+        console.error("Error fetching user stats:", error);
+      }
+    }
+  };
 
   useEffect(() => {
+    loadUserStats();
+  }, [windowType, user?._id, fetchStats]);
+
+  useEffect(() => {
+    console.log("Current user data:", user);
+
     const loadUserStats = async () => {
       if (windowType === "stats" && user?._id) {
         try {
           const fetchedStats = await fetchStats();
-          setStats(fetchedStats); 
+          setStats(fetchedStats);
         } catch (error) {
-          console.error('Error fetching user stats:', error);
+          console.error("Error fetching user stats:", error);
         }
       }
     };
 
     loadUserStats();
-  }, [windowType, user?._id, fetchStats]);
+  }, [windowType, user, fetchStats]);
 
-  return { user, stats };
+  const resolvedUser = {
+    ...user,
+    avatar: user?.avatar
+      ? resolveImagePath(user.avatar)
+      : "default_avatar_path",
+  };
+
+  return { user: resolvedUser, stats, loadUserStats };
 };

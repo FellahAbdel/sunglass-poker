@@ -1,5 +1,5 @@
 //react imports
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useAuth } from "./../components/Utiles/AuthProvider";
 
@@ -12,7 +12,7 @@ import "../components/Utiles/animations.css";
 import { getStyles } from "../components/Utiles/useStyles.jsx";
 
 //components imports
-import Navbar from "../components/Navbar/Navbar";
+import NavbarV2 from "../components/Navbar/NavbarV2";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
@@ -21,12 +21,35 @@ import HandCards from "../components/gameTable/HandCards/HandCards";
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
 const GameTable = () => {
-  const { theme } = useSettings();
+  const { theme , animation } = useSettings();
+  const { isLogged } = useAuth();
+  const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
+    useWindowContext();
+  const classes = getStyles(
+    windowType,
+    isLogged,
+    isGameTableVisible,
+    isWindowOpen
+  );
 
+
+  useEffect(() => {
+    console.log("isLogged gameTable:", isLogged);
+  }, [isLogged]);
+
+  const handleCloseOnClickOutside = (event) => {
+    if (isWindowOpen) {
+      closeWindow();
+    }
+  };
+
+  const handleBoxClick = (event) => {
+    event.stopPropagation();
+  };
+
+  //inGame Fonctions to test-----------------------------------------
   const [dealingFlop, setDealingFlop] = useState([true, true, true]);
-  const [handGuide, setHandGuide] = useState("Full house");
-  const [profileMenu] = useState(false);
-  const [settingsMenu] = useState(false);
+  const [handGuide, setHandGuide] = useState("fullHouse");
   const [showHandCard, setShowHandCard] = useState(true);
   const [playersCardsShow, setPlayersCardsShow] = useState([
     1, 0, 0, 1, 1, 0, 0, 0, 0, 1,
@@ -34,69 +57,6 @@ const GameTable = () => {
   const [playersCardDistributed, setPlayersCardDistributed] = useState([
     1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
   ]);
-
-  const { logingOut, isLogged } = useAuth();
-  const {
-    windowType,
-    isWindowOpen,
-    closeWindow,
-    openWindow,
-    isGameTableVisible,
-  } = useWindowContext();
-
-  const handleLanguageChange = (language) => {
-    console.log("Selected Language:", language);
-  };
-
-  // const handleIsLogged = () => {
-  //   setIsLogged(!isLogged);
-  //   console.log("isLogged");
-  // };
-
-  const handleClickStartGame = () => {
-    if (isLogged) {
-      // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
-      console.log("Montrer la window des différentes tables");
-      openWindow("list_table");
-    } else {
-      // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
-      openWindow("login");
-    }
-  };
-  useEffect(() => {
-    console.log("isLogged gameTable:", isLogged);
-  }, [isLogged]);
-
-  //Navbar buttons handles-----------------------------------------
-  const handleLogOutButton = () => {
-    logingOut();
-    //setProfileMenu(false);
-    //setSettingsMenu(false);
-    closeWindow();
-  };
-  const handleLogInButton = () => {
-    openWindow("login");
-    // setTutorialMenu(false);
-    // setLogInMenu(!logInMenu);
-    console.log("handleLogInButton function called from parent component");
-  };
-  const handleTutorialButton = () => {
-    openWindow("tutorial");
-    // setLogInMenu(false);
-    // setTutorialMenu(!tutorialMenu);
-    console.log("handleTutorialButton function called from parent component");
-  };
-  const handleProfileButton = () => {
-    openWindow("profile");
-    console.log("handleProfileButton function called from parent component");
-  };
-  const handleSettingsButton = () => {
-    openWindow("settings");
-    console.log("handleSettingsButton function called from parent component");
-  };
-  //-----------------------------------------Navbar buttons handles
-
-  //inGame Fonctions to test-----------------------------------------
 
   const handleFold = () => {
     console.log("handleFold function called from parent component");
@@ -121,64 +81,39 @@ const GameTable = () => {
       !playersCardsShow[2],
     ]);
   };
-  const handleCloseOnClickOutside = (event) => {
-    if (isWindowOpen) {
-      closeWindow();
-    }
-  };
 
-  const handleBoxClick = (event) => {
-    event.stopPropagation();
-  };
   //-----------------------------------------inGame functions to test
-
-  const classes = getStyles(windowType, isLogged, isGameTableVisible);
 
   return (
     <div
-      className="container-main resetall"
+      className={`container-main resetall ${animation ? "" : "no-animation"}`}
       id={theme}
       onClick={handleCloseOnClickOutside}
+      
     >
       {/* css Pattern background */}
-      <div className="background"></div>
-      <div className="backdrop"></div>
+
+      <div className="backdrop" />
+      <div className="backdrop2" />
 
       {/* Navbar or header */}
       <div className="comp-navbar">
-        <Navbar
-          logOutOnClick={handleLogOutButton}
-          settingsOnClick={handleSettingsButton}
-          profileOnClick={handleProfileButton}
-          //navbar changes for loggedIn
-          isLoggedNavbar={isLogged}
-          logInOnClick={handleLogInButton}
-          tutorialOnClick={handleTutorialButton}
-        />
+        <NavbarV2 />
       </div>
 
       {/* Menu/Table */}
       <div className={classes.compTable}>
         <Table
-          showGameList={handleClickStartGame}
-          selectedLanguage={handleLanguageChange}
           dealingFlop={dealingFlop}
           showCards={[0, 1, 2, 3, 4]}
           playersCardDistributedProp={playersCardDistributed}
           playersCardsShowProp={playersCardsShow}
-          moneyPot={9999999999}
-          // to open the profile and setting menus
-          profileMenuActive={profileMenu}
-          settingsMenuActive={settingsMenu}
-          // LogIn panel
-          //isLoggedOnClick={handleIsLogged}
-          //isLogged={isLogged}
           onClick={(e) => handleBoxClick}
         />
       </div>
 
       {/* playing elements opens when logged in */}
-      {isGameTableVisible && (
+      {isGameTableVisible && !isWindowOpen && (
         <>
           <div
             className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}

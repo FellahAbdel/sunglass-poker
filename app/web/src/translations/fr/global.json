@@ -1,0 +1,129 @@
+{
+  "navbar": {
+    "profile": "Profil",
+    "chat": "Chat",
+    "message": "Message",
+    "settings": "Paramètres",
+    "tutorial": "Tutoriel",
+    "exitTable": "Quitter La Table",
+    "exit": "Fermer La Fenêtre",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "signin": "Inscription"
+  },
+  "connection": {
+    "login": "Connexion",
+    "signin": "Inscription",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "repeatPass": "Répéter votre mot de passe",
+    "email": "Email",
+    "forgotPass": "J'ai oublié mon mot de passe",
+    "forgotPassQuestion": "Mot de passe oublié ?",
+    "forgotPassEnter": "Entrez votre email pour recevoir un lien de réinitialisation de mot de passe.",
+    "registerNewAcc": "Créer un nouveau compte",
+    "signinG": "Se connecter avec Google",
+    "haveAccQuestion": "Vous avez déjà un compte ?",
+    "optional": "Optionnel",
+    "loginMessage": "Se connecter à son compte",
+    "registerMessage": "Créer son compte",
+    "send": "Envoyer",
+    "returnConnection": "Retourner au menu de connection",
+    "loginSuccess": "Connexion réussit !"
+  },
+  "messageBox": {
+    "loginSucces": "Connecté avec succès !",
+    "ok": "D'accord"
+  },
+  "game": {
+    "loginPlay": "Connectez-vous pour jouer",
+    "signupPlay": "Créer un compter pour jouer",
+    "startGame": "Commencer une partie",
+    "joinGame": "Rejoindre une partie",
+    "createAgame": "Créer une nouvelle partie",
+    "status": "Statut",
+    "name": "Nom",
+    "gameName": "Nom de la partie",
+    "ranked": "Classé",
+    "players": "Joueurs",
+    "selectRank": "Sélectionnez le rang",
+    "join": "Rejoindre",
+    "full": "Complet"
+  },
+  "serverPanel": {
+    "name": "Nom",
+    "rank": "Rang",
+    "privacy": "Privé",
+    "join": "Rejoindre",
+    "full": "Complet",
+    "status": "Statut",
+    "action": "Action"
+  },
+  "handGuide": {
+    "highcard": "Carte haute",
+    "pair": "Paire",
+    "twoPair": "Double Paire",
+    "threeOfKind": "Brelan",
+    "straight": "Suite",
+    "flush": "Couleur",
+    "fullHouse": "Full",
+    "fourOfKind": "Carré",
+    "straightFlush": "Quinte Flush",
+    "royalFlush": "Quinte Flush Royale"
+  },
+  "gameActionPanel": {
+    "raise": "Relancer",
+    "call": "Suivre",
+    "check": "Vérifier",
+    "fold": "Se coucher"
+  },
+  "bonus": {
+    "bonus": "BONUS"
+  },
+  "playersStatus": {
+    "empty": "Vide",
+    "called": "Suivi",
+    "fold": "Se couche",
+    "raised": "Relancé",
+    "checked": "Vérifié",
+    "playing": "En jeu"
+  },
+  "settings": {
+    "mute": "Muet",
+    "theme": "Thème",
+    "langSelect": "Sélectionnez une langue"
+  },
+  "profil": {
+    "name": "Nom",
+    "mail": "Mail",
+    "coins": "Crédits",
+    "date": "Date création compte",
+    "unknowDate":"Date inconnue"
+
+  },
+  "shop": {
+    "shop": "Magasin",
+    "baseAvatar": "Avatars",
+    "sunglasses": "Lunettes",
+    "colorAvatar": "Couleur",
+    "confirmationMessage": "Êtes-vous sûr de vouloir acheter cet élément pour ",
+    "confirm": "Confirmer",
+    "cancel": "Annuler",
+    "price": "prix",
+    "success": "Achat réalisé avec succès !"
+  },
+  "messageLogo": {
+    "tutorial": "Tutoriel",
+    "profile": "Profil",
+    "listeTable": "REJOINDRE UNE PARTIE",
+    "createTable": "CRÉER UNE NOUVELLE PARTIE",
+    "validation": "Confirmation d'achat",
+    "shop": "Boutique"
+  },
+  "alert":{
+    "confirmExitMessage" : "Etes-vous sûr de vouloir quitter la table ? Vous allez perdre vos SC en jeu",
+    "confirm" : "Confirmer",
+    "cancel" : "Annuler",
+    "logout" : "Vous êtes sur le point de vous déconnecter"
+  }
+}

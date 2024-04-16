@@ -1,0 +1,155 @@
+.shop-window {
+  display: flex;
+  height: 95%;
+  width: 95%;
+  border-radius: 0px;
+  overflow: hidden;
+}
+
+.shop-tabs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: unset;
+  padding: 10px;
+  color: white;
+  width: 32%;
+  align-items: center;
+}
+
+.items-display {
+  width: 100%;
+  overflow-y: auto;
+  background-color: unset;
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.shop-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.shop-tabs a {
+  padding: 10px;
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 0;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.avatar-display-container {
+  bottom: 0;
+  left: 50%;
+  padding: 20px;
+  width: 10vw;
+  height: 10vw;
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.shop-tabs button {
+  width: 100%;
+}
+
+.shop-tabs a:hover {
+  background-color: #555;
+}
+
+.skin-item {
+  width: 100%;
+  height: auto;
+}
+
+.skin-item img {
+  width: 100%;
+  height: auto;
+}
+
+
+.owned-item {
+  background-color: green;
+}
+.shop-item {
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  flex-direction: column;
+  width: calc(20% - 10px);
+  margin: 5px;
+  height: 12vw;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: unset;
+  color: white;
+  border-radius: 10px;
+}
+.shop-item p{
+  margin: 0;
+  font-size: calc(0.7vw + 0.5vh);
+}
+/*for avatars*/
+.shop-item img{
+  width: 70%;
+  height: auto;
+  border-radius: 50%;
+  margin:10% 0 10% 0; 
+}
+
+.shop-item.active-item img {
+  border: calc(0.3vw + 0.3vh) solid rgba(51, 253, 0, 0.5);
+}
+
+.shop-item.non-active-item img{
+  border: calc(0.3vw + 0.3vh) solid rgba(0, 0, 0, 0.5);
+}
+
+/*for colors*/
+.shop-item div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  margin:15% 0 10% 0;  
+}
+
+.shop-item.active-item div:first-child {
+  outline: calc(0.3vw + 0.3vh) solid rgba(51, 253, 0, 0.5);
+}
+
+.shop-item.non-active-item div:first-child{
+  outline: calc(0.3vw + 0.3vh) solid rgba(0, 0, 0, 1);
+}
+
+.shop-item:hover{
+    filter: brightness(150%);
+    cursor: pointer;
+    color: black;
+    text-shadow: unset;
+  }
+
+.user-coins-back,.user-coins-text {
+  position: absolute;
+  left: 5%;
+  top: -23%;
+  width: fit-content;
+  height: 20vh;
+  padding: 0 1vw 0 1vw;
+  font-size: calc(0.5vh + 1vw);
+}
+.user-coins-back{
+  border-radius: 10px;
+  z-index: -1;
+}
+.user-coins-text{
+  color: white;
+  text-shadow: 0 0 10px white;
+}

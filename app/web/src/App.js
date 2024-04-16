@@ -5,7 +5,7 @@ import "./App.css";
 import GameTable from "./pages/gameTable";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { AuthProvider } from "./components/Utiles/AuthProvider";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -18,15 +18,15 @@ comm.joinRoom(10);
 function App() {
   return (
     <WindowProvider>
-      <Router>
-        <AuthProvider>
-          <SettingsProvider>
-            <Routes>
-              <Route path="/" Component={GameTable} />
-            </Routes>
-          </SettingsProvider>
-        </AuthProvider>
-      </Router>
+        <Router>
+          <AuthProvider>
+            <SettingsProvider>
+                <Routes>
+                  <Route path="/" Component={GameTable} />
+                </Routes>
+            </SettingsProvider>
+          </AuthProvider>
+        </Router>
     </WindowProvider>
   );
 }

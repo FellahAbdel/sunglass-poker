@@ -1,10 +1,30 @@
-// index.js
+// bdd.js
 const mongoose = require("mongoose");
 const UserModel = require("./User");
 const StatModel = require("./Stat");
 const GameDescriptionModel = require("./GameDescription");
+const ItemModel = require("./Item");
 const jwt = require("jsonwebtoken");
-const game = require("../controller/game");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const initOrUpdateItems = require("./initItems");
+
+require("dotenv").config();
+
+const cors = require("cors");
+
+const verifyToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) return res.sendStatus(403);
+    req.userId = decoded.id;
+    next();
+  });
+};
 
 module.exports = function (app, bdd) {
   console.log(bdd);
@@ -18,25 +38,23 @@ module.exports = function (app, bdd) {
   );
   db.once("open", async () => {
     console.log("Connecté à la base de données MongoDB");
+    //await UserModel.deleteMany({});
+    //await StatModel.deleteMany({});
 
-    async function getAllRecords() {
-      try {
-        const records = await GameDescriptionModel.find({});
-        console.log("All records:", records);
-        // Process fetched records here
-      } catch (err) {
-        console.error("Error fetching records:", err);
-        // Handle error here
-      }
-    }
-
-    getAllRecords();
-
-    // console.log(bdd);
+    initOrUpdateItems();
   });
+  /*try {
 
-  //file to create a user
-  app.get("/view/createUser", (req, res) => {
+    const users = await UserModel.find();
+    console.log("Affichage des utilisateurs dans la base de données :");
+    console.log(users); // Affichez le résultat dans la console
+  } catch (error) {
+    console.error("Erreur lors de la récupération des utilisateurs :", error);
+  
+  }
+});*/
+
+  app.get("/view/createUser", async (req, res, next) => {
     const filepath = "test.html";
     res.sendFile(filepath, { root: __dirname });
   });

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erreur de chargement</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url(./imgdesktop/backdrop2.jpg);
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Aligne les éléments en haut */
+      align-items: center; /* Centre les éléments horizontalement */
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      color: black;
+      text-align: center;
+      margin-top: 15vh; /* Ajustez la marge supérieure selon vos besoins */
+      font-family: Monaco, monospace;
+      font-size: 5vw;
+    }
+
+    img {
+      margin-top: 3vh; /* Ajustez la marge supérieure selon vos besoins */
+      max-width: 80vw; /* Utilise vw pour une largeur maximale proportionnelle à la largeur de la fenêtre */
+      max-height: 60vh; 
+      width: auto; 
+      height: auto;
+    }
+
+    .retry-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 10px; /* Ajoutez une valeur appropriée pour l'arrondi */
+      cursor: pointer;
+      transition: background-color 0.3s ease; /* Ajoute une transition en douceur pour le survol */
+      margin-top: 4vh;
+    }
+
+    .retry-button:hover {
+      background-color: #0056b3; /* Changement de couleur de fond au survol */
+    }
+
+    .retry-button:active {
+      background-color: #0056b3; /* Nouvelle couleur de fond lors du clic */
+    }
+
+  </style>
+</head>
+<body>
+  <img src="./imgdesktop/SunGameStudio_logo_dark.png" alt="Logo SunGameStudio">
+
+   <button class="retry-button" onclick="retry()">Réessayer</button>
+
+  <script>
+    // Fonction pour recharger la page lorsque le bouton "Réessayer" est cliqué
+    function retry() {
+      window.location.reload();
+    }
+    </script>
+
+  <h1>SUNGLASSPOKER n'a pas pu se lancer 😭</h1>
+</body>
+</html>

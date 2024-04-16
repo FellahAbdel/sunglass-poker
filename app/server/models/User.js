@@ -22,18 +22,34 @@ const UserSchema = new Schema({
   coins: {
     type: Number,
     required: true,
-    default: 0,
+    default: 1000,
   },
-  avatar: {
-    type: Number,
+  baseAvatar: {
+    type: Schema.Types.ObjectId,
+    ref: "Item",
     required: true,
-    default: 1,
+  },
+  sunglasses: {
+    type: Schema.Types.ObjectId,
+    ref: "Item",
+    default: null,
+  },
+  colorAvatar: {
+    type: Schema.Types.ObjectId,
+    ref: "Item",
+    default: null,
   },
   stat: {
     type: Schema.Types.ObjectId,
     ref: "Stat",
     unique: true,
   },
+  itemsOwned: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
 });
 
 const UserModel = model("User", UserSchema);

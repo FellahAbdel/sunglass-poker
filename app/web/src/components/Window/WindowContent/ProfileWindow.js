@@ -5,64 +5,46 @@ import Button from "../../button/Button.tsx";
 //import { useAuth } from "../../AuthProvider";
 import { useWindowContext } from "../../Utiles/WindowContext";
 import { useUserData } from "../../Utiles/useUserData";
+import { useTranslation } from "../../Utiles/Translations";
+import AvatarDisplay from "../../AvatarDisplay/AvatarDisplay.jsx";
 
 const ProfileWindow = () => {
-    const { openWindow } = useWindowContext();
-    const { user } = useUserData();
+  const { getTranslatedWord } = useTranslation();
 
-  // const handleEditName = () => {
-  //     setEditingName(true);
-  // }
-
-  // const handleSaveName = () => {
-  //     // Here you would typically update the user's name in your state or database
-  //     setEditingName(false);
-  // }
-
-  // const handleNameChange = (event) => {
-  //     setName(event.target.value);
-  // }
+  const { openWindow } = useWindowContext();
+  const { user } = useUserData();
 
   return (
     <div className="profileMenu">
-      <img
-        className="userPP"
-        src={require("./../../assets/images/pp_simple.jpg")}
-        alt="User Profile"
-      />
+      <div className="userPP">
+        <AvatarDisplay />
+      </div>
 
       <div className="userInfo">
+        <div className="userInfo-items">
+          {getTranslatedWord("profil.name")}
+          <br />
+          {getTranslatedWord("profil.mail")}
+          <br />
+          {getTranslatedWord("profil.coins")}
+          <br />
+          {getTranslatedWord("profil.date")}
+          <br />
+        </div>
 
-      <div className="userInfo-items">
-        Name
-        <br />
-        Mail
-        <br />
-        Coins
-        <br />
-        Joined Date
-        <br />
+        <div className="vertical-line" />
+
+        <div className="userInfo-Info">
+          {user?.pseudo || "Pseudo par défaut"}
+          <br />
+          {user?.email || "email inconnu"}
+          <br />
+          {user?.coins}
+          <br />
+          {user?.joinedDate || getTranslatedWord("profil.unknowDate")}
+          <br />
+        </div>
       </div>
-
-      <div className="vertical-line"/>
-
-      <div className="userInfo-Info">{user?.pseudo || "Pseudo par défaut"}
-        <br />
-        {user?.email || "email inconnu"}
-        <br />
-        {user?.coins || "0"}
-        <br />
-        {user?.joinedDate || "Date inconnue"} 
-        <br />
-      </div>
-
-
-      </div>
-      <Button
-          styleClass={"btn-gameStart"}
-          label={"User Stats"}
-          onClick={() => openWindow("stats")}
-        />
     </div>
   );
 };
