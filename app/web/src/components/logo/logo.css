@@ -23,12 +23,16 @@
 }
 
 .logo-main img {
+  display: flex;
   width: 11vw;
   transition: width 1s ease;
 }
 .logo-main.disappear {
   opacity: 0;
   z-index: -999;
+}
+.logo-accueil.logo-textPadding h1 {
+  padding: 0;
 }
 .logo-textPadding h1 {
   padding-left: 1.5vw;
