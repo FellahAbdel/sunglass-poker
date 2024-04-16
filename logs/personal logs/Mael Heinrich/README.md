@@ -74,4 +74,7 @@
 
 2024/05/16: 30min   Reglage de la version desktop sur linux+tentatives d'ajout d'une icone pour l'appli executable
 
-TEMPS TOTAL: 66h45  
+2024/05/16  3H15    Reunion...
+
+
+TEMPS TOTAL: 70H  
