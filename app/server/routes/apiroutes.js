@@ -3,10 +3,13 @@ const router = express.Router();
 
 const verifyToken = require("./auth");
 
-app = express();
+
 port = 3001; // Port du server
 
 module.exports = (app, dao) => {
+  app.get('/api/users', async (req, res) =>  {
+    res.status(200).json({text:"/api/users"});
+  })
   app.post("/api/users", async (req, res) => {
     try {
       const { pseudo, email, password } = req.body;

@@ -14,10 +14,11 @@ const initItems = require("./initItems");
 
 require("dotenv").config();
 
-module.exports = function (app) {
+module.exports = function (app,bdd) {
+  console.log("bdd!",bdd);
   // Connexion à la base de données MongoDB
   mongoose.connect(
-    "mongodb://pokerBackEndServer:azerty@127.0.0.1:27017/Poker",
+    "mongodb://pokerBackEndServer:azerty@"+bdd+"/Poker",
     {
       //useNewUrlParser: true,
       //useUnifiedTopology: true,
@@ -74,6 +75,11 @@ module.exports = function (app) {
         if (!user) {
           throw new Error("Utilisateur non trouvé");
         }
+        {
+          error: true,
+          code: 400,
+          data: { error: "user_exists", field: "pseudo" },
+        };
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
