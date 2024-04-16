@@ -88,9 +88,9 @@ module.exports = function (app, bdd) {
     },
 
     LoginUser: async function (body) {
+      const res = { error: true, code: 400 };
       try {
         const { username, password } = body;
-        const res = { error: true, code: 400 };
         // Recherche d'un utilisateur dans la base de données avec la combinaison pseudo/mot de passe
         const user = await UserModel.findOne({ pseudo: username, password });
         if (user) {
