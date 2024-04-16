@@ -112,4 +112,10 @@
 
 2024/04/14 : 2h00           Téléchargement models, générations avatar
 
-TEMPS TOTAL: 109h00min
+2024/04/15 : 3h00           Window alert quand logout et leavetable, translations amélioré, reducer windowcontext.
+
+2024/04/16 : 2h30           Réunion debug, début DAO, discution IHM.
+
+2024/04/16 : 1h30           DAO table user (branche Features/bddmodule2)
+
+TEMPS TOTAL: 116h00min
