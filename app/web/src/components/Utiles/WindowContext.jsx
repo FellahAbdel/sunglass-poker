@@ -78,7 +78,12 @@ export const WindowProvider = ({ children }) => {
     console.log("Fermeture de la fenêtre");
     setAlertParams({ message: "", onConfirm: () => {}, onCancel: () => {} });
     setWindowOpen(false);
-    setWindowType("");
+    if(state.isGameTableVisible){
+      setWindowType("");
+    }
+    else{
+      setWindowType("accueil");
+    }
     if (state.redirectAfterSuccess) {
       openWindow(state.redirectAfterSuccess);
       setRedirectAfterSuccess("");
