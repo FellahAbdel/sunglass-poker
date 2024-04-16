@@ -15,6 +15,11 @@
 
   font-weight: 800;
 }
+.container-settingsParameteres{
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
 
 .settingsMenu,
 .h1 {
@@ -29,7 +34,7 @@
 }
 .container-switch-mute p,
 .container-switch-theme p {
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 /* The switch - the box around the slider */
@@ -82,8 +87,11 @@
   border-radius: 50%;
 }
 
-input:checked + .slider {
-  background-color: #000000;
+#dark input:checked + .slider {
+  background-color: var(--color1-dark);
+}
+#light input:checked + .slider {
+  background-color: var(--color1-light);
 }
 
 input:focus + .slider {
@@ -120,7 +128,7 @@ input:checked + .slider:before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #595400;
+  background-color: var(--color1-light);
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 34px;

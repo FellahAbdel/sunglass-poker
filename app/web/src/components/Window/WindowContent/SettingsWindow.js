@@ -20,46 +20,48 @@ const SettingsWindow = () => {
   return (
     <div className="settingsMenu">
       <h1>{getTranslatedWord("navbar.settings")}</h1>
-      <span className="container-switch-mute">
-        <p>{getTranslatedWord("settings.mute")}</p>
-        <label className="switch">
-          <input type="checkbox" checked={mute} onChange={toggleMute} />
-          <span className="slider" />
-        </label>
-      </span>
+      <div className="container-settingsParameteres">
+        <span className="container-switch-mute">
+          <label className="switch">
+            <input type="checkbox" checked={mute} onChange={toggleMute} />
+            <span className="slider" />
+          </label>
+          <p>{getTranslatedWord("settings.mute")}</p>
+        </span>
 
-      <span className="container-switch-mute">
-        <p>{getTranslatedWord("settings.animations")}</p>
-        <label className="switch">
-          <input type="checkbox" checked={animation} onChange={toggleAnimation} />
-          <span className="slider" />
-        </label>
-      </span>
+        <span className="container-switch-mute">
+          <label className="switch">
+            <input type="checkbox" checked={animation} onChange={toggleAnimation} />
+            <span className="slider" />
+          </label>
+          <p>{getTranslatedWord("settings.animations")}</p>
+        </span>
 
 
-      <span className="container-switch-theme">
-        <p>{getTranslatedWord("settings.theme")}</p>
-        <label className="switch">
-          <input type="checkbox" checked={themeDark} onChange={toggleTheme} />
-          <span className="slider" />
-        </label>
-      </span>
+        <span className="container-switch-theme">
+          <label className="switch">
+            <input type="checkbox" checked={themeDark} onChange={toggleTheme} />
+            <span className="slider" />
+          </label>
+          <p>{getTranslatedWord("settings.theme")}</p>
+        </span>
 
-      <span className="container-select-lang">
-        <p>{getTranslatedWord("settings.langSelect")}</p>
-        <select
-          name="lang"
-          className="select-lang"
-          id="language-select"
-          value={language}
-          onChange={handleLanguageChange}
-        >
-          <option value="en">English</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="de">Deutsch</option>
-        </select>
-      </span>
+        <span className="container-select-lang">
+          <p>{getTranslatedWord("settings.langSelect")}</p>
+          <select
+            name="lang"
+            className="select-lang"
+            id="language-select"
+            value={language}
+            onChange={handleLanguageChange}
+          >
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </span>
+      </div>
     </div>
   );
 };

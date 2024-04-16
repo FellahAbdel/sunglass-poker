@@ -114,7 +114,8 @@
     "confirm": "Confirm",
     "cancel": "Cancel",
     "price": "price",
-    "success": "Purchase successfully completed !"
+    "success": "Purchase successfully completed !",
+    "afterTransaction": "Sun Coins after transaction"
   },
   "messageLogo": {
     "tutorial": "Tutorial",
