@@ -82,4 +82,6 @@
 
 * 2024/04/11 : <b> 6h </b> <br/>       Travail individuel: <i>nouvelle NavbarV2 , optimisation de navbar , optimisations des components , optimisation de css de table et leur conditions , text input erreur taille correction ,changements de css de range et game action buttons , warning fixes </i>
 
-total: 123h00min
+* 2024/04/15 : <b> 7h </b> <br/>       Travail individuel: <i>omptimisation de qualité de fond de la table , amelioration de shopping window css , ajoute de shop sur navbar , affichage des coins sur shopping window , css hover general , component de placements des coins joué de chaque joueur sur la table , css pour changement des colors de fenetre table pour validations et alertes , ajoutes des nouvelles buttons à game action panel et leur fonctionalité et renouvlation des css , ajoutes des buttons de show carts à handGuide , toggle de animation dans settings pour atteindre des animations dans tout la jeu </i>
+
+total: 130h00min
