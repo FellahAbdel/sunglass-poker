@@ -4,6 +4,8 @@ import Button from "../../button/Button.tsx";
 import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../Utiles/Translations";
+import { useState, useEffect } from "react";
+import { useAuth } from "../../Utiles/AuthProvider.jsx";
 
 const ServerPanelWindow = () => {
   const { getTranslatedWord } = useTranslation();

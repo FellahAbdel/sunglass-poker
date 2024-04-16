@@ -29,6 +29,8 @@ const Table = ({
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
+  //   const dispatch = useDispatch();
+
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
   }, [isWindowOpen]);
@@ -37,9 +39,10 @@ const Table = ({
     console.log("isLogged Table:", isLogged);
   }, [isLogged]);
 
-  const onClickStartGame = () => {
-    dispatch(startGame());
-  }
+  //   const onClickStartGame = () => {
+  //     dispatch(startGame());
+  //   };
+
   useEffect(() => {
     if (isWindowOpen && isGameTableVisible) {
       setIsVisible(true);
@@ -60,8 +63,9 @@ const Table = ({
     <div className={classes.containerTable}>
       {/* the white border line around the table in the middle */}
       <div
-        className={`${!isWindowOpen ? "table-lineAround" : ""} ${!isGameTableVisible || isWindowOpen ? "disappear" : ""
-          }`}
+        className={`${!isWindowOpen ? "table-lineAround" : ""} ${
+          !isGameTableVisible || isWindowOpen ? "disappear" : ""
+        }`}
       />
 
       {/* Game Components */}
@@ -91,7 +95,8 @@ const Table = ({
       <LogoComponent
         styleClass={classes.logoComponent}
         label={`
-        ${[
+        ${
+          [
             "tutorial",
             "profile",
             "servers",
@@ -101,7 +106,7 @@ const Table = ({
           ].some((type) => windowType.includes(type))
             ? getTranslatedWord(`messageLogo.${windowType}`)
             : ""
-          }`}
+        }`}
       />
     </div>
   );

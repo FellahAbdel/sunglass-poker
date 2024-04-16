@@ -8,18 +8,14 @@ import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import TextGlitch from "./../../TextGlitch/TextGlitch.js";
 
 import { useDispatch } from "react-redux";
-import { startGame } from "../../../store//actions/actionsCreator";
+import { startGame } from "../../../store/actions/clientInteractionsCreator.js";
 
 import "./acceuil.css";
 
 const AcceuilWindow = () => {
   const { isLogged } = useAuth();
-  const {
-    closeWindow,
-    openWindow,
-    showGameTable,
-    setWindowType,
-  } = useWindowContext();
+  const { closeWindow, openWindow, showGameTable, setWindowType } =
+    useWindowContext();
   const { getTranslatedWord } = useTranslation();
   const dispatch = useDispatch();
 
