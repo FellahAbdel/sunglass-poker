@@ -61,7 +61,6 @@ const Table = ({
       {isGameTableVisible && !isWindowOpen && (
         <>
           <CardsPlacements
-            moneyPot={9999999}
             dealingFlop={dealingFlop}
             disappear={isWindowOpen}
             playersCardDistributedProp={playersCardDistributedProp}
