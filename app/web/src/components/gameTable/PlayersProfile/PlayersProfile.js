@@ -13,7 +13,7 @@ const PlayersProfile = ({
   gotCards,
 }) => {
   const { getTranslatedWord } = useTranslation();
-  const formattedChips = chips.toLocaleString();
+  const formattedChips = chips;
   const dollarSign = "$";
 
   return (
