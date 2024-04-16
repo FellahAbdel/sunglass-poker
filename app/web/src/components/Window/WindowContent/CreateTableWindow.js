@@ -3,9 +3,11 @@ import "./createTableWindow.css";
 import Button from "../../button/Button.tsx"; // Assurez-vous que le chemin est correct
 import TextInputComponent from "../../textInput/TextInput";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
+import { useAuth } from "../../Utiles/AuthProvider";
 
 const CreateGameWindow = () => {
   const { openWindow } = useWindowContext();
+  const { createGameRoom } = useAuth();
 
   const [gameData, setGameData] = useState({
     serverName: "",
@@ -21,10 +23,21 @@ const CreateGameWindow = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Creating game with settings:", gameData);
+
     // Creer la partie
+    const { serverName, password, rank } = gameData;
+    const success = await createGameRoom(serverName, password, rank);
+    if (success) {
+      // Handle success
+      console.log("Game created successfully");
+      openWindow("list_table");
+    } else {
+      // Handle failure
+      console.error("Error creating game");
+    }
   };
 
   return (
