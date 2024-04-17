@@ -7,6 +7,7 @@ import { useTranslation } from "../../Utiles/Translations";
 import TextInputComponent from "../../textInput/TextInput.jsx";
 
 const ServerPanelWindow = () => {
+  const handleChange = (event) => {};
   const { getTranslatedWord } = useTranslation();
 
   const fakeTables = [
@@ -54,6 +55,7 @@ const ServerPanelWindow = () => {
         placeholder="Search room"
         styleClass={"input-connectionDefault input-icon-GameName"}
         errorMessage={""}
+        onChange={handleChange}
       ></TextInputComponent>
       <div className="listTableHeader">
         <div className="headerItem">
