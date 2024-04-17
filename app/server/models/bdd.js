@@ -253,6 +253,38 @@ module.exports = function (app, bdd) {
       }
     },
 
+    userInfo: async function (token) {
+      const res = { error: true, code: 400 };
+      try {
+        const decoded = jwt.verify(token, "secretKeyForSession");
+        const user = await UserModel.findById(decoded.id);
+        if (!user) {
+          return {
+            ...res,
+            code: 404,
+            data: { success: false, message: "Utilisateur non trouvé" },
+          };
+        }
+        return {
+          ...res,
+          error: false,
+          code: 200,
+          data: { success: true, user },
+        };
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des informations de l'utilisateur :",
+          error
+        );
+        return {
+          ...res,
+          code: 500,
+          data: { success: false, message: "Erreur serveur" },
+        };
+      }
+      return res;
+    },
+
     getItems: async () => {
       try {
         const items = await ItemModel.find();
