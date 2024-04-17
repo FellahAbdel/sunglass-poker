@@ -314,6 +314,7 @@ module.exports = function (app, bdd) {
         throw error;
       }
     },
+
     createGameDescription: async function (serverName, password, rank) {
       try {
         const gameDescription = new GameDescriptionModel({
