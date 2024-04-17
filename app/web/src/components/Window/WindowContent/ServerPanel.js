@@ -53,7 +53,8 @@ const ServerPanelWindow = () => {
     <div className="listTableWindow">
       <TextInputComponent
         placeholder="Search room"
-        styleClass={"input-connectionDefault input-icon-GameName"}
+        styleClass={"input-connectionDefault input-searchBar input-icon-search"}
+        styleClass2={"container-textInputComponent2"}
         errorMessage={""}
         onChange={handleChange}
       ></TextInputComponent>

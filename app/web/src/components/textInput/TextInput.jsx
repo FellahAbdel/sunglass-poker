@@ -9,10 +9,11 @@ const TextInputComponent = ({
   onChange,
   errorMessage,
   styleClass,
+  styleClass2
 }) => {
   const hasError = errorMessage !== "";
   return (
-    <div className="container-textInputComponent">
+    <div className={`container-textInputComponent ${styleClass2}`}>
       <input
         type={type}
         name={name}

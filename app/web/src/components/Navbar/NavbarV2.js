@@ -90,6 +90,13 @@ const Navbar = ({}) => {
 
   const handleNull = () => {};
 
+
+  const handleProfile = () => {!isWindowOpen ? openWindow("profile"): closeWindow()};
+  const handleSettings = () => {!isWindowOpen ? openWindow("settings"): closeWindow()};
+  const handleShop = () => {!isWindowOpen ? openWindow("shop"): closeWindow()};
+  const handleTutorial = () => {!isWindowOpen ? openWindow("tutorial"): closeWindow()};
+
+
   let label;
   if (windowType === "accueil") {
     label = getTranslatedWord("navbar.logout");
@@ -151,9 +158,7 @@ const Navbar = ({}) => {
                 ? getTranslatedWord("navbar.profile")
                 : getTranslatedWord("navbar.login")
             }
-            onClick={() =>
-              isLogged ? openWindow("profile") : openWindow("login")
-            }
+            onClick={handleProfile}
             styleClass={`${isLogged ? "btn-profile-V2 " : "btn-logIn-V2 "}`}
             iconSrc={require("./../assets/images/icons/white/profile.png")}
           />
@@ -161,7 +166,7 @@ const Navbar = ({}) => {
 
         <Button
           label={getTranslatedWord("navbar.settings")}
-          onClick={() => openWindow("settings")}
+          onClick={handleSettings}
           styleClass={`${isLogged ? "btn-settings-V2 " : "btn-settings-V2 "}`}
           iconSrc={require("./../assets/images/icons/white/settings.png")}
         />
@@ -170,14 +175,14 @@ const Navbar = ({}) => {
         {isLogged && (
           <Button
             label={getTranslatedWord("shop.shop")}
-            onClick={() => openWindow("shop")}
+            onClick={handleShop}
             styleClass="btn-shop-V2"
             iconSrc={require("./../assets/images/icons/white/shop.png")}
           />
         )}
         <Button
           label={getTranslatedWord("navbar.tutorial")}
-          onClick={() => openWindow("tutorial")}
+          onClick={handleTutorial}
           styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
           iconSrc={require("./../assets/images/icons/white/tutorial.png")}
         />

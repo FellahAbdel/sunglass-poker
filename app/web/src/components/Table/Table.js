@@ -15,14 +15,29 @@ import LogoComponent from "../logo/Logo";
 import PlayersPots from "./PlayersPots" ;
 
 const Table = ({
-  dealingFlop,
-  playersCardDistributedProp,
-  playersCardsShowProp,
+
 }) => {
   const { isWindowOpen, windowType, isGameTableVisible } = useWindowContext();
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
+
+  //demo test-----------------------------------------
+    const [dealingFlop, setDealingFlop] = useState([false, false, false]);
+    const [playersCardsShow, setPlayersCardsShow] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [playersCardDistributed, setPlayersCardDistributed] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  
+    const testDealingFlop = () => {
+      setDealingFlop([!dealingFlop[0], !dealingFlop[1], !dealingFlop[2]]);
+    };
+    const testDistribution = () => {
+      setPlayersCardDistributed([!playersCardDistributed[0], !playersCardDistributed[1], !playersCardDistributed[2], !playersCardDistributed[3], !playersCardDistributed[4], !playersCardDistributed[5], !playersCardDistributed[6], 0, !playersCardDistributed[8], !playersCardDistributed[9]]);
+    };
+    const testCardsShow = () => {
+      setPlayersCardsShow([!playersCardsShow[0], !playersCardsShow[1], !playersCardsShow[2], !playersCardsShow[3], !playersCardsShow[4], !playersCardsShow[5], !playersCardsShow[6], 0, !playersCardsShow[8], !playersCardsShow[9]]);
+    };
+    //-----------------------------------------demo test
+
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
@@ -63,14 +78,18 @@ const Table = ({
           <CardsPlacements
             dealingFlop={dealingFlop}
             disappear={isWindowOpen}
-            playersCardDistributedProp={playersCardDistributedProp}
+            playersCardDistributedProp={playersCardDistributed}
           />
           <PlayersPlacements
-            playersCardDistributedProp={playersCardDistributedProp}
-            playersCardsShowProp={playersCardsShowProp}
+            playersCardDistributedProp={playersCardDistributed}
+            playersCardsShowProp={playersCardsShow}
             disappear={isWindowOpen}
           />
-          <PlayersPots/>
+          <PlayersPots
+            testOnClick1={testDealingFlop}
+            testOnClick2={testDistribution}
+            testOnClick3={testCardsShow}
+          />
         </>
       )}
       {/*All the panels other than game itself are included in window component*/}

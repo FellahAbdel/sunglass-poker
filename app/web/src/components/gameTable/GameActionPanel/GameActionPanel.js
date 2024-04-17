@@ -65,7 +65,7 @@ useEffect(() => {
     <div className="container-gameAction">
       <div className="container-cashSituation">
         <div className="userCoinCashs">{getTranslatedWord("gameActionPanel.currentSC")}: {Math.round(coins)}</div>
-        {showPopup && coinsAfterRaise ? <div className="userCoinCashs">{getTranslatedWord("gameActionPanel.afterSC")}: {Math.round(coinsAfterRaise)}</div> : ""}
+        {showPopup && (coinsAfterRaise || sliderValueText!==0) ? <div className="userCoinCashs">{getTranslatedWord("gameActionPanel.afterSC")}: {Math.round(coinsAfterRaise)}</div> : ""}
       </div>
       {showPopup && (<>
         <div className="container-raiseButtons">
