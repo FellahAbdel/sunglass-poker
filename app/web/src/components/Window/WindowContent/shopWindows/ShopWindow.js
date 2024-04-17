@@ -33,10 +33,8 @@ const ShopWindow = () => {
   //console.log("user.colorAvatar : ", user.colorAvatar);
 
   const isActive = (item) => {
-    
     if (item.category === "colorAvatar") {
-      //console.log("item.imgSrc : ", item.imgSrc);
-      return user.colorAvatar === item.imgSrc;
+      return user.colorAvatar.imgSrc === item.imgSrc;
     } else if (item.category === "sunglasses") {
       return user.sunglasses?._id === item._id;
     } else if (item.category === "baseAvatar") {

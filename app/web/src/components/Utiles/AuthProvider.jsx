@@ -32,31 +32,36 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const getAuthHeaders = () => {
-    const token = sessionStorage.getItem("authToken");
+    const token = sessionStorage.getItem('authToken');
     return {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
     };
-  };
+};
 
   const login = async (credentials) => {
     try {
       const response = await fetch("http://localhost:3001/api/login", {
         ...CORSSETTINGS,
-
         body: JSON.stringify(credentials),
       });
+      if (!response.ok) {
+        // Si la réponse n'est pas un 2xx, gérer l'erreur
+        const errorData = await response.json();
+        console.error('Erreur de login:', errorData.message);
+        return { error: errorData.message };
+      }
       const data = await response.json();
       if (data.success) {
-        sessionStorage.setItem("authToken", data.token); // Stocker le token en mémoire ou gérer via headers
+        sessionStorage.setItem("authToken", data.token); // Stocker le token en session
         dispatch({
           type: "LOGIN",
           payload: { ...data.userData, token: data.token },
         });
-        fetchUserInfo(data.token); //Charger les info de l'utilisateur
+        fetchUserInfo(data.token); // Charger les informations utilisateur
         return true;
       } else {
-        console.error(data.message);
+        console.error('Erreur de login:', data.message);
         return { error: data.message };
       }
     } catch (error) {
@@ -248,28 +253,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const fetchStats = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:3001/api/user-stats/${user._id}`,
-        {
-          method: "GET",
-          headers: getAuthHeaders(),
-        }
-      );
-      const data = await response.json();
-      console.log("Data fetched from fetchStats:", data);
-      if (data.success) {
-        return data.stats; // Supposons que la réponse contient un objet stats dans data.stats
-      } else {
-        console.error("Failed to fetch user stats");
-        return null;
-      }
-    } catch (error) {
-      console.error("Error fetching user stats:", error);
-      return null;
-    }
-  };
+  // const fetchStats = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:3001/api/user-stats/${user._id}`,
+  //       {
+  //         method: "GET",
+  //         headers: getAuthHeaders(),
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     console.log("Data fetched from fetchStats:", data);
+  //     if (data.success) {
+  //       return data.stats; // Supposons que la réponse contient un objet stats dans data.stats
+  //     } else {
+  //       console.error("Failed to fetch user stats");
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching user stats:", error);
+  //     return null;
+  //   }
+  // };
 
   const resolveImagePath = (relativePath) => {
     return `${process.env.PUBLIC_URL}${relativePath}`;
@@ -364,7 +369,7 @@ export const AuthProvider = ({ children }) => {
         registerUser,
         state,
         dispatch,
-        fetchStats,
+        //fetchStats,
         fetchItems,
         buyItem,
         activateAvatar,

@@ -14,6 +14,9 @@ const ProfileWindow = () => {
   const { openWindow } = useWindowContext();
   const { user } = useUserData();
 
+  const date = new Date(user.createdAt);
+  const formattedDate = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  
   return (
     <div className="profileMenu">
       <div className="userPP">
@@ -41,8 +44,7 @@ const ProfileWindow = () => {
           <br />
           {user?.coins}
           <br />
-          {user?.joinedDate || getTranslatedWord("profil.unknowDate")}
-          <br />
+          {formattedDate}          <br />
         </div>
       </div>
     </div>

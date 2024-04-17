@@ -1,295 +1,319 @@
-// bdd.js
+// Importations nécessaires
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const saltRounds = 10;
+
+// Modèles Mongoose
 const UserModel = require("./User");
 const StatModel = require("./Stat");
 const GameDescriptionModel = require("./GameDescription");
 const ItemModel = require("./Item");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-const initOrUpdateItems = require("./initItems");
+
+// Initialisation des items (si nécessaire)
+const initItems = require("./initItems");
 
 require("dotenv").config();
 
-const cors = require("cors");
-
-const verifyToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(" ")[1];
-
-  if (token == null) return res.sendStatus(401);
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) return res.sendStatus(403);
-    req.userId = decoded.id;
-    next();
-  });
-};
-
 module.exports = function (app, bdd) {
-  console.log(bdd);
+  console.log("bdd!", bdd);
+
   // Connexion à la base de données MongoDB
   mongoose.connect("mongodb://pokerBackEndServer:azerty@" + bdd + "/Poker", {});
+
   const db = mongoose.connection;
 
   db.on(
     "error",
-    console.error.bind(console, "Erreur de connexion à la base de données :")
+    console.error.bind(console, "Erreur de connexion à la base de données:")
   );
-  db.once("open", async () => {
+  db.once("open", () => {
     console.log("Connecté à la base de données MongoDB");
-    //await UserModel.deleteMany({});
-    //await StatModel.deleteMany({});
-
-    initOrUpdateItems();
-  });
-  /*try {
-
-    const users = await UserModel.find();
-    console.log("Affichage des utilisateurs dans la base de données :");
-    console.log(users); // Affichez le résultat dans la console
-  } catch (error) {
-    console.error("Erreur lors de la récupération des utilisateurs :", error);
-  
-  }
-});*/
-
-  app.get("/view/createUser", async (req, res, next) => {
-    const filepath = "test.html";
-    res.sendFile(filepath, { root: __dirname });
+    initItems();
   });
 
   const dao = {
-    CreateUser: async function (body) {
+    createUser: async (pseudo, email, password) => {
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
       try {
-        const { pseudo, email, password } = body;
-
-        // Vérification si le pseudo existe déjà
-        const existingPseudo = await UserModel.findOne({ pseudo });
-        if (existingPseudo) {
+        // Vérification de l'unicité du pseudo et de l'email
+        const existingUser = await UserModel.findOne({
+          $or: [{ pseudo }, { email }],
+        });
+        if (existingUser) {
           return {
             error: true,
             code: 400,
-            data: { error: "user_exists", field: "pseudo" },
+            data: {
+              error: "user_exists",
+              field: existingUser.pseudo === pseudo ? "pseudo" : "email",
+            },
           };
         }
 
-        // Vérification si l'email existe déjà
-        const existingEmail = await UserModel.findOne({ email });
-        if (existingEmail) {
-          return {
-            error: true,
-            code: 400,
-            data: { error: "user_exists", field: "email" },
-          };
+        // Fonction pour trouver les items par défaut
+        async function findDefaultItem(name, category = null) {
+          const query = category
+            ? { "names.en": name, category }
+            : { "names.en": name };
+          const item = await ItemModel.findOne(query);
+          if (!item) {
+            throw new Error(`Default item not found: ${name}`);
+          }
+          return item;
         }
 
-        // Création d'un nouvel utilisateur
-        const nouveauUtilisateur = new UserModel({
+        // Récupération des items par défaut
+        const defaultAvatar = await findDefaultItem("Sun");
+        const defaultColor = await findDefaultItem("White", "colorAvatar");
+        const defaultSunglasses = await findDefaultItem("Nothing");
+
+        // Création de l'utilisateur avec les items par défaut
+        const newUser = new UserModel({
           pseudo,
           email,
-          password,
+          password: hashedPassword,
+          itemsOwned: [
+            defaultAvatar._id,
+            defaultColor._id,
+            defaultSunglasses._id,
+          ],
+          baseAvatar: defaultAvatar._id,
+          sunglasses: defaultSunglasses._id,
+          colorAvatar: defaultColor._id,
         });
+        const savedUser = await newUser.save();
 
-        // Enregistrement dans la base de données
-        const utilisateurEnregistre = await nouveauUtilisateur.save();
-
-        // Création d'une nouvelle instance de Stat
-        const nouvelleStat = new StatModel({
+        // Création des statistiques de l'utilisateur
+        const newStat = new StatModel({
           maxCoins: 0,
           maxGain: 0,
           totalGain: 0,
           experience: 0,
-          user: utilisateurEnregistre._id, // Associez l'ID de l'utilisateur
+          user: savedUser._id,
         });
+        await newStat.save();
+        savedUser.stat = newStat._id;
+        await savedUser.save();
 
-        // Enregistrement de la statistique dans la base de données
-        await nouvelleStat.save();
-
-        // Mettre à jour la propriété 'stat' de l'utilisateur avec l'ID de la nouvelle stat
-        utilisateurEnregistre.stat = nouvelleStat._id;
-        await utilisateurEnregistre.save();
-
-        return { error: false, code: 201, data: utilisateurEnregistre };
+        return savedUser;
       } catch (error) {
-        console.error("Erreur lors de la création de l'utilisateur :", error);
-        return {
-          error: true,
-          code: 500,
-          data: { error: "Erreur lors de la création de l'utilisateur" },
-        };
-      }
-    },
-
-    LoginUser: async function (body) {
-      const res = { error: true, code: 400 };
-      try {
-        const { username, password } = body;
-        // Recherche d'un utilisateur dans la base de données avec la combinaison pseudo/mot de passe
-        const user = await UserModel.findOne({ pseudo: username, password });
-        if (user) {
-          // La combinaison de pseudo et de mot de passe est correcte
-          const token = jwt.sign({ id: user._id }, "secretKeyForSession", {
-            expiresIn: "1h",
-          });
-          // Envoyer toutes les informations de l'utilisateur dans la réponse
+        console.error("Erreur lors de la création de l'utilisateur:", error);
+        if (error.message.startsWith("Default item not found")) {
           return {
-            ...res,
-            error: false,
-            data: { success: true, message: "Login successful", token: token },
-            user: user._id,
-          };
-        } else {
-          // La combinaison de pseudo et de mot de passe n'est pas correcte
-          return {
-            ...res,
-            data: { success: false, message: "Invalid credentials" },
+            error: true,
+            code: 404,
+            data: { error: "item_not_found", message: error.message },
           };
         }
-      } catch (error) {
-        console.error("Erreur lors de la connexion :", error);
-        return {
-          ...res,
-          code: 500,
-          data: { success: false, message: "Server error" },
-        };
+        throw error;
       }
-      return res;
     },
 
-    checkEmail: async function (body) {
+    loginUser: async (username, password) => {
       try {
-        const { email } = body;
-        const res = { error: true, code: 400 };
-        // Recherche d'un utilisateur dans la base de données avec l'e-mail fourni
-        const user = await UserModel.findOne({ email });
-
-        if (user) {
-          // L'e-mail existe dans la base de données
+        const user = await UserModel.findOne({ pseudo: username });
+        if (!user) {
           return {
-            ...res,
-            data: { exists: true, message: "E-mail exists in the database" },
+            error: true,
+            code: 404,
+            data: { error: "user_not_found", message: "User not found" },
           };
-        } else {
-          // L'e-mail n'existe pas dans la base de données
+        }
+
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
           return {
-            ...res,
-            error: false,
-            code: 200,
+            error: true,
+            code: 401,
             data: {
-              exists: false,
-              message: "E-mail does not exist in the database",
+              error: "invalid_credentials",
+              message: "Invalid credentials",
             },
           };
         }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+        return {
+          success: true,
+          user: {
+            id: user._id,
+            pseudo: user.pseudo,
+            email: user.email,
+          },
+          token: token,
+        };
       } catch (error) {
-        console.error("Erreur lors de la vérification de l'e-mail :", error);
-        return { ...res, code: 500, data: { error: "Server error" } };
+        console.error("Error during login:", error);
+        throw error;
       }
-      return res;
     },
 
-    updateUserData: async function (body) {
+    checkEmail: async (email) => {
       try {
-        const { field, value, identifierType, identifierValue } = body;
-        const res = { error: true, code: 400 };
+        const user = await UserModel.findOne({ email });
+        if (user) {
+          return { exists: true, message: "E-mail exists in the database" };
+        } else {
+          return {
+            exists: false,
+            message: "E-mail does not exist in the database",
+          };
+        }
+      } catch (error) {
+        console.error("Error during email check:", error);
+        throw error;
+      }
+    },
 
-        // Mettez à jour le champ de l'utilisateur dans la base de données
+    updateUserData: async (identifierType, identifierValue, field, value) => {
+      try {
         const updatedUser = await UserModel.findOneAndUpdate(
           { [identifierType]: identifierValue },
           { $set: { [field]: value } },
-          { new: true }
+          { new: true, runValidators: true }
         );
-
         if (updatedUser) {
-          return {
-            ...res,
-            error: false,
-            code: 200,
-            data: { success: true, message: `${field} updated successfully` },
-          };
+          return { success: true, message: `${field} updated successfully` };
         } else {
-          return {
-            ...res,
-            data: { success: false, message: `Failed to update ${field}` },
-          };
+          return { success: false, message: `Failed to update ${field}` };
         }
       } catch (error) {
-        console.error(`Error updating ${field}:`, error);
-        return {
-          ...res,
-          code: 500,
-          data: { success: false, message: "Server error" },
-        };
+        console.error("Error updating user data:", error);
+        throw error;
       }
-      return res;
     },
 
-    userInfo: async function (token) {
-      const res = { error: true, code: 400 };
+    buyItem: async (userId, itemId) => {
       try {
-        const decoded = jwt.verify(token, "secretKeyForSession");
-        const user = await UserModel.findById(decoded.id);
+        const user = await UserModel.findById(userId);
         if (!user) {
-          return {
-            ...res,
-            code: 404,
-            data: { success: false, message: "Utilisateur non trouvé" },
-          };
+          return { success: false, message: "User not found" };
         }
+
+        const item = await ItemModel.findById(itemId);
+        if (!item) {
+          return { success: false, message: "Item not found" };
+        }
+
+        if (user.coins < item.price) {
+          return { success: false, message: "Not enough coins" };
+        }
+
+        user.coins -= item.price;
+
+        user.itemsOwned.push(item._id);
+
+        await user.save();
+
         return {
-          ...res,
-          error: false,
-          code: 200,
-          data: { success: true, user },
+          success: true,
+          message: "Item bought successfully",
+          user: {
+            id: user._id,
+            coins: user.coins,
+            itemsOwned: user.itemsOwned,
+          },
         };
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des informations de l'utilisateur :",
-          error
-        );
-        return {
-          ...res,
-          code: 500,
-          data: { success: false, message: "Erreur serveur" },
-        };
+        console.error("Error buying item:", error);
+        throw error;
       }
-      return res;
     },
 
-    //route pour récupérer les statistiques d'un utilisateur
-    userStat: async function (userId) {
-      res = { error: true, code: 400 };
+    getUserInfo: async (userId) => {
+      console.log("Fetching info for user ID:", userId);
       try {
-        const stats = await StatModel.findOne({ user: userId }).populate(
-          "user",
-          "pseudo"
-        );
-        if (stats) {
-          return {
-            ...res,
-            error: false,
-            code: 200,
-            data: { success: true, stats },
-          };
-        } else {
-          return {
-            ...res,
-            code: 404,
-            data: { success: false, message: "Stats not found" },
-          };
+        const user = await UserModel.findById(userId)
+          .populate("baseAvatar")
+          .populate("sunglasses")
+          .populate("colorAvatar")
+          .exec();
+
+        if (!user) {
+          console.log("No user found with ID:", userId); // Log if no user is found
+          return { success: false, message: "Utilisateur non trouvé" };
         }
-      } catch (error) {
-        console.error("Error retrieving user stats:", error);
+
         return {
-          ...res,
-          code: 500,
-          data: { success: false, message: "Server error" },
+          success: true,
+          user: {
+            ...user._doc,
+            baseAvatarImgSrc: user.baseAvatar ? user.baseAvatar.imgSrc : null,
+            sunglassesImgSrc: user.sunglasses ? user.sunglasses.imgSrc : null,
+            colorAvatarImgSrc: user.colorAvatar
+              ? user.colorAvatar.imgSrc
+              : "#FFFFFF",
+          },
         };
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+        throw error;
       }
-      return res;
     },
 
+    getItems: async () => {
+      try {
+        const items = await ItemModel.find();
+        return { success: true, items: items };
+      } catch (error) {
+        console.error("Error fetching items:", error);
+        throw new Error("Error fetching items from the database");
+      }
+    },
+
+    activateAvatar: async (userId, itemId) => {
+      try {
+        const user = await UserModel.findById(userId);
+        if (!user) {
+          return { success: false, message: "User not found" };
+        }
+
+        const item = await ItemModel.findById(itemId);
+        if (!item) {
+          return { success: false, message: "Item not found" };
+        }
+
+        const itemExists = user.itemsOwned.some(
+          (id) => id.toString() === itemId
+        );
+        if (!itemExists) {
+          return { success: false, message: "Item not owned" };
+        }
+
+        let itemType;
+        switch (item.category) {
+          case "baseAvatar":
+            itemType = "baseAvatar";
+            user.baseAvatar = itemId;
+            break;
+          case "sunglasses":
+            itemType = "sunglasses";
+            user.sunglasses = itemId;
+            break;
+          case "colorAvatar":
+            itemType = "colorAvatar";
+            user.colorAvatar = itemId;
+            break;
+          default:
+            return { success: false, message: "Invalid item category" };
+        }
+
+        await user.save();
+
+        return {
+          success: true,
+          message: "Avatar component activated successfully",
+          itemType: itemType,
+          itemId: itemId,
+        };
+      } catch (error) {
+        console.error("Error activating avatar component:", error);
+        throw error;
+      }
+    },
     createGameDescription: async function (serverName, password, rank) {
       try {
         const gameDescription = new GameDescriptionModel({
