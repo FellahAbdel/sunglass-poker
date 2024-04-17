@@ -5,7 +5,7 @@ import TextInputComponent from "../../textInput/TextInput";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
 const CreateGameWindow = () => {
-  const { openWindow } = useWindowContext();
+  const { openWindow, openSuccessWindow } = useWindowContext();
 
   const [gameData, setGameData] = useState({
     serverName: "",
@@ -24,6 +24,9 @@ const CreateGameWindow = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Creating game with settings:", gameData);
+
+    openSuccessWindow("Game created successfully", "servers");
+
     // Creer la partie
   };
 
