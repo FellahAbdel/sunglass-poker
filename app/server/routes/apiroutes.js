@@ -6,6 +6,9 @@ const verifyToken = require("./auth");
 module.exports = (app, dao, gameController) => {
   app.get("/rooms", (req, res) => {
     var roomsInfos = [];
+    if(gameController !== undefined)
+    if(gameController.rooms !== undefined){
+      
     for (var room in gameController.rooms) {
       r = gameController.rooms[room];
       console.log(room);
@@ -14,6 +17,7 @@ module.exports = (app, dao, gameController) => {
         refresh: r.refresh !== undefined ? true : false,
       });
     }
+  }
     res.send(roomsInfos);
   });
 
