@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PlayersProfile from "../gameTable/PlayersProfile/PlayersProfile";
 import { useSelector } from "react-redux";
 
@@ -8,10 +8,15 @@ const PlayersPlacements = ({
   disappear,
 }) => {
   const playersInTable = useSelector((state) => state.game.players);
+  const [updatedPlayers, setUpdatedPlayers] = useState([]);
+
+  useEffect(() => {
+    setUpdatedPlayers(playersInTable);
+  }, [playersInTable]);
 
   return (
     <span className={`profiles ${disappear ? "disappear" : ""}`}>
-      {playersInTable.map((player, index) => (
+      {updatedPlayers.map((player, index) => (
         <div key={`profile${index}`} className={`profile profile${index}`}>
           <PlayersProfile
             status={player.status}
