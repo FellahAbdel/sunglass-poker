@@ -7,6 +7,7 @@ const GameDescriptionSchema = new Schema({
   serverName: String,
   password: String,
   rank: String,
+  countPlayers: Number,
 });
 
 const GameDescriptionModel = model("gameDescription", GameDescriptionSchema);
