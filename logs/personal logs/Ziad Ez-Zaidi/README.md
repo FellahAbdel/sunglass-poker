@@ -26,3 +26,6 @@
 - 4h séance du 26/03 (Réunion back : on s'est mis d'accord sur le schéma à suivre pour l'intégration back et front + monté en compétence REDUX)
 - 4h le 28/03 (Réunion back + front : résolution des conflits + erreurs + changement de l'hierarchie des fichiers afin de moduler le code pour implementer les composents REDUX)
 - 5h séance du 2/04 (Réunion Front + Back & 1ere simulation de la version 1 avec le Professeur + Reglage conflits)
+- 2h le 05/04 (travaille sur le ranking )
+- 3h le 09/04 (reunion Front + back / division des nouvelles taches + debut de travaille sur nouvelle Feature chat)
+- 3h séance du 16/04 (dernièr travail sur l'Ihm avant présentation + travail sur  présentation IHM/Projet)
