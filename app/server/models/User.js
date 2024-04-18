@@ -50,6 +50,11 @@ const UserSchema = new Schema({
       ref: "Item",
     },
   ],
+  inGame: {
+    type: Schema.Types.ObjectId,
+    ref: "gameDescription",
+    default:null,
+  }
 }, {
   timestamps: true
 });

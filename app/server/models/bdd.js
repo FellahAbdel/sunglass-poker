@@ -12,6 +12,7 @@ const GameDescriptionModel = require("./GameDescription");
 
 // Initialisation des items (si nécessaire)
 const initItems = require("./initItems");
+const emptyGames = require("./emptyGameDescription");
 
 require("dotenv").config();
 
@@ -29,6 +30,7 @@ module.exports = function (app, bdd) {
   );
   db.once("open", () => {
     console.log("Connecté à la base de données MongoDB");
+    emptyGames();
     initItems();
   });
 
@@ -81,6 +83,7 @@ module.exports = function (app, bdd) {
           baseAvatar: defaultAvatar._id,
           sunglasses: defaultSunglasses._id,
           colorAvatar: defaultColor._id,
+          inGame:null,
         });
         const savedUser = await newUser.save();
 
@@ -142,6 +145,7 @@ module.exports = function (app, bdd) {
             id: user._id,
             pseudo: user.pseudo,
             email: user.email,
+            inGame: user.inGame
           },
           token: token,
         };
@@ -247,6 +251,7 @@ module.exports = function (app, bdd) {
             colorAvatarImgSrc: user.colorAvatar
               ? user.colorAvatar.imgSrc
               : "#FFFFFF",
+            inGame:user.inGame
           },
         };
       } catch (error) {
