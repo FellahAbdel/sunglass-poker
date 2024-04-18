@@ -90,8 +90,8 @@ const ServerPanelWindow = () => {
             key={index}
             nom={table.serverName}
             rang={table.rank}
-            nombreDeJoueurs={0}
-            ouvert={"ouvert"}
+            nombreDeJoueurs={table.countPlayers}
+            ouvert={table.password ? "ferme" : "ouvert"}
             onJoinClick={handleJoinTable}
           />
         ))}
