@@ -68,15 +68,15 @@ module.exports = function (
    */
 
   async function identify(socket, token) {
-    csl.log(fileType,'User is himself with token ', token);
+    csl.log(fileType, 'User is himself with token ', token);
     if (token === null) {
       // csl.log(fileType,'Destroy socket for ', socket.id);
       // io.in(session.id).disconnectSockets(true);
       // session.destroy();
       // socket.disconnect();
-    } 
+    }
     else {
-      csl.log(fileType,socket.rooms,socket.rooms.has(token));
+      csl.log(fileType, socket.rooms, socket.rooms.has(token));
       if (!socket.rooms.has(token)) {
         try {
           const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -106,8 +106,8 @@ module.exports = function (
           );
           socket.join(token);
         } catch (err) {
-            csl.error(fileType, "Error with token : ", err);
-            socket.disconnect();
+          csl.error(fileType, "Error with token : ", err);
+          socket.disconnect();
         }
       }
     }
@@ -133,8 +133,8 @@ module.exports = function (
       if (answer.status === false) {
         socket.emit("joinRoom", answer);
       } else {
-        roomHash = gameController.hashRoom(data.id);
-        socket.join(roomHash);
+        room = data.id;
+        socket.join(room);
         socket.emit("joinRoom", answer);
         csl.log(fileType, answer);
         sendEvent(
@@ -144,7 +144,7 @@ module.exports = function (
             gameController.rooms[data.id].players
           )
         );
-        io.to(roomHash).emit("refresh");
+        io.to(room).emit("refresh");
         session.userRoom = data.id;
         session.save();
       }
@@ -195,30 +195,38 @@ module.exports = function (
     // Perform any necessary game initialization or logic here
     // We can dispatch an action to update the Redux state
     csl.log(fileType, "Who dispatch : ", session.userId);
+
+    const newGamePromise = new Promise((resolve) => {
+      // Call the DAO function
+      const id = gameController.newGame(session.userId);
+
+      // Resolve the promise once the DAO function completes
+      resolve(id);
+    });
+
+    // Wait for the promise to resolve
+    newGamePromise.then(id => {
+      csl.log(fileType, id, " >- id game created");
+      if (id === undefined) {
+        csl.error(fileType, "Refused to create new game");
+        return;
+      }
+      store.dispatch(actcrea.createGame(id));
+      // gameController.dispatch(session.userId,actions.START_GAME);
+      csl.log(fileType, "store dispatch");
+      csl.log(fileType, store.getState());
+      store.dispatch({ type: actions.GAME_STARTED });
+      console.log("dispatched GAME_STARTED got called");
+      state = store.getState();
+      const an = joinRoom(socket, { id: id });
+      csl.log(fileType, an);
+      socket.emit("joinRoom", an);
+      socket.emit("event", { payload: state.game.rooms[id], type: actions.GAME_STARTED });
+    });
+
     // Si l'action vient de quelqu'un non connecter on ignore
-    const id = gameController.newGame();
-    csl.log(fileType, id, " >- id game created");
-    if (id === undefined) {
-      csl.error(fileType, "Refused to create new game");
-      csl.log(fileType, "Join instead");
-      joinRoom(socket, { id: 10 });
-      // store.dispatch(actcrea.sit(10, session.userId));
-      // io.emit('event', { payload: state.game, type: actions.GAME_STARTED });
-      // csl.log(fileType, 'rooms : ', gameController.rooms.state);
-      // csl.log(fileType, 'la room gc:', gameController.rooms[10].game.players);
-      return;
-    }
-    store.dispatch(actcrea.createGame(id));
-    // gameController.dispatch(session.userId,actions.START_GAME);
-    csl.log(fileType, "store dispatch");
-    csl.log(fileType, store.getState());
-    store.dispatch({ type: actions.GAME_STARTED });
-    console.log("dispatched GAME_STARTED got called");
-    state = store.getState();
-    const an = joinRoom(socket, { id: id });
-    csl.log(fileType, an);
-    socket.emit("joinRoom", an);
-    socket.emit("event", { payload: state.game, type: actions.GAME_STARTED });
+
+
   }
 
   /** Lorsqu'une page est ouverte et se connecte au back.
@@ -285,7 +293,7 @@ module.exports = function (
 
     socket.on("createGame", () => {
       csl.log(fileType,
-      'user try to createGame user : ', session.userId);
+        'user try to createGame user : ', session.userId);
       if (session.userId) createGame(socket);
     });
 

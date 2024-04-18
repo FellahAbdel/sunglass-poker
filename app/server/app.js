@@ -4,7 +4,6 @@ const session = require("express-session");
 const cors = require("cors");
 const ENV_CONST_COMM = require("./controller/envConstants")();
 const gameController = require("./controller/gameController");
-gameController.init();
 const socketIOSession = require("socket.io-express-session");
 const MemoryStore = require("memorystore")(session);
 const csl = require("./controller/intelligentLogging");
@@ -65,6 +64,9 @@ const db = require("./models/bdd")(
   app,
   ENV_CONST_COMM.ENV_IP_BDD + ":" + ENV_CONST_COMM.ENV_PORT_BDD
 );
+
+
+gameController.init(db);
 
 const server = require("http").createServer(app);
 

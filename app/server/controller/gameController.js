@@ -1,8 +1,9 @@
 const gameReducer = require('../store/reducers/gameReducer');
+const gameDescriptionModel = require('../models/GameDescription');
 const actions =  require("../store/actions/actionsCreator");
 const jwt = require("jsonwebtoken");
 const { clearInterval } = require("timers");
-const createGame = require('./game');
+const initGameRoom = require('./game');
 const { create } = require('domain');
 const store = require('../store/configStore');
 const csl = require('./intelligentLogging');
@@ -13,30 +14,24 @@ const log_broadcast = false;
 
 module.exports = gameController = {
     io: null,
-    hashRoom: function (id) {
-        return id;
-    },
     rooms: {},
-    init: function(){
+    dao: null,
+    init: function(dao){
+        this.dao = dao;
         this.rooms = store.getState().game.rooms;
     },
 
     makeRefreshCall: function (room, reset = false) {
-        // return;
-        // csl.trace(fileType,this);
-        // csl.log(fileType,'Set refresh call for ', room, '  reset: ', reset);
-        const hroom = this.hashRoom(room);
-        // csl.log(fileType,this.rooms, hroom);
-        if (this.rooms.hasOwnProperty(hroom)) {
-            if (this.rooms[hroom].refresh && !reset) {
+        if (this.rooms.hasOwnProperty(room)) {
+            if (this.rooms[room].refresh && !reset) {
                 if(log_refresh) csl.error(fileType,"RefreshCall already exist, reset set to false -> Action canceled");
                 return;
             } else {
-                if (this.rooms[hroom].refresh) {
+                if (this.rooms[room].refresh) {
                     if(log_refresh) csl.log(fileType,'Refresh already in place, removed because reset is set to true');
-                    clearInterval(this.rooms[hroom].refresh);
+                    clearInterval(this.rooms[room].refresh);
                 }
-                this.rooms[hroom].refresh = setInterval((room, gc) => {
+                this.rooms[room].refresh = setInterval((room, gc) => {
                     if(log_refresh) csl.log(fileType,'Refresh for room : ', room);
                     gc.broadcastStatus(room);
                 }, 1000, room, this);
@@ -44,7 +39,7 @@ module.exports = gameController = {
             }
         }
         else
-            if(log_refresh) csl.error(fileType,"Can't create refreshCall for inexistant room, make sure it's NOT the hash that's passed", hroom);
+            if(log_refresh) csl.error(fileType,"Can't create refreshCall for inexistant room, make sure it's NOT the hash that's passed", room);
     },
 
     join: function (id, user) {
@@ -71,8 +66,7 @@ module.exports = gameController = {
         return { status: false, mes: 'No rooms' };
     },
     removePlayer: function (room, id) {
-        const hroom = this.hashRoom(room);
-        if (this.rooms.hasOwnProperty(hroom)) {
+        if (this.rooms.hasOwnProperty(room)) {
             let index = -1;
             if ((index = this.rooms[room].players.findIndex(player => player.getPlayerId() === id)) !== -1) {
                 csl.log(fileType,"Player : ", id, " removed from room : ", room);
@@ -88,19 +82,18 @@ module.exports = gameController = {
             csl.log(fileType,"mon io:", this.io);
             csl.log(fileType,'called for broadcast room ', room);
         }
-        const hroom = this.hashRoom(room);
         // Si la room existe
         if (this.io !== null) {
-            if (!this.rooms.hasOwnProperty(hroom)) {
+            if (!this.rooms.hasOwnProperty(room)) {
                 if(log_broadcast)csl.error(fileType,"Room expired or does not exist");
                 return;
             }
-            const players = this.rooms[hroom].players;
-            if(log_broadcast) csl.log(fileType,'gameController call for broadcast on ', room, ' to io with hash :', hroom);
+            const players = this.rooms[room].players;
+            if(log_broadcast) csl.log(fileType,'gameController call for broadcast on ', room, ' to io with hash :', room);
             if(players.length == 0){
                 if(log_broadcast) csl.log(fileType,'No player in room, refreshcall will be remove if set.');
-                if(this.rooms[hroom].refresh !==undefined)
-                    this.rooms[hroom].refresh=clearInterval(this.rooms[hroom].refresh);
+                if(this.rooms[room].refresh !==undefined)
+                    this.rooms[room].refresh=clearInterval(this.rooms[room].refresh);
             }
             // for (var i = 0; i < players.length; i++) {
             //     timedPassed = (Date.now() - players[i].gettimeLastAnswer());
@@ -109,7 +102,7 @@ module.exports = gameController = {
             //     //     this.removePlayer(room, players[i].id);
             //     // }
             // }
-            this.io.broadcastStatus(hroom);
+            this.io.broadcastStatus(room);
         } else  if(log_broadcast)csl.error(fileType,'No io to broadcast');
     },
     status: function (room, id) {
@@ -123,18 +116,20 @@ module.exports = gameController = {
         return { status: false, mes: "Can't refresh status", payload: [] };
     },
 
-    newGame: function(userId =false){
+    newGame: async function(userId){
+        if(userId === undefined) {csl.error(fileType,"player MUST be defined for newGame");return;};
         csl.log(fileType,"Create new game inside gameController");
-        if(this.rooms[10] !== undefined) return undefined;
-        const g = createGame();
-        const hroom = this.hashRoom(g.id);
-        this.rooms[hroom] = g;
-        store.dispatch(actions.startGame());
-        this.rooms[hroom].state = store.getState();
+        const respons  = await this.dao.createGameDescription('quickplay','','');
+        csl.log(fileType,'respons : ',respons);
+        if(respons.error) { csl.error(fileType,"Couln't create gamedescription",gameDescr.error); return;};
+        const gameDescr = respons.data;
+        const room = gameDescr._id;
+        this.rooms[room] = initGameRoom(room);
+        store.dispatch(actions.createGame(room));
         csl.log(fileType,this.rooms);
-        if(userId !== false)
-            this.join(g.id,userId);
-        return g.id;
+        this.join(room,userId);
+        await this.dao.updateUserData('_id',userId,'inGame',room);
+        return room;
     },
 
     dispatch: function(user, action){
