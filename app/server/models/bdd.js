@@ -348,13 +348,20 @@ module.exports = function (app, bdd) {
       }
     },
 
-    createGameDescription: async function (serverName, password, rank) {
+    createGameDescription: async function (
+      serverName,
+      roomPassword,
+      rank,
+      countPlayers
+    ) {
       try {
         const gameDescription = new GameDescriptionModel({
           serverName,
-          password,
+          roomPassword,
           rank,
+          countPlayers,
         });
+
         await gameDescription.save();
         return { error: false, code: 200, data: gameDescription };
       } catch (error) {
