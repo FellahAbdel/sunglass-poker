@@ -8,6 +8,7 @@ const saltRounds = 10;
 const UserModel = require("./User");
 const StatModel = require("./Stat");
 const ItemModel = require("./Item");
+const GameDescriptionModel = require("./GameDescription");
 
 // Initialisation des items (si nécessaire)
 const initItems = require("./initItems");
@@ -344,6 +345,39 @@ module.exports = function (app, bdd) {
       } catch (error) {
         console.error("Error activating avatar component:", error);
         throw error;
+      }
+    },
+
+    createGameDescription: async function (serverName, password, rank) {
+      try {
+        const gameDescription = new GameDescriptionModel({
+          serverName,
+          password,
+          rank,
+        });
+        await gameDescription.save();
+        return { error: false, code: 200, data: gameDescription };
+      } catch (error) {
+        console.error("Error creating game description:", error);
+        return {
+          error: true,
+          code: 500,
+          data: { error: "Error creating game description" },
+        };
+      }
+    },
+
+    gameRoomDescription: async function () {
+      try {
+        const gameDescriptions = await GameDescriptionModel.find({});
+        return { error: false, code: 200, data: gameDescriptions };
+      } catch (error) {
+        console.error("Error fetching game descriptions:", error);
+        return {
+          error: true,
+          code: 500,
+          data: { error: "Error fetching game descriptions" },
+        };
       }
     },
   };
