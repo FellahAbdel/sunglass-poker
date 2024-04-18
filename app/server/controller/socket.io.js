@@ -68,15 +68,14 @@ module.exports = function (
    */
 
   async function identify(socket, token) {
-    csl.log(fileType,'User is himself with token ', token);
+    csl.log(fileType, "User is himself with token ", token);
     if (token === null) {
       // csl.log(fileType,'Destroy socket for ', socket.id);
       // io.in(session.id).disconnectSockets(true);
       // session.destroy();
       // socket.disconnect();
-    } 
-    else {
-      csl.log(fileType,socket.rooms,socket.rooms.has(token));
+    } else {
+      csl.log(fileType, socket.rooms, socket.rooms.has(token));
       if (!socket.rooms.has(token)) {
         try {
           const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -106,8 +105,8 @@ module.exports = function (
           );
           socket.join(token);
         } catch (err) {
-            csl.error(fileType, "Error with token : ", err);
-            socket.disconnect();
+          csl.error(fileType, "Error with token : ", err);
+          socket.disconnect();
         }
       }
     }
@@ -284,8 +283,7 @@ module.exports = function (
     });
 
     socket.on("createGame", () => {
-      csl.log(fileType,
-      'user try to createGame user : ', session.userId);
+      csl.log(fileType, "user try to createGame user : ", session.userId);
       if (session.userId) createGame(socket);
     });
 
