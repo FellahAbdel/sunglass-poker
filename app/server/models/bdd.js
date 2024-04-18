@@ -240,6 +240,7 @@ module.exports = function (app, bdd) {
           success: true,
           user: {
             ...user._doc,
+            pseudo: user.pseudo,
             baseAvatarImgSrc: user.baseAvatar ? user.baseAvatar.imgSrc : null,
             sunglassesImgSrc: user.sunglasses ? user.sunglasses.imgSrc : null,
             colorAvatarImgSrc: user.colorAvatar

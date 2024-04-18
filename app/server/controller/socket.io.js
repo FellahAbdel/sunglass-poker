@@ -68,17 +68,19 @@ module.exports = function (
    */
 
   async function identify(socket, token) {
-    // csl.log(fileType,'Sets rooms',socket.rooms);
+    csl.log(fileType,'User is himself with token ', token);
     if (token === null) {
       // csl.log(fileType,'Destroy socket for ', socket.id);
       // io.in(session.id).disconnectSockets(true);
       // session.destroy();
       // socket.disconnect();
-    } else {
+    } 
+    else {
+      csl.log(fileType,socket.rooms,socket.rooms.has(token));
       if (!socket.rooms.has(token)) {
         try {
-          const decoded = jwt.verify(token, "secretKeyForSession");
-
+          const decoded = jwt.verify(token, process.env.JWT_SECRET);
+          console.log(decoded);
           session.save();
           csl.log(
             fileType,
@@ -87,10 +89,11 @@ module.exports = function (
             " join room session:",
             token
           );
-          info = await dao.userInfo(token);
-          if (!info.error) {
-            if (info.data.success) {
-              session.pseudo = info.data.user.pseudo;
+          info = await dao.getUserInfo(decoded.id);
+          console.log(info);
+          if (info.success) {
+            if (info.user) {
+              session.pseudo = info.user.pseudo;
             }
           }
           session.userId = decoded.id;
@@ -103,10 +106,8 @@ module.exports = function (
           );
           socket.join(token);
         } catch (err) {
-          if (err.name === "TokenExpiredError") {
-            csl.log(fileType, "token expired for status");
+            csl.error(fileType, "Error with token : ", err);
             socket.disconnect();
-          }
         }
       }
     }
@@ -283,6 +284,8 @@ module.exports = function (
     });
 
     socket.on("createGame", () => {
+      csl.log(fileType,
+      'user try to createGame user : ', session.userId);
       if (session.userId) createGame(socket);
     });
 
