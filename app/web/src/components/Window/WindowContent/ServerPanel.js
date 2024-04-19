@@ -104,7 +104,6 @@ const ServerPanelWindow = () => {
             onJoinClick={() => handleJoinTable(table._id)}
             nombreDeJoueurs={table.countPlayers}
             ouvert={table.password ? "ferme" : "ouvert"}
-            onJoinClick={handleJoinTable}
           />
         ))}
       </div>

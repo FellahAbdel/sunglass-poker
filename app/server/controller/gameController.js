@@ -119,7 +119,7 @@ module.exports = gameController = {
     newGame: async function(userId){
         if(userId === undefined) {csl.error(fileType,"player MUST be defined for newGame");return;};
         csl.log(fileType,"Create new game inside gameController");
-        const respons  = await this.dao.createGameDescription('quickplay','','');
+        const respons  = await this.dao.createGameDescription('quickplay','','',0);
         csl.log(fileType,'respons : ',respons);
         if(respons.error) { csl.error(fileType,"Couln't create gamedescription",gameDescr.error); return;};
         const gameDescr = respons.data;
