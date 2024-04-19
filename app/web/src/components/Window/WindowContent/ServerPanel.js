@@ -5,9 +5,12 @@ import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../Utiles/Translations";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
+import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 
 const ServerPanelWindow = () => {
+  const dispatch = useDispatch();
   const { getTranslatedWord } = useTranslation();
 
   const fakeTables = [
@@ -44,6 +47,7 @@ const ServerPanelWindow = () => {
   ];
 
   const { getRoomTableRecords } = useAuth();
+  const { isLogged } = useAuth();
   const [roomTableRecords, setRoomTableRecords] = useState([]); // State to store fetched roomTableRecords data
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken"); // Ou localStorage selon votre préférence
@@ -61,14 +65,19 @@ const ServerPanelWindow = () => {
       }
     };
 
+
     fetchRoomTableRecords(); // Call the fetchTables function when the component mounts
   }, []); // Empty dependency array to run this effect only once after the initial render
 
   console.log("roomsTableRecords : ", roomTableRecords); // Log the fetched roomTableRecords data to the console
   const { openWindow } = useWindowContext();
 
-  const handleJoinTable = () => {
+  const handleJoinTable = (id) => {
     // Logique pour rejoindre une table à faire
+    if (isLogged) {
+      console.log('Le joueur veut rejoindre la partie ', id);
+      dispatch(actions.joinRoom(id));
+    }
   };
 
   return (
@@ -92,7 +101,7 @@ const ServerPanelWindow = () => {
             rang={table.rank}
             nombreDeJoueurs={0}
             ouvert={"ouvert"}
-            onJoinClick={handleJoinTable}
+            onJoinClick={() => handleJoinTable(table._id)}
           />
         ))}
       </div>

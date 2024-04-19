@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
+const store = require('../store/configStore');
 const verifyToken = require("./auth");
 
 module.exports = (app, dao, gameController) => {
   app.get("/rooms", (req, res) => {
-    var roomsInfos = [];
+    var roomsInfos = store.getState();
     if(gameController !== undefined)
     if(gameController.rooms !== undefined){
       
