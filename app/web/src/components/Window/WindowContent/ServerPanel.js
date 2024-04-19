@@ -99,7 +99,6 @@ const ServerPanelWindow = () => {
             key={index}
             nom={table.serverName}
             rang={table.rank}
-            nombreDeJoueurs={0}
             ouvert={"ouvert"}
             onJoinClick={() => handleJoinTable(table._id)}
             nombreDeJoueurs={table.countPlayers}
