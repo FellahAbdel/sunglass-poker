@@ -65,7 +65,6 @@ const ServerPanelWindow = () => {
       }
     };
 
-
     fetchRoomTableRecords(); // Call the fetchTables function when the component mounts
   }, []); // Empty dependency array to run this effect only once after the initial render
 
@@ -75,8 +74,12 @@ const ServerPanelWindow = () => {
   const handleJoinTable = (id) => {
     // Logique pour rejoindre une table à faire
     if (isLogged) {
-      console.log('Le joueur veut rejoindre la partie ', id);
+      console.log("Le joueur veut rejoindre la partie ", id);
       dispatch(actions.joinRoom(id));
+
+      // TODO :
+      // il faudra qu'on informe le joueur que sa demande a bien été prise en compte
+      // et qu'il est en attente de la réponse du serveur.
     }
   };
 
@@ -99,12 +102,9 @@ const ServerPanelWindow = () => {
             key={index}
             nom={table.serverName}
             rang={table.rank}
-            nombreDeJoueurs={0}
-            ouvert={"ouvert"}
             onJoinClick={() => handleJoinTable(table._id)}
             nombreDeJoueurs={table.countPlayers}
             ouvert={table.password ? "ferme" : "ouvert"}
-            onJoinClick={handleJoinTable}
           />
         ))}
       </div>
