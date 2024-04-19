@@ -3,6 +3,7 @@ const router = express.Router();
 
 const store = require('../store/configStore');
 const verifyToken = require("./auth");
+const { count } = require("console");
 
 module.exports = (app, dao, gameController) => {
   app.get("/rooms", (req, res) => {
@@ -168,13 +169,14 @@ module.exports = (app, dao, gameController) => {
   app.post("/api/games", async (req, res) => {
     try {
       // Extract game data from the request body
-      const { serverName, password, rank } = req.body;
+      const { serverName, password, rank, countPlayers } = req.body;
 
       // Call the createGameDescription function from dao
       const result = await dao.createGameDescription(
         serverName,
         password,
-        rank
+        rank,
+        countPlayers
       );
 
       // Check if there was an error during game creation

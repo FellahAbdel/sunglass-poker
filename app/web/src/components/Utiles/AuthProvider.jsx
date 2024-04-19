@@ -32,12 +32,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const getAuthHeaders = () => {
-    const token = sessionStorage.getItem('authToken');
+    const token = sessionStorage.getItem("authToken");
     return {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     };
-};
+  };
 
   const login = async (credentials) => {
     try {
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
       if (!response.ok) {
         // Si la réponse n'est pas un 2xx, gérer l'erreur
         const errorData = await response.json();
-        console.error('Erreur de login:', errorData.message);
+        console.error("Erreur de login:", errorData.message);
         return { error: errorData.message };
       }
       const data = await response.json();
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
         fetchUserInfo(data.token); // Charger les informations utilisateur
         return true;
       } else {
-        console.error('Erreur de login:', data.message);
+        console.error("Erreur de login:", data.message);
         return { error: data.message };
       }
     } catch (error) {
@@ -71,11 +71,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Créer une description de jeu d'un salon.
-  const createGameRoom = async (serverName, password, rank) => {
+  const createGameRoom = async (serverName, password, rank, countPlayers) => {
     try {
       const response = await fetch("http://localhost:3001/api/games", {
         ...CORSSETTINGS,
-        body: JSON.stringify({ serverName, password, rank }),
+        body: JSON.stringify({ serverName, password, rank, countPlayers }),
       });
       const data = await response.json();
       if (response.ok) {

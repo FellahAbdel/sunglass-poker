@@ -7,8 +7,8 @@ const saltRounds = 10;
 // Modèles Mongoose
 const UserModel = require("./User");
 const StatModel = require("./Stat");
-const GameDescriptionModel = require("./GameDescription");
 const ItemModel = require("./Item");
+const GameDescriptionModel = require("./GameDescription");
 
 // Initialisation des items (si nécessaire)
 const initItems = require("./initItems");
@@ -321,13 +321,20 @@ module.exports = function (app, bdd) {
       }
     },
 
-    createGameDescription: async function (serverName, password, rank) {
+    createGameDescription: async function (
+      serverName,
+      roomPassword,
+      rank,
+      countPlayers
+    ) {
       try {
         const gameDescription = new GameDescriptionModel({
           serverName,
-          password,
+          roomPassword,
           rank,
+          countPlayers,
         });
+
         await gameDescription.save();
         return { error: false, code: 200, data: gameDescription };
       } catch (error) {

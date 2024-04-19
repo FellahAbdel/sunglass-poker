@@ -13,6 +13,7 @@ const CreateGameWindow = () => {
     serverName: "",
     password: "",
     rank: "Friendly",
+    countPlayers: 1, // The master of the room is always present.
   });
 
   const handleChange = (event) => {
@@ -28,8 +29,13 @@ const CreateGameWindow = () => {
     console.log("Creating game with settings:", gameData);
 
     // Creer la partie
-    const { serverName, password, rank } = gameData;
-    const success = await createGameRoom(serverName, password, rank);
+    const { serverName, password, rank, countPlayers } = gameData;
+    const success = await createGameRoom(
+      serverName,
+      password,
+      rank,
+      countPlayers
+    );
     if (success) {
       // Handle success
       console.log("Game created successfully");

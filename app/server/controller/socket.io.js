@@ -68,14 +68,13 @@ module.exports = function (
    */
 
   async function identify(socket, token) {
-    csl.log(fileType, 'User is himself with token ', token);
+    csl.log(fileType, "User is himself with token ", token);
     if (token === null) {
       // csl.log(fileType,'Destroy socket for ', socket.id);
       // io.in(session.id).disconnectSockets(true);
       // session.destroy();
       // socket.disconnect();
-    }
-    else {
+    } else {
       csl.log(fileType, socket.rooms, socket.rooms.has(token));
       if (!socket.rooms.has(token)) {
         try {
@@ -106,6 +105,8 @@ module.exports = function (
           );
           socket.join(token);
         } catch (err) {
+          csl.error(fileType, "Error with token : ", err);
+          socket.disconnect();
           csl.error(fileType, "Error with token : ", err);
           socket.disconnect();
         }
@@ -205,7 +206,7 @@ module.exports = function (
     });
 
     // Wait for the promise to resolve
-    newGamePromise.then(id => {
+    newGamePromise.then((id) => {
       csl.log(fileType, id, " >- id game created");
       if (id === undefined) {
         csl.error(fileType, "Refused to create new game");
@@ -221,12 +222,13 @@ module.exports = function (
       const an = joinRoom(socket, { id: id });
       csl.log(fileType, an);
       socket.emit("joinRoom", an);
-      socket.emit("event", { payload: state.game.rooms[id], type: actions.GAME_STARTED });
+      socket.emit("event", {
+        payload: state.game.rooms[id],
+        type: actions.GAME_STARTED,
+      });
     });
 
     // Si l'action vient de quelqu'un non connecter on ignore
-
-
   }
 
   /** Lorsqu'une page est ouverte et se connecte au back.
@@ -292,8 +294,7 @@ module.exports = function (
     });
 
     socket.on("createGame", () => {
-      csl.log(fileType,
-        'user try to createGame user : ', session.userId);
+      csl.log(fileType, "user try to createGame user : ", session.userId);
       if (session.userId) createGame(socket);
     });
 
