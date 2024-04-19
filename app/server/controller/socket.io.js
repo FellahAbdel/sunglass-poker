@@ -35,30 +35,26 @@ module.exports = function (
 
   function playerRoomStatus(socket, data) {
     csl.log(fileType, "Try for status");
-    try {
-      room = data.room;
-      if (room === undefined || room === null) {
-        csl.error(fileType, "Error in room number");
-        return;
-      }
-      try {
-        const decoded = jwt.verify(data.id, "secretKeyForSession");
-        id = decoded.id;
-        const answer = gameController.status(room, id);
-        csl.log(fileType, "status of ", id, " : =", answer);
-        socket.emit("event", {
-          payload: answer.payload,
-          type: actions.REFRESH,
-        });
-      } catch (err) {
-        if (err.name === "TokenExpiredError") {
-          csl.log(fileType, "token expired for status");
-          socket.disconnect();
-        }
-      }
-    } catch (err) {
-      csl.log(fileType, " err => ", err);
+    room = data.room;
+    var decoded;
+    if (room === undefined || room === null) {
+      csl.error(fileType, "Error in room number");
+      return;
     }
+    try {
+      decoded= jwt.verify(token, process.env.JWT_SECRET);
+    }
+    catch (err) {
+      csl.log(fileType, " err => ", err);
+      return;
+    }
+    id = decoded.id;
+    const answer = gameController.status(room, id);
+    csl.log(fileType, "status of ", id, " : =", answer);
+    socket.emit("event", {
+      payload: answer.payload,
+      type: actions.REFRESH,
+    });
   }
 
   /**
