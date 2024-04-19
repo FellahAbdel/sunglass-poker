@@ -6,7 +6,13 @@ import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useAuth } from "../../Utiles/AuthProvider";
 
 const CreateGameWindow = () => {
-  const { openWindow, openSuccessWindow } = useWindowContext();
+  const {
+    openWindow,
+    openSuccessWindow,
+    showGameTable,
+    closeWindow,
+    setWindowType,
+  } = useWindowContext();
   const { createGameRoom } = useAuth();
 
   const [gameData, setGameData] = useState({
@@ -40,7 +46,10 @@ const CreateGameWindow = () => {
       // Handle success
       console.log("Game created successfully");
 
-      openSuccessWindow("Game created successfully", "servers");
+      //   openSuccessWindow("Game created successfully", "servers");
+      showGameTable();
+      closeWindow();
+      setWindowType("");
 
       //   openWindow("list_table");
     } else {
