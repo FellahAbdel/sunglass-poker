@@ -27,4 +27,6 @@
 - 11/04 , apprentissage et formation socket io : 1H30
 - 13/04  ,lecturz code et mise au point avec equipe backend pour la partie chat du jeu : 1H
 - 15/04 , apprentissage socket.io pour faire le chat : 1H30
-- TOTAL:64H
+- 16/04 , Reunion TP / début de travail sur le chat et apprentissage : 3h
+- 19/04 , formation socket io sur Youtube : https://www.youtube.com/watch?v=x_fHXt9V3zQ : 1H30
+- TOTAL:68H30
