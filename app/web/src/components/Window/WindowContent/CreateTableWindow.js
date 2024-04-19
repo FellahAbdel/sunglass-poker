@@ -5,15 +5,16 @@ import TextInputComponent from "../../textInput/TextInput";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useAuth } from "../../Utiles/AuthProvider";
 
+import { useDispatch } from "react-redux";
+import { startGame } from "../../../store/actions/clientInteractionsCreator.js";
+
 const CreateGameWindow = () => {
-  const {
-    openWindow,
-    openSuccessWindow,
-    showGameTable,
-    closeWindow,
-    setWindowType,
-  } = useWindowContext();
+  const { openWindow, showGameTable, closeWindow, setWindowType } =
+    useWindowContext();
+
   const { createGameRoom } = useAuth();
+
+  const dispatch = useDispatch();
 
   const [gameData, setGameData] = useState({
     serverName: "",
@@ -42,11 +43,15 @@ const CreateGameWindow = () => {
       rank,
       countPlayers
     );
+
     if (success) {
       // Handle success
-      console.log("Game created successfully");
+      console.log("Game room created successfully");
 
-      //   openSuccessWindow("Game created successfully", "servers");
+      // On fait un dispatch StartGame
+      dispatch(startGame());
+
+      // On envoie le master de la room à la table de jeux.
       showGameTable();
       closeWindow();
       setWindowType("");
