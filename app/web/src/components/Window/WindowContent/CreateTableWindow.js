@@ -4,69 +4,115 @@ import Button from "../../button/Button.tsx"; // Assurez-vous que le chemin est 
 import TextInputComponent from "../../textInput/TextInput";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useAuth } from "../../Utiles/AuthProvider";
+import {
+  validateUsername,
+  validatePasswordOrNull,
+} from "../../Utiles/ValidationUtils.jsx";
 
 const CreateGameWindow = () => {
   const { openWindow, openSuccessWindow } = useWindowContext();
   const { createGameRoom } = useAuth();
 
-  const [gameData, setGameData] = useState({
+  const [formData, setFormData] = useState({
     serverName: "",
     password: "",
     rank: "Friendly",
-    countPlayers: 1, // The master of the room is always present.
+    countPlayers: 1,
+  });
+
+  const [validationErrors, setValidationErrors] = useState({
+    serverName: "",
+    password: "",
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setGameData((prevGameData) => ({
-      ...prevGameData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
+    setValidationErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+  };
+
+  const validateForm = () => {
+    const errors = {
+      serverName: "",
+      password: "",
+    };
+
+    const usernameValidation = validateUsername(formData.serverName);
+    if (!usernameValidation.isValid) {
+      errors.serverName = usernameValidation.errorMessage;
+    }
+
+    const passwordValidation = validatePasswordOrNull(formData.password);
+    if (!passwordValidation.isValid) {
+      errors.password = passwordValidation.errorMessage;
+    }
+
+    setValidationErrors(errors);
+    return Object.values(errors).every((error) => error === "");
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Creating game with settings:", gameData);
-
-    // Creer la partie
-    const { serverName, password, rank, countPlayers } = gameData;
-    const success = await createGameRoom(
-      serverName,
-      password,
-      rank,
-      countPlayers
-    );
-    if (success) {
-      // Handle success
-      console.log("Game created successfully");
-
-      openSuccessWindow("Game created successfully", "servers");
-
-      //   openWindow("list_table");
+  
+    if (validateForm()) {
+      try {
+        const result = await createGameRoom(
+          formData.serverName,
+          formData.password,
+          formData.rank,
+          formData.countPlayers
+        );
+  
+        if (result === true) {
+          openSuccessWindow("Game created successfully", "servers");
+        } else if (result && result.error) {
+          if (result.error === "game_exists") {
+            // Afficher un message d'erreur indiquant que le jeu existe déjà
+            setValidationErrors((prevErrors) => ({
+              ...prevErrors,
+              serverName: "Game name already exists",
+            }));
+          } else {
+            // Autres erreurs
+            console.error("Failed to create game:", result.error);
+          }
+        }
+      } catch (error) {
+        console.error("Error creating game:", error);
+      }
     } else {
-      // Handle failure
-      console.error("Error creating game");
+      // Feedback pour indiquer les erreurs de validation
+      console.error("Form validation failed");
     }
   };
+
+
+
 
   return (
     <div className="box create-game-box">
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="serverName"
-          value={gameData.serverName}
+          value={formData.serverName}
           onChange={handleChange}
           placeholder="Game name"
-          errorMessage=""
+          errorMessage={validationErrors.serverName}
           styleClass="input-connectionDefault input-icon-GameName"
         />
         <TextInputComponent
           name="password"
-          value={gameData.password}
+          value={formData.password}
           onChange={handleChange}
           type="password"
           placeholder="Password (optional)"
-          errorMessage=""
+          errorMessage={validationErrors.password}
           styleClass="input-connectionDefault input-icon-password"
         />
         <div className="container-select-rank">
@@ -75,7 +121,7 @@ const CreateGameWindow = () => {
             name="rank"
             id="rank-select"
             className="select-rank"
-            value={gameData.rank}
+            value={formData.rank}
             onChange={handleChange}
           >
             <option value="Novice">Novice</option>
@@ -93,7 +139,7 @@ const CreateGameWindow = () => {
         <br />
         <Button
           styleClass="btn-connectionDefault start-button back-color2"
-          type="submit"
+          type="button"
           label="Join a Game"
           onClick={() => openWindow("servers")}
         />

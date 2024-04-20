@@ -12,6 +12,9 @@ import {
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
 
+import { GoogleLogin } from "react-google-login";
+
+
 const SignUpWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const { openSuccessWindow, openWindow } = useWindowContext();
@@ -82,6 +85,27 @@ const SignUpWindow = () => {
 
     // Vérifie si tous les champs sont valides
     return Object.values(errors).every((error) => error === "");
+  };
+
+  const responseGoogle = async (response) => {
+    // Utilisez la réponse de l'API Google pour créer ou connecter un utilisateur
+    try {
+      const googleUserData = {
+        pseudo: response.profileObj.name,
+        email: response.profileObj.email,
+        // Autres données à récupérer de la réponse si nécessaire
+      };
+      const result = await registerUser(googleUserData);
+
+      if (result === true) {
+        openSuccessWindow("Account created with success!");
+      } else if (result && result.error) {
+        // Gérer les erreurs d'authentification ou de création de compte
+        console.error("Failed to create or authenticate user.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -163,11 +187,12 @@ const SignUpWindow = () => {
         />
       </form>
 
-      <Button
-        styleClass="btn-connectionDefault google-button back-color3"
-        label={getTranslatedWord("connection.signinG")}
-        iconSrc={require("./../../../assets/images/icons/white/google.png")}
-        iconStyle={true}
+      <GoogleLogin
+        clientId="YOUR_CLIENT_ID.apps.googleusercontent.com"
+        buttonText={getTranslatedWord("connection.signinG")}
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle} // Gérer les erreurs
+        cookiePolicy={'single_host_origin'}
       />
 
       <Button
