@@ -118,4 +118,8 @@
 
 2024/04/16 : 1h30           DAO table user (branche Features/bddmodule2)
 
-TEMPS TOTAL: 116h00min
+2024/04/17 : 1h00           Amélioration IHM.
+
+2024/04/20 : 1h00           Amélioration ServerPanel, Serveurs divisés en différentes table, barre de recherche fonctionnelle.
+
+TEMPS TOTAL: 118h00min
