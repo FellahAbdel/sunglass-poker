@@ -150,7 +150,7 @@ const ServerPanelWindow = () => {
         ).map((page) => (
           <Button
             key={page}
-            styleClass={page === currentPage ? "back-color1" : "back-color3"}
+            styleClass={page === currentPage ? "back-color1 btn-serverPage" : "back-color3 btn-serverPage"}
             label={page}
             onClick={() => paginate(page)}
           />
