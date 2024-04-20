@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
         return true;
       } else {
         console.error("Error creating game:", data.message);
-        return false;
+        return { error: data.error, field: data.field };
       }
     } catch (error) {
       console.error("Error creating game:", error);
