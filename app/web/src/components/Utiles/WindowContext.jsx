@@ -16,11 +16,15 @@ export const WindowProvider = ({ children }) => {
     console.log("windowType:", state.windowType);
     console.log("isGameTableVisible:", state.isGameTableVisible);
     console.log("connectionWindowOpen:", state.connectionWindowOpen);
-  }, [state.isWindowOpen, state.windowType, state.isGameTableVisible, state.connectionWindowOpen]);
-
+  }, [
+    state.isWindowOpen,
+    state.windowType,
+    state.isGameTableVisible,
+    state.connectionWindowOpen,
+  ]);
 
   useEffect(() => {
-    if (state.windowType === 'alert') {
+    if (state.windowType === "alert") {
       dispatch({ type: "SET_WINDOW_TYPE", payload: "accueil" });
     }
   }, []);
@@ -55,6 +59,12 @@ export const WindowProvider = ({ children }) => {
 
   const openWindow = (type, params = {}) => {
     console.log(`Opening window: ${type}`, params);
+
+    if (state.windowType === type && state.isWindowOpen) {
+      closeWindow();
+      return;
+    }
+
     if (type === "alert") {
       setAlertParams({
         message: params.message || "Default message",
@@ -78,10 +88,9 @@ export const WindowProvider = ({ children }) => {
     console.log("Fermeture de la fenêtre");
     setAlertParams({ message: "", onConfirm: () => {}, onCancel: () => {} });
     setWindowOpen(false);
-    if(state.isGameTableVisible){
+    if (state.isGameTableVisible) {
       setWindowType("");
-    }
-    else{
+    } else {
       setWindowType("accueil");
     }
     if (state.redirectAfterSuccess) {
@@ -121,10 +130,8 @@ export const WindowProvider = ({ children }) => {
   };
 
   const onClickStartGame = () => {
-    openWindow('game'); // Assurez-vous que 'game' est géré dans votre reducer pour `windowType`
-};
-
-
+    openWindow("game"); // Assurez-vous que 'game' est géré dans votre reducer pour `windowType`
+  };
 
   // Effets pour gérer la persistance de sessionStorage
   useEffect(() => {
@@ -153,7 +160,7 @@ export const WindowProvider = ({ children }) => {
         openSuccessWindow,
         openValidationWindow,
         showGameTable,
-        onClickStartGame
+        onClickStartGame,
       }}
     >
       {children}
