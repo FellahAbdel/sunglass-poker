@@ -120,6 +120,6 @@
 
 2024/04/17 : 1h00           Amélioration IHM.
 
-2024/04/20 : 1h00           Amélioration ServerPanel, Serveurs divisés en différentes table, barre de recherche fonctionnelle.
+2024/04/20 : 2h00           Amélioration ServerPanel, Serveurs divisés en différentes table, barre de recherche fonctionnelle. Ajout vérification et feedback création game. modif windowcontext.
 
-TEMPS TOTAL: 118h00min
+TEMPS TOTAL: 119h00min
