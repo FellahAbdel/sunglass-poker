@@ -95,7 +95,16 @@ const CreateGameWindow = () => {
           styleClass="btn-connectionDefault start-button back-color2"
           type="submit"
           label="Join a Game"
+
+          // ICI QUE JE DOIT CHANGER (MAEL)
+          //pas ici mais apres 
+
+
           onClick={() => openWindow("list_table")}
+
+
+
+          ///////////////////////////////////////
         />
       </form>
     </div>

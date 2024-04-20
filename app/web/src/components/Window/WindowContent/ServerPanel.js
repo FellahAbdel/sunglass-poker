@@ -9,9 +9,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 
+
+//ADD A LARRACHE
+
+
 const ServerPanelWindow = () => {
   const dispatch = useDispatch();
   const { getTranslatedWord } = useTranslation();
+
+  const { closeWindow, showGameTable, setWindowType } =
+useWindowContext();
 
   const fakeTables = [
     {
@@ -77,6 +84,9 @@ const ServerPanelWindow = () => {
     if (isLogged) {
       console.log('Le joueur veut rejoindre la partie ', id);
       dispatch(actions.joinRoom(id));
+      showGameTable();
+      closeWindow();
+      setWindowType("");
     }
   };
 
