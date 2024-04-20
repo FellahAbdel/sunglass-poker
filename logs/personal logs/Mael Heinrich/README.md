@@ -76,5 +76,8 @@
 
 2024/05/16  3H15    Reunion...
 
+2024/05/16  2H      Lecture de tout le code pour comprendre l'implémentation pour regler un probleme pour les listes de tables  
 
-TEMPS TOTAL: 70H  
+
+
+TEMPS TOTAL: 72H  
