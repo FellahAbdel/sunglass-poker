@@ -95,7 +95,7 @@ const CreateGameWindow = () => {
           styleClass="btn-connectionDefault start-button back-color2"
           type="submit"
           label="Join a Game"
-          onClick={() => openWindow("list_table")}
+          onClick={() => openWindow("servers")}
         />
       </form>
     </div>
