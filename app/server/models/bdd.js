@@ -330,7 +330,7 @@ module.exports = function (app, bdd) {
       try {
         const existingGame = await GameDescriptionModel.findOne({ serverName });
         if (existingGame) {
-          GameDescriptionModel.deleteOne({ serverName });
+          await GameDescriptionModel.deleteOne({ serverName });
         }
         //   return {
         //     error: true,
