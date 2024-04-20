@@ -330,14 +330,16 @@ module.exports = function (app, bdd) {
       try {
         const existingGame = await GameDescriptionModel.findOne({ serverName });
         if (existingGame) {
-          return {
-            error: true,
-            code: 400,
-            data: { error: "game_exists", 
-            field: "game",
-            message: "Game name already exists" },
-          };
+          GameDescriptionModel.deleteOne({ serverName });
         }
+        //   return {
+        //     error: true,
+        //     code: 400,
+        //     data: { error: "game_exists", 
+        //     field: "game",
+        //     message: "Game name already exists" },
+        //   };
+        // }
 
         const gameDescription = new GameDescriptionModel({
           serverName,
@@ -355,6 +357,35 @@ module.exports = function (app, bdd) {
           code: 500,
           data: { error: "Error creating game description" },
         };
+      }
+    },
+
+    addOnePlayerGameDesc: async function(gameId,userId){
+      try{
+        console.log('add a player in game bdd');
+        const gameDesc = await GameDescriptionModel.findOne({'_id':gameId});
+        gameDesc.players.push(userId);
+        gameDesc.save();
+      }catch(err){
+        console.error('dao', err);
+      }
+    },
+
+    updateGameDescription: async function(identifierType, identifierValue, field, value){
+      try {
+        const updatedGameDesc = await GameDescriptionModel.findOneAndUpdate(
+          { [identifierType]: identifierValue },
+          { $set: { [field]: value } },
+          { new: true, runValidators: true }
+        );
+        if (updatedGameDesc) {
+          return { success: true, message: `${field} updated successfully` };
+        } else {
+          return { success: false, message: `Failed to update ${field}` };
+        }
+      } catch (error) {
+        console.error("Error updating user data:", error);
+        throw error;
       }
     },
 

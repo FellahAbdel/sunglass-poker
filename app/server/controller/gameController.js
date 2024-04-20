@@ -51,8 +51,9 @@ module.exports = gameController = {
                     return { status: false, mes: 'User undefined' };
                 }
                 const answer = this.dispatch(user,actions.sit(id,user));
-                csl.log(fileType, answer);
+                csl.log(fileType, "answer of dispatch : ",answer);
                 if (answer.status) {
+                    this.dao.addOnePlayerGameDesc(id,user);
                     csl.log(fileType,this.rooms[id].state);
                     // csl.log(fileType,'nop at');
                     // csl.log(fileType,'New player, try to set refresh');
@@ -78,10 +79,6 @@ module.exports = gameController = {
 
     timeOutPlayer: 3e10,
     broadcastStatus: function (room) {
-        if(log_broadcast){
-            csl.log(fileType,"mon io:", this.io);
-            csl.log(fileType,'called for broadcast room ', room);
-        }
         // Si la room existe
         if (this.io !== null) {
             if (!this.rooms.hasOwnProperty(room)) {
@@ -110,7 +107,7 @@ module.exports = gameController = {
         // csl.log(fileType,this.rooms, this.rooms.hasOwnProperty(room));
         if (this.rooms[room] !== undefined) {
             // if (this.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
-                return { status: true, mes: 'Refreshing status', payload: this.rooms[room] };
+                return { status: true, mes: 'Refreshing status', payload: this.rooms[room].game };
             // }
         }
         return { status: false, mes: "Can't refresh status", payload: [] };
@@ -119,7 +116,7 @@ module.exports = gameController = {
     newGame: async function(userId){
         if(userId === undefined) {csl.error(fileType,"player MUST be defined for newGame");return;};
         csl.log(fileType,"Create new game inside gameController");
-        const respons  = await this.dao.createGameDescription('quickplay','','',0);
+        const respons  = await this.dao.createGameDescription(userId,'','',0);
         csl.log(fileType,'respons : ',respons);
         if(respons.error) { csl.error(fileType,"Couln't create gamedescription",gameDescr.error); return;};
         const gameDescr = respons.data;

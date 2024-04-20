@@ -8,6 +8,10 @@ const GameDescriptionSchema = new Schema({
   roomPassword: String,
   rank: String,
   countPlayers: Number,
+  players: {
+    type:Array,
+    default:[],
+  },
 });
 
 const GameDescriptionModel = model("gameDescription", GameDescriptionSchema);

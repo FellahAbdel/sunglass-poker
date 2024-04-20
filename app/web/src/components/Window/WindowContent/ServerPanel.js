@@ -147,7 +147,7 @@ useWindowContext();
             nom={table.serverName}
             rang={table.rank}
             onJoinClick={() => handleJoinTable(table._id)}
-            nombreDeJoueurs={table.countPlayers}
+            nombreDeJoueurs={table.players.length}
             ouvert={table.roomPassword ? false : true}
           />
         ))}
