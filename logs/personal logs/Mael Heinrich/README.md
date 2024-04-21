@@ -76,8 +76,8 @@
 
 2024/05/16  3H15    Reunion...
 
-2024/05/16  2H      Lecture de tout le code pour comprendre l'implémentation pour regler un probleme pour les listes de tables  
+2024/05/21  2H      Lecture de tout le code pour comprendre l'implémentation pour regler un probleme pour les listes de tables
 
+2024/05/21  1H      Ajout du handle de leave room pour gerer les users autour de la table, mais il manque encore un petit morceau ou j ai besoin d aide pour le regler.
 
-
-TEMPS TOTAL: 72H  
+TEMPS TOTAL: 73H  
