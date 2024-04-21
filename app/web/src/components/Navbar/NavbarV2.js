@@ -43,8 +43,7 @@ const Navbar = ({}) => {
         onConfirm: () => {
           console.log("User confirms log out");
 
-          //AJOUTER LE HANDLE LEAVE ROOM ICI
-          handleleaveRoom();
+       
 
           logingOut();
           showHome();
@@ -62,6 +61,7 @@ const Navbar = ({}) => {
         message: "alert.confirmExitMessage",
         onConfirm: () => {
           console.log("L'utilisateur quitte la table");
+          handleleaveRoom();
           showHome();
         },
         onCancel: () => {
