@@ -8,6 +8,11 @@ const GameDescriptionSchema = new Schema({
   roomPassword: String,
   rank: String,
   countPlayers: Number,
+  master: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 const GameDescriptionModel = model("gameDescription", GameDescriptionSchema);
