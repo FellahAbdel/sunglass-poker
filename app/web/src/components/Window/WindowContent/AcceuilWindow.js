@@ -21,7 +21,7 @@ const AcceuilWindow = () => {
 
   const onClickStartGame = () => {
     if (isLogged) {
-    //   dispatch(startGame());
+      dispatch(startGame());
       console.log("Utilisateur connecté, on montre la table");
       showGameTable();
       closeWindow();
