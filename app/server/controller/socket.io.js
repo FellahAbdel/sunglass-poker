@@ -157,7 +157,7 @@ module.exports = function (
     const respons = await dao.getUserInfo(session.userId);
     if(respons.success){
       const user = respons.user;
-      gameController.removePlayer(user.inGame,session.userId);
+      gameController.removePlayer(user.inGame.toString(),session.userId);
     }
   }
 

@@ -396,7 +396,7 @@ module.exports = function (app, bdd) {
 
     playerLeftGame: async function (id){
       try{
-        const user = await UserModel.findById(userId);
+        const user = await UserModel.findById(id);
         user.inGame = null;
         await user.save();
       }catch(err){
