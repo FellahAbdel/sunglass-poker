@@ -122,4 +122,6 @@
 
 2024/04/20 : 2h00           Amélioration ServerPanel, Serveurs divisés en différentes table, barre de recherche fonctionnelle. Ajout vérification et feedback création game. modif windowcontext.
 
-TEMPS TOTAL: 119h00min
+2024/04/21 : 1h00           Changement logique window, "accueil" n'existe plus dans windowType
+
+TEMPS TOTAL: 120h00min
