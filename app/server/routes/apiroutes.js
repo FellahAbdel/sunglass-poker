@@ -1,25 +1,24 @@
 const express = require("express");
 const router = express.Router();
 
-const store = require('../store/configStore');
+const store = require("../store/configStore");
 const verifyToken = require("./auth");
 const { count } = require("console");
 
 module.exports = (app, dao, gameController) => {
   app.get("/rooms", (req, res) => {
     var roomsInfos = store.getState();
-    if(gameController !== undefined)
-    if(gameController.rooms !== undefined){
-      
-    for (var room in gameController.rooms) {
-      r = gameController.rooms[room];
-      console.log(room);
-      roomsInfos.push({
-        ...r,
-        refresh: r.refresh !== undefined ? true : false,
-      });
-    }
-  }
+    if (gameController !== undefined)
+      if (gameController.rooms !== undefined) {
+        for (var room in gameController.rooms) {
+          r = gameController.rooms[room];
+          console.log(room);
+          roomsInfos.push({
+            ...r,
+            refresh: r.refresh !== undefined ? true : false,
+          });
+        }
+      }
     res.send(roomsInfos);
   });
 
@@ -169,14 +168,13 @@ module.exports = (app, dao, gameController) => {
   app.post("/api/games", async (req, res) => {
     try {
       // Extract game data from the request body
-      const { serverName, password, rank, countPlayers } = req.body;
+      const { serverName, password, rank, countPlayers, master } = req.body;
 
       // Call the createGameDescription function from dao
       const result = await dao.createGameDescription(
         serverName,
         password,
-        rank,
-        countPlayers
+        rank
       );
 
       // Check if there was an error during game creation

@@ -28,9 +28,8 @@ const CreateGameWindow = () => {
     serverName: "",
     password: "",
     rank: "Friendly",
-    countPlayers: 1, // The master of the room is always present.
-    master: user._id,
   });
+
   const [validationErrors, setValidationErrors] = useState({
     serverName: "",
     password: "",
@@ -71,13 +70,13 @@ const CreateGameWindow = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    console.log("user_id", user._id);
     if (validateForm()) {
       try {
         const result = await createGameRoom(
           formData.serverName,
           formData.password,
-          formData.rank,
-          formData.countPlayers
+          formData.rank
         );
 
         if (result === true) {

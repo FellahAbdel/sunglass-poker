@@ -321,12 +321,7 @@ module.exports = function (app, bdd) {
       }
     },
 
-    createGameDescription: async function (
-      serverName,
-      roomPassword,
-      rank,
-      countPlayers
-    ) {
+    createGameDescription: async function (serverName, roomPassword, rank) {
       try {
         const existingGame = await GameDescriptionModel.findOne({ serverName });
         if (existingGame) {
@@ -335,7 +330,7 @@ module.exports = function (app, bdd) {
         //   return {
         //     error: true,
         //     code: 400,
-        //     data: { error: "game_exists", 
+        //     data: { error: "game_exists",
         //     field: "game",
         //     message: "Game name already exists" },
         //   };
@@ -345,7 +340,6 @@ module.exports = function (app, bdd) {
           serverName,
           roomPassword,
           rank,
-          countPlayers,
         });
 
         await gameDescription.save();
@@ -360,18 +354,23 @@ module.exports = function (app, bdd) {
       }
     },
 
-    addOnePlayerGameDesc: async function(gameId,userId){
-      try{
-        console.log('add a player in game bdd');
-        const gameDesc = await GameDescriptionModel.findOne({'_id':gameId});
+    addOnePlayerGameDesc: async function (gameId, userId) {
+      try {
+        console.log("add a player in game bdd");
+        const gameDesc = await GameDescriptionModel.findOne({ _id: gameId });
         gameDesc.players.push(userId);
         gameDesc.save();
-      }catch(err){
-        console.error('dao', err);
+      } catch (err) {
+        console.error("dao", err);
       }
     },
 
-    updateGameDescription: async function(identifierType, identifierValue, field, value){
+    updateGameDescription: async function (
+      identifierType,
+      identifierValue,
+      field,
+      value
+    ) {
       try {
         const updatedGameDesc = await GameDescriptionModel.findOneAndUpdate(
           { [identifierType]: identifierValue },
