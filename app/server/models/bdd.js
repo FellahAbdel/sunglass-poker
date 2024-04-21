@@ -341,7 +341,6 @@ module.exports = function (app, bdd) {
         //   };
         // }
 
-        console.log("bdd master", master);
         const gameDescription = new GameDescriptionModel({
           serverName,
           roomPassword,
