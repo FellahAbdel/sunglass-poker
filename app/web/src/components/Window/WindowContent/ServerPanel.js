@@ -10,7 +10,6 @@ import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import TextInputComponent from "../../textInput/TextInput.jsx";
 
-//ADD A LARRACHE
 
 
 const ServerPanelWindow = () => {
