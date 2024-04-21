@@ -6,30 +6,53 @@ const functionMapper = {
 
 const getInitialWindowType = () => {
   const storedWindowType = sessionStorage.getItem("windowType");
-  const isGameTableVisible = sessionStorage.getItem("isGameTableVisible") === "true";
+  const isGameTableVisible =
+    sessionStorage.getItem("isGameTableVisible") === "true";
 
+  if (storedWindowType === "alert") {
+    return "";
+  }
   if (storedWindowType !== null) {
-    return storedWindowType;  // Utilisez la valeur stockée si elle est présente
+    return storedWindowType;
   } else {
-    // Utilisez "accueil" seulement si isGameTableVisible est false
-    return isGameTableVisible ? "" : "accueil";
+    return "";
   }
 };
 
-export const initialState = {
-  selectedItem: null,
-  redirectAfterSuccess: sessionStorage.getItem("redirectAfterSuccess") || "",
-  alertParams: {
-    message: sessionStorage.getItem("alertMessage") || "",
-    onConfirm: functionMapper[sessionStorage.getItem("alertOnConfirm")] || functionMapper.defaultConfirm,
-    onCancel: functionMapper[sessionStorage.getItem("alertOnCancel")] || functionMapper.defaultCancel,
-  },
-  isWindowOpen: sessionStorage.getItem("isWindowOpen") === "true",
-  windowType: getInitialWindowType(), 
-    connectionWindowOpen: false,
-  successMessage: sessionStorage.getItem("successMessage") || "",
-  isGameTableVisible: sessionStorage.getItem("isGameTableVisible") === "true",
+const getIsWindowOpen = () => {
+  const storedWindowType = sessionStorage.getItem("windowType");
+  if (storedWindowType === "alert") {
+    return false;
+  }
+  else{
+    return storedWindowType;
+  }
 };
+
+
+const loadInitialState = () => {
+  return {
+    selectedItem: sessionStorage.getItem("selectedItem") || null,
+    redirectAfterSuccess: sessionStorage.getItem("redirectAfterSuccess") || "",
+    alertParams: {
+      message: sessionStorage.getItem("alertMessage") || "",
+      onConfirm:
+        functionMapper[sessionStorage.getItem("alertOnConfirm")] ||
+        functionMapper.defaultConfirm,
+      onCancel:
+        functionMapper[sessionStorage.getItem("alertOnCancel")] ||
+        functionMapper.defaultCancel,
+    },
+    isWindowOpen: getIsWindowOpen(),
+    windowType: getInitialWindowType(),
+    connectionWindowOpen:
+      sessionStorage.getItem("connectionWindowOpen") === "true",
+    successMessage: sessionStorage.getItem("successMessage") || "",
+    isGameTableVisible: sessionStorage.getItem("isGameTableVisible") === "true",
+  };
+};
+
+export const initialState = loadInitialState();
 
 // Actions Types
 const SET_SELECTED_ITEM = "SET_SELECTED_ITEM";
@@ -57,13 +80,21 @@ export function windowReducer(state = initialState, action) {
       sessionStorage.setItem("redirectAfterSuccess", action.payload);
       break;
     case SET_ALERT_PARAMS:
-      nextState.alertParams = action.payload;
       sessionStorage.setItem("alertMessage", action.payload.message);
       sessionStorage.setItem("alertOnConfirm", action.payload.onConfirm);
       sessionStorage.setItem("alertOnCancel", action.payload.onCancel);
+      nextState.alertParams = action.payload;
       break;
     case TOGGLE_WINDOW_OPEN:
-      nextState.isWindowOpen = action.payload !== undefined ? action.payload : !state.isWindowOpen;
+      sessionStorage.setItem(
+        "isWindowOpen",
+        (action.payload !== undefined
+          ? action.payload
+          : !state.isWindowOpen
+        ).toString()
+      );
+      nextState.isWindowOpen =
+        action.payload !== undefined ? action.payload : !state.isWindowOpen;
       break;
     case SET_WINDOW_TYPE:
       nextState.windowType = action.payload;

@@ -23,12 +23,6 @@ export const WindowProvider = ({ children }) => {
     state.connectionWindowOpen,
   ]);
 
-  useEffect(() => {
-    if (state.windowType === "alert") {
-      dispatch({ type: "SET_WINDOW_TYPE", payload: "accueil" });
-    }
-  }, []);
-
   const setWindowOpen = (isOpen) => {
     dispatch({ type: "TOGGLE_WINDOW_OPEN", payload: isOpen });
   };
@@ -91,7 +85,7 @@ export const WindowProvider = ({ children }) => {
     if (state.isGameTableVisible) {
       setWindowType("");
     } else {
-      setWindowType("accueil");
+      setWindowType("");
     }
     if (state.redirectAfterSuccess) {
       openWindow(state.redirectAfterSuccess);
@@ -103,10 +97,10 @@ export const WindowProvider = ({ children }) => {
   const showHome = () => {
     toggleGameTableVisibility();
     setWindowOpen(false);
-    setWindowType("accueil");
+    setWindowType("");
   };
 
-  const openSuccessWindow = (message, redirect = "accueil") => {
+  const openSuccessWindow = (message, redirect = "") => {
     console.log(
       `Ouverture de la fenêtre de succès avec le message : ${message}`
     );

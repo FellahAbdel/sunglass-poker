@@ -21,7 +21,7 @@ import AlertWindow from "./WindowContent/AlertWindow";
 import { useWindowContext } from "../Utiles/WindowContext";
 
 const Window = () => {
-  const { windowType } = useWindowContext();
+  const { windowType, isGameTableVisible } = useWindowContext();
 
   const handleWindowClick = (event) => {
     event.stopPropagation();
@@ -47,7 +47,7 @@ const Window = () => {
         {windowType === "create_table" && <CreateTableWindow />}
         {windowType === "shop" && <ShopWindow />}
         {windowType === "validation" && <ValidationWindow />}
-        {windowType === "accueil" && <AcceuilWindow />}
+        {(windowType==="" && !isGameTableVisible) && <AcceuilWindow />}
         {windowType === "alert" && <AlertWindow />}
       </div>
     </div>
