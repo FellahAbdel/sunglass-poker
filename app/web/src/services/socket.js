@@ -83,6 +83,11 @@ const comm = {
     }
   },
 
+  leaveRoom: function(){
+    this.preFun();
+    socket.emit('leaveRoom');
+  },
+
   joinRoom: function (id) {
     this.preFun();
     socket.emit("joinRoom", { id: id });

@@ -13,6 +13,10 @@ const GameDescriptionSchema = new Schema({
     ref: "User",
     required: true,
   },
+  players: {
+    type: Array,
+    default: [],
+  },
 });
 
 const GameDescriptionModel = model("gameDescription", GameDescriptionSchema);

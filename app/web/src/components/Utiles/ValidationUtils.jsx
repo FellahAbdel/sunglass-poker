@@ -35,3 +35,13 @@ export const validatePasswordMatch = (password, repeatPassword) => {
     errorMessage: "Passwords do not match",
   };
 };
+
+//Fonction pour la création de table
+
+export const validatePasswordOrNull = (password) => {
+  // Vérifier si le mot de passe a au moins 6 caractères
+  return {
+    isValid: password.length === 0 || password.length >= 6,
+    errorMessage: "Password must have at least 6 characters",
+  };
+};

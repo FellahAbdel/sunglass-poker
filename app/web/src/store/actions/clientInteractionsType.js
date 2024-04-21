@@ -2,6 +2,8 @@ export const START_GAME = "START_GAME";
 
 export const JOIN_ROOM = "JOIN_ROOM";
 
+export const LEAVE_ROOM = "LEAVE_ROOM";
+
 export const FOLD = "FOLD";
 
 export const SIT = "SIT";

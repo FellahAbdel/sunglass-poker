@@ -4,6 +4,10 @@ import Button from "../../button/Button.tsx"; // Assurez-vous que le chemin est 
 import TextInputComponent from "../../textInput/TextInput";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useAuth } from "../../Utiles/AuthProvider";
+import {
+  validateUsername,
+  validatePasswordOrNull,
+} from "../../Utiles/ValidationUtils.jsx";
 
 import { useDispatch } from "react-redux";
 import { startGame } from "../../../store/actions/clientInteractionsCreator.js";
@@ -11,24 +15,53 @@ import { startGame } from "../../../store/actions/clientInteractionsCreator.js";
 const CreateGameWindow = () => {
   const { openWindow, showGameTable, closeWindow, setWindowType } =
     useWindowContext();
-
   const { createGameRoom } = useAuth();
 
   const dispatch = useDispatch();
 
-  const [gameData, setGameData] = useState({
+  const [formData, setFormData] = useState({
     serverName: "",
     password: "",
     rank: "Friendly",
     countPlayers: 1, // The master of the room is always present.
+    master: user._id,
+  });
+
+  const [validationErrors, setValidationErrors] = useState({
+    serverName: "",
+    password: "",
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setGameData((prevGameData) => ({
-      ...prevGameData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
+    setValidationErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+  };
+
+  const validateForm = () => {
+    const errors = {
+      serverName: "",
+      password: "",
+    };
+
+    const usernameValidation = validateUsername(formData.serverName);
+    if (!usernameValidation.isValid) {
+      errors.serverName = usernameValidation.errorMessage;
+    }
+
+    const passwordValidation = validatePasswordOrNull(formData.password);
+    if (!passwordValidation.isValid) {
+      errors.password = passwordValidation.errorMessage;
+    }
+
+    setValidationErrors(errors);
+    return Object.values(errors).every((error) => error === "");
   };
 
   const handleSubmit = async (event) => {
@@ -58,8 +91,8 @@ const CreateGameWindow = () => {
 
       //   openWindow("list_table");
     } else {
-      // Handle failure
-      console.error("Error creating game");
+      // Feedback pour indiquer les erreurs de validation
+      console.error("Form validation failed");
     }
   };
 
@@ -68,19 +101,19 @@ const CreateGameWindow = () => {
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="serverName"
-          value={gameData.serverName}
+          value={formData.serverName}
           onChange={handleChange}
           placeholder="Game name"
-          errorMessage=""
+          errorMessage={validationErrors.serverName}
           styleClass="input-connectionDefault input-icon-GameName"
         />
         <TextInputComponent
           name="password"
-          value={gameData.password}
+          value={formData.password}
           onChange={handleChange}
           type="password"
           placeholder="Password (optional)"
-          errorMessage=""
+          errorMessage={validationErrors.password}
           styleClass="input-connectionDefault input-icon-password"
         />
         <div className="container-select-rank">
@@ -89,7 +122,7 @@ const CreateGameWindow = () => {
             name="rank"
             id="rank-select"
             className="select-rank"
-            value={gameData.rank}
+            value={formData.rank}
             onChange={handleChange}
           >
             <option value="Novice">Novice</option>
@@ -107,9 +140,14 @@ const CreateGameWindow = () => {
         <br />
         <Button
           styleClass="btn-connectionDefault start-button back-color2"
-          type="submit"
+          type="button"
           label="Join a Game"
-          onClick={() => openWindow("list_table")}
+          // ICI QUE JE DOIT CHANGER (MAEL)
+          //pas ici mais apres
+
+          onClick={() => openWindow("servers")}
+
+          ///////////////////////////////////////
         />
       </form>
     </div>

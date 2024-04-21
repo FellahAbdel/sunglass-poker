@@ -152,6 +152,11 @@ module.exports = function (
     session.save();
   }
 
+  async function  leaveRoom(socket){
+    const user = await this.dao.getUserInfo(session.userId);
+    gameController.removePlayer(user.inGame,session.userId);
+  }
+
   /**
    *
    * @param {socket} socket
@@ -268,6 +273,9 @@ module.exports = function (
     });
     socket.on("joinRoom", (data) => {
       if (session.id) joinRoom(socket, data);
+    });
+    socket.on("leaveRoom", () => {
+      if (session.id) leaveRoom(socket, data);
     });
 
     // Fonction test

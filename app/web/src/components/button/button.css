@@ -102,6 +102,16 @@ Button:hover{
   border-radius: 10px;
 }
 
+.btn-serverPage{
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 .btn-leaveConfirmation{
   background-color: var(--error-red);
   width: 20%;
