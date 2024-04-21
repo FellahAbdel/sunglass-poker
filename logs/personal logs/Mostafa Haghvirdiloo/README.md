@@ -84,4 +84,8 @@
 
 * 2024/04/15 : <b> 7h </b> <br/>       Travail individuel: <i>omptimisation de qualité de fond de la table , amelioration de shopping window css , ajoute de shop sur navbar , affichage des coins sur shopping window , css hover general , component de placements des coins joué de chaque joueur sur la table , css pour changement des colors de fenetre table pour validations et alertes , ajoutes des nouvelles buttons à game action panel et leur fonctionalité et renouvlation des css , ajoutes des buttons de show carts à handGuide , toggle de animation dans settings pour atteindre des animations dans tout la jeu </i>
 
-total: 130h00min
+* 2024/04/16 : <b> 2h </b> <br/>       Travail en cours TP: <i>modif glitch pour no animation mode, total pot css ,preparation pour presentation IHM , shop validation message</i>
+
+* 2024/04/17 : <b> 3h </b> <br/>       Travail individuel: <i>creation de demo pour demonstrer des animations pour presentation IHM , debuggage des conditions de css , boite input pour rechercher des servers</i>
+
+total: 135h00min
