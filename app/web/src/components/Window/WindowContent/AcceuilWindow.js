@@ -8,7 +8,7 @@ import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import TextGlitch from "./../../TextGlitch/TextGlitch.js";
 
 import { useDispatch } from "react-redux";
-import { startGame } from "../../../store/actions/clientInteractionsCreator.js";
+import { createGame } from "../../../store/actions/clientInteractionsCreator.js";
 
 import "./acceuil.css";
 
@@ -21,7 +21,7 @@ const AcceuilWindow = () => {
 
   const onClickStartGame = () => {
     if (isLogged) {
-      dispatch(startGame());
+      dispatch(createGame());
       console.log("Utilisateur connecté, on montre la table");
       showGameTable();
       closeWindow();

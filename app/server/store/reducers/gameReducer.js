@@ -47,12 +47,10 @@ const gameReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.CREATE_GAME:
       csl.log(fileType,"CREATE GAME");
-      state.rooms[action.payload.id] = begin(initialRoomState);
-      if (action.payload.player)
-        state.rooms[action.payload.id].players = [
-          ...state.rooms[action.payload.id].players,
-          action.payload.player,
-        ];
+      state.rooms[action.payload.id] = initialRoomState;
+      return state;
+    case actions.START_GAME:
+      state.rooms[action.payload.id] = begin(state.rooms[action.payload.id]);
       return state;
     case actions.GAME_STARTED:
       csl.log(fileType,"start", action.type);

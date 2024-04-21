@@ -13,6 +13,7 @@ import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import { useUserData } from "../Utiles/useUserData.jsx";
 import * as actions from "../../store/actions/clientInteractionsCreator.js";
 import { useDispatch } from 'react-redux'
+import comm from '../../services/socket.js';
 
 
 
@@ -23,6 +24,10 @@ const Navbar = ({}) => {
     dispatch(actions.leaveRoom());
   }
 
+
+  const handleRefreshGame = () => {
+    comm.refresh();
+  }
   const {
     isGameTableVisible,
     closeWindow,
@@ -179,6 +184,12 @@ const Navbar = ({}) => {
           iconSrc={require("./../assets/images/icons/white/settings.png")}
         />
 
+        <Button
+          label={"REFRESH GAME PAGE"}
+          onClick={() => handleRefreshGame()}
+          styleClass={`${isLogged ? "btn-settings-V2 " : "btn-settings-V2 "}`}
+          iconSrc={require("./../assets/images/icons/white/password-repeat.png")}
+        />
 
         {isLogged && (
           <Button

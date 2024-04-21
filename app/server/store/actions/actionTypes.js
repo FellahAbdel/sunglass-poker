@@ -16,6 +16,7 @@ module.exports.UPDATE_USER_DATA = "UPDATE_USER_DATA";
 
 module.exports.CREATE_GAME= "CREATE_GAME";
 
+module.exports.GAME_LOBBY = "GAME_LOBBY";
 module.exports.GAME_STARTED = "GAME_STARTED";
 
 module.exports.FOLD = "FOLD";

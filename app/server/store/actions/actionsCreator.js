@@ -1,5 +1,10 @@
 const actions = require("./actionTypes.js");
 
+module.exports.gameLobby = (idGame) => ({
+  type: actions.GAME_LOBBY,
+  payload:{id:idGame}
+});
+
 module.exports.startGame = (idGame) => ({
   type: actions.START_GAME,
   payload:{id:idGame}

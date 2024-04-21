@@ -16,6 +16,10 @@ export const startGame = () => ({
     type:actions.START_GAME
 });
 
+export const createGame = () => ({
+    type:actions.CREATE_GAME
+});
+
 export const fold = () => ({
     type:actions.FOLD
 });
