@@ -85,6 +85,7 @@ const comm = {
 
   leaveRoom: function(){
     this.preFun();
+    console.log('comm emit leaveRoom');
     socket.emit('leaveRoom');
   },
 

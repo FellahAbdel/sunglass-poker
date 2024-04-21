@@ -394,6 +394,16 @@ module.exports = function (app, bdd) {
       }
     },
 
+    playerLeftGame: async function (id){
+      try{
+        const user = await UserModel.find({_id,id});
+        user.inGame = null;
+        await user.save();
+      }catch(err){
+        console.error('erreur avec player Left game',err  );
+      }
+    },
+
     gameRoomDescription: async function () {
       try {
         const gameDescriptions = await GameDescriptionModel.find({});

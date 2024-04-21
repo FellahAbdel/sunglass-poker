@@ -69,7 +69,6 @@ const db = require("./models/bdd")(
 gameController.init(db);
 
 const server = require("http").createServer(app);
-
 // socketIo
 const io = require("./controller/socket.io")(
   server,

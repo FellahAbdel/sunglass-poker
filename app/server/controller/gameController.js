@@ -72,6 +72,7 @@ module.exports = gameController = {
             if ((index = this.rooms[room].players.findIndex(player => player.getPlayerId() === id)) !== -1) {
                 csl.log(fileType,"Player : ", id, " removed from room : ", room);
                 this.rooms[room].players.splice(index, 1);
+                this.dao.playerLeftGame(id);
                 return;
             } else csl.error(fileType,"Player ", id, " is not in the room");
         } else csl.error(fileType,"Not a room, can't kick player", room, "  -:> ", id);
