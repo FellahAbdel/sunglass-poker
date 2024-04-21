@@ -60,24 +60,26 @@
 
 2024/04/10: 1H30    Amélioration du desktop+netoyage branche+début de desktop en .exe
 
-2024/05/10: 1h15    Tentative de création de la version exécutable desktop, recherche sur le sujet...
+2024/04/10: 1h15    Tentative de création de la version exécutable desktop, recherche sur le sujet...
 
-2024/05/10: 45min   Recherche supplémentaire, marche toujours pas, problème avec electron quand on lance avec build
+2024/04/10: 45min   Recherche supplémentaire, marche toujours pas, problème avec electron quand on lance avec build
 
-2024/05/12: 30min   Recherche pour la création du desktop, le problème viens des buils, il a un pb de chemin mais je ne trouve pas la solution 
+2024/04/12: 30min   Recherche pour la création du desktop, le problème viens des buils, il a un pb de chemin mais je ne trouve pas la solution 
 
-2024/05/13: 1h30    Création de design pour la boutique
+2024/04/13: 1h30    Création de design pour la boutique
 
-2024/05/15: 1h15    Recherche supplémentaire sur le build, maj de paquet, piste pour regler le probleme...
+2024/04/15: 1h15    Recherche supplémentaire sur le build, maj de paquet, piste pour regler le probleme...
 
-2024/05/15: 30min   Reunion avec Victor pour le problème du build, semble fonctionel sur windows mais pas encore sur linux
+2024/04/15: 30min   Reunion avec Victor pour le problème du build, semble fonctionel sur windows mais pas encore sur linux
 
-2024/05/16: 30min   Reglage de la version desktop sur linux+tentatives d'ajout d'une icone pour l'appli executable
+2024/04/16: 30min   Reglage de la version desktop sur linux+tentatives d'ajout d'une icone pour l'appli executable
 
-2024/05/16  3H15    Reunion...
+2024/04/16  3H15    Reunion...
 
-2024/05/21  2H      Lecture de tout le code pour comprendre l'implémentation pour regler un probleme pour les listes de tables
+2024/04/21  2H      Lecture de tout le code pour comprendre l'implémentation pour regler un probleme pour les listes de tables
 
-2024/05/21  1H      Ajout du handle de leave room pour gerer les users autour de la table, mais il manque encore un petit morceau ou j ai besoin d aide pour le regler.
+2024/04/21  1H      Ajout du handle de leave room pour gerer les users autour de la table, mais il manque encore un petit morceau ou j ai besoin d aide pour le regler.
 
-TEMPS TOTAL: 73H  
+2024/04/21  1H      Reunion avec victor pour voir si les fonctionnalité marchait puis discussion a propose de la suite et du travail a faire et affectation de ma futur tache.
+
+TEMPS TOTAL: 74H  
