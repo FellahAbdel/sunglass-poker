@@ -60,15 +60,15 @@ const ServerPanelWindow = () => {
           if (data) {
             // Diviser les tables en deux groupes : tables pleines et tables non pleines
             const fullTables = data.filter(
-              (table) => table.countPlayers === 10
+              (table) => table.players.length === 10
             );
             const nonFullTables = data.filter(
-              (table) => table.countPlayers < 10
+              (table) => table.players.length < 10
             );
 
             // Trier les tables non pleines dans l'ordre décroissant du nombre de joueurs
             const sortedNonFullTables = nonFullTables.sort(
-              (a, b) => b.countPlayers - a.countPlayers
+              (a, b) => b.players.length - a.players.length
             );
 
             // Fusionner les deux groupes de tables en plaçant les tables pleines à la fin
