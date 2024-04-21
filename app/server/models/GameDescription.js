@@ -7,10 +7,9 @@ const GameDescriptionSchema = new Schema({
   serverName: String,
   roomPassword: String,
   rank: String,
-  countPlayers: Number,
   players: {
-    type:Array,
-    default:[],
+    type: Array,
+    default: [],
   },
 });
 

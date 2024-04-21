@@ -11,9 +11,18 @@ import { useTranslation } from "../Utiles/Translations";
 import { useAuth } from "../Utiles/AuthProvider";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import { useUserData } from "../Utiles/useUserData.jsx";
+import * as actions from "../../store/actions/clientInteractionsCreator.js";
+import { useDispatch } from 'react-redux'
+
+
 
 const Navbar = ({}) => {
   const { isLogged, logingOut } = useAuth();
+  const dispatch = useDispatch();
+  const handleleaveRoom = () => {
+    dispatch(actions.leaveRoom());
+  }
+
   const {
     isGameTableVisible,
     closeWindow,
@@ -33,6 +42,10 @@ const Navbar = ({}) => {
         message: "alert.logout",
         onConfirm: () => {
           console.log("User confirms log out");
+
+          //AJOUTER LE HANDLE LEAVE ROOM ICI
+          handleleaveRoom();
+
           logingOut();
           showHome();
         },

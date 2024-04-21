@@ -9,15 +9,25 @@ import {
   validatePasswordOrNull,
 } from "../../Utiles/ValidationUtils.jsx";
 
+import { useDispatch } from "react-redux";
+import { startGame } from "../../../store/actions/clientInteractionsCreator.js";
+
 const CreateGameWindow = () => {
-  const { openWindow, openSuccessWindow } = useWindowContext();
-  const { createGameRoom } = useAuth();
+  const {
+    openWindow,
+    showGameTable,
+    closeWindow,
+    setWindowType,
+    openSuccessWindow,
+  } = useWindowContext();
+  const { createGameRoom, user } = useAuth();
+
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     serverName: "",
     password: "",
     rank: "Friendly",
-    countPlayers: 1,
   });
 
   const [validationErrors, setValidationErrors] = useState({
@@ -59,16 +69,22 @@ const CreateGameWindow = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+    // Create an object with only the _id and pseudo fields from the user
+    const masterInfo = {
+      _id: user._id,
+      pseudo: user.pseudo,
+    };
+
+    console.log("user", user);
     if (validateForm()) {
       try {
         const result = await createGameRoom(
           formData.serverName,
           formData.password,
           formData.rank,
-          formData.countPlayers
+          masterInfo
         );
-  
+
         if (result === true) {
           openSuccessWindow("Game created successfully", "servers");
         } else if (result && result.error) {
@@ -91,9 +107,6 @@ const CreateGameWindow = () => {
       console.error("Form validation failed");
     }
   };
-
-
-
 
   return (
     <div className="box create-game-box">
@@ -141,14 +154,10 @@ const CreateGameWindow = () => {
           styleClass="btn-connectionDefault start-button back-color2"
           type="button"
           label="Join a Game"
-
           // ICI QUE JE DOIT CHANGER (MAEL)
-          //pas ici mais apres 
-
+          //pas ici mais apres
 
           onClick={() => openWindow("servers")}
-
-
 
           ///////////////////////////////////////
         />
