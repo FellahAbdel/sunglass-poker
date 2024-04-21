@@ -13,8 +13,13 @@ import { useDispatch } from "react-redux";
 import { startGame } from "../../../store/actions/clientInteractionsCreator.js";
 
 const CreateGameWindow = () => {
-  const { openWindow, showGameTable, closeWindow, setWindowType } =
-    useWindowContext();
+  const {
+    openWindow,
+    showGameTable,
+    closeWindow,
+    setWindowType,
+    openSuccessWindow,
+  } = useWindowContext();
   const { createGameRoom, user } = useAuth();
 
   const dispatch = useDispatch();
@@ -65,30 +70,33 @@ const CreateGameWindow = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Creating game with settings:", formData);
 
-    // Creer la partie
-    const { serverName, password, rank, countPlayers } = formData;
-    const success = await createGameRoom(
-      serverName,
-      password,
-      rank,
-      countPlayers
-    );
+    if (validateForm()) {
+      try {
+        const result = await createGameRoom(
+          formData.serverName,
+          formData.password,
+          formData.rank,
+          formData.countPlayers
+        );
 
-    if (success) {
-      // Handle success
-      console.log("Game room created successfully");
-
-      // On fait un dispatch StartGame
-      dispatch(startGame());
-
-      // On envoie le master de la room à la table de jeux.
-      showGameTable();
-      closeWindow();
-      setWindowType("");
-
-      //   openWindow("list_table");
+        if (result === true) {
+          openSuccessWindow("Game created successfully", "servers");
+        } else if (result && result.error) {
+          if (result.error === "game_exists") {
+            // Afficher un message d'erreur indiquant que le jeu existe déjà
+            setValidationErrors((prevErrors) => ({
+              ...prevErrors,
+              serverName: "Game name already exists",
+            }));
+          } else {
+            // Autres erreurs
+            console.error("Failed to create game:", result.error);
+          }
+        }
+      } catch (error) {
+        console.error("Error creating game:", error);
+      }
     } else {
       // Feedback pour indiquer les erreurs de validation
       console.error("Form validation failed");
