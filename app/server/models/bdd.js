@@ -321,7 +321,12 @@ module.exports = function (app, bdd) {
       }
     },
 
-    createGameDescription: async function (serverName, roomPassword, rank) {
+    createGameDescription: async function (
+      serverName,
+      roomPassword,
+      rank,
+      master
+    ) {
       try {
         const existingGame = await GameDescriptionModel.findOne({ serverName });
         if (existingGame) {
@@ -336,10 +341,12 @@ module.exports = function (app, bdd) {
         //   };
         // }
 
+        console.log("bdd master", master);
         const gameDescription = new GameDescriptionModel({
           serverName,
           roomPassword,
           rank,
+          players: [master],
         });
 
         await gameDescription.save();

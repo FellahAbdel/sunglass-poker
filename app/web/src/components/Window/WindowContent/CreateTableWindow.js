@@ -69,14 +69,20 @@ const CreateGameWindow = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Create an object with only the _id and pseudo fields from the user
+    const masterInfo = {
+      _id: user._id,
+      pseudo: user.pseudo,
+    };
 
-    console.log("user_id", user._id);
+    console.log("user", user);
     if (validateForm()) {
       try {
         const result = await createGameRoom(
           formData.serverName,
           formData.password,
-          formData.rank
+          formData.rank,
+          masterInfo
         );
 
         if (result === true) {

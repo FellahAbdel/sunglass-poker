@@ -168,13 +168,14 @@ module.exports = (app, dao, gameController) => {
   app.post("/api/games", async (req, res) => {
     try {
       // Extract game data from the request body
-      const { serverName, password, rank, countPlayers, master } = req.body;
+      const { serverName, password, rank, master } = req.body;
 
       // Call the createGameDescription function from dao
       const result = await dao.createGameDescription(
         serverName,
         password,
-        rank
+        rank,
+        master
       );
 
       // Check if there was an error during game creation
