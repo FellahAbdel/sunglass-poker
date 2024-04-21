@@ -138,5 +138,7 @@
 
 * 2024/04/17: <b>1h30</b> <br/> Travail individuel : <i> Préparation de présentation IHM. Rédaction des tests utilisateurs. Travaille sur le workflow. </i>
 
-* 2024/04/21 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Demandes de feedback personnalisé. Rédirigé les taches à faire </i>
+* 2024/04/21 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Demandes de feedback personnalisé. Identifier les tâches qui restent. </i>
+
+* 2024/04/21 : <b>3h</b> <br/> Travail individuel : <i> Faire la matrice d'Eisenhower. Créer un nouveau Gantt pour la période du 21 avril au 28 mai. Mettre à jour Trello.</i>
 
