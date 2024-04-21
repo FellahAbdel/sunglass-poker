@@ -15,7 +15,7 @@ import { startGame } from "../../../store/actions/clientInteractionsCreator.js";
 const CreateGameWindow = () => {
   const { openWindow, showGameTable, closeWindow, setWindowType } =
     useWindowContext();
-  const { createGameRoom } = useAuth();
+  const { createGameRoom, user } = useAuth();
 
   const dispatch = useDispatch();
 
@@ -26,7 +26,6 @@ const CreateGameWindow = () => {
     countPlayers: 1, // The master of the room is always present.
     master: user._id,
   });
-
   const [validationErrors, setValidationErrors] = useState({
     serverName: "",
     password: "",
@@ -66,10 +65,10 @@ const CreateGameWindow = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Creating game with settings:", gameData);
+    console.log("Creating game with settings:", formData);
 
     // Creer la partie
-    const { serverName, password, rank, countPlayers } = gameData;
+    const { serverName, password, rank, countPlayers } = formData;
     const success = await createGameRoom(
       serverName,
       password,
