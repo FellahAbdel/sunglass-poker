@@ -71,12 +71,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Créer une description de jeu d'un salon.
-  const createGameRoom = async (serverName, password, rank, countPlayers) => {
+  const createGameRoom = async (serverName, password, rank, masterInfo) => {
     try {
       const response = await fetch("http://localhost:3001/api/games", {
         ...CORSSETTINGS,
-        body: JSON.stringify({ serverName, password, rank, countPlayers }),
+        body: JSON.stringify({
+          serverName,
+          password,
+          rank,
+          master: masterInfo,
+        }),
       });
+
       const data = await response.json();
       if (response.ok) {
         console.log("Game created successfully");

@@ -10,14 +10,11 @@ import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import TextInputComponent from "../../textInput/TextInput.jsx";
 
-
-
 const ServerPanelWindow = () => {
   const dispatch = useDispatch();
   const { getTranslatedWord } = useTranslation();
 
-  const { closeWindow, showGameTable, setWindowType } =
-useWindowContext();
+  const { closeWindow, showGameTable, setWindowType } = useWindowContext();
 
   const { getRoomTableRecords } = useAuth();
   const { isLogged } = useAuth();
@@ -27,7 +24,6 @@ useWindowContext();
   const [recordsPerPage, setRecordsPerPage] = useState(6);
 
   const [searchText, setSearchText] = useState("");
-
 
   //Gère le nombre de tables affichées par page
   useEffect(() => {
@@ -103,6 +99,10 @@ useWindowContext();
     if (isLogged) {
       console.log("Le joueur veut rejoindre la partie ", id);
       dispatch(actions.joinRoom(id));
+
+      // TODO :
+      // il faudra qu'on informe le joueur que sa demande a bien été prise en compte
+      // et qu'il est en attente de la réponse du serveur.
       showGameTable();
       closeWindow();
       setWindowType("");
@@ -158,7 +158,11 @@ useWindowContext();
         ).map((page) => (
           <Button
             key={page}
-            styleClass={page === currentPage ? "back-color1 btn-serverPage" : "back-color3 btn-serverPage"}
+            styleClass={
+              page === currentPage
+                ? "back-color1 btn-serverPage"
+                : "back-color3 btn-serverPage"
+            }
             label={page}
             onClick={() => paginate(page)}
           />
