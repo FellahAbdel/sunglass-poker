@@ -86,7 +86,12 @@ const CreateGameWindow = () => {
         );
 
         if (result === true) {
-          openSuccessWindow("Game created successfully", "servers");
+          // We dispatch the action to start the game
+          // We sent the user to the game room
+          dispatch(startGame());
+          showGameTable();
+          closeWindow();
+          setWindowType("");
         } else if (result && result.error) {
           if (result.error === "game_exists") {
             // Afficher un message d'erreur indiquant que le jeu existe déjà
