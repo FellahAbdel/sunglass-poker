@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./createTableWindow.css";
 import Button from "../../button/Button.tsx"; // Assurez-vous que le chemin est correct
 import TextInputComponent from "../../textInput/TextInput";
@@ -9,8 +9,8 @@ import {
   validatePasswordOrNull,
 } from "../../Utiles/ValidationUtils.jsx";
 
-import { useDispatch } from "react-redux";
-import { startGame } from "../../../store/actions/clientInteractionsCreator.js";
+import { useDispatch, useSelector } from "react-redux";
+import { createGame } from "../../../store/actions/clientInteractionsCreator.js";
 
 const CreateGameWindow = () => {
   const {
@@ -23,6 +23,24 @@ const CreateGameWindow = () => {
   const { createGameRoom, user } = useAuth();
 
   const dispatch = useDispatch();
+  const gameCreated = useSelector((state) => state.game.gameCreated);
+  console.log("gameCreated", gameCreated);
+
+  // Define your function to display the game room
+  const displayGameRoom = () => {
+    // Your logic to display the game room goes here
+    console.log("Game room displayed!");
+    showGameTable();
+    closeWindow();
+    setWindowType("");
+  };
+  
+  useEffect(() => {
+    if (gameCreated) {
+      displayGameRoom();
+      console.log("gameCreated (useEffect)", gameCreated);
+    }
+  }, [gameCreated]);
 
   const [formData, setFormData] = useState({
     serverName: "",
@@ -87,11 +105,12 @@ const CreateGameWindow = () => {
 
         if (result === true) {
           // We dispatch the action to start the game
-          // We sent the user to the game room
-          dispatch(startGame());
-          showGameTable();
-          closeWindow();
-          setWindowType("");
+          dispatch(createGame());
+          // We have to wait for the game to be created before closing the window
+          // And then we sent the user to the game room
+          //   showGameTable();
+          //   closeWindow();
+          //   setWindowType("");
         } else if (result && result.error) {
           if (result.error === "game_exists") {
             // Afficher un message d'erreur indiquant que le jeu existe déjà
