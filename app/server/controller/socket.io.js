@@ -81,7 +81,6 @@ module.exports = function (
             token
           );
           info = await dao.getUserInfo(decoded.id);
-          console.log(info);
           if (info.success) {
             if (info.user) {
               session.pseudo = info.user.pseudo;
@@ -166,7 +165,7 @@ module.exports = function (
    */
 
   function sendEvent(socket, action) {
-    csl.log(fileType, "send event to dispatch at user");
+    csl.log('Event', "send event to dispatch at user", action);
     socket.emit("event", action);
   }
 
@@ -176,7 +175,7 @@ module.exports = function (
    * @param {{action:{}, room:id}} data
    */
   function dispatch(socket, data) {
-    csl.log(fileType, "dispatch recevied : ", data);
+    csl.log('dispatch', "dispatch recevied : ", data);
     const { action, room } = data;
     const userId = session.userId;
     // si login
@@ -215,13 +214,11 @@ module.exports = function (
         csl.error(fileType, "Refused to create new game");
         return;
       }
-      store.dispatch(actcrea.createGame(id));
-      // gameController.dispatch(session.userId,actions.START_GAME);
+      // store.dispatch(actcrea.createGame(id));
+      gameController.dispatch(session.userId,actcrea.createGame(id));
       csl.log(fileType, "store dispatch");
       csl.log(fileType, store.getState());
-
-      // Ce dispatch modifie le store dans le server.
-      store.dispatch({ type: actions.GAME_STARTED });
+      store.dispatch({ type: actions.GAME_LOBBY });
       console.log("dispatched GAME_STARTED got called");
 
       // On récupère le nouvel état du store.
@@ -230,10 +227,7 @@ module.exports = function (
       const answer = joinRoom(socket, { id: id });
       csl.log(fileType, answer);
       socket.emit("joinRoom", answer);
-      socket.emit("event", {
-        payload: state.game.rooms[id],
-        type: actions.GAME_STARTED,
-      });
+      sendEvent(socket,actcrea.gameLobby(state.game.rooms[id]));
     });
 
     // Si l'action vient de quelqu'un non connecter on ignore

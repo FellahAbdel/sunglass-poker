@@ -23,13 +23,13 @@ export const LOGIN = "LOGIN";
  * 
  * _______________________________________
  */
+// Game Lobby, no round turning.
+export const GAME_LOBBY  = "GAME_LOBBY";
+
 // Game has started
 export const GAME_STARTED = "GAME_STARTED";
+
+
+
 // Successfully sit at a table.
-/**
- *  payload: {
- *     table: all table information,
- *     players: list of players
- *  }
- */
 export const SITTED = "SITTED";
