@@ -3,7 +3,7 @@ import { useTranslation } from "../../Utiles/Translations";
 import Button from "../../button/Button.tsx";
 
 const RankingWindow = ({ onClose }) => {
-    const nbRes = 15;
+    const nbRes = 11;
     const [page, setPage] = useState(1);
     const [ranks, setRanks] = useState([]);
     const { getTranslatedWord } = useTranslation();
