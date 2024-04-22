@@ -146,6 +146,12 @@ module.exports = gameController = {
         return room;
     },
 
+    /**
+     * 
+     * @param {id user} user 
+     * @param {actions} action
+     * @returns  {{status:boolean,mes:string, payload:{}}}
+     */
     dispatch: function(user, action){
         csl.log(fileType,"user : ",user, " dispatch event : ", action);
         store.dispatch(action);
