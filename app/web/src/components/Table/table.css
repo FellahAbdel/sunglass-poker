@@ -67,8 +67,8 @@
   --dark-background-color:#282828;
   --dark-background-size: 16px 16px;
   --inGame-dark-shadow-box:
-  inset 0px 10px 5vw 1vw rgb(0, 0, 0),
-  inset 0 -5px 0 2vw rgb(43, 41, 41),
+  inset 0px 10px 10vw 3vw rgb(0, 0, 0),
+  inset 0 -5px 0 1vw var(--color3-dark),
   inset 0 0 0 0 transparent,
   0 0px 1vw 0vw #0000005f,
   0 5px 1vw 1vw #164f81,    
@@ -158,9 +158,16 @@
 }
 #dark .container-inGame{
   box-shadow:var(--inGame-dark-shadow-box);
-  background:var(--isLogged-dark-background);
+  /* background:var(--isLogged-dark-background);
   background-color: var(--dark-background-color);
-  background-size: 16px 12px;
+  background-size: 16px 12px; */
+
+  background-image:   
+  radial-gradient(#bababa0c 40%, #000000),
+  url("./../assets/images/texture/carpetlow-bnw.jpg");
+  background-size: 65vw;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 #light .container-inGame{
   box-shadow:var(--inGame-light-shadow-box);
@@ -345,16 +352,16 @@
   right: -10%;
 }
 .profile4 {
-  bottom: -10%;
+  bottom: -15%;
   right: 20%;
 }
 
 .profile5 {
-  bottom: -10%;
+  bottom: -15%;
 }
 
 .profile6 {
-  bottom: -10%;
+  bottom: -15%;
   left: 20%;
 }
 

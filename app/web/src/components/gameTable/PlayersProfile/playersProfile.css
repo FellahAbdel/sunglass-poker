@@ -52,7 +52,7 @@
   padding: 0;
   box-shadow: 0 0 10px black;
   border-radius: 20px;
-  z-index: 1;
+  z-index: unset;
 
   border-style: solid;
   border-width: 2px;
@@ -73,60 +73,66 @@
 
 .box-statusText {
   font-size: 1vw;
-  z-index: -1;
+  z-index: unset;
   color: rgb(255, 255, 255);
 }
 #light .box-statusText {
   color: rgb(255, 255, 255);
 }
-#dark .box-statusText.Fold {
+#dark .box-statusText.fold {
   color: rgb(255, 255, 255);
 }
 
-#dark .box-status.Fold {
+#dark .box-status.fold {
   filter: brightness(30%);
   box-shadow: inset 0 0 10px 1px rgb(0, 0, 0), 0 0 10px 1px rgb(0, 0, 0);
   background-color: rgb(0, 0, 0);
 }
-#light .box-status.Fold {
+#light .box-status.fold {
   filter: brightness(30%);
   box-shadow: unset;
 }
 
-#dark .box-status.Waiting {
+#dark .box-status.waiting {
   box-shadow: inset 0 0 10px 1px rgb(0, 255, 98), 0 0 10px 1px rgb(0, 255, 98);
 }
-#light .box-status.Waiting {
+#light .box-status.waiting {
   box-shadow: unset;
   background-color: #00a674;
 }
-#dark .box-status.Raised {
+#dark .box-status.raised {
   box-shadow: inset 0 0 10px 1px rgb(255, 0, 0), 0 0 10px 1px rgb(255, 0, 0);
 }
-#light .box-status.Raised {
+#light .box-status.raised {
   background-color: rgb(254, 111, 68);
   box-shadow: inset 0 0 10px 1px rgb(255, 0, 0), 0 0 10px 1px rgb(255, 0, 0);
 }
 
-#dark .box-status.Empty {
+#dark .box-status.empty {
   box-shadow: inset 0 0 10px 0px rgb(255, 255, 255),
     0 0 10px 0px rgb(255, 255, 255);
   filter: brightness(30%);
+  height: 86%;
+  width: 105%;
+  border-radius: 13px;
 }
-#light .box-status.Empty {
+#light .box-status.empty {
   box-shadow: inset 0 0 10px 0px rgb(255, 255, 255),
     0 0 10px 0px rgb(255, 255, 255);
   filter: brightness(30%);
   background-color: black;
+  height: 86%;
+  width: 105%;
+  border-radius: 13px;
 }
-.profilePic.Fold {
+.profilePic.fold {
   filter: saturate(0);
   filter: brightness(40%);
 }
-.profilePic.Empty {
+.profilePic.empty {
   filter: blur(3px);
 }
-.box-playerInfo.Fold {
+.box-playerInfo.fold {
   color: rgb(88, 88, 88);
 }
 
@@ -193,6 +199,12 @@
     0px -79px 40px 0px rgba(0, 0, 0, 0.1) inset, 0px 2px 1px rgba(0, 0, 0, 0.06),
     0px 4px 2px rgba(0, 0, 0, 0.09), 0px 8px 4px rgba(0, 0, 0, 0.09),
     0px 16px 8px rgba(0, 0, 0, 0.09);
+}
+#light .box-playerInfo.you{
+  outline: 0.2vw solid var(--color1-light);
+}
+#dark .box-playerInfo.you{
+  outline: 0.2vw solid var(--color1-dark);
 }
 .profilePic {
   position: absolute;

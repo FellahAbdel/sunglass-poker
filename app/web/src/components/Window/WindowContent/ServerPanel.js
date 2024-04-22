@@ -4,8 +4,10 @@ import Button from "../../button/Button.tsx";
 import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../Utiles/Translations";
+import TextInputComponent from "../../textInput/TextInput.jsx";
 
 const ServerPanelWindow = () => {
+  const handleChange = (event) => {};
   const { getTranslatedWord } = useTranslation();
 
   const fakeTables = [
@@ -49,6 +51,13 @@ const ServerPanelWindow = () => {
 
   return (
     <div className="listTableWindow">
+      <TextInputComponent
+        placeholder="Search room"
+        styleClass={"input-connectionDefault input-searchBar input-icon-search"}
+        styleClass2={"container-textInputComponent2"}
+        errorMessage={""}
+        onChange={handleChange}
+      ></TextInputComponent>
       <div className="listTableHeader">
         <div className="headerItem">
           {getTranslatedWord("serverPanel.name")}
