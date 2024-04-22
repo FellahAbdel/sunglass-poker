@@ -69,12 +69,31 @@ module.exports = gameController = {
         }
         return { status: false, mes: 'No rooms' };
     },
+
+    deleteroom: function (room) {
+        if (this.rooms.hasOwnProperty(room)) {
+            const players = this.rooms[room].players;
+            if (players.length === 0) {
+                // Si la salle est vide, supprimez-la
+                delete this.rooms[room];
+                console.log("Room", room, "has been deleted because it is empty.");
+            } else {
+                console.error("Room", room, "is not empty, cannot delete.");
+            }
+        } else {
+            console.error("Room", room, "does not exist, cannot delete.");
+        }
+    },
+    
+
     removePlayer: function (room, id) {
         store.dispatch(actions.leaveRoom(room,id));
-        // const players = this.rooms[room].players;
-        // if(players.length == 0){
-        //     // AJOUTER LE DELETE DE LA ROOM 
-        // }
+        const players = this.rooms[room].players;
+        console.log("Number of players in room before removal:", players.length);
+        if(players.length == 0){
+            console.log("Room is empty, attempting to delete:", room);
+            this.deleteroom(room);
+        }
     },
 
     timeOutPlayer: 3e10,
