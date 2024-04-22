@@ -202,7 +202,9 @@
   height: 80vh;
 }
 #light .container-servers,
-#dark .container-servers {
+#dark .container-servers,
+#light .container-ranking,
+#dark .container-ranking {
   border-radius: 60px;
   width: 80vw;
   height: 70vh;
