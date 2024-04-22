@@ -1,14 +1,10 @@
 # Franck William Djeufack Akono
 
-reunion du 08/02/2024 duree 2h20 de 14h00 a 16h20
-
-travail de groupe le mardi 20/02/2024 de 13h-30 a 16h et le jeudi 22/02/2024 de 
-22h-00 a 00h-00 sur la premiere partie de la specification du backend du deroulement d'une partie.
-
-travail de groupe sur la finalisation de la specifications des fonctions du backend implementant le deroulement du jeu de 21h-00 a 23h-50 le vendredi 23/02/2024.
-
 | Dates | description | duree |
 --------|-------------|---------|
+| 08/02/2024 | reunion de 14h00 a 16h20 | 2h20 |
+| 20/02/2024 et 22/02/2024 | travail de groupe le mardi 20/02/2024 de 13h a 16h et le jeudi 22/02/2024 de 22h-00 a 00h-00 sur la premiere partie de la specification du backend du deroulement d'une partie. | 5h |
+| 23/02/2024 | travail de groupe sur la finalisation de la specifications des fonctions du backend implementant le deroulement du jeu de 21h a 00h. | 3h |
 | 25/02/24 | travail sur les fonctions maximums, shuffle et estCouleur | 2h |
 | 27/02/24 | travail sur les fonctions secondCarre secondBrelan, et second carteHaute | 4h |
 | 05/03/24 | travail sur la fonction gagnant et refactoration de la nomonclature des variables du code | 2h |
@@ -17,3 +13,6 @@ travail de groupe sur la finalisation de la specifications des fonctions du back
 | 26/03/24 | prise en main de react redux et implementation d'action et reducers | 4h |
 | 28/03/24 | suite et integration des differents autres codes | 4h |
 | 02/04/24 | reecriture des actions de call, check et raise | 4h |
+| 16/04/24 | tutoriel react : https://www.youtube.com/watch?v=SqcY0GlETPk | 1h20 |
+| 16/04/24 | tutoriel mongodb : https://www.youtube.com/watch?v=iYMtc8c945U | 1h |
+| 16/04/24 - 22/04/2024 | mise en place du systeme de classement des joueurs par rapport au gain maximal | 20h |
