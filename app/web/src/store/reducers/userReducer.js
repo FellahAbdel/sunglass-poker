@@ -3,6 +3,7 @@ export const initialState = {
   user: null,
 };
 
+
 function userReducer(state = initialState, action) {
   const { type, payload } = action;
 

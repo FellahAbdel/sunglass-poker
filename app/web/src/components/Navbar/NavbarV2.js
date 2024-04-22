@@ -13,7 +13,7 @@ import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import { useUserData } from "../Utiles/useUserData.jsx";
 import * as actions from "../../store/actions/clientInteractionsCreator.js";
 import { useDispatch } from 'react-redux'
-import comm from '../../services/socket.js';
+import {comm} from '../../services/socket.js';
 
 
 

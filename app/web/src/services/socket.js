@@ -13,7 +13,7 @@ const socket = io("http://localhost:3001", {
  * Puis le back envoie des données et le front le log.
  *
  */
-const comm = {
+export const comm = {
   token: null,
 
   preFun: function () {
@@ -108,5 +108,3 @@ const comm = {
     socket.emit("createGame");
   },
 };
-
-export default comm;

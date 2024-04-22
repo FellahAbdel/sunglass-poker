@@ -1,5 +1,5 @@
 // Redux middleware
-import comm from "../../services/socket.js";
+import {comm} from "../../services/socket.js";
 
 
 const actions = require("../actions/clientInteractionsType.js");
@@ -7,6 +7,10 @@ const actions = require("../actions/clientInteractionsType.js");
 export const socketMiddleware = (socket) => (store) => (next) => (action) => {
     console.log('Middleware scoket');
     switch(action.type){
+        case actions.LOGIN:
+            console.log('LOGIN INIT');
+            comm.Init();
+            break;
         case actions.CREATE_GAME:
             console.log('emit createGame');
             comm.createGame();
