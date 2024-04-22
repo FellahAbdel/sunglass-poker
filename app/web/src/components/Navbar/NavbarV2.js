@@ -181,6 +181,14 @@ const Navbar = ({}) => {
           styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
           iconSrc={require("./../assets/images/icons/white/tutorial.png")}
         />
+
+        <Button
+          label={getTranslatedWord("navbar.ranking")}
+          onClick={() => openWindow("ranking")}
+          styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
+          iconSrc={require("./../assets/images/icons/white/ranking.png")}
+        />
+
         {isLogged && (
           <Button
             label={label}

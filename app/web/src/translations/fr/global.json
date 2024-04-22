@@ -9,7 +9,8 @@
     "exit": "Fermer La Fenêtre",
     "logout": "Déconnexion",
     "login": "Connexion",
-    "signin": "Inscription"
+    "signin": "Inscription",
+    "ranking": "Classement" 
   },
   "connection": {
     "login": "Connexion",
@@ -125,5 +126,11 @@
     "confirm" : "Confirmer",
     "cancel" : "Annuler",
     "logout" : "Vous êtes sur le point de vous déconnecter"
+  },
+  "ranking": {
+    "rank" : "Rang",
+    "pseudo" : "Pseudo",
+    "gain" : "Gain",
+    "loadMore" : "Voir plus"
   }
 }

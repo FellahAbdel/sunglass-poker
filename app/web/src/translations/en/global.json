@@ -9,7 +9,8 @@
     "exit": "Close Window",
     "logout": "Log out",
     "login": "Log in",
-    "signin": "Sign Up"
+    "signin": "Sign Up",
+    "ranking" : "Ranking"
   },
   "connection": {
     "login": "Log in",
@@ -134,5 +135,11 @@
   },
   "table":{
     "total": "Total Pot"
+  },
+  "ranking": {
+    "rank" : "Rank",
+    "pseudo" : "Pseudonym",
+    "gain" : "Gain",
+    "loadMore" : "Load more"
   }
 }

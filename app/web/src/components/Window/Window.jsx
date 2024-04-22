@@ -17,6 +17,7 @@ import ShopWindow from "./WindowContent/shopWindows/ShopWindow";
 import ValidationWindow from "./WindowContent/shopWindows/ValidationWindow";
 import AcceuilWindow from "./WindowContent/Acceuil";
 import AlertWindow from "./WindowContent/AlertWindow";
+import RankingWindow from "./WindowContent/RankingWindow";
 
 import { useWindowContext } from "../Utiles/WindowContext";
 
@@ -49,6 +50,7 @@ const Window = () => {
         {windowType === "validation" && <ValidationWindow />}
         {(windowType==="" && !isGameTableVisible) && <AcceuilWindow />}
         {windowType === "alert" && <AlertWindow />}
+        {windowType === "ranking" && <RankingWindow />}
       </div>
     </div>
   );

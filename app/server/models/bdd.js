@@ -246,6 +246,50 @@ module.exports = function (app, bdd) {
     }
   });
 
+  app.get("/api/get-all-ranking/", async (req, res, next) => {
+    // get user name, ranking and gain
+
+    try {
+      const page = parseInt(req.query.page);
+      const nbRes = parseInt(req.query.nbres);
+
+      console.log("page", page);
+      console.log("nbres", nbRes);
+
+      const users = await UserModel.aggregate([
+        {
+            $lookup: {
+                from: "Stat",
+                pipeline: [
+                    { $project: {maxGain: 1}}
+                ],
+                as: "gain"
+            }
+        },
+        {
+          $sort: {gain : -1}
+        },
+        {
+          $project: {pseudo : 1, gain : 1} 
+        },
+        {
+          $skip : (page-1) * nbRes
+        },
+        { 
+          $limit : nbRes
+        }
+      ]);
+
+      console.log("j'envoi les stats les stats");
+      res.send({success : true, data : users});
+
+    } catch (err){
+      next(err);
+    }
+
+    
+  });
+
   app.post("/api/buy-item", verifyToken, async (req, res, next) => {
     const { itemId } = req.body;
 
