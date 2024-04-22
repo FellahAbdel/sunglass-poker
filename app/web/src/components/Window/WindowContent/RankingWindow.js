@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "../../Utiles/Translations";
-import './rankingWindow.css';
+import Button from "../../button/Button.tsx";
 
 const RankingWindow = ({ onClose }) => {
     const nbRes = 15;
@@ -50,7 +50,13 @@ const RankingWindow = ({ onClose }) => {
                     </div>
                 ))}
             </div>
-            <button className="load-more" onClick={() => fetchRankings(page + 1)}>{getTranslatedWord("ranking.loadMore")}</button>
+            <div className="container-listButton">
+                <Button
+                styleClass={"btn-loadMore back-color1"}
+                label={getTranslatedWord("ranking.loadMore")}
+                onClick={() => fetchRankings(page + 1)}
+                />
+            </div>
         </div>
     );
 };
