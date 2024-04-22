@@ -44,6 +44,8 @@ const begin = (state) => {
 
 const gameReducer = (state = initialState, action) => {
   csl.log(fileType,state, action);
+  var room;
+  var playerId;
   switch (action.type) {
     case actions.CREATE_GAME:
       csl.log(fileType,"CREATE GAME");
@@ -58,15 +60,17 @@ const gameReducer = (state = initialState, action) => {
 
     case actions.LEAVE_ROOM:
       console.log(actions.payload);
-      if (state.rooms.hasOwnProperty(action.payload.tableId)) {
-          const updatedPlayers = state.rooms[action.payload.tableId].players.filter(player => player.id !== action.payload.player);
-          if (updatedPlayers.length !== state.rooms[action.payload.tableId].players.length) {
-              console.log("Player:", action.payload.player, " removed from room:", action.payload.tableId);
+      room = action.payload.tableId;
+      playerId = action.payload.player;
+      if (state.rooms.hasOwnProperty(room)) {
+          const updatedPlayers = state.rooms[room].players.filter(player => player.id !== playerId);
+          if (updatedPlayers.length !== state.rooms[room].players.length) {
+              console.log("Player:", playerId, " removed from room:", room);
               return {
                   ...state,
                   rooms: {
                       ...state.rooms,
-                      [action.payload.tableId]: {
+                      [room]: {
                           ...state.rooms[action.payload.room],
                           players: updatedPlayers
                       }
@@ -77,9 +81,12 @@ const gameReducer = (state = initialState, action) => {
               return state;
           }
       } else {
-          console.error("Not a room, can't kick player", action.payload.tableId, "  -:> ", action.payload.player);
+          console.error("Not a room, can't kick player", room, "  -:> ", playerId);
           return state;
       }
+
+    case actions.CHANGE_MASTER:
+      return state;
 
     case actions.SIT:
       failed =false;
@@ -93,21 +100,23 @@ const gameReducer = (state = initialState, action) => {
         state.answer = {status:false, mes:'No such room'};
         failed=true;
       }
+      // --------------
 
       //Test to see if player id is given
       if(action.payload.player === undefined){
         state.answer = {status:false,mes:'No player given ?'};
         failed=true;
       }
-      const playerId = action.payload.player.id;
-      const pseudo = action.payload.player.pseudo;
+      playerId = action.payload.player.id;
+      pseudo = action.payload.player.pseudo;
       if(playerId === undefined || pseudo === undefined){
         failed = true;
         state.answer = {status:false, mes :'player empty'};
       }
-      csl.log(fileType,'output for sit', action);
-      const room = state.rooms[action.payload.tableId];
-      csl.log(fileType, 'wtf', playerId,'  ' ,pseudo);
+      // --------------
+
+      room = state.rooms[action.payload.tableId];
+      
       // Test if player is already in the game
       found = false;
       csl.log(fileType,'(check for room length)',room.players, room.players.length);
@@ -121,16 +130,17 @@ const gameReducer = (state = initialState, action) => {
         state.answer = {status:false, mes:'Player already inside the room'};
         failed =true; 
       }
+      // --------------
 
-      csl.log(fileType,"tableid: ", action.payload.tableId);
-      csl.log(fileType,"state.game : ", state);
-      csl.log(fileType,state.rooms[action.payload.tableId]);
+
+      // We can add the player in the game
       if(!failed){
         state.answer = {status:true,mes:'Successfully join room', payload:{id:action.payload.tableId}};
         room.players = [
           ...room.players,
           new Player(playerId,pseudo),
         ];
+
         csl.log(fileType,"Added player successfully");
       }else{
         csl.error(fileType, "Failed to sit player at the table.");

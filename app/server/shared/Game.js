@@ -8,6 +8,10 @@ class Game {
     this.players = [];
     this.deck = new Deck();
     this.pokerTable = new PokerTable();
+    // Big blind
+    this.master = false;
+    // Player turn
+    this.focus = false;
   }
 
   addPlayer(player) {
