@@ -59,7 +59,8 @@ const gameReducer = (state = initialState, action) => {
       return state;
 
     case actions.LEAVE_ROOM:
-      console.log(actions.payload);
+      answer = {status: false, mes:"Couldn't remove player from room"};
+      console.log(action.payload);
       room = action.payload.tableId;
       playerId = action.payload.player;
       if (state.rooms.hasOwnProperty(room)) {
@@ -68,7 +69,7 @@ const gameReducer = (state = initialState, action) => {
               console.log("Player:", playerId, " removed from room:", room);
               return {
                   ...state,
-                  answer:{status:true,mes:"OUI",payload:{restant:updatedPlayers.length}},
+                  answer:{status:true,mes:"Player removed from room",payload:{restant:updatedPlayers.length}},
                   rooms: {
                       ...state.rooms,
                       [room]: {
@@ -78,13 +79,16 @@ const gameReducer = (state = initialState, action) => {
                   }
               };
           } else {
-              console.error("Player", actions.payload.player, "is not in the room");
+              answer.mes = "Player"+ playerId+ "is not in the room";
               return state;
           }
       } else {
-          console.error("Not a room, can't kick player", room, "  -:> ", playerId);
-          return state;
+          answer.mes = "Not a room, can't kick player"+ room+ "  -:> "+ playerId;
       }
+      return {
+        ...state,
+        answer:answer
+      };
 
     case actions.CHANGE_MASTER:
       return state;

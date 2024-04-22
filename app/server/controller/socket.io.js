@@ -133,8 +133,8 @@ module.exports = function (
         sendEvent(
           socket,
           actcrea.sitted(
-            gameController.rooms[data.id].game.pokerTable.communityCards,
-            gameController.rooms[data.id].players
+            gameController.state.game.rooms[data.id].game.pokerTable.communityCards,
+            gameController.state.game.rooms[data.id].players
           )
         );
         io.to(room).emit("refresh");

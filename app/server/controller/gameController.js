@@ -17,18 +17,18 @@ const log_broadcast = false;
 
 module.exports = gameController = {
     io: null,
-    rooms: {},
+    state: null,
     game: null,
     dao: null,
     refresh: {},
     init: function(dao){
         this.dao = dao;
+        this.state = store.getState();
         this.game = store.getState().game;
-        this.rooms = store.getState().game.rooms;
     },
 
     makeRefreshCall: function (room, reset = false) {
-        if (this.rooms.hasOwnProperty(room)) {
+        if (this.state.game.rooms.hasOwnProperty(room)) {
             if (this.refresh[room] && !reset) {
                 csl.error('refreshCall',"RefreshCall already exist, reset set to false -> Action canceled");
                 return;
@@ -48,8 +48,8 @@ module.exports = gameController = {
 
     join: function (id, user) {
         csl.log(fileType,this);
-        if (this.rooms !== undefined) {
-            if (this.rooms.hasOwnProperty(id)) {
+        if (this.state.game.rooms !== undefined) {
+            if (this.state.game.rooms.hasOwnProperty(id)) {
                 csl.log(fileType,'User to add : ',user);
                 if (user === undefined) {
                     return { status: false, mes: 'User undefined' };
@@ -58,7 +58,7 @@ module.exports = gameController = {
                 csl.log(fileType, "answer of dispatch : ",answer);
                 if (answer.status) {
                     this.dao.addOnePlayerGameDesc(id,user);
-                    csl.log(fileType,this.rooms[id].state);
+                    csl.log(fileType,this.state.game.rooms[id].state);
                     csl.log(fileType,'New player, try to set refresh');
                     this.makeRefreshCall(id, false);
                     csl.log(fileType,'Join call for broadcast ', answer);
@@ -71,11 +71,12 @@ module.exports = gameController = {
     },
 
     deleteroom: function (room) {
-        if (this.rooms.hasOwnProperty(room)) {
-            const players = this.rooms[room].players;
+        csl.log('deleteRoom', "Trying to deleteroom",room);
+        if (this.state.game.rooms.hasOwnProperty(room)) {
+            const players = this.state.game.rooms[room].players;
             if (players.length === 0) {
                 // Si la salle est vide, supprimez-la
-                delete this.rooms[room];
+                delete this.state.game.rooms[room];
                 console.log("Room", room, "has been deleted because it is empty.");
             } else {
                 console.error("Room", room, "is not empty",players.length," cannot delete.");
@@ -88,7 +89,9 @@ module.exports = gameController = {
 
     removePlayer: function (room, id) {
         reponse=this.dispatch(id,actions.leaveRoom(room,id));
-        if(reponse.payload.restant==0){
+        csl.log('removePlayer', 'reponse : ',reponse);
+        if(reponse.status)
+        if(reponse.payload.restant === 0){
             this.deleteroom(room);
         }
     },
@@ -97,11 +100,11 @@ module.exports = gameController = {
     broadcastStatus: function (room) {
         // Si la room existe
         if (this.io !== null) {
-            if (!this.rooms.hasOwnProperty(room)) {
+            if (!this.state.game.rooms.hasOwnProperty(room)) {
                 if(log_broadcast)csl.error('refreshCall',"Room expired or does not exist");
                 return;
             }
-            const players = this.rooms[room].players;
+            const players = this.state.game.rooms[room].players;
             if(log_broadcast) csl.log('refreshCall','gameController call for broadcast on ', room, ' to io with hash :', room);
             if(players.length == 0){
                 if(log_broadcast) csl.log(fileType,'No player in room, refreshcall will be remove if set.');
@@ -121,10 +124,10 @@ module.exports = gameController = {
     },
     status: function (room, id) {
         csl.log('Status','Status room:', room, ' for : ', id);
-        // csl.log(fileType,this.rooms, this.rooms.hasOwnProperty(room));
-        if (this.rooms[room] !== undefined) {
-            // if (this.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
-                return { status: true, mes: 'Refreshing status', payload: this.rooms[room] };
+        // csl.log(fileType,this.state.game.rooms, this.state.game.rooms.hasOwnProperty(room));
+        if (this.state.game.rooms[room] !== undefined) {
+            // if (this.state.game.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
+                return { status: true, mes: 'Refreshing status', payload: this.state.game.rooms[room] };
             // }
         }
         return { status: false, mes: "Can't refresh status", payload: [] };
@@ -138,9 +141,9 @@ module.exports = gameController = {
         if(respons.error) { csl.error(fileType,"Couln't create gamedescription",gameDescr.error); return;};
         const gameDescr = respons.data;
         const room = gameDescr._id;
-        this.rooms[room] = initGameRoom(room);
+        this.state.game.rooms[room] = initGameRoom(room);
         this.dispatch(userId,actions.createGame(room));
-        csl.log(fileType,this.rooms);
+        csl.log(fileType,this.state.game.rooms);
         this.join(room,userId);
         await this.dao.updateUserData('_id',userId,'inGame',room);
         return room;
@@ -155,8 +158,8 @@ module.exports = gameController = {
     dispatch: function(user, action){
         csl.log(fileType,"user : ",user, " dispatch event : ", action);
         store.dispatch(action);
-        const state = store.getState();
-        const answer = state.game.answer;
+        this.state = store.getState();
+        const answer = this.state.game.answer;
         csl.log(fileType, "Answer: ", answer)
         store.dispatch(actions.clearAnswer());
         return answer;
