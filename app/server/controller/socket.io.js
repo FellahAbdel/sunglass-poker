@@ -40,8 +40,8 @@ module.exports = function (
       csl.error(fileType, "Error in room number");
       return;
     }
-    if(session.userId === undefined){
-      csl.error(fileType,"Can't refresh status to player with undefined id");
+    if (session.userId === undefined) {
+      csl.error(fileType, "Can't refresh status to player with undefined id");
       return;
     }
     id = session.userId;
@@ -133,7 +133,8 @@ module.exports = function (
         sendEvent(
           socket,
           actcrea.sitted(
-            gameController.state.game.rooms[data.id].game.pokerTable.communityCards,
+            gameController.state.game.rooms[data.id].game.pokerTable
+              .communityCards,
             gameController.state.game.rooms[data.id].players
           )
         );
@@ -148,13 +149,13 @@ module.exports = function (
     session.save();
   }
 
-  async function  leaveRoom(socket){
-    csl.log(fileType," receive leaveroom from player");
+  async function leaveRoom(socket) {
+    csl.log(fileType, " receive leaveroom from player");
     const respons = await dao.getUserInfo(session.userId);
-    if(respons.success){
+    if (respons.success) {
       const user = respons.user;
-      if(user.inGame !== null)
-        gameController.removePlayer(user.inGame.toString(),session.userId);
+      if (user.inGame !== null)
+        gameController.removePlayer(user.inGame.toString(), session.userId);
     }
   }
 
@@ -218,12 +219,17 @@ module.exports = function (
       // gameController.dispatch(session.userId,actions.START_GAME);
       csl.log(fileType, "store dispatch");
       csl.log(fileType, store.getState());
+
+      // Ce dispatch modifie le store dans le server.
       store.dispatch({ type: actions.GAME_STARTED });
       console.log("dispatched GAME_STARTED got called");
+
+      // On récupère le nouvel état du store.
       state = store.getState();
-      const an = joinRoom(socket, { id: id });
-      csl.log(fileType, an);
-      socket.emit("joinRoom", an);
+
+      const answer = joinRoom(socket, { id: id });
+      csl.log(fileType, answer);
+      socket.emit("joinRoom", answer);
       socket.emit("event", {
         payload: state.game.rooms[id],
         type: actions.GAME_STARTED,
@@ -272,12 +278,12 @@ module.exports = function (
       identify(socket, token);
     });
     socket.on("joinRoom", (data) => {
-      if (session.id){
+      if (session.id) {
         joinRoom(socket, data);
       }
     });
     socket.on("leaveRoom", () => {
-      if (session.id){
+      if (session.id) {
         leaveRoom(socket, data);
       }
     });
@@ -298,14 +304,14 @@ module.exports = function (
     });
 
     socket.on("dispatch", (data) => {
-      if (session.userId){
+      if (session.userId) {
         dispatch(socket, data);
       }
     });
 
     socket.on("createGame", () => {
       csl.log(fileType, "user try to createGame user : ", session.userId);
-      if (session.userId){
+      if (session.userId) {
         createGame(socket);
       }
     });
