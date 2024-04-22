@@ -58,6 +58,11 @@ module.exports.sit = (table,player) => ({
   payload: {tableId:table, player:player},
 })
 
+module.exports.leaveRoom = (table,player) => ({
+  type: actions.LEAVE_ROOM,
+  payload:{tableId:table, player:player}
+});
+
 // Actions creators for user authentication
 module.exports.login = (user) => ({
   type: actions.LOGIN,

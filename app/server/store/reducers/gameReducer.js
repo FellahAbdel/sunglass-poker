@@ -56,6 +56,30 @@ const gameReducer = (state = initialState, action) => {
       csl.log(fileType,"start", action.type);
       return state;
 
+    case actions.LEAVE_ROOM:
+      console.log(actions.payload);
+      if (state.rooms.hasOwnProperty(action.payload.tableId)) {
+          const updatedPlayers = state.rooms[action.payload.tableId].players.filter(player => player.id !== action.payload.player);
+          if (updatedPlayers.length !== state.rooms[action.payload.tableId].players.length) {
+              console.log("Player:", action.payload.player, " removed from room:", action.payload.tableId);
+              return {
+                  ...state,
+                  rooms: {
+                      ...state.rooms,
+                      [action.payload.tableId]: {
+                          ...state.rooms[action.payload.room],
+                          players: updatedPlayers
+                      }
+                  }
+              };
+          } else {
+              console.error("Player", actions.payload.player, "is not in the room");
+              return state;
+          }
+      } else {
+          console.error("Not a room, can't kick player", action.payload.tableId, "  -:> ", action.payload.player);
+          return state;
+      }
 
     case actions.SIT:
       failed =false;

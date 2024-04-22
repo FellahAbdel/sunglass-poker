@@ -67,15 +67,11 @@ module.exports = gameController = {
         return { status: false, mes: 'No rooms' };
     },
     removePlayer: function (room, id) {
-        if (this.rooms.hasOwnProperty(room)) {
-            let index = -1;
-            if ((index = this.rooms[room].players.findIndex(player => player.getPlayerId() === id)) !== -1) {
-                csl.log(fileType,"Player : ", id, " removed from room : ", room);
-                this.rooms[room].players.splice(index, 1);
-                this.dao.playerLeftGame(id);
-                return;
-            } else csl.error(fileType,"Player ", id, " is not in the room");
-        } else csl.error(fileType,"Not a room, can't kick player", room, "  -:> ", id);
+        store.dispatch(actions.leaveRoom(room,id));
+        // const players = this.rooms[room].players;
+        // if(players.length == 0){
+        //     // AJOUTER LE DELETE DE LA ROOM 
+        // }
     },
 
     timeOutPlayer: 3e10,
