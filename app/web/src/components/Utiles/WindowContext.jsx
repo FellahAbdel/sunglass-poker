@@ -129,7 +129,7 @@ export const WindowProvider = ({ children }) => {
 
   // Effets pour gérer la persistance de sessionStorage
   useEffect(() => {
-    sessionStorage.setItem("isWindowOpen", state.isWindowOpen.toString());
+    sessionStorage.setItem("isWindowOpen", state.isWindowOpen);
     sessionStorage.setItem("windowType", state.windowType);
     sessionStorage.setItem(
       "isGameTableVisible",
