@@ -48,7 +48,7 @@ export const comm = {
     });
 
     socket.on("event", (data) => {
-      console.log(data);
+      console.log("event receive : ",data);
       store.dispatch({ payload: data.payload, type: data.type });
     });
 
