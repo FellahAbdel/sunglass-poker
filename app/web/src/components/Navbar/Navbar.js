@@ -115,6 +115,17 @@ const Navbar = ({}) => {
         }`}
         iconSrc={require("./../assets/images/icons/white/tutorial.png")}
       />
+
+        {/* ranking */}
+      <Button
+        label={getTranslatedWord("navbar.ranking")}
+        onClick={() => openWindow("ranking")}
+        styleClass={`${
+          isLogged ? "btn-tutorial back-color2" : "btn-tutorial back-color3"
+        }`}
+        iconSrc={require("./../assets/images/icons/white/ranking.png")}
+      />
+
       <Button
         label={getTranslatedWord("navbar.settings")}
         onClick={() => openWindow("settings")}

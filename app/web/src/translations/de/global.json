@@ -8,7 +8,8 @@
     "exit": "Beenden",
     "logout": "Ausloggen",
     "login": "Einloggen",
-    "signin": "Registrieren"
+    "signin": "Registrieren",
+    "ranking": "Rangfolge"
   },
   "connection": {
     "login": "Einloggen",
@@ -116,5 +117,11 @@
     "createTable": "NEUES SPIEL ERSTELLEN",
     "validation": "Kaufbestätigung",
     "shop": "Einkaufsladen"
+  },
+  "ranking": {
+    "rank" : "Rang",
+    "pseudo" : "Pseudonym",
+    "gain" : "Gewinnen",
+    "loadMore" : "Mehr laden"
   }
 }
