@@ -22,7 +22,7 @@ export function getStyles(
     logoComponent: `
       logo-main
       logo-${windowType}
-      ${isGameTableVisible && !isWindowOpen && "disappear"}
+      ${((isGameTableVisible && !isWindowOpen) || windowType==="ranking") && "disappear"}
     `,
   };
 }
