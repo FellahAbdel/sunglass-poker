@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Card from "../gameTable/Card/Card";
-import TextGlitch from "./../TextGlitch/TextGlitch";
-import { useTranslation } from "../Utiles/Translations";
+import useAudio from '../../hooks/useAudio';
 
 
 const CardsPlacements = ({
@@ -9,6 +8,44 @@ const CardsPlacements = ({
   disappear,
   playersCardDistributedProp,
 }) => {
+  const [playing0, togglePlay0] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+  const [playing1, togglePlay1] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+  const [playing2, togglePlay2] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+  const [playing3, togglePlay3] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+  const [playing4, togglePlay4] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+
+  const [delayedDealingFlop, setDelayedDealingFlop] = useState([false, false, false, false, false]);
+
+  useEffect(() => {
+    const delays = [500, 1000, 1500, 2000, 2500]; // Individual delays for each card
+
+    dealingFlop.forEach((newFlop, index) => {
+      if (newFlop === true && delayedDealingFlop[index] === false) {
+        setTimeout(() => {
+          setDelayedDealingFlop(current => {
+            const newStates = [...current];
+            newStates[index] = true;
+            // Trigger the corresponding sound play
+            switch(index) {
+              case 0: togglePlay0(); break;
+              case 1: togglePlay1(); break;
+              case 2: togglePlay2(); break;
+              case 3: togglePlay3(); break;
+              case 4: togglePlay4(); break;
+              default: break;
+            }
+            return newStates;
+          });
+        }, delays[index]);
+      } else if (newFlop === false) {
+        setDelayedDealingFlop(current => {
+          const newStates = [...current];
+          newStates[index] = false;
+          return newStates;
+        });
+      }
+    });
+  }, [dealingFlop]);
 
   return (
     <div className={`container-cards ${disappear ? "disappear" : ""}`}>
@@ -21,31 +58,31 @@ const CardsPlacements = ({
           card={["2", "clubs"]}
           styleClass={`tableCard`}
           flippedStyle={"dealingFlop0"}
-          flippingCard={dealingFlop[0]}
+          flippingCard={delayedDealingFlop[0]}
         />
         <Card
           card={["3", "clubs"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop1"}
-          flippingCard={dealingFlop[0]}
+          flippingCard={delayedDealingFlop[1]}
         />
         <Card
           card={["4", "clubs"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop2"}
-          flippingCard={dealingFlop[0]}
+          flippingCard={delayedDealingFlop[2]}
         />
         <Card
           card={["5", "clubs"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop3"}
-          flippingCard={dealingFlop[1]}
+          flippingCard={delayedDealingFlop[3]}
         />
         <Card
           card={["6", "clubs"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop4"}
-          flippingCard={dealingFlop[2]}
+          flippingCard={delayedDealingFlop[4]}
         />
       </div>
 

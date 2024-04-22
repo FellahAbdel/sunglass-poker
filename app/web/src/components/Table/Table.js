@@ -23,12 +23,12 @@ const Table = ({
   const [isVisible, setIsVisible] = useState(false);
 
   //demo test-----------------------------------------
-    const [dealingFlop, setDealingFlop] = useState([false, false, false]);
+    const [dealingFlop, setDealingFlop] = useState([false, false, false,false,false]);
     const [playersCardsShow, setPlayersCardsShow] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const [playersCardDistributed, setPlayersCardDistributed] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   
     const testDealingFlop = () => {
-      setDealingFlop([!dealingFlop[0], !dealingFlop[1], !dealingFlop[2]]);
+      setDealingFlop([!dealingFlop[0], !dealingFlop[1], !dealingFlop[2], !dealingFlop[3] ,!dealingFlop[4]]);
     };
     const testDistribution = () => {
       setPlayersCardDistributed([!playersCardDistributed[0], !playersCardDistributed[1], !playersCardDistributed[2], !playersCardDistributed[3], !playersCardDistributed[4], !playersCardDistributed[5], !playersCardDistributed[6], 0, !playersCardDistributed[8], !playersCardDistributed[9]]);
