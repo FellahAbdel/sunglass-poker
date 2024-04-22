@@ -8,6 +8,9 @@ const { create } = require('domain');
 const store = require('../store/configStore');
 const csl = require('./intelligentLogging');
 const fileType = "gameController";
+csl.silenced('Status');
+csl.silenced('refreshCall');
+
 
 const log_refresh = false;
 const log_broadcast = false;
@@ -27,22 +30,20 @@ module.exports = gameController = {
     makeRefreshCall: function (room, reset = false) {
         if (this.rooms.hasOwnProperty(room)) {
             if (this.refresh[room] && !reset) {
-                if(log_refresh) csl.error(fileType,"RefreshCall already exist, reset set to false -> Action canceled");
+                csl.error('refreshCall',"RefreshCall already exist, reset set to false -> Action canceled");
                 return;
             } else {
                 if (this.refresh[room]) {
-                    if(log_refresh) csl.log(fileType,'Refresh already in place, removed because reset is set to true');
+                    csl.log('refreshCall','Refresh already in place, removed because reset is set to true');
                     clearInterval(this.refresh[room]);
                 }
                 this.refresh[room] = setInterval((room, gc) => {
-                    if(log_refresh) csl.log(fileType,'Refresh for room : ', room);
+                    csl.log('refreshCall','Refresh for room : ', room);
                     gc.broadcastStatus(room);
                 }, 1000, room, this);
-                if(log_refresh) csl.log(fileType,"Refresh setup");
+                csl.log('refreshCall',"Refresh setup");
             }
         }
-        // else
-        //     if(log_refresh) csl.error(fileType,"Can't create refreshCall for inexistant room, make sure it's NOT the hash that's passed", room);
     },
 
     join: function (id, user) {
@@ -58,11 +59,10 @@ module.exports = gameController = {
                 if (answer.status) {
                     this.dao.addOnePlayerGameDesc(id,user);
                     csl.log(fileType,this.rooms[id].state);
-                    // csl.log(fileType,'nop at');
-                    // csl.log(fileType,'New player, try to set refresh');
+                    csl.log(fileType,'New player, try to set refresh');
                     this.makeRefreshCall(id, false);
-                    // csl.log(fileType,'Join call for broadcast ', answer);
-                    // this.broadcastStatus(id);
+                    csl.log(fileType,'Join call for broadcast ', answer);
+                    this.broadcastStatus(id);
                 }
                 return answer;
             }
@@ -101,28 +101,29 @@ module.exports = gameController = {
         // Si la room existe
         if (this.io !== null) {
             if (!this.rooms.hasOwnProperty(room)) {
-                if(log_broadcast)csl.error(fileType,"Room expired or does not exist");
+                if(log_broadcast)csl.error('refreshCall',"Room expired or does not exist");
                 return;
             }
             const players = this.rooms[room].players;
-            if(log_broadcast) csl.log(fileType,'gameController call for broadcast on ', room, ' to io with hash :', room);
+            if(log_broadcast) csl.log('refreshCall','gameController call for broadcast on ', room, ' to io with hash :', room);
             if(players.length == 0){
                 if(log_broadcast) csl.log(fileType,'No player in room, refreshcall will be remove if set.');
                 if(this.refresh[room] !==undefined)
                     this.refresh[room]=clearInterval(this.refresh[room]);
             }
+            // Code to kick someone if they didn't answer soon enough.
             // for (var i = 0; i < players.length; i++) {
             //     timedPassed = (Date.now() - players[i].gettimeLastAnswer());
-            //     csl.log(fileType,'since last answer:', timedPassed);
-            //     // if (timedPassed > this.timeOutPlayer) {
-            //     //     this.removePlayer(room, players[i].id);
-            //     // }
+            //     csl.log(('refreshCall'),' last answer :', players[i].gettimeLastAnswer());
+            //     if (timedPassed > this.timeOutPlayer) {
+            //         this.removePlayer(room, players[i].id);
+            //     }
             // }
             this.io.broadcastStatus(room);
         } else  if(log_broadcast)csl.error(fileType,'No io to broadcast');
     },
     status: function (room, id) {
-        csl.log(fileType,'Status room:', room, ' for : ', id);
+        csl.log('Status','Status room:', room, ' for : ', id);
         // csl.log(fileType,this.rooms, this.rooms.hasOwnProperty(room));
         if (this.rooms[room] !== undefined) {
             // if (this.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
@@ -141,7 +142,7 @@ module.exports = gameController = {
         const gameDescr = respons.data;
         const room = gameDescr._id;
         this.rooms[room] = initGameRoom(room);
-        store.dispatch(actions.createGame(room));
+        this.dispatch(userId,actions.createGame(room));
         csl.log(fileType,this.rooms);
         this.join(room,userId);
         await this.dao.updateUserData('_id',userId,'inGame',room);

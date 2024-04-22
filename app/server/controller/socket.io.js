@@ -258,7 +258,6 @@ module.exports = function (
 
     socket.on("status", (data) => {
       if (session.userId) {
-        7;
         csl.log(fileType, "giving status to player : ", session.userId);
         playerRoomStatus(socket, data);
       } else {
@@ -273,10 +272,14 @@ module.exports = function (
       identify(socket, token);
     });
     socket.on("joinRoom", (data) => {
-      if (session.id) joinRoom(socket, data);
+      if (session.id){
+        joinRoom(socket, data);
+      }
     });
     socket.on("leaveRoom", () => {
-      if (session.id) leaveRoom(socket, data);
+      if (session.id){
+        leaveRoom(socket, data);
+      }
     });
 
     // Fonction test
@@ -295,12 +298,16 @@ module.exports = function (
     });
 
     socket.on("dispatch", (data) => {
-      if (session.userId) dispatch(socket, data);
+      if (session.userId){
+        dispatch(socket, data);
+      }
     });
 
     socket.on("createGame", () => {
       csl.log(fileType, "user try to createGame user : ", session.userId);
-      if (session.userId) createGame(socket);
+      if (session.userId){
+        createGame(socket);
+      }
     });
 
     session.save();
