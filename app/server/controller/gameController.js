@@ -108,7 +108,7 @@ module.exports = gameController = {
         // csl.log(fileType,this.rooms, this.rooms.hasOwnProperty(room));
         if (this.rooms[room] !== undefined) {
             // if (this.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
-                return { status: true, mes: 'Refreshing status', payload: this.rooms[room].game };
+                return { status: true, mes: 'Refreshing status', payload: this.rooms[room] };
             // }
         }
         return { status: false, mes: "Can't refresh status", payload: [] };
