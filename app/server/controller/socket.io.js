@@ -36,19 +36,15 @@ module.exports = function (
   function playerRoomStatus(socket, data) {
     csl.log(fileType, "Try for status");
     room = data.room;
-    var decoded;
     if (room === undefined || room === null) {
       csl.error(fileType, "Error in room number");
       return;
     }
-    try {
-      decoded= jwt.verify(token, process.env.JWT_SECRET);
-    }
-    catch (err) {
-      csl.log(fileType, " err => ", err);
+    if(session.userId === undefined){
+      csl.error(fileType,"Can't refresh status to player with undefined id");
       return;
     }
-    id = decoded.id;
+    id = session.userId;
     const answer = gameController.status(room, id);
     csl.log(fileType, "status of ", id, " : =", answer);
     socket.emit("event", {
@@ -157,7 +153,8 @@ module.exports = function (
     const respons = await dao.getUserInfo(session.userId);
     if(respons.success){
       const user = respons.user;
-      gameController.removePlayer(user.inGame.toString(),session.userId);
+      if(user.inGame !== null)
+        gameController.removePlayer(user.inGame.toString(),session.userId);
     }
   }
 

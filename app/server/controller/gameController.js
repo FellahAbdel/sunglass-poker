@@ -15,31 +15,34 @@ const log_broadcast = false;
 module.exports = gameController = {
     io: null,
     rooms: {},
+    game: null,
     dao: null,
+    refresh: {},
     init: function(dao){
         this.dao = dao;
+        this.game = store.getState().game;
         this.rooms = store.getState().game.rooms;
     },
 
     makeRefreshCall: function (room, reset = false) {
         if (this.rooms.hasOwnProperty(room)) {
-            if (this.rooms[room].refresh && !reset) {
+            if (this.refresh[room] && !reset) {
                 if(log_refresh) csl.error(fileType,"RefreshCall already exist, reset set to false -> Action canceled");
                 return;
             } else {
-                if (this.rooms[room].refresh) {
+                if (this.refresh[room]) {
                     if(log_refresh) csl.log(fileType,'Refresh already in place, removed because reset is set to true');
-                    clearInterval(this.rooms[room].refresh);
+                    clearInterval(this.refresh[room]);
                 }
-                this.rooms[room].refresh = setInterval((room, gc) => {
+                this.refresh[room] = setInterval((room, gc) => {
                     if(log_refresh) csl.log(fileType,'Refresh for room : ', room);
                     gc.broadcastStatus(room);
                 }, 1000, room, this);
                 if(log_refresh) csl.log(fileType,"Refresh setup");
             }
         }
-        else
-            if(log_refresh) csl.error(fileType,"Can't create refreshCall for inexistant room, make sure it's NOT the hash that's passed", room);
+        // else
+        //     if(log_refresh) csl.error(fileType,"Can't create refreshCall for inexistant room, make sure it's NOT the hash that's passed", room);
     },
 
     join: function (id, user) {
@@ -57,7 +60,7 @@ module.exports = gameController = {
                     csl.log(fileType,this.rooms[id].state);
                     // csl.log(fileType,'nop at');
                     // csl.log(fileType,'New player, try to set refresh');
-                    // this.makeRefreshCall(id, false);
+                    this.makeRefreshCall(id, false);
                     // csl.log(fileType,'Join call for broadcast ', answer);
                     // this.broadcastStatus(id);
                 }
@@ -86,8 +89,8 @@ module.exports = gameController = {
             if(log_broadcast) csl.log(fileType,'gameController call for broadcast on ', room, ' to io with hash :', room);
             if(players.length == 0){
                 if(log_broadcast) csl.log(fileType,'No player in room, refreshcall will be remove if set.');
-                if(this.rooms[room].refresh !==undefined)
-                    this.rooms[room].refresh=clearInterval(this.rooms[room].refresh);
+                if(this.refresh[room] !==undefined)
+                    this.refresh[room]=clearInterval(this.refresh[room]);
             }
             // for (var i = 0; i < players.length; i++) {
             //     timedPassed = (Date.now() - players[i].gettimeLastAnswer());
@@ -104,7 +107,7 @@ module.exports = gameController = {
         // csl.log(fileType,this.rooms, this.rooms.hasOwnProperty(room));
         if (this.rooms[room] !== undefined) {
             // if (this.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
-                return { status: true, mes: 'Refreshing status', payload: this.rooms[room].game };
+                return { status: true, mes: 'Refreshing status', payload: this.rooms[room] };
             // }
         }
         return { status: false, mes: "Can't refresh status", payload: [] };
