@@ -41,8 +41,6 @@ module.exports = gameController = {
                 if(log_refresh) csl.log(fileType,"Refresh setup");
             }
         }
-        // else
-        //     if(log_refresh) csl.error(fileType,"Can't create refreshCall for inexistant room, make sure it's NOT the hash that's passed", room);
     },
 
     join: function (id, user) {
@@ -82,22 +80,23 @@ module.exports = gameController = {
         // Si la room existe
         if (this.io !== null) {
             if (!this.rooms.hasOwnProperty(room)) {
-                if(log_broadcast)csl.error(fileType,"Room expired or does not exist");
+                if(log_broadcast)csl.error('refreshCall',"Room expired or does not exist");
                 return;
             }
             const players = this.rooms[room].players;
-            if(log_broadcast) csl.log(fileType,'gameController call for broadcast on ', room, ' to io with hash :', room);
+            if(log_broadcast) csl.log('refreshCall','gameController call for broadcast on ', room, ' to io with hash :', room);
             if(players.length == 0){
                 if(log_broadcast) csl.log(fileType,'No player in room, refreshcall will be remove if set.');
                 if(this.refresh[room] !==undefined)
                     this.refresh[room]=clearInterval(this.refresh[room]);
             }
+            // Code to kick someone if they didn't answer soon enough.
             // for (var i = 0; i < players.length; i++) {
             //     timedPassed = (Date.now() - players[i].gettimeLastAnswer());
-            //     csl.log(fileType,'since last answer:', timedPassed);
-            //     // if (timedPassed > this.timeOutPlayer) {
-            //     //     this.removePlayer(room, players[i].id);
-            //     // }
+            //     csl.log(('refreshCall'),' last answer :', players[i].gettimeLastAnswer());
+            //     if (timedPassed > this.timeOutPlayer) {
+            //         this.removePlayer(room, players[i].id);
+            //     }
             // }
             this.io.broadcastStatus(room);
         } else  if(log_broadcast)csl.error(fileType,'No io to broadcast');
