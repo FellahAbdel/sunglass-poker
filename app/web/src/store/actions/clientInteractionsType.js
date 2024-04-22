@@ -13,6 +13,8 @@ export const SIT = "SIT";
 export const REFRESH  = "REFRESH";
 
 
+export const LOGIN = "LOGIN";
+
 
 /**
  * _______________________________________
