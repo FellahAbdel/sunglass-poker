@@ -68,6 +68,7 @@ const gameReducer = (state = initialState, action) => {
               console.log("Player:", playerId, " removed from room:", room);
               return {
                   ...state,
+                  answer:{status:true,mes:"OUI",payload:{restant:updatedPlayers.length}},
                   rooms: {
                       ...state.rooms,
                       [room]: {

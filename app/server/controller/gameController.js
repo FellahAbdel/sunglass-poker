@@ -78,7 +78,7 @@ module.exports = gameController = {
                 delete this.rooms[room];
                 console.log("Room", room, "has been deleted because it is empty.");
             } else {
-                console.error("Room", room, "is not empty, cannot delete.");
+                console.error("Room", room, "is not empty",players.length," cannot delete.");
             }
         } else {
             console.error("Room", room, "does not exist, cannot delete.");
@@ -87,11 +87,8 @@ module.exports = gameController = {
     
 
     removePlayer: function (room, id) {
-        store.dispatch(actions.leaveRoom(room,id));
-        const players = this.rooms[room].players;
-        console.log("Number of players in room before removal:", players.length);
-        if(players.length == 0){
-            console.log("Room is empty, attempting to delete:", room);
+        reponse=this.dispatch(id,actions.leaveRoom(room,id));
+        if(reponse.payload.restant==0){
             this.deleteroom(room);
         }
     },
