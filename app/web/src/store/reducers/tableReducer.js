@@ -9,6 +9,7 @@ const initialState = {
     },
     players: [],
     gameStarted:false,
+    gameCreated:false,
   };
 
 
@@ -20,6 +21,7 @@ const tableReducer = (state = initialState, action) => {
           return {
             ...state,
             gameStarted: true,
+            gameCreated:true,
             table:action.payload.table,
             players:action.payload.players
           }
