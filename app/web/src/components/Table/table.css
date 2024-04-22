@@ -165,7 +165,7 @@
   background-image:   
   radial-gradient(#bababa0c 40%, #000000),
   url("./../assets/images/texture/carpetlow-bnw.jpg");
-  background-size: 65vw;
+  background-size: 77vw;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -174,7 +174,7 @@
   background-image:   
     radial-gradient(#ffd9002e 50%, #000000),
     url("./../assets/images/texture/carpetlow.jpg");
-  background-size: 65vw;
+  background-size: 77vw;
   background-position: center;
   background-repeat: no-repeat;
 }
