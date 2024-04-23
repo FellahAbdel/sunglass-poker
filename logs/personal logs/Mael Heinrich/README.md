@@ -82,4 +82,6 @@
 
 2024/04/21  1H      Reunion avec victor pour voir si les fonctionnalité marchait puis discussion a propose de la suite et du travail a faire et affectation de ma futur tache.
 
-TEMPS TOTAL: 74H  
+2024/04/22  3H      Avancement de leave room et delete room, reunion avec victor pour le fonctionnement/ voir si tout marche + affecatation de la suite (faut aussi regler avec la bdd)
+
+TEMPS TOTAL: 77H  
