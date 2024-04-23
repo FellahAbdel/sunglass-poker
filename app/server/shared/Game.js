@@ -4,16 +4,16 @@ const PokerTable = require("./PokerTable.js");
 const scoreEngineUtils = require("./ScoreEngineUtils.js");
 
 class Game {
-  #master = false;
-  #focus = null;
+  master = false;
+  focus = null;
   constructor() {
     this.players = [];
     this.deck = new Deck();
     this.pokerTable = new PokerTable();
     // Big blind
-    this.#master = false;
+    this.master = false;
     // Player turn
-    this.#focus = null;
+    this.focus = null;
   }
 
   setMaster(id){
@@ -24,17 +24,17 @@ class Game {
   }
   setFocus(n){
     if(n >= 0 < this.players.length){
-      this.#focus = n;
+      this.focus = n;
     }
   }
   getFocus(){
-    return this.#focus;
+    return this.focus;
   }
   rotateFocus(){
     if(this.players.length === 0)
-      this.#focus = null;
+      this.focus = null;
     else
-      this.#focus = (this.#focus++)%this.players.length;
+      this.focus = (this.focus++)%this.players.length;
   }
 
   addPlayer(player) {

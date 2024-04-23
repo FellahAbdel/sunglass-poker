@@ -139,10 +139,6 @@ module.exports = function (
             state.game.rooms[data.id].players
           )
         );
-        if(answer.start_game !== undefined)
-          if(answer.start_game){
-            sendEvent(socket,action.gameStarted())
-          }
         io.to(room).emit("refresh");
         socket.request.session.userRoom = data.id;
         socket.request.session.save();
@@ -224,7 +220,6 @@ module.exports = function (
       gameController.dispatch(socket.request.session.userId,actcrea.createGame(id));
       csl.log(fileType, "store dispatch", store.getState());
       store.dispatch({ type: actions.GAME_LOBBY });
-      console.log("dispatched GAME_STARTED got called");
 
       // On récupère le nouvel état du store.
       state = store.getState();
