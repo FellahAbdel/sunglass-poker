@@ -13,6 +13,8 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
             break;
         case actions.CREATE_GAME:
             console.log('emit createGame (socketMiddleware)');
+            // once the server finish creating the game,
+            // the client store will receive a SITTED event.
             comm.createGame();
             break;
         case actions.START_GAME:
