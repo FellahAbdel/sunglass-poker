@@ -4,12 +4,15 @@ import global_en from "../../translations/en/global.json";
 import global_fr from "../../translations/fr/global.json";
 import global_es from "../../translations/es/global.json";
 import global_de from "../../translations/de/global.json";
+import global_ch from "../../translations/ch/global.json";
+
 
 const translations = {
   en: global_en,
   fr: global_fr,
   es: global_es,
   de: global_de,
+  ch: global_ch,
 };
 
 export function useTranslation() {

@@ -3,9 +3,10 @@
     "profile": "Perfil",
     "chat": "Chat",
     "message": "Mensaje",
-    "settings": "Ajustes",
+    "settings": "Configuración",
     "tutorial": "Tutorial",
-    "exit": "Salir",
+    "exitTable": "Abandonar la mesa",
+    "exit": "Cerrar ventana",
     "logout": "Cerrar sesión",
     "login": "Iniciar sesión",
     "signin": "Registrarse",
@@ -16,26 +17,28 @@
     "signin": "Registrarse",
     "username": "Nombre de usuario",
     "password": "Contraseña",
-    "repeatPass": "Repite tu contraseña",
+    "repeatPass": "Repetir contraseña",
     "email": "correo electrónico",
     "forgotPass": "Olvidé mi contraseña",
     "forgotPassQuestion": "¿Olvidaste tu contraseña?",
     "forgotPassEnter": "Ingresa tu correo electrónico para recibir un enlace de restablecimiento de contraseña.",
-    "registerNewAcc": "Registrar una nueva cuenta",
+    "registerNewAcc": "Registrar nueva cuenta",
     "signinG": "Iniciar sesión con Google",
     "haveAccQuestion": "¿Ya tienes una cuenta?",
     "optional": "Opcional",
     "loginMessage": "Inicia sesión en tu cuenta",
     "registerMessage": "Crea tu cuenta",
     "send": "Enviar",
-    "returnConnection": "Volver al menú de conexión"
+    "returnConnection": "Volver al menú de conexión",
+    "loginSuccess": "¡Conectado con éxito!"
   },
   "messageBox": {
-    "loginSucces": "¡Sesión iniciada con éxito!",
+    "loginSuccess": "¡Conectado con éxito!",
     "ok": "Ok"
   },
   "game": {
-    "loginPlay": "iniciar sesión para jugar",
+    "loginPlay": "Inicia sesión para jugar",
+    "signupPlay": "Regístrate para jugar",
     "startGame": "Iniciar un juego",
     "joinGame": "Unirse a un juego",
     "createAgame": "Crear un nuevo juego",
@@ -44,34 +47,34 @@
     "gameName": "Nombre del juego",
     "ranked": "Clasificado",
     "players": "Jugadores",
-    "selectRank": "Seleccionar Rango",
+    "selectRank": "Seleccionar rango",
     "join": "Unirse",
-    "full": "Lleno",
-    "confirmExitMessage": "¿Estás seguro de que quieres abandonar la mesa? Perderás todos los SC en juego.",
-    "leftTableSuccess": "Has abandonado la mesa con éxito.",
-    "confirm": "Confirmar",
-    "cancel": "Cancelar"
+    "full": "Lleno"
   },
   "handGuide": {
     "highcard": "Carta Alta",
     "pair": "Par",
     "twoPair": "Doble Par",
-    "threeOfKind": "Trio",
+    "threeOfKind": "Tercia",
     "straight": "Escalera",
     "flush": "Color",
     "fullHouse": "Full",
     "fourOfKind": "Póquer",
     "straightFlush": "Escalera de Color",
-    "royalFlush": "Escalera Real"
+    "royalFlush": "Escalera Real",
+    "show": "Mostrar",
+    "showB": "Mostrar ambos"
   },
   "gameActionPanel": {
     "raise": "Subir",
     "call": "Igualar",
     "check": "Pasar",
-    "fold": "Retirarse"
+    "fold": "Retirarse",
+    "currentSC": "Tu SC actual",
+    "afterSC": "Tu SC después de subir"
   },
   "bonus": {
-    "bonus": "BONO"
+    "bonus": "BONUS"
   },
   "serverPanel": {
     "name": "Nombre",
@@ -92,36 +95,60 @@
   },
   "settings": {
     "mute": "Silenciar",
+    "sound": "Sonido",
     "theme": "Tema",
+    "animations": "Animaciones",
     "langSelect": "Seleccionar idioma"
   },
   "profil": {
     "name": "Nombre",
     "mail": "Correo",
     "coins": "Monedas",
-    "date": "Fecha de Ingreso"
+    "date": "Fecha de unión",
+    "unknownDate": "Fecha desconocida"
   },
   "shop": {
     "shop": "Tienda",
-    "avatars": "Avatares",
-    "sunglasses": "Cartas",
-    "color": "Fondos de pantalla",
+    "baseAvatar": "Avatares",
+    "sunglasses": "Gafas de sol",
+    "colorAvatar": "Color",
     "confirmationMessage": "¿Realmente quieres comprar este artículo por ",
     "confirm": "Confirmar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "price": "precio",
+    "success": "¡Compra completada con éxito!",
+    "afterTransaction": "Sun Coins después de la transacción"
   },
   "messageLogo": {
     "tutorial": "Tutorial",
     "profile": "Perfil",
-    "listeTable": "UNIRSE A UN JUEGO",
-    "createTable": "CREAR UN NUEVO JUEGO",
+    "servers": "UNIRSE A UN JUEGO",
+    "create_table": "CREAR UN NUEVO JUEGO",
     "validation": "Confirmación de compra",
-    "shop": "Comercio"
+    "shop": "Tienda",
+    "ranking": "Clasificaciones"
+  },
+  "alert": {
+    "confirmExitMessage": "¿Estás seguro de que quieres abandonar la mesa? Perderás todos los SC en juego.",
+    "leftTableSuccess": "Has abandonado la mesa con éxito.",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "logout": "Estás a punto de cerrar sesión"
+  },
+  "table": {
+    "total": "Bote Total"
   },
   "ranking": {
-    "rank" : "Rango",
-    "pseudo" : "Seudónimo",
-    "gain" : "Ganar",
-    "loadMore" : "Carga más"
+    "rank": "Rango",
+    "pseudo": "Pseudónimo",
+    "gain": "Ganancia",
+    "loadMore": "Cargar más"
+  },
+  "error": {
+    "noAccountFound": "No se encontró ninguna cuenta",
+    "invalidEmail": "Dirección de correo inválida",
+    "badUsername": "El nombre de usuario debe tener al menos 3 caracteres",
+    "password6Characters": "La contraseña debe tener al menos 6 caracteres",
+    "passwordNotMatch": "Las contraseñas no coinciden"
   }
 }

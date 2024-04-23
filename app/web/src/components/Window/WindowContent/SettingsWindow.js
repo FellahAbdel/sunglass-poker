@@ -62,6 +62,7 @@ const SettingsWindow = () => {
             <option value="fr">Français</option>
             <option value="es">Español</option>
             <option value="de">Deutsch</option>
+            <option value="ch">Chinois</option>
           </select>
         </span>
       </div>

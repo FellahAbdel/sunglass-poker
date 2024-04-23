@@ -1,5 +1,6 @@
 import React from "react";
 import "./TextInput.css";
+import { useTranslation } from "../Utiles/Translations";
 
 const TextInputComponent = ({
   name,
@@ -12,6 +13,7 @@ const TextInputComponent = ({
   styleClass2
 }) => {
   const hasError = errorMessage !== "";
+  const { getTranslatedWord } = useTranslation();
   return (
     <div className={`container-textInputComponent ${styleClass2}`}>
       <input
@@ -22,8 +24,7 @@ const TextInputComponent = ({
         value={value}
         onChange={(e) => onChange(e)}
       />
-      {errorMessage && <p>{errorMessage}</p>}
-    </div>
+      {errorMessage && <p>{getTranslatedWord(errorMessage)}</p>}    </div>
   );
 };
 

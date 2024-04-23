@@ -41,7 +41,7 @@ const LoginWindow = () => {
         setValidationErrors({
           ...validationErrors,
           username: "",
-          password: "No account found",
+          password: "error.noAccountFound",
         });
       } else {
         // Autres erreurs
