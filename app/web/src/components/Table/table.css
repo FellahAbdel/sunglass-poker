@@ -190,8 +190,8 @@
 }
 .container-settings {
   border-radius: 150px;
-  width: 32vw;
-  height: 32vw;
+  width: 30vw;
+  height: 30vw;
 }
 .container-login,
 .container-register,
@@ -390,8 +390,17 @@
   position: absolute;
   bottom: -30%;
 }
-
-.box-onGameNotif.visible{
+.container-ranking .box-onGameNotif.visible{
+  bottom: -15%;
+}
+.container-settings .box-onGameNotif.visible{
+  bottom: -20%;
+}
+.container-shop .box-onGameNotif.visible,
+.container-profile .box-onGameNotif.visible,
+.container-tutorial .box-onGameNotif.visible,
+.container-alert .box-onGameNotif.visible,
+.container-validation .box-onGameNotif.visible{
   bottom: -25%;
 }
 .box-onGameNotif{
