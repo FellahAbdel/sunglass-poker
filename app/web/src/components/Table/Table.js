@@ -13,6 +13,8 @@ import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import LogoComponent from "../logo/Logo";
 import PlayersPots from "./PlayersPots" ;
+//fonctions
+import { delayedExecution, delayedExecutionWithCancel } from "./../Utiles/delay.js";
 
 const Table = ({
 
@@ -26,10 +28,27 @@ const Table = ({
     const [dealingFlop, setDealingFlop] = useState([false, false, false,false,false]);
     const [playersCardsShow, setPlayersCardsShow] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const [playersCardDistributed, setPlayersCardDistributed] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-  
+    const shouldUpdate = [true, true, true, false, false];
+    const shouldUpdate2 = [true, true, true, true, false];
+    const shouldUpdate3 = [true, true, true, true, true];
+
+
+    const delayTimes = [0, 500, 1000 , 1500, 2000]; 
+
     const testDealingFlop = () => {
-      setDealingFlop([!dealingFlop[0], !dealingFlop[1], !dealingFlop[2], !dealingFlop[3] ,!dealingFlop[4]]);
-    };
+      dealingFlop.forEach((state, index) => {
+          if (shouldUpdate[index]) {
+              setTimeout(() => {
+                  setDealingFlop(prevFlop => {
+                      let newFlop = [...prevFlop];
+                      newFlop[index] = !state;
+                      return newFlop;
+                  });
+              }, delayTimes[index]);
+          }
+      });
+  };
+  
     const testDistribution = () => {
       setPlayersCardDistributed([!playersCardDistributed[0], !playersCardDistributed[1], !playersCardDistributed[2], !playersCardDistributed[3], !playersCardDistributed[4], !playersCardDistributed[5], !playersCardDistributed[6], 0, !playersCardDistributed[8], !playersCardDistributed[9]]);
     };
