@@ -132,6 +132,7 @@ module.exports = function (
         socket.emit("joinRoom", answer);
         csl.log(fileType, answer);
         const state = store.getState();
+        // We send the new game state to the client store.
         sendEvent(
           socket,
           actcrea.sitted(
