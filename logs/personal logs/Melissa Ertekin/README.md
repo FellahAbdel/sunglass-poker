@@ -1,4 +1,4 @@
-# Melissa Ertekin | Temps Totale : 98h
+# Melissa Ertekin | Temps Totale : 107h
 
 
 ### Semaine 0 : 30 Janvier - 05 Février  | Temps Totale: 5h
@@ -132,6 +132,14 @@
 
 * Durant la semaine : <b>1h</b> <br/> Discussions en directe: <i> Échanges sur le projet et leurs avancement.</i> 
 
-### Semaine 11 : 15 Avril - 22 Avril | Temps Totale: 5h
+### Semaine 11 : 15 Avril - 22 Avril | Temps Totale: 9h 
 
 * 2024/04/16 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Réunion avec les développeurs. Réorganisation du planning. Travaille sur IHM </i>
+
+* 2024/04/17: <b>1h30</b> <br/> Travail individuel : <i> Préparation de présentation IHM. Rédaction des tests utilisateurs. Travaille sur le workflow. </i>
+
+* 2024/04/21 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux. Demandes de feedback personnalisé. Identifier les tâches qui restent. </i>
+
+* 2024/04/21 : <b>3h</b> <br/> Travail individuel : <i> Faire la matrice d'Eisenhower. Créer un nouveau Gantt pour la période du 21 avril au 28 mai. Mettre à jour Trello.</i>
+
+* 2024/04/22 : <b>30 mins</b> <br/> Travail individuel : <i> Rédaction du compte-rendu hebdomadaire.</i>

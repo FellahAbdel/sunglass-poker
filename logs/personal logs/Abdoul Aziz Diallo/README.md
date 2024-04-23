@@ -87,3 +87,14 @@
 | 09/04 | Victor explains me the socket.io code part                                |                  | 3h         |           |
 | 13/04 | Socket.io docs reading - readapting shared dir - create room button works | socket.io        | 3h30       |           |
 | 14/04 | Fetch api to render all available rooms                                   | fetch api        | 2h         |           |
+
+## Week 11 - _Total: 12h80_
+
+| Date  | Description                                                                    | Skills developed | Time Spent | Resources |
+| ----- | ------------------------------------------------------------------------------ | ---------------- | ---------- | --------- |
+| 16/04 | Organize task for the ihm presentation + work on the back-end code             |                  | 3h         |           |
+| 17/04 | Meeting before presenting our ihm                                              |                  | 2h         |           |
+|       | merge bddmodule2 with createAgame branch which lead to broken project          |                  | 2h         |           |
+|       | Review Victo's debug                                                           |                  | 30min      |           |
+| 19/04 | Work on creating rooms (front-end part)                                        |                  | 3h30min    |           |
+| 21/04 | Merge conflict resolution + re-adapt my code and mael's for the rooms creation |                  | 2h20min    |           |

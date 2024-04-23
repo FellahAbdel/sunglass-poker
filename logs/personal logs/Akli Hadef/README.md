@@ -29,4 +29,5 @@
 - 15/04 , apprentissage socket.io pour faire le chat : 1H30
 - 16/04 , Reunion TP / début de travail sur le chat et apprentissage : 3h
 - 19/04 , formation socket io sur Youtube : https://www.youtube.com/watch?v=x_fHXt9V3zQ : 1H30
-- TOTAL:68H30
+- 22/04 , travail sur le chatBox , implementation de code et documentation : 4H
+- TOTAL:72H30
