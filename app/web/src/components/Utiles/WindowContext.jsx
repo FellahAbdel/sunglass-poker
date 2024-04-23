@@ -54,6 +54,12 @@ export const WindowProvider = ({ children }) => {
 
   const openWindow = (type, params = {}) => {
     console.log(`Opening window: ${type}`, params);
+
+    if (state.windowType === type && state.isWindowOpen) {
+      closeWindow();
+      return;
+    }
+
     if (type === "alert") {
       setAlertParams({
         message: params.message || "Default message",
@@ -77,11 +83,10 @@ export const WindowProvider = ({ children }) => {
     console.log("Fermeture de la fenêtre");
     setAlertParams({ message: "", onConfirm: () => {}, onCancel: () => {} });
     setWindowOpen(false);
-    if(state.isGameTableVisible){
+    if (state.isGameTableVisible) {
       setWindowType("");
-    }
-    else{
-      setWindowType("accueil");
+    } else {
+      setWindowType("");
     }
     if (state.redirectAfterSuccess) {
       openWindow(state.redirectAfterSuccess);
@@ -93,10 +98,10 @@ export const WindowProvider = ({ children }) => {
   const showHome = () => {
     toggleGameTableVisibility();
     setWindowOpen(false);
-    setWindowType("accueil");
+    setWindowType("");
   };
 
-  const openSuccessWindow = (message, redirect = "accueil") => {
+  const openSuccessWindow = (message, redirect = "") => {
     console.log(
       `Ouverture de la fenêtre de succès avec le message : ${message}`
     );
@@ -120,14 +125,12 @@ export const WindowProvider = ({ children }) => {
   };
 
   const onClickStartGame = () => {
-    openWindow('game'); // Assurez-vous que 'game' est géré dans votre reducer pour `windowType`
-};
-
-
+    openWindow("game"); // Assurez-vous que 'game' est géré dans votre reducer pour `windowType`
+  };
 
   // Effets pour gérer la persistance de sessionStorage
   useEffect(() => {
-    sessionStorage.setItem("isWindowOpen", state.isWindowOpen.toString());
+    sessionStorage.setItem("isWindowOpen", state.isWindowOpen);
     sessionStorage.setItem("windowType", state.windowType);
     sessionStorage.setItem(
       "isGameTableVisible",
@@ -152,7 +155,7 @@ export const WindowProvider = ({ children }) => {
         openSuccessWindow,
         openValidationWindow,
         showGameTable,
-        onClickStartGame
+        onClickStartGame,
       }}
     >
       {children}

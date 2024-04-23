@@ -9,7 +9,7 @@
   width: 19.5vw;
   height: 5vh;
   font-size: 16px;
-  padding-left: 60px; /* Adjust this value as needed */
+  padding-left: 60px; 
   border-radius: 10px;
   border: 2px solid #ccc;
   background-color: rgba(237, 242, 247, 1);
@@ -69,7 +69,6 @@
   background-size: 2vh;
 }
 
-
 .input-icon-email {
   background: url("./../assets/images/icons/black/email.png") no-repeat,
     rgb(255, 255, 255);
@@ -102,6 +101,7 @@
   background-position: 15px;
   background-size: 2.5vh;
 }
+
 
 .input-chatBox {
   position: absolute;

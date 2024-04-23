@@ -17,8 +17,8 @@ export const SettingsProvider = ({ children }) => {
   }, [state.theme]);
 
   useEffect(() => {
-    localStorage.setItem("mute", state.mute);
-  }, [state.mute]);
+    localStorage.setItem("sound", state.sound);
+  }, [state.sound]);
 
   useEffect(() => {
     localStorage.setItem("animation", state.animation);
@@ -33,8 +33,8 @@ export const SettingsProvider = ({ children }) => {
     dispatch({ type: "TOGGLE_THEME" });
   };
 
-  const toggleMute = () => {
-    dispatch({ type: "TOGGLE_MUTE" });
+  const toggleSound = () => {
+    dispatch({ type: "TOGGLE_SOUND" });
   };
 
   const toggleAnimation = () => {
@@ -47,7 +47,7 @@ export const SettingsProvider = ({ children }) => {
 
   return (
     <SettingsContext.Provider
-      value={{ ...state, toggleTheme, toggleMute, toggleAnimation, changeLanguage }}
+      value={{ ...state, toggleTheme, toggleSound, toggleAnimation, changeLanguage }}
     >
       {children}
     </SettingsContext.Provider>

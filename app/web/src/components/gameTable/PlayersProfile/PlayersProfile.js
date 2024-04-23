@@ -13,13 +13,13 @@ const PlayersProfile = ({
   gotCards,
 }) => {
   const { getTranslatedWord } = useTranslation();
-  const formattedChips = chips;
-  const dollarSign = "$";
+  const formattedChips = chips.toLocaleString();
+  const dollarSign = " SC";
 
   return (
-    <div className="container-onGameProfile">
+    <div className={`container-onGameProfile`}>
       <div className={`box-status  ${status}`}>
-        {status === "Waiting" ? (
+        {status === "waiting" ? (
           <ProgressBar
             className="progressBar progressPercentage"
             durationInSeconds={5}
@@ -31,11 +31,10 @@ const PlayersProfile = ({
         )}
       </div>
 
-      <div className={`box-playerInfo ${status}`}>
+      <div className={`box-playerInfo ${status} ${name === "YOU" && "you"}`}>
         {name}
         <br />
-        {formattedChips}
-        {status === "Empty" ? null : dollarSign}
+        {status === "empty" ? null : `${formattedChips}${dollarSign}`}
       </div>
 
       <Card
@@ -54,7 +53,7 @@ const PlayersProfile = ({
       <img
         className={`profilePic ${status}`}
         src={
-          status === "Empty"
+          status === "empty"
             ? require("./../../assets/images/pp_empty.png")
             : require("./../../assets/images/pp_empty.png")
         }

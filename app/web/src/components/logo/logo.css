@@ -94,11 +94,13 @@
 .logo-stats img {
   width: 9vw;
 }
-.logo-servers {
+.logo-servers,
+.logo-ranking {
   z-index: -1;
   bottom: 100%;
 }
-.logo-servers img {
+.logo-servers img,
+.logo-ranking img {
   width: 7vw;
 }
 .logo-create_table {

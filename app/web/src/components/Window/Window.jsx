@@ -18,11 +18,12 @@ import ValidationWindow from "./WindowContent/shopWindows/ValidationWindow";
 // import AcceuilWindow from "./WindowContent/AccueilWindow";
 import AcceuilWindow from "./WindowContent/AcceuilWindow";
 import AlertWindow from "./WindowContent/AlertWindow";
+import RankingWindow from "./WindowContent/RankingWindow";
 
 import { useWindowContext } from "../Utiles/WindowContext";
 
 const Window = () => {
-  const { windowType } = useWindowContext();
+  const { windowType, isGameTableVisible } = useWindowContext();
 
   const handleWindowClick = (event) => {
     event.stopPropagation();
@@ -48,8 +49,9 @@ const Window = () => {
         {windowType === "create_table" && <CreateTableWindow />}
         {windowType === "shop" && <ShopWindow />}
         {windowType === "validation" && <ValidationWindow />}
-        {windowType === "accueil" && <AcceuilWindow />}
+        {(windowType==="" && !isGameTableVisible) && <AcceuilWindow />}
         {windowType === "alert" && <AlertWindow />}
+        {windowType === "ranking" && <RankingWindow />}
       </div>
     </div>
   );
