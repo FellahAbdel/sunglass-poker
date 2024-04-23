@@ -168,7 +168,7 @@ const ServerPanelWindow = () => {
           />
         ))}
       </div>
-      <div className="container-listButton">
+      <div className="button-container">
         <Button
           styleClass={"btn-gameStart back-color1"}
           label={"Create a new game"}
