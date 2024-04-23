@@ -325,6 +325,39 @@ module.exports = function (app, bdd) {
       }
     },
 
+getAllRanking: async (page, nbRes) => {
+    try {
+      const users = await UserModel.aggregate([
+        {
+          $lookup: {
+            from: "Stat",  // Assurez-vous que le nom de la collection est correct
+            pipeline : [
+              {$project:{maxGain: 1}}
+            ],
+            as: "gain"
+          }
+        },
+        {
+          $sort: {gain : -1}
+        },
+        {
+          $project: {pseudo : 1, gain : 1} 
+        },
+        {
+          $skip : (page-1) * nbRes
+        },
+        { 
+          $limit : nbRes
+        }
+      ]);
+      return { success: true, data: users };
+    } catch (err) {
+      console.error("Error fetching rankings:", err);
+      return { success: false, error: err }; // rethrow the error after logging
+    }
+  },
+
+
     createGameDescription: async function (
       serverName,
       roomPassword,
