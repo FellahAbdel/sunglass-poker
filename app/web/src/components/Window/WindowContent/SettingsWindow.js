@@ -21,29 +21,32 @@ const SettingsWindow = () => {
     <div className="settingsMenu">
       <h1>{getTranslatedWord("navbar.settings")}</h1>
       <div className="container-settingsParameteres">
-        <span className="container-switch-mute">
+        
+        <span className="container-switchSettings">
+        <p>{getTranslatedWord("settings.mute")}</p>
+
           <label className="switch">
             <input type="checkbox" checked={mute} onChange={toggleMute} />
             <span className="slider" />
           </label>
-          <p>{getTranslatedWord("settings.mute")}</p>
         </span>
 
-        <span className="container-switch-mute">
+        <span className="container-switchSettings">
+        <p>{getTranslatedWord("settings.animations")}</p>
           <label className="switch">
             <input type="checkbox" checked={animation} onChange={toggleAnimation} />
             <span className="slider" />
           </label>
-          <p>{getTranslatedWord("settings.animations")}</p>
         </span>
 
 
-        <span className="container-switch-theme">
+        <span className="container-switchSettings container-switch-theme">
+        <p>{getTranslatedWord("settings.theme")}</p>
+
           <label className="switch">
             <input type="checkbox" checked={themeDark} onChange={toggleTheme} />
             <span className="slider" />
           </label>
-          <p>{getTranslatedWord("settings.theme")}</p>
         </span>
 
         <span className="container-select-lang">
