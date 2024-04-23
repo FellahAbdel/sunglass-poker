@@ -24,7 +24,6 @@ const CreateGameWindow = () => {
 
   const dispatch = useDispatch();
   const gameCreated = useSelector((state) => state.game.gameCreated);
-  console.log("gameCreated", gameCreated);
 
   // Define your function to display the game room
   const displayGameRoom = () => {
