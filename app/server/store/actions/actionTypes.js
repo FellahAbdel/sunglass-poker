@@ -7,7 +7,10 @@ module.exports.CALL = "CALL";
 module.exports.RAISE = "RAISE";
 module.exports.END_ROUND = "END_ROUND";
 module.exports.RESET_GAME = "RESET_GAME";
+
+
 module.exports.LEAVE_ROOM="LEAVE_ROOM";
+module.exports.DELETE_ROOM="DELETE_ROOM";
 
 // Actions for user authentication
 module.exports.LOGIN = "LOGIN";

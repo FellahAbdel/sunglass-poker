@@ -16,7 +16,7 @@ const emptyGames = require("./emptyGameDescription");
 
 
 const csl = require('../controller/intelligentLogging');
-csl.silenced('bdd');
+// csl.silenced('bdd');
 
 require("dotenv").config();
 
@@ -34,7 +34,7 @@ module.exports = function (app, bdd) {
   );
   db.once("open", () => {
     csl.log("bdd","Connecté à la base de données MongoDB");
-    emptyGames();
+    // emptyGames();
     initItems();
   });
 
@@ -329,7 +329,7 @@ module.exports = function (app, bdd) {
       serverName,
       roomPassword,
       rank,
-      master
+      master = 0
     ) {
       try {
         const existingGame = await GameDescriptionModel.findOne({ serverName });
@@ -349,7 +349,7 @@ module.exports = function (app, bdd) {
           serverName,
           roomPassword,
           rank,
-          players: [master],
+          players: (master===0)? []: [master],
         });
 
         await gameDescription.save();
@@ -365,14 +365,23 @@ module.exports = function (app, bdd) {
     },
 
     addOnePlayerGameDesc: async function (gameId, userId) {
-      try {
+      // try {
         csl.log("bdd","add a player in game bdd");
-        const gameDesc = await GameDescriptionModel.findOne({ _id: gameId });
+        const gameDesc = await GameDescriptionModel.findById(gameId);
         gameDesc.players.push(userId);
-        gameDesc.save();
-      } catch (err) {
-        csl.error("bdd","dao", err);
-      }
+        await gameDesc.save();
+        csl.log("bdd","update the inGame status of the player");
+        const user = await UserModel.findById(userId);
+        console.log(userId, user);
+        user.inGame = gameId;
+        await user.save();
+      // } catch (err) {
+      //   csl.error("bdd","dao", err);
+      // }
+    },
+
+    removeGameDesc: async function(gameId){
+      await GameDescriptionModel.findByIdAndDelete(gameId);
     },
 
     updateGameDescription: async function (
@@ -401,7 +410,13 @@ module.exports = function (app, bdd) {
     playerLeftGame: async function (id){
       try{
         const user = await UserModel.findById(id);
+        const gameDesc = await GameDescriptionModel.findById(user.inGame);
+        if(gameDesc !== null){
+          gameDesc.players = gameDesc.players.filter(p => p === id);
+          await gameDesc.save();
+        }
         user.inGame = null;
+        console.log(user, " removing user in game");
         await user.save();
       }catch(err){
         csl.error("bdd",'erreur avec player Left game',err  );

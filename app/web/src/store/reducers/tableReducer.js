@@ -28,9 +28,9 @@ const tableReducer = (state = initialState, action) => {
         case actions.REFRESH:
           return {
             ...state,
-            table:action.payload.game,
-            players:action.payload.players,
-            game:action.payload.game,
+            table:action.payload.game || state.table,
+            players:action.payload.players || state.players,
+            game:action.payload.game || state.game,
           };
         case actions.SIT:
           console.log("New player sit at the table");

@@ -52,8 +52,9 @@ const UserSchema = new Schema(
       },
     ],
     inGame: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId || null,
       ref: "gameDescription",
+      required:false,
       default: null,
     },
   },

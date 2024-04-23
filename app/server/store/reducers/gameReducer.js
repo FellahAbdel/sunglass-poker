@@ -4,6 +4,7 @@ const Deck = require("../../shared/Deck.js");
 const Player = require("../../shared/Player.js");
 const game = require("../../shared/Game.js");
 const csl = require('../../controller/intelligentLogging.js');
+const { strictEqual } = require("assert");
 const fileType = "gameReducer";
 
 
@@ -50,10 +51,22 @@ const gameReducer = (state = initialState, action) => {
     case actions.CREATE_GAME:
       csl.log(fileType,"CREATE GAME");
       state.rooms[action.payload.id] = initialRoomState;
-      return state;
+      return {
+        ...state,
+        rooms:{
+          ...state.rooms,
+          [action.payload.id]:{...initialRoomState}
+        }
+      };
     case actions.START_GAME:
       state.rooms[action.payload.id] = begin(state.rooms[action.payload.id]);
-      return state;
+      return {
+        ...state,
+        rooms:{
+          ...state.rooms,
+          [action.payload.id]:{...begin(state.rooms[action.payload.id])}
+        }
+      };
     case actions.GAME_STARTED:
       csl.log(fileType,"start", action.type);
       return state;
@@ -63,17 +76,26 @@ const gameReducer = (state = initialState, action) => {
       console.log(action.payload);
       room = action.payload.tableId;
       playerId = action.payload.player;
+      var isMaster = false;
       if (state.rooms.hasOwnProperty(room)) {
-          const updatedPlayers = state.rooms[room].players.filter(player => player.id !== playerId);
+          const updatedPlayers = state.rooms[room].players.filter(player => player.getPlayerId() !== playerId);
+          // If the player who leave was the master we change the master.
+          // But only if there is still at least one player in the room.
+          csl.log('leaveRoom', ' srggm : ', state.rooms[room]);
+          if(state.rooms[room].game.getMaster() === playerId){
+            isMaster = true;
+            if(updatedPlayers.length !== 0)
+              state.rooms[room].game.setMaster(updatedPlayers[0].getPlayerId());
+          }
           if (updatedPlayers.length !== state.rooms[room].players.length) {
               console.log("Player:", playerId, " removed from room:", room);
               return {
                   ...state,
-                  answer:{status:true,mes:"Player removed from room",payload:{restant:updatedPlayers.length}},
+                  answer:{status:true,mes:"Player removed from room",payload:{restant:updatedPlayers.length, wasMaster:isMaster}},
                   rooms: {
                       ...state.rooms,
                       [room]: {
-                          ...state.rooms[action.payload.room],
+                          ...state.rooms[room],
                           players: updatedPlayers
                       }
                   }
@@ -89,9 +111,6 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         answer:answer
       };
-
-    case actions.CHANGE_MASTER:
-      return state;
 
     case actions.SIT:
       failed =false;
@@ -140,6 +159,11 @@ const gameReducer = (state = initialState, action) => {
 
       // We can add the player in the game
       if(!failed){
+        if(room.players.length === 0){
+          csl.log(fileType, 'Sit player, first player set as Master and first to play.');
+          room.game.setMaster(playerId);
+          room.game.setFocus(0);
+        }
         state.answer = {status:true,mes:'Successfully join room', payload:{id:action.payload.tableId}};
         room.players = [
           ...room.players,
@@ -150,10 +174,19 @@ const gameReducer = (state = initialState, action) => {
       }else{
         csl.error(fileType, "Failed to sit player at the table.");
       }
-      return state;
+      return {...state};
+    case actions.DELETE_ROOM:
+      if(action.payload.tableId !== undefined){
+        if(state.rooms.hasOwnProperty(action.payload.tableId)){
+          delete state.rooms[action.payload.tableId];
+        }
+      }
+      return {
+        ...state
+      }
     case actions.CLEARANSWER:
       state.answer = false;
-      return state;
+      return {...state};
     // Other game actions can be handled here
     default:
       csl.log(fileType,"default", action.type);

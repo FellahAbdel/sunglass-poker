@@ -7,18 +7,16 @@ const { count } = require("console");
 
 module.exports = (app, dao, gameController) => {
   app.get("/rooms", (req, res) => {
-    var roomsInfos = store.getState();
+    var roomsInfos = [];
+    roomsInfos[0] = store.getState();
+    roomsInfos[1] = []
     if (gameController !== undefined)
-      if (gameController.rooms !== undefined) {
-        for (var room in gameController.rooms) {
-          r = gameController.rooms[room];
+        for (var room in gameController.refresh) {
           console.log(room);
-          roomsInfos.push({
-            ...r,
-            refresh: r.refresh !== undefined ? true : false,
+          roomsInfos[1].push({
+            refresh: gameController.refresh[room] !== undefined ? true : false,
           });
         }
-      }
     res.send(roomsInfos);
   });
 

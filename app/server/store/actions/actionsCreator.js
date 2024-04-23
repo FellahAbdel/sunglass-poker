@@ -63,6 +63,11 @@ module.exports.leaveRoom = (table,player) => ({
   payload:{tableId:table, player:player}
 });
 
+module.exports.deleteRoom = (room) => ({
+  type:actions.DELETE_ROOM,
+  payload:{tableId:room},
+});
+
 // Actions creators for user authentication
 module.exports.login = (user) => ({
   type: actions.LOGIN,

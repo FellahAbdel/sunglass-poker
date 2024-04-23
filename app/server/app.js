@@ -83,7 +83,7 @@ io.engine.use(Middleware);
 const port = ENV_CONST_COMM.ENV_PORT_SERVER;
 
 // router
-const router = require('./routes/apiroutes')(app,db);
+const router = require('./routes/apiroutes')(app,db,gameController);
 
 /** Démarrage du serveur.
  *
