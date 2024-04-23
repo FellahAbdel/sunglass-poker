@@ -36,3 +36,5 @@ export const GAME_STARTED = "GAME_STARTED";
 
 // Successfully sit at a table.
 export const SITTED = "SITTED";
+
+export const LOGGED_IN = "LOGGED_IN";

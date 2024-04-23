@@ -7,8 +7,8 @@ const actions = require("../actions/clientInteractionsType.js");
 export const socketMiddleware = (socket) => (store) => (next) => (action) => {
     console.log('Middleware scoket');
     switch(action.type){
-        case actions.LOGIN:
-            console.log('LOGIN INIT called (fellah)');
+        case actions.LOGGED_IN:
+            console.log('LOGGED_IN INIT called (fellah)');
             comm.Init();
             break;
         case actions.CREATE_GAME:

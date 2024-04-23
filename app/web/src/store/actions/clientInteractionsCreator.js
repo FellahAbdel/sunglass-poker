@@ -66,6 +66,6 @@ export const gameLobby = (room) => ({
 
 
 export const loggedIn = (user) => ({
-    type:actions.LOGIN,
+    type:actions.LOGGED_IN,
     payload: user
 });
