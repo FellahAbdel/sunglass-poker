@@ -1,12 +1,7 @@
 import * as actions from "../actions/clientInteractionsType.js";
 
 const initialState = {
-  table: {
-    deck: {},
-    cards: [],
-    chips: 0,
-    stake: 0,
-  },
+  gameClass: {},
   players: [],
   gameStarted: false,
   gameCreated: false,
