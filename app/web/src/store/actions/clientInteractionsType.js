@@ -8,6 +8,9 @@ export const LEAVE_ROOM = "LEAVE_ROOM";
 
 export const FOLD = "FOLD";
 
+export const BET = "BET";
+
+
 export const SIT = "SIT";
 
 export const REFRESH  = "REFRESH";

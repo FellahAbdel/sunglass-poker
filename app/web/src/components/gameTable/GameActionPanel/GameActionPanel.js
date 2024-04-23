@@ -62,6 +62,8 @@ const GameActionButtons = ({}) => {
         console.log('sliderValueText :', sliderValueText);
         console.log('coins :', coins);
         console.log("raiseCoin :", raiseCoin);
+        if(raiseCoin!==0)
+        dispatch(actions.bet(raiseCoin));
     }
 }, [raiseCoin]);
 

@@ -10,8 +10,10 @@ class Game {
     this.players = [];
     this.deck = new Deck();
     this.pokerTable = new PokerTable();
-    // Big blind
+    // Owner of the room
     this.master = false;
+    // Big blind
+    this.blind = 0;
     // Player turn
     this.focus = null;
   }
@@ -31,10 +33,7 @@ class Game {
     return this.focus;
   }
   rotateFocus(){
-    if(this.players.length === 0)
-      this.focus = null;
-    else
-      this.focus = (this.focus++)%this.players.length;
+    this.focus = (this.focus+1)%this.players.length;
   }
 
   addPlayer(player) {

@@ -37,6 +37,11 @@ export const fold = () => ({
     type:actions.FOLD
 });
 
+export const bet = (amount) => ({
+    type:actions.BET,
+    payload:{amount:amount}
+})
+
 
 /**
  *  payload: {

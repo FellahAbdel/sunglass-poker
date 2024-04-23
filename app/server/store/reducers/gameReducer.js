@@ -31,12 +31,18 @@ const begin = (state) => {
     return player;
   });
 
+  var posBigBlind = state.game.blind;
+  var posSmallBlind = (posBigBlind+1)%updatedPlayers.length;
+  var blind = 20;
+  updatedPlayers[posBigBlind].bet(blind*2);
+  updatedPlayers[posSmallBlind].bet(blind);
+  state.game.focus = (posSmallBlind+1)%updatedPlayers.length;
   return {
     ...state,
     table: {
       ...state.table,
       deck,
-      stake: 0,
+      stake: blind*3,
     },
     players: updatedPlayers,
     controlsMode: "roundOne",
@@ -61,6 +67,7 @@ const gameReducer = (state = initialState, action) => {
     case actions.START_GAME:
       csl.log(fileType,"START GAME FOR ", action.payload.id);
       state.rooms[action.payload.id] = begin(state.rooms[action.payload.id]);
+      state.rooms[action.payload.id].game.players = state.rooms[action.payload.id].players;
       return {
         ...state,
         answer:{success:true},
@@ -186,6 +193,27 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state
       }
+    case actions.FOLD:
+      console.log(state.rooms[action.payload.room],action);
+      console.log('position: ',state.rooms[action.payload.room].players.findIndex(p => p.getPlayerId == action.payload.playerId ))
+      if(action.payload !== undefined)
+      if(state.rooms[action.payload.room].players.findIndex(p => p.getPlayerId() == action.payload.playerId ) === state.rooms[action.payload.room].game.focus){
+        csl.log('playerAction', "call for fold");
+        state.rooms[action.payload.room].players.find(p => p.getPlayerId() == action.payload.playerId).setPlayerState("Folded");
+        state.rooms[action.payload.room].players.find(p => p.getPlayerId() == action.payload.playerId).setStatus("Folded");
+        state.rooms[action.payload.room].game.rotateFocus()
+      }
+      return {...state};
+    case actions.BET:
+      console.log(state.rooms[action.payload.room],action);
+      if(action.payload !== undefined)
+      if(action.payload.amount !== undefined)
+      if(state.rooms[action.payload.room].players.findIndex(p => p.getPlayerId() == action.payload.playerId ) === state.rooms[action.payload.room].game.focus){
+        csl.log('playerAction', " call for raise of ", action.payload.amount);
+        state.rooms[action.payload.room].players.find(p => p.getPlayerId() == action.payload.playerId).bet(action.payload.amount);
+        state.rooms[action.payload.room].game.rotateFocus()
+      }
+      return {...state};
     case actions.CLEARANSWER:
       state.answer = false;
       return {...state};

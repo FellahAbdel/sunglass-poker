@@ -178,11 +178,25 @@ module.exports = function (
    */
   function dispatch(socket, data) {
     csl.log('dispatch', "dispatch recevied : ", data);
-    const { action, room } = data;
-    const userId = socket.request.socket.request.session.userId;
+    var action = {...data.action};
+    console.log(action,data);
+    const userId = socket.request.session.userId;
+    const room = socket.request.session.userRoom;
+    action.payload = {
+      playerId:userId,
+      room: room
+    }
+    
+    switch(action.type){
+      case actions.BET:
+        action = {...action, payload:{...action.payload, amount:data.action.payload.amount}}
+        break;
+      default:
+        
+    }
     // si login
     if (userId) {
-      gameController.dispatch(userId, action, room);
+      gameController.dispatch(userId, action);
     }
   }
 

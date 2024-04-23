@@ -1,6 +1,7 @@
 const gameReducer = require('../store/reducers/gameReducer');
 const gameDescriptionModel = require('../models/GameDescription');
 const actions =  require("../store/actions/actionsCreator");
+const actionsTypes =  require("../store/actions/actionTypes");
 const jwt = require("jsonwebtoken");
 const { clearInterval } = require("timers");
 const initGameRoom = require('./game');
