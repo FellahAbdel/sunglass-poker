@@ -63,3 +63,9 @@ export const gameLobby = (room) => ({
     type:actions.GAME_LOBBY,
     payload: room
 })
+
+
+export const loggedIn = (user) => ({
+    type:actions.LOGIN,
+    payload: user
+});

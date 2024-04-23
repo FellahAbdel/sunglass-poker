@@ -6,7 +6,11 @@ import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
 
+import { useDispatch } from "react-redux";
+import { loggedIn } from "../../../../store/actions/clientInteractionsCreator.js";
+
 const LoginWindow = () => {
+  const dispatch = useDispatch();
   const { getTranslatedWord } = useTranslation();
 
   const { openSuccessWindow, openWindow } = useWindowContext();
@@ -36,6 +40,8 @@ const LoginWindow = () => {
 
       if (loginResult === true) {
         openSuccessWindow("connection.loginSuccess");
+        dispatch(loggedIn());
+        console.log("dipatch loggedIn()");
       } else if (loginResult || loginResult.error === "invalid_credentials") {
         // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
         setValidationErrors({

@@ -18,6 +18,7 @@ export const comm = {
 
   preFun: function () {
     this.token = sessionStorage.getItem("authToken");
+    console.log("(fellahClient) Token is ", this.token);
     socket.emit("myNameIs", this.token);
   },
 
@@ -33,6 +34,7 @@ export const comm = {
   },
 
   Init: function () {
+    this.preFun();
     console.log("Init of socketio client side");
     this.Hello();
     socket.on("world", (data) => {
@@ -48,7 +50,7 @@ export const comm = {
     });
 
     socket.on("event", (data) => {
-      console.log("event receive : ",data);
+      console.log("event receive (from server) [socket.js]: ",data);
       store.dispatch({ payload: data.payload, type: data.type });
     });
 

@@ -8,11 +8,11 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
     console.log('Middleware scoket');
     switch(action.type){
         case actions.LOGIN:
-            console.log('LOGIN INIT');
+            console.log('LOGIN INIT called (fellah)');
             comm.Init();
             break;
         case actions.CREATE_GAME:
-            console.log('emit createGame');
+            console.log('emit createGame (socketMiddleware)');
             comm.createGame();
             break;
         case actions.START_GAME:
