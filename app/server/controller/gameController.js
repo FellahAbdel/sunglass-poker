@@ -56,6 +56,9 @@ module.exports = gameController = {
                     csl.log(fileType,'New player, try to set refresh');
                     this.makeRefreshCall(id, false);
                     csl.log(fileType,'Join call for broadcast ', answer);
+                    if(state.game.rooms[id].players.length >=2)
+                        if(this.dispatch(user,actions.startGame(id)))
+                            answer.start_game = true;
                     this.broadcastStatus(id);
                 }
                 return answer;

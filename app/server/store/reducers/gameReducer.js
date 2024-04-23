@@ -59,9 +59,11 @@ const gameReducer = (state = initialState, action) => {
         }
       };
     case actions.START_GAME:
+      csl.log(fileType,"START GAME FOR ", action.payload.id);
       state.rooms[action.payload.id] = begin(state.rooms[action.payload.id]);
       return {
         ...state,
+        answer:{success:true},
         rooms:{
           ...state.rooms,
           [action.payload.id]:{...begin(state.rooms[action.payload.id])}

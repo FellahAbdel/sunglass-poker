@@ -9,6 +9,9 @@ module.exports.startGame = (idGame) => ({
   type: actions.START_GAME,
   payload:{id:idGame}
 });
+module.exports.gameStarted = () => ({
+  type: actions.GAME_STARTED,
+});
 
 module.exports.dealCards = () => ({
   type: actions.DEAL_CARDS,

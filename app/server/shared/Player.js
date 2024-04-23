@@ -1,26 +1,24 @@
 class Player {
-  #timeLastAnswer = 0;
-  #playerId = 0;
-  id = 0;
-  #playerState = "";
-  #playerMoney = 1000;
-  #playerCards = []; // tableau de deux cartes au maximum
-  #playerActionLog = [
+  timeLastAnswer = 0;
+  playerId = 0;
+  playerState = "";
+  playerMoney = 1000;
+  playerCards = []; // tableau de deux cartes au maximum
+  playerActionLog = [
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
 
   constructor(playerId, name) {
-    this.#playerId = playerId;
-    this.id = playerId;
+    this.playerId = playerId;
     this.name = name;
     this.status = "Empty";
   }
 
   settimeLastAnswer(t){
-    this.#timeLastAnswer = t;
+    this.timeLastAnswer = t;
   }
   gettimeLastAnswer(){
-    return this.#timeLastAnswer;
+    return this.timeLastAnswer;
   }
 
   // Methods to get and set status
@@ -38,7 +36,7 @@ class Player {
    * FUNCTION : retourne l'playerId du joueur
    */
   getPlayerId() {
-    return this.#playerId;
+    return this.playerId;
   }
 
   /*
@@ -47,7 +45,7 @@ class Player {
    * FUNCTION : retourne la liste des cartes du joueur
    */
   getPlayerCards() {
-    return this.#playerCards;
+    return this.playerCards;
   }
 
   /*
@@ -56,15 +54,15 @@ class Player {
    * FUNCTION : retourne l'état courant du joueur
    */
   getPlayerState() {
-    return this.#playerState;
+    return this.playerState;
   }
 
   getPlayerMoney() {
-    return this.#playerMoney;
+    return this.playerMoney;
   }
 
   getPlayerActionLog() {
-    return this.#playerActionLog;
+    return this.playerActionLog;
   }
 
   /*
@@ -73,7 +71,7 @@ class Player {
    * FUNCTION : altère l'état d'un joueur
    */
   setPlayerState(state) {
-    this.#playerState = state;
+    this.playerState = state;
   }
 
   /*
@@ -82,7 +80,7 @@ class Player {
    * FUNCTION : initialise les cartes du joueur
    */
   setCards(randomCardsList) {
-    this.#playerCards = randomCardsList;
+    this.playerCards = randomCardsList;
   }
 
   /*
@@ -91,7 +89,7 @@ class Player {
    * FUNCTION : déduire la somme misée de la somme des moneys
    */
   bet(moneyToBet) {
-    this.#playerMoney -= moneyToBet;
+    this.playerMoney -= moneyToBet;
   }
 
   /*
@@ -100,19 +98,19 @@ class Player {
    * FUNCTION : ajoute a l'historique du joueur l'action effectue et la mise associe
    */
   action(playerAction, playerMoneyBet) {
-    this.#playerActionLog.push({ action: playerAction, bet: playerMoneyBet });
+    this.playerActionLog.push({ action: playerAction, bet: playerMoneyBet });
   }
 
   addCard(card) {
-    this.#playerCards.push(card);
+    this.playerCards.push(card);
   }
 
   clearHand() {
-    this.#playerCards = [];
+    this.playerCards = [];
   }
 
   isPlayerActive() {
-    return this.#playerState === "active";
+    return this.playerState === "active";
   }
 }
 

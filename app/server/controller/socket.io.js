@@ -7,7 +7,7 @@ const game = require("./game");
 const csl = require("./intelligentLogging");
 // const session = require("express-session");
 const fileType = "socket.io.js";
-
+csl.silenced("broadcastStatus");
 // Durée d'une session en millisecondes.
 const SESSION_DURATION = 2**31-1;
 
@@ -139,6 +139,10 @@ module.exports = function (
             state.game.rooms[data.id].players
           )
         );
+        if(answer.start_game !== undefined)
+          if(answer.start_game){
+            sendEvent(socket,action.gameStarted())
+          }
         io.to(room).emit("refresh");
         socket.request.session.userRoom = data.id;
         socket.request.session.save();
@@ -225,10 +229,11 @@ module.exports = function (
       // On récupère le nouvel état du store.
       state = store.getState();
 
+      
+      sendEvent(socket,actcrea.gameLobby(state.game.rooms[id]));
       const answer = joinRoom(socket, { id: id.toString() });
       csl.log(fileType, answer);
       socket.emit("joinRoom", answer);
-      sendEvent(socket,actcrea.gameLobby(state.game.rooms[id]));
     });
 
     // Si l'action vient de quelqu'un non connecter on ignore
