@@ -95,6 +95,7 @@
   },
   "settings": {
     "mute": "Mute",
+    "sound": "Sound",
     "theme": "Theme",
     "animations": "Animations",
     "langSelect": "Select a language"
