@@ -47,40 +47,7 @@ const GameTable = () => {
     event.stopPropagation();
   };
 
-  //inGame Fonctions to test-----------------------------------------
-  const [dealingFlop, setDealingFlop] = useState([true, true, true]);
-  const [handGuide, setHandGuide] = useState("fullHouse");
-  const [showHandCard, setShowHandCard] = useState(true);
-  const [playersCardsShow, setPlayersCardsShow] = useState([
-    1, 0, 0, 1, 1, 0, 0, 0, 0, 1,
-  ]);
-  const [playersCardDistributed, setPlayersCardDistributed] = useState([
-    1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
-  ]);
 
-  const handleFold = () => {
-    console.log("handleFold function called from parent component");
-    setDealingFlop([!dealingFlop[0], !dealingFlop[1], !dealingFlop[2]]);
-    setHandGuide("Full House");
-    setShowHandCard(!showHandCard);
-  };
-  const handleCheckOrCall = () => {
-    setPlayersCardDistributed([
-      !playersCardDistributed[0],
-      !playersCardDistributed[1],
-      !playersCardDistributed[2],
-      !playersCardDistributed[3],
-    ]);
-    console.log("handleFold function called from parent component");
-  };
-  const handleRaise = () => {
-    console.log("handleFold function called from parent component");
-    setPlayersCardsShow([
-      !playersCardsShow[0],
-      !playersCardsShow[1],
-      !playersCardsShow[2],
-    ]);
-  };
 
   //-----------------------------------------inGame functions to test
 
@@ -104,10 +71,6 @@ const GameTable = () => {
       {/* Menu/Table */}
       <div className={classes.compTable}>
         <Table
-          dealingFlop={dealingFlop}
-          showCards={[0, 1, 2, 3, 4]}
-          playersCardDistributedProp={playersCardDistributed}
-          playersCardsShowProp={playersCardsShow}
           onClick={(e) => handleBoxClick}
         />
       </div>
@@ -140,8 +103,8 @@ const GameTable = () => {
             <HandCards
               card1={["a", "hearts"]}
               card2={["a", "diamonds"]}
-              showHandCardProp={showHandCard}
-              handGuideProp={handGuide}
+              showHandCardProp={[true,true]}
+              handGuideProp={"straight"}
             />
           </div>
         </>

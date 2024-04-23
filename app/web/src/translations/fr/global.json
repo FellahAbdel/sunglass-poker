@@ -9,7 +9,8 @@
     "exit": "Fermer La Fenêtre",
     "logout": "Déconnexion",
     "login": "Connexion",
-    "signin": "Inscription"
+    "signin": "Inscription",
+    "ranking": "Classement" 
   },
   "connection": {
     "login": "Connexion",
@@ -125,5 +126,19 @@
     "confirm" : "Confirmer",
     "cancel" : "Annuler",
     "logout" : "Vous êtes sur le point de vous déconnecter"
-  }
+  },
+  "ranking": {
+    "rank" : "Rang",
+    "pseudo" : "Pseudo",
+    "gain" : "Gain",
+    "loadMore" : "Voir plus"
+  },
+    "error": {
+      "noAccountFound": "Aucun compte trouvé",
+      "invalidEmail": "Adresse email invalide",
+      "badUsername": "Le nom d'utilisateur doit comporter au moins 3 caractères",
+      "password6Characters": "Le mot de passe doit contenir au moins 6 caractères",
+      "passwordNotMatch": "Les mots de passe ne correspondent pas"
+    }
+  
 }

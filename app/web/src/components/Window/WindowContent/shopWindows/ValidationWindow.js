@@ -51,8 +51,9 @@ const ValidationWindow = () => {
           {getTranslatedWord("shop.confirmationMessage")} {selectedItem.price}{" "}
           coins?
           <br/>
-          {finalCoins} Coins après
-          achat
+          <b>{getTranslatedWord("shop.afterTransaction")}: {finalCoins} SC</b>
+
+
 
         </p>
         <div className="container-ValidationButtons">

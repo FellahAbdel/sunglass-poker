@@ -132,10 +132,8 @@
 .shop-item:hover{
     filter: brightness(150%);
     cursor: pointer;
-    color: black;
     text-shadow: unset;
   }
-
 .user-coins-back,.user-coins-text {
   position: absolute;
   left: 5%;

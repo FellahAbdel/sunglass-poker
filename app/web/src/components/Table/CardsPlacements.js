@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Card from "../gameTable/Card/Card";
-import TextGlitch from "./../TextGlitch/TextGlitch";
-import { useTranslation } from "../Utiles/Translations";
+import useAudio from '../../hooks/useAudio';
 
 
 const CardsPlacements = ({
@@ -9,6 +8,26 @@ const CardsPlacements = ({
   disappear,
   playersCardDistributedProp,
 }) => {
+  const [playing0, togglePlay0] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+  const [playing1, togglePlay1] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+  const [playing2, togglePlay2] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+  const [playing3, togglePlay3] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+  const [playing4, togglePlay4] = useAudio(require("./../assets/sounds/soundEffect-card1.mp3"));
+
+  useEffect(() => {
+    dealingFlop.forEach((newFlop, index) => {
+      if (newFlop === true) {
+        switch(index) {
+          case 0: togglePlay0(); break;
+          case 1: togglePlay1(); break;
+          case 2: togglePlay2(); break;
+          case 3: togglePlay3(); break;
+          case 4: togglePlay4(); break;
+          default: break;
+        }
+      }
+    });
+  }, [dealingFlop]);
 
   return (
     <div className={`container-cards ${disappear ? "disappear" : ""}`}>
@@ -27,25 +46,25 @@ const CardsPlacements = ({
           card={["3", "clubs"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop1"}
-          flippingCard={dealingFlop[0]}
+          flippingCard={dealingFlop[1]}
         />
         <Card
           card={["4", "clubs"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop2"}
-          flippingCard={dealingFlop[0]}
+          flippingCard={dealingFlop[2]}
         />
         <Card
           card={["5", "clubs"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop3"}
-          flippingCard={dealingFlop[1]}
+          flippingCard={dealingFlop[3]}
         />
         <Card
           card={["6", "clubs"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop4"}
-          flippingCard={dealingFlop[2]}
+          flippingCard={dealingFlop[4]}
         />
       </div>
 

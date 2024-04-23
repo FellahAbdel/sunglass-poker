@@ -162,7 +162,7 @@ const Navbar = ({}) => {
       */}
 
       <div className="container-navMain-V2">
-        {isLogged && (
+        {isLogged && (<>
           <Button
             label={
               isLogged
@@ -175,7 +175,13 @@ const Navbar = ({}) => {
             styleClass={`${isLogged ? "btn-profile-V2 " : "btn-logIn-V2 "}`}
             iconSrc={require("./../assets/images/icons/white/profile.png")}
           />
-        )}
+          <Button
+          label={getTranslatedWord("navbar.ranking")}
+          onClick={() => openWindow("ranking")}
+          styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
+          iconSrc={require("./../assets/images/icons/white/ranking.png")}
+        />
+        </>)}
 
         <Button
           label={getTranslatedWord("navbar.settings")}
@@ -205,6 +211,7 @@ const Navbar = ({}) => {
           styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
           iconSrc={require("./../assets/images/icons/white/tutorial.png")}
         />
+
         {isLogged && (
           <Button
             label={label}

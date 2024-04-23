@@ -186,3 +186,36 @@ Button:hover{
 .btn-showCard:hover img{
   filter: invert(100%);
 }
+
+.btn-loadMore{
+  width: 15vw;
+  height: 4vh;
+  margin-top: 10px;
+  position: absolute;
+  bottom: 13%;
+  background-color: #4d6478;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px black;
+  font-size: 1vw;
+  font-weight: bold;
+}
+
+.btn-gameStart {
+  width: 15vw;
+  height: 4vh;
+  margin-top: 10px;
+  position: absolute;
+  bottom: 13%;
+  background-color: #4d6478;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px black;
+  font-size: 1vw;
+  font-weight: bold;
+}
+
+.btn-gameJoin {
+  position: unset;
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: #033f61;
+}
