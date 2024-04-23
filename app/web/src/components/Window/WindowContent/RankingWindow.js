@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "../../Utiles/Translations";
 import Button from "../../button/Button.tsx";
+import goldMedal from '../../assets/images/gold-medal.png';
+import silverMedal from '../../assets/images/silver-medal.png';
+import bronzeMedal from '../../assets/images/bronze-medal.png';
 
 const RankingWindow = ({ onClose }) => {
     const nbRes = 11;
@@ -43,8 +46,8 @@ const RankingWindow = ({ onClose }) => {
                 {ranks.map((rank, index) => (
                     <div className="tableRow" key={index}>
                         <div className="rowItem">{index < 3 ? 
-                            <img src={require(`./../../assets/images/${index === 0 ? "gold" : index === 1 ? "silver" : "bronze"}-medal.png`)} alt="medal" /> 
-                            : index + 1}
+                            <img src={index === 0 ? goldMedal : index === 1 ? silverMedal : bronzeMedal} alt="medal" /> 
+                                : index + 1}
                         </div>
                         <div className="rowItem">{rank.pseudo}</div>
                         <div className="rowItem">{Array.isArray(rank.gain) && rank.gain.length === 0 ? 0 : rank.gain}</div>

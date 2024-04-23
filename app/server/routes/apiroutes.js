@@ -162,6 +162,19 @@ module.exports = (app, dao, gameController) => {
     }
   });
 
+
+    app.get("/api/get-all-ranking/", async (req, res) => {
+      try {
+        const page = parseInt(req.query.page) || 1; // Default to page 1 if undefined
+        const nbRes = parseInt(req.query.nbres) || 10; // Default to 10 results per page if undefined
+  
+        const result = await dao.getAllRanking(page, nbRes);
+        res.send(result);
+      } catch (error) {
+        res.status(500).send({success: false, message: "Internal Server Error"});
+      }
+    });
+
   // Route to handle the creation of games
   app.post("/api/games", async (req, res) => {
     try {
