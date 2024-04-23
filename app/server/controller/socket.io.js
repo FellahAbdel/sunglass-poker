@@ -71,7 +71,8 @@ module.exports = function (
       if (!socket.rooms.has(token)) {
         try {
           const decoded = jwt.verify(token, process.env.JWT_SECRET);
-          console.log(decoded);
+          console.log("decoded : " , decoded);
+          
           socket.request.session.save();
           csl.log(
             fileType,
@@ -238,7 +239,7 @@ module.exports = function (
       // On récupère le nouvel état du store.
       state = store.getState();
 
-      
+        
       sendEvent(socket,actcrea.gameLobby(state.game.rooms[id]));
       const answer = joinRoom(socket, { id: id.toString() });
       csl.log(fileType, answer);
