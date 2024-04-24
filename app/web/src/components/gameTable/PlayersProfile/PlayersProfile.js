@@ -39,13 +39,13 @@ const PlayersProfile = ({
 
       <Card
         styleClass={`showCardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
-        card={["a", "clubs"]}
+        card={["14", "C"]}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />
       <Card
         styleClass={`showCardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
-        card={["a", "clubs"]}
+        card={["14", "C"]}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />

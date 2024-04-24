@@ -37,34 +37,35 @@ const CardsPlacements = ({
             first forth flops -> dealingFlop[1]
             first fifth flops -> dealingFlop[2] */}
         <Card
-          card={["2", "clubs"]}
+          card={["2", "C"]}
           styleClass={`tableCard`}
           flippedStyle={"dealingFlop0"}
           flippingCard={dealingFlop[0]}
         />
         <Card
-          card={["3", "clubs"]}
+          card={["3", "C"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop1"}
           flippingCard={dealingFlop[1]}
         />
         <Card
-          card={["4", "clubs"]}
+          card={["4", "C"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop2"}
           flippingCard={dealingFlop[2]}
         />
         <Card
-          card={["5", "clubs"]}
+          card={["5", "C"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop3"}
           flippingCard={dealingFlop[3]}
         />
         <Card
-          card={["6", "clubs"]}
+          card={["6", "C"]}
           styleClass={"tableCard"}
           flippedStyle={"dealingFlop4"}
-          flippingCard={dealingFlop[4]}
+        //   flippingCard={dealingFlop[4]}
+          flippingCard={true}
         />
       </div>
 

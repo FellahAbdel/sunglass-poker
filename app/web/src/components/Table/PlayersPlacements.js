@@ -37,8 +37,11 @@ const PlayersPlacements = ({
             status={player.status}
             chips={player.playerMoney}
             name={player.name}
-            flippingPlayerCards={playersCardsShowProp[index]}
-            gotCards={playersCardDistributedProp[index]}
+            // flippingPlayerCards={playersCardsShowProp[index]}
+            flippingPlayerCards={true}
+
+            // gotCards={playersCardDistributedProp[index]}
+            gotCards={true}
           />
         </div>
       ))}
