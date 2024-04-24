@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const saltRounds = 10;
 
+const nodemailer = require("nodemailer");
+
 // Modèles Mongoose
 const UserModel = require("./User");
 const StatModel = require("./Stat");
@@ -14,14 +16,36 @@ const GameDescriptionModel = require("./GameDescription");
 const initItems = require("./initItems");
 const emptyGames = require("./emptyGameDescription");
 
-
-const csl = require('../controller/intelligentLogging');
+const csl = require("../controller/intelligentLogging");
 // csl.silenced('bdd');
 
 require("dotenv").config();
 
+async function sendVerificationEmail(email, code) {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "sunglass.poker@gmail.com",
+      pass: "sunglass.poker1%",
+    },
+  });
+
+  const mailOptions = {
+    from: "sunglass.poker@gmail.com",
+    to: email,
+    subject: "Verify your email",
+    text: `Your verification code is: ${code}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Email send error:", error);
+    }
+  });
+}
+
 module.exports = function (app, bdd) {
-  csl.log("bdd","bdd!", bdd);
+  csl.log("bdd", "bdd!", bdd);
 
   // Connexion à la base de données MongoDB
   mongoose.connect("mongodb://pokerBackEndServer:azerty@" + bdd + "/Poker", {});
@@ -33,7 +57,7 @@ module.exports = function (app, bdd) {
     console.error.bind(console, "Erreur de connexion à la base de données:")
   );
   db.once("open", () => {
-    csl.log("bdd","Connecté à la base de données MongoDB");
+    csl.log("bdd", "Connecté à la base de données MongoDB");
     // emptyGames();
     initItems();
   });
@@ -57,7 +81,12 @@ module.exports = function (app, bdd) {
           };
         }
 
-        // Fonction pour trouver les items par défaut
+        // Génération du code de vérification
+        const verificationCode = Math.random()
+          .toString(36)
+          .substring(2, 7)
+          .toUpperCase();
+
         async function findDefaultItem(name, category = null) {
           const query = category
             ? { "names.en": name, category }
@@ -69,16 +98,17 @@ module.exports = function (app, bdd) {
           return item;
         }
 
-        // Récupération des items par défaut
         const defaultAvatar = await findDefaultItem("Sun");
         const defaultColor = await findDefaultItem("White", "colorAvatar");
         const defaultSunglasses = await findDefaultItem("Nothing");
 
-        // Création de l'utilisateur avec les items par défaut
+        // Création de l'utilisateur
         const newUser = new UserModel({
           pseudo,
           email,
           password: hashedPassword,
+          verificationCode, // Stocker le code dans la base de données
+          emailVerified: false, // Initialement non vérifié
           itemsOwned: [
             defaultAvatar._id,
             defaultColor._id,
@@ -91,7 +121,8 @@ module.exports = function (app, bdd) {
         });
         const savedUser = await newUser.save();
 
-        // Création des statistiques de l'utilisateur
+        await sendVerificationEmail(email, verificationCode);
+
         const newStat = new StatModel({
           maxCoins: 0,
           maxGain: 0,
@@ -103,9 +134,14 @@ module.exports = function (app, bdd) {
         savedUser.stat = newStat._id;
         await savedUser.save();
 
+        // Autres opérations...
         return savedUser;
       } catch (error) {
-        csl.error("bdd","Erreur lors de la création de l'utilisateur:", error);
+        console.error(
+          "bdd",
+          "Erreur lors de la création de l'utilisateur:",
+          error
+        );
         if (error.message.startsWith("Default item not found")) {
           return {
             error: true,
@@ -154,7 +190,7 @@ module.exports = function (app, bdd) {
           token: token,
         };
       } catch (error) {
-        csl.error("bdd","Error during login:", error);
+        csl.error("bdd", "Error during login:", error);
         throw error;
       }
     },
@@ -171,7 +207,7 @@ module.exports = function (app, bdd) {
           };
         }
       } catch (error) {
-        csl.error("bdd","Error during email check:", error);
+        csl.error("bdd", "Error during email check:", error);
         throw error;
       }
     },
@@ -189,7 +225,7 @@ module.exports = function (app, bdd) {
           return { success: false, message: `Failed to update ${field}` };
         }
       } catch (error) {
-        csl.error("bdd","Error updating user data:", error);
+        csl.error("bdd", "Error updating user data:", error);
         throw error;
       }
     },
@@ -226,13 +262,13 @@ module.exports = function (app, bdd) {
           },
         };
       } catch (error) {
-        csl.error("bdd","Error buying item:", error);
+        csl.error("bdd", "Error buying item:", error);
         throw error;
       }
     },
 
     getUserInfo: async (userId) => {
-      csl.log("bdd","Fetching info for user ID:", userId);
+      csl.log("bdd", "Fetching info for user ID:", userId);
       try {
         const user = await UserModel.findById(userId)
           .populate("baseAvatar")
@@ -241,7 +277,7 @@ module.exports = function (app, bdd) {
           .exec();
 
         if (!user) {
-          csl.log("bdd","No user found with ID:", userId); // Log if no user is found
+          csl.log("bdd", "No user found with ID:", userId); // Log if no user is found
           return { success: false, message: "Utilisateur non trouvé" };
         }
 
@@ -259,7 +295,7 @@ module.exports = function (app, bdd) {
           },
         };
       } catch (error) {
-        csl.error("bdd","Error fetching user information:", error);
+        csl.error("bdd", "Error fetching user information:", error);
         throw error;
       }
     },
@@ -269,7 +305,7 @@ module.exports = function (app, bdd) {
         const items = await ItemModel.find();
         return { success: true, items: items };
       } catch (error) {
-        csl.error("bdd","Error fetching items:", error);
+        csl.error("bdd", "Error fetching items:", error);
         throw new Error("Error fetching items from the database");
       }
     },
@@ -320,43 +356,40 @@ module.exports = function (app, bdd) {
           itemId: itemId,
         };
       } catch (error) {
-        csl.error("bdd","Error activating avatar component:", error);
+        csl.error("bdd", "Error activating avatar component:", error);
         throw error;
       }
     },
 
-getAllRanking: async (page, nbRes) => {
-    try {
-      const users = await UserModel.aggregate([
-        {
-          $lookup: {
-            from: "Stat",  // Assurez-vous que le nom de la collection est correct
-            pipeline : [
-              {$project:{maxGain: 1}}
-            ],
-            as: "gain"
-          }
-        },
-        {
-          $sort: {gain : -1}
-        },
-        {
-          $project: {pseudo : 1, gain : 1} 
-        },
-        {
-          $skip : (page-1) * nbRes
-        },
-        { 
-          $limit : nbRes
-        }
-      ]);
-      return { success: true, data: users };
-    } catch (err) {
-      console.error("Error fetching rankings:", err);
-      return { success: false, error: err }; // rethrow the error after logging
-    }
-  },
-
+    getAllRanking: async (page, nbRes) => {
+      try {
+        const users = await UserModel.aggregate([
+          {
+            $lookup: {
+              from: "Stat", // Assurez-vous que le nom de la collection est correct
+              pipeline: [{ $project: { maxGain: 1 } }],
+              as: "gain",
+            },
+          },
+          {
+            $sort: { gain: -1 },
+          },
+          {
+            $project: { pseudo: 1, gain: 1 },
+          },
+          {
+            $skip: (page - 1) * nbRes,
+          },
+          {
+            $limit: nbRes,
+          },
+        ]);
+        return { success: true, data: users };
+      } catch (err) {
+        console.error("Error fetching rankings:", err);
+        return { success: false, error: err }; // rethrow the error after logging
+      }
+    },
 
     createGameDescription: async function (
       serverName,
@@ -382,13 +415,13 @@ getAllRanking: async (page, nbRes) => {
           serverName,
           roomPassword,
           rank,
-          players: (master===0)? []: [master],
+          players: master === 0 ? [] : [master],
         });
 
         await gameDescription.save();
         return { error: false, code: 200, data: gameDescription };
       } catch (error) {
-        csl.error("bdd","Error creating game description:", error);
+        csl.error("bdd", "Error creating game description:", error);
         return {
           error: true,
           code: 500,
@@ -399,21 +432,21 @@ getAllRanking: async (page, nbRes) => {
 
     addOnePlayerGameDesc: async function (gameId, userId) {
       // try {
-        csl.log("bdd","add a player in game bdd");
-        const gameDesc = await GameDescriptionModel.findById(gameId);
-        gameDesc.players.push(userId);
-        await gameDesc.save();
-        csl.log("bdd","update the inGame status of the player");
-        const user = await UserModel.findById(userId);
-        console.log(userId, user);
-        user.inGame = gameId;
-        await user.save();
+      csl.log("bdd", "add a player in game bdd");
+      const gameDesc = await GameDescriptionModel.findById(gameId);
+      gameDesc.players.push(userId);
+      await gameDesc.save();
+      csl.log("bdd", "update the inGame status of the player");
+      const user = await UserModel.findById(userId);
+      console.log(userId, user);
+      user.inGame = gameId;
+      await user.save();
       // } catch (err) {
       //   csl.error("bdd","dao", err);
       // }
     },
 
-    removeGameDesc: async function(gameId){
+    removeGameDesc: async function (gameId) {
       await GameDescriptionModel.findByIdAndDelete(gameId);
     },
 
@@ -435,24 +468,24 @@ getAllRanking: async (page, nbRes) => {
           return { success: false, message: `Failed to update ${field}` };
         }
       } catch (error) {
-        csl.error("bdd","Error updating user data:", error);
+        csl.error("bdd", "Error updating user data:", error);
         throw error;
       }
     },
 
-    playerLeftGame: async function (id){
-      try{
+    playerLeftGame: async function (id) {
+      try {
         const user = await UserModel.findById(id);
         const gameDesc = await GameDescriptionModel.findById(user.inGame);
-        if(gameDesc !== null){
-          gameDesc.players = gameDesc.players.filter(p => p === id);
+        if (gameDesc !== null) {
+          gameDesc.players = gameDesc.players.filter((p) => p === id);
           await gameDesc.save();
         }
         user.inGame = null;
         console.log(user, " removing user in game");
         await user.save();
-      }catch(err){
-        csl.error("bdd",'erreur avec player Left game',err  );
+      } catch (err) {
+        csl.error("bdd", "erreur avec player Left game", err);
       }
     },
 
@@ -461,7 +494,7 @@ getAllRanking: async (page, nbRes) => {
         const gameDescriptions = await GameDescriptionModel.find({});
         return { error: false, code: 200, data: gameDescriptions };
       } catch (error) {
-        csl.error("bdd","Error fetching game descriptions:", error);
+        csl.error("bdd", "Error fetching game descriptions:", error);
         return {
           error: true,
           code: 500,

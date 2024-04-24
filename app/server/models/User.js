@@ -40,6 +40,14 @@ const UserSchema = new Schema(
       ref: "Item",
       default: null,
     },
+    verificationCode: {
+      type: String,
+      required: false,
+    },
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    },
     stat: {
       type: Schema.Types.ObjectId,
       ref: "Stat",
