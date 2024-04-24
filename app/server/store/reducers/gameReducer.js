@@ -18,31 +18,30 @@ const initialState = {
 };
 
 const begin = (state) => {
-  const deck = state.game.deck;
-  deck.initCards();
-  deck.shuffle();
+  const playersInRoom = state.game.players;
 
-  const updatedPlayers = state.players.map((player) => {
-    player.clearHand();
-    player.setCards(deck.deal(2));
-    player.setStatus("Playing"); // Set status to "Playing" during gameplay
-    return player;
-  });
-
+  // Start the game
   var posBigBlind = state.game.blind;
-  var posSmallBlind = (posBigBlind + 1) % updatedPlayers.length;
+  var posSmallBlind = (posBigBlind + 1) % playersInRoom.length;
   var blind = 20;
-  updatedPlayers[posBigBlind].bet(blind * 2);
-  updatedPlayers[posSmallBlind].bet(blind);
-  state.game.focus = (posSmallBlind + 1) % updatedPlayers.length;
+  playersInRoom[posBigBlind].bet(blind * 2);
+  playersInRoom[posSmallBlind].bet(blind);
+  state.game.focus = (posSmallBlind + 1) % playersInRoom.length;
+
+    // Distribute blinds
+  state.game.pokerTable.playerBet(
+    state.game.players[posBigBlind],
+    blind * 2
+  );
+
+  state.game.pokerTable.playerBet(
+    state.game.players[posSmallBlind],
+    blind
+  );
+
+  state.game.start();
   return {
     ...state,
-    table: {
-      ...state.table,
-      deck,
-      stake: blind * 3,
-    },
-    players: updatedPlayers,
     controlsMode: "roundOne",
   };
 };
@@ -192,7 +191,8 @@ const gameReducer = (state = initialState, action) => {
           payload: { id: action.payload.tableId },
         };
         room.players = [...room.players, new Player(playerId, pseudo)];
-
+        // We add the player to the game class.
+        // room.game.addPlayer(room.players[room.players.length - 1]);
         csl.log(fileType, "Added player successfully");
       } else {
         csl.error(fileType, "Failed to sit player at the table.");
