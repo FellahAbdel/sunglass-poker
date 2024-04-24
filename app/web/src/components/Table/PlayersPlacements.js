@@ -43,7 +43,7 @@ const PlayersPlacements = ({
             flippingPlayerCards={true}
 
             // gotCards={playersCardDistributedProp[index]}
-            gotCards={true}
+            gotCards={player.playerCards.length !== 0}
           />
         </div>
       ))}
