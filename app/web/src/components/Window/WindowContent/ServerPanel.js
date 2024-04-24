@@ -119,7 +119,7 @@ const ServerPanelWindow = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="listTableWindow">
+    <div className="listTableWindowPanel">
       <TextInputComponent
         placeholder="Search room"
         styleClass={"input-connectionDefault input-searchBar input-icon-search"}
