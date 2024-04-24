@@ -4,10 +4,13 @@ class Card {
     this.number = number;
   }
 
+  getNumberAndColor(){
+    return [this.number, this.color];
+  }
+  
   getCardString() {
-    return `${this.number} of ${this.color}`;
+    return `${this.number}_of_${this.color}`;
   }
 }
-
 
 module.exports = Card;
