@@ -29,6 +29,7 @@ const PlayersPlacements = ({
     setUpdatedPlayers(playersInTable);
   }, [playersInTable]);
 
+//   console.log("players cards :", updatedPlayers[0].playerCards);
   return (
     <span className={`profiles ${disappear ? "disappear" : ""}`}>
       {updatedPlayers.map((player, index) => (
