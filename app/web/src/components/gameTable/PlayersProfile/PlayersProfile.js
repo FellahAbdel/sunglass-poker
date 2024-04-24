@@ -16,6 +16,9 @@ const PlayersProfile = ({
   const formattedChips = chips.toLocaleString();
   const dollarSign = " SC";
 
+//   const [card1, card2] = cards ? cards : ["14", "C"];
+
+
   return (
     <div className={`container-onGameProfile`}>
       <div className={`box-status  ${status}`}>
@@ -45,7 +48,9 @@ const PlayersProfile = ({
       />
       <Card
         styleClass={`showCardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
+        // card={card2.getNumberAndColor()}
         card={["14", "C"]}
+        // card={ cards == undefined ? ["14", "C"] : [cards.number.toString(), cards.color]}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />

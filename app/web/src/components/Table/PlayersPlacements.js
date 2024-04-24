@@ -37,6 +37,7 @@ const PlayersPlacements = ({
             status={player.status}
             chips={player.playerMoney}
             name={player.name}
+            cards={player.playerCards}
             // flippingPlayerCards={playersCardsShowProp[index]}
             flippingPlayerCards={true}
 
