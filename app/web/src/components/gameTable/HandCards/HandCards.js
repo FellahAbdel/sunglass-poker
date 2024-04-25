@@ -18,19 +18,30 @@ const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
   console.log("HandCards1", card1);
   console.log("HandCards2", card2);
 
+  const cardIcons = {
+    H: require("./../../assets/images/icons/white/heart.png"),
+    D: require("./../../assets/images/icons/white/diamon.png"),
+    C: require("./../../assets/images/icons/white/club.png"),
+    S: require("./../../assets/images/icons/white/spade.png"),
+  };
+
   return (
     <div className="container-handMain">
       <div className="container-showCardsButtons">
         <Button
           styleClass={"btn-showCard"}
-          label={`${getTranslatedWord("handGuide.show")} A of`}
-          iconSrc={require("./../../assets/images/icons/white/heart.png")}
+          label={`${getTranslatedWord("handGuide.show")} ${card1[0]} of ${
+            card1[1]
+          }`}
+          iconSrc={cardIcons[card1[1]]}
           onClick={handleShowCard1}
         />
         <Button
           styleClass={"btn-showCard"}
-          label={`${getTranslatedWord("handGuide.show")} A of`}
-          iconSrc={require("./../../assets/images/icons/white/diamon.png")}
+          label={`${getTranslatedWord("handGuide.show")} ${card2[0]} of ${
+            card2[1]
+          }`}
+          iconSrc={cardIcons[card2[1]]}
           onClick={handleShowCard2}
         />
         <Button
