@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../Utiles/AuthProvider";
 import "./avatarDisplay.css";
 
-const AvatarDisplay = () => {
-  const { user } = useAuth();
+const AvatarDisplay = ({ user: propUser }) => {
+  const { user: authUser } = useAuth();
+  const user = propUser || authUser; // Utiliser propUser s'il est fourni, sinon authUser
   const [baseAvatar, setBaseAvatar] = useState({});
   const [sunglasses, setSunglasses] = useState({});
 
@@ -29,9 +30,6 @@ const AvatarDisplay = () => {
           transform: "translate(-50%, -50%)",
         }
       : {};
-
-  console.log("Les lunettes devraient s'afficher en :", baseAvatar.eyePosition);
-
 
   const backgroundColor =
     user && user.colorAvatar ? user.colorAvatar.imgSrc : "#FFFFFF";
