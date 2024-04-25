@@ -143,3 +143,7 @@
 * 2024/04/21 : <b>3h</b> <br/> Travail individuel : <i> Faire la matrice d'Eisenhower. Créer un nouveau Gantt pour la période du 21 avril au 28 mai. Mettre à jour Trello.</i>
 
 * 2024/04/22 : <b>30 mins</b> <br/> Travail individuel : <i> Rédaction du compte-rendu hebdomadaire.</i>
+
+### Semaine 12 : 22 Avril - 29 Avril | Temps Totale: 
+
+* 2024/04/23 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Réunion avec les développeurs.</i>

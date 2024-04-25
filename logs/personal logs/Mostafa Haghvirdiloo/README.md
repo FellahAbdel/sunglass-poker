@@ -88,4 +88,8 @@
 
 * 2024/04/17 : <b> 3h </b> <br/>       Travail individuel: <i>creation de demo pour demonstrer des animations pour presentation IHM , debuggage des conditions de css , boite input pour rechercher des servers</i>
 
-total: 135h00min
+* 2024/04/22 : <b> 3h </b> <br/>       Travail individuel: <i>ranking window css , Audio hook , fonction delay , debuggage css </i>
+
+* 2024/04/23 : <b> 1h </b> <br/>       Travail en TP: <i>debuggage et des petite changements , reunion en groupe</i>
+
+total: 139h00min
