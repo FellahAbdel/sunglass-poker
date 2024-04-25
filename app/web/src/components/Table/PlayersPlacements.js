@@ -14,6 +14,7 @@ const PlayersPlacements = ({
     setUpdatedPlayers(playersInTable);
   }, [playersInTable]);
 
+//   console.log("players cards :", updatedPlayers[0].playerCards);
   return (
     <span className={`profiles ${disappear ? "disappear" : ""}`}>
       {updatedPlayers.map((player, index) => (
@@ -22,8 +23,12 @@ const PlayersPlacements = ({
             status={player.status}
             chips={player.playerMoney}
             name={player.name}
-            flippingPlayerCards={playersCardsShowProp[index]}
-            gotCards={playersCardDistributedProp[index]}
+            cards={player.playerCards}
+            // flippingPlayerCards={playersCardsShowProp[index]}
+            flippingPlayerCards={true}
+
+            // gotCards={playersCardDistributedProp[index]}
+            gotCards={player.playerCards.length !== 0}
           />
         </div>
       ))}

@@ -101,8 +101,8 @@ const GameTable = () => {
             }`}
           >
             <HandCards
-              card1={["a", "hearts"]}
-              card2={["a", "diamonds"]}
+              card1={["14", "H"]}
+              card2={["14", "D"]}
               showHandCardProp={[true,true]}
               handGuideProp={"straight"}
             />

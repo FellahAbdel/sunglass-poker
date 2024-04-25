@@ -11,7 +11,7 @@ class Player {
   constructor(playerId, name) {
     this.playerId = playerId;
     this.name = name;
-    this.status = "Empty";
+    this.status = "Playing";
   }
 
   settimeLastAnswer(t){
