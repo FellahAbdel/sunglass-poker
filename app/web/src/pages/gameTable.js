@@ -103,18 +103,14 @@ const GameTable = () => {
           <div
             className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
           >
-            <BonusPanel />
+            <BonusPanel/>
           </div>
           <div
             className={`comp-gameAction ${
               isWindowOpen ? "slideDown" : "slideUp"
             }`}
           >
-            <GameActionPanel
-            // handleFoldProp={handleFold}
-            // handleRaiseProp={handleRaise}
-            // handleCheckOrCallProp={handleCheckOrCall}
-            />
+            <GameActionPanel/>
           </div>
 
           <div

@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import PlayersProfile from "../gameTable/PlayersProfile/PlayersProfile";
 import { useSelector } from "react-redux";
 
-const PlayersPlacements = ({
-  playersCardsShowProp,
-  playersCardDistributedProp,
-  disappear,
-}) => {
+const PlayersPlacements = ({}) => {
+
+  //playersCardDistributed for each player 
+  // *** also has been used in CardsPlacements component
+  const [playersCardDistributed, setPlayersCardDistributed] = useState([1, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [playersCardsShow, setPlayersCardsShow] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+
   const playersInTable = useSelector((state) => state.game.players);
   const [updatedPlayers, setUpdatedPlayers] = useState([]);
 
@@ -16,7 +19,7 @@ const PlayersPlacements = ({
 
 //   console.log("players cards :", updatedPlayers[0].playerCards);
   return (
-    <span className={`profiles ${disappear ? "disappear" : ""}`}>
+    <span className={`profiles`}>
       {updatedPlayers.map((player, index) => (
         <div key={`profile${index}`} className={`profile profile${index}`}>
           <PlayersProfile
@@ -24,11 +27,10 @@ const PlayersPlacements = ({
             chips={player.playerMoney}
             name={player.name}
             cards={player.playerCards}
-            // flippingPlayerCards={playersCardsShowProp[index]}
+            // flippingPlayerCards={playersCardsShow[index]}
             flippingPlayerCards={true}
-
-            // gotCards={playersCardDistributedProp[index]}
-            gotCards={player.playerCards.length !== 0}
+            gotCards={playersCardDistributed}
+            // gotCards={player.playerCards.length !== 0}
             playerId={player.playerId}
           />
         </div>

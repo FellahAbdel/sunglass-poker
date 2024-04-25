@@ -16,47 +16,11 @@ import PlayersPots from "./PlayersPots" ;
 //fonctions
 import { delayedExecution, delayedExecutionWithCancel } from "./../Utiles/delay.js";
 
-const Table = ({
-
-}) => {
+const Table = ({}) => {
   const { isWindowOpen, windowType, isGameTableVisible } = useWindowContext();
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
-
-  //demo test-----------------------------------------
-    const [dealingFlop, setDealingFlop] = useState([false, false, false,false,false]);
-    const [playersCardsShow, setPlayersCardsShow] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-    const [playersCardDistributed, setPlayersCardDistributed] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-    const shouldUpdate = [true, true, true, false, false];
-    const shouldUpdate2 = [true, true, true, true, false];
-    const shouldUpdate3 = [true, true, true, true, true];
-
-
-    const delayTimes = [0, 500, 1000 , 1500, 2000]; 
-
-    const testDealingFlop = () => {
-      dealingFlop.forEach((state, index) => {
-          if (shouldUpdate[index]) {
-              setTimeout(() => {
-                  setDealingFlop(prevFlop => {
-                      let newFlop = [...prevFlop];
-                      newFlop[index] = !state;
-                      return newFlop;
-                  });
-              }, delayTimes[index]);
-          }
-      });
-  };
-  
-    const testDistribution = () => {
-      setPlayersCardDistributed([!playersCardDistributed[0], !playersCardDistributed[1], !playersCardDistributed[2], !playersCardDistributed[3], !playersCardDistributed[4], !playersCardDistributed[5], !playersCardDistributed[6], 0, !playersCardDistributed[8], !playersCardDistributed[9]]);
-    };
-    const testCardsShow = () => {
-      setPlayersCardsShow([!playersCardsShow[0], !playersCardsShow[1], !playersCardsShow[2], !playersCardsShow[3], !playersCardsShow[4], !playersCardsShow[5], !playersCardsShow[6], 0, !playersCardsShow[8], !playersCardsShow[9]]);
-    };
-    //-----------------------------------------demo test
-
 
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
@@ -98,21 +62,18 @@ const Table = ({
       {/* Game Components */}
       {isGameTableVisible && !isWindowOpen && (
         <>
-          <CardsPlacements
-            dealingFlop={dealingFlop}
-            disappear={isWindowOpen}
-            playersCardDistributedProp={playersCardDistributed}
-          />
-          <PlayersPlacements
-            playersCardDistributedProp={playersCardDistributed}
-            playersCardsShowProp={playersCardsShow}
-            disappear={isWindowOpen}
-          />
-          <PlayersPots
-            testOnClick1={testDealingFlop}
-            testOnClick2={testDistribution}
-            testOnClick3={testCardsShow}
-          />
+          {/*DISTRIBUTION ANIMATION :
+           in CardPlacements you have the distribution
+           animation which gets handled with a table called 
+           "playersCardDistributed" with 10 booleen members
+           representing each players that gets a card
+           
+           playersCardDistributed is also used in PlayersPlacements
+           that shows which players gets the cards
+           */}
+          <CardsPlacements/> {/*NEEDS DealingFlop and playersCardDistribution in it*/}
+          <PlayersPlacements/> {/*NEEDS playersCardsShow and playersCardDistribution in it*/}
+          <PlayersPots/> 
         </>
       )}
       {/*All the panels other than game itself are included in window component*/}
