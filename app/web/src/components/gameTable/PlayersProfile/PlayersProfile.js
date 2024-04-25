@@ -48,7 +48,7 @@ const PlayersProfile = ({
         card={
           cards.length === 2
             ? [cards[0].number.toString(), cards[0].color]
-            : ["14", "C"]
+            : ["14", "C"] // default card (has to be changed)
         }
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
@@ -58,7 +58,7 @@ const PlayersProfile = ({
         card={
           cards.length === 2
             ? [cards[1].number.toString(), cards[1].color]
-            : ["14", "C"]
+            : ["14", "C"] // default card (has to be changed)
         }
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
