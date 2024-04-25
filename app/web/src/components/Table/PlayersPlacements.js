@@ -29,8 +29,8 @@ const PlayersPlacements = ({}) => {
             cards={player.playerCards}
             // flippingPlayerCards={playersCardsShow[index]}
             flippingPlayerCards={true}
-            gotCards={playersCardDistributed}
-            // gotCards={player.playerCards.length !== 0}
+            // gotCards={playersCardDistributed}
+            gotCards={player.playerCards.length !== 0}
             playerId={player.playerId}
           />
         </div>
