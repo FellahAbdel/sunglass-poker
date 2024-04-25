@@ -42,6 +42,10 @@ export const bet = (amount) => ({
     payload:{amount:amount}
 })
 
+export const check = () => ({
+    type:actions.CHECK
+});
+
 
 /**
  *  payload: {

@@ -40,6 +40,14 @@ const GameActionButtons = ({}) => {
     dispatch(actions.fold());
   }
 
+  const handleBet = () => {
+    dispatch(actions.bet());
+  }
+
+  const handleCheck = () => {
+    dispatch(actions.check());
+  }
+
   //console.log(pot)
   const handlePercentageButton = (percentage) => {
     const newValue = coins * percentage;
@@ -89,6 +97,7 @@ useEffect(() => {
         </div>
         </>)}
       <div className={`container-ActionButtons`}>
+        {/* LEBOUTON BET MAIS faut reclické alors jsp ou mettre le handle */}
         <Button
           styleClass={"btn-mainAction"}
           onClick={() => togglePopupAndRaise()}
@@ -96,20 +105,18 @@ useEffect(() => {
             raiseCoin ? Math.round(raiseCoin) + " SC" : ""
           }`}
         />
+        {/* LE BOUTON CHECK OR CALL  */}
         <Button
           styleClass={"btn-mainAction"}
-          onClick={null}
+          onClick={handleCheck}
           label={checkOrCall}
         />
-        <Button styleClass={"btn-fold"} onClick={handleFold} label={"Fold"} />
+        {/* LE BOUTON FOLD */}
+        <Button styleClass={"btn-fold btn-mainAction"} onClick={handleFold} label={getTranslatedWord("gameActionPanel.fold")} />
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
         <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />
-        <Button
-          styleClass={"btn-mainAction"}
-          onClick={null}
-          label={getTranslatedWord("gameActionPanel.fold")}
-        />
+        
       </div>
 
     </div>

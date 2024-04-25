@@ -10,6 +10,7 @@ export const FOLD = "FOLD";
 
 export const BET = "BET";
 
+export const CHECK="CHECK";
 
 export const SIT = "SIT";
 
