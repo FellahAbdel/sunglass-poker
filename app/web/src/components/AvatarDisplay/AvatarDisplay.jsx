@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Utiles/AuthProvider";
 import "./avatarDisplay.css";
-
 const AvatarDisplay = ({ userId }) => {
   const { user, getAvatarById } = useAuth();
   const [avatar, setAvatar] = useState({
@@ -11,13 +10,15 @@ const AvatarDisplay = ({ userId }) => {
   });
 
   useEffect(() => {
-    console.log("Fetching avatar for user ID:", userId);
     const fetchAvatar = async () => {
       if (userId) {
         const avatarData = await getAvatarById(userId);
-        console.log("Avatar data received:", avatarData);
         if (avatarData) {
-          setAvatar(avatarData);
+          setAvatar({
+            baseAvatar: avatarData.baseAvatar,
+            sunglasses: avatarData.sunglasses,
+            colorAvatar: avatarData.colorAvatar.imgSrc || "#FFFFFF",
+          });
         }
       } else if (user) {
         setAvatar({
@@ -28,9 +29,7 @@ const AvatarDisplay = ({ userId }) => {
           sunglasses: {
             imgSrc: user.sunglassesImgSrc,
           },
-          colorAvatar: {
-            imgSrc: user.colorAvatar?.imgSrc || "#FFFFFF",
-          },
+          colorAvatar: user.colorAvatar?.imgSrc || "#FFFFFF",
         });
       }
     };
@@ -38,21 +37,17 @@ const AvatarDisplay = ({ userId }) => {
     fetchAvatar();
   }, [userId, user, getAvatarById]);
 
-  const sunglassesStyle =
-    avatar.sunglasses.imgSrc && avatar.baseAvatar.eyePosition
-      ? {
-          position: "absolute",
-          top: `${avatar.baseAvatar.eyePosition.y}%`,
-          left: `${avatar.baseAvatar.eyePosition.x}%`,
-          transform: "translate(-50%, -50%)",
-        }
-      : {};
+  const sunglassesStyle = avatar.sunglasses.imgSrc && avatar.baseAvatar.eyePosition
+    ? {
+        position: "absolute",
+        top: `${avatar.baseAvatar.eyePosition.y}%`,
+        left: `${avatar.baseAvatar.eyePosition.x}%`,
+        transform: "translate(-50%, -50%)",
+      }
+    : {};
 
   return (
-    <div
-      className="avatarContainer"
-      style={{ backgroundColor: avatar.colorAvatar }}
-    >
+    <div className="avatarContainer" style={{ backgroundColor: avatar.colorAvatar }}>
       {avatar.baseAvatar.imgSrc && (
         <img
           src={avatar.baseAvatar.imgSrc}
