@@ -84,4 +84,10 @@
 
 2024/04/22  3H      Avancement de leave room et delete room, reunion avec victor pour le fonctionnement/ voir si tout marche + affecatation de la suite (faut aussi regler avec la bdd)
 
-TEMPS TOTAL: 77H  
+2024/04/23: 30min   Check de tout les bugs par rapport au dernier ajout avant la reunion
+
+2024/04/23: 3H30    Reunion habituel du mardi avec affectation des nouveles taches etc...
+
+2024/04/25: 1H      Ajout logique coté front des boutons de jeux avec comprenhension des pages
+
+TEMPS TOTAL: 81H  
