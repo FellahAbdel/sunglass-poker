@@ -17,11 +17,12 @@ import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
+import { useSelector } from "react-redux";
 
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
 const GameTable = () => {
-  const { theme , animation } = useSettings();
+  const { theme, animation } = useSettings();
   const { isLogged } = useAuth();
   const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
@@ -31,6 +32,32 @@ const GameTable = () => {
     isGameTableVisible,
     isWindowOpen
   );
+  const { userId } = useAuth();
+  const [updatedPlayers, setUpdatedPlayers] = useState([]);
+
+  const playersInTable = useSelector((state) => state.game.players);
+  useEffect(() => {
+    const currentUserData = playersInTable.find(
+      (player) => player.id === userId
+    );
+    if (
+      currentUserData &&
+      currentUserData.playerCards &&
+      currentUserData.playerCards.length >= 2
+    ) {
+      const card1 = [
+        currentUserData.playerCards[0].number,
+        currentUserData.playerCards[0].color,
+      ];
+      const card2 = [
+        currentUserData.playerCards[1].number,
+        currentUserData.playerCards[1].color,
+      ];
+      setUpdatedPlayers([{ ...currentUserData, playerCards: [card1, card2] }]);
+    } else {
+      setUpdatedPlayers([]);
+    }
+  }, [playersInTable, userId]);
 
 
   useEffect(() => {
@@ -47,8 +74,6 @@ const GameTable = () => {
     event.stopPropagation();
   };
 
-
-
   //-----------------------------------------inGame functions to test
 
   return (
@@ -56,7 +81,6 @@ const GameTable = () => {
       className={`container-main resetall ${animation ? "" : "no-animation"}`}
       id={theme}
       onClick={handleCloseOnClickOutside}
-      
     >
       {/* css Pattern background */}
 
@@ -70,9 +94,7 @@ const GameTable = () => {
 
       {/* Menu/Table */}
       <div className={classes.compTable}>
-        <Table
-          onClick={(e) => handleBoxClick}
-        />
+        <Table onClick={(e) => handleBoxClick} />
       </div>
 
       {/* playing elements opens when logged in */}
@@ -100,12 +122,15 @@ const GameTable = () => {
               isWindowOpen ? "slideDown" : "slideUp"
             }`}
           >
-            <HandCards
-              card1={["14", "H"]}
-              card2={["14", "D"]}
-              showHandCardProp={[true,true]}
-              handGuideProp={"straight"}
-            />
+            {updatedPlayers.length > 0 &&
+              updatedPlayers[0].playerCards.length >= 2 && (
+                <HandCards
+                  card1={updatedPlayers[0].playerCards[0]}
+                  card2={updatedPlayers[0].playerCards[1]}
+                  showHandCardProp={[true, true]}
+                  handGuideProp={"straight"} // Assumez que vous avez cette prop pour une raison
+                />
+              )}
           </div>
         </>
       )}
