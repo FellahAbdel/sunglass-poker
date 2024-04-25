@@ -124,4 +124,10 @@
 
 2024/04/21 : 1h00           Changement logique window, "accueil" n'existe plus dans windowType
 
-TEMPS TOTAL: 120h00min
+2024/04/23 : 3h30           Réunion, correction bug, revue code, traductions supplémentaires
+
+2024/04/24 : 0h30           Correction bugs serverpannel
+
+2024/04/25 : 2h30           Affichage avatar autour table, Affichage carte joueur + boutons en bas à droite
+
+TEMPS TOTAL: 126h30min
