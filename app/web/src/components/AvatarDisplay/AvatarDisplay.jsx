@@ -2,46 +2,67 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../Utiles/AuthProvider";
 import "./avatarDisplay.css";
 
-const AvatarDisplay = ({ user: propUser }) => {
-  const { user: authUser } = useAuth();
-  const user = propUser || authUser; // Utiliser propUser s'il est fourni, sinon authUser
-  const [baseAvatar, setBaseAvatar] = useState({});
-  const [sunglasses, setSunglasses] = useState({});
+const AvatarDisplay = ({ userId }) => {
+  const { user, getAvatarById } = useAuth();
+  const [avatar, setAvatar] = useState({
+    baseAvatar: {},
+    sunglasses: {},
+    colorAvatar: "#FFFFFF",
+  });
 
   useEffect(() => {
-    if (user && user.baseAvatarImgSrc && user.colorAvatar) {
-      console.log("User data:", user);
-      setBaseAvatar({
-        imgSrc: user.baseAvatarImgSrc,
-        eyePosition: user.baseAvatar.eyePosition,
-      });
-      setSunglasses({
-        imgSrc: user.sunglassesImgSrc,
-      });
-    }
-  }, [user]);
+    console.log("Fetching avatar for user ID:", userId);
+    const fetchAvatar = async () => {
+      if (userId) {
+        const avatarData = await getAvatarById(userId);
+        console.log("Avatar data received:", avatarData);
+        if (avatarData) {
+          setAvatar(avatarData);
+        }
+      } else if (user) {
+        setAvatar({
+          baseAvatar: {
+            imgSrc: user.baseAvatarImgSrc,
+            eyePosition: user.baseAvatar?.eyePosition || { x: 50, y: 50 },
+          },
+          sunglasses: {
+            imgSrc: user.sunglassesImgSrc,
+          },
+          colorAvatar: {
+            imgSrc: user.colorAvatar?.imgSrc || "#FFFFFF",
+          },
+        });
+      }
+    };
+
+    fetchAvatar();
+  }, [userId, user, getAvatarById]);
 
   const sunglassesStyle =
-    sunglasses.imgSrc && baseAvatar.eyePosition
+    avatar.sunglasses.imgSrc && avatar.baseAvatar.eyePosition
       ? {
           position: "absolute",
-          top: `${baseAvatar.eyePosition.y}%`,
-          left: `${baseAvatar.eyePosition.x}%`,
+          top: `${avatar.baseAvatar.eyePosition.y}%`,
+          left: `${avatar.baseAvatar.eyePosition.x}%`,
           transform: "translate(-50%, -50%)",
         }
       : {};
 
-  const backgroundColor =
-    user && user.colorAvatar ? user.colorAvatar.imgSrc : "#FFFFFF";
-
   return (
-    <div className="avatarContainer" style={{ backgroundColor }}>
-      {baseAvatar.imgSrc && (
-        <img src={baseAvatar.imgSrc} alt="Base Avatar" className="baseAvatar" />
-      )}
-      {sunglasses.imgSrc && (
+    <div
+      className="avatarContainer"
+      style={{ backgroundColor: avatar.colorAvatar }}
+    >
+      {avatar.baseAvatar.imgSrc && (
         <img
-          src={sunglasses.imgSrc}
+          src={avatar.baseAvatar.imgSrc}
+          alt="Base Avatar"
+          className="baseAvatar"
+        />
+      )}
+      {avatar.sunglasses.imgSrc && (
+        <img
+          src={avatar.sunglasses.imgSrc}
           alt="Sunglasses"
           style={sunglassesStyle}
           className="sunglasses"

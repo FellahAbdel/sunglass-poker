@@ -9,14 +9,14 @@ module.exports = (app, dao, gameController) => {
   app.get("/rooms", (req, res) => {
     var roomsInfos = [];
     roomsInfos[0] = store.getState();
-    roomsInfos[1] = []
+    roomsInfos[1] = [];
     if (gameController !== undefined)
-        for (var room in gameController.refresh) {
-          console.log(room);
-          roomsInfos[1].push({
-            refresh: gameController.refresh[room] !== undefined ? true : false,
-          });
-        }
+      for (var room in gameController.refresh) {
+        console.log(room);
+        roomsInfos[1].push({
+          refresh: gameController.refresh[room] !== undefined ? true : false,
+        });
+      }
     res.send(roomsInfos);
   });
 
@@ -162,18 +162,19 @@ module.exports = (app, dao, gameController) => {
     }
   });
 
+  app.get("/api/get-all-ranking/", async (req, res) => {
+    try {
+      const page = parseInt(req.query.page) || 1; // Default to page 1 if undefined
+      const nbRes = parseInt(req.query.nbres) || 10; // Default to 10 results per page if undefined
 
-    app.get("/api/get-all-ranking/", async (req, res) => {
-      try {
-        const page = parseInt(req.query.page) || 1; // Default to page 1 if undefined
-        const nbRes = parseInt(req.query.nbres) || 10; // Default to 10 results per page if undefined
-  
-        const result = await dao.getAllRanking(page, nbRes);
-        res.send(result);
-      } catch (error) {
-        res.status(500).send({success: false, message: "Internal Server Error"});
-      }
-    });
+      const result = await dao.getAllRanking(page, nbRes);
+      res.send(result);
+    } catch (error) {
+      res
+        .status(500)
+        .send({ success: false, message: "Internal Server Error" });
+    }
+  });
 
   // Route to handle the creation of games
   app.post("/api/games", async (req, res) => {
@@ -223,4 +224,20 @@ module.exports = (app, dao, gameController) => {
       res.status(500).json({ error: "Internal server error" });
     }
   });
+
+  app.get("/api/avatar-info/:userId", async (req, res) => {
+    console.log("UserID from URL:", req.params.userId); 
+    try {
+        const userId = req.params.userId;
+        const avatarData = await dao.getAvatarInfo(userId);
+        if (avatarData) {
+            res.json(avatarData);
+        } else {
+            res.status(404).json({ message: "Avatar information not found" });
+        }
+    } catch (error) {
+        console.error("Error fetching avatar information:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 };

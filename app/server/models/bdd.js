@@ -14,14 +14,13 @@ const GameDescriptionModel = require("./GameDescription");
 const initItems = require("./initItems");
 const emptyGames = require("./emptyGameDescription");
 
-
-const csl = require('../controller/intelligentLogging');
+const csl = require("../controller/intelligentLogging");
 // csl.silenced('bdd');
 
 require("dotenv").config();
 
 module.exports = function (app, bdd) {
-  csl.log("bdd","bdd!", bdd);
+  csl.log("bdd", "bdd!", bdd);
 
   // Connexion à la base de données MongoDB
   mongoose.connect("mongodb://pokerBackEndServer:azerty@" + bdd + "/Poker", {});
@@ -33,7 +32,7 @@ module.exports = function (app, bdd) {
     console.error.bind(console, "Erreur de connexion à la base de données:")
   );
   db.once("open", () => {
-    csl.log("bdd","Connecté à la base de données MongoDB");
+    csl.log("bdd", "Connecté à la base de données MongoDB");
     // emptyGames();
     initItems();
   });
@@ -105,7 +104,7 @@ module.exports = function (app, bdd) {
 
         return savedUser;
       } catch (error) {
-        csl.error("bdd","Erreur lors de la création de l'utilisateur:", error);
+        csl.error("bdd", "Erreur lors de la création de l'utilisateur:", error);
         if (error.message.startsWith("Default item not found")) {
           return {
             error: true,
@@ -154,7 +153,7 @@ module.exports = function (app, bdd) {
           token: token,
         };
       } catch (error) {
-        csl.error("bdd","Error during login:", error);
+        csl.error("bdd", "Error during login:", error);
         throw error;
       }
     },
@@ -171,7 +170,7 @@ module.exports = function (app, bdd) {
           };
         }
       } catch (error) {
-        csl.error("bdd","Error during email check:", error);
+        csl.error("bdd", "Error during email check:", error);
         throw error;
       }
     },
@@ -189,7 +188,7 @@ module.exports = function (app, bdd) {
           return { success: false, message: `Failed to update ${field}` };
         }
       } catch (error) {
-        csl.error("bdd","Error updating user data:", error);
+        csl.error("bdd", "Error updating user data:", error);
         throw error;
       }
     },
@@ -226,13 +225,13 @@ module.exports = function (app, bdd) {
           },
         };
       } catch (error) {
-        csl.error("bdd","Error buying item:", error);
+        csl.error("bdd", "Error buying item:", error);
         throw error;
       }
     },
 
     getUserInfo: async (userId) => {
-      csl.log("bdd","Fetching info for user ID:", userId);
+      csl.log("bdd", "Fetching info for user ID:", userId);
       try {
         const user = await UserModel.findById(userId)
           .populate("baseAvatar")
@@ -241,7 +240,7 @@ module.exports = function (app, bdd) {
           .exec();
 
         if (!user) {
-          csl.log("bdd","No user found with ID:", userId); // Log if no user is found
+          csl.log("bdd", "No user found with ID:", userId); // Log if no user is found
           return { success: false, message: "Utilisateur non trouvé" };
         }
 
@@ -259,7 +258,7 @@ module.exports = function (app, bdd) {
           },
         };
       } catch (error) {
-        csl.error("bdd","Error fetching user information:", error);
+        csl.error("bdd", "Error fetching user information:", error);
         throw error;
       }
     },
@@ -269,7 +268,7 @@ module.exports = function (app, bdd) {
         const items = await ItemModel.find();
         return { success: true, items: items };
       } catch (error) {
-        csl.error("bdd","Error fetching items:", error);
+        csl.error("bdd", "Error fetching items:", error);
         throw new Error("Error fetching items from the database");
       }
     },
@@ -320,43 +319,86 @@ module.exports = function (app, bdd) {
           itemId: itemId,
         };
       } catch (error) {
-        csl.error("bdd","Error activating avatar component:", error);
+        csl.error("bdd", "Error activating avatar component:", error);
         throw error;
       }
     },
 
-getAllRanking: async (page, nbRes) => {
-    try {
-      const users = await UserModel.aggregate([
-        {
-          $lookup: {
-            from: "Stat",  // Assurez-vous que le nom de la collection est correct
-            pipeline : [
-              {$project:{maxGain: 1}}
-            ],
-            as: "gain"
-          }
-        },
-        {
-          $sort: {gain : -1}
-        },
-        {
-          $project: {pseudo : 1, gain : 1} 
-        },
-        {
-          $skip : (page-1) * nbRes
-        },
-        { 
-          $limit : nbRes
-        }
-      ]);
-      return { success: true, data: users };
-    } catch (err) {
-      console.error("Error fetching rankings:", err);
-      return { success: false, error: err }; // rethrow the error after logging
-    }
-  },
+    getAllRanking: async (page, nbRes) => {
+      try {
+        const users = await UserModel.aggregate([
+          {
+            $lookup: {
+              from: "Stat", // Assurez-vous que le nom de la collection est correct
+              pipeline: [{ $project: { maxGain: 1 } }],
+              as: "gain",
+            },
+          },
+          {
+            $sort: { gain: -1 },
+          },
+          {
+            $project: { pseudo: 1, gain: 1 },
+          },
+          {
+            $skip: (page - 1) * nbRes,
+          },
+          {
+            $limit: nbRes,
+          },
+        ]);
+        return { success: true, data: users };
+      } catch (err) {
+        console.error("Error fetching rankings:", err);
+        return { success: false, error: err }; // rethrow the error after logging
+      }
+    },
 
+    getAvatarInfo: async (userId) => {
+      try {
+        const user = await UserModel.findById(userId)
+          .populate({
+            path: "baseAvatar",
+            select: "imgSrc eyePosition", // Only fetching necessary fields
+          })
+          .populate({
+            path: "sunglasses",
+            select: "imgSrc",
+          })
+          .populate({
+            path: "colorAvatar",
+            select: "imgSrc",
+          })
+          .exec();
+
+        if (!user) {
+          console.log("No user found with ID:", userId);
+          return null;
+        }
+
+        return {
+          baseAvatar: user.baseAvatar
+            ? {
+                imgSrc: user.baseAvatar.imgSrc,
+                eyePosition: user.baseAvatar.eyePosition,
+              }
+            : null,
+          sunglasses: user.sunglasses
+            ? {
+                imgSrc: user.sunglasses.imgSrc,
+              }
+            : null,
+          colorAvatar: user.colorAvatar
+            ? {
+                imgSrc: user.colorAvatar.imgSrc,
+              }
+            : null,
+        };
+      } catch (error) {
+        console.error("Error fetching avatar information:", error);
+        throw error;
+      }
+    },
 
     createGameDescription: async function (
       serverName,
@@ -382,13 +424,13 @@ getAllRanking: async (page, nbRes) => {
           serverName,
           roomPassword,
           rank,
-          players: (master===0)? []: [master],
+          players: master === 0 ? [] : [master],
         });
 
         await gameDescription.save();
         return { error: false, code: 200, data: gameDescription };
       } catch (error) {
-        csl.error("bdd","Error creating game description:", error);
+        csl.error("bdd", "Error creating game description:", error);
         return {
           error: true,
           code: 500,
@@ -399,21 +441,21 @@ getAllRanking: async (page, nbRes) => {
 
     addOnePlayerGameDesc: async function (gameId, userId) {
       // try {
-        csl.log("bdd","add a player in game bdd");
-        const gameDesc = await GameDescriptionModel.findById(gameId);
-        gameDesc.players.push(userId);
-        await gameDesc.save();
-        csl.log("bdd","update the inGame status of the player");
-        const user = await UserModel.findById(userId);
-        console.log(userId, user);
-        user.inGame = gameId;
-        await user.save();
+      csl.log("bdd", "add a player in game bdd");
+      const gameDesc = await GameDescriptionModel.findById(gameId);
+      gameDesc.players.push(userId);
+      await gameDesc.save();
+      csl.log("bdd", "update the inGame status of the player");
+      const user = await UserModel.findById(userId);
+      console.log(userId, user);
+      user.inGame = gameId;
+      await user.save();
       // } catch (err) {
       //   csl.error("bdd","dao", err);
       // }
     },
 
-    removeGameDesc: async function(gameId){
+    removeGameDesc: async function (gameId) {
       await GameDescriptionModel.findByIdAndDelete(gameId);
     },
 
@@ -435,24 +477,24 @@ getAllRanking: async (page, nbRes) => {
           return { success: false, message: `Failed to update ${field}` };
         }
       } catch (error) {
-        csl.error("bdd","Error updating user data:", error);
+        csl.error("bdd", "Error updating user data:", error);
         throw error;
       }
     },
 
-    playerLeftGame: async function (id){
-      try{
+    playerLeftGame: async function (id) {
+      try {
         const user = await UserModel.findById(id);
         const gameDesc = await GameDescriptionModel.findById(user.inGame);
-        if(gameDesc !== null){
-          gameDesc.players = gameDesc.players.filter(p => p === id);
+        if (gameDesc !== null) {
+          gameDesc.players = gameDesc.players.filter((p) => p === id);
           await gameDesc.save();
         }
         user.inGame = null;
         console.log(user, " removing user in game");
         await user.save();
-      }catch(err){
-        csl.error("bdd",'erreur avec player Left game',err  );
+      } catch (err) {
+        csl.error("bdd", "erreur avec player Left game", err);
       }
     },
 
@@ -461,7 +503,7 @@ getAllRanking: async (page, nbRes) => {
         const gameDescriptions = await GameDescriptionModel.find({});
         return { error: false, code: 200, data: gameDescriptions };
       } catch (error) {
-        csl.error("bdd","Error fetching game descriptions:", error);
+        csl.error("bdd", "Error fetching game descriptions:", error);
         return {
           error: true,
           code: 500,

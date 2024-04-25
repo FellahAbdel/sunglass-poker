@@ -29,6 +29,7 @@ const PlayersPlacements = ({
 
             // gotCards={playersCardDistributedProp[index]}
             gotCards={player.playerCards.length !== 0}
+            playerId={player.playerId}
           />
         </div>
       ))}

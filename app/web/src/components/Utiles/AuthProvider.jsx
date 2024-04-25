@@ -360,6 +360,51 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getAvatarById = async (userId) => {
+    try {
+      const requestUrl = `http://localhost:3001/api/avatar-info/${userId}`;
+      //console.log("Requesting avatar data from URL:", requestUrl);
+
+      const response = await fetch(requestUrl, {
+        method: "GET",
+        headers: getAuthHeaders(),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Failed to fetch avatar:", errorText);
+        throw new Error(errorText || "API responded with an error.");
+      }
+
+      const data = await response.json();
+      //console.log("Parsed Data Received:", data);
+
+      if (data && data.baseAvatar && data.sunglasses && data.colorAvatar) {
+        console.log("Data fields are correctly structured and present.");
+        return {
+          baseAvatar: {
+            imgSrc: data.baseAvatar.imgSrc,
+            eyePosition: data.baseAvatar.eyePosition,
+          },
+          sunglasses: {
+            imgSrc: data.sunglasses.imgSrc,
+          },
+          colorAvatar: {
+            imgSrc: data.colorAvatar.imgSrc,
+          },
+        };
+      } else {
+        console.error("Data validation error: Missing required avatar fields.");
+        throw new Error(
+          "Data validation error: Missing required avatar fields."
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching avatar:", error);
+      return null;
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -379,6 +424,7 @@ export const AuthProvider = ({ children }) => {
         fetchItems,
         buyItem,
         activateAvatar,
+        getAvatarById,
       }}
     >
       {children}

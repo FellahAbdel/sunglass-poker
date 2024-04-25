@@ -3,6 +3,7 @@ import "./playersProfile.css";
 import ProgressBar from "../../Utiles/ProgressBar";
 import Card from "../Card/Card";
 import { useTranslation } from "../../Utiles/Translations";
+import AvatarDisplay from "../../AvatarDisplay/AvatarDisplay.jsx";
 
 const PlayersProfile = ({
   status,
@@ -11,6 +12,7 @@ const PlayersProfile = ({
   cards,
   flippingPlayerCards,
   gotCards,
+  playerId,
 }) => {
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips.toLocaleString();
@@ -61,16 +63,9 @@ const PlayersProfile = ({
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />
-
-      <img
-        className={`profilePic ${status}`}
-        src={
-          status === "empty"
-            ? require("./../../assets/images/pp_empty.png")
-            : require("./../../assets/images/pp_empty.png")
-        }
-        alt="profilePic"
-      />
+      <div className={`profilePic ${status}`}>
+        <AvatarDisplay userId={playerId} />
+      </div>
     </div>
   );
 };
