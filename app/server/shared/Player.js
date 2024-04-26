@@ -8,11 +8,10 @@ class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
 
-  constructor(playerId, name, coins) {
+  constructor(playerId, name) {
     this.playerId = playerId;
     this.name = name;
     this.status = "Playing";
-    this.playerMoney = coins;
     this.playerCards = [];
     this.playerActionLog = [];
     this.currentBet = 0;
