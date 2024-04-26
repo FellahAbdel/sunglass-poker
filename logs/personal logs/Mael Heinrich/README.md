@@ -102,7 +102,11 @@
 
 2024/04/25: 1H      Ajout logique coté front des boutons de jeux avec comprenhension des pages
 
+2024/04/25  30min   modif du fichier de mes heures/ reherches supplémentaires sur comment faire fonctioner les boutons
+
+2024/04/26  1H30    Continu de la réflexion sur le fonctionnemenbt des boutons, recherches ET reglages des bugs push avec les autres (j'ai surtour reperer les problèmes mais pas réparer)
+
 --2024/04 SEMAINE 4: 8H (TOTAL: 82H)
 
 
-TEMPS TOTAL: 82H  
+TEMPS TOTAL: 84H  
