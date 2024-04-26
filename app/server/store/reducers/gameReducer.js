@@ -261,6 +261,26 @@ const gameReducer = (state = initialState, action) => {
             state.rooms[action.payload.room].game.rotateFocus();
           }
       return { ...state };
+      case actions.CHECK:
+        console.log(state.rooms[action.payload.room], action);
+        if (action.payload !== undefined)
+          if (action.payload.amount !== undefined)
+            if (
+              state.rooms[action.payload.room].players.findIndex(
+                (p) => p.getPlayerId() == action.payload.playerId
+              ) === state.rooms[action.payload.room].game.focus
+            ) {
+              csl.log(
+                "playerAction",
+                " call for check or call",
+                action.payload.amount
+              );
+              state.rooms[action.payload.room].players
+                .find((p) => p.getPlayerId() == action.payload.playerId)
+                .check();
+              state.rooms[action.payload.room].game.rotateFocus();
+            }
+        return { ...state };
     case actions.CLEARANSWER:
       state.answer = false;
       return { ...state };

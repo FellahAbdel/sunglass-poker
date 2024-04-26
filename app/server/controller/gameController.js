@@ -38,7 +38,7 @@ module.exports = gameController = {
           csl.log("refreshCall", "Refresh for room : ", room);
           gc.broadcastStatus(room);
         },
-        1000,
+        3000,
         room,
         this
       );
@@ -188,6 +188,11 @@ module.exports = gameController = {
     this.join(room, userId);
     await this.dao.updateUserData("_id", userId, "inGame", room);
     return room;
+  },
+
+  playerAction: function(action){
+    csl.log('PLAYER_ACTION','Player is affecting the game : ',action);
+    this.dispatch(action.payload.playerId,action);
   },
 
   /**
