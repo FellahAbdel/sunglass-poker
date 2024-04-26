@@ -30,17 +30,13 @@ const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
       <div className="container-showCardsButtons">
         <Button
           styleClass={"btn-showCard"}
-          label={`${getTranslatedWord("handGuide.show")} ${card1[0]} of ${
-            card1[1]
-          }`}
+          label={`${getTranslatedWord("handGuide.show")} ${card1[0]} of `}
           iconSrc={cardIcons[card1[1]]}
           onClick={handleShowCard1}
         />
         <Button
           styleClass={"btn-showCard"}
-          label={`${getTranslatedWord("handGuide.show")} ${card2[0]} of ${
-            card2[1]
-          }`}
+          label={`${getTranslatedWord("handGuide.show")} ${card2[0]} of `}
           iconSrc={cardIcons[card2[1]]}
           onClick={handleShowCard2}
         />
