@@ -2,13 +2,19 @@ const actions = require("./actionTypes.js");
 
 module.exports.gameLobby = (idGame) => ({
   type: actions.GAME_LOBBY,
-  payload:{id:idGame}
+  payload: { id: idGame },
 });
 
-module.exports.startGame = (idGame) => ({
-  type: actions.START_GAME,
-  payload:{id:idGame}
-});
+module.exports.startGame = (idGame, userId) => {
+  console.log("Action START_GAME created with payload:", {
+    id: idGame,
+    userId: userId,
+  });
+  return {
+    type: actions.START_GAME,
+    payload: { id: idGame,userId:userId},
+  };
+};
 
 module.exports.dealCards = () => ({
   type: actions.DEAL_CARDS,
@@ -46,26 +52,25 @@ module.exports.resetGame = () => ({
 
 // Rooms control
 
-
 /**
- * 
- * @param {table: id} table 
- * @param {{id: id, pseudo:STRING}} player 
- * @returns 
+ *
+ * @param {table: id} table
+ * @param {{id: id, pseudo:STRING}} player
+ * @returns
  */
-module.exports.sit = (table,player) => ({
+module.exports.sit = (table, player) => ({
   type: actions.SIT,
-  payload: {tableId:table, player:player},
-})
+  payload: { tableId: table, player: player },
+});
 
-module.exports.leaveRoom = (table,player) => ({
+module.exports.leaveRoom = (table, player) => ({
   type: actions.LEAVE_ROOM,
-  payload:{tableId:table, player:player}
+  payload: { tableId: table, player: player },
 });
 
 module.exports.deleteRoom = (room) => ({
-  type:actions.DELETE_ROOM,
-  payload:{tableId:room},
+  type: actions.DELETE_ROOM,
+  payload: { tableId: room },
 });
 
 // Actions creators for user authentication
@@ -83,26 +88,24 @@ module.exports.updateUserData = (data) => ({
   payload: data,
 });
 
-
-module.exports.createGame = (id,player=false) => ({
-  type:actions.CREATE_GAME,
-  payload:{id:id,player:player},
+module.exports.createGame = (id, player = false) => ({
+  type: actions.CREATE_GAME,
+  payload: { id: id, player: player },
 });
 
 module.exports.clearAnswer = () => ({
-  type:actions.CLEARANSWER
+  type: actions.CLEARANSWER,
 });
-
 
 /**
  * _______________________________________
- * 
+ *
  *  Actions to send informations to player
- * 
+ *
  * _______________________________________
  */
 
-module.exports.sitted = (table,players) => ({
-  type:actions.SITTED,
-  payload:{table:table,players:players}
+module.exports.sitted = (table, players) => ({
+  type: actions.SITTED,
+  payload: { table: table, players: players },
 });

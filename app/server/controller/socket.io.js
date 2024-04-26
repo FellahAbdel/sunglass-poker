@@ -349,6 +349,13 @@ module.exports = function (
       }
     });
 
+    socket.on("startGame", (data) => {
+      console.log("Received startGame event with data:", data);
+      const room = data.room;
+      const userId = data.userId;
+      gameController.startGame(room, userId);
+    });
+
     socket.request.session.save();
   });
 

@@ -59,6 +59,8 @@ class Game {
   }
 
   start(playerId) {
+    console.log("PlayerID Game.js start :", playerId);
+
     if (this.master !== playerId) {
       console.log("Only the master can start the game.");
       return;

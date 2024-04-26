@@ -50,7 +50,7 @@ export const comm = {
     });
 
     socket.on("event", (data) => {
-      console.log("event receive (from server) [socket.js]: ",data);
+      console.log("event receive (from server) [socket.js]: ", data);
       store.dispatch({ payload: data.payload, type: data.type });
     });
 
@@ -85,10 +85,10 @@ export const comm = {
     }
   },
 
-  leaveRoom: function(){
+  leaveRoom: function () {
     this.preFun();
-    console.log('comm emit leaveRoom');
-    socket.emit('leaveRoom');
+    console.log("comm emit leaveRoom");
+    socket.emit("leaveRoom");
   },
 
   joinRoom: function (id) {
@@ -108,5 +108,13 @@ export const comm = {
     // socket.emit('startGame',{room:sessionStorage.getItem('room')});
     console.log("Emit startGame from comm");
     socket.emit("createGame");
+  },
+
+  startGame: function () {
+    this.preFun();
+    const roomId = sessionStorage.getItem("room");
+    const userId = sessionStorage.getItem("authToken");
+    console.log("Emitting startGame with room and userId:", roomId, userId);
+    socket.emit("startGame", { room: roomId, userId: userId });
   },
 };

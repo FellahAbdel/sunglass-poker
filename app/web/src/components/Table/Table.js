@@ -105,8 +105,10 @@ const Table = ({}) => {
     isGameTableVisible,
     isWindowOpen
   );
+
   const startGame = () => {
     // Logique pour commencer la partie
+    console.log("Starting game with roomId:");
     dispatch(actions.startGame());
   };
 
