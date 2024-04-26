@@ -13,6 +13,7 @@ import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import LogoComponent from "../logo/Logo";
 import PlayersPots from "./PlayersPots" ;
+import TotalPot from "./TotalPot";
 //fonctions
 import { delayedExecution, delayedExecutionWithCancel } from "./../Utiles/delay.js";
 
@@ -73,7 +74,8 @@ const Table = ({}) => {
            */}
           <CardsPlacements/> {/*NEEDS DealingFlop and playersCardDistribution in it*/}
           <PlayersPlacements/> {/*NEEDS playersCardsShow and playersCardDistribution in it*/}
-          <PlayersPots/> 
+          {/* <PlayersPots/>  */}
+          <TotalPot/>
         </>
       )}
       {/*All the panels other than game itself are included in window component*/}
