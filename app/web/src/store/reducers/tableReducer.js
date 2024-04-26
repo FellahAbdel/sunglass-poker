@@ -1,7 +1,6 @@
 import * as actions from "../actions/clientInteractionsType.js";
 
 const initialState = {
-  gameClass: {},
   players: [],
   gameStarted: false,
   gameCreated: false,
@@ -17,14 +16,12 @@ const tableReducer = (state = initialState, action) => {
         ...state,
         gameStarted: true,
         gameCreated: true,
-        table: action.payload.table,
         players: action.payload.players,
       };
     case actions.REFRESH:
         console.log("Refresh page (tableReducer-fellah) ");
       return {
         ...state,
-        table: action.payload.game || state.table,
         players: action.payload.players || state.players,
         game: action.payload.game || state.game,
       };
@@ -32,7 +29,6 @@ const tableReducer = (state = initialState, action) => {
       console.log("New player sit at the table");
       return {
         ...state,
-        table: action.payload.table,
         players: action.payload.game.players,
       };
       // This event must come from the server.
@@ -42,7 +38,6 @@ const tableReducer = (state = initialState, action) => {
         ...state,
         gameCreated: true,
         gameStarted: true,
-        table: action.payload.table,
         players: action.payload.players,
       };
     case actions.LEFT_ROOM:
