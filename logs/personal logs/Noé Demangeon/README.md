@@ -130,4 +130,6 @@
 
 2024/04/25 : 2h30           Affichage avatar autour table, Affichage carte joueur + boutons en bas à droite
 
-TEMPS TOTAL: 126h30min
+2024/04/26 : 5h00           Lecture et compréhension code connection back/front. Implémentation changement status partie, Bouton start game pour le master
+
+TEMPS TOTAL: 131h30min
