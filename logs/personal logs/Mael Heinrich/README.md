@@ -4,6 +4,8 @@
 
 2024/01/31 : 1h		Travail individuel: Design du logo de l'entreprise
 
+--2024/01: 4H
+
 2024/02/03 : 30min	Réunion Discord en groupe:  cahier des charges 
 
 2024/02/06 : 3h30min	Réunion du mardi en groupe:  cahier des charges , création des groupes + début idée design 
@@ -30,6 +32,8 @@
 
 2024/02/28 et 29: 1h    recherche css pour améliorer les bouton
 
+--2024/02: 25H15 (TOTAL: 29H15)
+
 2024/03/07: 1h30    Mise en place du conditionning avec recherche de comment cela fonctionne 
 
 2024/03/12: 30min   Résolution des quelques bug et erreur 
@@ -50,9 +54,13 @@
 
 2024/03/26: 4h
 
+--2024/03:  18H45 (TOTAL: 48H)
+
 2024/04/01: 3H30    Redux, comprehension de tout/ tentatives de faire fonctionner ... 
 
 2024/04/02: 3H30    Reunion générale avec démo...
+
+--2024/04 SEMAINE 1: 7H (TOTAL: 55H)
 
 2024/04/09: 1h      Tentatives d'améliorations de la version desktop
 
@@ -68,6 +76,8 @@
 
 2024/04/13: 1h30    Création de design pour la boutique
 
+--2024/04 SEMAINE 2: 9H30 (TOTAL: 64H30) 
+
 2024/04/15: 1h15    Recherche supplémentaire sur le build, maj de paquet, piste pour regler le probleme...
 
 2024/04/15: 30min   Reunion avec Victor pour le problème du build, semble fonctionel sur windows mais pas encore sur linux
@@ -82,6 +92,17 @@
 
 2024/04/21  1H      Reunion avec victor pour voir si les fonctionnalité marchait puis discussion a propose de la suite et du travail a faire et affectation de ma futur tache.
 
+--2024/04 SEMAINE 3: 9H30 (TOTAL: 74H)
+
 2024/04/22  3H      Avancement de leave room et delete room, reunion avec victor pour le fonctionnement/ voir si tout marche + affecatation de la suite (faut aussi regler avec la bdd)
 
-TEMPS TOTAL: 77H  
+2024/04/23: 30min   Check de tout les bugs par rapport au dernier ajout avant la reunion
+
+2024/04/23: 3H30    Reunion habituel du mardi avec affectation des nouveles taches etc...
+
+2024/04/25: 1H      Ajout logique coté front des boutons de jeux avec comprenhension des pages
+
+--2024/04 SEMAINE 4: 8H (TOTAL: 82H)
+
+
+TEMPS TOTAL: 82H  
