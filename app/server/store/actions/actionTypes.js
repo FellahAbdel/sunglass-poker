@@ -9,7 +9,6 @@ module.exports.END_ROUND = "END_ROUND";
 module.exports.RESET_GAME = "RESET_GAME";
 
 
-
 module.exports.LEAVE_ROOM="LEAVE_ROOM";
 module.exports.LEFT_ROOM="LEFT_ROOM";
 module.exports.DELETE_ROOM="DELETE_ROOM";
@@ -46,3 +45,11 @@ module.exports.SITTED = "SITTED";
 // reducer controls
 
 module.exports.CLEARANSWER = "CLEAR_ANSWER";
+
+module.exports.PLAYER_GAME_ACTION = "PLAYER_GAME_ACTION";
+
+module.exports.PLAYER_GAME_ACTION_LIST = [
+    module.exports.FOLD,
+    module.exports.RAISE,
+    module.exports.CHECK,
+];

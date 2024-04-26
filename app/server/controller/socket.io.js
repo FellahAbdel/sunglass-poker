@@ -5,6 +5,7 @@ const store = require("../store/configStore");
 const Player = require("../shared/Player");
 const game = require("./game");
 const csl = require("./intelligentLogging");
+const hydra = require("./hydrateSpecifics");
 // const session = require("express-session");
 const fileType = "socket.io.js";
 csl.silenced("broadcastStatus");
@@ -167,44 +168,43 @@ module.exports = function (
   }
 
   /**
-   *
-   * @param {socket} socket
-   * @param {{type:STRING?actionType, payload:{}}} action
-   */
-
+  * Sends an event to a socket for dispatch.
+  * 
+  * @param {Socket} socket The socket to send the event through.
+  * @param {{ type: string, payload: any }} action The action object containing type and payload.
+  */
   function sendEvent(socket, action) {
-    csl.log("Event", "send event to dispatch at user", action);
+    csl.log("Event", "Sending event to dispatch at user:", action);
     socket.emit("event", action);
   }
+
 
   /**
    *
    * @param {socket} socket
-   * @param {{action:{}, room:id}} data
+   * @param {{data:{action:{type: String, payload: any}, room:id}}} data
    */
   function dispatch(socket, data) {
     csl.log("dispatch", "dispatch recevied : ", data);
-    var action = { ...data.action };
-    console.log(action, data);
-    const userId = socket.request.session.userId;
-    const room = socket.request.session.userRoom;
-    action.payload = {
-      playerId: userId,
-      room: room,
-    };
+    var action =hydra(socket,data);
+    csl.log('DISPATCH SOCKET','Action hydrated vs data received ',action, data);
+    
 
-    switch (action.type) {
-      case actions.BET:
-        action = {
-          ...action,
-          payload: { ...action.payload, amount: data.action.payload.amount },
-        };
-        break;
-      default:
-    }
+    // switch (action.type) {
+    //   case actions.BET:
+    //     action = {
+    //       ...action,
+    //       payload: { ...action.payload, amount: data.action.payload.amount },
+    //     };
+    //     break;
+    //   default:
+    // }
     // si login
-    if (userId) {
-      gameController.dispatch(userId, action);
+    if (action.userId) {
+      if(action.subtype == actions.PLAYER_GAME_ACTION)
+        gameController.playerAction(action);
+      else
+        gameController.dispatch(action.userId, action);
     }
   }
 
