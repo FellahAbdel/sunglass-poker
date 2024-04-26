@@ -200,11 +200,11 @@ module.exports = function (
     //   default:
     // }
     // si login
-    if (action.userId) {
-      if(action.subtype == actions.PLAYER_GAME_ACTION)
+    if (action.payload.playerId) {
+      if(action.subtype === actions.PLAYER_GAME_ACTION)
         gameController.playerAction(action);
       else
-        gameController.dispatch(action.userId, action);
+        gameController.dispatch(action.payload.playerId, action);
     }
   }
 

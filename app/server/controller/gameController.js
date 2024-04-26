@@ -192,7 +192,7 @@ module.exports = gameController = {
 
   playerAction: function(action){
     csl.log('PLAYER_ACTION','Player is affecting the game : ',action);
-    this.dispatch(action.userId,action);
+    this.dispatch(action.payload.playerId,action);
   },
 
   /**

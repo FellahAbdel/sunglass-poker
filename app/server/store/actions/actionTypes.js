@@ -46,10 +46,12 @@ module.exports.SITTED = "SITTED";
 
 module.exports.CLEARANSWER = "CLEAR_ANSWER";
 
+module.exports.USER_GENERIC_ACTION = "USER_GENERIC_ACTION"; 
 module.exports.PLAYER_GAME_ACTION = "PLAYER_GAME_ACTION";
 
 module.exports.PLAYER_GAME_ACTION_LIST = [
     module.exports.FOLD,
+    module.exports.BET,
     module.exports.RAISE,
     module.exports.CHECK,
 ];

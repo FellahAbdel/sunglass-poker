@@ -17,9 +17,12 @@ module.exports = eventHydra = (socket, data) => {
     //We check if the action the user try to performs is related to a game
     //If so we will dispatch the event through specifics game dispatcher
     //To performs end turn etc..
+    console.log('action received in hydra ->',action)
     if (action.type !== undefined)
-        if (action.type in actions.PLAYER_GAME_ACTION_LIST)
+        if (actions.PLAYER_GAME_ACTION_LIST.findIndex(e => e==action.type) !== -1)
             hydrated.subtype = actions.PLAYER_GAME_ACTION
+        else
+            hydrated.subtype = actions.USER_GENERIC_ACTION
     
     switch (action.type) {
         // If the user try to bet, we get the bet value and force it to be a valid int.
@@ -28,7 +31,7 @@ module.exports = eventHydra = (socket, data) => {
             if(typeof(amount) !== 'number')
                 amount = 0
             amount = parseInt(amount)
-            hydrated.payload = {...hydrated.payload,'amount':amount}
+            hydrated = {subtype:hydrated.subtype,payload:{...hydrated.payload},'amount':amount}
             break;
         default:
             csl.log('HYDRA','default action hydrated; In case of error make sure you add the correct case and hydrate the arguments with CORRECT verification for type and range.');
