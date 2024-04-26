@@ -44,6 +44,10 @@ const tableReducer = (state = initialState, action) => {
         table: action.payload.table,
         players: action.payload.players,
       };
+    case actions.LEFT_ROOM:
+      return {
+        ...initialState
+      }
     default:
       console.log("Table reducer called");
       return state;

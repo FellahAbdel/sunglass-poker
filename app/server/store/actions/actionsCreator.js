@@ -68,6 +68,11 @@ module.exports.leaveRoom = (table, player) => ({
   payload: { tableId: table, player: player },
 });
 
+module.exports.leftRoom = () => ({
+  type: actions.LEFT_ROOM,
+});
+
+
 module.exports.deleteRoom = (room) => ({
   type: actions.DELETE_ROOM,
   payload: { tableId: room },

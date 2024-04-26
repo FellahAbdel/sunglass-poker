@@ -6,6 +6,8 @@ export const JOIN_ROOM = "JOIN_ROOM";
 
 export const LEAVE_ROOM = "LEAVE_ROOM";
 
+export const LEFT_ROOM = "LEFT_ROOM";
+
 export const FOLD = "FOLD";
 
 export const BET = "BET";

@@ -156,11 +156,13 @@ module.exports = function (
     const respons = await dao.getUserInfo(socket.request.session.userId);
     if (respons.success) {
       const user = respons.user;
-      if (user.inGame !== null)
+      if (user.inGame !== null){
         gameController.removePlayer(
           user.inGame.toString(),
           socket.request.session.userId
         );
+        sendEvent(socket,actcrea.leftRoom());
+      }
     }
   }
 
