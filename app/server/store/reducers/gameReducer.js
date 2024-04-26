@@ -59,16 +59,16 @@ const gameReducer = (state = initialState, action) => {
       };
     case actions.START_GAME:
       if (state.rooms[action.payload.id].game.state === "waiting") {
-        console.log("Action payload:", action.payload);
-        console.log("Starting game for room:", action.payload.id);
-        console.log(
+        csl.log('START_GAME_EVENT',"Action payload:", action.payload);
+        csl.log('START_GAME_EVENT',"Starting game for room:", action.payload.id);
+        csl.log('START_GAME_EVENT',
           "Current game state:",
           state.rooms[action.payload.id].game.state,
           "USER :",
           action.payload.userId
         );
 
-        console.log("PlayerID start:", action.payload.userId);
+        csl.log('START_GAME_EVENT',"PlayerID start:", action.payload.userId);
         csl.log(fileType, "START GAME FOR ", action.payload.id);
         state.rooms[action.payload.id].game.players =
           state.rooms[action.payload.id].players;

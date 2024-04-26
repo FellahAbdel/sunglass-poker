@@ -33,7 +33,7 @@ module.exports = function (app, bdd) {
   );
   db.once("open", () => {
     csl.log("bdd", "Connecté à la base de données MongoDB");
-    // emptyGames();
+    emptyGames();
     initItems();
   });
 
