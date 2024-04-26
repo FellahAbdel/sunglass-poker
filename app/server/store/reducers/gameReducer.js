@@ -33,7 +33,7 @@ const begin = (state) => {
 
   state.game.pokerTable.playerBet(state.game.players[posSmallBlind], blind);
 
-  state.game.start();
+  //state.game.start();
   return {
     ...state,
     controlsMode: "roundOne",
@@ -64,13 +64,15 @@ const gameReducer = (state = initialState, action) => {
         console.log(
           "Current game state:",
           state.rooms[action.payload.id].game.state,
-          "USER :", action.payload.userId
+          "USER :",
+          action.payload.userId
         );
 
         console.log("PlayerID start:", action.payload.userId);
         csl.log(fileType, "START GAME FOR ", action.payload.id);
         state.rooms[action.payload.id].game.players =
           state.rooms[action.payload.id].players;
+        state.rooms[action.payload.id].game.start(action.payload.userId);
         return {
           ...state,
           rooms: {

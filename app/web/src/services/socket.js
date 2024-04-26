@@ -110,10 +110,9 @@ export const comm = {
     socket.emit("createGame");
   },
 
-  startGame: function () {
+  startGame: function (userId) {
     this.preFun();
     const roomId = sessionStorage.getItem("room");
-    const userId = sessionStorage.getItem("authToken");
     console.log("Emitting startGame with room and userId:", roomId, userId);
     socket.emit("startGame", { room: roomId, userId: userId });
   },

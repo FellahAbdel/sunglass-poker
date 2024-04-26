@@ -109,7 +109,7 @@ const Table = ({}) => {
   const startGame = () => {
     // Logique pour commencer la partie
     console.log("Starting game with roomId:");
-    dispatch(actions.startGame());
+    dispatch(actions.startGame(userId));
   };
 
   return (
@@ -151,7 +151,7 @@ const Table = ({}) => {
               <Button
                 styleClass="btn-connectionDefault login-button back-color1"
                 label={"Commencer la partie"}
-                onClick={startGame}
+                onClick={() => startGame()}
               />
             </>
           )}

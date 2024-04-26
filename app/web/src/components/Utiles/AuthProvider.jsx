@@ -410,6 +410,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         isLogged,
         user,
+        userId: user ? user._id : null,
         login,
         createGameRoom,
         getRoomTableRecords,
