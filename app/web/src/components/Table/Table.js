@@ -148,11 +148,15 @@ const Table = ({}) => {
                 styleClass={"glitch-accueil"}
                 glitchStyle={"glitchStyle-accueil"}
               />
-              <Button
-                styleClass="btn-connectionDefault login-button back-color1"
-                label={"Commencer la partie"}
-                onClick={() => startGame()}
-              />
+              {gameInfo &&
+                gameInfo.game &&
+                gameInfo.game.master === userId && (
+                  <Button
+                    styleClass="btn-connectionDefault login-button back-color1"
+                    label={"Commencer la partie"}
+                    onClick={() => startGame()}
+                  />
+                )}
             </>
           )}
         </>
