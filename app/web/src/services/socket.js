@@ -79,7 +79,12 @@ export const comm = {
       "   ",
       sessionStorage.getItem("room")
     );
-    if (sessionStorage.getItem("room")) this.status();
+
+    if (sessionStorage.getItem("room")) 
+    {
+        console.log("refreshing room", sessionStorage.getItem("room"));
+        this.status();
+    }
     else {
       console.log("No room no status");
     }
@@ -100,6 +105,7 @@ export const comm = {
   dispatch: function (data) {
     console.log("dispatch of socket");
     this.preFun();
+    console.log("Event dispatch (socket.js - fellah) : ", data);
     socket.emit("dispatch", data);
   },
 
