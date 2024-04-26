@@ -17,6 +17,7 @@ class Game {
     // Player turn
     this.focus = null;
     this.currentStage = 'preflop';
+    this.state = 'waiting';
   }
 
   setMaster(id){
@@ -41,28 +42,61 @@ class Game {
   }
 
   startNewRound() {
-    this.startingPlayerIndex = (this.blind + 2) % this.players.length;
-    this.focus = this.startingPlayerIndex;
-    this.players.forEach(player => player.newRoundReset());
+    if (this.state === 'active') {
+      this.startingPlayerIndex = (this.blind + 2) % this.players.length;
+      this.focus = this.startingPlayerIndex;
+      this.players.forEach(player => player.newRoundReset());
+      this.currentStage = 'preflop';
+    }
   }
 
-  addPlayer(player) {
-    this.players.push(player);
+  addPlayer(playerId) {
+    if (this.state === 'waiting' && !this.players.includes(playerId)) {
+      this.players.push(playerId);
+    } else {
+      console.log("Cannot add new players at this stage or player already added.");
+    }
   }
 
-  start() {
-    // Reset deck and shuffle
+  start(playerId) {
+    if (this.master !== playerId) {
+      console.log("Only the master can start the game.");
+      return;
+    }
+    if (this.state !== 'waiting') {
+      console.log("The game is not in a waiting state.");
+      return;
+    }
+    if (this.players.length <= 1) {
+      console.log("Not enough players to start the game.");
+      return;
+    }
+  
+    this.state = 'active';
     this.deck.initCards();
     this.deck.shuffle();
-
-    // Deal cards to each player
-    this.players.forEach((player) => {
+    this.players.forEach(player => {
       player.clearHand();
       for (let i = 0; i < 2; i++) {
         player.addCard(this.deck.deal());
       }
     });
+    this.advanceStage();
   }
+
+  // start() {
+  //   // Reset deck and shuffle
+  //   this.deck.initCards();
+  //   this.deck.shuffle();
+
+  //   // Deal cards to each player
+  //   this.players.forEach((player) => {
+  //     player.clearHand();
+  //     for (let i = 0; i < 2; i++) {
+  //       player.addCard(this.deck.deal());
+  //     }
+  //   });
+  // }
 
   evaluateHands() {
     const results = this.listeCombinaison(this.getActivePlayers());
@@ -98,6 +132,10 @@ class Game {
   }
 
   advanceStage() {
+    if (this.state !== 'active') {
+      console.log("Game not active, cannot advance stage.");
+      return;
+    }
     const stageOrder = ['preflop', 'flop', 'turn', 'river', 'showdown'];
     const currentIndex = stageOrder.indexOf(this.currentStage);
     const nextIndex = (currentIndex + 1) % stageOrder.length;

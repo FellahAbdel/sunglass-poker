@@ -28,16 +28,10 @@ const begin = (state) => {
   playersInRoom[posSmallBlind].bet(blind);
   state.game.focus = (posSmallBlind + 1) % playersInRoom.length;
 
-    // Distribute blinds
-  state.game.pokerTable.playerBet(
-    state.game.players[posBigBlind],
-    blind * 2
-  );
+  // Distribute blinds
+  state.game.pokerTable.playerBet(state.game.players[posBigBlind], blind * 2);
 
-  state.game.pokerTable.playerBet(
-    state.game.players[posSmallBlind],
-    blind
-  );
+  state.game.pokerTable.playerBet(state.game.players[posSmallBlind], blind);
 
   state.game.start();
   return {
@@ -64,17 +58,22 @@ const gameReducer = (state = initialState, action) => {
         },
       };
     case actions.START_GAME:
-      csl.log(fileType, "START GAME FOR ", action.payload.id);
-      state.rooms[action.payload.id].game.players =
-        state.rooms[action.payload.id].players;
-      return {
-        ...state,
-        answer: { success: true },
-        rooms: {
-          ...state.rooms,
-          [action.payload.id]: { ...begin(state.rooms[action.payload.id]) },
-        },
-      };
+      if (state.rooms[action.payload.id].game.state === "waiting") {
+        csl.log(fileType, "START GAME FOR ", action.payload.id);
+        state.rooms[action.payload.id].game.players =
+          state.rooms[action.payload.id].players;
+        return {
+          ...state,
+          rooms: {
+            ...state.rooms,
+            [action.payload.id]: { ...begin(state.rooms[action.payload.id]) },
+          },
+        };
+      } else {
+        // La partie est déjà en cours
+        console.log("La partie est déjà en cours.");
+        return state;
+      }
     case actions.GAME_STARTED:
       csl.log(fileType, "start", action.type);
       return state;
