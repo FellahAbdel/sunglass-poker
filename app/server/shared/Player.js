@@ -8,10 +8,15 @@ class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
 
-  constructor(playerId, name) {
+  constructor(playerId, name, coins) {
     this.playerId = playerId;
     this.name = name;
     this.status = "Playing";
+    this.playerMoney = coins;
+    this.playerCards = [];
+    this.playerActionLog = [];
+    this.currentBet = 0;
+    this.isActive = true;
   }
 
   settimeLastAnswer(t){
@@ -111,6 +116,14 @@ class Player {
 
   isPlayerActive() {
     return this.playerState === "active";
+  }
+
+  newRoundReset() {
+    this.clearHand();       
+    this.playerActionLog = [];
+    this.currentBet = 0;           
+    this.isActive = true;
+    // Ajouter d'autres réinitialisations si nécessaire
   }
 }
 

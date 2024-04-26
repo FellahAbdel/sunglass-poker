@@ -16,6 +16,7 @@ class Game {
     this.blind = 0;
     // Player turn
     this.focus = null;
+    this.currentStage = 'preflop';
   }
 
   setMaster(id){
@@ -25,15 +26,24 @@ class Game {
     return this.master;
   }
   setFocus(n){
-    if(n >= 0 < this.players.length){
+    if (n >= 0 && n < this.players.length) {
       this.focus = n;
     }
   }
   getFocus(){
     return this.focus;
   }
-  rotateFocus(){
-    this.focus = (this.focus+1)%this.players.length;
+  rotateFocus() {
+    this.focus = (this.focus + 1) % this.players.length;
+    if (this.focus === this.startingPlayerIndex) {
+      this.advanceStage();
+    }
+  }
+
+  startNewRound() {
+    this.startingPlayerIndex = (this.blind + 2) % this.players.length;
+    this.focus = this.startingPlayerIndex;
+    this.players.forEach(player => player.newRoundReset());
   }
 
   addPlayer(player) {
@@ -52,6 +62,12 @@ class Game {
         player.addCard(this.deck.deal());
       }
     });
+  }
+
+  evaluateHands() {
+    const results = this.listeCombinaison(this.getActivePlayers());
+    const winner = this.determineWinner(results);
+    console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
   }
 
   /*
@@ -79,6 +95,28 @@ class Game {
   */
   turn() {
     this.pokerTable.communityCards.push(this.deck.deal());
+  }
+
+  advanceStage() {
+    const stageOrder = ['preflop', 'flop', 'turn', 'river', 'showdown'];
+    const currentIndex = stageOrder.indexOf(this.currentStage);
+    const nextIndex = (currentIndex + 1) % stageOrder.length;
+    this.currentStage = stageOrder[nextIndex];
+  
+    switch (this.currentStage) {
+      case 'flop':
+        this.flop();
+        break;
+      case 'turn':
+        this.turn();
+        break;
+      case 'river':
+        this.river();
+        break;
+      case 'showdown':
+        this.evaluateHands();
+        break;
+    }
   }
 
   /*
