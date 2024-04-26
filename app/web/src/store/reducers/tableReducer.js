@@ -21,6 +21,7 @@ const tableReducer = (state = initialState, action) => {
         players: action.payload.players,
       };
     case actions.REFRESH:
+        console.log("Refresh page (tableReducer-fellah) ");
       return {
         ...state,
         table: action.payload.game || state.table,
