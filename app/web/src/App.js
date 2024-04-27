@@ -11,19 +11,22 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { WindowProvider } from "./components/Utiles/WindowContext";
 import { SettingsProvider } from "./components/Utiles/SettingsContext";
+import { GameTableProvider } from "./components/Utiles/GameTableProvider";
 
 function App() {
   return (
     <WindowProvider>
-        <Router>
-          <AuthProvider>
-            <SettingsProvider>
-                <Routes>
-                  <Route path="/" Component={GameTable} />
-                </Routes>
-            </SettingsProvider>
-          </AuthProvider>
-        </Router>
+      <Router>
+        <AuthProvider>
+          <SettingsProvider>
+            <GameTableProvider>
+              <Routes>
+                <Route path="/" Component={GameTable} />
+              </Routes>
+            </GameTableProvider>
+          </SettingsProvider>
+        </AuthProvider>
+      </Router>
     </WindowProvider>
   );
 }

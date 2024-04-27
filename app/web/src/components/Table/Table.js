@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import { useTranslation } from "../Utiles/Translations";
+import { useGameTable } from '../Utiles/GameTableProvider.jsx';
 import { useDispatch } from "react-redux";
 import * as actions from "../../store/actions/clientInteractionsCreator.js";
 
@@ -33,6 +34,8 @@ const Table = ({}) => {
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
+
+  const { isMaster, showWaitingMessage } = useGameTable();
 
   const [updatedPlayers, setUpdatedPlayers] = useState([]);
   const [startButtonVisible, setStartButtonVisible] = useState(false);
@@ -86,14 +89,9 @@ const Table = ({}) => {
   }, [playersInTable, userId]);
 
   useEffect(() => {
-    // Si le jeu n'a pas encore commencé et que l'utilisateur est le maître du jeu,
-    // Afficher le bouton de démarrage
-    if (!gameInfo.gameStarted && gameInfo.master === userId) {
-      setStartButtonVisible(true);
-    } else {
-      setStartButtonVisible(false);
-    }
-  }, [gameInfo, userId]);
+    setStartButtonVisible(isMaster && !gameInfo.gameStarted);
+  }, [isMaster, gameInfo.gameStarted]);
+
 
   // useEffect(() => {
   //   console.log("Game state:", gameInfo.game.state);
@@ -141,16 +139,14 @@ const Table = ({}) => {
           {/* <PlayersPots/>  */}
           <TotalPot />
           {/* Afficher le bouton "Commencer la partie" si le bouton est visible */}
-          {gameInfo && gameInfo.game && gameInfo.game.state === "waiting" && (
+          {showWaitingMessage && (
             <>
               <TextGlitch
                 children={"En attente de joueurs"}
                 styleClass={"glitch-accueil"}
                 glitchStyle={"glitchStyle-accueil"}
               />
-              {gameInfo &&
-                gameInfo.game &&
-                gameInfo.game.master === userId && (
+              {isMaster && (
                   <Button
                     styleClass="btn-connectionDefault login-button back-color1"
                     label={"Commencer la partie"}
