@@ -38,7 +38,7 @@ module.exports = gameController = {
           csl.log("refreshCall", "Refresh for room : ", room);
           gc.broadcastStatus(room);
         },
-        3000,
+        2000,
         room,
         this
       );
@@ -150,16 +150,22 @@ module.exports = gameController = {
       this.io.broadcastStatus(room);
     } else if (log_broadcast) csl.error(fileType, "No io to broadcast");
   },
+
   status: function (room, id) {
     const state = store.getState();
     csl.log("Status", "Status room:", room, " for : ", id);
     // csl.log(fileType,this.state.game.rooms, this.state.game.rooms.hasOwnProperty(room));
     if (state.game.rooms[room] !== undefined) {
+      toSendroom = {};
+      toSendroom.game = state.game.rooms[room].game.getForPlayer(id);
+      toSendroom.players = state.game.rooms[room].players.map(player => player.statusFor(id));
+      toSendroom.controlsMode = state.game.rooms[room].controlsMode
+      csl.log('STATUS',state.game.rooms[room],toSendroom);
       // if (state.game.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
       return {
         status: true,
         mes: "Refreshing status",
-        payload: state.game.rooms[room],
+        payload:toSendroom,
       };
       // }
     }
@@ -193,6 +199,7 @@ module.exports = gameController = {
   playerAction: function(action){
     csl.log('PLAYER_ACTION','Player is affecting the game : ',action);
     this.dispatch(action.payload.playerId,action);
+    this.broadcastStatus(action.payload.room);
   },
 
   /**

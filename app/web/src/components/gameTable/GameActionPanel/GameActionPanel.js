@@ -136,7 +136,7 @@ const GameActionButtons = ({}) => {
       <div className={`container-ActionButtons`}>
         {/* LEBOUTON BET MAIS faut reclické alors jsp ou mettre le handle */}
         <Button
-          styleClass={"btn-mainAction"}
+          styleClass={`btn-mainAction ${condition && "deactive"}`}
           onClick={() => togglePopupAndRaise()}
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
             raiseCoin ? Math.round(raiseCoin) + " SC" : ""
@@ -144,7 +144,7 @@ const GameActionButtons = ({}) => {
         />
         {/* LE BOUTON CHECK OR CALL  */}
         <Button
-          styleClass={"btn-mainAction"}
+          styleClass={`btn-mainAction ${condition && "deactive"}`}
           onClick={handleCheck}
           label={checkOrCall}
         />

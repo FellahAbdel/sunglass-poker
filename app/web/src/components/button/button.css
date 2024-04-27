@@ -141,6 +141,9 @@ Button:hover{
   white-space: nowrap;
   text-align: center;
 }
+.btn-mainAction.deactive{
+  opacity: 0.5;
+}
 .btn-mainAction:hover {
   filter: brightness(150%);
   text-shadow: unset;
