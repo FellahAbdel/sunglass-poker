@@ -106,7 +106,9 @@
 
 2024/04/26  1H30    Continu de la réflexion sur le fonctionnemenbt des boutons, recherches ET reglages des bugs push avec les autres (j'ai surtour reperer les problèmes mais pas réparer)
 
---2024/04 SEMAINE 4: 8H (TOTAL: 82H)
+2024/04/27  1H      Test de bug/recherche supplémentaire sur le fonctionnement des boutons, discussion a ce propos avec d'autre membres du groupe(nornalement il reste juste a modifier dans le déroulement de la partie mais je ne comprend pas ou cela se trouve)
+
+--2024/04 SEMAINE 4: 8H (TOTAL: 85H)
 
 
-TEMPS TOTAL: 84H  
+TEMPS TOTAL: 85H  
