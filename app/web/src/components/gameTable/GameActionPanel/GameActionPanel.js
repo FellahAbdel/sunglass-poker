@@ -40,7 +40,7 @@ const GameActionButtons = ({}) => {
     dispatch(actions.fold());
   }
 
-fix  const handleBet = (amount) => {
+  const handleBet = (amount) => {
     dispatch(actions.bet(amount));
   }
 
