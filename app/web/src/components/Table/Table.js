@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import { useTranslation } from "../Utiles/Translations";
-import { useGameTable } from '../Utiles/GameTableProvider.jsx';
+import { useGameTable } from "../Utiles/GameTableProvider.jsx";
 import { useDispatch } from "react-redux";
 import * as actions from "../../store/actions/clientInteractionsCreator.js";
 
@@ -35,10 +35,8 @@ const Table = ({}) => {
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
-  const { isMaster, showWaitingMessage } = useGameTable();
+  const { isMaster, showWaitingMessage, isFocus } = useGameTable();
 
-  const [updatedPlayers, setUpdatedPlayers] = useState([]);
-  const [startButtonVisible, setStartButtonVisible] = useState(false);
   const playersInTable = useSelector((state) => state.game.players);
 
   const gameInfo = useSelector((state) => state.game);
@@ -65,33 +63,11 @@ const Table = ({}) => {
     }
   }, [isWindowOpen, isGameTableVisible]);
 
-  useEffect(() => {
-    const currentUserData = playersInTable.find(
-      (player) => player.id === userId
-    );
-    if (
-      currentUserData &&
-      currentUserData.playerCards &&
-      currentUserData.playerCards.length >= 2
-    ) {
-      const card1 = [
-        currentUserData.playerCards[0].number,
-        currentUserData.playerCards[0].color,
-      ];
-      const card2 = [
-        currentUserData.playerCards[1].number,
-        currentUserData.playerCards[1].color,
-      ];
-      setUpdatedPlayers([{ ...currentUserData, playerCards: [card1, card2] }]);
-    } else {
-      setUpdatedPlayers([]);
-    }
-  }, [playersInTable, userId]);
 
   useEffect(() => {
-    setStartButtonVisible(isMaster && !gameInfo.gameStarted);
-  }, [isMaster, gameInfo.gameStarted]);
 
+    console.log("isFocus TABLE:", isFocus); 
+  }, [isFocus]);
 
   // useEffect(() => {
   //   console.log("Game state:", gameInfo.game.state);
@@ -147,13 +123,21 @@ const Table = ({}) => {
                 glitchStyle={"glitchStyle-accueil"}
               />
               {isMaster && (
-                  <Button
-                    styleClass="btn-connectionDefault login-button back-color1"
-                    label={"Commencer la partie"}
-                    onClick={() => startGame()}
-                  />
-                )}
+                <Button
+                  styleClass="btn-connectionDefault login-button back-color1"
+                  label={"Commencer la partie"}
+                  onClick={() => startGame()}
+                />
+              )}
             </>
+          )}
+          {/* Afficher le texte lorsque le focus est sur le joueur */}
+          {isFocus && (
+            <TextGlitch
+              children={"A vous de jouer ! "}
+              styleClass={"glitch-accueil"}
+              glitchStyle={"glitchStyle-accueil"}
+            />
           )}
         </>
       )}

@@ -5,6 +5,7 @@ import {
   gameTableReducer,
   SET_MASTER,
   SET_WAITING_MESSAGE_VISIBLE,
+  SET_FOCUS,
 } from "../../store/reducers/GameTableReducer.js";
 
 // Créer un contexte pour la table de jeu
@@ -15,6 +16,7 @@ export const GameTableProvider = ({ children }) => {
   const [state, dispatch] = useReducer(gameTableReducer, {
     isMaster: false,
     showWaitingMessage: false,
+    isFocus: null,
   });
   const { userId } = useAuth();
   const gameInfo = useSelector((state) => state.game);
@@ -34,6 +36,19 @@ export const GameTableProvider = ({ children }) => {
       });
     }
   }, [gameInfo?.game?.state]);
+
+  // Mettre à jour le focus
+  useEffect(() => {
+    if (gameInfo && gameInfo.game && gameInfo.game.focus != null) {
+      // Récupérer l'ID du joueur ciblé par le focus
+      const focusPlayerId = gameInfo.game.players[gameInfo.game.focus].playerId;
+      // Déterminer si l'utilisateur actuel est focus en comparant les IDs
+      const isFocus = focusPlayerId === userId;
+      console.log("Focus:", gameInfo.game.focus);
+      console.log("Est-ce que je suis focus:", isFocus);
+      dispatch({ type: SET_FOCUS, payload: isFocus });
+    }
+  }, [gameInfo?.game?.focus, userId]);
 
   return (
     <GameTableContext.Provider value={state}>

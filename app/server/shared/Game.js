@@ -41,14 +41,14 @@ class Game {
     }
   }
 
-  startNewRound() {
-    if (this.state === 'active') {
-      this.startingPlayerIndex = (this.blind + 2) % this.players.length;
-      this.focus = this.startingPlayerIndex;
-      this.players.forEach(player => player.newRoundReset());
-      this.currentStage = 'preflop';
-    }
-  }
+  // startNewRound() {
+  //   if (this.state === 'active') {
+  //     this.startingPlayerIndex = (this.blind + 2) % this.players.length;
+  //     this.focus = this.startingPlayerIndex;
+  //     this.players.forEach(player => player.newRoundReset());
+  //     this.currentStage = 'preflop';
+  //   }
+  // }
 
   addPlayer(playerId) {
     if (this.state === 'waiting' && !this.players.includes(playerId)) {
@@ -75,6 +75,7 @@ class Game {
     }
   
     this.state = 'active';
+    this.focus = 0;
     this.deck.initCards();
     this.deck.shuffle();
     this.players.forEach(player => {
@@ -100,10 +101,18 @@ class Game {
   //   });
   // }
 
+  reset() {
+    this.players = [];
+    this.state = 'waiting';
+    this.deck.initCards();
+    this.pokerTable.reset();
+  }
+
   evaluateHands() {
     const results = this.listeCombinaison(this.getActivePlayers());
     const winner = this.determineWinner(results);
     console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
+    this.reset();
   }
 
   /*

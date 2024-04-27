@@ -26,7 +26,7 @@ const begin = (state) => {
   var blind = 20;
   playersInRoom[posBigBlind].bet(blind * 2);
   playersInRoom[posSmallBlind].bet(blind);
-  state.game.focus = (posSmallBlind + 1) % playersInRoom.length;
+  //state.game.focus = (posSmallBlind + 1) % playersInRoom.length;
 
   // Distribute blinds
   state.game.pokerTable.playerBet(state.game.players[posBigBlind], blind * 2);
@@ -193,7 +193,7 @@ const gameReducer = (state = initialState, action) => {
             "Sit player, first player set as Master and first to play."
           );
           room.game.setMaster(playerId);
-          room.game.setFocus(0);
+          //room.game.setFocus(0);
         }
         state.answer = {
           status: true,
