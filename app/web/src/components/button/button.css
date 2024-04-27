@@ -141,8 +141,13 @@ Button:hover{
   white-space: nowrap;
   text-align: center;
 }
-.btn-mainAction.deactive{
-  opacity: 0.5;
+.btn-mainAction.disabled{
+  opacity: 0.5; /* Réduit l'opacité pour indiquer que le bouton est désactivé */
+  cursor: not-allowed; /* Change le curseur pour indiquer que le bouton est désactivé */
+  pointer-events: none; /* Désactive les événements de pointeur, ce qui rend le bouton non cliquable */
+  filter: grayscale(100%); /* Convertit le bouton en nuances de gris */
+  background-color: #ccc; /* Vous pouvez personnaliser la couleur du fond du bouton désactivé */
+  color: #666; /* Vous pouvez personnaliser la couleur du texte du bouton désactivé */
 }
 .btn-mainAction:hover {
   filter: brightness(150%);
