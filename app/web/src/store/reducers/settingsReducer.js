@@ -2,7 +2,7 @@ export const initialState = {
     theme: localStorage.getItem('theme') || "dark",
     sound: localStorage.getItem('sound') === 'true',
     language: localStorage.getItem('language') || 'en',
-    animation: localStorage.getItem('animation') === 'true' || true,
+    animation: localStorage.getItem('animation') === 'true' || false,
   };
 
   
