@@ -12,6 +12,7 @@ module.exports = eventHydra = (socket, data) => {
     hydrated.payload = {
         playerId: userId,
         room: room,
+        ...action.payload
     };
 
     //We check if the action the user try to performs is related to a game

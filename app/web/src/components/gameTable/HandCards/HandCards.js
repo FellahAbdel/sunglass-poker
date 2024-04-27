@@ -3,17 +3,19 @@ import "./handCards.css";
 import Card from "../Card/Card.js";
 import { useTranslation } from "../../Utiles/Translations";
 import Button from "./../../button/Button.tsx";
+import * as actions from "../../../store/actions/clientInteractionsCreator.js";
+import { useDispatch } from 'react-redux'
 
 const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
   const { getTranslatedWord } = useTranslation();
-  const [showCard1, setShowCard1] = useState(false);
-  const [showCard2, setShowCard2] = useState(false);
+
+  const dispatch = useDispatch()
 
   const handleShowCard1 = () => {
-    setShowCard1(true);
+    dispatch(actions.showCard(1));
   };
   const handleShowCard2 = () => {
-    setShowCard2(true);
+    dispatch(actions.showCard(0));
   };
   console.log("HandCards1", card1);
   console.log("HandCards2", card2);

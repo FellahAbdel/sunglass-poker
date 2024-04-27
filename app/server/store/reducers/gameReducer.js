@@ -288,6 +288,7 @@ const gameReducer = (state = initialState, action) => {
       return { ...state };
 
     case actions.SHOW_CARD:
+      console.log(state.rooms[action.payload.room], action);
       const {
         room: showRoomId,
         playerId: showPlayerId,
@@ -295,16 +296,24 @@ const gameReducer = (state = initialState, action) => {
       } = action.payload;
       const showRoom = state.rooms[showRoomId];
       if (showRoom) {
-        const player = showRoom.players.find(
-          (p) => p.getPlayerId() === showPlayerId
-        );
-        if (player) {
-          player.revealCard(showCardIndex);
+        // Assurez-vous que le joueur en focus est celui qui essaie de montrer la carte
+        if (
+          showRoom.players.findIndex((p) => p.getPlayerId() == showPlayerId) ===
+          showRoom.game.focus
+        ) {
+          csl.log("playerAction", "call for show card", showCardIndex);
+          const player = showRoom.players.find(
+            (p) => p.getPlayerId() === showPlayerId
+          );
+          if (player) {
+            player.revealCard(showCardIndex);
+          }
         }
       }
       return { ...state };
 
     case actions.HIDE_CARD:
+      console.log(state.rooms[action.payload.room], action);
       const {
         room: hideRoomId,
         playerId: hidePlayerId,
@@ -312,11 +321,18 @@ const gameReducer = (state = initialState, action) => {
       } = action.payload;
       const hideRoom = state.rooms[hideRoomId];
       if (hideRoom) {
-        const player = hideRoom.players.find(
-          (p) => p.getPlayerId() === hidePlayerId
-        );
-        if (player) {
-          player.hideCard(hideCardIndex);
+        // Vérifier que le joueur en focus est celui qui essaie de cacher la carte
+        if (
+          hideRoom.players.findIndex((p) => p.getPlayerId() == hidePlayerId) ===
+          hideRoom.game.focus
+        ) {
+          csl.log("playerAction", "call for hide card", hideCardIndex);
+          const player = hideRoom.players.find(
+            (p) => p.getPlayerId() === hidePlayerId
+          );
+          if (player) {
+            player.hideCard(hideCardIndex);
+          }
         }
       }
       return { ...state };
