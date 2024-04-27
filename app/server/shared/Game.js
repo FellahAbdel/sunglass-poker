@@ -24,17 +24,6 @@ class Game {
     this.focus = focus;
     this.currentStage = currentStage;
     this.state = state;
-    // this.players = [];
-    // this.deck = new Deck();
-    // this.pokerTable = new PokerTable();
-    // // Owner of the room
-    // this.master = false;
-    // // Big blind
-    // this.blind = 0;
-    // // Player turn
-    // this.focus = null;
-    // this.currentStage = 'preflop';
-    // this.state = 'waiting';
   }
 
   getForPlayer(id) {

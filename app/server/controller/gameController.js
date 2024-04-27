@@ -153,13 +153,13 @@ module.exports = gameController = {
 
   status: function (room, id) {
     const state = store.getState();
-    csl.log("Status", "Status room:", room, " for : ", id);
+    //csl.log("Status", "Status room:", room, " for : ", id);
     // csl.log(fileType,this.state.game.rooms, this.state.game.rooms.hasOwnProperty(room));
     if (state.game.rooms[room] !== undefined) {
       toSendroom = {};
       toSendroom.game = state.game.rooms[room].game.getForPlayer(id);
       toSendroom.players = state.game.rooms[room].players.map(player => player.statusFor(id));
-      toSendroom.controlsMode = state.game.rooms[room].controlsMode
+      toSendroom.controlsMode = state.game.rooms[room].controlsMode;
       //csl.log('STATUS',state.game.rooms[room],toSendroom);
       // if (state.game.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
       return {

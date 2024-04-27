@@ -6,9 +6,6 @@ import cardBackDark from "./../../assets/images/card-design-dark.png";
 import { useSettings } from "../../Utiles/SettingsContext";
 
 const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
-  if (!card || card.length < 2 || !card[0] || !card[1]) {
-    console.error("Invalid card data:", card);
-  }
   const { theme } = useSettings();
   return (
     <div
