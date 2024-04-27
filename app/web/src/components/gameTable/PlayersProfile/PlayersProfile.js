@@ -22,6 +22,7 @@ const PlayersProfile = ({
     console.log("Cards to display:", cards);
   }, [cards]);
 
+  console.log("Player status (fellah):", status);
   // Fonction pour transformer et valider les cartes
   const renderCard = (card) => {
     if (card && card.number !== undefined && card.color !== undefined) {
@@ -42,7 +43,7 @@ const PlayersProfile = ({
           />
         ) : (
           <div className={`box-statusText ${status}`}>
-            {getTranslatedWord(`playersStatus.${status.toLowerCase()}`)}
+            {getTranslatedWord(`${status.toLowerCase()}`)}
           </div>
         )}
       </div>
