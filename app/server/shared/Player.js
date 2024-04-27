@@ -1,4 +1,5 @@
 class Player {
+  cardsVisible = [true, false];
   timeLastAnswer = 0;
   playerId = 0;
   playerState = "";
@@ -8,36 +9,53 @@ class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
 
-  constructor(playerId, name, status = 'Playing',currentBet=0,isActive=true) {
+  constructor(
+    playerId,
+    name,
+    status = "Playing",
+    currentBet = 0,
+    isActive = true
+  ) {
     this.playerId = playerId;
     this.name = name;
     this.status = status;
     this.playerCards = [];
     this.playerActionLog = [];
-    this.currentBet =currentBet;
+    this.currentBet = currentBet;
     this.isActive = isActive;
   }
-  // constructor(playerId,name,status = "Playing",playerCards = [],currentBet = 0,isActive = true){
-  //   this.playerId = playerId;
-  //   this.name = name;
-  //   this.status = status;
-  //   this.playerCards = playerCards;
-  //   this.currentBet = currentBet;
-  //   this.playerActionLog = [];
-  //   this.isActive = isActive;
-  // }
 
-  statusFor(id){
-    if(id === this.playerId)
-      return this;
-    else
-      return new Player(this.playerId,this.name,this.status,this.currentBet,this.isActive);
+  statusFor(id) {
+    const view = {
+      playerId: this.playerId,
+      name: this.name,
+      status: this.status,
+      currentBet: this.currentBet,
+      isActive: this.isActive,
+      timeLastAnswer: this.timeLastAnswer,
+      playerMoney: this.playerMoney,
+      playerCards: this.playerCards.map((card, index) => this.cardsVisible[index] || id === this.playerId ? card : null),
+      playerActionLog: this.playerActionLog
+    };
+    return view;
   }
 
-  settimeLastAnswer(t){
+  revealCard(cardIndex) {
+    if (this.playerCards.length > cardIndex) {
+      this.cardsVisible[cardIndex] = true;
+    }
+  }
+
+  hideCard(cardIndex) {
+    if (this.playerCards.length > cardIndex) {
+      this.cardsVisible[cardIndex] = false;
+    }
+  }
+
+  settimeLastAnswer(t) {
     this.timeLastAnswer = t;
   }
-  gettimeLastAnswer(){
+  gettimeLastAnswer() {
     return this.timeLastAnswer;
   }
 
@@ -134,13 +152,12 @@ class Player {
   }
 
   newRoundReset() {
-    this.clearHand();       
+    this.clearHand();
     this.playerActionLog = [];
-    this.currentBet = 0;           
+    this.currentBet = 0;
     this.isActive = true;
     // Ajouter d'autres réinitialisations si nécessaire
   }
 }
-
 
 module.exports = Player;

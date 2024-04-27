@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useAuth } from "./../components/Utiles/AuthProvider";
+import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
 
 import { useWindowContext } from "./../components/Utiles/WindowContext";
 
@@ -32,33 +33,7 @@ const GameTable = () => {
     isGameTableVisible,
     isWindowOpen
   );
-  const { userId } = useAuth();
-  const [updatedPlayers, setUpdatedPlayers] = useState([]);
-
-  const playersInTable = useSelector((state) => state.game.players);
-  useEffect(() => {
-    const currentUserData = playersInTable.find(
-      (player) => player.id === userId
-    );
-    if (
-      currentUserData &&
-      currentUserData.playerCards &&
-      currentUserData.playerCards.length >= 2
-    ) {
-      const card1 = [
-        currentUserData.playerCards[0].number,
-        currentUserData.playerCards[0].color,
-      ];
-      const card2 = [
-        currentUserData.playerCards[1].number,
-        currentUserData.playerCards[1].color,
-      ];
-      setUpdatedPlayers([{ ...currentUserData, playerCards: [card1, card2] }]);
-    } else {
-      setUpdatedPlayers([]);
-    }
-  }, [playersInTable, userId]);
-
+  const { playerCards } = useGameTable();
 
   useEffect(() => {
     console.log("isLogged gameTable:", isLogged);
@@ -69,6 +44,10 @@ const GameTable = () => {
       closeWindow();
     }
   };
+
+  useEffect(() => {
+    console.log("Player cards received:", playerCards);
+  }, [playerCards]);
 
   const handleBoxClick = (event) => {
     event.stopPropagation();
@@ -103,14 +82,14 @@ const GameTable = () => {
           <div
             className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
           >
-            <BonusPanel/>
+            <BonusPanel />
           </div>
           <div
             className={`comp-gameAction ${
               isWindowOpen ? "slideDown" : "slideUp"
             }`}
           >
-            <GameActionPanel/>
+            <GameActionPanel />
           </div>
 
           <div
@@ -118,13 +97,14 @@ const GameTable = () => {
               isWindowOpen ? "slideDown" : "slideUp"
             }`}
           >
-            {updatedPlayers.length > 0 &&
-              updatedPlayers[0].playerCards.length >= 2 && (
+            {playerCards[0] !== undefined &&
+              playerCards[1] !== undefined &&
+              playerCards.length === 2 && (
                 <HandCards
-                  card1={updatedPlayers[0].playerCards[0]}
-                  card2={updatedPlayers[0].playerCards[1]}
+                  card1={playerCards[0]}
+                  card2={playerCards[1]}
                   showHandCardProp={[true, true]}
-                  handGuideProp={"straight"} // Assumez que vous avez cette prop pour une raison
+                  handGuideProp={"straight"}
                 />
               )}
           </div>

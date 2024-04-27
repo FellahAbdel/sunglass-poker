@@ -59,16 +59,21 @@ const gameReducer = (state = initialState, action) => {
       };
     case actions.START_GAME:
       if (state.rooms[action.payload.id].game.state === "waiting") {
-        csl.log('START_GAME_EVENT',"Action payload:", action.payload);
-        csl.log('START_GAME_EVENT',"Starting game for room:", action.payload.id);
-        csl.log('START_GAME_EVENT',
+        csl.log("START_GAME_EVENT", "Action payload:", action.payload);
+        csl.log(
+          "START_GAME_EVENT",
+          "Starting game for room:",
+          action.payload.id
+        );
+        csl.log(
+          "START_GAME_EVENT",
           "Current game state:",
           state.rooms[action.payload.id].game.state,
           "USER :",
           action.payload.userId
         );
 
-        csl.log('START_GAME_EVENT',"PlayerID start:", action.payload.userId);
+        csl.log("START_GAME_EVENT", "PlayerID start:", action.payload.userId);
         csl.log(fileType, "START GAME FOR ", action.payload.id);
         state.rooms[action.payload.id].game.players =
           state.rooms[action.payload.id].players;
@@ -261,26 +266,60 @@ const gameReducer = (state = initialState, action) => {
             state.rooms[action.payload.room].game.rotateFocus();
           }
       return { ...state };
-      case actions.CHECK:
-        console.log(state.rooms[action.payload.room], action);
-        if (action.payload !== undefined)
-          if (action.payload.amount !== undefined)
-            if (
-              state.rooms[action.payload.room].players.findIndex(
-                (p) => p.getPlayerId() == action.payload.playerId
-              ) === state.rooms[action.payload.room].game.focus
-            ) {
-              csl.log(
-                "playerAction",
-                " call for check or call",
-                action.payload.amount
-              );
-              state.rooms[action.payload.room].players
-                .find((p) => p.getPlayerId() == action.payload.playerId)
-                .check();
-              state.rooms[action.payload.room].game.rotateFocus();
-            }
-        return { ...state };
+    case actions.CHECK:
+      console.log(state.rooms[action.payload.room], action);
+      if (action.payload !== undefined)
+        if (action.payload.amount !== undefined)
+          if (
+            state.rooms[action.payload.room].players.findIndex(
+              (p) => p.getPlayerId() == action.payload.playerId
+            ) === state.rooms[action.payload.room].game.focus
+          ) {
+            csl.log(
+              "playerAction",
+              " call for check or call",
+              action.payload.amount
+            );
+            state.rooms[action.payload.room].players
+              .find((p) => p.getPlayerId() == action.payload.playerId)
+              .check();
+            state.rooms[action.payload.room].game.rotateFocus();
+          }
+      return { ...state };
+
+    case actions.SHOW_CARD:
+      const {
+        room: showRoomId,
+        playerId: showPlayerId,
+        cardIndex: showCardIndex,
+      } = action.payload;
+      const showRoom = state.rooms[showRoomId];
+      if (showRoom) {
+        const player = showRoom.players.find(
+          (p) => p.getPlayerId() === showPlayerId
+        );
+        if (player) {
+          player.revealCard(showCardIndex);
+        }
+      }
+      return { ...state };
+
+    case actions.HIDE_CARD:
+      const {
+        room: hideRoomId,
+        playerId: hidePlayerId,
+        cardIndex: hideCardIndex,
+      } = action.payload;
+      const hideRoom = state.rooms[hideRoomId];
+      if (hideRoom) {
+        const player = hideRoom.players.find(
+          (p) => p.getPlayerId() === hidePlayerId
+        );
+        if (player) {
+          player.hideCard(hideCardIndex);
+        }
+      }
+      return { ...state };
     case actions.CLEARANSWER:
       state.answer = false;
       return { ...state };

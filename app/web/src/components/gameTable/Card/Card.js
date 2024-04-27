@@ -10,7 +10,7 @@ const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
   return (
     <div
       className={`${styleClass} ${
-        flippingCard ? `flippedCard ${flippedStyle}` : ""
+        (flippingCard && card != null) ? `flippedCard ${flippedStyle}` : ""
       }`}
     >
       <img
