@@ -37,10 +37,6 @@ const Table = ({}) => {
 
   const { isMaster, showWaitingMessage, isFocus } = useGameTable();
 
-  const playersInTable = useSelector((state) => state.game.players);
-
-  const gameInfo = useSelector((state) => state.game);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,10 +46,6 @@ const Table = ({}) => {
   useEffect(() => {
     console.log("isLogged Table:", isLogged);
   }, [isLogged]);
-
-  //   const onClickStartGame = () => {
-  //     dispatch(startGame());
-  //   };
 
   useEffect(() => {
     if (isWindowOpen && isGameTableVisible) {
