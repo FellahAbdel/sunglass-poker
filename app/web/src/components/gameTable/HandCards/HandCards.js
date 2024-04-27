@@ -56,16 +56,20 @@ const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
           </div>
         )}
         <div className="container-handCard">
-          <Card
-            styleClass="handCard"
-            card={card1}
-            flippingCard={showHandCardProp}
-          />
-          <Card
-            styleClass="handCard"
-            card={card2}
-            flippingCard={showHandCardProp}
-          />
+          {card1 !== undefined && (
+            <Card
+              styleClass="handCard"
+              card={card1}
+              flippingCard={showHandCardProp}
+            />
+          )}
+          {card2 !== undefined && (
+            <Card
+              styleClass="handCard"
+              card={card2}
+              flippingCard={showHandCardProp}
+            />
+          )}
         </div>
       </div>
     </div>

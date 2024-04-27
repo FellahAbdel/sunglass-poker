@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useReducer, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useState,
+} from "react";
 import { useSelector } from "react-redux";
 import { useAuth } from "./AuthProvider.jsx";
 import {
@@ -20,14 +26,14 @@ export const GameTableProvider = ({ children }) => {
   });
   const { userId } = useAuth();
   const gameInfo = useSelector((state) => state.game);
+  const [playerCards, setPlayerCards] = useState([]);
 
-  // Mettre à jour si l'utilisateur est le maître du jeu
   useEffect(() => {
-    const isMaster = gameInfo && gameInfo.game && gameInfo.game.master === userId;
+    const isMaster =
+      gameInfo && gameInfo.game && gameInfo.game.master === userId;
     dispatch({ type: SET_MASTER, payload: isMaster });
   }, [userId, gameInfo?.game?.master]);
 
-  // Contrôler la visibilité du message d'attente
   useEffect(() => {
     if (gameInfo && gameInfo.game && gameInfo.game.state) {
       dispatch({
@@ -37,12 +43,9 @@ export const GameTableProvider = ({ children }) => {
     }
   }, [gameInfo?.game?.state]);
 
-  // Mettre à jour le focus
   useEffect(() => {
     if (gameInfo && gameInfo.game && gameInfo.game.focus != null) {
-      // Récupérer l'ID du joueur ciblé par le focus
       const focusPlayerId = gameInfo.game.players[gameInfo.game.focus].playerId;
-      // Déterminer si l'utilisateur actuel est focus en comparant les IDs
       const isFocus = focusPlayerId === userId;
       console.log("Focus:", gameInfo.game.focus);
       console.log("Est-ce que je suis focus:", isFocus);
@@ -50,8 +53,26 @@ export const GameTableProvider = ({ children }) => {
     }
   }, [gameInfo?.game?.focus, userId]);
 
+  useEffect(() => {
+    if (gameInfo && gameInfo.game && gameInfo.game.players) {
+      const currentPlayer = gameInfo.game.players.find(
+        (player) => player.playerId === userId
+      );
+      if (currentPlayer && currentPlayer.playerCards) {
+        // Assurer que chaque carte a un numéro et une couleur définis
+        const transformedCards = currentPlayer.playerCards
+          .filter(
+            (card) => card.number !== undefined && card.color !== undefined
+          )
+          .map((card) => [card.number.toString(), card.color]);
+        console.log("Transformed Cards:", transformedCards);
+        setPlayerCards(transformedCards);
+      }
+    }
+  }, [gameInfo, userId]);
+
   return (
-    <GameTableContext.Provider value={state}>
+    <GameTableContext.Provider value={{ ...state, playerCards }}>
       {children}
     </GameTableContext.Provider>
   );
