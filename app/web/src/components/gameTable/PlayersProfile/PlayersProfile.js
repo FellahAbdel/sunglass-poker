@@ -57,11 +57,13 @@ const PlayersProfile = ({
       <Card
         styleClass={`showCardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
         card={renderCard(cards[0])}
+        flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />
       <Card
         styleClass={`showCardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
         card={renderCard(cards[1])}
+        flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />
 
