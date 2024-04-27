@@ -41,11 +41,7 @@ const GameActionButtons = ({}) => {
 
   // Function to handle the fold action
   const handleFold = () => {
-    if (isFocus) {
       dispatch(actions.fold());
-    } else {
-      console.log("You cannot fold, it's not your turn");
-    }
   };
 
   const handleBet = (amount) => {
@@ -136,7 +132,7 @@ const GameActionButtons = ({}) => {
       <div className={`container-ActionButtons`}>
         {/* LEBOUTON BET MAIS faut reclické alors jsp ou mettre le handle */}
         <Button
-          styleClass={`btn-mainAction ${condition && "deactive"}`}
+          styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
           onClick={() => togglePopupAndRaise()}
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
             raiseCoin ? Math.round(raiseCoin) + " SC" : ""
@@ -144,13 +140,13 @@ const GameActionButtons = ({}) => {
         />
         {/* LE BOUTON CHECK OR CALL  */}
         <Button
-          styleClass={`btn-mainAction ${condition && "deactive"}`}
-          onClick={handleCheck}
+          styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
+          onClick={isFocus && handleCheck}
           label={checkOrCall}
         />
         {/* LE BOUTON FOLD */}
         <Button
-          styleClass={`btn-fold btn-mainAction ${isFocus && "deactive"}`}
+          styleClass={`btn-fold btn-mainAction ${!isFocus && "disabled"}`}
           onClick={isFocus && handleFold}
           label={getTranslatedWord("gameActionPanel.fold")}
         />
