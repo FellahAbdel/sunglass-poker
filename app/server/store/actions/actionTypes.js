@@ -24,7 +24,6 @@ module.exports.CREATE_GAME= "CREATE_GAME";
 module.exports.GAME_LOBBY = "GAME_LOBBY";
 module.exports.GAME_STARTED = "GAME_STARTED";
 
-module.exports.FOLD = "FOLD";
 
 
 module.exports.SIT = "SIT";
