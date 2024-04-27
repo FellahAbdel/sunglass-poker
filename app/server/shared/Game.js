@@ -6,15 +6,24 @@ const scoreEngineUtils = require("./ScoreEngineUtils.js");
 class Game {
   master = false;
   focus = null;
-  constructor(players = [], deck = new Deck(), pokerTable = new PokerTable(), master = false, blind = 0, focus = null, currentStage = 'preflop', state = 'waiting') {
-    this.players = players
-    this.deck = deck
-    this.pokerTable = pokerTable
-    this.master = master
-    this.blind = blind
-    this.focus = focus
-    this.currentStage = currentStage
-    this.state = state
+  constructor(
+    players = [],
+    deck = new Deck(),
+    pokerTable = new PokerTable(),
+    master = false,
+    blind = 0,
+    focus = null,
+    currentStage = "preflop",
+    state = "waiting"
+  ) {
+    this.players = players;
+    this.deck = deck;
+    this.pokerTable = pokerTable;
+    this.master = master;
+    this.blind = blind;
+    this.focus = focus;
+    this.currentStage = currentStage;
+    this.state = state;
     // this.players = [];
     // this.deck = new Deck();
     // this.pokerTable = new PokerTable();
@@ -29,8 +38,17 @@ class Game {
   }
 
   getForPlayer(id) {
-    var filteredPlayer = this.players.map(player => player.statusFor(id));
-    var g = new Game(filteredPlayer, null,this.pokerTable, this.master, this.blind, this.focus, this.currentStage);
+    var filteredPlayer = this.players.map((player) => player.statusFor(id));
+    var g = new Game(
+      filteredPlayer,
+      null,
+      this.pokerTable,
+      this.master,
+      this.blind,
+      this.focus,
+      this.currentStage,
+      this.state
+    );
     return g;
   }
 
@@ -65,10 +83,12 @@ class Game {
   // }
 
   addPlayer(playerId) {
-    if (this.state === 'waiting' && !this.players.includes(playerId)) {
+    if (this.state === "waiting" && !this.players.includes(playerId)) {
       this.players.push(playerId);
     } else {
-      console.log("Cannot add new players at this stage or player already added.");
+      console.log(
+        "Cannot add new players at this stage or player already added."
+      );
     }
   }
 
@@ -79,7 +99,7 @@ class Game {
       console.log("Only the master can start the game.");
       return;
     }
-    if (this.state !== 'waiting') {
+    if (this.state !== "waiting") {
       console.log("The game is not in a waiting state.");
       return;
     }
@@ -88,11 +108,12 @@ class Game {
       return;
     }
 
-    this.state = 'active';
+    this.state = "active";
     this.focus = 0;
     this.deck.initCards();
     this.deck.shuffle();
-    this.players.forEach(player => {
+    console.log("Game started, State =", this.state);
+    this.players.forEach((player) => {
       player.clearHand();
       for (let i = 0; i < 2; i++) {
         player.addCard(this.deck.deal());
@@ -117,7 +138,7 @@ class Game {
 
   reset() {
     this.players = [];
-    this.state = 'waiting';
+    this.state = "waiting";
     this.deck.initCards();
     this.pokerTable.reset();
   }
@@ -157,26 +178,26 @@ class Game {
   }
 
   advanceStage() {
-    if (this.state !== 'active') {
+    if (this.state !== "active") {
       console.log("Game not active, cannot advance stage.");
       return;
     }
-    const stageOrder = ['preflop', 'flop', 'turn', 'river', 'showdown'];
+    const stageOrder = ["preflop", "flop", "turn", "river", "showdown"];
     const currentIndex = stageOrder.indexOf(this.currentStage);
     const nextIndex = (currentIndex + 1) % stageOrder.length;
     this.currentStage = stageOrder[nextIndex];
 
     switch (this.currentStage) {
-      case 'flop':
+      case "flop":
         this.flop();
         break;
-      case 'turn':
+      case "turn":
         this.turn();
         break;
-      case 'river':
+      case "river":
         this.river();
         break;
-      case 'showdown':
+      case "showdown":
         this.evaluateHands();
         break;
     }

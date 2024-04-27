@@ -6,8 +6,8 @@ import Button from "./../../button/Button.tsx";
 
 const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
   const { getTranslatedWord } = useTranslation();
-  const [showCard1, setShowCard1] = useState(false);
-  const [showCard2, setShowCard2] = useState(false);
+  const [showCard1, setShowCard1] = useState(true);
+  const [showCard2, setShowCard2] = useState(true);
 
   const handleShowCard1 = () => {
     setShowCard1(true);

@@ -160,7 +160,7 @@ module.exports = gameController = {
       toSendroom.game = state.game.rooms[room].game.getForPlayer(id);
       toSendroom.players = state.game.rooms[room].players.map(player => player.statusFor(id));
       toSendroom.controlsMode = state.game.rooms[room].controlsMode
-      csl.log('STATUS',state.game.rooms[room],toSendroom);
+      //csl.log('STATUS',state.game.rooms[room],toSendroom);
       // if (state.game.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
       return {
         status: true,
