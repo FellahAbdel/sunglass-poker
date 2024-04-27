@@ -1,5 +1,5 @@
 class Player {
-  cardsVisible = [false, false];
+  cardsVisible = [true, false];
   timeLastAnswer = 0;
   playerId = 0;
   playerState = "";

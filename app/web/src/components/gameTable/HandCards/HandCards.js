@@ -6,8 +6,8 @@ import Button from "./../../button/Button.tsx";
 
 const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
   const { getTranslatedWord } = useTranslation();
-  const [showCard1, setShowCard1] = useState(true);
-  const [showCard2, setShowCard2] = useState(true);
+  const [showCard1, setShowCard1] = useState(false);
+  const [showCard2, setShowCard2] = useState(false);
 
   const handleShowCard1 = () => {
     setShowCard1(true);
@@ -56,20 +56,16 @@ const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
           </div>
         )}
         <div className="container-handCard">
-          {card1 !== undefined && (
-            <Card
-              styleClass="handCard"
-              card={card1}
-              flippingCard={showHandCardProp}
-            />
-          )}
-          {card2 !== undefined && (
-            <Card
-              styleClass="handCard"
-              card={card2}
-              flippingCard={showHandCardProp}
-            />
-          )}
+          <Card
+            styleClass="handCard"
+            card={card1}
+            flippingCard={showHandCardProp}
+          />
+          <Card
+            styleClass="handCard"
+            card={card2}
+            flippingCard={showHandCardProp}
+          />
         </div>
       </div>
     </div>

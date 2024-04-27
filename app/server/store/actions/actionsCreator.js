@@ -12,7 +12,7 @@ module.exports.startGame = (idGame, userId) => {
   });
   return {
     type: actions.START_GAME,
-    payload: { id: idGame,userId:userId},
+    payload: { id: idGame, userId: userId },
   };
 };
 
@@ -40,6 +40,16 @@ module.exports.call = () => ({
 module.exports.raise = (amount) => ({
   type: actions.RAISE,
   payload: amount,
+});
+
+module.exports.showCard = (cardIndex) => ({
+  type: actions.SHOW_CARD,
+  payload: { cardIndex },
+});
+
+module.exports.hideCard = (cardIndex) => ({
+  type: actions.HIDE_CARD,
+  payload: { cardIndex },
 });
 
 module.exports.endRound = () => ({
@@ -71,7 +81,6 @@ module.exports.leaveRoom = (table, player) => ({
 module.exports.leftRoom = () => ({
   type: actions.LEFT_ROOM,
 });
-
 
 module.exports.deleteRoom = (room) => ({
   type: actions.DELETE_ROOM,
