@@ -8,14 +8,30 @@ class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
 
-  constructor(playerId, name) {
+  constructor(playerId, name, status = 'Playing',currentBet=0,isActive=true) {
     this.playerId = playerId;
     this.name = name;
-    this.status = "Playing";
+    this.status = status;
     this.playerCards = [];
     this.playerActionLog = [];
-    this.currentBet = 0;
-    this.isActive = true;
+    this.currentBet =currentBet;
+    this.isActive = isActive;
+  }
+  // constructor(playerId,name,status = "Playing",playerCards = [],currentBet = 0,isActive = true){
+  //   this.playerId = playerId;
+  //   this.name = name;
+  //   this.status = status;
+  //   this.playerCards = playerCards;
+  //   this.currentBet = currentBet;
+  //   this.playerActionLog = [];
+  //   this.isActive = isActive;
+  // }
+
+  statusFor(id){
+    if(id === this.playerId)
+      return this;
+    else
+      return new Player(this.playerId,this.name,this.status,this.currentBet,this.isActive);
   }
 
   settimeLastAnswer(t){

@@ -6,32 +6,46 @@ const scoreEngineUtils = require("./ScoreEngineUtils.js");
 class Game {
   master = false;
   focus = null;
-  constructor() {
-    this.players = [];
-    this.deck = new Deck();
-    this.pokerTable = new PokerTable();
-    // Owner of the room
-    this.master = false;
-    // Big blind
-    this.blind = 0;
-    // Player turn
-    this.focus = null;
-    this.currentStage = 'preflop';
-    this.state = 'waiting';
+  constructor(players = [], deck = new Deck(), pokerTable = new PokerTable(), master = false, blind = 0, focus = null, currentStage = 'preflop', state = 'waiting') {
+    this.players = players
+    this.deck = deck
+    this.pokerTable = pokerTable
+    this.master = master
+    this.blind = blind
+    this.focus = focus
+    this.currentStage = currentStage
+    this.state = state
+    // this.players = [];
+    // this.deck = new Deck();
+    // this.pokerTable = new PokerTable();
+    // // Owner of the room
+    // this.master = false;
+    // // Big blind
+    // this.blind = 0;
+    // // Player turn
+    // this.focus = null;
+    // this.currentStage = 'preflop';
+    // this.state = 'waiting';
   }
 
-  setMaster(id){
+  getForPlayer(id) {
+    var filteredPlayer = this.players.map(player => player.statusFor(id));
+    var g = new Game(filteredPlayer, null,this.pokerTable, this.master, this.blind, this.focus, this.currentStage);
+    return g;
+  }
+
+  setMaster(id) {
     this.master = id;
   }
-  getMaster(){
+  getMaster() {
     return this.master;
   }
-  setFocus(n){
+  setFocus(n) {
     if (n >= 0 && n < this.players.length) {
       this.focus = n;
     }
   }
-  getFocus(){
+  getFocus() {
     return this.focus;
   }
   rotateFocus() {
@@ -73,7 +87,7 @@ class Game {
       console.log("Not enough players to start the game.");
       return;
     }
-  
+
     this.state = 'active';
     this.focus = 0;
     this.deck.initCards();
@@ -151,7 +165,7 @@ class Game {
     const currentIndex = stageOrder.indexOf(this.currentStage);
     const nextIndex = (currentIndex + 1) % stageOrder.length;
     this.currentStage = stageOrder[nextIndex];
-  
+
     switch (this.currentStage) {
       case 'flop':
         this.flop();
