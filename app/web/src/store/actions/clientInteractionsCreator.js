@@ -38,6 +38,16 @@ export const fold = () => ({
   type: actions.FOLD,
 });
 
+export const showCard = (cardIndex) => ({
+  type: actions.SHOW_CARD,
+  payload: { cardIndex }
+});
+
+export const hideCard = (cardIndex) => ({
+  type: actions.HIDE_CARD,
+  payload: { cardIndex }
+});
+
 export const bet = (amount) => ({
   type: actions.BET,
   payload: { amount: amount },

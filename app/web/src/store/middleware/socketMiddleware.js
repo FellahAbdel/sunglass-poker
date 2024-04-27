@@ -17,7 +17,10 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
       comm.createGame();
       break;
     case actions.START_GAME:
-      console.log("Emitting startGame event from socketMiddleware", action.payload.userId);
+      console.log(
+        "Emitting startGame event from socketMiddleware",
+        action.payload.userId
+      );
       comm.startGame(action.payload.userId);
       break;
     case actions.JOIN_ROOM:
@@ -31,6 +34,12 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
       comm.dispatch({ action: action });
       break;
     case actions.CHECK:
+      comm.dispatch({ action: action });
+      break;
+    case actions.SHOW_CARD:
+      comm.dispatch({ action: action });
+      break;
+    case actions.HIDE_CARD:
       comm.dispatch({ action: action });
       break;
     case actions.LEAVE_ROOM:
