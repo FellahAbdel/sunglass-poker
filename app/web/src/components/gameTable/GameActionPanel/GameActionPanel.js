@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { useTranslation } from "../../Utiles/Translations";
 import { useUserData } from "../../Utiles/useUserData.jsx";
 
+
 const GameActionButtons = ({}) => {
   const { getTranslatedWord } = useTranslation();
   //checkValue = true -> Check
@@ -21,6 +22,9 @@ const GameActionButtons = ({}) => {
   const [coins, setCoins] = useState(user.coins);
   const [raiseCoin, setRaiseCoin] = useState(0);
   const [coinsAfterRaise , setCoinsAfterRaise] = useState(coins);
+
+  //temprory : delete after setting the deactive css condition
+  const [condition] = useState(false);
 
   let checkOrCall = checkValue
     ? getTranslatedWord("gameActionPanel.check")
@@ -99,7 +103,7 @@ useEffect(() => {
       <div className={`container-ActionButtons`}>
         {/* LEBOUTON BET MAIS faut reclické alors jsp ou mettre le handle */}
         <Button
-          styleClass={"btn-mainAction"}
+          styleClass={`btn-mainAction ${condition && "deactive"}`}
           onClick={() => togglePopupAndRaise()}
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
             raiseCoin ? Math.round(raiseCoin) + " SC" : ""
@@ -107,12 +111,12 @@ useEffect(() => {
         />
         {/* LE BOUTON CHECK OR CALL  */}
         <Button
-          styleClass={"btn-mainAction"}
+          styleClass={`btn-mainAction ${condition && "deactive"}`}
           onClick={handleCheck}
           label={checkOrCall}
         />
         {/* LE BOUTON FOLD */}
-        <Button styleClass={"btn-fold btn-mainAction"} onClick={handleFold} label={getTranslatedWord("gameActionPanel.fold")} />
+        <Button styleClass={`btn-mainAction ${condition && "deactive"}`} onClick={handleFold} label={getTranslatedWord("gameActionPanel.fold")} />
       </div>
       <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
         <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />
