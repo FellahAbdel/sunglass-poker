@@ -40,8 +40,8 @@ const GameActionButtons = ({}) => {
     dispatch(actions.fold());
   }
 
-  const handleBet = () => {
-    dispatch(actions.bet());
+  const handleBet = (amount) => {
+    dispatch(actions.bet(amount));
   }
 
   const handleCheck = () => {
@@ -71,7 +71,7 @@ const GameActionButtons = ({}) => {
         console.log('coins :', coins);
         console.log("raiseCoin :", raiseCoin);
         if(raiseCoin!==0)
-        dispatch(actions.bet(raiseCoin));
+          handleBet(raiseCoin);
     }
 }, [raiseCoin]);
 

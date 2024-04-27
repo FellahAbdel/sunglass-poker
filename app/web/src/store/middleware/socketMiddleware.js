@@ -30,12 +30,9 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
     case actions.BET:
       comm.dispatch({ action: action });
       break;
-
     case actions.CHECK:
       comm.dispatch({ action: action });
       break;
-    /*Ducoup il manque juste recuperer la liste des joueurs et enlever l id de celui qui parle
-        mais jsp ou ce trouve cette liste, normalement j'ai installe tt au bonne endroit et cela devrait marcher */
     case actions.LEAVE_ROOM:
       console.log("Player wants to leave the room, emit");
       comm.leaveRoom();
