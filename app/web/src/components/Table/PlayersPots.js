@@ -6,8 +6,8 @@ import "./table.css";
 const PlayersPots = ({ players = [], stack = 0 }) => {
   // le premier game est le nom du reducer dans le store
   // le deuxieme game est le nom de la class game dans shared.
-    console.log("playerls in players pots", players);
-    console.log("stack in players pots", stack);
+    // console.log("playerls in players pots", players);
+    // console.log("stack in players pots", stack);
 
     const localStack= 0;
 //   const gameClass = useSelector((state) => state.game.game);

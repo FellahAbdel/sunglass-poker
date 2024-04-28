@@ -19,14 +19,14 @@ const PlayersProfile = ({
   const dollarSign = " SC";
 
   useEffect(() => {
-    console.log("Cards to display:", cards);
+    // console.log("Cards to display:", cards);
   }, [cards]);
 
   // Fonction pour transformer et valider les cartes
   const renderCard = (card) => {
     if (card && card.number !== undefined && card.color !== undefined) {
       const formattedCard = [card.number.toString(), card.color];
-      console.log("Formatted card:", formattedCard);
+      // console.log("Formatted card:", formattedCard);
       return formattedCard;
     }
     return null; // Gère le cas où la carte est invalide

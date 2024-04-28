@@ -34,7 +34,7 @@ const PlayersPlacements = ({}) => {
   }, [currentStack]);
 
   {
-    console.log("updated players", updatedPlayers);
+    // console.log("updated players", updatedPlayers);
   }
   //   console.log("players cards :", updatedPlayers[0].playerCards);
   return (
