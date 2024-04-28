@@ -48,7 +48,8 @@ module.exports.PLAYER_GAME_ACTION = "PLAYER_GAME_ACTION";
 
 module.exports.PLAYER_GAME_ACTION_LIST = [
   module.exports.FOLD,
-  module.exports.BET,
+  module.exports.BET,,
+  module.exports.CHECK,
   module.exports.RAISE,
   module.exports.SHOW_CARD,
   module.exports.HIDE_CARD,
