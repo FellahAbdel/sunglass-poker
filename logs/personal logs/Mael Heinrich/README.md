@@ -108,7 +108,9 @@
 
 2024/04/27  1H      Test de bug/recherche supplémentaire sur le fonctionnement des boutons, discussion a ce propos avec d'autre membres du groupe(nornalement il reste juste a modifier dans le déroulement de la partie mais je ne comprend pas ou cela se trouve)
 
---2024/04 SEMAINE 4: 8H (TOTAL: 85H)
+2024/04/28  1H      Mise en commentaire de bcp de console log car console illisible pour test, debut de logique pour que en cas de fold le focus saute les joueurs couché.
+
+--2024/04 SEMAINE 4: 12H (TOTAL: 86H)
 
 
-TEMPS TOTAL: 85H  
+TEMPS TOTAL: 86H  
