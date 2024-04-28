@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "../Utiles/Translations";
 import "./table.css";
 
-const TotalPot = ({ stack }) => {
+const TotalPot = () => {
   const { getTranslatedWord } = useTranslation();
 
   const gameClass = useSelector((state) => state.game.game);
