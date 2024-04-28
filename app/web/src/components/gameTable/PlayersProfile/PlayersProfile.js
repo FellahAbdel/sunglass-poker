@@ -15,17 +15,17 @@ const PlayersProfile = ({
   gotCards,
   playerId,
   cardsVisible,
+  isFocus
 }) => {
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips.toLocaleString();
   const dollarSign = " SC";
-  const { isFocus } = useGameTable();
+  console.log("isFocus playersProfile :", isFocus);
 
 
   console.log("Player status (fellah):", status);
   // Fonction pour transformer et valider les cartes
   const renderCard = (card, index) => {
-    console.log("cardsVisible[index]", cardsVisible[index]);
     if (cardsVisible[index] === true) {
       if (card && card.number !== undefined && card.color !== undefined) {
         const formattedCard = [card.number.toString(), card.color];

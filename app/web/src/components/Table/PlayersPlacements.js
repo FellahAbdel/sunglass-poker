@@ -7,31 +7,24 @@ const PlayersPlacements = ({}) => {
   //playersCardDistributed for each player
   // *** also has been used in CardsPlacements component
 
-
   const playersInTable = useSelector((state) => state.game.players);
   const [updatedPlayers, setUpdatedPlayers] = useState([]);
+
+  const gameClass = useSelector((state) => state.game.game);
+
+  const currentFocusIndex = gameClass ? gameClass.focus : null;
 
   useEffect(() => {
     setUpdatedPlayers(playersInTable);
   }, [playersInTable]);
 
-  const gameClass = useSelector((state) => state.game.game);
+  //const currentFocusIndex = gameClass?.focus;
+
+  //console.log("currentFocusIndex",currentFocusIndex, gameClass.focus);
 
   // Définir currentStack avec une valeur par défaut de 0
   const currentStack = gameClass?.pokerTable?.stack || 0;
 
-  // // Définir updatedStack à partir de currentStack
-  // const [updatedStack, setUpdatedStack] = useState(currentStack);
-
-  // useEffect(() => {
-  //   // Mettre à jour updatedStack si currentStack change
-  //   setUpdatedStack(currentStack);
-  // }, [currentStack]);
-
-  {
-    // console.log("updated players", updatedPlayers);
-  }
-  //   console.log("players cards :", updatedPlayers[0].playerCards);
   return (
     <span className={`profiles`}>
       {updatedPlayers.map((player, index) => (
@@ -47,6 +40,7 @@ const PlayersPlacements = ({}) => {
             cardsVisible={player.cardsVisible}
             gotCards={player.playerCards.length !== 0}
             playerId={player.playerId}
+            isFocus={currentFocusIndex === index}
           />
         </div>
       ))}
