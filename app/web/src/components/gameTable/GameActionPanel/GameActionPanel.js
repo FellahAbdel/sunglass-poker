@@ -9,6 +9,7 @@ import { useUserData } from "../../Utiles/useUserData.jsx";
 import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
 const GameActionButtons = ({}) => {
+  const { isFocus, playerMoney } = useGameTable();
   const { getTranslatedWord } = useTranslation();
   //checkValue = true -> Check
   //checkValue = False -> Call
@@ -19,7 +20,7 @@ const GameActionButtons = ({}) => {
   const dispatch = useDispatch();
   const [sliderValueText, setSliderValueText] = useState();
   const { user } = useUserData();
-  const [coins, setCoins] = useState(user.coins);
+  const [coins, setCoins] = useState(playerMoney);
   const [raiseCoin, setRaiseCoin] = useState(0);
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(coins);
 
@@ -37,8 +38,6 @@ const GameActionButtons = ({}) => {
   const handleSliderChange = (value) => {
     setSliderValueText(value);
   };
-
-  const { isFocus } = useGameTable();
 
   // Function to handle the fold action
   const handleFold = () => {
@@ -79,8 +78,8 @@ const GameActionButtons = ({}) => {
   }, [raiseCoin]);
 
   useEffect(() => {
-    setCoins(user.coins);
-  }, [user.coins]);
+    setCoins(playerMoney);
+  }, [playerMoney]);
 
   return (
     <div className="container-gameAction">
