@@ -41,20 +41,20 @@ const PlayersProfile = ({
       <div className={`container-profileMessage ${isFocus ? "profileMessageShow" : ""}`}>
         Your Turn !
       </div>
-      <div className={`box-status ${status}`}>
+      <div className={`box-status ${status.toLowerCase()}`}>
         {status === "waiting" ? (
           <ProgressBar
             className="progressBar progressPercentage"
             durationInSeconds={5}
           />
         ) : (
-          <div className={`box-statusText ${status}`}>
-            {getTranslatedWord(`${status.toLowerCase()}`)}
+          <div className={`box-statusText ${status.toLowerCase()}`}>
+            {getTranslatedWord(`playersStatus.${status.toLowerCase()}`)}
           </div>
         )}
       </div>
 
-      <div className={`box-playerInfo ${status} ${name === "YOU" && "you"}`}>
+      <div className={`box-playerInfo ${status.toLowerCase()} ${name === "YOU" && "you"}`}>
         {name}
         <br />
         {status !== "empty" && `${formattedChips}${dollarSign}`}
@@ -74,7 +74,7 @@ const PlayersProfile = ({
         flippingCard={flippingPlayerCards}
       />
 
-      <div className={`profilePic ${status}`}>
+      <div className={`profilePic ${status.toLowerCase()}`}>
         <AvatarDisplay userId={playerId} />
       </div>
     </div>

@@ -91,7 +91,7 @@
   "playersStatus": {
     "empty": "Empty",
     "called": "Called",
-    "fold": "Fold",
+    "folded": "Fold",
     "raised": "Raised",
     "checked": "Checked",
     "playing": "Playing"

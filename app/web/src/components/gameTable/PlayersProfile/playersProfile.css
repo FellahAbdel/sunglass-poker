@@ -96,16 +96,16 @@
 #light .box-statusText {
   color: rgb(255, 255, 255);
 }
-#dark .box-statusText.fold {
+#dark .box-statusText.folded {
   color: rgb(255, 255, 255);
 }
 
-#dark .box-status.fold {
+#dark .box-status.folded {
   filter: brightness(30%);
   box-shadow: inset 0 0 10px 1px rgb(0, 0, 0), 0 0 10px 1px rgb(0, 0, 0);
   background-color: rgb(0, 0, 0);
 }
-#light .box-status.fold {
+#light .box-status.folded {
   filter: brightness(30%);
   box-shadow: unset;
 }
@@ -142,14 +142,14 @@
   width: 105%;
   border-radius: 13px;
 }
-.profilePic.fold {
+.profilePic.folded {
   filter: saturate(0);
   filter: brightness(40%);
 }
 .profilePic.empty {
   filter: blur(3px);
 }
-.box-playerInfo.fold {
+.box-playerInfo.folded {
   color: rgb(88, 88, 88);
 }
 
