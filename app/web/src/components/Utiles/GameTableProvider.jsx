@@ -55,18 +55,16 @@ export const GameTableProvider = ({ children }) => {
 
   useEffect(() => {
     if (gameInfo && gameInfo.game && gameInfo.game.players) {
-      const currentPlayer = gameInfo.game.players.find(
-        (player) => player.playerId === userId
-      );
+      const currentPlayer = gameInfo.game.players.find(player => player.playerId === userId);
+      
       if (currentPlayer && currentPlayer.playerCards) {
-        // Assurer que chaque carte a un numéro et une couleur définis
-        const transformedCards = currentPlayer.playerCards
-          .filter(
-            (card) => card.number !== undefined && card.color !== undefined
-          )
-          .map((card) => [card.number.toString(), card.color]);
-        console.log("Transformed Cards:", transformedCards);
-        setPlayerCards(transformedCards);
+        const cardsWithVisibility = currentPlayer.playerCards.map((card, index) => ({
+          number: card.number,
+          color: card.color,
+          isVisible: currentPlayer.cardsVisible ? currentPlayer.cardsVisible[index] : false
+        }));
+
+        setPlayerCards(cardsWithVisibility);
       }
     }
   }, [gameInfo, userId]);

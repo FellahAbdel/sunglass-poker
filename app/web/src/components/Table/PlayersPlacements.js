@@ -3,8 +3,6 @@ import PlayersProfile from "../gameTable/PlayersProfile/PlayersProfile";
 import PlayersPots from "../Table/PlayersPots";
 import { useSelector } from "react-redux";
 
-const initialCardsVisible = Array(2).fill(false);
-
 const PlayersPlacements = ({}) => {
   //playersCardDistributed for each player
   // *** also has been used in CardsPlacements component

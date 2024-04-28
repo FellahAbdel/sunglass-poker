@@ -70,7 +70,9 @@
     "fullHouse": "Full",
     "fourOfKind": "Carré",
     "straightFlush": "Quinte Flush",
-    "royalFlush": "Quinte Flush Royale"
+    "royalFlush": "Quinte Flush Royale",
+    "show":"show",
+    "hide":"hide"
   },
   "gameActionPanel": {
     "raise": "Relancer",
