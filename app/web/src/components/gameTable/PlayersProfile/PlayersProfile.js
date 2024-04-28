@@ -13,24 +13,24 @@ const PlayersProfile = ({
   flippingPlayerCards,
   gotCards,
   playerId,
+  cardsVisible,
 }) => {
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips.toLocaleString();
   const dollarSign = " SC";
 
-  useEffect(() => {
-    // console.log("Cards to display:", cards);
-  }, [cards]);
-
   console.log("Player status (fellah):", status);
   // Fonction pour transformer et valider les cartes
-  const renderCard = (card) => {
-    if (card && card.number !== undefined && card.color !== undefined) {
-      const formattedCard = [card.number.toString(), card.color];
-      // console.log("Formatted card:", formattedCard);
-      return formattedCard;
+  const renderCard = (card, index) => {
+    console.log("cardsVisible[index]", cardsVisible[index]);
+    if (cardsVisible[index] === true) {
+      if (card && card.number !== undefined && card.color !== undefined) {
+        const formattedCard = [card.number.toString(), card.color];
+        console.log("Formatted card:", formattedCard);
+        return formattedCard;
+      }
     }
-    return null; // Gère le cas où la carte est invalide
+    return null;
   };
 
   return (
@@ -57,13 +57,13 @@ const PlayersProfile = ({
       {/* Appliquer renderCard pour chaque carte avant de l'envoyer au composant Card */}
       <Card
         styleClass={`showCardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
-        card={renderCard(cards[0])}
+        card={renderCard(cards[0],0)}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />
       <Card
         styleClass={`showCardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
-        card={renderCard(cards[1])}
+        card={renderCard(cards[1],1)}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />

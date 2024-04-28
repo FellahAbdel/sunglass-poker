@@ -12,13 +12,11 @@ const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
   const dispatch = useDispatch()
 
   const handleShowCard1 = () => {
-    dispatch(actions.showCard(1));
-  };
-  const handleShowCard2 = () => {
     dispatch(actions.showCard(0));
   };
-  console.log("HandCards1", card1);
-  console.log("HandCards2", card2);
+  const handleShowCard2 = () => {
+    dispatch(actions.showCard(1));
+  };
 
   const cardIcons = {
     H: require("./../../assets/images/icons/white/heart.png"),

@@ -3,15 +3,12 @@ import PlayersProfile from "../gameTable/PlayersProfile/PlayersProfile";
 import PlayersPots from "../Table/PlayersPots";
 import { useSelector } from "react-redux";
 
+const initialCardsVisible = Array(2).fill(false);
+
 const PlayersPlacements = ({}) => {
   //playersCardDistributed for each player
   // *** also has been used in CardsPlacements component
-  const [playersCardDistributed, setPlayersCardDistributed] = useState([
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  ]);
-  const [playersCardsShow, setPlayersCardsShow] = useState([
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  ]);
+
 
   const playersInTable = useSelector((state) => state.game.players);
   const [updatedPlayers, setUpdatedPlayers] = useState([]);
@@ -25,13 +22,13 @@ const PlayersPlacements = ({}) => {
   // Définir currentStack avec une valeur par défaut de 0
   const currentStack = gameClass?.pokerTable?.stack || 0;
 
-  // Définir updatedStack à partir de currentStack
-  const [updatedStack, setUpdatedStack] = useState(currentStack);
+  // // Définir updatedStack à partir de currentStack
+  // const [updatedStack, setUpdatedStack] = useState(currentStack);
 
-  useEffect(() => {
-    // Mettre à jour updatedStack si currentStack change
-    setUpdatedStack(currentStack);
-  }, [currentStack]);
+  // useEffect(() => {
+  //   // Mettre à jour updatedStack si currentStack change
+  //   setUpdatedStack(currentStack);
+  // }, [currentStack]);
 
   {
     // console.log("updated players", updatedPlayers);
@@ -49,13 +46,14 @@ const PlayersPlacements = ({}) => {
             // flippingPlayerCards={playersCardsShow[index]}
             flippingPlayerCards={true}
             // gotCards={playersCardDistributed}
+            cardsVisible={player.cardsVisible}
             gotCards={player.playerCards.length !== 0}
             playerId={player.playerId}
           />
         </div>
       ))}
       {/* Add PlayersPots component and pass updatedPlayers as props */}
-      <PlayersPots players={updatedPlayers}/>
+      <PlayersPots players={updatedPlayers} />
     </span>
   );
 };
