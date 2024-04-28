@@ -29,6 +29,7 @@ const GameActionButtons = ({}) => {
 
   useEffect(() => {
     const newRaiseCoin = (coins * sliderValueText) / 100;
+    console.log("newRaiseCoin :", newRaiseCoin);
     setRaiseCoin(newRaiseCoin);
     setCoinsAfterRaise(coins - newRaiseCoin);
   }, [sliderValueText, coins]);
@@ -48,7 +49,7 @@ const GameActionButtons = ({}) => {
     dispatch(actions.bet(amount));
   };
 
-  const handleCheck = () => {
+  const handleCheckOrCall = () => {
     dispatch(actions.check());
   };
 
@@ -70,7 +71,6 @@ const GameActionButtons = ({}) => {
   };
   useEffect(() => {
     if (!showPopup) {
-      setRaiseCoin(0);
       console.log("sliderValueText :", sliderValueText);
       console.log("coins :", coins);
       console.log("raiseCoin :", raiseCoin);
@@ -123,7 +123,7 @@ const GameActionButtons = ({}) => {
           </div>
           <div className={`rangeSlide`}>
             <RaiseSlider
-              initialValue={sliderValueText}
+              initialValue={sliderValueText || 0}
               onSliderChange={handleSliderChange}
             />
           </div>
@@ -141,7 +141,7 @@ const GameActionButtons = ({}) => {
         {/* LE BOUTON CHECK OR CALL  */}
         <Button
           styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
-          onClick={isFocus && handleCheck}
+          onClick={isFocus && handleCheckOrCall}
           label={checkOrCall}
         />
         {/* LE BOUTON FOLD */}

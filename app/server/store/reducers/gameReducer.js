@@ -246,9 +246,15 @@ const gameReducer = (state = initialState, action) => {
               " call for raise of ",
               action.payload.amount
             );
-            state.rooms[action.payload.room].players
-              .find((p) => p.getPlayerId() == action.payload.playerId)
-              .bet(action.payload.amount);
+            // state.rooms[action.payload.room].players
+            //   .find((p) => p.getPlayerId() == action.payload.playerId)
+            //   .bet(action.payload.amount);
+            state.rooms[action.payload.room].game.pokerTable.playerBet(
+                state.rooms[action.payload.room].game.players
+                .find((p) => p.getPlayerId() == action.payload.playerId),
+                action.payload.amount
+                );
+                
             state.rooms[action.payload.room].game.rotateFocus();
           }
       return { ...state };
