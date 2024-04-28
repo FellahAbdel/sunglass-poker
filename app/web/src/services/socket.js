@@ -54,9 +54,13 @@ export const comm = {
       store.dispatch({ payload: data.payload, type: data.type });
     });
 
+    // When the client receive the status of the room 
+    // we console log the data.
     socket.on("status", (data) => this.getStatus(data));
 
-    socket.on("refresh", (data) => this.refresh(data));
+    // When the client receive an refresh event, we call the refresh function
+    //
+    socket.on("refresh", (data) => this.handleNewsRefresh(data));
   },
 
   status: function () {
@@ -66,13 +70,15 @@ export const comm = {
       sessionStorage.getItem("room"),
       sessionStorage.getItem("authToken")
     );
+
+    // We emit a status event to the server.
     socket.emit("status", {
       room: sessionStorage.getItem("room"),
       id: sessionStorage.getItem("authToken"),
     });
   },
 
-  refresh: function (data) {
+  handleNewsRefresh: function (data) {
     console.log(
       "Receive news to refresh room",
       data,
