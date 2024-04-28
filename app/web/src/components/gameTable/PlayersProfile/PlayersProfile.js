@@ -4,6 +4,7 @@ import ProgressBar from "../../Utiles/ProgressBar";
 import Card from "../Card/Card";
 import { useTranslation } from "../../Utiles/Translations";
 import AvatarDisplay from "../../AvatarDisplay/AvatarDisplay.jsx";
+import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
 const PlayersProfile = ({
   status,
@@ -18,6 +19,8 @@ const PlayersProfile = ({
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips.toLocaleString();
   const dollarSign = " SC";
+  const { isFocus } = useGameTable();
+
 
   console.log("Player status (fellah):", status);
   // Fonction pour transformer et valider les cartes
@@ -35,6 +38,9 @@ const PlayersProfile = ({
 
   return (
     <div className={`container-onGameProfile`}>
+      <div className={`container-profileMessage ${isFocus ? "profileMessageShow" : ""}`}>
+        Your Turn !
+      </div>
       <div className={`box-status ${status}`}>
         {status === "waiting" ? (
           <ProgressBar
