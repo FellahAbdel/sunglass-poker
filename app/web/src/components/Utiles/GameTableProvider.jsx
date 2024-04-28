@@ -27,6 +27,7 @@ export const GameTableProvider = ({ children }) => {
   const { userId } = useAuth();
   const gameInfo = useSelector((state) => state.game);
   const [playerCards, setPlayerCards] = useState([]);
+  const [playerMoney, setPlayerMoney] = useState(0);
 
   useEffect(() => {
     const isMaster =
@@ -52,25 +53,35 @@ export const GameTableProvider = ({ children }) => {
       dispatch({ type: SET_FOCUS, payload: isFocus });
     }
   }, [gameInfo?.game?.focus, userId]);
-
+  
+  // Mettre à jour l'argent du joueur
   useEffect(() => {
     if (gameInfo && gameInfo.game && gameInfo.game.players) {
-      const currentPlayer = gameInfo.game.players.find(player => player.playerId === userId);
+      const currentPlayer = gameInfo.game.players.find(
+        (player) => player.playerId === userId
+      );
       
-      if (currentPlayer && currentPlayer.playerCards) {
-        const cardsWithVisibility = currentPlayer.playerCards.map((card, index) => ({
-          number: card.number,
-          color: card.color,
-          isVisible: currentPlayer.cardsVisible ? currentPlayer.cardsVisible[index] : false
-        }));
-
-        setPlayerCards(cardsWithVisibility);
+      if (currentPlayer) {
+        setPlayerMoney(currentPlayer.playerMoney);
+        
+        // Mettre à jour les cartes du joueur
+        if (currentPlayer.playerCards) {
+          const cardsWithVisibility = currentPlayer.playerCards.map((card, index) => ({
+            number: card.number,
+            color: card.color,
+            isVisible: currentPlayer.cardsVisible
+              ? currentPlayer.cardsVisible[index]
+              : false,
+          }));
+          setPlayerCards(cardsWithVisibility);
+        }
       }
     }
   }, [gameInfo, userId]);
 
+
   return (
-    <GameTableContext.Provider value={{ ...state, playerCards }}>
+    <GameTableContext.Provider value={{ ...state, playerCards, playerMoney }}>
       {children}
     </GameTableContext.Provider>
   );
