@@ -119,15 +119,6 @@ const Table = ({}) => {
                 {/* <PlayersPots/>  */}
                 <TotalPot />
               </>)}
-
-          {/* Afficher le texte lorsque le focus est sur le joueur */}
-          {isFocus && (
-            <TextGlitch
-              children={"A vous de jouer ! "}
-              styleClass={"glitch-accueil"}
-              glitchStyle={"glitchStyle-accueil"}
-            />
-          )}
         </>
       )}
       {/*All the panels other than game itself are included in window component*/}
