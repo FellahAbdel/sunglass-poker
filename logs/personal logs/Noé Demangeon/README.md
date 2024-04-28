@@ -132,4 +132,8 @@
 
 2024/04/26 : 5h00           Lecture et compréhension code connection back/front. Implémentation changement status partie, Bouton start game pour le master
 
-TEMPS TOTAL: 131h30min
+2024/04/27 : 6h00           GameTableProvider Focus et IsMaster fonctionnel. Privatisation données. Affichage cartes. Début showCards.
+
+2024/04/28 : 2h00           ShowCards et HideCards fonctionnel.
+
+TEMPS TOTAL: 139h30min
