@@ -141,13 +141,13 @@ const GameActionButtons = ({}) => {
         {/* LE BOUTON CHECK OR CALL  */}
         <Button
           styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
-          onClick={isFocus && handleCheckOrCall}
+          onClick={isFocus ? handleCheckOrCall : undefined}
           label={checkOrCall}
         />
         {/* LE BOUTON FOLD */}
         <Button
           styleClass={`btn-fold btn-mainAction ${!isFocus && "disabled"}`}
-          onClick={isFocus && handleFold}
+          onClick={isFocus ? handleFold : undefined}
           label={getTranslatedWord("gameActionPanel.fold")}
         />
       </div>
