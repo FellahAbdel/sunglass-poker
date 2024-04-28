@@ -294,7 +294,13 @@
   height: 30vh;
 
   border-radius: 250px 250px 180px 180px;
-  transition: width 1s ease, height 1s ease;
+  transition: width 1s ease, height 1s ease, border 1s ease;
+}
+.table-lineAround-waiting{
+  width:40vw;
+  height: 20vh;
+  border: 3px solid rgba(255, 255, 255, 0.317);
+
 }
 .disappear{
   width: 0;
@@ -410,4 +416,17 @@
   color:white;
   font-size: 1.5vw;
   transition: bottom 1s ease;
+}
+.container-waiting{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap:1vh;
+  z-index: 1;
+}
+.txt-waiting{
+  font-size: 2vw;
+  color: white;
 }

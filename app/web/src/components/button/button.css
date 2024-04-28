@@ -227,3 +227,12 @@ Button:hover{
   margin-right: 5%;
   background-color: #033f61;
 }
+
+.btn-gameStart2{
+  width: 15vw;
+  height: 4vh;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px black;
+  font-size: 1vw;
+  font-weight: bold;
+}

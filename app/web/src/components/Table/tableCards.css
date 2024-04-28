@@ -207,7 +207,7 @@
   position: absolute;
   font-size: 0.7vw;
   font-weight: 600;
-  z-index: 1;
+  z-index: unset;
 }
 #light .container-playerPots{
   color: black;
