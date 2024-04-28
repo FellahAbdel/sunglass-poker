@@ -83,46 +83,43 @@ const Table = ({}) => {
     <div className={classes.containerTable}>
       {/* the white border line around the table in the middle */}
       <div
-        className={`${!isWindowOpen ? "table-lineAround" : ""} ${
-          !isGameTableVisible || isWindowOpen ? "disappear" : ""
-        }`}
+        className={`${!isWindowOpen ? "table-lineAround" : ""} 
+        ${!isGameTableVisible || isWindowOpen ? "disappear" : ""}
+        ${showWaitingMessage ? "table-lineAround-waiting" : ""}`}
       />
 
       {/* Game Components */}
       {isGameTableVisible && !isWindowOpen && (
         <>
-          {/*DISTRIBUTION ANIMATION :
-           in CardPlacements you have the distribution
-           animation which gets handled with a table called 
-           "playersCardDistributed" with 10 booleen members
-           representing each players that gets a card
-           
-           playersCardDistributed is also used in PlayersPlacements
-           that shows which players gets the cards
-           */}
-          <CardsPlacements />{" "}
           {/*NEEDS DealingFlop and playersCardDistribution in it*/}
-          <PlayersPlacements />{" "}
-          {/*NEEDS playersCardsShow and playersCardDistribution in it*/}
-          {/* <PlayersPots/>  */}
-          <TotalPot />
+          <PlayersPlacements />
           {/* Afficher le bouton "Commencer la partie" si le bouton est visible */}
-          {showWaitingMessage && (
-            <>
-              <TextGlitch
-                children={"En attente de joueurs"}
-                styleClass={"glitch-accueil"}
-                glitchStyle={"glitchStyle-accueil"}
-              />
-              {isMaster && (
-                <Button
-                  styleClass="btn-connectionDefault login-button back-color1"
-                  label={"Commencer la partie"}
-                  onClick={() => startGame()}
-                />
-              )}
-            </>
-          )}
+          {showWaitingMessage ? (
+              <div className="container-waiting">
+                <div className="txt-waiting">En attente des joueurs ...</div>
+                {isMaster && (
+                  <Button
+                    styleClass="btn-gameStart2 back-color1"
+                    label={"Commencer la partie"}
+                    onClick={() => startGame()}
+                  />)}
+              </div>
+              ) : (<>
+                  {/*DISTRIBUTION ANIMATION :
+                  in CardPlacements you have the distribution
+                  animation which gets handled with a table called 
+                  "playersCardDistributed" with 10 booleen members
+                  representing each players that gets a card
+                  
+                  playersCardDistributed is also used in PlayersPlacements
+                  that shows which players gets the cards
+                  */}
+                <CardsPlacements />
+                {/*NEEDS playersCardsShow and playersCardDistribution in it*/}
+                {/* <PlayersPots/>  */}
+                <TotalPot />
+              </>)}
+
           {/* Afficher le texte lorsque le focus est sur le joueur */}
           {isFocus && (
             <TextGlitch

@@ -72,7 +72,7 @@ module.exports = function (
       if (!socket.rooms.has(token)) {
         try {
           const decoded = jwt.verify(token, process.env.JWT_SECRET);
-          console.log("decoded : ", decoded);
+          // console.log("decoded : ", decoded);
 
           socket.request.session.save();
           csl.log(
@@ -352,7 +352,7 @@ module.exports = function (
     });
 
     socket.on("startGame", (data) => {
-      console.log("Received startGame event with data:", data);
+      // console.log("Received startGame event with data:", data);
       const room = data.room;
       const userId = data.userId;
       gameController.startGame(room, userId);

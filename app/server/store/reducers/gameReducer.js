@@ -224,18 +224,8 @@ const gameReducer = (state = initialState, action) => {
       };
     case actions.FOLD:
       console.log(state.rooms[action.payload.room], action);
-      console.log(
-        "position: ",
-        state.rooms[action.payload.room].players.findIndex(
-          (p) => p.getPlayerId == action.payload.playerId
-        )
-      );
       if (action.payload !== undefined)
-        if (
-          state.rooms[action.payload.room].players.findIndex(
-            (p) => p.getPlayerId() == action.payload.playerId
-          ) === state.rooms[action.payload.room].game.focus
-        ) {
+        {
           csl.log("playerAction", "call for fold");
           state.rooms[action.payload.room].players
             .find((p) => p.getPlayerId() == action.payload.playerId)
@@ -250,11 +240,7 @@ const gameReducer = (state = initialState, action) => {
       console.log(state.rooms[action.payload.room], action);
       if (action.payload !== undefined)
         if (action.payload.amount !== undefined)
-          if (
-            state.rooms[action.payload.room].players.findIndex(
-              (p) => p.getPlayerId() == action.payload.playerId
-            ) === state.rooms[action.payload.room].game.focus
-          ) {
+          {
             csl.log(
               "playerAction",
               " call for raise of ",
@@ -270,11 +256,7 @@ const gameReducer = (state = initialState, action) => {
       console.log(state.rooms[action.payload.room], action);
       if (action.payload !== undefined)
         if (action.payload.amount !== undefined)
-          if (
-            state.rooms[action.payload.room].players.findIndex(
-              (p) => p.getPlayerId() == action.payload.playerId
-            ) === state.rooms[action.payload.room].game.focus
-          ) {
+          {
             csl.log(
               "playerAction",
               " call for check or call",
@@ -288,6 +270,7 @@ const gameReducer = (state = initialState, action) => {
       return { ...state };
 
     case actions.SHOW_CARD:
+      console.log(state.rooms[action.payload.room], action);
       const {
         room: showRoomId,
         playerId: showPlayerId,
@@ -295,6 +278,7 @@ const gameReducer = (state = initialState, action) => {
       } = action.payload;
       const showRoom = state.rooms[showRoomId];
       if (showRoom) {
+        csl.log("playerAction", "call for show card", showCardIndex);
         const player = showRoom.players.find(
           (p) => p.getPlayerId() === showPlayerId
         );
@@ -305,6 +289,7 @@ const gameReducer = (state = initialState, action) => {
       return { ...state };
 
     case actions.HIDE_CARD:
+      console.log(state.rooms[action.payload.room], action);
       const {
         room: hideRoomId,
         playerId: hidePlayerId,
@@ -312,11 +297,14 @@ const gameReducer = (state = initialState, action) => {
       } = action.payload;
       const hideRoom = state.rooms[hideRoomId];
       if (hideRoom) {
-        const player = hideRoom.players.find(
-          (p) => p.getPlayerId() === hidePlayerId
-        );
-        if (player) {
-          player.hideCard(hideCardIndex);
+        {
+          csl.log("playerAction", "call for hide card", hideCardIndex);
+          const player = hideRoom.players.find(
+            (p) => p.getPlayerId() === hidePlayerId
+          );
+          if (player) {
+            player.hideCard(hideCardIndex);
+          }
         }
       }
       return { ...state };

@@ -63,7 +63,10 @@
     "straightFlush": "Straight Flush",
     "royalFlush": "Royal Flush",
     "show":"Show",
-    "showB":"Show both"
+    "hide":"Hide",
+    "showB":"Show both",
+    "hideB":"Hide both"
+
   },
   "gameActionPanel": {
     "raise": "Raise",

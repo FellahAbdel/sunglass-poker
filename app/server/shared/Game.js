@@ -2,6 +2,8 @@ const hands = require("./score-engine/index.js");
 const Deck = require("./Deck.js");
 const PokerTable = require("./PokerTable.js");
 const scoreEngineUtils = require("./ScoreEngineUtils.js");
+const Players= require("./Player.js");
+
 
 class Game {
   master = false;
@@ -57,6 +59,11 @@ class Game {
   }
   rotateFocus() {
     this.focus = (this.focus + 1) % this.players.length;
+    csl.log("STATUT DU JOUEUR",this.focus.state);
+    if (this.focus.state=="Folded"){
+      this.rotateFocus();
+    }
+
     if (this.focus === this.startingPlayerIndex) {
       this.advanceStage();
     }

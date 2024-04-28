@@ -198,7 +198,21 @@ module.exports = gameController = {
 
   playerAction: function(action){
     csl.log('PLAYER_ACTION','Player is affecting the game : ',action);
-    this.dispatch(action.payload.playerId,action);
+    if(action.type === actionsTypes.SHOW_CARD ||
+      action.type === actionsTypes.HIDE_CARD){
+      this.dispatch(action.payload.playerId,action);
+    }
+    else{
+      state = store.getState()
+      if(state.game.rooms === undefined) return
+      if(state.game.rooms[action.payload.room] === undefined) return
+      room = state.game.rooms[action.payload.room]
+      csl.log("playerAction",room)
+      if(room.game.players.findIndex(
+        (p) => p.getPlayerId() == action.payload.playerId) === room.game.focus){
+          this.dispatch(action.payload.playerId,action);
+        }
+    }
     this.broadcastStatus(action.payload.room);
   },
 

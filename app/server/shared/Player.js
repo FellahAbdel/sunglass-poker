@@ -1,5 +1,5 @@
 class Player {
-  cardsVisible = [true, false];
+  cardsVisible = [false, false];
   timeLastAnswer = 0;
   playerId = 0;
   playerState = "";
@@ -35,7 +35,8 @@ class Player {
       timeLastAnswer: this.timeLastAnswer,
       playerMoney: this.playerMoney,
       playerCards: this.playerCards.map((card, index) => this.cardsVisible[index] || id === this.playerId ? card : null),
-      playerActionLog: this.playerActionLog
+      playerActionLog: this.playerActionLog,
+      cardsVisible: this.cardsVisible
     };
     return view;
   }
