@@ -3,6 +3,7 @@ const Deck = require("./Deck.js");
 const PokerTable = require("./PokerTable.js");
 const scoreEngineUtils = require("./ScoreEngineUtils.js");
 const Players = require("./Player.js");
+const { clearScreenDown } = require("readline");
 
 class Game {
   master = false;
@@ -70,7 +71,7 @@ class Game {
     const originalFocus = this.focus;
 
     this.focus = (this.focus + 1) % this.players.length;
-
+    
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
@@ -79,6 +80,12 @@ class Game {
       }
       this.focus = (this.focus + 1) % this.players.length;
     }
+
+    if (this.focus === 0) {
+      console.log("J'avance dans la partie");
+      this.advanceStage();
+    }
+
   }
 
   foldPlayer(playerId) {
@@ -169,7 +176,7 @@ class Game {
         player.addCard(this.deck.deal());
       }
     });
-    this.advanceStage();
+    
   }
 
   // start() {
@@ -208,7 +215,9 @@ class Game {
   */
   flop() {
     // Deal 3 cards for the flop
+    console.log("je suis RENTREr DANS FLOP");
     const flopCards = this.deck.deal3Cards();
+    console.log("les flopCards:",flopCards);
 
     // If dealCards() doesn't return exactly 3 cards, handle the error
     if (flopCards.length !== 3) {
@@ -218,6 +227,7 @@ class Game {
 
     // Update the community cards on the poker table with the flop cards
     this.pokerTable.communityCards = [...flopCards];
+    console.log(this.pokerTable.communityCards = [...flopCards]);
   }
 
   /*
@@ -240,6 +250,7 @@ class Game {
 
     switch (this.currentStage) {
       case "flop":
+        console.log("PASSE PAR LE CASE FLOP");
         this.flop();
         break;
       case "turn":
