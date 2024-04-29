@@ -67,7 +67,7 @@ export const GameTableProvider = ({ children }) => {
         
         // Mettre à jour les cartes du joueur
         if (currentPlayer.playerCards) {
-          const cardsWithVisibility = currentPlayer.playerCards.map((card, index) => ({
+          const cardsWithVisibility = currentPlayer?.playerCards?.map((card, index) => ({
             number: card.number,
             color: card.color,
             isVisible: currentPlayer.cardsVisible

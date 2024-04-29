@@ -3,7 +3,7 @@ import PlayersProfile from "../gameTable/PlayersProfile/PlayersProfile";
 import PlayersPots from "../Table/PlayersPots";
 import { useSelector } from "react-redux";
 
-const PlayersPlacements = ({}) => {
+const PlayersPlacements = ({showMiddle}) => {
   //playersCardDistributed for each player
   // *** also has been used in CardsPlacements component
 
@@ -27,7 +27,7 @@ const PlayersPlacements = ({}) => {
 
   return (
     <span className={`profiles`}>
-      {updatedPlayers.map((player, index) => (
+      {updatedPlayers?.map((player, index) => (
         <div key={`profile${index}`} className={`profile profile${index}`}>
           <PlayersProfile
             status={player.status}
@@ -45,7 +45,7 @@ const PlayersPlacements = ({}) => {
         </div>
       ))}
       {/* Add PlayersPots component and pass updatedPlayers as props */}
-      <PlayersPots players={updatedPlayers} />
+      <PlayersPots players={updatedPlayers} isVisible={showMiddle}/>
     </span>
   );
 };

@@ -92,7 +92,7 @@ const Table = ({}) => {
       {isGameTableVisible && !isWindowOpen && (
         <>
           {/*NEEDS DealingFlop and playersCardDistribution in it*/}
-          <PlayersPlacements />
+          <PlayersPlacements showMiddle={!showWaitingMessage}/>
           {/* Afficher le bouton "Commencer la partie" si le bouton est visible */}
           {showWaitingMessage ? (
               <div className="container-waiting">

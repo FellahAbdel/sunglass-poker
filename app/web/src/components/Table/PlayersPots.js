@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "../Utiles/Translations";
 import "./table.css";
 
-const PlayersPots = ({ players = []}) => {
+const PlayersPots = ({ players = [] , isVisible}) => {
   return (
     <div className="container-playerPots">
-      {players.map((player, index) => (
+      {isVisible && players?.map((player, index) => (
         <div key={index} className={`playerPot${index}`}>
-          {player.currentBet} SC
+          {player.currentBet || 0} SC
         </div>
       ))}
     </div>
