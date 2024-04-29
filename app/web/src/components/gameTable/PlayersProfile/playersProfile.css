@@ -117,10 +117,10 @@
   box-shadow: unset;
   background-color: #00a674;
 }
-#dark .box-status.raised {
+#dark .box-status.raise {
   box-shadow: inset 0 0 10px 1px rgb(255, 0, 0), 0 0 10px 1px rgb(255, 0, 0);
 }
-#light .box-status.raised {
+#light .box-status.raise {
   background-color: rgb(254, 111, 68);
   box-shadow: inset 0 0 10px 1px rgb(255, 0, 0), 0 0 10px 1px rgb(255, 0, 0);
 }
