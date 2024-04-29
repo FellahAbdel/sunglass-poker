@@ -55,9 +55,7 @@ class Player {
     }
   }
 
-  fold() {
-    this.isActive = false;
-  }
+
 
   settimeLastAnswer(t) {
     this.timeLastAnswer = t;
@@ -69,7 +67,7 @@ class Player {
   // Methods to get and set status
   setStatus(status) {
     this.status = status;
-    this.isActive = status !== 'Folded';
+    this.isActive = status !== 'folded';
   }
 
   getStatus() {
@@ -157,6 +155,16 @@ class Player {
 
   isPlayerActive() {
     return this.playerState === "active";
+  }
+
+  fold() {
+    this.status = "folded";
+    this.isActive = false;
+  }
+  
+
+  check(){
+    this.status = "checked";
   }
 
   newRoundReset() {

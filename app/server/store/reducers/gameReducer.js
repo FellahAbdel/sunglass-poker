@@ -223,57 +223,75 @@ const gameReducer = (state = initialState, action) => {
         ...state,
       };
     case actions.FOLD:
-      console.log("Handling FOLD action for player", action.payload.playerId, "in room", action.payload.room);
+      console.log(
+        "Handling FOLD action for player",
+        action.payload.playerId,
+        "in room",
+        action.payload.room
+      );
       console.log(state.rooms[action.payload.room], action);
-      if (action.payload !== undefined)
-        {
-          csl.log("playerAction", "call for fold");
-          state.rooms[action.payload.room].players
-            .find((p) => p.getPlayerId() == action.payload.playerId)
-            .setPlayerState("Folded");
-          state.rooms[action.payload.room].players
-            .find((p) => p.getPlayerId() == action.payload.playerId)
-            .setStatus("Folded");
-          state.rooms[action.payload.room].game.rotateFocus();
+
+      if (action.payload && action.payload.playerId) {
+        const room = state.rooms[action.payload.room];
+        const player = room.players.find(
+          (p) => p.getPlayerId() === action.payload.playerId
+        );
+
+        if (player) {
+          csl.log("playerAction", "Player is folding.");
+          room.game.fold(player);
+        } else {
+          console.error("Player not found for the fold action");
         }
+      } else {
+        console.error("Invalid payload for Fold action");
+      }
+
       return { ...state };
+      
     case actions.BET:
       console.log(state.rooms[action.payload.room], action);
       if (action.payload !== undefined)
-        if (action.payload.amount !== undefined)
-          {
-            csl.log(
-              "playerAction",
-              " call for raise of ",
-              action.payload.amount
-            );
-            // state.rooms[action.payload.room].players
-            //   .find((p) => p.getPlayerId() == action.payload.playerId)
-            //   .bet(action.payload.amount);
-            state.rooms[action.payload.room].game.pokerTable.playerBet(
-                state.rooms[action.payload.room].game.players
-                .find((p) => p.getPlayerId() == action.payload.playerId),
-                action.payload.amount
-                );
-                
-            state.rooms[action.payload.room].game.rotateFocus();
-          }
+        if (action.payload.amount !== undefined) {
+          csl.log("playerAction", " call for raise of ", action.payload.amount);
+          // state.rooms[action.payload.room].players
+          //   .find((p) => p.getPlayerId() == action.payload.playerId)
+          //   .bet(action.payload.amount);
+          state.rooms[action.payload.room].game.pokerTable.playerBet(
+            state.rooms[action.payload.room].game.players.find(
+              (p) => p.getPlayerId() == action.payload.playerId
+            ),
+            action.payload.amount
+          );
+
+          state.rooms[action.payload.room].game.rotateFocus();
+        }
       return { ...state };
     case actions.CHECK:
+      console.log(
+        "Handling CHECK action for player",
+        action.payload.playerId,
+        "in room",
+        action.payload.room
+      );
       console.log(state.rooms[action.payload.room], action);
-      if (action.payload !== undefined)
-        if (action.payload.amount !== undefined)
-          {
-            csl.log(
-              "playerAction",
-              " call for check or call",
-              action.payload.amount
-            );
-            state.rooms[action.payload.room].players
-              .find((p) => p.getPlayerId() == action.payload.playerId)
-              .check();
-            state.rooms[action.payload.room].game.rotateFocus();
-          }
+
+      if (action.payload && action.payload.playerId) {
+        const room = state.rooms[action.payload.room];
+        const player = room.players.find(
+          (p) => p.getPlayerId() === action.payload.playerId
+        );
+
+        if (player) {
+          csl.log("playerAction", "Player is checking.");
+          room.game.check(player);
+        } else {
+          console.error("Player not found for the check action");
+        }
+      } else {
+        console.error("Invalid payload for CHECK action");
+      }
+
       return { ...state };
 
     case actions.SHOW_CARD:

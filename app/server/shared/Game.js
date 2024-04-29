@@ -88,6 +88,17 @@ class Game {
     }
   }
 
+  fold(player){
+    player.fold();
+    this.rotateFocus()
+  }
+
+  check(player){
+    player.check();
+    this.rotateFocus()
+  }
+  
+
   // startNewRound() {
   //   if (this.state === 'active') {
   //     this.startingPlayerIndex = (this.blind + 2) % this.players.length;
