@@ -147,3 +147,5 @@
 ### Semaine 12 : 22 Avril - 29 Avril | Temps Totale: 
 
 * 2024/04/23 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Réunion avec les développeurs.</i>
+
+* 2024/04/29 : <b>1h30</b> <br/> Travail individuel : <i> Surveillance des journaux. Lecture des commits.  Demandes de feedback personnalisé. Rédaction du compte-rendu hebdomadaire. </i>
