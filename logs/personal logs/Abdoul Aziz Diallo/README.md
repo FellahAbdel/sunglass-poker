@@ -98,3 +98,15 @@
 |       | Review Victo's debug                                                           |                  | 30min      |           |
 | 19/04 | Work on creating rooms (front-end part)                                        |                  | 3h30min    |           |
 | 21/04 | Merge conflict resolution + re-adapt my code and mael's for the rooms creation |                  | 2h20min    |           |
+
+## Week 11 - _Total: 23h00_
+
+| Date     | Description                                                                                                                                                                                                                        | Skills developed | Time Spent | Resources |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------- | --------- |
+| 22-23/04 | Comprehension of sockets code to debug (I wanted to get the response from server to update the store and then display the game room. Finally did it but Victor's changes something and it's not working anymore, I don't know why. |                  | 3h         |           |
+|          | Trying to stabilize room creation, more understanding of the Victor's                                                                                                                                                              |                  | 4h         |           |
+|          | Finally did it                                                                                                                                                                                                                     |                  | 3h         |           |
+| 24-25/04 | Work on the server side to update some game logic and make the shuffle fonctionnal between two players                                                                                                                             |                  | 6h         |           |
+| 26/04    | Try to make the total pot dynamic                                                                                                                                                                                                  |                  | 2h         |           |
+|          | Create a new component that allow displaying the total pot uniquely once for all                                                                                                                                                   |                  | 2h         |           |
+| 28/04    | Raise button work (there is some bugs)                                                                                                                                                                                             |                  | 3h         |           |
