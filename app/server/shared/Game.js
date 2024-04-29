@@ -88,16 +88,27 @@ class Game {
     }
   }
 
-  fold(player){
-    player.fold();
-    this.rotateFocus()
+  isPlayersTurn(playerId) {
+    if (this.focus === null || this.players[this.focus].playerId !== playerId) {
+      console.error("It's not this player's turn.");
+      return false;
+    }
+    return true;
   }
 
-  check(player){
-    player.check();
-    this.rotateFocus()
+  fold(player) {
+    if (this.isPlayersTurn(player.getPlayerId())) {
+      player.fold();
+      this.rotateFocus();
+    }
   }
-  
+
+  check(player) {
+    if (this.isPlayersTurn(player.getPlayerId())) {
+      player.check();
+      this.rotateFocus();
+    }
+  }
 
   // startNewRound() {
   //   if (this.state === 'active') {
