@@ -112,5 +112,8 @@
 
 --2024/04 SEMAINE 4: 12H (TOTAL: 86H)
 
+2024/O4/30  45min   Mise en place de l'avancement dans la partie, il manque juste l'affichage mais les cartes sont bien tirer(test effectué avec des consoles log)
 
-TEMPS TOTAL: 86H  
+--2024/04 SEMAINE 5: 45min (TOTAL: 86H45)
+
+TEMPS TOTAL: 86H45  
