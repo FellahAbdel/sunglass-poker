@@ -64,18 +64,17 @@ class Game {
   }
 
   rotateFocus() {
-    let initialFocus = this.focus;
-    do {
-      this.focus = (this.focus + 1) % this.players.length;
-    } while (
-      !this.activePlayers.some(
-        (p) => p.playerId === this.players[this.focus].playerId
-      ) &&
-      this.focus !== initialFocus
-    );
+    const originalFocus = this.focus;
 
-    if (this.focus === this.startingPlayerIndex) {
-      this.advanceStage();
+    this.focus = (this.focus + 1) % this.players.length;
+
+    while (!this.players[this.focus].isActive) {
+      if (this.focus === originalFocus) {
+        console.log("No active players available. Setting focus to null.");
+        this.focus = null;
+        return;
+      }
+      this.focus = (this.focus + 1) % this.players.length;
     }
   }
 
