@@ -48,9 +48,10 @@ export const GameTableProvider = ({ children }) => {
     if (gameInfo && gameInfo.game && gameInfo.game.focus != null) {
       const focusPlayerId = gameInfo.game.players[gameInfo.game.focus].playerId;
       const isFocus = focusPlayerId === userId;
-      // console.log("Focus:", gameInfo.game.focus);
-      // console.log("Est-ce que je suis focus:", isFocus);
       dispatch({ type: SET_FOCUS, payload: isFocus });
+    } else {
+      // Si 'focus' est null ou non défini, assurez-vous de réinitialiser isFocus
+      dispatch({ type: SET_FOCUS, payload: false });
     }
   }, [gameInfo?.game?.focus, userId]);
   
