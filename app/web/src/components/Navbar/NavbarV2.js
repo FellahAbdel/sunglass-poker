@@ -197,7 +197,7 @@ const Navbar = ({}) => {
           iconSrc={require("./../assets/images/icons/white/password-repeat.png")}
         />
 
-        {isLogged && (
+        {isLogged && !isGameTableVisible && (
           <Button
             label={getTranslatedWord("shop.shop")}
             onClick={() => openWindow("shop")}
