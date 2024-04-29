@@ -150,9 +150,9 @@ const GameActionButtons = ({}) => {
           label={getTranslatedWord("gameActionPanel.fold")}
         />
       </div>
-      <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
+      {/* <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
         <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />
-      </div>
+      </div> */}
     </div>
   );
 };
