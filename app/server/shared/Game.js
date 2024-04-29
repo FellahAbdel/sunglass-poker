@@ -15,7 +15,8 @@ class Game {
     blind = 0,
     focus = null,
     currentStage = "preflop",
-    state = "waiting"
+    state = "waiting",
+    total = 0,
   ) {
     this.activePlayers = null;
     this.players = players;
@@ -26,6 +27,7 @@ class Game {
     this.focus = focus;
     this.currentStage = currentStage;
     this.state = state;
+    this.total = total;
   }
 
   getForPlayer(id) {
@@ -39,7 +41,8 @@ class Game {
       this.focus,
       this.currentStage,
       this.state,
-      this.activePlayers
+      this.activePlayers,
+      this.total
     );
     return g;
   }
@@ -107,6 +110,17 @@ class Game {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.check();
       this.rotateFocus();
+    }
+  }
+
+  bet(player, amount) {
+    if (this.isPlayersTurn(player.getPlayerId())) {
+      if (player.getPlayerMoney() > amount) {
+        player.bet(amount);
+        this.total+=amount;
+
+        this.rotateFocus();
+      }
     }
   }
 

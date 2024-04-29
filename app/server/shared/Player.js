@@ -57,6 +57,7 @@ class Player {
 
 
 
+
   settimeLastAnswer(t) {
     this.timeLastAnswer = t;
   }
@@ -165,6 +166,14 @@ class Player {
 
   check(){
     this.status = "checked";
+  }
+
+  bet(amount){
+    if(this.playerMoney>amount){
+      this.currentBet=amount;
+      this.playerMoney-=amount;
+      this.status = "raise";
+    }
   }
 
   newRoundReset() {

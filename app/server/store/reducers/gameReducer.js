@@ -21,17 +21,17 @@ const begin = (state) => {
   const playersInRoom = state.game.players;
 
   // Start the game
-  var posBigBlind = state.game.blind;
-  var posSmallBlind = (posBigBlind + 1) % playersInRoom.length;
-  var blind = 20;
-  playersInRoom[posBigBlind].bet(blind * 2);
-  playersInRoom[posSmallBlind].bet(blind);
+  //var posBigBlind = state.game.blind;
+  //var posSmallBlind = (posBigBlind + 1) % playersInRoom.length;
+  //var blind = 20;
+  //playersInRoom[posBigBlind].bet(blind * 2);
+  //playersInRoom[posSmallBlind].bet(blind);
   //state.game.focus = (posSmallBlind + 1) % playersInRoom.length;
 
   // Distribute blinds
-  state.game.pokerTable.playerBet(state.game.players[posBigBlind], blind * 2);
+  //state.game.pokerTable.playerBet(state.game.players[posBigBlind], blind * 2);
 
-  state.game.pokerTable.playerBet(state.game.players[posSmallBlind], blind);
+  //state.game.pokerTable.playerBet(state.game.players[posSmallBlind], blind);
 
   //state.game.start();
   return {
@@ -248,25 +248,27 @@ const gameReducer = (state = initialState, action) => {
       }
 
       return { ...state };
-      
+
     case actions.BET:
       console.log(state.rooms[action.payload.room], action);
-      if (action.payload !== undefined)
-        if (action.payload.amount !== undefined) {
-          csl.log("playerAction", " call for raise of ", action.payload.amount);
-          // state.rooms[action.payload.room].players
-          //   .find((p) => p.getPlayerId() == action.payload.playerId)
-          //   .bet(action.payload.amount);
-          state.rooms[action.payload.room].game.pokerTable.playerBet(
-            state.rooms[action.payload.room].game.players.find(
-              (p) => p.getPlayerId() == action.payload.playerId
-            ),
-            action.payload.amount
-          );
+      if (action.payload && action.payload.playerId) {
+        csl.log("playerAction", " call for raise of ", action.payload.amount);
+        const room = state.rooms[action.payload.room];
+        const player = room.players.find(
+          (p) => p.getPlayerId() === action.payload.playerId
+        );
 
-          state.rooms[action.payload.room].game.rotateFocus();
+        if (player) {
+          csl.log("playerAction", "Player is beting.");
+          room.game.bet(player, action.payload.amount);
+        } else {
+          console.error("Player not found for the bet action");
         }
+      } else {
+        console.error("Invalid payload for bet action");
+      }
       return { ...state };
+
     case actions.CHECK:
       console.log(
         "Handling CHECK action for player",

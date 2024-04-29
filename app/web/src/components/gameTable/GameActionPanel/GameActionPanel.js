@@ -45,6 +45,7 @@ const GameActionButtons = ({}) => {
   };
 
   const handleBet = (amount) => {
+    amount=Math.round(amount);
     dispatch(actions.bet(amount));
   };
 
@@ -54,7 +55,7 @@ const GameActionButtons = ({}) => {
 
   //console.log(pot)
   const handlePercentageButton = (percentage) => {
-    const newValue = coins * percentage;
+    const newValue = Math.round(coins * percentage);
     setRaiseCoin(newValue);
     setSliderValueText(percentage * 100);
   };

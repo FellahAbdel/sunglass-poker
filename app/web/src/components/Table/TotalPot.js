@@ -9,7 +9,7 @@ const TotalPot = () => {
   const gameClass = useSelector((state) => state.game.game);
 
   // Définir currentStack avec une valeur par défaut de 0
-  const currentStack = gameClass?.pokerTable?.stack || 0;
+  const currentStack = gameClass?.game?.total || 0;
 
   // Définir updatedStack à partir de currentStack
   const [updatedStack, setUpdatedStack] = useState(currentStack);

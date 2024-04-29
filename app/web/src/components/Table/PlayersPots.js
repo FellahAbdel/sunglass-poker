@@ -8,7 +8,7 @@ const PlayersPots = ({ players = []}) => {
     <div className="container-playerPots">
       {players.map((player, index) => (
         <div key={index} className={`playerPot${index}`}>
-          {player.playerMoney} SC
+          {player.currentBet} SC
         </div>
       ))}
     </div>
