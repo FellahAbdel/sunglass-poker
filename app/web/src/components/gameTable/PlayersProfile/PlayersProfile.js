@@ -18,7 +18,7 @@ const PlayersProfile = ({
   isFocus
 }) => {
   const { getTranslatedWord } = useTranslation();
-  const formattedChips = chips.toLocaleString();
+  const formattedChips = chips?.toLocaleString();
   const dollarSign = " SC";
   console.log("isFocus playersProfile :", isFocus);
 

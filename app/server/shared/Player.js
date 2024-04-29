@@ -34,9 +34,11 @@ class Player {
       isActive: this.isActive,
       timeLastAnswer: this.timeLastAnswer,
       playerMoney: this.playerMoney,
-      playerCards: this.playerCards.map((card, index) => this.cardsVisible[index] || id === this.playerId ? card : null),
+      playerCards: this.playerCards.map((card, index) =>
+        this.cardsVisible[index] || id === this.playerId ? card : null
+      ),
       playerActionLog: this.playerActionLog,
-      cardsVisible: this.cardsVisible
+      cardsVisible: this.cardsVisible,
     };
     return view;
   }
@@ -53,6 +55,10 @@ class Player {
     }
   }
 
+  fold() {
+    this.isActive = false;
+  }
+
   settimeLastAnswer(t) {
     this.timeLastAnswer = t;
   }
@@ -63,6 +69,7 @@ class Player {
   // Methods to get and set status
   setStatus(status) {
     this.status = status;
+    this.isActive = status !== 'Folded';
   }
 
   getStatus() {
@@ -157,6 +164,7 @@ class Player {
     this.playerActionLog = [];
     this.currentBet = 0;
     this.isActive = true;
+    this.cardsVisible = [false, false];
     // Ajouter d'autres réinitialisations si nécessaire
   }
 }

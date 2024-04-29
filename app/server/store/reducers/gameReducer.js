@@ -223,6 +223,7 @@ const gameReducer = (state = initialState, action) => {
         ...state,
       };
     case actions.FOLD:
+      console.log("Handling FOLD action for player", action.payload.playerId, "in room", action.payload.room);
       console.log(state.rooms[action.payload.room], action);
       if (action.payload !== undefined)
         {

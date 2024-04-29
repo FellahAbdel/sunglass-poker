@@ -2,8 +2,7 @@ const hands = require("./score-engine/index.js");
 const Deck = require("./Deck.js");
 const PokerTable = require("./PokerTable.js");
 const scoreEngineUtils = require("./ScoreEngineUtils.js");
-const Players= require("./Player.js");
-
+const Players = require("./Player.js");
 
 class Game {
   master = false;
@@ -18,6 +17,7 @@ class Game {
     currentStage = "preflop",
     state = "waiting"
   ) {
+    this.activePlayers = null;
     this.players = players;
     this.deck = deck;
     this.pokerTable = pokerTable;
@@ -38,9 +38,14 @@ class Game {
       this.blind,
       this.focus,
       this.currentStage,
-      this.state
+      this.state,
+      this.activePlayers
     );
     return g;
+  }
+
+  getActivePlayers() {
+    return this.activePlayers;
   }
 
   setMaster(id) {
@@ -57,15 +62,30 @@ class Game {
   getFocus() {
     return this.focus;
   }
+
   rotateFocus() {
-    this.focus = (this.focus + 1) % this.players.length;
-    csl.log("STATUT DU JOUEUR",this.focus.state);
-    if (this.focus.state=="Folded"){
-      this.rotateFocus();
-    }
+    let initialFocus = this.focus;
+    do {
+      this.focus = (this.focus + 1) % this.players.length;
+    } while (
+      !this.activePlayers.some(
+        (p) => p.playerId === this.players[this.focus].playerId
+      ) &&
+      this.focus !== initialFocus
+    );
 
     if (this.focus === this.startingPlayerIndex) {
       this.advanceStage();
+    }
+  }
+
+  foldPlayer(playerId) {
+    const player = this.players.find((p) => p.playerId === playerId);
+    if (player) {
+      player.fold();
+      this.activePlayers = this.activePlayers.filter(
+        (p) => p.playerId !== playerId
+      );
     }
   }
 
@@ -81,6 +101,7 @@ class Game {
   addPlayer(playerId) {
     if (this.state === "waiting" && !this.players.includes(playerId)) {
       this.players.push(playerId);
+      this.activePlayers.push(newPlayer);
     } else {
       console.log(
         "Cannot add new players at this stage or player already added."
@@ -89,8 +110,6 @@ class Game {
   }
 
   start(playerId) {
-    console.log("PlayerID Game.js start :", playerId);
-
     if (this.master !== playerId) {
       console.log("Only the master can start the game.");
       return;
@@ -105,10 +124,10 @@ class Game {
     }
 
     this.state = "active";
-    this.focus = 0;
+    this.focus = 0; // Initialise le focus sur le premier joueur
+    this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
     this.deck.initCards();
     this.deck.shuffle();
-    console.log("Game started, State =", this.state);
     this.players.forEach((player) => {
       player.clearHand();
       for (let i = 0; i < 2; i++) {
@@ -135,6 +154,7 @@ class Game {
   reset() {
     this.players = [];
     this.state = "waiting";
+    this.activePlayers = [];
     this.deck.initCards();
     this.pokerTable.reset();
   }
