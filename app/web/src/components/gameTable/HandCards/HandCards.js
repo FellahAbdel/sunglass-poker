@@ -15,7 +15,7 @@ const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
     return [card.number.toString(), card.color];
   };
 
-  console.log("card1", card1);
+  //console.log("card1", card1);
 
   const toggleShowCard = (cardIndex, card) => {
     if (card.isVisible) {

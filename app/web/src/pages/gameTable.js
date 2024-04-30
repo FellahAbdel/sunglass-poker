@@ -36,7 +36,7 @@ const GameTable = () => {
   const { playerCards } = useGameTable();
 
   useEffect(() => {
-    console.log("isLogged gameTable:", isLogged);
+    //console.log("isLogged gameTable:", isLogged);
   }, [isLogged]);
 
   const handleCloseOnClickOutside = (event) => {
