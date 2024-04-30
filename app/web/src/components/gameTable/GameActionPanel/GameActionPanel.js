@@ -41,11 +41,12 @@ const GameActionButtons = ({}) => {
 
   // Function to handle the fold action
   const handleFold = () => {
-      dispatch(actions.fold());
+    dispatch(actions.fold());
   };
 
   const handleBet = (amount) => {
-    amount=Math.round(amount);
+    console.log("amount :", amount);
+    amount = Math.round(amount);
     dispatch(actions.bet(amount));
   };
 
@@ -56,6 +57,7 @@ const GameActionButtons = ({}) => {
   //console.log(pot)
   const handlePercentageButton = (percentage) => {
     const newValue = Math.round(coins * percentage);
+    console.log("newValue :", newValue);
     setRaiseCoin(newValue);
     setSliderValueText(percentage * 100);
   };
@@ -65,18 +67,20 @@ const GameActionButtons = ({}) => {
       setShowPopup(true);
     } else {
       setShowPopup(false);
+      if (raiseCoin !== 0) {
+        handleBet(raiseCoin);
+      }
       setRaiseCoin(0);
       setCoins(coinsAfterRaise);
     }
   };
+
   useEffect(() => {
-    if (!showPopup) {
-      console.log("sliderValueText :", sliderValueText);
-      console.log("coins :", coins);
-      console.log("raiseCoin :", raiseCoin);
-      if (raiseCoin !== 0) handleBet(raiseCoin);
-    }
-  }, [raiseCoin]);
+    const newRaiseCoin = (coins * sliderValueText) / 100;
+    console.log("New raiseCoin:", newRaiseCoin);
+    setRaiseCoin(newRaiseCoin);
+    setCoinsAfterRaise(coins - newRaiseCoin);
+  }, [sliderValueText, coins]);
 
   useEffect(() => {
     setCoins(playerMoney);
