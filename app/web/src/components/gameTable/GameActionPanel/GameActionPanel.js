@@ -23,6 +23,7 @@ const GameActionButtons = ({}) => {
   const [coins, setCoins] = useState(playerMoney);
   const [raiseCoin, setRaiseCoin] = useState(0);
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(coins);
+  const [amount, setAmount] = useState(0);
 
   let checkOrCall = checkValue
     ? getTranslatedWord("gameActionPanel.check")
@@ -48,6 +49,7 @@ const GameActionButtons = ({}) => {
     console.log("amount :", amount);
     amount = Math.round(amount);
     dispatch(actions.bet(amount));
+    setAmount(amount);
   };
 
   const handleCheckOrCall = () => {
@@ -86,6 +88,7 @@ const GameActionButtons = ({}) => {
     setCoins(playerMoney);
   }, [playerMoney]);
 
+  console.log("raise coins (fellah)", raiseCoin);
   return (
     <div className="container-gameAction">
       <div className="conthis user undefined is focus:  nulltainer-cashSituation">
@@ -139,9 +142,12 @@ const GameActionButtons = ({}) => {
           styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
           onClick={() => togglePopupAndRaise()}
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
-            raiseCoin ? Math.round(raiseCoin) + " SC" : ""
+            !isFocus && amount !== 0
+              ? `${Math.round(amount)} SC`
+              : `${raiseCoin ? Math.round(raiseCoin) + " SC" : ""}`
           }`}
         />
+
         {/* LE BOUTON CHECK OR CALL  */}
         <Button
           styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
