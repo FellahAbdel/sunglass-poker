@@ -18,6 +18,7 @@ class Game {
     currentStage = "preflop",
     state = "waiting",
     total = 0,
+    nbhostfolded=0,
   ) {
     this.activePlayers = null;
     this.players = players;
@@ -29,6 +30,7 @@ class Game {
     this.currentStage = currentStage;
     this.state = state;
     this.total = total;
+    this.nbhostfolded=nbhostfolded;
   }
 
   getForPlayer(id) {
@@ -70,7 +72,7 @@ class Game {
   rotateFocus() {
     const originalFocus = this.focus;
 
-    this.focus = (this.focus + 1) % this.players.length;
+    this.focus = (this.focus + 1) % this.activePlayers.length;
     
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
@@ -78,10 +80,11 @@ class Game {
         this.focus = null;
         return;
       }
-      this.focus = (this.focus + 1) % this.players.length;
+      this.focus = (this.focus + 1) % this.activePlayers.length;
     }
-
-    if (this.focus === 0) {
+    console.log("testt: dansrotatefocusavantle test:",this.nbhostfolded);
+    if (this.focus === 0+this.nbhostfolded) {
+      console.log("testt: passer dans le test:",this.nbhostfolded);
       console.log("J'avance dans la partie");
       this.advanceStage();
     }
@@ -109,7 +112,15 @@ class Game {
   fold(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
-      this.rotateFocus();
+      if(this.focus===0+this.nbhostfolded){
+        console.log("testt: aledavant:",this.nbhostfolded);
+        this.rotateFocus();
+        this.nbhostfolded++;
+        console.log("testt: aledapres:",this.nbhostfolded);
+      }
+      else{
+        this.rotateFocus();
+      }
     }
   }
 
@@ -176,6 +187,10 @@ class Game {
         player.addCard(this.deck.deal());
       }
     });
+    this.nbhostfolded=0;
+    
+    // console.log("length:",this.players.length);
+    // console.log("active:",this.activePlayers.length);
     
   }
 
@@ -227,7 +242,7 @@ class Game {
 
     // Update the community cards on the poker table with the flop cards
     this.pokerTable.communityCards = [...flopCards];
-    console.log(this.pokerTable.communityCards = [...flopCards]);
+    console.log(this.pokerTable.communityCards);
   }
 
   /*
@@ -236,8 +251,17 @@ class Game {
   */
   turn() {
     this.pokerTable.communityCards.push(this.deck.deal());
+    console.log(this.pokerTable.communityCards);
   }
-
+  
+  /*
+   * In : nothing
+   * OUT : nothing but we push one card to the community cards (5 cards in total)
+   */
+  river() {
+    this.pokerTable.communityCards.push(this.deck.deal());
+    console.log(this.pokerTable.communityCards);
+  }
   advanceStage() {
     if (this.state !== "active") {
       console.log("Game not active, cannot advance stage.");
@@ -255,23 +279,19 @@ class Game {
         break;
       case "turn":
         this.turn();
+        console.log("PASSE PAR LE CASE TURN");
         break;
       case "river":
         this.river();
+        console.log("PASSE PAR LE CASE river");
         break;
       case "showdown":
         this.evaluateHands();
+        console.log("PASSE PAR LE CASE showdown");
         break;
     }
   }
 
-  /*
-   * In : nothing
-   * OUT : nothing but we push one card to the community cards (5 cards in total)
-   */
-  river() {
-    this.pokerTable.communityCards.push(this.deck.deal());
-  }
 
   /*
    * Retrieves all active players in the game.
