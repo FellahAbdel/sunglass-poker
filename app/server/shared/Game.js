@@ -217,8 +217,7 @@ class Game {
   }
 
   evaluateHands() {
-    const results = this.listeCombinaison(this.getActivePlayers());
-    const winner = this.determineWinner(results);
+    const winner = this.determineWinner();
     console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     this.reset();
   }
@@ -358,6 +357,12 @@ class Game {
     return res;
   }
 
+  //result est vide mais ça passe et this.poker.table marche pas 
+  determineWinner(){
+    const results = this.listeCombinaison(this.getActivePlayers());
+    console.log("results: ",results);
+    return results;
+  }
   /*
    * IN : rien
    * OUT : { [c1, ..., c5], playerId } tableau de combinaison et identifiant du gagnant
@@ -409,9 +414,10 @@ class Game {
           }
         }
       }
-
+      console.log("res",res);
       return res;
     } else {
+      console.log("maxList",maxList);
       return maxList;
     }
   }
