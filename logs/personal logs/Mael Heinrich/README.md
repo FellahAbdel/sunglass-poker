@@ -114,6 +114,12 @@
 
 2024/O4/30  45min   Mise en place de l'avancement dans la partie, il manque juste l'affichage mais les cartes sont bien tirer(test effectué avec des consoles log)
 
---2024/04 SEMAINE 5: 45min (TOTAL: 86H45)
+2024/04/30  1H30    J'ai fait marcher le fold dans tout les cas sans bug + recherche des erreurs et noter tt les petis probleme a resoudre plus tard
 
-TEMPS TOTAL: 86H45  
+2024/05/2   45min   Debut reflexion sur determiner e winner, note de plusieiurs bug a regler apres ou de truc a faire, modification du trello.
+
+--2024/04 SEMAINE 5: 3H (TOTAL: 89H)
+
+
+
+TEMPS TOTAL: 89H 
