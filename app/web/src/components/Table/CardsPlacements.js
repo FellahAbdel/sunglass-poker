@@ -8,7 +8,7 @@ const CardsPlacements = ({}) => {
 
   // Fonction pour transformer les données de la carte en tableau [number, color]
   const formatCardData = (card) => {
-    return [card.number.toString(), card.color];
+    return card ? [card.number.toString(), card.color] : ['', ''];
   };
   console.log("communityCards", communityCards);
   {
@@ -32,6 +32,8 @@ const CardsPlacements = ({}) => {
     false,
   ]);
 
+  const initialCards = Array(5).fill(null);
+
   // Function to update dealingFlop based on communityCards
   const updateDealingFlop = () => {
     // If communityCards is empty, set dealingFlop to all false
@@ -47,10 +49,19 @@ const CardsPlacements = ({}) => {
     }
   };
 
+  // to stop the transition animation to happend more than once
+  const [flipped, setFlipped] = useState(communityCards.map(() => false));
+
+  useEffect(() => {
+    // Update the flipped state based on dealingFlop
+    setFlipped(flipped.map((f, index) => f || dealingFlop[index]));
+  }, [dealingFlop]);
+
   // Call the update function when communityCards changes
   useEffect(() => {
     updateDealingFlop();
   }, [communityCards]);
+
   //playersCardDistributed for each player
   // *** also has been used in PlayersPlacements component
   // *** here only for animation purposes
@@ -79,95 +90,58 @@ const CardsPlacements = ({}) => {
   //     });
   // };
 
-  //AUDIO -----------------------------
-  const [playing0, togglePlay0] = useAudio(
-    require("./../assets/sounds/soundEffect-card1.mp3")
-  );
-  const [playing1, togglePlay1] = useAudio(
-    require("./../assets/sounds/soundEffect-card1.mp3")
-  );
-  const [playing2, togglePlay2] = useAudio(
-    require("./../assets/sounds/soundEffect-card1.mp3")
-  );
-  const [playing3, togglePlay3] = useAudio(
-    require("./../assets/sounds/soundEffect-card1.mp3")
-  );
-  const [playing4, togglePlay4] = useAudio(
-    require("./../assets/sounds/soundEffect-card1.mp3")
-  );
+  // //AUDIO -----------------------------
+  // const [playing0, togglePlay0] = useAudio(
+  //   require("./../assets/sounds/soundEffect-card1.mp3")
+  // );
+  // const [playing1, togglePlay1] = useAudio(
+  //   require("./../assets/sounds/soundEffect-card1.mp3")
+  // );
+  // const [playing2, togglePlay2] = useAudio(
+  //   require("./../assets/sounds/soundEffect-card1.mp3")
+  // );
+  // const [playing3, togglePlay3] = useAudio(
+  //   require("./../assets/sounds/soundEffect-card1.mp3")
+  // );
+  // const [playing4, togglePlay4] = useAudio(
+  //   require("./../assets/sounds/soundEffect-card1.mp3")
+  // );
 
-  useEffect(() => {
-    dealingFlop.forEach((newFlop, index) => {
-      if (newFlop === true) {
-        switch (index) {
-          case 0:
-            togglePlay0();
-            break;
-          case 1:
-            togglePlay1();
-            break;
-          case 2:
-            togglePlay2();
-            break;
-          case 3:
-            togglePlay3();
-            break;
-          case 4:
-            togglePlay4();
-            break;
-          default:
-            break;
-        }
-      }
-    });
-  }, [dealingFlop]);
-  //----------------------------- AUDIO
+  // useEffect(() => {
+  //   dealingFlop.forEach((newFlop, index) => {
+  //     if (newFlop === true) {
+  //       switch (index) {
+  //         case 0:
+  //           togglePlay0();
+  //           break;
+  //         case 1:
+  //           togglePlay1();
+  //           break;
+  //         case 2:
+  //           togglePlay2();
+  //           break;
+  //         case 3:
+  //           togglePlay3();
+  //           break;
+  //         case 4:
+  //           togglePlay4();
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     }
+  //   });
+  // }, [dealingFlop]);
+  // //----------------------------- AUDIO
 
   return (
     <div className={`container-cards`}>
-      {/* <div className="container-tableCards">
-        <Card
-          card={["2", "C"]}
-          styleClass={`tableCard`}
-          flippedStyle={"dealingFlop0"}
-          flippingCard={dealingFlop[0]}
-        />
-        <Card
-          card={["3", "C"]}
-          styleClass={"tableCard"}
-          flippedStyle={"dealingFlop1"}
-          flippingCard={dealingFlop[1]}
-        />
-        <Card
-          card={["4", "C"]}
-          styleClass={"tableCard"}
-          flippedStyle={"dealingFlop2"}
-          flippingCard={dealingFlop[2]}
-        />
-        <Card
-          card={["5", "C"]}
-          styleClass={"tableCard"}
-          flippedStyle={"dealingFlop3"}
-          flippingCard={dealingFlop[3]}
-        />
-        <Card
-          card={["6", "C"]}
-          styleClass={"tableCard"}
-          flippedStyle={"dealingFlop4"}
-          flippingCard={dealingFlop[4]}
-          // flippingCard={true}
-        />
-      </div> */}
-
       <div className="container-tableCards">
-        {/* first three flops -> dealingFlop[0]
-            first forth flops -> dealingFlop[1]
-            first fifth flops -> dealingFlop[2] */}
-        {communityCards.map((card, index) => (
+        {initialCards.map((placeholder, index) => (
           <Card
             key={index}
-            card={formatCardData(card)}
-            styleClass={`tableCard`}
+            card={formatCardData(communityCards[index])}
+            styleClass={`tableCard ${flipped[index] && "flipped"}`}
             flippedStyle={`dealingFlop${index}`}
             flippingCard={dealingFlop[index]}
           />
