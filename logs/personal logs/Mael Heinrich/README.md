@@ -120,9 +120,12 @@
 
 2024/05/02  2H30    Definition du gagnant(fonctionel), demande d'aide de aziz, début du reset de partie
 
+2024/05/02  30min   Suite réflection sur le reset avec qq tentatives de reglages de bug et discussion avec d'autres membres sur le sujet
 
---2024/04 SEMAINE 5: 3H (TOTAL: 91H30)
+2024/05/03  1H15    debut Reglages des problémes de raise/call et explication de ce qui va pas au autres du groupes
+
+--2024/04 SEMAINE 5: 7H15 (TOTAL: 93H15)
 
 
 
-TEMPS TOTAL: 91H30
+TEMPS TOTAL: 93H15
