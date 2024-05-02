@@ -85,7 +85,7 @@ export const GameTableProvider = ({ children }) => {
         setCommunityCards(gameInfo.game.pokerTable.communityCards);
       }
 
-      if(gameInfo.game.gameCurrentBet){
+      if(gameInfo.game){
         SetGameCurrentBet(gameInfo.game.gameCurrentBet);
       }
     }

@@ -48,7 +48,7 @@ class Game {
       this.state,
       this.total,
       this.nbhostfolded,
-      this.gameCurrentBet, // Incluez gameCurrentBet ici
+      this.gameCurrentBet // Incluez gameCurrentBet ici
     );
     return g;
   }
@@ -99,6 +99,9 @@ class Game {
     if (this.focus === 0 + this.nbhostfolded) {
       console.log("testt: passer dans le test:", this.nbhostfolded);
       console.log("J'avance dans la partie");
+
+      // Réinitialisez gameCurrentBet à 0 à la fin d'un tour complet
+      this.gameCurrentBet = 0;
       this.advanceStage();
     }
   }
