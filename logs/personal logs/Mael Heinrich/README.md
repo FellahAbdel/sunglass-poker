@@ -116,10 +116,13 @@
 
 2024/04/30  1H30    J'ai fait marcher le fold dans tout les cas sans bug + recherche des erreurs et noter tt les petis probleme a resoudre plus tard
 
-2024/05/2   45min   Debut reflexion sur determiner e winner, note de plusieiurs bug a regler apres ou de truc a faire, modification du trello.
+2024/05/02   45min   Debut reflexion sur determiner e winner, note de plusieiurs bug a regler apres ou de truc a faire, modification du trello.
 
---2024/04 SEMAINE 5: 3H (TOTAL: 89H)
+2024/05/02  2H30    Definition du gagnant(fonctionel), demande d'aide de aziz, début du reset de partie
+
+
+--2024/04 SEMAINE 5: 3H (TOTAL: 91H30)
 
 
 
-TEMPS TOTAL: 89H 
+TEMPS TOTAL: 91H30
