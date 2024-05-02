@@ -53,8 +53,25 @@ const GameActionButtons = ({}) => {
     setAmount(amount);
   };
 
+  // Met à jour la valeur du bouton "Check" ou "Call" en fonction de gameCurrentBet
+  const getCheckOrCallLabel = () => {
+    if (gameCurrentBet > 0) {
+      return `${getTranslatedWord(
+        "gameActionPanel.call"
+      )} ${gameCurrentBet} SC`;
+    } else {
+      return getTranslatedWord("gameActionPanel.check");
+    }
+  };
+
   const handleCheckOrCall = () => {
-    dispatch(actions.check());
+    if (gameCurrentBet > 0) {
+      // Si il y a un currentBet, effectue une action "Call"
+      dispatch(actions.bet(gameCurrentBet));
+    } else {
+      // Sinon, effectue une action "Check"
+      dispatch(actions.check());
+    }
   };
 
   //console.log(pot)
@@ -149,11 +166,11 @@ const GameActionButtons = ({}) => {
           }`}
         />
 
-        {/* LE BOUTON CHECK OR CALL  */}
+        {/* Bouton "Check" ou "Call" en fonction de gameCurrentBet */}
         <Button
           styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
           onClick={isFocus ? handleCheckOrCall : undefined}
-          label={checkOrCall}
+          label={getCheckOrCallLabel()}
         />
         {/* LE BOUTON FOLD */}
         <Button
