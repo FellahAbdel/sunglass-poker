@@ -267,7 +267,7 @@ class Game {
       console.log("Game not active, cannot advance stage.");
       return;
     }
-    const stageOrder = ["preflop", "flop", "turn", "river", "showdown"];
+    const stageOrder = ["preflop", "flop", "turn", "river", "showdown", "end"];
     const currentIndex = stageOrder.indexOf(this.currentStage);
     const nextIndex = (currentIndex + 1) % stageOrder.length;
     this.currentStage = stageOrder[nextIndex];
@@ -286,9 +286,14 @@ class Game {
         console.log("PASSE PAR LE CASE river");
         break;
       case "showdown":
-        this.evaluateHands();
+        console.log(this.gagnant());
         console.log("PASSE PAR LE CASE showdown");
         break;
+      case "end":
+        this.reset();
+        console.log("PASSE PAR LE CASE end");
+        break;
+            
     }
   }
 
