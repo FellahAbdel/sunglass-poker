@@ -217,8 +217,7 @@ class Game {
   }
 
   evaluateHands() {
-    const results = this.listeCombinaison(this.getActivePlayers());
-    const winner = this.determineWinner(results);
+    const winner = this.determineWinner();
     console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     this.reset();
   }
@@ -275,18 +274,21 @@ class Game {
     switch (this.currentStage) {
       case "flop":
         console.log("PASSE PAR LE CASE FLOP");
+        console.log("activePlayers.length au niveau de flop",this.activePlayers.length);
         this.flop();
         break;
       case "turn":
         this.turn();
         console.log("PASSE PAR LE CASE TURN");
+        console.log("activePlayers.length au niveau de turn",this.activePlayers.length);
         break;
       case "river":
         this.river();
         console.log("PASSE PAR LE CASE river");
         break;
       case "showdown":
-        console.log(this.gagnant());
+        console.log("activePlayers.length au niveau de shodown",this.activePlayers.length);
+        this.evaluateHands();
         console.log("PASSE PAR LE CASE showdown");
         break;
       case "end":
@@ -353,16 +355,27 @@ class Game {
   listeCombinaison(activePlayers) {
     let res = [];
 
-    for (let i = 0; i < activePlayers.length; i++) {
-      let f7c = this.make7Cards(activePlayers[i]);
+    console.log("activePlayers.length:",this.activePlayers.length);
+    for (let i = 0; i < this.activePlayers.length; i++) {
+      let f7c = this.make7Cards(this.activePlayers[i]);
+      console.log("f7c:",f7c);
       let c = this.combinaison(f7c.cards);
+      console.log("c:",c);
       c.id = f7c.id;
+      console.log("resavantlepush:",res);
       res.push(c);
+      console.log("resapreslepush:",res);
     }
 
     return res;
   }
 
+  //result est vide mais ça passe et this.poker.table marche pas 
+  determineWinner(){
+    const results = this.listeCombinaison(this.getActivePlayers());
+    console.log("results: ",results);
+    return results;
+  }
   /*
    * IN : rien
    * OUT : { [c1, ..., c5], playerId } tableau de combinaison et identifiant du gagnant
@@ -414,9 +427,10 @@ class Game {
           }
         }
       }
-
+      console.log("res",res);
       return res;
     } else {
+      console.log("maxList",maxList);
       return maxList;
     }
   }
