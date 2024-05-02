@@ -274,17 +274,20 @@ class Game {
     switch (this.currentStage) {
       case "flop":
         console.log("PASSE PAR LE CASE FLOP");
+        console.log("activePlayers.length au niveau de flop",this.activePlayers.length);
         this.flop();
         break;
       case "turn":
         this.turn();
         console.log("PASSE PAR LE CASE TURN");
+        console.log("activePlayers.length au niveau de turn",this.activePlayers.length);
         break;
       case "river":
         this.river();
         console.log("PASSE PAR LE CASE river");
         break;
       case "showdown":
+        console.log("activePlayers.length au niveau de shodown",this.activePlayers.length);
         this.evaluateHands();
         console.log("PASSE PAR LE CASE showdown");
         break;
@@ -347,11 +350,16 @@ class Game {
   listeCombinaison(activePlayers) {
     let res = [];
 
-    for (let i = 0; i < activePlayers.length; i++) {
-      let f7c = this.make7Cards(activePlayers[i]);
+    console.log("activePlayers.length:",this.activePlayers.length);
+    for (let i = 0; i < this.activePlayers.length; i++) {
+      let f7c = this.make7Cards(this.activePlayers[i]);
+      console.log("f7c:",f7c);
       let c = this.combinaison(f7c.cards);
+      console.log("c:",c);
       c.id = f7c.id;
+      console.log("resavantlepush:",res);
       res.push(c);
+      console.log("resapreslepush:",res);
     }
 
     return res;
