@@ -216,10 +216,28 @@ class Game {
     this.pokerTable.reset();
   }
 
+  //Probmème:on devra surement clear l'affichage 
+  newgame(){
+    this.state = "active";
+    this.focus = 0; // Initialise le focus sur le premier joueur
+    this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
+    this.deck.initCards();
+    this.deck.shuffle();
+    this.players.forEach((player) => {
+      player.clearHand();
+      for (let i = 0; i < 2; i++) {
+        player.addCard(this.deck.deal());
+      }
+    });
+    this.nbhostfolded=0;
+    this.advanceStage();
+  }
+
   evaluateHands() {
     const winner = this.determineWinner();
     console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
-    this.reset();
+    this.newgame();
+
   }
 
   /*
