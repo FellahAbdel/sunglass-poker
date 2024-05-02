@@ -14,6 +14,7 @@ class Player {
     name,
     status = "Playing",
     currentBet = 0,
+    currentBetTurn=0,
     isActive = true
   ) {
     this.playerId = playerId;
@@ -22,6 +23,7 @@ class Player {
     this.playerCards = [];
     this.playerActionLog = [];
     this.currentBet = currentBet;
+    this.currentBetTurn= currentBetTurn;
     this.isActive = isActive;
   }
 
@@ -31,6 +33,7 @@ class Player {
       name: this.name,
       status: this.status,
       currentBet: this.currentBet,
+      currentBetTurn: this.currentBetTurn,
       isActive: this.isActive,
       timeLastAnswer: this.timeLastAnswer,
       playerMoney: this.playerMoney,
@@ -137,6 +140,10 @@ class Player {
     this.playerMoney -= moneyToBet;
   }
 
+  howmanyBetTurn(){
+    return this.currentBetTurn;
+  }
+
   /*
    * IN : STRING NUMBER, une action et une mise
    * OUT : rien
@@ -168,9 +175,14 @@ class Player {
     this.status = "checked";
   }
 
+  call(){
+    this.status = "call";
+  }
+
   bet(amount){
     if(this.playerMoney>amount){
       this.currentBet=amount;
+      this.currentBetTurn+=amount;
       this.playerMoney-=amount;
       this.status = "raise";
     }
@@ -180,9 +192,14 @@ class Player {
     this.clearHand();
     this.playerActionLog = [];
     this.currentBet = 0;
+    this.currentBetTurn=0;
     this.isActive = true;
     this.cardsVisible = [false, false];
     // Ajouter d'autres réinitialisations si nécessaire
+  }
+
+  newTurnReset(){
+    this.currentBetTurn=0;
   }
 }
 

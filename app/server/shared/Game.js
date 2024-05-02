@@ -95,14 +95,19 @@ class Game {
       }
       this.focus = (this.focus + 1) % this.activePlayers.length;
     }
-    console.log("testt: dansrotatefocusavantle test:", this.nbhostfolded);
+    // console.log("testt: dansrotatefocusavantle test:", this.nbhostfolded);
     if (this.focus === 0 + this.nbhostfolded) {
-      console.log("testt: passer dans le test:", this.nbhostfolded);
-      console.log("J'avance dans la partie");
+      if(this.gameCurrentBet===this.players[this.focus].howmanyBetTurn()){
+        this.gameCurrentBet = 0;
+        this.advanceStage();
+        this.activePlayers.forEach((player) => {
+          player.newTurnReset();
+        });
+      }
+      // console.log("testt: passer dans le test:", this.nbhostfolded);
+      // console.log("J'avance dans la partie");
 
       // Réinitialisez gameCurrentBet à 0 à la fin d'un tour complet
-      this.gameCurrentBet = 0;
-      this.advanceStage();
     }
   }
 
@@ -140,9 +145,27 @@ class Game {
 
   check(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
-      player.check();
-      this.gameCurrentBet = 0; // Pour que le joueur suivant puisse vérifier s'il le souhaite.
-      this.rotateFocus();
+      if(this.gameCurrentBet===0){
+        player.check();
+        //this.gameCurrentBet = 0; // Pour que le joueur suivant puisse vérifier s'il le souhaite.
+        this.rotateFocus();
+      }
+      else{
+        //faudra enlever le stack qu'il a deja poser si c est le cas
+        if(player.howmanyBet()===this.gameCurrentBet){
+          player.check();
+          this.rotateFocus();
+        }
+        if(player.getPlayerMoney()> (this.gameCurrentBet-player.howmanyBet())){
+
+          player.bet(this.gameCurrentBet-(player.howmanyBet()));
+          player.call();
+          this.rotateFocus();
+        }
+        else{
+          //La faut faire en sorte de coller et couepr le pot en deux avec les regles spéciale
+        }
+      }
     }
   }
 
