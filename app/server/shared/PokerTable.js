@@ -9,6 +9,11 @@ class PokerTable {
     this.stack += amount;
   }
 
+  reset() {
+    this.communityCards = [];
+    this.stack = 0;
+  }
+  
   showCommunityCards() {
     console.log("Community cards:");
     this.communityCards.forEach((card) => {

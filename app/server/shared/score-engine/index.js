@@ -1,13 +1,13 @@
-const flush = require("./flush.js").isFlush;
-const fourOfAKind = require("./fourOfAKind.js").isFourOfAKind;
-const fullHouse = require("./fullHouse.js").isFullHouse;
-const highCard = require("./highCard.js").isHighCard;
-const onePair = require("./onePair.js").isOnePair;
-const royalFlush = require("./royalFlush.js").isRoyalFlush;
-const straight = require("./straight.js").isStraight;
-const straightFlush = require("./straightFlush.js").isStraightFlush;
-const threeOfAKind = require("./threeOfAKind.js").isThreeOfAKind;
-const twoPair = require("./twoPair.js").isTwoPair;
+const flush = require("./flush");
+const fourOfAKind = require("./fourOfAKind");
+const fullHouse = require("./fullHouse");
+const highCard = require("./highCard");
+const onePair = require("./onePair");
+const royalFlush = require("./royalFlush");
+const straight = require("./straight");
+const straightFlush = require("./straightFlush");
+const threeOfAKind = require("./threeOfAKind");
+const twoPair = require("./twoPair");
 
 module.exports = {
   flush,
