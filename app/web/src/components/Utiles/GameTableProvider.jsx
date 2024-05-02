@@ -29,6 +29,7 @@ export const GameTableProvider = ({ children }) => {
   const [playerCards, setPlayerCards] = useState([]);
   const [playerMoney, setPlayerMoney] = useState(0);
   const [communityCards, setCommunityCards] = useState([]);
+  const [gameCurrentBet, SetGameCurrentBet] = useState(0);
 
   useEffect(() => {
     const isMaster =
@@ -83,12 +84,16 @@ export const GameTableProvider = ({ children }) => {
       if (gameInfo.game.pokerTable.communityCards) {
         setCommunityCards(gameInfo.game.pokerTable.communityCards);
       }
+
+      if(gameInfo.game.gameCurrentBet){
+        SetGameCurrentBet(gameInfo.game.gameCurrentBet);
+      }
     }
   }, [gameInfo, userId]);
 
 
   return (
-    <GameTableContext.Provider value={{ ...state, playerCards, playerMoney, communityCards }}>
+    <GameTableContext.Provider value={{ ...state, playerCards, playerMoney, communityCards, gameCurrentBet }}>
       {children}
     </GameTableContext.Provider>
   );

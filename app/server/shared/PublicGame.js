@@ -8,6 +8,7 @@ class PublicGame extends Game {
     this.players = game.players.map((player) => new PublicPlayer(player));
     this.focus = game.focus;
     this.master = game.master;
+    // this.gameCurrentBet = game.gameCurrentBet;
   }
 
   getCommunityCards() {

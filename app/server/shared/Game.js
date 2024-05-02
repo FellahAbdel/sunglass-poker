@@ -18,7 +18,8 @@ class Game {
     currentStage = "preflop",
     state = "waiting",
     total = 0,
-    nbhostfolded=0,
+    nbhostfolded = 0,
+    gameCurrentBet = blind // Ajoutez gameCurrentBet comme paramètre distinct
   ) {
     this.activePlayers = null;
     this.players = players;
@@ -30,7 +31,8 @@ class Game {
     this.currentStage = currentStage;
     this.state = state;
     this.total = total;
-    this.nbhostfolded=nbhostfolded;
+    this.nbhostfolded = nbhostfolded;
+    this.gameCurrentBet = gameCurrentBet; // Utilisez gameCurrentBet ici
   }
 
   getForPlayer(id) {
@@ -44,8 +46,9 @@ class Game {
       this.focus,
       this.currentStage,
       this.state,
-      this.activePlayers,
-      this.total
+      this.total,
+      this.nbhostfolded,
+      this.gameCurrentBet, // Incluez gameCurrentBet ici
     );
     return g;
   }
@@ -83,7 +86,7 @@ class Game {
     const originalFocus = this.focus;
 
     this.focus = (this.focus + 1) % this.activePlayers.length;
-    
+
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
@@ -92,13 +95,12 @@ class Game {
       }
       this.focus = (this.focus + 1) % this.activePlayers.length;
     }
-    console.log("testt: dansrotatefocusavantle test:",this.nbhostfolded);
-    if (this.focus === 0+this.nbhostfolded) {
-      console.log("testt: passer dans le test:",this.nbhostfolded);
+    console.log("testt: dansrotatefocusavantle test:", this.nbhostfolded);
+    if (this.focus === 0 + this.nbhostfolded) {
+      console.log("testt: passer dans le test:", this.nbhostfolded);
       console.log("J'avance dans la partie");
       this.advanceStage();
     }
-
   }
 
   foldPlayer(playerId) {
@@ -122,13 +124,12 @@ class Game {
   fold(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
-      if(this.focus===0+this.nbhostfolded){
-        console.log("testt: aledavant:",this.nbhostfolded);
+      if (this.focus === 0 + this.nbhostfolded) {
+        console.log("testt: aledavant:", this.nbhostfolded);
         this.rotateFocus();
         this.nbhostfolded++;
-        console.log("testt: aledapres:",this.nbhostfolded);
-      }
-      else{
+        console.log("testt: aledapres:", this.nbhostfolded);
+      } else {
         this.rotateFocus();
       }
     }
@@ -137,6 +138,7 @@ class Game {
   check(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.check();
+      this.gameCurrentBet = 0; // Pour que le joueur suivant puisse vérifier s'il le souhaite.
       this.rotateFocus();
     }
   }
@@ -145,8 +147,10 @@ class Game {
     if (this.isPlayersTurn(player.getPlayerId())) {
       if (player.getPlayerMoney() > amount) {
         player.bet(amount);
-        this.total+=amount;
+        this.total += amount;
+        this.gameCurrentBet = amount;
 
+        console.log("this line got executed", this.gameCurrentBet);
         this.rotateFocus();
       }
     }
@@ -197,11 +201,10 @@ class Game {
         player.addCard(this.deck.deal());
       }
     });
-    this.nbhostfolded=0;
-    
+    this.nbhostfolded = 0;
+
     // console.log("length:",this.players.length);
     // console.log("active:",this.activePlayers.length);
-    
   }
 
   reset() {
@@ -212,8 +215,8 @@ class Game {
     this.pokerTable.reset();
   }
 
-  //Probmème:on devra surement clear l'affichage 
-  newgame(){
+  //Probmème:on devra surement clear l'affichage
+  newgame() {
     this.state = "active";
     this.focus = 0; // Initialise le focus sur le premier joueur
     this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
@@ -225,15 +228,15 @@ class Game {
         player.addCard(this.deck.deal());
       }
     });
-    this.nbhostfolded=0;
+    this.nbhostfolded = 0;
     this.advanceStage();
   }
 
   evaluateHands() {
     const winner = this.gagnant();
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
-    console.log("winner est: ",winner);
-    console.log("winner est: ",winner[0].id);
+    console.log("winner est: ", winner);
+    console.log("winner est: ", winner[0].id);
     console.log("WINNER EST:", this.getPlayerById(winner[0].id));
   }
 
@@ -246,7 +249,7 @@ class Game {
     // Deal 3 cards for the flop
     console.log("je suis RENTREr DANS FLOP");
     const flopCards = this.deck.deal3Cards();
-    console.log("les flopCards:",flopCards);
+    console.log("les flopCards:", flopCards);
 
     // If dealCards() doesn't return exactly 3 cards, handle the error
     if (flopCards.length !== 3) {
@@ -267,7 +270,7 @@ class Game {
     this.pokerTable.communityCards.push(this.deck.deal());
     console.log(this.pokerTable.communityCards);
   }
-  
+
   /*
    * In : nothing
    * OUT : nothing but we push one card to the community cards (5 cards in total)
@@ -289,20 +292,29 @@ class Game {
     switch (this.currentStage) {
       case "flop":
         console.log("PASSE PAR LE CASE FLOP");
-        console.log("activePlayers.length au niveau de flop",this.activePlayers.length);
+        console.log(
+          "activePlayers.length au niveau de flop",
+          this.activePlayers.length
+        );
         this.flop();
         break;
       case "turn":
         this.turn();
         console.log("PASSE PAR LE CASE TURN");
-        console.log("activePlayers.length au niveau de turn",this.activePlayers.length);
+        console.log(
+          "activePlayers.length au niveau de turn",
+          this.activePlayers.length
+        );
         break;
       case "river":
         this.river();
         console.log("PASSE PAR LE CASE river");
         break;
       case "showdown":
-        console.log("activePlayers.length au niveau de shodown",this.activePlayers.length);
+        console.log(
+          "activePlayers.length au niveau de shodown",
+          this.activePlayers.length
+        );
         this.evaluateHands();
         console.log("PASSE PAR LE CASE showdown");
         break;
@@ -310,10 +322,8 @@ class Game {
         console.log("PASSE PAR LE CASE end");
         this.newgame();
         break;
-            
     }
   }
-
 
   /*
    * Retrieves all active players in the game.
@@ -370,25 +380,25 @@ class Game {
   listeCombinaison(activePlayers) {
     let res = [];
 
-    console.log("activePlayers.length:",this.activePlayers.length);
+    console.log("activePlayers.length:", this.activePlayers.length);
     for (let i = 0; i < this.activePlayers.length; i++) {
       let f7c = this.make7Cards(this.activePlayers[i]);
-      console.log("f7c:",f7c);
+      console.log("f7c:", f7c);
       let c = this.combinaison(f7c.cards);
-      console.log("c:",c);
+      console.log("c:", c);
       c.id = f7c.id;
-      console.log("resavantlepush:",res);
+      console.log("resavantlepush:", res);
       res.push(c);
-      console.log("resapreslepush:",res);
+      console.log("resapreslepush:", res);
     }
 
     return res;
   }
 
-  //result est vide mais ça passe et this.poker.table marche pas 
-  determineWinner(){
+  //result est vide mais ça passe et this.poker.table marche pas
+  determineWinner() {
     const results = this.listeCombinaison(this.getActivePlayers());
-    console.log("results: ",results);
+    console.log("results: ", results);
     return results;
   }
   /*
@@ -400,7 +410,7 @@ class Game {
     let activeUsers = this.getActivePlayers();
     let combinationList = this.listeCombinaison(activeUsers);
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
-    console.log("maxListapresinit",maxList);
+    console.log("maxListapresinit", maxList);
 
     if (maxList.length > 1) {
       let winners = [];
@@ -435,9 +445,9 @@ class Game {
           break;
       }
 
-      console.log("maxListapres switch",maxList);
+      console.log("maxListapres switch", maxList);
       let res = [];
-      console.log("winners.length",winners.length);
+      console.log("winners.length", winners.length);
       for (let i = 0; i < winners.length; i++) {
         for (let j = 0; j < maxList.length; j++) {
           if (winners[i] === maxList[j].id) {
@@ -445,10 +455,10 @@ class Game {
           }
         }
       }
-      console.log("res",res);
+      console.log("res", res);
       return res;
     } else {
-      console.log("maxList",maxList);
+      console.log("maxList", maxList);
       return maxList;
     }
   }

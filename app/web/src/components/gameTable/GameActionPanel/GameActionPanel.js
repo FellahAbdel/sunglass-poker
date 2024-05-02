@@ -9,7 +9,8 @@ import { useUserData } from "../../Utiles/useUserData.jsx";
 import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
 const GameActionButtons = ({}) => {
-  const { isFocus, playerMoney } = useGameTable();
+  const { isFocus, playerMoney, gameCurrentBet } = useGameTable();
+  console.log("gameCurrentBet :", gameCurrentBet);
   const { getTranslatedWord } = useTranslation();
   //checkValue = true -> Check
   //checkValue = False -> Call

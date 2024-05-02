@@ -1,6 +1,6 @@
 // Import necessary classes
-import Game from "./Game.js";
-import Player from "./Player.js";
+const Game = require("./Game.js");
+const Player = require("./Player.js");
 
 // Create a new game instance
 const pokerGame = new Game();
