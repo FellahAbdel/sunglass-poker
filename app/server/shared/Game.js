@@ -1,4 +1,4 @@
-const hands = require("./score-engine/index.js");
+const hands = require("./score-engine/index");
 const Deck = require("./Deck.js");
 const PokerTable = require("./PokerTable.js");
 const scoreEngineUtils = require("./ScoreEngineUtils.js");
