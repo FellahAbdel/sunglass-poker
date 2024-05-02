@@ -2,15 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import Card from "../gameTable/Card/Card";
 import useAudio from "../../hooks/useAudio";
 import { useGameTable } from "../Utiles/GameTableProvider";
+import soundSrc from "./../assets/sounds/soundEffect-card1.mp3";
 
 const CardsPlacements = ({}) => {
   const { communityCards } = useGameTable();
+  const [flipped, setFlipped] = useState(communityCards.map(() => false));   // to stop the transition animation to happend more than once
+  //playersCardDistributed for each player
+  // *** also has been used in PlayersPlacements component
+  // *** here only for animation purposes
+  const [playersCardDistributed, setPlayersCardDistributed] = useState([1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [playing ,togglePlay] = useAudio(soundSrc);
+  const timeoutRefs = useRef([]);
 
-  // Fonction pour transformer les données de la carte en tableau [number, color]
-  const formatCardData = (card) => {
-    return card ? [card.number.toString(), card.color] : ['', ''];
-  };
-  console.log("communityCards", communityCards);
+
   {
     /*DISTRIBUTION ANIMATION :
   in CardPlacements you have the distribution
@@ -24,120 +28,53 @@ const CardsPlacements = ({}) => {
   //   first three = flop  -> dealingFlop[0]
   //   forth one   = river -> dealingFlop[1]
   //   fifth one   = turn  -> dealingFlop[2]
-  const [dealingFlop, setDealingFlop] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  // const [dealingFlop, setDealingFlop] = useState([false,false,false,false,false]);
 
-  const initialCards = Array(5).fill(null);
+ // Initialize dealingFlop from local storage or set to default if not available
+ const [dealingFlop, setDealingFlop] = useState(() => {
+  const saved = localStorage.getItem("dealingFlop");
+  return saved ? JSON.parse(saved) : [false, false, false, false, false];
+});
 
-  // Function to update dealingFlop based on communityCards
-  const updateDealingFlop = () => {
-    // If communityCards is empty, set dealingFlop to all false
-    if (!communityCards || communityCards.length === 0) {
-      setDealingFlop([false, false, false, false, false]);
-    } else {
-      // Create a new array of booleans based on the length of communityCards
-      const newDealingFlop = communityCards.map((card, index) => {
-        return card !== null;
-      });
-      // Set the state to the new array
-      setDealingFlop(newDealingFlop);
-    }
-  };
+// Store dealingFlop in local storage whenever it changes
+useEffect(() => {
+  localStorage.setItem("dealingFlop", JSON.stringify(dealingFlop));
+  setFlipped(flipped.map((f, index) => f || dealingFlop[index]));
+  togglePlay();
+}, [dealingFlop]);
 
-  // to stop the transition animation to happend more than once
-  const [flipped, setFlipped] = useState(communityCards.map(() => false));
+// Update dealingFlop based on communityCards with sequential timing
+useEffect(() => {
+  if (communityCards && communityCards.length > 0) {
+    updateDealingFlopSequentially();
+    console.log("communityCards: ",communityCards);
+  }
+}, [communityCards]);
 
-  useEffect(() => {
-    // Update the flipped state based on dealingFlop
-    setFlipped(flipped.map((f, index) => f || dealingFlop[index]));
-  }, [dealingFlop]);
+const updateDealingFlopSequentially = () => {
+  communityCards.forEach((card, index) => {
+    const timeout = setTimeout(() => {
+      setDealingFlop(prev => prev.map((item, idx) => idx === index ? card !== null : item));
+      // togglePlay(index);  // Play sound when the card is revealed
+    }, 1000 * index);
+    timeoutRefs.current.push(timeout);
+  });
+};
 
-  // Call the update function when communityCards changes
-  useEffect(() => {
-    updateDealingFlop();
-  }, [communityCards]);
+// Clear timeouts on component unmount
+useEffect(() => {
+  return () => timeoutRefs.current.forEach(clearTimeout);
+}, []);
 
-  //playersCardDistributed for each player
-  // *** also has been used in PlayersPlacements component
-  // *** here only for animation purposes
-  const [playersCardDistributed, setPlayersCardDistributed] = useState([
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  ]);
+const formatCardData = (card) => {
+  return card ? [card.number.toString(), card.color] : null;
+};
 
-  //Delay function for flop ; to continue later on ; ignore it now
-  //   const shouldUpdate = [true, true, true, false, false];
-  //   const shouldUpdate2 = [true, true, true, true, false];
-  //   const shouldUpdate3 = [true, true, true, true, true];
-
-  //   const delayTimes = [0, 500, 1000 , 1500, 2000];
-
-  //   const testDealingFlop = () => {
-  //     dealingFlop.forEach((state, index) => {
-  //         if (shouldUpdate[index]) {
-  //             setTimeout(() => {
-  //                 setDealingFlop(prevFlop => {
-  //                     let newFlop = [...prevFlop];
-  //                     newFlop[index] = !state;
-  //                     return newFlop;
-  //                 });
-  //             }, delayTimes[index]);
-  //         }
-  //     });
-  // };
-
-  // //AUDIO -----------------------------
-  // const [playing0, togglePlay0] = useAudio(
-  //   require("./../assets/sounds/soundEffect-card1.mp3")
-  // );
-  // const [playing1, togglePlay1] = useAudio(
-  //   require("./../assets/sounds/soundEffect-card1.mp3")
-  // );
-  // const [playing2, togglePlay2] = useAudio(
-  //   require("./../assets/sounds/soundEffect-card1.mp3")
-  // );
-  // const [playing3, togglePlay3] = useAudio(
-  //   require("./../assets/sounds/soundEffect-card1.mp3")
-  // );
-  // const [playing4, togglePlay4] = useAudio(
-  //   require("./../assets/sounds/soundEffect-card1.mp3")
-  // );
-
-  // useEffect(() => {
-  //   dealingFlop.forEach((newFlop, index) => {
-  //     if (newFlop === true) {
-  //       switch (index) {
-  //         case 0:
-  //           togglePlay0();
-  //           break;
-  //         case 1:
-  //           togglePlay1();
-  //           break;
-  //         case 2:
-  //           togglePlay2();
-  //           break;
-  //         case 3:
-  //           togglePlay3();
-  //           break;
-  //         case 4:
-  //           togglePlay4();
-  //           break;
-  //         default:
-  //           break;
-  //       }
-  //     }
-  //   });
-  // }, [dealingFlop]);
-  // //----------------------------- AUDIO
 
   return (
     <div className={`container-cards`}>
       <div className="container-tableCards">
-        {initialCards.map((placeholder, index) => (
+        {new Array(5).fill(null).map((_, index) => (
           <Card
             key={index}
             card={formatCardData(communityCards[index])}
@@ -150,182 +87,32 @@ const CardsPlacements = ({}) => {
 
       <div className="container-dealerDuck">
         <Card
-          styleClass={"cardDuck"}
+          styleClass="cardDuck"
           card={null}
           flippedStyle={null}
           flippingCard={false}
         />
 
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[0] ? "transition1 profile0cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[0] ? "transition2 profile0cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[1] ? "transition1 profile1cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[1] ? "transition2 profile1cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[2] ? "transition1 profile2cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[2] ? "transition2 profile2cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[3] ? "transition1 profile3cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[3] ? "transition2 profile3cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[4] ? "transition1 profile4cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[4] ? "transition2 profile4cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[5] ? "transition1 profile5cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[5] ? "transition2 profile5cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[6] ? "transition1 profile6cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[6] ? "transition2 profile6cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[7] ? "transition1 profile7cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[7] ? "transition2 profile7cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[8] ? "transition1 profile8cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[8] ? "transition2 profile8cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[9] ? "transition1 profile9cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-        <Card
-          styleClass={`cardPlayer ${
-            playersCardDistributed[9] ? "transition2 profile9cards" : ""
-          }`}
-          card={null}
-          flippedStyle={null}
-          flippingCard={false}
-        />
-      </div>
+        {new Array(10).fill(null).map((_, index) => (
+          <React.Fragment key={index}>
+            <Card
+              key={`player-${index}-transition1`}
+              styleClass={`cardPlayer ${playersCardDistributed[index] ? `transition1 profile${index}cards` : ''}`}
+              card={null}
+              flippedStyle={null}
+              flippingCard={false}
+            />
+            <Card
+              key={`player-${index}-transition2`}
+              styleClass={`cardPlayer ${playersCardDistributed[index] ? `transition2 profile${index}cards` : ''}`}
+              card={null}
+              flippedStyle={null}
+              flippingCard={false}
+            />
+          </React.Fragment>
+        ))}
+    </div>
+      
     </div>
   );
 };
