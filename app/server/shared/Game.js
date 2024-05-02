@@ -54,6 +54,16 @@ class Game {
     return this.activePlayers;
   }
 
+  getPlayerById(playerId) {
+    const player = this.players.find((p) => p.playerId === playerId);
+    if (player) {
+      return player.name;
+    } else {
+      console.error("Player not found with ID:", playerId);
+      return null;
+    }
+  }
+
   setMaster(id) {
     this.master = id;
   }
@@ -234,10 +244,11 @@ class Game {
   }
 
   evaluateHands() {
-    const winner = this.determineWinner();
-    console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
-    this.newgame();
-
+    const winner = this.gagnant();
+    // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
+    console.log("winner est: ",winner);
+    console.log("winner est: ",winner[0].id);
+    console.log("WINNER EST:", this.getPlayerById(winner[0].id));
   }
 
   /*
@@ -310,8 +321,8 @@ class Game {
         console.log("PASSE PAR LE CASE showdown");
         break;
       case "end":
-        this.reset();
         console.log("PASSE PAR LE CASE end");
+        this.newgame();
         break;
             
     }
@@ -403,6 +414,7 @@ class Game {
     let activeUsers = this.getActivePlayers();
     let combinationList = this.listeCombinaison(activeUsers);
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
+    console.log("maxListapresinit",maxList);
 
     if (maxList.length > 1) {
       let winners = [];
@@ -437,7 +449,9 @@ class Game {
           break;
       }
 
+      console.log("maxListapres switch",maxList);
       let res = [];
+      console.log("winners.length",winners.length);
       for (let i = 0; i < winners.length; i++) {
         for (let j = 0; j < maxList.length; j++) {
           if (winners[i] === maxList[j].id) {

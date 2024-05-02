@@ -1,4 +1,4 @@
-const { isStraight } = require("./straight.js");
+const isStraight  = require("./straight");
 /*
  * IN : tableau de 7 cartes
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
