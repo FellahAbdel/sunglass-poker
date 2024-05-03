@@ -136,9 +136,9 @@ class Player {
    * OUT : rien
    * FUNCTION : déduire la somme misée de la somme des moneys
    */
-  bet(moneyToBet) {
-    this.playerMoney -= moneyToBet;
-  }
+  // bet(moneyToBet) {
+  //   this.playerMoney -= moneyToBet;
+  // }
 
   howmanyBetTurn(){
     return this.currentBetTurn;

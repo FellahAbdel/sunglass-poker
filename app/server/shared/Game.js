@@ -95,14 +95,16 @@ class Game {
       }
       this.focus = (this.focus + 1) % this.activePlayers.length;
     }
-    // console.log("testt: dansrotatefocusavantle test:", this.nbhostfolded);
+    
     if (this.focus === 0 + this.nbhostfolded) {
+      console.log("argent du focus",this.players[this.focus].howmanyBetTurn());
       if(this.gameCurrentBet===this.players[this.focus].howmanyBetTurn()){
         this.gameCurrentBet = 0;
         this.advanceStage();
         this.activePlayers.forEach((player) => {
           player.newTurnReset();
         });
+        console.log("POT TOTAL",this.total);
       }
       // console.log("testt: passer dans le test:", this.nbhostfolded);
       // console.log("J'avance dans la partie");
@@ -156,14 +158,17 @@ class Game {
           player.check();
           this.rotateFocus();
         }
+        console.log("avant je re bet",this.gameCurrentBet-(player.howmanyBet()));
+        console.log("la condition: ",player.getPlayerMoney()> (this.gameCurrentBet-player.howmanyBet()));
         if(player.getPlayerMoney()> (this.gameCurrentBet-player.howmanyBet())){
 
+          console.log("je re bet",this.gameCurrentBet-(player.howmanyBet()));
           player.bet(this.gameCurrentBet-(player.howmanyBet()));
           player.call();
           this.rotateFocus();
         }
         else{
-          //La faut faire en sorte de coller et couepr le pot en deux avec les regles spéciale
+          //La faut faire en sorte de coller et couper le pot en deux avec les regles spéciale
         }
       }
     }
@@ -221,6 +226,7 @@ class Game {
     this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
     this.deck.initCards();
     this.deck.shuffle();
+    this.gameCurrentBet=40;
     this.players.forEach((player) => {
       player.clearHand();
       for (let i = 0; i < 2; i++) {
@@ -228,6 +234,17 @@ class Game {
       }
     });
     this.nbhostfolded = 0;
+    const firstPlayer = this.players[this.focus];
+    console.log("firstplayer: ",firstPlayer);
+    firstPlayer.bet(this.gameCurrentBet / 2);
+
+    this.rotateFocus();
+    const nextPlayer = this.players[this.focus];
+    console.log("nextPlayer: ",nextPlayer);
+    nextPlayer.bet(this.gameCurrentBet);
+
+    this.rotateFocus();
+    //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
 
     // console.log("length:",this.players.length);
     // console.log("active:",this.activePlayers.length);
