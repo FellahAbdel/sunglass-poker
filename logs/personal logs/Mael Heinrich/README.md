@@ -124,8 +124,10 @@
 
 2024/05/03  1H15    debut Reglages des problémes de raise/call et explication de ce qui va pas au autres du groupes
 
---2024/04 SEMAINE 5: 7H15 (TOTAL: 93H15)
+2024/05/03  1h15    continue sur le bet, probleme avec le call, j'ai init les mises de bases mais tout le marche pas correctement
+
+--2024/04 SEMAINE 5: 8H30 (TOTAL: 94H30)
 
 
 
-TEMPS TOTAL: 93H15
+TEMPS TOTAL: 94H30
