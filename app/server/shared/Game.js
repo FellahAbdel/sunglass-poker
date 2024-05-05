@@ -146,6 +146,7 @@ class Game {
   }
 
   check(player) {
+    console.log("PAR ICI");
     if (this.isPlayersTurn(player.getPlayerId())) {
       if(this.gameCurrentBet===0){
         player.check();
@@ -153,7 +154,7 @@ class Game {
         this.rotateFocus();
       }
       else{
-        //faudra enlever le stack qu'il a deja poser si c est le cas
+
         if(player.howmanyBet()===this.gameCurrentBet){
           player.check();
           this.rotateFocus();

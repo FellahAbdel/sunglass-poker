@@ -30,6 +30,8 @@ export const GameTableProvider = ({ children }) => {
   const [playerMoney, setPlayerMoney] = useState(0);
   const [communityCards, setCommunityCards] = useState([]);
   const [gameCurrentBet, SetGameCurrentBet] = useState(0);
+  //MAel a add mais pas sur du fonctionnement
+  //const [gamePlayerCurrentBet,SetGamePlayerCurrentBet] = useState([]);
 
   useEffect(() => {
     const isMaster =

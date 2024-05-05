@@ -7,8 +7,10 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "../../Utiles/Translations";
 import { useUserData } from "../../Utiles/useUserData.jsx";
 import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
+const Players = require("./Player.js");
 
 const GameActionButtons = ({}) => {
+  //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet 
   const { isFocus, playerMoney, gameCurrentBet } = useGameTable();
   console.log("gameCurrentBet :", gameCurrentBet);
   const { getTranslatedWord } = useTranslation();
@@ -58,6 +60,7 @@ const GameActionButtons = ({}) => {
     if (gameCurrentBet > 0) {
       return `${getTranslatedWord(
         "gameActionPanel.call"
+  //----------------------------------------------------AJOUT LA SOUSTRACTION DU BET DU JOUEUR ACUTELLE      
       )} ${gameCurrentBet} SC`;
     } else {
       return getTranslatedWord("gameActionPanel.check");
@@ -67,6 +70,7 @@ const GameActionButtons = ({}) => {
   const handleCheckOrCall = () => {
     if (gameCurrentBet > 0) {
       // Si il y a un currentBet, effectue une action "Call"
+  //-----------------------------------------------------------------------LA AUSSI    
       dispatch(actions.bet(gameCurrentBet));
     } else {
       // Sinon, effectue une action "Check"
