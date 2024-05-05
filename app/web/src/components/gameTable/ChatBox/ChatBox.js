@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './ChatBox.css'; // Assurez-vous que le chemin vers le fichier CSS est correct
+import './ChatBox.css';
 
 const ChatBox = ({ isVisible, closeChat, message, setMessage }) => {
   const handleSendMessage = () => {
-    // Logique d'envoi de message
+    // Logic for sending message
   };
 
   const handleKeyPress = (event) => {
@@ -15,9 +15,11 @@ const ChatBox = ({ isVisible, closeChat, message, setMessage }) => {
   return (
     isVisible && (
       <div className="chatBoxContainer">
-        <button onClick={closeChat}>Close</button>
+        <div className="chatBoxHeader">
+          <button onClick={closeChat} className="chatCloseButton">X</button>
+        </div>
         <div className="messagesContainer">
-          {/* Affichage des messages */}
+          {/* Dynamic list of messages will be displayed here */}
         </div>
         <input
           type="text"
@@ -27,7 +29,7 @@ const ChatBox = ({ isVisible, closeChat, message, setMessage }) => {
           onKeyPress={handleKeyPress}
           placeholder="Type a message..."
         />
-        <button onClick={handleSendMessage}>Send</button>
+        <button onClick={handleSendMessage} className="sendButton">Send</button>
       </div>
     )
   );
