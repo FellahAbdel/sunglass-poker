@@ -10,9 +10,8 @@ import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
 const GameActionButtons = ({}) => {
   //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet 
-  const a = useGameTable();
-  console.log('MERDE',a);
-  const { isFocus, playerMoney, gameCurrentBet } = useGameTable();
+  
+  const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } = useGameTable();
   console.log("gameCurrentBet :", gameCurrentBet);
   const { getTranslatedWord } = useTranslation();
   //checkValue = true -> Check
@@ -62,7 +61,7 @@ const GameActionButtons = ({}) => {
       return `${getTranslatedWord(
         "gameActionPanel.call"
   //----------------------------------------------------AJOUT LA SOUSTRACTION DU BET DU JOUEUR ACUTELLE      
-      )} ${gameCurrentBet} SC`;
+      )} ${gameCurrentBet-gamePlayerCurrentBet} SC`;
     } else {
       return getTranslatedWord("gameActionPanel.check");
     }
@@ -72,7 +71,7 @@ const GameActionButtons = ({}) => {
     if (gameCurrentBet > 0) {
       // Si il y a un currentBet, effectue une action "Call"
   //-----------------------------------------------------------------------LA AUSSI    
-      dispatch(actions.bet(gameCurrentBet));
+      dispatch(actions.bet(gameCurrentBet-gamePlayerCurrentBet));
     } else {
       // Sinon, effectue une action "Check"
       dispatch(actions.check());
