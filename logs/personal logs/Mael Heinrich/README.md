@@ -126,8 +126,10 @@
 
 2024/05/03  1h15    continue sur le bet, probleme avec le call, j'ai init les mises de bases mais tout le marche pas correctement
 
---2024/04 SEMAINE 5: 8H30 (TOTAL: 94H30)
+2024/05/05  1H30    Trouver comment resoudre le probleme du call qui n'a pas la bonne valeur mais ça touche au provide rdonc j'ai besoin d aide, et j'ai noter tt les trucs qui nous reste a faire en "urgences" et les qq bug 
+
+--2024/04 SEMAINE 5: 10 (TOTAL: 96H)
 
 
 
-TEMPS TOTAL: 94H30
+TEMPS TOTAL: 96H
