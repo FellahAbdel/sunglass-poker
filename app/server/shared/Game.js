@@ -188,9 +188,6 @@ class Game {
           this.gameCurrentBet = player.howmanyBetTurn();
 
         }
-        else{
-          this.gameCurrentBet= amount;
-        }
 
 
         console.log("this line got executed", this.gameCurrentBet);
