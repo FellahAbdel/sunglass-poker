@@ -211,6 +211,7 @@ module.exports = gameController = {
       if(room.game.players.findIndex(
         (p) => p.getPlayerId() == action.payload.playerId) === room.game.focus){
           this.dispatch(action.payload.playerId,action);
+          this.dispatch(action.payload.playerId,actions.playerPlayed(action.payload.room))
         }
     }
     this.broadcastStatus(action.payload.room);

@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "../../Utiles/Translations";
 import { useUserData } from "../../Utiles/useUserData.jsx";
 import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
-const Players = require("./Player.js");
 
 const GameActionButtons = ({}) => {
   //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet 

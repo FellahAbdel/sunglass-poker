@@ -335,6 +335,9 @@ const gameReducer = (state = initialState, action) => {
         }
       }
       return { ...state };
+    case actions.PLAYER_PLAYED:
+      state.rooms[action.payload.room].game.playerPlayed();
+      return {...state}
     case actions.CLEARANSWER:
       state.answer = false;
       return { ...state };

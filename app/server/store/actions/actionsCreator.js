@@ -5,6 +5,11 @@ module.exports.gameLobby = (idGame) => ({
   payload: { id: idGame },
 });
 
+module.exports.playerPlayed = (room) => ({
+  type:actions.PLAYER_PLAYED,
+  payload: { room:room }
+})
+
 module.exports.startGame = (idGame, userId) => {
   console.log("Action START_GAME created with payload:", {
     id: idGame,

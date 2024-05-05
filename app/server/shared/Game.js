@@ -113,6 +113,10 @@ class Game {
     }
   }
 
+  playerPlayed(){
+    csl.log('classGame_PLAYER_PLAYED',"un joueur a joué");
+  }
+
   foldPlayer(playerId) {
     const player = this.players.find((p) => p.playerId === playerId);
     if (player) {
