@@ -128,8 +128,10 @@
 
 2024/05/05  1H30    Trouver comment resoudre le probleme du call qui n'a pas la bonne valeur mais ça touche au provide rdonc j'ai besoin d aide, et j'ai noter tt les trucs qui nous reste a faire en "urgences" et les qq bug 
 
---2024/04 SEMAINE 5: 10 (TOTAL: 96H)
+2024/05/05  1H30    Reunion avec victor pour pouvoir faire marcher les boutons call raise et le bon deroulement de la partie
+
+--2024/04 SEMAINE 5: 11H30 (TOTAL: 97H30)
 
 
 
-TEMPS TOTAL: 96H
+TEMPS TOTAL: 97H30
