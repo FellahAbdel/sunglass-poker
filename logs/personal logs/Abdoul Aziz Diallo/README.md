@@ -99,7 +99,7 @@
 | 19/04 | Work on creating rooms (front-end part)                                        |                  | 3h30min    |           |
 | 21/04 | Merge conflict resolution + re-adapt my code and mael's for the rooms creation |                  | 2h20min    |           |
 
-## Week 11 - _Total: 23h00_
+## Week 12 - _Total: 23h00_
 
 | Date     | Description                                                                                                                                                                                                                        | Skills developed | Time Spent | Resources |
 | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------- | --------- |
@@ -110,3 +110,12 @@
 | 26/04    | Try to make the total pot dynamic                                                                                                                                                                                                  |                  | 2h         |           |
 |          | Create a new component that allow displaying the total pot uniquely once for all                                                                                                                                                   |                  | 2h         |           |
 | 28/04    | Raise button work (there is some bugs)                                                                                                                                                                                             |                  | 3h         |           |
+
+## Week 13 - _Total: 7h30mn_
+
+| Date  | Description                                                  | Skills developed | Time Spent | Resources |
+| ----- | ------------------------------------------------------------ | ---------------- | ---------- | --------- |
+| 30/04 | communityCards dynamic rendering                             |                  | 2h         |           |
+|       | Front code debugging of the raise button                     |                  | 2h         |           |
+| 02/05 | Help Mael for some debugging, we got a winner                |                  | 30mn       |           |
+|       | CHECK or CALL button work at 90% it remains updating the pot |                  | 3h       |           |
