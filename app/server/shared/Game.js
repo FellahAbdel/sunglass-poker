@@ -184,7 +184,14 @@ class Game {
       if (player.getPlayerMoney() > amount) {
         player.bet(amount);
         this.total += amount;
-        this.gameCurrentBet = amount;
+        if(this.gameCurrentBet<player.howmanyBetTurn()){
+          this.gameCurrentBet = player.howmanyBetTurn();
+
+        }
+        else{
+          this.gameCurrentBet= amount;
+        }
+
 
         console.log("this line got executed", this.gameCurrentBet);
         this.rotateFocus();
