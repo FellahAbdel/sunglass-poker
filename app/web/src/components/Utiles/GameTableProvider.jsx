@@ -31,7 +31,7 @@ export const GameTableProvider = ({ children }) => {
   const [communityCards, setCommunityCards] = useState([]);
   const [gameCurrentBet, SetGameCurrentBet] = useState(0);
   //MAel a add mais pas sur du fonctionnement
-  //const [gamePlayerCurrentBet,SetGamePlayerCurrentBet] = useState([]);
+  const [gamePlayerCurrentBet,setGamePlayerCurrentBet] = useState([]);
 
   useEffect(() => {
     const isMaster =
@@ -65,10 +65,10 @@ export const GameTableProvider = ({ children }) => {
       const currentPlayer = gameInfo.game.players.find(
         (player) => player.playerId === userId
       );
-      
+      console.log("j'actualise depuis:",gameInfo);
       if (currentPlayer) {
         setPlayerMoney(currentPlayer.playerMoney);
-        
+        setGamePlayerCurrentBet(gameInfo.game.players.find((p) => p.playerId===userId).currentBetTurn);
         // Mettre à jour les cartes du joueur
         if (currentPlayer.playerCards) {
           const cardsWithVisibility = currentPlayer?.playerCards?.map((card, index) => ({
@@ -95,7 +95,7 @@ export const GameTableProvider = ({ children }) => {
 
 
   return (
-    <GameTableContext.Provider value={{ ...state, playerCards, playerMoney, communityCards, gameCurrentBet }}>
+    <GameTableContext.Provider value={{ ...state, playerCards, playerMoney, communityCards, gameCurrentBet, gamePlayerCurrentBet}}>
       {children}
     </GameTableContext.Provider>
   );

@@ -10,6 +10,8 @@ import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
 const GameActionButtons = ({}) => {
   //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet 
+  const a = useGameTable();
+  console.log('MERDE',a);
   const { isFocus, playerMoney, gameCurrentBet } = useGameTable();
   console.log("gameCurrentBet :", gameCurrentBet);
   const { getTranslatedWord } = useTranslation();
