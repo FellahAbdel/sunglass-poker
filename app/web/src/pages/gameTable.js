@@ -12,7 +12,7 @@ import "../components/Utiles/animations.css";
 import { getStyles } from "../components/Utiles/useStyles.jsx";
 
 //components imports
-import NavbarV2 from "../components/Navbar/NavbarV2";
+import NavbarV3 from "../components/Navbar/NavbarV3.js";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
@@ -21,7 +21,7 @@ import HandCards from "../components/gameTable/HandCards/HandCards";
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
 const GameTable = () => {
-  const { theme , animation } = useSettings();
+  const { theme, animation } = useSettings();
   const { isLogged } = useAuth();
   const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
@@ -31,7 +31,6 @@ const GameTable = () => {
     isGameTableVisible,
     isWindowOpen
   );
-
 
   useEffect(() => {
     console.log("isLogged gameTable:", isLogged);
@@ -47,8 +46,6 @@ const GameTable = () => {
     event.stopPropagation();
   };
 
-
-
   //-----------------------------------------inGame functions to test
 
   return (
@@ -56,7 +53,6 @@ const GameTable = () => {
       className={`container-main resetall ${animation ? "" : "no-animation"}`}
       id={theme}
       onClick={handleCloseOnClickOutside}
-      
     >
       {/* css Pattern background */}
 
@@ -65,14 +61,12 @@ const GameTable = () => {
 
       {/* Navbar or header */}
       <div className="comp-navbar">
-        <NavbarV2 />
+        <NavbarV3 />
       </div>
 
       {/* Menu/Table */}
       <div className={classes.compTable}>
-        <Table
-          onClick={(e) => handleBoxClick}
-        />
+        <Table onClick={(e) => handleBoxClick} />
       </div>
 
       {/* playing elements opens when logged in */}
@@ -103,7 +97,7 @@ const GameTable = () => {
             <HandCards
               card1={["a", "hearts"]}
               card2={["a", "diamonds"]}
-              showHandCardProp={[true,true]}
+              showHandCardProp={[true, true]}
               handGuideProp={"straight"}
             />
           </div>
