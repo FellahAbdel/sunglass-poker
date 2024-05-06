@@ -47,12 +47,12 @@ const GameActionButtons = ({}) => {
   const handleFold = () => {
     dispatch(actions.fold());
   };
-
+//AVANT Y AVAIS JUSTE amount, mais ça marche pas super 
   const handleBet = (amount) => {
-    console.log("amount :", amount);
-    amount = Math.round(amount);
-    dispatch(actions.bet(amount));
-    setAmount(amount);
+    console.log("amount :", amount+gamePlayerCurrentBet);
+    amount = Math.round(amount+gamePlayerCurrentBet);
+    dispatch(actions.bet(amount+gamePlayerCurrentBet));
+    setAmount(amount+gamePlayerCurrentBet);
   };
 
   // Met à jour la valeur du bouton "Check" ou "Call" en fonction de gameCurrentBet
@@ -164,7 +164,7 @@ const GameActionButtons = ({}) => {
           styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
           onClick={() => togglePopupAndRaise()}
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
-            !isFocus && amount !== 0
+            !isFocus && amount !== 0            
               ? `${Math.round(amount)} SC`
               : `${raiseCoin ? Math.round(raiseCoin) + " SC" : ""}`
           }`}
