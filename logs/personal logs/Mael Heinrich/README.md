@@ -132,6 +132,9 @@
 
 --2024/04 SEMAINE 5: 11H30 (TOTAL: 97H30)
 
+2024/05/06  1H30    Tentatives de reglage des problemes de mises, problemes d'affichage, debut du bonus, probleme du reset,j'ai noté plein de choses a voir avec le reste du groupe 
 
 
-TEMPS TOTAL: 97H30
+--2024/04 SEMAINE 6: 1H30 (TOTAL: 99H)
+
+TEMPS TOTAL: 99H
