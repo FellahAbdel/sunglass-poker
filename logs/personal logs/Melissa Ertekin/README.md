@@ -144,8 +144,12 @@
 
 * 2024/04/22 : <b>30 mins</b> <br/> Travail individuel : <i> Rédaction du compte-rendu hebdomadaire.</i>
 
-### Semaine 12 : 22 Avril - 29 Avril | Temps Totale: 
+### Semaine 12 : 22 Avril - 29 Avril | Temps Totale: 4h30
 
 * 2024/04/23 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Réunion avec les développeurs.</i>
 
 * 2024/04/29 : <b>1h30</b> <br/> Travail individuel : <i> Surveillance des journaux. Lecture des commits.  Demandes de feedback personnalisé. Rédaction du compte-rendu hebdomadaire. </i>
+
+### Semaine 13 : 29 Avril - 6 Mai | Temps Totale: 1h
+
+* 2024/05/06 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux et Trello.  Demandes de feedback. Rédaction du compte-rendu hebdomadaire. </i>
