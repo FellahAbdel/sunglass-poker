@@ -31,4 +31,5 @@
 - 19/04 , formation socket io sur Youtube : https://www.youtube.com/watch?v=x_fHXt9V3zQ : 1H30
 - 22/04 , travail sur le chatBox , implementation de code et documentation : 4H
 - 28/04 , travail front ChatBox : 3H
-- TOTAL:75H30
+- 04/05 ,  probleme bug npm : 1H
+- TOTAL:76H30
