@@ -29,3 +29,6 @@
 - 2h le 05/04 (travaille sur le ranking )
 - 3h le 09/04 (reunion Front + back / division des nouvelles taches + debut de travaille sur nouvelle Feature chat)
 - 3h séance du 16/04 (dernièr travail sur l'Ihm avant présentation + travail sur  présentation IHM/Projet)
+- 3h séance du 22/04(Plannification et conception + Création de composants )
+- 2h séance du 23/04 (création nouveaux composants Barre d'entrée/Liste d'utilisateurs + monté en competence react)
+- 3h séance du 30/04 (nouvelle tache : Intégration des websockets + monté en competence websockets )
