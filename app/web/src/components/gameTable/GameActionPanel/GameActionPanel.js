@@ -92,7 +92,7 @@ const GameActionButtons = ({}) => {
     } else {
       setShowPopup(false);
       if (raiseCoin !== 0) {
-        handleBet(raiseCoin);
+        handleBet((raiseCoin+gameCurrentBet));
       }
       setRaiseCoin(0);
       setCoins(coinsAfterRaise);

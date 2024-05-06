@@ -182,11 +182,16 @@ class Game {
   bet(player, amount) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       if (player.getPlayerMoney() > amount) {
-        player.bet(amount);
-        this.total += amount;
-        if(this.gameCurrentBet<player.howmanyBetTurn()){
-          this.gameCurrentBet = player.howmanyBetTurn();
+        if((amount + player.howmanyBetTurn()) >= this.gameCurrentBet){
 
+          player.bet(amount);
+          this.total += amount;
+          if(this.gameCurrentBet<player.howmanyBetTurn()){
+            this.gameCurrentBet = player.howmanyBetTurn();
+            
+          }
+        }else{
+          return;
         }
 
 

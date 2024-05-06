@@ -210,8 +210,8 @@ module.exports = gameController = {
       csl.log("playerAction",room)
       if(room.game.players.findIndex(
         (p) => p.getPlayerId() == action.payload.playerId) === room.game.focus){
-          this.dispatch(action.payload.playerId,action);
-          this.dispatch(action.payload.playerId,actions.playerPlayed(action.payload.room))
+          csl.log("playerAction",this.dispatch(action.payload.playerId,action));
+          csl.log("playerAction",this.dispatch(action.payload.playerId,actions.playerPlayed(action.payload.room)))
         }
     }
     this.broadcastStatus(action.payload.room);

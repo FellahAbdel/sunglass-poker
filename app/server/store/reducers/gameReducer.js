@@ -250,6 +250,7 @@ const gameReducer = (state = initialState, action) => {
       return { ...state };
 
     case actions.BET:
+      answer = {success:false, mes:"Action did not go through", payload:undefined};
       console.log(state.rooms[action.payload.room], action);
       if (action.payload && action.payload.playerId) {
         csl.log("playerAction", " call for raise of ", action.payload.amount);
@@ -260,14 +261,15 @@ const gameReducer = (state = initialState, action) => {
 
         if (player) {
           csl.log("playerAction", "Player is beting.");
-          room.game.bet(player, action.payload.amount);
+          answer = room.game.bet(player, action.payload.amount);
         } else {
           console.error("Player not found for the bet action");
         }
       } else {
         console.error("Invalid payload for bet action");
       }
-      return { ...state };
+
+      return { ...state, answer:answer };
 
     case actions.CHECK:
       console.log(
