@@ -292,6 +292,14 @@ class Game {
     console.log("WINNER EST:", this.getPlayerById(winner[0].id));
   }
 
+  //Debut de fonction pour le bonus, a terminer
+  UseBonus(playerId){
+
+    this.activePlayers.forEach((player) => {
+      player.bet(50);
+    });
+  }
+
   /*
   in : nothing
   out : nothing but we update the communityCards by pushing three cards in the 

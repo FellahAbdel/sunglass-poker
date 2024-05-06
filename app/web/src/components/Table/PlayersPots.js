@@ -8,7 +8,7 @@ const PlayersPots = ({ players = [] , isVisible}) => {
     <div className="container-playerPots">
       {isVisible && players?.map((player, index) => (
         <div key={index} className={`playerPot${index}`}>
-          {player.currentBet || 0} SC
+          {player.currentBetTurn || 0} SC
         </div>
       ))}
     </div>
