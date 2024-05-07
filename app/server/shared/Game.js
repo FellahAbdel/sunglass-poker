@@ -237,6 +237,10 @@ class Game {
 
     this.state = "active";
     this.focus = 0; // Initialise le focus sur le premier joueur
+  //   this.players.forEach(player => {
+  //     player.newRoundReset();
+  // });
+  
     this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
     this.deck.initCards();
     this.deck.shuffle();
@@ -279,6 +283,7 @@ class Game {
     this.state = "active";
     this.focus = 0; // Initialise le focus sur le premier joueur
     this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
+    this.pokerTable.reset();
     this.deck.initCards();
     this.deck.shuffle();
     this.players.forEach((player) => {
