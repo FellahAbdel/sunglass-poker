@@ -136,4 +136,6 @@
 
 2024/04/28 : 2h00           ShowCards et HideCards fonctionnel.
 
-TEMPS TOTAL: 139h30min
+2024/05/07 : 4h00           Réunion, correction bugs, base partie.
+
+TEMPS TOTAL: 143h30min
