@@ -94,7 +94,8 @@
     "folded": "Fold",
     "raise": "Raised",
     "checked": "Checked",
-    "playing": "Playing"
+    "playing": "Playing",
+    "waiting": "Waiting"
   },
   "settings": {
     "mute": "Mute",
