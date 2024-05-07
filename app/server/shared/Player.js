@@ -58,8 +58,9 @@ class Player {
     }
   }
 
-
-
+  seRemplirLesPoches(total){
+  this.playerMoney+=total;
+  }
 
   settimeLastAnswer(t) {
     this.timeLastAnswer = t;
