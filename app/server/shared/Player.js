@@ -188,6 +188,16 @@ class Player {
     }
   }
 
+  betinitial(amount){
+    if(this.playerMoney>amount){
+      this.currentBet=amount;
+      this.currentBetTurn+=amount;
+      this.playerMoney-=amount;
+      //status a definir:
+      // this.status = "raise";
+    }
+  }
+
   newRoundReset() {
     this.clearHand();
     this.playerActionLog = [];
