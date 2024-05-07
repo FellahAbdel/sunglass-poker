@@ -32,4 +32,5 @@
 - 22/04 , travail sur le chatBox , implementation de code et documentation : 4H
 - 28/04 , travail front ChatBox : 3H
 - 04/05 ,  probleme bug npm : 1H
-- TOTAL:76H30
+- 07/05 , stund up meeting , avancement sur le chatBox ajustement du front et liaison back-front du chat : 3H30
+- TOTAL:80H
