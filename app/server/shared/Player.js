@@ -72,7 +72,6 @@ class Player {
   // Methods to get and set status
   setStatus(status) {
     this.status = status;
-    this.isActive = status !== 'folded';
   }
 
   getStatus() {

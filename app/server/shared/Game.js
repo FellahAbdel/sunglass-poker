@@ -54,7 +54,7 @@ class Game {
   }
 
   getActivePlayers() {
-    return this.activePlayers;
+    return this.players.filter((player) => player.isActive);
   }
 
   getPlayerNameById(playerId) {
@@ -131,10 +131,12 @@ class Game {
     const player = this.players.find((p) => p.playerId === playerId);
     if (player) {
       player.fold();
-      this.activePlayers = this.activePlayers.filter(
-        (p) => p.playerId !== playerId
-      );
+      this.updateActivePlayers();
     }
+  }
+
+  updateActivePlayers() {
+    this.activePlayers = this.players.filter(player => player.isActive);
   }
 
   isPlayersTurn(playerId) {
@@ -148,6 +150,7 @@ class Game {
   fold(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
+      this.updateActivePlayers();
       if (this.focus === 0 + this.nbhostfolded) {
         console.log("testt: aledavant:", this.nbhostfolded);
         this.rotateFocus();
@@ -297,7 +300,8 @@ class Game {
   }
 
   evaluateHands() {
-    const winner = this.gagnant();
+    const activePlayers = this.getActivePlayers();
+    const winner = this.gagnant(activePlayers);
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     console.log("winner est: ", winner);
     console.log("winner est: ", winner[0].id);
@@ -481,9 +485,9 @@ class Game {
    * OUT : { [c1, ..., c5], playerId } tableau de combinaison et identifiant du gagnant
    * FUNCTION : identifie le joueur gagnant de la partie et la main avec laquelle il a gagne
    */
-  gagnant() {
-    let activeUsers = this.getActivePlayers();
-    let combinationList = this.listeCombinaison(activeUsers);
+  gagnant(activePlayers) {
+    console.log("Joueurs actifs lors de la détermination du gagnant:", activePlayers.map(p => `${p.name}: ${p.isActive}`));
+    let combinationList = this.listeCombinaison(activePlayers);
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
     console.log("maxListapresinit", maxList);
 
