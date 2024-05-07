@@ -1,4 +1,4 @@
-# Melissa Ertekin | Temps Totale : 107h
+# Melissa Ertekin | Temps Totale : 112h30
 
 
 ### Semaine 0 : 30 Janvier - 05 Février  | Temps Totale: 5h
@@ -153,3 +153,8 @@
 ### Semaine 13 : 29 Avril - 6 Mai | Temps Totale: 1h
 
 * 2024/05/06 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux et Trello.  Demandes de feedback. Rédaction du compte-rendu hebdomadaire. </i>
+
+### Semaine 14 : 6 Mai - 13 Mai | Temps Totale:
+
+* 2024/05/07 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Standup meeting avec les développeurs. Planification de cette semaine et précision de ce que nous allons faire les semaines à venir jusqu'au rendu. Petite démo de jeux. </i>
+
