@@ -302,6 +302,9 @@ class Game {
     console.log("winner est: ", winner);
     console.log("winner est: ", winner[0].id);
     console.log("WINNER EST:", this.getPlayerById(winner[0].id));
+    const aa=this.getPlayerById(winner[0].id);
+    console.log("aa",aa);
+    aa.SeRemplirLesPoches(this.total);
   }
 
   //Debut de fonction pour le bonus, a terminer
