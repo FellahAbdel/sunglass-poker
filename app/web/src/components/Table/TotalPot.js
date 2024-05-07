@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "../Utiles/Translations";
 import "./table.css";
+import { useGameTable } from "../Utiles/GameTableProvider";
 
 const TotalPot = () => {
+  const { total } = useGameTable();
   const { getTranslatedWord } = useTranslation();
 
   const gameClass = useSelector((state) => state.game.game);
@@ -22,7 +24,7 @@ const TotalPot = () => {
   return (
     <div className={`container-playerPots`}>
       <div className={`container-totalPot`}>
-        {getTranslatedWord("table.total")}: {updatedStack.toLocaleString()} SC
+        {getTranslatedWord("table.total")}: {total.toLocaleString()} SC
       </div>
     </div>
   );
