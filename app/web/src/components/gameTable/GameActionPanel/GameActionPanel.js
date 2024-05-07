@@ -49,10 +49,10 @@ const GameActionButtons = ({}) => {
   };
 //AVANT Y AVAIS JUSTE amount, mais ça marche pas super 
   const handleBet = (amount) => {
-    console.log("amount :", amount+gamePlayerCurrentBet);
-    amount = Math.round(amount+gamePlayerCurrentBet);
-    dispatch(actions.bet(amount+gamePlayerCurrentBet));
-    setAmount(amount+gamePlayerCurrentBet);
+    console.log("amount :", amount);
+    amount = Math.round(amount);
+    dispatch(actions.bet(amount));
+    setAmount(amount);
   };
 
   // Met à jour la valeur du bouton "Check" ou "Call" en fonction de gameCurrentBet
@@ -92,10 +92,11 @@ const GameActionButtons = ({}) => {
     } else {
       setShowPopup(false);
       if (raiseCoin !== 0) {
-        handleBet((raiseCoin+gameCurrentBet));
+        if(gamePlayerCurrentBet >= gameCurrentBet) handleBet((raiseCoin));
+        else handleBet((raiseCoin+(gameCurrentBet-gamePlayerCurrentBet)));
       }
-      setRaiseCoin(0);
-      setCoins(coinsAfterRaise);
+      // setRaiseCoin(0);
+      // setCoins(coinsAfterRaise);
     }
   };
 

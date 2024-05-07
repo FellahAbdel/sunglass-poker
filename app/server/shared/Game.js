@@ -251,11 +251,13 @@ class Game {
     const firstPlayer = this.players[this.focus];
     console.log("firstplayer: ",firstPlayer);
     firstPlayer.bet(this.gameCurrentBet / 2);
+    this.total+=this.gameCurrentBet/2;
 
     this.rotateFocus();
     const nextPlayer = this.players[this.focus];
     console.log("nextPlayer: ",nextPlayer);
     nextPlayer.bet(this.gameCurrentBet);
+    this.total+=this.gameCurrentBet;
 
     this.rotateFocus();
     //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
