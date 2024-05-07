@@ -57,10 +57,20 @@ class Game {
     return this.activePlayers;
   }
 
-  getPlayerById(playerId) {
+  getPlayerNameById(playerId) {
     const player = this.players.find((p) => p.playerId === playerId);
     if (player) {
       return player.name;
+    } else {
+      console.error("Player not found with ID:", playerId);
+      return null;
+    }
+  }
+
+  getPlayerById(playerId) {
+    const player = this.players.find((p) => p.playerId === playerId);
+    if (player) {
+      return player;
     } else {
       console.error("Player not found with ID:", playerId);
       return null;
@@ -305,7 +315,7 @@ class Game {
     console.log("WINNER EST:", this.getPlayerById(winner[0].id));
     const aa=this.getPlayerById(winner[0].id);
     console.log("aa",aa);
-    aa.SeRemplirLesPoches(this.total);
+    aa.seRemplirLesPoches(this.total);
   }
 
   //Debut de fonction pour le bonus, a terminer
