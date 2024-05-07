@@ -86,7 +86,7 @@ class Game {
     const originalFocus = this.focus;
 
     this.focus = (this.focus + 1) % this.activePlayers.length;
-
+    // this.players[this.focus].playerState="waiting";
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
@@ -384,6 +384,7 @@ class Game {
         );
         this.evaluateHands();
         console.log("PASSE PAR LE CASE showdown");
+        this.advanceStage();
         break;
       case "end":
         console.log("PASSE PAR LE CASE end");
