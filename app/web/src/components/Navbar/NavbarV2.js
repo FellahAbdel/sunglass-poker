@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import "./navbarV2.css";
 //components
 //import ChipsCash from "./ChipsCash";
-import ChatBox from '../gameTable/ChatBox/ChatBox.js';
+import Button from "../button/Button.tsx";
 import TextInputComponent from "../textInput/TextInput.jsx";
 import { useTranslation } from "../Utiles/Translations";
 import { useAuth } from "../Utiles/AuthProvider";
@@ -16,7 +16,6 @@ import { useDispatch } from 'react-redux'
 import {comm} from '../../services/socket.js';
 
 
-const [message, setMessage] = useState('');
 
 const Navbar = ({}) => {
   const { isLogged, logingOut } = useAuth();
@@ -134,23 +133,23 @@ const Navbar = ({}) => {
                   />
                 )}
 
-{isChatOpen && (
-  <>
-    <img
-      className={"btn-chatClose-V2"}
-      onClick={handleChatClose}
-      src={require("./../assets/images/icons/white/cross.png")}
-      alt="exit-chat"
-    />
-    <TextInputComponent
-      name="Message"
-      value={message}
-      onChange={(e) => setMessage(e.target.value)}
-      placeholder={"Messages"}
-      styleClass={"input-chatBox-V2"}
-    />
-  </>
-)}
+                {isChatOpen && (
+                  <>
+                    <img
+                      className={"btn-chatClose-V2"}
+                      onClick={handleChatClose}
+                      src={require("./../assets/images/icons/white/cross.png")}
+                      alt="exit-chat"
+                    />
+                    <TextInputComponent
+                      name="Message"
+                      value={handleNull}
+                      onChange={handleNull}
+                      placeholder={"Messages"}
+                      styleClass={"input-chatBox-V2"}
+                    />
+                  </>
+                )}
               </>
             )}
           </div>
