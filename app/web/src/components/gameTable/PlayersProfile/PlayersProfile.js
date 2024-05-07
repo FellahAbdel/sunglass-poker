@@ -76,6 +76,7 @@ const PlayersProfile = ({
 
       <div className={`profilePic ${status.toLowerCase()}`}>
         <AvatarDisplay userId={playerId} />
+        {status === "winner" && <img id="crown" src={require("./../../assets/images/icons/white/crown.png")}/>}
       </div>
     </div>
   );
