@@ -95,7 +95,8 @@
     "raise": "Raised",
     "checked": "Checked",
     "playing": "Playing",
-    "waiting": "Waiting"
+    "waiting": "Waiting",
+    "winner":"Winner"
   },
   "settings": {
     "mute": "Mute",
