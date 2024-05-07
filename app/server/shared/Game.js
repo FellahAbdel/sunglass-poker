@@ -278,6 +278,7 @@ class Game {
   newgame() {
     this.state = "active";
     this.focus = 0; // Initialise le focus sur le premier joueur
+    this.total= 0;
     this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
     this.deck.initCards();
     this.deck.shuffle();
