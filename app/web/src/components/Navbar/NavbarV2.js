@@ -14,13 +14,23 @@ import { useUserData } from "../Utiles/useUserData.jsx";
 import * as actions from "../../store/actions/clientInteractionsCreator.js";
 import { useDispatch } from 'react-redux'
 import {comm} from '../../services/socket.js';
+import { useGameTable } from "../Utiles/GameTableProvider.jsx";
 
 
 
 const Navbar = ({}) => {
   const { isLogged, logingOut } = useAuth();
+  const {gameState} = useGameTable();
+
   const dispatch = useDispatch();
+
   const handleleaveRoom = () => {
+    // si le jeu est en cours
+    if(gameState === "active"){
+        // On le force à fold.
+        dispatch(actions.fold());
+    }
+
     dispatch(actions.leaveRoom());
   }
 

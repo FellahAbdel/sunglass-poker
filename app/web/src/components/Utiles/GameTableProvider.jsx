@@ -33,6 +33,7 @@ export const GameTableProvider = ({ children }) => {
   //MAel a add mais pas sur du fonctionnement
   const [gamePlayerCurrentBet, setGamePlayerCurrentBet] = useState([]);
   const [total, setTotal] = useState(0);
+  const [gameState, setGameState] = useState("");
 
   useEffect(() => {
     const isMaster =
@@ -100,6 +101,10 @@ export const GameTableProvider = ({ children }) => {
       if (gameInfo.game) {
         setTotal(gameInfo.game.total);
       }
+
+      if (gameInfo.game) {
+        setGameState(gameInfo.game.state);
+      }
     }
   }, [gameInfo, userId]);
 
@@ -113,6 +118,7 @@ export const GameTableProvider = ({ children }) => {
         gameCurrentBet,
         gamePlayerCurrentBet,
         total,
+        gameState,
       }}
     >
       {children}
