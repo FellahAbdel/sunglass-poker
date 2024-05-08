@@ -134,7 +134,12 @@
 
 2024/05/06  1H30    Tentatives de reglage des problemes de mises, problemes d'affichage, debut du bonus, probleme du reset,j'ai noté plein de choses a voir avec le reste du groupe 
 
+2024/05/06  30min   Reunion avec victor pour regler quelque problème sur les boutons
 
---2024/04 SEMAINE 6: 1H30 (TOTAL: 99H)
+2024/05/07  4H30    Reunion générale du mardi, recherche de bugs  avanacement dans le projet etc...
 
-TEMPS TOTAL: 99H
+
+
+--2024/04 SEMAINE 6: 6H30 (TOTAL: 104H)
+
+TEMPS TOTAL: 104H
