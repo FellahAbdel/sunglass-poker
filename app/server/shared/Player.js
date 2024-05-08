@@ -58,8 +58,9 @@ class Player {
     }
   }
 
-
-
+  seRemplirLesPoches(total){
+  this.playerMoney+=total;
+  }
 
   settimeLastAnswer(t) {
     this.timeLastAnswer = t;
@@ -71,7 +72,6 @@ class Player {
   // Methods to get and set status
   setStatus(status) {
     this.status = status;
-    this.isActive = status !== 'folded';
   }
 
   getStatus() {
@@ -184,7 +184,8 @@ class Player {
       this.currentBet=amount;
       this.currentBetTurn+=amount;
       this.playerMoney-=amount;
-      this.status = "raise";
+        this.status = "raise";
+      
     }
   }
 
@@ -205,6 +206,7 @@ class Player {
     this.currentBetTurn=0;
     this.isActive = true;
     this.cardsVisible = [false, false];
+    this.status="Playing";
     // Ajouter d'autres réinitialisations si nécessaire
   }
 
