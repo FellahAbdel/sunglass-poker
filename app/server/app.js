@@ -88,6 +88,6 @@ const router = require('./routes/apiroutes')(app,db,gameController);
 /** Démarrage du serveur.
  *
  */
-server.listen(port, () => {
-  console.log("Server is running on port " + port);
+server.listen(port, ()=> {
+    console.log('Server is running on port ' + port);
 });

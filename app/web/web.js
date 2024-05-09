@@ -1,36 +1,21 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const session = require('express-session');
-const MemoryStore = require('memorystore')(session);
+const {createProxyMiddleware} = require('http-proxy-middleware');
+
+app.use(express.static(path.join(__dirname, 'build')));
 
 
-app.use(express.static(path.join(__dirname, 'public/')));
-
-const myStore = new MemoryStore({
-    checkPeriod: 3 // prune expired entries every 24h
- });
-/** Paramètres de session
- * 
- * 
-*/
-const Middleware = session({
-    secret:'secretKeyForSession',
-    name:'SunglassPokerSession',
-    credentials:'include',
-    secure:true,
-    resave: true,
-    proxy:true,
-    store:myStore,
-    saveUninitialized: true,
-    cookie: {
-        secure:true,
-        maxAge: 1e7, // 10 seconds
-        sameSite:'none',
-    },
+const logProxyRequest = (proxyReq, req, res) => {
+    console.log(`[${new Date().toLocaleString()}] Proxying request: ${req.method} ${req.originalUrl} to ${proxyReq.path}`);
+};
+const apiProxy = createProxyMiddleware('/api', {
+	target:'http://localhost:10002',
+	changeOrigin: true,
+	onProxyReq: logProxyRequest
 });
-app.use(Middleware);
 
+app.use('/api',apiProxy);
 
 app.use((err,req,res,next) => {
 	console.error(err.stack);
@@ -44,7 +29,7 @@ app.use((err,req,res,next) => {
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-app.listen(3000, () => {
-	console.log('Server running on port : 3000');
+app.listen(80, () => {
+	console.log('Server running on port : 80');
 
 });
