@@ -190,6 +190,11 @@ const gameReducer = (state = initialState, action) => {
         state.answer = { status: false, alreadyIn:true, mes: "Player already inside the room",payload: { id: action.payload.tableId }};
         failed = true;
       }
+
+      if(room.game.state !== "waiting" && !found){
+        failed =true;
+        state.answer = {status:false, alreadyIn:false, mes:"Game already started, can't join."};
+      }
       // --------------
 
       // We can add the player in the game
@@ -207,6 +212,7 @@ const gameReducer = (state = initialState, action) => {
           mes: "Successfully join room",
           payload: { id: action.payload.tableId },
         };
+        room.game.resetRestartCall()
         room.players = [...room.players, new Player(playerId, pseudo)];
         // We add the player to the game class.
         // room.game.addPlayer(room.players[room.players.length - 1]);

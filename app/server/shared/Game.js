@@ -37,6 +37,8 @@ class Game {
     this.focusTurnTimer = 0;
     this.focusTurnCall = false;
     this.autoTurnDelay = 60000;
+    this.restartCall = false;
+    this.allow_start = true;
   }
 
   getForPlayer(id) {
@@ -305,6 +307,10 @@ class Game {
 
   //Probmème:on devra surement clear l'affichage
   newgame() {
+    if(!this.allow_start) return;
+
+    this.allow_start = false;
+    clearTimeout(this.restartCall);
     this.players.forEach((player) => {
       player.newRoundReset();
     });
@@ -435,16 +441,23 @@ class Game {
         case "showdown":
           console.log("PASSE PAR LE CASE showdown");
           this.evaluateHands();
-          setTimeout(() => {
-            this.currentStage = stageOrder[nextIndex];
-            this.advanceStage(); 
-          }, 5000); 
+          this.state = "waiting";
+          clearTimeout(this.focusTurnCall);
+          this.resetRestartCall();
+          // setTimeout(() => {
+          //   this.currentStage = stageOrder[nextIndex];
+          //   this.advanceStage(); 
+          // }, 5000); 
           break;
       case "end":
         console.log("PASSE PAR LE CASE end");
-        this.newgame();
         break;
     }
+  }
+
+  resetRestartCall(){
+    clearTimeout(this.resetRestartCall);
+    this.restartCall = setTimeout(() => {this.allow_start = true},5000);  
   }
 
   advanceStageToShowdown() {
