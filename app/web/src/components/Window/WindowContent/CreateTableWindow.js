@@ -87,10 +87,7 @@ const CreateGameWindow = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Create an object with only the _id and pseudo fields from the user
-    const masterInfo = {
-      _id: user._id,
-      pseudo: user.pseudo,
-    };
+    const masterInfo = 0; // master
 
     console.log("user", user);
     if (validateForm()) {
