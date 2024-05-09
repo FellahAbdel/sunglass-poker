@@ -82,6 +82,9 @@ class Game {
     }
   }
 
+  //si le nombre de joueur change en cours de parti ça risque de faire des saut chelou
+  //faudrait faire un truc genre Modulo 10 joeurs en mode ça tourne autour de la table
+  //et si la place est vide on va au prochain
   rotateStartingPlayer() {
     this.startingPlayerIndex =
       (this.startingPlayerIndex + 1) % this.players.length;
@@ -148,6 +151,10 @@ class Game {
         });
         console.log("POT TOTAL", this.total);
       }
+
+      //Faut rajouter le cas ou un joueur raise, il deviens alors le focus pour le tour puis pour pas qu'il
+      //puisse reparler si tt le monde égalise et qu on reviens sur lui 
+
     } // Le joueur n'était pas le dernier à jouer ou tout le monde n'as pas misé autant.
 
     this.rotateTimer();
