@@ -18,7 +18,7 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
       comm.createGame();
       break;
     case actions.CREATE_GAME_V2:
-      comm.createGame(action.payload.gameRoomId);
+      comm.createGameV2(action.payload.gameRoomId);
       break;
     case actions.START_GAME:
       // console.log(
