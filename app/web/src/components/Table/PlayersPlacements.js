@@ -41,6 +41,7 @@ const PlayersPlacements = ({showMiddle}) => {
             gotCards={player.playerCards.length !== 0}
             playerId={player.playerId}
             isFocus={currentFocusIndex === index}
+            isYou={player.isYou}
           />
         </div>
       ))}

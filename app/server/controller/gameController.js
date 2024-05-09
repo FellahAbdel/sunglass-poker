@@ -267,6 +267,7 @@ module.exports = gameController = {
     const state = store.getState();
     if (state.game.rooms.hasOwnProperty(room)) {
       store.dispatch(actions.startGame(room, userId));
+      this.broadcastStatus(room);
     } else {
       console.error("Room does not exist:", room);
     }

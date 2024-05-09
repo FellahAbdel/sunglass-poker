@@ -36,7 +36,7 @@ class Game {
     this.startingPlayerIndex = startingPlayerIndex;
     this.focusTurnTimer = 0;
     this.focusTurnCall = false;
-    this.autoTurnDelay = 35000;
+    this.autoTurnDelay = 60000;
   }
 
   getForPlayer(id) {

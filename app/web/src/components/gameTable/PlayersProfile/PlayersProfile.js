@@ -15,7 +15,8 @@ const PlayersProfile = ({
   gotCards,
   playerId,
   cardsVisible,
-  isFocus
+  isFocus,
+  isYou
 }) => {
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips?.toLocaleString();
@@ -38,14 +39,17 @@ const PlayersProfile = ({
 
   return (
     <div className={`container-onGameProfile`}>
-      <div className={`container-profileMessage ${isFocus ? "profileMessageShow" : ""}`}>
+      <div className={`container-profileMessage ${isFocus && isYou ? "profileMessageShow" : ""}`}>
         Your Turn !
       </div>
+      <div className={`container-profileMessage ${isFocus && !isYou ? "profileMessageShow" : ""}`}>
+        Their turn..
+      </div>
       <div className={`box-status ${status.toLowerCase()}`}>
-        {status === "waiting" ? (
+        {isFocus ? (
           <ProgressBar
             className="progressBar progressPercentage"
-            durationInSeconds={5}
+            durationInSeconds={60}
           />
         ) : (
           <div className={`box-statusText ${status.toLowerCase()}`}>
