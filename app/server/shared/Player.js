@@ -181,6 +181,18 @@ class Player {
     this.status = "call";
   }
 
+  playing(){
+    this.status="playing";
+  }
+
+  raise(){
+    this.status="raise";
+  }
+
+  jesuislewinner(){
+    this.status="winner"
+  }
+
   bet(amount){
     if(this.playerMoney>amount){
       this.currentBet=amount;

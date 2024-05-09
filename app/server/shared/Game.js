@@ -143,6 +143,8 @@ class Game {
         this.advanceStage();
         this.activePlayers.forEach((player) => {
           player.newTurnReset();
+          //reset le status a chaque tour
+          player.playing();
         });
         console.log("POT TOTAL", this.total);
       }
@@ -223,19 +225,26 @@ class Game {
   }
 
   bet(player, amount) {
+    //Si c'est son tour de jouer
     if (this.isPlayersTurn(player.getPlayerId())) {
+      //si il a assez d'argent
       if (player.getPlayerMoney() >= amount) {
+        //Cas ou il ajoute a sa mise pour s'équilibrer au autre
         if (amount + player.howmanyBetTurn() >= this.gameCurrentBet) {
           player.bet(amount);
-          player.call();
           this.total += amount;
+          //on met le max a la mise a mettre
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();
+            player.raise();
           }
         } else {
           return;
         }
-
+        //ça change juste le status si ça equivaut a un check (bet de 0)
+        if(amount===0){
+          player.check();
+        }
         console.log("this line got executed", this.gameCurrentBet);
         this.rotateFocus();
       }
@@ -336,6 +345,7 @@ class Game {
     const aa = this.getPlayerById(winner[0].id);
     console.log("aa", aa);
     aa.seRemplirLesPoches(this.total);
+    aa.jesuislewinner();
   }
 
   //Debut de fonction pour le bonus, a terminer
