@@ -103,4 +103,47 @@
 | 14 avril | 7 Heures | Amélioration des logs. Interactions avec les joueurs correct, dispatch des deux côtés, refactorisation du code dans le socket.  correction de code résiduels inutile / dépasser par le nouveau code. | --
 | TOTAL | 13 Heures || --
 
-2024/05/15: 30min   Reunion avec Maël pour le problème du build, semble fonctionel sur windows mais pas encore sur linux
+## Douxième semaine
+
+| Date | Temps passé | Description | Ressources |
+|:-------|:--:|:----: |--:|
+| 15 avril | 30 min |  Reunion avec Maël pour le problème du build, semble fonctionel sur windows mais pas encore sur linux.| --
+| 16 avril | 4 Heures | Création de super-user pour la BDD sur le serveur. Résolution de bugs et adaptation du refresh de partie pour l'utilisateur. Echange avec Aziz et Noe sur les avancé de chacun lié au backend et aux besoin de la bdd + explication des users. définission des objectifs de la version desktop et recherche complémentaire avec Mael sur le fonctionnement.| --
+| 18 avril | 1 Heure | Utilisation de l'objet de description de partie créer par Aziz dans l'implémentation actuelle de création.| --
+| 19 avril | 2 Heures | Ajout des interactions / événements côté utilisateur pour rejoindre une partie. Correction de bugs.| --
+| 21 avril | 3 Heures | Réunion avec Mael. débug et ajout de la possibilité de quitter une partie + supprimer une partie vide.| --
+| TOTAL | 10 Heures || --
+
+
+## Treizième semaine
+| Date | Temps passé | Description | Ressources |
+|:-------|:--:|:----: |--:|
+| 22 avril | 4 Heures | Refactorisation des codes plus vieux. Correction d'un gros problème dans l'implémentation liée à l'utilisation de copie d'objets par références provoquant des différences entre les deux versions utiliser. Debug, commentaire.| --
+| 21 avril | 3 Heures | Réunion avec Mael. débug et ajout de la possibilité de quitter une partie + supprimer une partie vide.| --
+| 22-23 avril | 8 Heures | Renforcements des controles des fonctions pour résoudre divers bugs. Correction d'utilisations erronée des références aux objets de la partie. Commencement de partie avec petite et grosse blind. Début de code pour les fonctions de BET et FOLD. Assistances et réunion à distances, définitions des problèmes actuelle et objectifs principaux. Répartitions des taches.| --
+| 26 avril | 1 Heure | Travail sur les informations échangé entre le front et le back. Création d'un controller pour assurer un format spécifics pour les actions utilisateurs, simplifie le code côté de gameController et socket; Simplifie l'utilisations dans Game.js et Game Reducer| --
+| 27 avril | 2 Heures | Envoie d'un refresh à chaque action du joueur. Echange avec Noé et début d'une fonctionnalité de filtre pour n'envoyer à l'utilisateur que ce qu'il a le droit de voir. (Quelles informations, tests d'implémentation)| --
+| 28 avril | 1 Heure | Finalisation de la feature Show/Hidden faite par Noé, résolutions de bug et ajout de conditions.| --
+| TOTAL | 19 Heures || --
+
+## Quatorzième semaine
+
+>[!NOTE]
+>Semaine vacance et travail sur les projets personnel, assistances et réponses aux questions posé en privé mais pas de travail direct sur le projet
+
+
+## Quinzième semaine
+| Date | Temps passé | Description | Ressources |
+|:-------|:--:|:----: |--:|
+| 5 mai | 1 Heure | Ajout d'un événement après une interaction de jeu d'un joueur pour aider l'implémentation de code liér à celle ci.| --
+| 6 mai | 1 Heure | Travail avec Mael sur l'utilisation des éléments en mémoire côté front pour raise / bet. Condition de raise et bet en backend.| --
+| 7 mai | 4 Heures | Stand-up meeting, définitions des taches de chacun, échange des bugs connue, fixation des dates et des objectifs. Répartition de taches avec Noé et Aziz sur des fonctionnalités non finalisé. Tests des VM| --
+| TOTAL | 6 Heures || --
+
+
+
+
+____
+
+# Total des heures : 
+> ## 150 Heures
