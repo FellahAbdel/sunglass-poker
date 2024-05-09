@@ -30,8 +30,9 @@ export const startGame = (userId) => {
  * Rules, Gamedesc, Name etc... need to be added to the game Object too.
  * Should already be in the bdd with GameDesc table.
  */
-export const createGame = () => ({
+export const createGame = (gameRoomId) => ({
   type: actions.CREATE_GAME,
+  payload: { gameRoomId: gameRoomId },
 });
 
 export const fold = () => ({

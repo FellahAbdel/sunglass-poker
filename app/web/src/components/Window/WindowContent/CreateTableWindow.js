@@ -104,9 +104,9 @@ const CreateGameWindow = () => {
 
         if (result) {
           // We dispatch the action to start the game
-          const gameId = result;
-          console.log("Game created with ID:", gameId);
-          dispatch(createGame());
+          const gameRoomId = result;
+          console.log("Game created with ID:", gameRoomId);
+          dispatch(createGame(gameRoomId));
           // We have to wait for the game to be created before closing the window
           // And then we sent the user to the game room
           //   showGameTable();
