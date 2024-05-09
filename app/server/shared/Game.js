@@ -4,6 +4,7 @@ const PokerTable = require("./PokerTable.js");
 const scoreEngineUtils = require("./ScoreEngineUtils.js");
 const Players = require("./Player.js");
 const { clearScreenDown } = require("readline");
+const csl = require('../controller/intelligentLogging.js');
 
 class Game {
   constructor(
@@ -18,7 +19,7 @@ class Game {
     total = 0,
     nbhostfolded = 0,
     gameCurrentBet = blind, // Ajoutez gameCurrentBet comme paramètre distinct
-    startingPlayerIndex = 0
+    startingPlayerIndex = 0,
   ) {
     this.activePlayers = null;
     this.players = players;
@@ -33,6 +34,9 @@ class Game {
     this.nbhostfolded = nbhostfolded;
     this.gameCurrentBet = gameCurrentBet; // Utilisez gameCurrentBet ici
     this.startingPlayerIndex = startingPlayerIndex;
+    this.focusTurnTimer = 0;
+    this.focusTurnCall = false;
+    this.autoTurnDelay = 35000;
   }
 
   getForPlayer(id) {
@@ -48,8 +52,9 @@ class Game {
       this.state,
       this.total,
       this.nbhostfolded,
-      this.gameCurrentBet // Incluez gameCurrentBet ici
-    );
+      this.gameCurrentBet, // Incluez gameCurrentBet ici
+      );
+      g.focusTurnTimer = this.focusTurnTimer;
     return g;
   }
 
@@ -97,6 +102,18 @@ class Game {
     return this.focus;
   }
 
+  createAutoTurnCall(){
+    let n = this.focus;
+    return setTimeout( () => {csl.log('autoTurn',"Player did not play fasst enough, auto fold");this.fold(this.players[n]);},
+    this.autoTurnDelay
+    );
+  }
+  rotateTimer(){
+    clearTimeout(this.focusTurnCall)
+    this.focusTurnCall = this.createAutoTurnCall()
+    this.focusTurnTimer = Date.now()+this.autoTurnDelay;
+  }
+
   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
 
@@ -108,7 +125,6 @@ class Game {
 
     const originalFocus = this.focus;
     this.focus = (this.focus + 1) % this.activePlayers.length; // Utilisation de activePlayers.length pour la rotation
-
     // Rotation du focus tant que le joueur actuel n'est pas actif
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
@@ -130,7 +146,9 @@ class Game {
         });
         console.log("POT TOTAL", this.total);
       }
-    }
+    } // Le joueur n'était pas le dernier à jouer ou tout le monde n'as pas misé autant.
+
+    this.rotateTimer();
   }
 
   playerPlayed() {
