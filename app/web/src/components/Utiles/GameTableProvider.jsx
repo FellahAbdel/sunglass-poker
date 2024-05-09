@@ -33,6 +33,8 @@ export const GameTableProvider = ({ children }) => {
   //MAel a add mais pas sur du fonctionnement
   const [gamePlayerCurrentBet,setGamePlayerCurrentBet] = useState([]);
   const [total, setTotal] = useState(0);
+  //FRanck a add mais pas sur du fonctionnement
+  const [playerBonus, setPlayerBonus] = useState([]);
 
   useEffect(() => {
     const isMaster =
@@ -81,6 +83,9 @@ export const GameTableProvider = ({ children }) => {
           }));
           setPlayerCards(cardsWithVisibility);
         }
+        //Mettre a jour le bonus du joueur
+        console.log("j'affiche le bonus : ", gameInfo.game.players.find((p) => p.playerId===userId));
+        setPlayerBonus(gameInfo.game.players.find((p) => p.playerId===userId).playerBonus);
       }
 
             // Mettre à jour les cartes communautaires
@@ -100,7 +105,7 @@ export const GameTableProvider = ({ children }) => {
 
 
   return (
-    <GameTableContext.Provider value={{ ...state, playerCards, playerMoney, communityCards, gameCurrentBet, gamePlayerCurrentBet, total}}>
+    <GameTableContext.Provider value={{ ...state, playerBonus, playerCards, playerMoney, communityCards, gameCurrentBet, gamePlayerCurrentBet, total}}>
       {children}
     </GameTableContext.Provider>
   );

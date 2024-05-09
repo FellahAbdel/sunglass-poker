@@ -8,6 +8,7 @@ class Player {
   playerActionLog = [
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
+  playerBonus = {H:0, D:0, C:0, S:0, ready:false}
 
   constructor(
     playerId,
@@ -113,6 +114,19 @@ class Player {
     return this.playerActionLog;
   }
 
+  getPlayerBonus() {
+    return this.playerBonus;
+  }
+
+
+
+  resetPlayerBonus() {
+    for (const c in this.playerBonus) {
+      if (isNaN(Object[c])) Object[c] = false;
+      else Object[c] = 0;
+    }
+  }
+
   /*
    * IN : "actif", "passif"
    * OUT : rien
@@ -155,6 +169,19 @@ class Player {
 
   addCard(card) {
     this.playerCards.push(card);
+    //let myself = this;
+
+    //randomCardsList.map((card, self=myself) => {
+    let count = 0;
+    let color = card.getNumberAndColor()[1];
+    if (this.playerBonus[color] < 3) this.playerBonus[color]++;
+
+    // check if bonus is ready to use and set state to true if so
+    for (const c in this.playerBonus) {
+      if (Object[c] === 3) count++;
+    }
+    if (count === 4) this.playerBonus.ready = true;
+    //});
   }
 
   clearHand() {

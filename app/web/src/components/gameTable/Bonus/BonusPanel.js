@@ -7,7 +7,7 @@ import Hearts from "./../../assets/images/icons/white/heart.png";
 import Spades from "./../../assets/images/icons/white/spade.png";
 import { useTranslation } from "../../Utiles/Translations";
 
-const BonusPanel = () => {
+const BonusPanel = ({nbHearts, nbDiamonds, nbSpades, nbClubs}) => {
   //we can use a number divisable by all the different numbers that they need
   //to fill the bonus boxes and back-end will manage the part of the variable
   //bonus numbers to show graphiquly
@@ -23,21 +23,21 @@ const BonusPanel = () => {
 
   const { getTranslatedWord } = useTranslation();
 
-  const handleChangeHearts = 1;
-  const handleChangeDiamonds = 0;
-  const handleChangeSpades = 2;
-  const handleChangeClubs = 3;
+  // const handleChangeHearts = nbHearts;
+  // const handleChangeDiamonds = nbDiamonds;
+  // const handleChangeSpades = nbSpades;
+  // const handleChangeClubs = nbClubs;
   return (
     <div className="panel-bonus">
       <div className="container-bonusCards">
-        <img src={Hearts} alt="Heart" className={`box-${handleChangeHearts}`} />
+        <img src={Hearts} alt="Heart" className={`box-${nbHearts}`} />
         <img
           src={Diamonds}
           alt="Diamond"
-          className={`box-${handleChangeDiamonds}`}
+          className={`box-${nbDiamonds}`}
         />
-        <img src={Spades} alt="Spade" className={`box-${handleChangeSpades}`} />
-        <img src={Clubs} alt="Club" className={`box-${handleChangeClubs}`} />
+        <img src={Spades} alt="Spade" className={`box-${nbSpades}`} />
+        <img src={Clubs} alt="Club" className={`box-${nbClubs}`} />
       </div>
 
       <Button

@@ -33,7 +33,7 @@ const GameTable = () => {
     isGameTableVisible,
     isWindowOpen
   );
-  const { playerCards } = useGameTable();
+  const { playerBonus, playerCards } = useGameTable();
 
   useEffect(() => {
     //console.log("isLogged gameTable:", isLogged);
@@ -46,8 +46,8 @@ const GameTable = () => {
   };
 
   useEffect(() => {
-    console.log("Player cards received:", playerCards);
-  }, [playerCards]);
+    console.log("Player cards and bonus received:", playerCards, playerBonus);
+  }, [playerBonus, playerCards]);
 
   const handleBoxClick = (event) => {
     event.stopPropagation();
@@ -82,7 +82,14 @@ const GameTable = () => {
           <div
             className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
           >
-            <BonusPanel />
+            {playerBonus !== undefined && ( 
+              <BonusPanel 
+                nbHearts = {playerBonus.H}
+                nbDiamonds = {playerBonus.D}
+                nbSpades = {playerBonus.S}
+                nbClubs = {playerBonus.C}
+              />
+            )}
           </div>
           <div
             className={`comp-gameAction ${
