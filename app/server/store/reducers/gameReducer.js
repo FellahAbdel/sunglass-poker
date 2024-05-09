@@ -7,9 +7,11 @@ const csl = require("../../controller/intelligentLogging.js");
 const { strictEqual } = require("assert");
 const fileType = "gameReducer";
 
-const initialRoomState = {
-  game: new game(),
-  players: [], // initial players
+const initialRoomState = () =>{
+  return {
+    game: new game(),
+    players: [], // initial players
+  }
 };
 
 const initialState = {
@@ -49,12 +51,12 @@ const gameReducer = (state = initialState, action) => {
       csl.log(fileType, "CREATE GAME");
       // Create a new room with an initial state
       // We should have the creator of the room in the players list
-      state.rooms[action.payload.id] = initialRoomState;
+      state.rooms[action.payload.id] = initialRoomState();
       return {
         ...state,
         rooms: {
           ...state.rooms,
-          [action.payload.id]: { ...initialRoomState },
+          [action.payload.id]: { ...initialRoomState() },
         },
       };
     case actions.START_GAME:
@@ -185,7 +187,7 @@ const gameReducer = (state = initialState, action) => {
           found = p.getPlayerId() == playerId || found;
         });
       if (found) {
-        state.answer = { status: false, mes: "Player already inside the room" };
+        state.answer = { status: false, alreadyIn:true, mes: "Player already inside the room",payload: { id: action.payload.tableId }};
         failed = true;
       }
       // --------------

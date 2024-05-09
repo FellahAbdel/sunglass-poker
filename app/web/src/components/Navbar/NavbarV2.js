@@ -17,8 +17,10 @@ import {comm} from '../../services/socket.js';
 
 
 
+
 const Navbar = ({}) => {
   const { isLogged, logingOut } = useAuth();
+  const {showGameTable} = useWindowContext();
   const dispatch = useDispatch();
   const handleleaveRoom = () => {
     dispatch(actions.leaveRoom());
@@ -27,6 +29,7 @@ const Navbar = ({}) => {
 
   const handleRefreshGame = () => {
     comm.refresh();
+    showGameTable();
   }
   const {
     isGameTableVisible,

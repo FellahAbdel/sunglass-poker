@@ -6,8 +6,6 @@ const Players = require("./Player.js");
 const { clearScreenDown } = require("readline");
 
 class Game {
-  master = false;
-  focus = null;
   constructor(
     players = [],
     deck = new Deck(),

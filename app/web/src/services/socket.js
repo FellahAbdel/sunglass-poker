@@ -94,6 +94,11 @@ export const comm = {
     }
   },
 
+  // Call for the game the player is playing right now
+  refresh:function(){
+    socket.emit("showMyGame");
+  },
+
   leaveRoom: function () {
     this.preFun();
     // console.log("comm emit leaveRoom");
