@@ -37,6 +37,7 @@ const Navbar = ({}) => {
 
   const handleRefreshGame = () => {
     comm.refresh();
+    showGameTable();
   }
   const {
     isGameTableVisible,

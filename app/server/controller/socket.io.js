@@ -28,6 +28,19 @@ module.exports = function (
     },
   };
 
+
+  async function findPlayerRoom(socket,userId){
+    answer = await dao.getUserInfo(userId)
+    csl.log("ManualRequestForGame",answer);
+    if(answer.success){
+      userInfos = answer.user;
+      csl.log("ManualRequestForGame",userInfos.inGame,userInfos.inGame!==null,userInfos.inGame!==undefined)
+      if(userInfos.inGame !== null && userInfos.inGame !== undefined){
+        joinRoom(socket,{id:userInfos.inGame.toString()});
+      }
+    }
+  }
+
   /**
    *
    * @param {object socket} socket
@@ -115,12 +128,12 @@ module.exports = function (
    * socket.request.session.userId must be defined.
    */
 
-  function joinRoom(socket, data) {
+  async function joinRoom(socket, data) {
     // csl.log(fileType,"sessionHs:",session);
     // csl.log(fileType,'data:',data);
     // csl.log(fileType,'userId = ', socket.handshake.socket.request.session.userId);
     if (typeof data === "object" && data.id !== undefined) {
-      answer = gameController.join(data.id, {
+      answer = await gameController.join(data.id, {
         id: socket.request.session.userId,
         pseudo: socket.request.session.pseudo,
       });
@@ -234,7 +247,7 @@ module.exports = function (
     });
 
     // Wait for the promise to resolve
-    newGamePromise.then((id) => {
+    newGamePromise.then( async (id) => {
       csl.log(fileType, id, " >- id game created");
       if (id === undefined) {
         csl.error(fileType, "Refused to create new game");
@@ -252,7 +265,7 @@ module.exports = function (
       state = store.getState();
 
       sendEvent(socket, actcrea.gameLobby(state.game.rooms[id]));
-      const answer = joinRoom(socket, { id: id.toString() });
+      const answer = await joinRoom(socket, { id: id.toString() });
       csl.log(fileType, answer);
       socket.emit("joinRoom", answer);
     });
@@ -400,6 +413,12 @@ module.exports = function (
       const userId = data.userId;
       gameController.startGame(room, userId);
     });
+
+    socket.on("showMyGame", () =>{
+      if(socket.request.session.userId){
+        findPlayerRoom(socket,socket.request.session.userId);
+      }
+    })
 
     socket.request.session.save();
   });

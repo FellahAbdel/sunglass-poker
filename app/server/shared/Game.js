@@ -6,8 +6,6 @@ const Players = require("./Player.js");
 const { clearScreenDown } = require("readline");
 
 class Game {
-  master = false;
-  focus = null;
   constructor(
     players = [],
     deck = new Deck(),
@@ -19,7 +17,8 @@ class Game {
     state = "waiting",
     total = 0,
     nbhostfolded = 0,
-    gameCurrentBet = blind // Ajoutez gameCurrentBet comme paramètre distinct
+    gameCurrentBet = blind, // Ajoutez gameCurrentBet comme paramètre distinct
+    startingPlayerIndex = 0
   ) {
     this.activePlayers = null;
     this.players = players;
@@ -33,6 +32,7 @@ class Game {
     this.total = total;
     this.nbhostfolded = nbhostfolded;
     this.gameCurrentBet = gameCurrentBet; // Utilisez gameCurrentBet ici
+    this.startingPlayerIndex = startingPlayerIndex;
   }
 
   getForPlayer(id) {
@@ -77,6 +77,11 @@ class Game {
     }
   }
 
+  rotateStartingPlayer() {
+    this.startingPlayerIndex =
+      (this.startingPlayerIndex + 1) % this.players.length;
+  }
+
   setMaster(id) {
     this.master = id;
   }
@@ -93,10 +98,18 @@ class Game {
   }
 
   rotateFocus() {
-    const originalFocus = this.focus;
+    this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
 
-    this.focus = (this.focus + 1) % this.activePlayers.length;
-    // this.players[this.focus].playerState="waiting";
+    // Vérification pour passer directement à showdown si moins de deux joueurs actifs
+    if (this.activePlayers.length < 2) {
+      this.advanceStageToShowdown();
+      return;
+    }
+
+    const originalFocus = this.focus;
+    this.focus = (this.focus + 1) % this.activePlayers.length; // Utilisation de activePlayers.length pour la rotation
+
+    // Rotation du focus tant que le joueur actuel n'est pas actif
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
@@ -106,6 +119,7 @@ class Game {
       this.focus = (this.focus + 1) % this.activePlayers.length;
     }
 
+    // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
     if (this.focus === 0 + this.nbhostfolded) {
       console.log("argent du focus", this.players[this.focus].howmanyBetTurn());
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
@@ -116,10 +130,6 @@ class Game {
         });
         console.log("POT TOTAL", this.total);
       }
-      // console.log("testt: passer dans le test:", this.nbhostfolded);
-      // console.log("J'avance dans la partie");
-
-      // Réinitialisez gameCurrentBet à 0 à la fin d'un tour complet
     }
   }
 
@@ -127,16 +137,8 @@ class Game {
     csl.log("classGame_PLAYER_PLAYED", "un joueur a joué");
   }
 
-  foldPlayer(playerId) {
-    const player = this.players.find((p) => p.playerId === playerId);
-    if (player) {
-      player.fold();
-      this.updateActivePlayers();
-    }
-  }
-
   updateActivePlayers() {
-    this.activePlayers = this.players.filter(player => player.isActive);
+    this.activePlayers = this.players.filter((player) => player.isActive);
   }
 
   isPlayersTurn(playerId) {
@@ -151,6 +153,11 @@ class Game {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
       this.updateActivePlayers();
+      console.log("NOmbre de joururs actif :", this.activePlayers.length);
+      if (this.activePlayers.length < 2) {
+        this.advanceStageToShowdown();
+        return;
+      }
       if (this.focus === 0 + this.nbhostfolded) {
         console.log("testt: aledavant:", this.nbhostfolded);
         this.rotateFocus();
@@ -267,7 +274,7 @@ class Game {
       player.newRoundReset();
     });
     this.state = "active";
-    this.focus = 0; // Initialise le focus sur le premier joueur
+    this.focus = this.startingPlayerIndex;
     this.total = 0;
     this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
     this.pokerTable.reset();
@@ -293,6 +300,7 @@ class Game {
     this.total += this.gameCurrentBet;
 
     this.rotateFocus();
+    this.rotateStartingPlayer();
     //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
 
     // console.log("length:",this.players.length);
@@ -388,20 +396,30 @@ class Game {
         this.river();
         console.log("PASSE PAR LE CASE river");
         break;
-      case "showdown":
-        console.log(
-          "activePlayers.length au niveau de shodown",
-          this.activePlayers.length
-        );
-        this.evaluateHands();
-        console.log("PASSE PAR LE CASE showdown");
-        this.advanceStage();
-        break;
+        case "showdown":
+          console.log("PASSE PAR LE CASE showdown");
+          this.evaluateHands();
+          setTimeout(() => {
+            this.currentStage = stageOrder[nextIndex];
+            this.advanceStage(); 
+          }, 5000); 
+          break;
       case "end":
         console.log("PASSE PAR LE CASE end");
         this.newgame();
         break;
     }
+  }
+
+  advanceStageToShowdown() {
+    if (this.state !== "active") {
+      console.log("Game not active, cannot advance stage to showdown.");
+      return;
+    }
+
+    // Définir directement le currentStage à 'showdown'
+    this.currentStage = "river";
+    this.advanceStage();
   }
 
   /*
@@ -486,7 +504,10 @@ class Game {
    * FUNCTION : identifie le joueur gagnant de la partie et la main avec laquelle il a gagne
    */
   gagnant(activePlayers) {
-    console.log("Joueurs actifs lors de la détermination du gagnant:", activePlayers.map(p => `${p.name}: ${p.isActive}`));
+    console.log(
+      "Joueurs actifs lors de la détermination du gagnant:",
+      activePlayers.map((p) => `${p.name}: ${p.isActive}`)
+    );
     let combinationList = this.listeCombinaison(activePlayers);
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
     console.log("maxListapresinit", maxList);
