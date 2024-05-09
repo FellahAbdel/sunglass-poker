@@ -138,8 +138,9 @@
 
 2024/05/07  4H30    Reunion générale du mardi, recherche de bugs  avanacement dans le projet etc...
 
+2024/05/10  2H      Ajustement des status des joeurs, discussion sur les choses a faire, debut reflexion sur certains problème  
 
 
---2024/04 SEMAINE 6: 6H30 (TOTAL: 104H)
+--2024/04 SEMAINE 6: 8H30 (TOTAL: 106H)
 
-TEMPS TOTAL: 104H
+TEMPS TOTAL: 106H
