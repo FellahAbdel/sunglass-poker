@@ -97,7 +97,7 @@ const ServerPanelWindow = () => {
   const handleJoinTable = (id) => {
     // Logique pour rejoindre une table à faire
     if (isLogged) {
-      console.log("Le joueur veut rejoindre la partie ", id);
+      console.log("Le joueur veut rejoindre la partie (fellah) ", id);
       dispatch(actions.joinRoom(id));
 
       // TODO :
