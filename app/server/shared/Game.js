@@ -169,39 +169,40 @@ class Game {
         player.check();
         //this.gameCurrentBet = 0; // Pour que le joueur suivant puisse vérifier s'il le souhaite.
         this.rotateFocus();
-      } else {
-        if (player.howmanyBet() === this.gameCurrentBet) {
-          player.check();
-          this.rotateFocus();
-        }
-        console.log(
-          "avant je re bet",
-          this.gameCurrentBet - player.howmanyBet()
-        );
-        console.log(
-          "la condition: ",
-          player.getPlayerMoney() > this.gameCurrentBet - player.howmanyBet()
-        );
-        if (
-          player.getPlayerMoney() >
-          this.gameCurrentBet - player.howmanyBet()
-        ) {
-          console.log("je re bet", this.gameCurrentBet - player.howmanyBet());
-          player.bet(this.gameCurrentBet - player.howmanyBet());
-          player.call();
-          this.rotateFocus();
-        } else {
-          //La faut faire en sorte de coller et couper le pot en deux avec les regles spéciale
-        }
+      // } else {
+      //   if (player.howmanyBet() === this.gameCurrentBet) {
+      //     player.check();
+      //     this.rotateFocus();
+      //   }
+      //   console.log(
+      //     "avant je re bet",
+      //     this.gameCurrentBet - player.howmanyBet()
+      //   );
+      //   console.log(
+      //     "la condition: ",
+      //     player.getPlayerMoney() > this.gameCurrentBet - player.howmanyBet()
+      //   );
+      //   if (
+      //     player.getPlayerMoney() >
+      //     this.gameCurrentBet - player.howmanyBet()
+      //   ) {
+      //     console.log("je re bet", this.gameCurrentBet - player.howmanyBet());
+      //     player.bet(this.gameCurrentBet - player.howmanyBet());
+      //     player.call();
+      //     this.rotateFocus();
+      //   } else {
+      //     //La faut faire en sorte de coller et couper le pot en deux avec les regles spéciale
+      //   }
       }
     }
   }
 
   bet(player, amount) {
     if (this.isPlayersTurn(player.getPlayerId())) {
-      if (player.getPlayerMoney() > amount) {
+      if (player.getPlayerMoney() >= amount) {
         if (amount + player.howmanyBetTurn() >= this.gameCurrentBet) {
           player.bet(amount);
+          player.call();
           this.total += amount;
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();

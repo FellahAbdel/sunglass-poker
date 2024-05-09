@@ -184,7 +184,7 @@ class Player {
       this.currentBet=amount;
       this.currentBetTurn+=amount;
       this.playerMoney-=amount;
-        this.status = "raise";
+        this.status = "call";
       
     }
   }
