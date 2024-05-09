@@ -90,7 +90,7 @@
   },
   "playersStatus": {
     "empty": "Empty",
-    "called": "Called",
+    "call": "Called",
     "folded": "Fold",
     "raise": "Raised",
     "checked": "Checked",
