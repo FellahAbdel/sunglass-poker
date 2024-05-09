@@ -3,25 +3,34 @@ import Card from "../gameTable/Card/Card";
 import useAudio from "../../hooks/useAudio";
 import { useGameTable } from "../Utiles/GameTableProvider";
 import soundSrc from "./../assets/sounds/soundEffect-card1.mp3";
+import { useSelector } from "react-redux";
 
 const CardsPlacements = ({}) => {
+  // const playersInTable = useSelector((state) => state.game.activePlayers);
   const { communityCards } = useGameTable();
   const [flipped, setFlipped] = useState(communityCards.map(() => false));   // to stop the transition animation to happend more than once
   //playersCardDistributed for each player
   // *** also has been used in PlayersPlacements component
   // *** here only for animation purposes
-  const [playersCardDistributed, setPlayersCardDistributed] = useState([1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [playing ,togglePlay] = useAudio(soundSrc);
   const timeoutRefs = useRef([]);
 
 
-  {
+  // useEffect(() => {
+  //   console.log("playersInTable",playersInTable);
+  // }, [playersInTable]);
+
+  // const initialDistribution = Array.from({length: 10}, (_, i) => i < playersInTable.length);
+  // const playersCardDistributed = useState(initialDistribution);
+
+  const [playersCardDistributed, setPlayersCardDistributed] = useState([1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
+  // {
     /*DISTRIBUTION ANIMATION :
   in CardPlacements you have the distribution
   animation which gets handled with a table called 
   "playersCardDistributed" with 10 booleen members
   representing each players that gets a card*/
-  }
+
 
   //default values to test ---------- have to be recived from back
   //dealingFlop for the flop river turn
@@ -70,7 +79,6 @@ const formatCardData = (card) => {
   return card ? [card.number.toString(), card.color] : null;
 };
 
-
   return (
     <div className={`container-cards`}>
       <div className="container-tableCards">
@@ -111,8 +119,7 @@ const formatCardData = (card) => {
             />
           </React.Fragment>
         ))}
-    </div>
-      
+      </div>
     </div>
   );
 };

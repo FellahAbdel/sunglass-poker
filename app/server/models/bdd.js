@@ -12,7 +12,7 @@ const GameDescriptionModel = require("./GameDescription");
 
 // Initialisation des items (si nécessaire)
 const initItems = require("./initItems");
-const emptyGames = require("./emptyGameDescription");
+const resetServer = require("./resetServer");
 
 const csl = require("../controller/intelligentLogging");
 // csl.silenced('bdd');
@@ -33,7 +33,8 @@ module.exports = function (app, bdd) {
   );
   db.once("open", () => {
     csl.log("bdd", "Connecté à la base de données MongoDB");
-    emptyGames();
+    resetServer.emptyGameDesc();
+    resetServer.resetPlayerInGame();
     initItems();
   });
 

@@ -31,8 +31,9 @@ export const GameTableProvider = ({ children }) => {
   const [communityCards, setCommunityCards] = useState([]);
   const [gameCurrentBet, SetGameCurrentBet] = useState(0);
   //MAel a add mais pas sur du fonctionnement
-  const [gamePlayerCurrentBet,setGamePlayerCurrentBet] = useState([]);
+  const [gamePlayerCurrentBet, setGamePlayerCurrentBet] = useState([]);
   const [total, setTotal] = useState(0);
+  const [gameState, setGameState] = useState("");
 
   useEffect(() => {
     const isMaster =
@@ -59,48 +60,67 @@ export const GameTableProvider = ({ children }) => {
       dispatch({ type: SET_FOCUS, payload: false });
     }
   }, [gameInfo?.game?.focus, userId]);
-  
+
   // Mettre à jour l'argent du joueur
   useEffect(() => {
     if (gameInfo && gameInfo.game && gameInfo.game.players) {
       const currentPlayer = gameInfo.game.players.find(
         (player) => player.playerId === userId
       );
-      console.log("j'actualise depuis:",gameInfo);
+      console.log("j'actualise depuis:", gameInfo);
       if (currentPlayer) {
         setPlayerMoney(currentPlayer.playerMoney);
-        setGamePlayerCurrentBet(gameInfo.game.players.find((p) => p.playerId===userId).currentBetTurn);
+        setGamePlayerCurrentBet(
+          gameInfo.game.players.find((p) => p.playerId === userId)
+            .currentBetTurn
+        );
         // Mettre à jour les cartes du joueur
         if (currentPlayer.playerCards) {
-          const cardsWithVisibility = currentPlayer?.playerCards?.map((card, index) => ({
-            number: card.number,
-            color: card.color,
-            isVisible: currentPlayer.cardsVisible
-              ? currentPlayer.cardsVisible[index]
-              : false,
-          }));
+          const cardsWithVisibility = currentPlayer?.playerCards?.map(
+            (card, index) => ({
+              number: card.number,
+              color: card.color,
+              isVisible: currentPlayer.cardsVisible
+                ? currentPlayer.cardsVisible[index]
+                : false,
+            })
+          );
           setPlayerCards(cardsWithVisibility);
         }
       }
 
-            // Mettre à jour les cartes communautaires
+      // Mettre à jour les cartes communautaires
       if (gameInfo.game.pokerTable.communityCards) {
         setCommunityCards(gameInfo.game.pokerTable.communityCards);
       }
 
-      if(gameInfo.game){
+      if (gameInfo.game) {
         SetGameCurrentBet(gameInfo.game.gameCurrentBet);
       }
 
-      if(gameInfo.game){
+      if (gameInfo.game) {
         setTotal(gameInfo.game.total);
+      }
+
+      if (gameInfo.game) {
+        setGameState(gameInfo.game.state);
       }
     }
   }, [gameInfo, userId]);
 
-
   return (
-    <GameTableContext.Provider value={{ ...state, playerCards, playerMoney, communityCards, gameCurrentBet, gamePlayerCurrentBet, total}}>
+    <GameTableContext.Provider
+      value={{
+        ...state,
+        playerCards,
+        playerMoney,
+        communityCards,
+        gameCurrentBet,
+        gamePlayerCurrentBet,
+        total,
+        gameState,
+      }}
+    >
       {children}
     </GameTableContext.Provider>
   );

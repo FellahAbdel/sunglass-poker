@@ -25,6 +25,7 @@ class Player {
     this.currentBet = currentBet;
     this.currentBetTurn= currentBetTurn;
     this.isActive = isActive;
+    this.isYou = false;
   }
 
   statusFor(id) {
@@ -42,6 +43,7 @@ class Player {
       ),
       playerActionLog: this.playerActionLog,
       cardsVisible: this.cardsVisible,
+      isYou: (id === this.playerId) ? true:false,
     };
     return view;
   }

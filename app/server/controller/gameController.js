@@ -8,6 +8,7 @@ const initGameRoom = require("./game");
 const { create } = require("domain");
 const store = require("../store/configStore");
 const csl = require("./intelligentLogging");
+const { userInfo } = require("os");
 const fileType = "gameController";
 csl.silenced("Status");
 csl.silenced("refreshCall");
@@ -46,16 +47,22 @@ module.exports = gameController = {
     }
   },
 
-  join: function (id, user) {
+  join: async function (id, user) {
     csl.log(fileType, this);
     var state = store.getState();
     if (state.game.rooms !== undefined) {
       if (state.game.rooms.hasOwnProperty(id)) {
-        csl.log(fileType, "User to add : ", user);
         if (user === undefined) {
           return { status: false, mes: "User undefined" };
         }
-        const answer = this.dispatch(user, actions.sit(id, user));
+        answer =await this.dao.getUserInfo(user.id);
+        if(!answer.success) return {status:false,mes:"Player not found in bdd"};
+        userInfos = answer.user;
+        csl.log(fileType, "Room: ",id,"User to add : ", user, "His infos : ",userInfos.inGame);
+        if(userInfos.inGame !== undefined && userInfos.inGame !== null && userInfos.inGame.toString() !== id){
+          return  {status:false, mes: "User already in a game."};
+        }
+        var answer = this.dispatch(user, actions.sit(id, user));
         state = store.getState();
         csl.log(fileType, "answer of dispatch : ", answer);
         if (answer.status) {
@@ -64,10 +71,16 @@ module.exports = gameController = {
           csl.log(fileType, "New player, try to set refresh");
           this.makeRefreshCall(id, false);
           csl.log(fileType, "Join call for broadcast ", answer);
-          if (state.game.rooms[id].players.length >= 2)
-            if (this.dispatch(user, actions.startGame(id)))
-              answer.start_game = true;
+          // if (state.game.rooms[id].players.length >= 2)
+          //   if (this.dispatch(user, actions.startGame(id)))
+          //     answer.start_game = true;
           this.broadcastStatus(id);
+        }
+        else{
+          if(answer.alreadyIn !== undefined && answer.alreadyIn){
+            this.broadcastStatus(id);
+            answer = {...answer,status:true};
+          }
         }
         return answer;
       }
@@ -191,9 +204,23 @@ module.exports = gameController = {
     state.game.rooms[room] = initGameRoom(room);
     console.log("après le init", state.game.rooms);
     this.dispatch(userId, actions.createGame(room));
-    this.join(room, userId);
+    await this.join(room, userId);
     await this.dao.updateUserData("_id", userId, "inGame", room);
     return room;
+  },
+  newGameV2: async function (userId, gameRoomId) {
+    const state = store.getState();
+    if (userId === undefined) {
+      csl.error(fileType, "player MUST be defined for newGame");
+      return;
+    }
+    console.log("avant le init", state.game.rooms);
+    state.game.rooms[gameRoomId] = initGameRoom(gameRoomId);
+    console.log("après le init", state.game.rooms);
+    this.dispatch(userId, actions.createGame(gameRoomId));
+    this.join(gameRoomId, userId);
+    await this.dao.updateUserData("_id", userId, "inGame", gameRoomId);
+    return true;
   },
 
   playerAction: function(action){
@@ -240,6 +267,7 @@ module.exports = gameController = {
     const state = store.getState();
     if (state.game.rooms.hasOwnProperty(room)) {
       store.dispatch(actions.startGame(room, userId));
+      this.broadcastStatus(room);
     } else {
       console.error("Room does not exist:", room);
     }

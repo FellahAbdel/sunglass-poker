@@ -10,11 +10,15 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
       // console.log("LOGGED_IN INIT called (fellah)");
       comm.Init();
       break;
+
     case actions.CREATE_GAME:
-      // console.log("emit createGame (socketMiddleware)");
-      // once the server finish creating the game,
-      // the client store will receive a SITTED event.
+        // console.log("emit createGame (socketMiddleware)");
+        // once the server finish creating the game,
+        // the client store will receive a SITTED event.
       comm.createGame();
+      break;
+    case actions.CREATE_GAME_V2:
+      comm.createGameV2(action.payload.gameRoomId);
       break;
     case actions.START_GAME:
       // console.log(

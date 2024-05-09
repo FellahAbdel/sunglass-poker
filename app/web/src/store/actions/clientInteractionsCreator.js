@@ -34,6 +34,11 @@ export const createGame = () => ({
   type: actions.CREATE_GAME,
 });
 
+export const createGameV2 = (gameRoomId) => ({
+  type: actions.CREATE_GAME_V2,
+  payload: { gameRoomId: gameRoomId },
+});
+
 export const fold = () => ({
   type: actions.FOLD,
 });

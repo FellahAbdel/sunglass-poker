@@ -10,7 +10,7 @@ import {
 } from "../../Utiles/ValidationUtils.jsx";
 
 import { useDispatch, useSelector } from "react-redux";
-import { createGame } from "../../../store/actions/clientInteractionsCreator.js";
+import { createGameV2 } from "../../../store/actions/clientInteractionsCreator.js";
 
 const CreateGameWindow = () => {
   const {
@@ -87,10 +87,7 @@ const CreateGameWindow = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Create an object with only the _id and pseudo fields from the user
-    const masterInfo = {
-      _id: user._id,
-      pseudo: user.pseudo,
-    };
+    const masterInfo = 0; // master
 
     console.log("user", user);
     if (validateForm()) {
@@ -102,9 +99,11 @@ const CreateGameWindow = () => {
           masterInfo
         );
 
-        if (result === true) {
+        if (result) {
           // We dispatch the action to start the game
-          dispatch(createGame());
+          const gameRoomId = result;
+          console.log("Game created with ID:", gameRoomId);
+          dispatch(createGameV2(gameRoomId));
           // We have to wait for the game to be created before closing the window
           // And then we sent the user to the game room
           //   showGameTable();

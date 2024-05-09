@@ -41,11 +41,6 @@
 }
 
 .container-profileMessage{
-  border: 2px solid white;
-  border-radius: 5px;
-  color: white;
-  font-size: 1vw;
-  padding: 2% 5% 20% 5%;
   position: absolute;
   top: 50%;
   z-index: -1;
@@ -53,6 +48,12 @@
   transition: opacity 0.5s ease ,top 0.5s ease;
 }
 .profileMessageShow{
+  border: 0.15vw solid white;
+  border-bottom: 0;
+  border-radius: 0.5vw 0.5vw 0 0 ;
+  color: white;
+  font-size: 1vw;
+  padding: 2% 5% 9% 5%;
   top:-30%;
   opacity: 1;
 }
@@ -206,17 +207,18 @@
   text-align: center;
 
   height: 100%;
-  width: 100%;
-  padding: 7px;
+  width: 110%;
+  padding: 0;
   margin: 0;
 
   text-align: left;
-
-  border-radius: 13px;
-
+  border-radius: 1vw;
   font-size: 1vw;
-
   border: unset;
+}
+.box-playerInfo p{
+  margin:0;
+  margin-bottom: 7%;
 }
 
 #dark .box-playerInfo {

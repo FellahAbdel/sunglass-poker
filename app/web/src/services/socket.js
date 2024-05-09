@@ -94,6 +94,11 @@ export const comm = {
     }
   },
 
+  // Call for the game the player is playing right now
+  refresh:function(){
+    socket.emit("showMyGame");
+  },
+
   leaveRoom: function () {
     this.preFun();
     // console.log("comm emit leaveRoom");
@@ -118,6 +123,13 @@ export const comm = {
     // socket.emit('startGame',{room:sessionStorage.getItem('room')});
     console.log("Emit startGame from comm");
     socket.emit("createGame");
+  },
+
+   createGameV2: function (gameRoomId) {
+    this.preFun();
+    // socket.emit('startGame',{room:sessionStorage.getItem('room')});
+    console.log("Emit startGame from comm");
+    socket.emit("createGameV2", { gameRoomId: gameRoomId });
   },
 
   startGame: function (userId) {

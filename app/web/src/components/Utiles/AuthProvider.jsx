@@ -86,8 +86,9 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
       if (response.ok) {
         console.log("Game created successfully");
+        console.log("Game data:", data);
         // Additional logic if needed
-        return true;
+        return data._id;
       } else {
         console.error("Error creating game:", data.message);
         return { error: data.error, field: data.field };

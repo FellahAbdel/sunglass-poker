@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from "react";
 
 export default function Progressbar({ durationInSeconds }) {
+  const [count, setCount] = useState(durationInSeconds);
   const [filled, setFilled] = useState(0);
-  const [isRunning] = useState(true);
 
+  //counting from durationInSeconds to 0 and calculating filled as a percentage of durationInSeconds
   useEffect(() => {
-    let timeout;
-    if (filled < 100 && isRunning) {
-      timeout = setTimeout(
-        () => setFilled((prev) => prev + 2),
-        (durationInSeconds * 1000) / 50
-      );
-    }
-    return () => clearTimeout(timeout);
-  }, [filled, isRunning, durationInSeconds]);
+    const interval = setInterval(() => {
+      setCount(prevCount => prevCount - 1);
+    }, 1000);
 
-  const getTimeToFinish = () => {
-    const remainingPercent = 100 - filled;
-    const timeToFinishInSeconds =
-      (remainingPercent * durationInSeconds) / 50 / 2; // Each step takes 50 milliseconds, and each step covers 2%
-    return timeToFinishInSeconds;
-  };
+    if (count === 0) {
+      clearInterval(interval);
+    }
+
+    setFilled(((durationInSeconds - count) / durationInSeconds) * 100);
+
+    return () => clearInterval(interval);
+  }, [count, durationInSeconds]);
 
   return (
     <div>
@@ -31,10 +28,10 @@ export default function Progressbar({ durationInSeconds }) {
             width: `${filled}%`,
             backgroundColor: "#00a674",
             boxShadow: "inset 0 0 10px 1px rgb(0, 255, 98)",
-            transition: "width 0.5s",
+            transition: "width 1s ease-in-out",
           }}
         ></div>
-        <span className="progressPercent">{getTimeToFinish()}s</span>
+        <span className="progressPercent">{count}s</span>
       </div>
     </div>
   );

@@ -28,6 +28,19 @@ module.exports = function (
     },
   };
 
+
+  async function findPlayerRoom(socket,userId){
+    answer = await dao.getUserInfo(userId)
+    csl.log("ManualRequestForGame",answer);
+    if(answer.success){
+      userInfos = answer.user;
+      csl.log("ManualRequestForGame",userInfos.inGame,userInfos.inGame!==null,userInfos.inGame!==undefined)
+      if(userInfos.inGame !== null && userInfos.inGame !== undefined){
+        joinRoom(socket,{id:userInfos.inGame.toString()});
+      }
+    }
+  }
+
   /**
    *
    * @param {object socket} socket
@@ -115,12 +128,12 @@ module.exports = function (
    * socket.request.session.userId must be defined.
    */
 
-  function joinRoom(socket, data) {
+  async function joinRoom(socket, data) {
     // csl.log(fileType,"sessionHs:",session);
     // csl.log(fileType,'data:',data);
     // csl.log(fileType,'userId = ', socket.handshake.socket.request.session.userId);
     if (typeof data === "object" && data.id !== undefined) {
-      answer = gameController.join(data.id, {
+      answer = await gameController.join(data.id, {
         id: socket.request.session.userId,
         pseudo: socket.request.session.pseudo,
       });
@@ -157,27 +170,26 @@ module.exports = function (
     const respons = await dao.getUserInfo(socket.request.session.userId);
     if (respons.success) {
       const user = respons.user;
-      if (user.inGame !== null){
+      if (user.inGame !== null) {
         gameController.removePlayer(
           user.inGame.toString(),
           socket.request.session.userId
         );
-        sendEvent(socket,actcrea.leftRoom());
+        sendEvent(socket, actcrea.leftRoom());
       }
     }
   }
 
   /**
-  * Sends an event to a socket for dispatch.
-  * 
-  * @param {Socket} socket The socket to send the event through.
-  * @param {{ type: string, payload: any }} action The action object containing type and payload.
-  */
+   * Sends an event to a socket for dispatch.
+   *
+   * @param {Socket} socket The socket to send the event through.
+   * @param {{ type: string, payload: any }} action The action object containing type and payload.
+   */
   function sendEvent(socket, action) {
     csl.log("Event", "Sending event to dispatch at user:", action);
     socket.emit("event", action);
   }
-
 
   /**
    *
@@ -186,9 +198,13 @@ module.exports = function (
    */
   function dispatch(socket, data) {
     csl.log("dispatch", "dispatch recevied : ", data);
-    var action =hydra(socket,data);
-    csl.log('DISPATCH SOCKET','Action hydrated vs data received ',action, data);
-    
+    var action = hydra(socket, data);
+    csl.log(
+      "DISPATCH SOCKET",
+      "Action hydrated vs data received ",
+      action,
+      data
+    );
 
     // switch (action.type) {
     //   case actions.BET:
@@ -201,10 +217,9 @@ module.exports = function (
     // }
     // si login
     if (action.payload.playerId) {
-      if(action.subtype === actions.PLAYER_GAME_ACTION)
+      if (action.subtype === actions.PLAYER_GAME_ACTION)
         gameController.playerAction(action);
-      else
-        gameController.dispatch(action.payload.playerId, action);
+      else gameController.dispatch(action.payload.playerId, action);
     }
   }
 
@@ -232,7 +247,7 @@ module.exports = function (
     });
 
     // Wait for the promise to resolve
-    newGamePromise.then((id) => {
+    newGamePromise.then( async (id) => {
       csl.log(fileType, id, " >- id game created");
       if (id === undefined) {
         csl.error(fileType, "Refused to create new game");
@@ -250,12 +265,41 @@ module.exports = function (
       state = store.getState();
 
       sendEvent(socket, actcrea.gameLobby(state.game.rooms[id]));
-      const answer = joinRoom(socket, { id: id.toString() });
+      const answer = await joinRoom(socket, { id: id.toString() });
       csl.log(fileType, answer);
       socket.emit("joinRoom", answer);
     });
 
     // Si l'action vient de quelqu'un non connecter on ignore
+  }
+
+  function createGameV2(socket, receivedGameRoomId) {
+    csl.log(fileType, "createGameV2 called (from socket.io.js)");
+    csl.log(fileType, "createGameV2 event received on the server");
+    csl.log(fileType, "Who dispatch : ", socket.request.session.userId);
+
+    const userId = socket.request.session.userId;
+    const result = gameController.newGameV2(userId, receivedGameRoomId);
+
+    if (!result) {
+      csl.error(fileType, "Refused to create new game");
+      return;
+    }
+
+    gameController.dispatch(
+      socket.request.session.userId,
+      actcrea.createGame(receivedGameRoomId)
+    );
+    csl.log(fileType, "store dispatch", store.getState());
+    store.dispatch({ type: actions.GAME_LOBBY });
+
+    // On récupère le nouvel état du store.
+    state = store.getState();
+
+    sendEvent(socket, actcrea.gameLobby(state.game.rooms[receivedGameRoomId]));
+    const answer = joinRoom(socket, { id: receivedGameRoomId.toString() });
+    csl.log(fileType, answer);
+    socket.emit("joinRoom", answer);
   }
 
   /** Lorsqu'une page est ouverte et se connecte au back.
@@ -351,12 +395,30 @@ module.exports = function (
       }
     });
 
+    socket.on("createGameV2", (data) => {
+      const receivedGameRoomId = data.gameRoomId;
+      csl.log(
+        fileType,
+        "user try to createGame user : ",
+        socket.request.session.userId
+      );
+      if (socket.request.session.userId) {
+        createGameV2(socket, receivedGameRoomId);
+      }
+    });
+
     socket.on("startGame", (data) => {
       // console.log("Received startGame event with data:", data);
       const room = data.room;
       const userId = data.userId;
       gameController.startGame(room, userId);
     });
+
+    socket.on("showMyGame", () =>{
+      if(socket.request.session.userId){
+        findPlayerRoom(socket,socket.request.session.userId);
+      }
+    })
 
     socket.request.session.save();
   });
