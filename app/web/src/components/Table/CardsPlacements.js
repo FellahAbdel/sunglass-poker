@@ -23,13 +23,14 @@ const CardsPlacements = ({}) => {
   // const initialDistribution = Array.from({length: 10}, (_, i) => i < playersInTable.length);
   // const playersCardDistributed = useState(initialDistribution);
 
+  const [playersCardDistributed, setPlayersCardDistributed] = useState([1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
   // {
     /*DISTRIBUTION ANIMATION :
   in CardPlacements you have the distribution
   animation which gets handled with a table called 
   "playersCardDistributed" with 10 booleen members
   representing each players that gets a card*/
-  }
+
 
   //default values to test ---------- have to be recived from back
   //dealingFlop for the flop river turn
@@ -78,7 +79,6 @@ const formatCardData = (card) => {
   return card ? [card.number.toString(), card.color] : null;
 };
 
-
   return (
     <div className={`container-cards`}>
       <div className="container-tableCards">
@@ -119,8 +119,7 @@ const formatCardData = (card) => {
             />
           </React.Fragment>
         ))}
-    </div>
-      
+      </div>
     </div>
   );
 };
