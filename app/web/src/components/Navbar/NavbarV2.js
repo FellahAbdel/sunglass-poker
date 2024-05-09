@@ -12,33 +12,31 @@ import { useAuth } from "../Utiles/AuthProvider";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import { useUserData } from "../Utiles/useUserData.jsx";
 import * as actions from "../../store/actions/clientInteractionsCreator.js";
-import { useDispatch } from 'react-redux'
-import {comm} from '../../services/socket.js';
+import { useDispatch } from "react-redux";
+import { comm } from "../../services/socket.js";
 import { useGameTable } from "../Utiles/GameTableProvider.jsx";
-
-
 
 const Navbar = ({}) => {
   const { isLogged, logingOut } = useAuth();
-  const {gameState} = useGameTable();
+  const { showGameTable } = useWindowContext();
+  const { gameState } = useGameTable();
 
   const dispatch = useDispatch();
 
   const handleleaveRoom = () => {
     // si le jeu est en cours
-    if(gameState === "active"){
-        // On le force à fold.
-        dispatch(actions.fold());
+    if (gameState === "active") {
+      // On le force à fold.
+      dispatch(actions.fold());
     }
 
     dispatch(actions.leaveRoom());
-  }
-
+  };
 
   const handleRefreshGame = () => {
     comm.refresh();
     showGameTable();
-  }
+  };
   const {
     isGameTableVisible,
     closeWindow,
@@ -173,26 +171,30 @@ const Navbar = ({}) => {
       */}
 
       <div className="container-navMain-V2">
-        {isLogged && (<>
-          <Button
-            label={
-              isLogged
-                ? getTranslatedWord("navbar.profile")
-                : getTranslatedWord("navbar.login")
-            }
-            onClick={() =>
-              isLogged ? openWindow("profile") : openWindow("login")
-            }
-            styleClass={`${isLogged ? "btn-profile-V2 " : "btn-logIn-V2 "}`}
-            iconSrc={require("./../assets/images/icons/white/profile.png")}
-          />
-          <Button
-          label={getTranslatedWord("navbar.ranking")}
-          onClick={() => openWindow("ranking")}
-          styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
-          iconSrc={require("./../assets/images/icons/white/ranking.png")}
-        />
-        </>)}
+        {isLogged && (
+          <>
+            <Button
+              label={
+                isLogged
+                  ? getTranslatedWord("navbar.profile")
+                  : getTranslatedWord("navbar.login")
+              }
+              onClick={() =>
+                isLogged ? openWindow("profile") : openWindow("login")
+              }
+              styleClass={`${isLogged ? "btn-profile-V2 " : "btn-logIn-V2 "}`}
+              iconSrc={require("./../assets/images/icons/white/profile.png")}
+            />
+            <Button
+              label={getTranslatedWord("navbar.ranking")}
+              onClick={() => openWindow("ranking")}
+              styleClass={`${
+                isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "
+              }`}
+              iconSrc={require("./../assets/images/icons/white/ranking.png")}
+            />
+          </>
+        )}
 
         <Button
           label={getTranslatedWord("navbar.settings")}
@@ -231,7 +233,6 @@ const Navbar = ({}) => {
             iconSrc={require("./../assets/images/icons/white/exit.png")}
           />
         )}
-        
       </div>
     </div>
   );
