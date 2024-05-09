@@ -1,6 +1,7 @@
 export const START_GAME = "START_GAME";
 
 export const CREATE_GAME = "CREATE_GAME";
+export const CREATE_GAME_V2 = "CREATE_GAME_V2";
 
 export const JOIN_ROOM = "JOIN_ROOM";
 

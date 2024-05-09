@@ -10,7 +10,7 @@ import {
 } from "../../Utiles/ValidationUtils.jsx";
 
 import { useDispatch, useSelector } from "react-redux";
-import { createGame } from "../../../store/actions/clientInteractionsCreator.js";
+import { createGameV2 } from "../../../store/actions/clientInteractionsCreator.js";
 
 const CreateGameWindow = () => {
   const {
@@ -106,7 +106,7 @@ const CreateGameWindow = () => {
           // We dispatch the action to start the game
           const gameRoomId = result;
           console.log("Game created with ID:", gameRoomId);
-          dispatch(createGame(gameRoomId));
+          dispatch(createGameV2(gameRoomId));
           // We have to wait for the game to be created before closing the window
           // And then we sent the user to the game room
           //   showGameTable();
