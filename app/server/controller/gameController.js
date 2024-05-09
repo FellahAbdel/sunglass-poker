@@ -195,6 +195,20 @@ module.exports = gameController = {
     await this.dao.updateUserData("_id", userId, "inGame", room);
     return room;
   },
+  newGameV2: async function (userId, gameRoomId) {
+    const state = store.getState();
+    if (userId === undefined) {
+      csl.error(fileType, "player MUST be defined for newGame");
+      return;
+    }
+    console.log("avant le init", state.game.rooms);
+    state.game.rooms[gameRoomId] = initGameRoom(gameRoomId);
+    console.log("après le init", state.game.rooms);
+    this.dispatch(userId, actions.createGame(gameRoomId));
+    this.join(gameRoomId, userId);
+    await this.dao.updateUserData("_id", userId, "inGame", gameRoomId);
+    return true;
+  },
 
   playerAction: function(action){
     csl.log('PLAYER_ACTION','Player is affecting the game : ',action);

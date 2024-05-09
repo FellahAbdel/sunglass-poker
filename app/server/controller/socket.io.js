@@ -157,27 +157,26 @@ module.exports = function (
     const respons = await dao.getUserInfo(socket.request.session.userId);
     if (respons.success) {
       const user = respons.user;
-      if (user.inGame !== null){
+      if (user.inGame !== null) {
         gameController.removePlayer(
           user.inGame.toString(),
           socket.request.session.userId
         );
-        sendEvent(socket,actcrea.leftRoom());
+        sendEvent(socket, actcrea.leftRoom());
       }
     }
   }
 
   /**
-  * Sends an event to a socket for dispatch.
-  * 
-  * @param {Socket} socket The socket to send the event through.
-  * @param {{ type: string, payload: any }} action The action object containing type and payload.
-  */
+   * Sends an event to a socket for dispatch.
+   *
+   * @param {Socket} socket The socket to send the event through.
+   * @param {{ type: string, payload: any }} action The action object containing type and payload.
+   */
   function sendEvent(socket, action) {
     csl.log("Event", "Sending event to dispatch at user:", action);
     socket.emit("event", action);
   }
-
 
   /**
    *
@@ -186,9 +185,13 @@ module.exports = function (
    */
   function dispatch(socket, data) {
     csl.log("dispatch", "dispatch recevied : ", data);
-    var action =hydra(socket,data);
-    csl.log('DISPATCH SOCKET','Action hydrated vs data received ',action, data);
-    
+    var action = hydra(socket, data);
+    csl.log(
+      "DISPATCH SOCKET",
+      "Action hydrated vs data received ",
+      action,
+      data
+    );
 
     // switch (action.type) {
     //   case actions.BET:
@@ -201,10 +204,9 @@ module.exports = function (
     // }
     // si login
     if (action.payload.playerId) {
-      if(action.subtype === actions.PLAYER_GAME_ACTION)
+      if (action.subtype === actions.PLAYER_GAME_ACTION)
         gameController.playerAction(action);
-      else
-        gameController.dispatch(action.payload.playerId, action);
+      else gameController.dispatch(action.payload.playerId, action);
     }
   }
 
@@ -256,6 +258,35 @@ module.exports = function (
     });
 
     // Si l'action vient de quelqu'un non connecter on ignore
+  }
+
+  function createGameV2(socket, receivedGameRoomId) {
+    csl.log(fileType, "createGameV2 called (from socket.io.js)");
+    csl.log(fileType, "createGameV2 event received on the server");
+    csl.log(fileType, "Who dispatch : ", socket.request.session.userId);
+
+    const userId = socket.request.session.userId;
+    const result = gameController.newGameV2(userId, receivedGameRoomId);
+
+    if (!result) {
+      csl.error(fileType, "Refused to create new game");
+      return;
+    }
+
+    gameController.dispatch(
+      socket.request.session.userId,
+      actcrea.createGame(receivedGameRoomId)
+    );
+    csl.log(fileType, "store dispatch", store.getState());
+    store.dispatch({ type: actions.GAME_LOBBY });
+
+    // On récupère le nouvel état du store.
+    state = store.getState();
+
+    sendEvent(socket, actcrea.gameLobby(state.game.rooms[receivedGameRoomId]));
+    const answer = joinRoom(socket, { id: receivedGameRoomId.toString() });
+    csl.log(fileType, answer);
+    socket.emit("joinRoom", answer);
   }
 
   /** Lorsqu'une page est ouverte et se connecte au back.
@@ -348,6 +379,18 @@ module.exports = function (
       );
       if (socket.request.session.userId) {
         createGame(socket);
+      }
+    });
+
+    socket.on("createGameV2", (data) => {
+      const receivedGameRoomId = data.gameRoomId;
+      csl.log(
+        fileType,
+        "user try to createGame user : ",
+        socket.request.session.userId
+      );
+      if (socket.request.session.userId) {
+        createGameV2(socket, receivedGameRoomId);
       }
     });
 

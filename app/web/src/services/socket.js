@@ -120,11 +120,11 @@ export const comm = {
     socket.emit("createGame");
   },
 
-   createGameV2: function () {
+   createGameV2: function (gameRoomId) {
     this.preFun();
     // socket.emit('startGame',{room:sessionStorage.getItem('room')});
     console.log("Emit startGame from comm");
-    socket.emit("createGameV2");
+    socket.emit("createGameV2", { gameRoomId: gameRoomId });
   },
 
   startGame: function (userId) {
