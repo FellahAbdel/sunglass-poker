@@ -39,11 +39,8 @@ const PlayersProfile = ({
 
   return (
     <div className={`container-onGameProfile`}>
-      <div className={`container-profileMessage ${isFocus && isYou ? "profileMessageShow" : ""}`}>
-        Your Turn !
-      </div>
-      <div className={`container-profileMessage ${isFocus && !isYou ? "profileMessageShow" : ""}`}>
-        Their turn..
+      <div className={`container-profileMessage ${isFocus ? "profileMessageShow" : ""}`}>
+        {isYou ? "Your Turn" : "Their Turn"} !
       </div>
       <div className={`box-status ${status.toLowerCase()}`}>
         {isFocus ? (
@@ -59,9 +56,9 @@ const PlayersProfile = ({
       </div>
 
       <div className={`box-playerInfo ${status.toLowerCase()} ${name === "YOU" && "you"}`}>
-        {name}
-        <br />
-        {status !== "empty" && `${formattedChips}${dollarSign}`}
+        <p>{name}
+        <br/>
+        {status !== "empty" && `${formattedChips}${dollarSign}`}</p>
       </div>
 
       {/* Appliquer renderCard pour chaque carte avant de l'envoyer au composant Card */}
