@@ -105,7 +105,6 @@ class Game {
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
     if (this.activePlayers.length < 2) {
       this.advanceStageToShowdown();
-      this.advanceStage();
       return;
     }
 
@@ -159,7 +158,6 @@ class Game {
       console.log("NOmbre de joururs actif :", this.activePlayers.length);
       if (this.activePlayers.length < 2) {
         this.advanceStageToShowdown();
-        this.advanceStage();
         return;
       }
       if (this.focus === 0 + this.nbhostfolded) {
@@ -400,15 +398,14 @@ class Game {
         this.river();
         console.log("PASSE PAR LE CASE river");
         break;
-      case "showdown":
-        console.log(
-          "activePlayers.length au niveau de shodown",
-          this.activePlayers.length
-        );
-        this.evaluateHands();
-        console.log("PASSE PAR LE CASE showdown");
-        this.advanceStage();
-        break;
+        case "showdown":
+          console.log("PASSE PAR LE CASE showdown");
+          this.evaluateHands();
+          setTimeout(() => {
+            this.currentStage = stageOrder[nextIndex];
+            this.advanceStage(); 
+          }, 5000); 
+          break;
       case "end":
         console.log("PASSE PAR LE CASE end");
         this.newgame();
