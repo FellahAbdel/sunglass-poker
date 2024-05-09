@@ -1,44 +1,23 @@
 import React, { useState, useEffect } from "react";
 
 export default function Progressbar({ durationInSeconds }) {
-  // const [filled, setFilled] = useState(0);
-  // const [timeToFinish, setTimeToFinish] = useState(durationInSeconds);
-
-  // useEffect(() => {
-  //   let timeout;
-  //   if (filled < 100) {
-  //     timeout = setTimeout(
-  //       () => setFilled((prev) => prev + 1),
-  //       (durationInSeconds * 10) 
-  //     );
-  //   }
-  //   return () => clearTimeout(timeout);
-  // }, [filled]);
-
-  // useEffect(() => {
-  //   setTimeToFinish(Math.ceil(((100 - filled) * durationInSeconds) / 100));
-  // }, [filled, durationInSeconds]);
-
-
   const [count, setCount] = useState(durationInSeconds);
   const [filled, setFilled] = useState(0);
 
+  //counting from durationInSeconds to 0 and calculating filled as a percentage of durationInSeconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCount(prevCount => prevCount - 1);
     }, 1000);
 
-    // Clear the interval when count reaches 0
     if (count === 0) {
       clearInterval(interval);
     }
 
     setFilled(((durationInSeconds - count) / durationInSeconds) * 100);
 
-    // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(interval);
-  }, [count, durationInSeconds]); // Dependency array includes count and durationInSeconds
-
+  }, [count, durationInSeconds]);
 
   return (
     <div>
