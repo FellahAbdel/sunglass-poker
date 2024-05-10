@@ -25,7 +25,7 @@ function maximums(playerHandWeightList, getter) {
  * OUT : STRING ==> identifiant d' un joueur
  * FUNCTION : renvoi l'identifiant de l'utilisateur ayant le plus fort des carres
  */
-function secondCarre(listeJoueurCombinaison, self = this) {
+function secondCarre(listeJoueurCombinaison) {
   // je sais que cette liste contient deux elements
 
   let typeCarre = function (playerHand) {
@@ -63,12 +63,12 @@ function secondCarre(listeJoueurCombinaison, self = this) {
     types.push(typeCarre(tab[i]));
   }
 
-  let maxTypes = self.maximums(types, (x) => x.type);
+  let maxTypes = maximums(types, (x) => x.type);
 
   if (maxTypes.length === 1) {
     return [maxTypes[0].id];
   } else {
-    let intruderMax = self.maximums(maxTypes, (x) => x.intruder);
+    let intruderMax = maximums(maxTypes, (x) => x.intruder);
 
     if (intruderMax.length === 1) {
       return [intruderMax[0].id];
@@ -177,7 +177,7 @@ function secondSuite(listeJoueurCombinaison) {
 /*
  * ...
  */
-function secondBrelan(listeJoueurCombinaison, self = this) {
+function secondBrelan(listeJoueurCombinaison) {
   let typeBrelan = function (playerHand, trier) {
     let type = {
       type: null,
@@ -207,15 +207,15 @@ function secondBrelan(listeJoueurCombinaison, self = this) {
   let tab = [...listeJoueurCombinaison];
   let types = [];
   for (let i = 0; i < tab.length; i++) {
-    types.push(typeBrelan(tab[i], self.trier));
+    types.push(typeBrelan(tab[i], trier));
   }
 
-  let maxTypes = self.maximums(types, (x) => x.type);
+  let maxTypes = maximums(types, (x) => x.type);
 
   if (maxTypes.length === 1) {
     return [maxTypes[0].id];
   } else {
-    let intruderMax = self.maximums(maxTypes, (x) => x.intruder);
+    let intruderMax = maximums(maxTypes, (x) => x.intruder);
 
     if (intruderMax.length === 1) {
       return [intruderMax[0].id];
@@ -261,70 +261,90 @@ function secondDoublePaire(tableauxAvecId) {
 
   return [meilleursIds];
 }
-/*
- * ...
- */
-function secondPaire(listeJoueurCombinaison, self = this) {
-  let tab = [...listeJoueurCombinaison];
-  let hautesPaires = []; // Stockage des paires les plus hautes
-  let plusHauteValeur = -1; // Valeur numérique de la plus haute paire
 
-  // Etape 1 : Recherche des paires et identification de la plus haute valeur de paire
-  for (let joueur of tab) {
-    let cartes = joueur.hand.map((carte) => carte.number);
-    let paire = cartes.find((carte, index) => cartes.indexOf(carte) !== index); // Trouver la paire
+function secondPaire(maxList) {
+  // Identifier la paire la plus haute et les joueurs qui la détiennent
+  let highestPairValue = -1;
+  let playersWithHighestPair = [];
 
-    let cartePaire = [];
-    cartePaire.push(joueur.hand.find((elt) => elt.number === paire));
-    cartePaire.push(
-      joueur.hand.find(
-        (elt) => elt.number === paire && elt.color !== cartePaire[0].color
-      )
-    );
+  maxList.forEach((entry) => {
+    let hand = entry.hand;
 
-    if (paire) {
-      let valeur = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].indexOf(paire);
+    // Trouver la valeur de la paire dans la main de chaque joueur
+    let cardCounts = {};
+    hand.forEach((card) => {
+      cardCounts[card.number] = (cardCounts[card.number] || 0) + 1;
+    });
 
-      if (valeur > plusHauteValeur) {
-        plusHauteValeur = valeur; // Mettre à jour la plus haute valeur de paire
-        hautesPaires = [
-          {
-            hand: joueur.hand.filter(
-              (carte) =>
-                carte.number !== paire ||
-                (carte.color !== cartePaire[0].color &&
-                  carte.color !== cartePaire[1].color)
-            ),
-            id: joueur.id,
-          },
-        ]; // Sauvegarder la main sans la paire
-      } else if (valeur === plusHauteValeur) {
-        hautesPaires.push({
-          hand: joueur.hand.filter(
-            (carte) =>
-              carte.number !== paire ||
-              (carte.color !== cartePaire[0].color &&
-                carte.color !== cartePaire[1].color)
-          ),
-          id: joueur.id,
-        }); // Ajouter la main sans la paire à la liste
+    console.log("cards count", cardCounts);
+
+    // Identifier la paire la plus haute dans cette main
+    let highestPairInHand = -1;
+    for (let number in cardCounts) {
+      if (cardCounts[number] === 2) {
+        let value = parseInt(number);
+
+        if (value === 1) {
+          value = 14; // Traitez l'As comme 14
+        }
+
+        if (value > highestPairInHand) {
+          highestPairInHand = value;
+        }
       }
+    }
+
+    // Mettre à jour la paire la plus haute et les joueurs correspondants
+    if (highestPairInHand > highestPairValue) {
+      highestPairValue = highestPairInHand;
+      playersWithHighestPair = [entry];
+    } else if (highestPairInHand === highestPairValue) {
+      playersWithHighestPair.push(entry);
+    }
+  });
+
+  // Si un seul joueur a la paire la plus haute, il est le gagnant
+  if (playersWithHighestPair.length === 1) {
+    return [playersWithHighestPair[0].id];
+  }
+
+  // Si plusieurs joueurs ont la même paire la plus haute, comparer les cartes restantes
+  for (let i = 0; i < playersWithHighestPair.length; i++) {
+    // Exclure la paire de la main et trier par valeur décroissante
+    playersWithHighestPair[i].hand = playersWithHighestPair[i].hand.filter(
+      (card) => card.number !== highestPairValue
+    );
+    playersWithHighestPair[i].hand.sort((a, b) => b.number - a.number);
+  }
+
+  // Comparer les cartes restantes des joueurs
+  for (let i = 0; i < playersWithHighestPair[0].hand.length; i++) {
+    let maxCardValue = -1;
+    let potentialWinners = [];
+
+    playersWithHighestPair.forEach((player) => {
+      if (player.hand[i].number > maxCardValue) {
+        maxCardValue = player.hand[i].number;
+        potentialWinners = [player];
+      } else if (player.hand[i].number === maxCardValue) {
+        potentialWinners.push(player);
+      }
+    });
+
+    // Si un seul joueur a la carte la plus haute, il est le gagnant
+    if (potentialWinners.length === 1) {
+      return [potentialWinners[0].id];
     }
   }
 
-  // Etape 2 : Comparaison des paires sauvegardées
-  if (hautesPaires.length > 1) {
-    // Appeler la fonction pour comparer les mains restantes en cas d'égalité
-    return self.secondCarteHaute(hautesPaires);
-  } else if (hautesPaires.length === 1)
-    // Renvoyer l'id du joueur avec la paire la plus haute
-    return hautesPaires[0].id;
+  // Si tout est égal, renvoyer les identifiants de tous les joueurs avec la paire la plus haute
+  return playersWithHighestPair.map((player) => player.id);
 }
 
 /*
  * ...
  */
-function secondCarteHaute(listeJoueurCombinaison, self = this) {
+function secondCarteHaute(listeJoueurCombinaison) {
   let tab = [...listeJoueurCombinaison];
 
   for (let i = 0; i < tab.length; i++) {
@@ -335,7 +355,7 @@ function secondCarteHaute(listeJoueurCombinaison, self = this) {
   let max = tab;
 
   for (let i = 0; i < tab[0].hand.length; i++) {
-    max = self.maximums(max, (x) => x.hand[i].number);
+    max = maximums(max, (x) => x.hand[i].number);
     if (max.length === 1) return [max[0].id];
   }
 
