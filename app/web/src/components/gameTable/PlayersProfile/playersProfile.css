@@ -272,7 +272,7 @@
 .cardPlayers2 {
   width: 2.5vw;
   height: 3.5vw;
-  box-shadow: -2px 2px 5px black;
+  filter: drop-shadow(-2px 2 5px rgb(255, 255, 255));
   opacity: 0%;
   transform: rotate(-20deg);
   transform-origin: unset;
