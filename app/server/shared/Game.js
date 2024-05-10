@@ -55,7 +55,7 @@ class Game {
       "players":filteredPlayer,
       "spectators":this.spectators,
       "pokerTable":this.pokerTable,
-      "master:":this.master,
+      "master":this.master,
       "blind":this.blind,
       "focus":this.focus,
       "currentStage":this.currentStage,
