@@ -138,8 +138,8 @@
 | 5 mai | 1 Heure | Ajout d'un événement après une interaction de jeu d'un joueur pour aider l'implémentation de code liér à celle ci.| --
 | 6 mai | 1 Heure | Travail avec Mael sur l'utilisation des éléments en mémoire côté front pour raise / bet. Condition de raise et bet en backend.| --
 | 7 mai | 4 Heures | Stand-up meeting, définitions des taches de chacun, échange des bugs connue, fixation des dates et des objectifs. Répartition de taches avec Noé et Aziz sur des fonctionnalités non finalisé. Tests des VM| --
-| 9 mai | 2 Heures | Le joueur peut rejoindre sa partie déjà en cours, en join ou avec le bouton de refresh. Correction du bug qui liée la mémoire de deux partie différente du à l'objet initialState.| --
-| TOTAL | 8 Heures || --
+| 9 mai | 6 Heures | Le joueur peut rejoindre sa partie déjà en cours, en join ou avec le bouton de refresh. Correction du bug qui liée la mémoire de deux partie différente du à l'objet initialState. Travail sur les  VM et les proxys mais impossible de résoudre le problème, il faudra contacter le responsable réseau, installations des dépendances et lib sur un autre serveur externe en secours pour préparer le déploiement mais manque de port à l'ouverture. Ajout d'affichage de timer sur le frontend + tour automatique pour les joueurs trop lent. Blocage des parties pendant le jeu et déblocage lors du redémarage après gagnant.| --
+| TOTAL | 12 Heures || --
 
 
 
