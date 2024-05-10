@@ -43,7 +43,7 @@ const AcceuilWindow = () => {
           <>
             <Button
               styleClass={"btn-gameStart btn-gameJoin back-color1"}
-              label={getTranslatedWord("game.startGame")}
+              label={getTranslatedWord("game.quickGame")}
               onClick={() => onClickStartGame()}
             />
             <Button
@@ -52,8 +52,8 @@ const AcceuilWindow = () => {
               onClick={() => openWindow("servers")}
             />
             <Button
-              styleClass={" back-color1"}
-              label={"Create a new game"}
+              styleClass={"btn-gameStart btn-gameJoin back-color1"}
+              label={getTranslatedWord("game.createAgame")}
               onClick={() => openWindow("create_table")}
             />
           </>

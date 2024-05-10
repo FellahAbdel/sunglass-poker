@@ -42,6 +42,7 @@
     "startGame": "Start a game",
     "joinGame": "Join a game",
     "createAgame": "Create a new game",
+    "quickGame":"Quick game",
     "status": "Status",
     "name": "Name",
     "gameName": "Game name",
