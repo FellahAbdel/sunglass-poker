@@ -28,7 +28,7 @@ class Game {
       startingPlayerIndex: -1,
       focusTurnTimer: 0,
       focusTurnCall: false,
-      autoTurnDelay: 60000,
+      autoTurnDelay: 10000,
       restartCall: false,
       restartTimer: 0,
       restartDelay: 5000,
@@ -76,7 +76,7 @@ class Game {
 
   updatePlayersList() {
     // Filtrer les joueurs qui ne sont pas spectateurs et qui sont actifs
-    this.players = this.allPlayers.filter((player) => !player.isSpectator);
+    this.players = this.allPlayers.filter((player) => !player.isSpectator && !player.isAFK);
     console.log(
       `Updated players list: Now includes ${this.players.length} active players.`
     );
@@ -318,6 +318,12 @@ class Game {
   //   }
   // }
 
+  removePlayer(playerId){
+    this.allPlayers = this.allPlayers.filter((p) => p.getPlayerId() !== playerId);
+    this.players = this.players.filter((p) => p.getPlayerId() !== playerId);
+    this.updateActivePlayers();
+  }
+
   addPlayer(player) {
     this.allPlayers.push(player);
     if (this.state !== 'waiting'){
@@ -373,9 +379,9 @@ class Game {
     this.rotateStartingPlayer();
     this.focus = this.startingPlayerIndex;
     this.total = 0;
-    this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
+    this.activePlayers = this.players.filter((player) => player.isActive && !player.isAfk); // Remplir la liste des joueurs actifs
     this.pokerTable.reset();
-    this.deck.initCards();
+    this.deck = new Deck();
     this.deck.shuffle();
     this.gameCurrentBet = 40;
     this.players.forEach((player) => {

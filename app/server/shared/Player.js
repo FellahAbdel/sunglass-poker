@@ -33,9 +33,12 @@ class Player {
 
   setAfk(){
     this.isAfk = true;
+    this.isActive = false;
+    this.status = "AFK";
   }
   unsetAfk(){
     this.isAfk = false;
+    this.isActive = true;
   }
 
   statusFor(id) {

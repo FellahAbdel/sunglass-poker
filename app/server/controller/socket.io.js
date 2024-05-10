@@ -177,6 +177,9 @@ module.exports = function (
 
             // If the socket is found and it's in the specified room, remove it from the room
             if (socket && socket.rooms.has(room)) {
+              csl.log("kickOfRoom",'KICKING ')
+                socket.emit("kicked");
+                io.to(room).emit('refresh');
                 socket.leave(room);
             }
         });

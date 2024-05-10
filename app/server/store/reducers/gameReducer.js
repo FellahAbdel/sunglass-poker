@@ -61,6 +61,9 @@ const gameReducer = (state = initialState, action) => {
         },
       };
     case actions.START_GAME:
+      if(state.rooms[action.payload.id].players.length <= 1)
+        csl.log('START_GAME_EVENT',"not enough player");
+      else
       if (state.rooms[action.payload.id].game.state === "waiting") {
         csl.log("START_GAME_EVENT", "Action payload:", action.payload);
         csl.log(
@@ -104,6 +107,7 @@ const gameReducer = (state = initialState, action) => {
       playerId = action.payload.player;
       var isMaster = false;
       if (state.rooms.hasOwnProperty(room)) {
+        state.rooms[room].game.removePlayer(playerId);
         const updatedPlayers = state.rooms[room].players.filter(
           (player) => player.getPlayerId() !== playerId
         );

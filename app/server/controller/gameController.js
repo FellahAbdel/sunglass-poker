@@ -123,6 +123,7 @@ module.exports = gameController = {
         this.removePlayer(roomId,copy[p].getPlayerId());
       }
     }
+    room.hasAfk = false;
   },
   removePlayer: function (room, id) {
     reponse = this.dispatch(id, actions.leaveRoom(room, id));
@@ -254,8 +255,8 @@ module.exports = gameController = {
       if(room.game.players.findIndex(
         (p) => p.getPlayerId() == action.payload.playerId) === room.game.focus){
           csl.log("playerAction",this.dispatch(action.payload.playerId,action));
-          csl.log("playerAction",)
           answer_post_action = this.dispatch(action.payload.playerId,actions.playerPlayed(roomId))
+          csl.log("playerAction",answer_post_action);
           if(answer_post_action.success){
             for(var caller in answer_post_action.toCall)
             switch(answer_post_action.toCall[caller]){
@@ -291,12 +292,12 @@ module.exports = gameController = {
     return answer;
   },
 
-  startGame: function (room, userId) {
+  startGame: async function (room, userId) {
     // Logique pour démarrer le jeu
     console.log("Starting game in room:", room, "requested by player:", userId );
     const state = store.getState();
     if (state.game.rooms.hasOwnProperty(room)) {
-      this.removeAfk(state.game.rooms[room].game,room);
+      await this.removeAfk(state.game.rooms[room].game,room);
       store.dispatch(actions.startGame(room, userId));
       this.broadcastStatus(room);
     } else {

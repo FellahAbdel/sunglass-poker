@@ -128,3 +128,8 @@ module.exports.sitted = (table, players) => ({
   type: actions.SITTED,
   payload: { table: table, players: players },
 });
+
+
+module.exports.kicked = () => ({
+  type:actions.KICKED,
+})

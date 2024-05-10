@@ -41,4 +41,9 @@ export const GAME_STARTED = "GAME_STARTED";
 // Successfully sit at a table.
 export const SITTED = "SITTED";
 
+// Kicked out of the game
+export const KICKED = "KICKED";
+
+
 export const LOGGED_IN = "LOGGED_IN";
+
