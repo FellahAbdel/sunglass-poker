@@ -8,58 +8,63 @@ const csl = require("../controller/intelligentLogging.js");
 
 class Game {
   constructor(
-    players = [],
-    spectators = [],
-    deck = new Deck(),
-    pokerTable = new PokerTable(),
-    master = false,
-    blind = 0,
-    focus = null,
-    currentStage = "preflop",
-    state = "waiting",
-    total = 0,
-    nbhostfolded = 0,
-    gameCurrentBet = blind, // Ajoutez gameCurrentBet comme paramètre distinct
-    startingPlayerIndex = 0
+    ...args
   ) {
-    this.activePlayers = null;
-    this.players = players;
-    this.spectators = spectators;
-    this.deck = deck;
-    this.pokerTable = pokerTable;
-    this.master = master;
-    this.blind = blind;
-    this.focus = focus;
-    this.currentStage = currentStage;
-    this.state = state;
-    this.total = total;
-    this.nbhostfolded = nbhostfolded;
-    this.gameCurrentBet = gameCurrentBet; // Utilisez gameCurrentBet ici
-    this.startingPlayerIndex = startingPlayerIndex;
-    this.focusTurnTimer = 0;
-    this.focusTurnCall = false;
-    this.autoTurnDelay = 60000;
-    this.restartCall = false;
-    this.allow_start = true;
+    let basedValue = {
+      "players": [],
+      "spectators": [],
+      "deck": new Deck(),
+      "pokerTable": new PokerTable(),
+      "master": false,
+      "blind": 0,
+      "focus": null,
+      "currentStage": "preflop",
+      "state": "waiting",
+      "total": 0,
+      "nbhostfolded": 0,
+      "gameCurrentBet": 0,
+      "startingPlayerIndex": 0,
+      "focusTurnTimer": 0,
+      "focusTurnCall": false,
+      "autoTurnDelay": 60000,
+      "restartCall": false,
+      "restartTimer": 0,
+      "restartDelay": 5000,
+      "allow_start": true,
+    };
+    Object.assign(this,basedValue,...args);
+    // this.activePlayers = null;
+    // this.players = players;
+    // this.spectators = spectators;
+    // this.deck = deck;
+    // this.pokerTable = pokerTable;
+    // this.master = master;
+    // this.blind = blind;
+    // this.focus = focus;
+    // this.currentStage = currentStage;
+    // this.state = state;
+    // this.total = total;
+    // this.nbhostfolded = nbhostfolded;
+    // this.gameCurrentBet = gameCurrentBet; // Utilisez gameCurrentBet ici
+    // this.startingPlayerIndex = startingPlayerIndex;
   }
 
   getForPlayer(id) {
     var filteredPlayer = this.players.map((player) => player.statusFor(id));
-    var g = new Game(
-      filteredPlayer,
-      null,
-      this.spectators,
-      this.pokerTable,
-      this.master,
-      this.blind,
-      this.focus,
-      this.currentStage,
-      this.state,
-      this.total,
-      this.nbhostfolded,
-      this.gameCurrentBet
-    );
-    g.focusTurnTimer = this.focusTurnTimer;
+    var g = new Game({
+      "players":filteredPlayer,
+      "spectators":this.spectators,
+      "pokerTable":this.pokerTable,
+      "master:":this.master,
+      "blind":this.blind,
+      "focus":this.focus,
+      "currentStage":this.currentStage,
+      "state":this.state,
+      "total":this.total,
+      "nbhostfolded":this.nbhostfolded,
+      "gameCurrentBet":this.gameCurrentBet,
+      "focusTurnTimer":this.focusTurnTimer
+    });
     return g;
   }
 
@@ -80,6 +85,7 @@ class Game {
   addSpectator(player) {
     if (
       !this.spectators.some((s) => s.getPlayerId() === player.getPlayerId())
+      && !this.players.findIndex(p => p.getPlayerId() === player.getPlayerId())
     ) {
       this.spectators.push(player);
       console.log(`Spectator ${player.getPlayerId()} added.`);
@@ -513,9 +519,10 @@ class Game {
 
   resetRestartCall() {
     clearTimeout(this.resetRestartCall);
+    this.restartTimer = Date.now()+this.restartDelay;
     this.restartCall = setTimeout(() => {
       this.allow_start = true;
-    }, 5000);
+    }, this.restartDelay);
   }
 
   advanceStageToShowdown() {
