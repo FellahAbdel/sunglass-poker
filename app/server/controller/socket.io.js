@@ -26,6 +26,7 @@ module.exports = function (
       csl.log("broadcastStatus", "socket io broadcast to room", room);
       io.to(room).emit("refresh", { status: true });
     },
+    stopListeningToRoom:kickOfRoom,
   };
 
 
@@ -109,7 +110,7 @@ module.exports = function (
             " id :",
             socket.request.session.userId
           );
-          socket.join(token);
+          socket.join(decoded.id);
         } catch (err) {
           csl.error(fileType, "Error with token : ", err);
           socket.disconnect();
@@ -163,6 +164,23 @@ module.exports = function (
       socket.emit("jointRoom", { status: failed, mes: "Invalid data" });
     }
     socket.request.session.save();
+  }
+
+  async function kickOfRoom(userId,room){
+    const socketsOfPlayer = io.sockets.adapter.rooms.get(userId);
+
+    if (socketsOfPlayer) {
+        // Iterate through each socket in the room
+        socketsOfPlayer.forEach(socketId => {
+            // Find the socket object by its ID
+            const socket = io.sockets.sockets.get(socketId);
+
+            // If the socket is found and it's in the specified room, remove it from the room
+            if (socket && socket.rooms.has(room)) {
+                socket.leave(room);
+            }
+        });
+    }
   }
 
   async function leaveRoom(socket) {

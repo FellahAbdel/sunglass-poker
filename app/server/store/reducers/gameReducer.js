@@ -46,6 +46,7 @@ const gameReducer = (state = initialState, action) => {
   csl.log(fileType, state, action);
   var room;
   var playerId;
+  var answer;
   switch (action.type) {
     case actions.CREATE_GAME:
       csl.log(fileType, "CREATE GAME");
@@ -369,8 +370,10 @@ const gameReducer = (state = initialState, action) => {
       }
       return { ...state };
     case actions.PLAYER_PLAYED:
-      state.rooms[action.payload.room].game.playerPlayed();
-      return { ...state };
+      let toCall = state.rooms[action.payload.room].game.playerPlayed();
+      answer = {success:false,toCall:toCall};
+      if(toCall.length > 0) answer.success = true;
+      return { ...state,answer:answer };
     case actions.CLEARANSWER:
       state.answer = false;
       return { ...state };

@@ -113,11 +113,25 @@ module.exports = gameController = {
     }
   },
 
+  removeAfk:function(room,roomId){
+    csl.log("removeAFK",room,roomId);
+    const copy = room.players;
+    csl.log('removeAfk','List of player :',copy);
+    for(p in copy){
+      csl.log('removeAfk',copy[p]);
+      if(copy[p].isAfk){
+        this.removePlayer(roomId,copy[p].getPlayerId());
+      }
+    }
+  },
   removePlayer: function (room, id) {
     reponse = this.dispatch(id, actions.leaveRoom(room, id));
     csl.log("removePlayer", "reponse : ", reponse);
     if (reponse.status) {
       this.dao.playerLeftGame(id);
+      this.makeRefreshCall(room);
+      csl.log('removePlayer',this.io);
+      this.io.stopListeningToRoom(id,room);
       if (reponse.payload.restant === 0) {
         this.deleteroom(room);
       }
@@ -225,6 +239,7 @@ module.exports = gameController = {
 
   playerAction: function(action){
     csl.log('PLAYER_ACTION','Player is affecting the game : ',action);
+    roomId = action.payload.room;
     if(action.type === actionsTypes.SHOW_CARD ||
       action.type === actionsTypes.HIDE_CARD){
       this.dispatch(action.payload.playerId,action);
@@ -233,17 +248,31 @@ module.exports = gameController = {
       state = store.getState()
       if(state.game.rooms === undefined) return
       if(state.game.rooms[action.payload.room] === undefined) return
-      room = state.game.rooms[action.payload.room]
+      room = state.game.rooms[roomId]
       csl.log("playerAction",room)
       if(room.game.state !== "waiting")
       if(room.game.players.findIndex(
         (p) => p.getPlayerId() == action.payload.playerId) === room.game.focus){
           csl.log("playerAction",this.dispatch(action.payload.playerId,action));
-          csl.log("playerAction",this.dispatch(action.payload.playerId,actions.playerPlayed(action.payload.room)))
+          csl.log("playerAction",)
+          answer_post_action = this.dispatch(action.payload.playerId,actions.playerPlayed(roomId))
+          if(answer_post_action.success){
+            for(var caller in answer_post_action.toCall)
+            switch(answer_post_action.toCall[caller]){
+              case "REMOVE_AFK":
+                csl.log("postPlayerAction", "Asked to remove AFK");
+                this.removeAfk(room,roomId);
+                break;
+              default:
+                csl.log("postPlayerAction", "--DEFAULT-- Ask to : ",answer_post_action);
+                break;
+            }
+          }
         }
     }
-    this.broadcastStatus(action.payload.room);
+    this.broadcastStatus(roomId);
   },
+
 
   /**
    *
@@ -267,6 +296,7 @@ module.exports = gameController = {
     console.log("Starting game in room:", room, "requested by player:", userId );
     const state = store.getState();
     if (state.game.rooms.hasOwnProperty(room)) {
+      this.removeAfk(state.game.rooms[room].game,room);
       store.dispatch(actions.startGame(room, userId));
       this.broadcastStatus(room);
     } else {

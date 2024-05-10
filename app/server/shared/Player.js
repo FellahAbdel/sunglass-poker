@@ -14,8 +14,9 @@ class Player {
     name,
     status = "Playing",
     currentBet = 0,
-    currentBetTurn=0,
-    isActive = true
+    currentBetTurn = 0,
+    isActive = true,
+    isSpectator = false
   ) {
     this.playerId = playerId;
     this.name = name;
@@ -23,9 +24,18 @@ class Player {
     this.playerCards = [];
     this.playerActionLog = [];
     this.currentBet = currentBet;
-    this.currentBetTurn= currentBetTurn;
+    this.currentBetTurn = currentBetTurn;
     this.isActive = isActive;
     this.isYou = false;
+    this.isAfk = false;
+    this.isSpectator = isSpectator;
+  }
+
+  setAfk(){
+    this.isAfk = true;
+  }
+  unsetAfk(){
+    this.isAfk = false;
   }
 
   statusFor(id) {
@@ -36,6 +46,7 @@ class Player {
       currentBet: this.currentBet,
       currentBetTurn: this.currentBetTurn,
       isActive: this.isActive,
+      isSpectator: this.isSpectator,
       timeLastAnswer: this.timeLastAnswer,
       playerMoney: this.playerMoney,
       playerCards: this.playerCards.map((card, index) =>
@@ -43,7 +54,7 @@ class Player {
       ),
       playerActionLog: this.playerActionLog,
       cardsVisible: this.cardsVisible,
-      isYou: (id === this.playerId) ? true:false,
+      isYou: id === this.playerId ? true : false,
     };
     return view;
   }
@@ -53,6 +64,12 @@ class Player {
       this.cardsVisible[cardIndex] = true;
     }
   }
+  toggleSpectator() {
+    this.isSpectator = !this.isSpectator;
+    if (this.isSpectator) {
+      this.isActive = false;
+    }
+  }
 
   hideCard(cardIndex) {
     if (this.playerCards.length > cardIndex) {
@@ -60,8 +77,8 @@ class Player {
     }
   }
 
-  seRemplirLesPoches(total){
-  this.playerMoney+=total;
+  seRemplirLesPoches(total) {
+    this.playerMoney += total;
   }
 
   settimeLastAnswer(t) {
@@ -142,7 +159,7 @@ class Player {
   //   this.playerMoney -= moneyToBet;
   // }
 
-  howmanyBetTurn(){
+  howmanyBetTurn() {
     return this.currentBetTurn;
   }
 
@@ -171,43 +188,41 @@ class Player {
     this.status = "folded";
     this.isActive = false;
   }
-  
 
-  check(){
+  check() {
     this.status = "checked";
   }
 
-  call(){
+  call() {
     this.status = "call";
   }
 
-  playing(){
-    this.status="playing";
+  playing() {
+    this.status = "playing";
   }
 
-  raise(){
-    this.status="raise";
+  raise() {
+    this.status = "raise";
   }
 
-  jesuislewinner(){
-    this.status="winner"
+  jesuislewinner() {
+    this.status = "winner";
   }
 
-  bet(amount){
-    if(this.playerMoney>amount){
-      this.currentBet=amount;
-      this.currentBetTurn+=amount;
-      this.playerMoney-=amount;
-        this.status = "call";
-      
+  bet(amount) {
+    if (this.playerMoney > amount) {
+      this.currentBet = amount;
+      this.currentBetTurn += amount;
+      this.playerMoney -= amount;
+      this.status = "call";
     }
   }
 
-  betinitial(amount){
-    if(this.playerMoney>amount){
-      this.currentBet=amount;
-      this.currentBetTurn+=amount;
-      this.playerMoney-=amount;
+  betinitial(amount) {
+    if (this.playerMoney > amount) {
+      this.currentBet = amount;
+      this.currentBetTurn += amount;
+      this.playerMoney -= amount;
       //status a definir:
       // this.status = "raise";
     }
@@ -217,15 +232,15 @@ class Player {
     this.clearHand();
     this.playerActionLog = [];
     this.currentBet = 0;
-    this.currentBetTurn=0;
+    this.currentBetTurn = 0;
     this.isActive = true;
     this.cardsVisible = [false, false];
-    this.status="Playing";
+    this.status = "Playing";
     // Ajouter d'autres réinitialisations si nécessaire
   }
 
-  newTurnReset(){
-    this.currentBetTurn=0;
+  newTurnReset() {
+    this.currentBetTurn = 0;
   }
 }
 
