@@ -279,6 +279,13 @@
   position: absolute;
   transition: transform 1s ease, opacity 1s ease 0.5s, left 2s ease , bottom 1s ease;
 }
+.cardPlayers1 .cardContainer .cardNumber,
+.cardPlayers2 .cardContainer .cardNumber{
+  font-size: 0.8vw;
+  left: 10%;
+  top:10%;
+  gap:0.2vh;
+}
 .playerCardAppear {
   opacity: 100;
 }

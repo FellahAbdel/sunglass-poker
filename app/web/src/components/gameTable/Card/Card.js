@@ -34,7 +34,7 @@ const Card = ({ card, styleClass, flippingCard, flippedStyle}) => {
           alt="card"
         /> */}
         <div className="cardNumber">
-          <div>
+          <div style={card[1] === "H" || card[1] === "D" ? {color: "#df1e22"} : {}}>
           {(() => {
             switch (card[0]) {
               case "1":
