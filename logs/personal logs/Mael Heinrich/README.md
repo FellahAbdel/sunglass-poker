@@ -142,6 +142,9 @@
 
 2024/05/10  2H30    Discussion avec le groupes de multiples problèmes, vocal avec noé pour certains plus spéciphiques,recherche et test sur le jeux, ajustement du rotateFocus qui n'était pas correct par rapport au regles du poker etc...
 
---2024/04 SEMAINE 6: 11H (TOTAL: 108H30)
+2024/05/10  1H      Reunion avec victor pour regler le bug du isActive puis recherche et discussions sur le pb de l'affichage du winner qui d'affiche que dans le cas ou ya un fold
 
-TEMPS TOTAL: 108H30
+
+--2024/04 SEMAINE 6: 12H (TOTAL: 109H30)
+
+TEMPS TOTAL: 109H30
