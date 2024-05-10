@@ -168,7 +168,6 @@ class Game {
 
   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
-
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
     if (this.activePlayers.length < 2) {
       this.advanceStageToShowdown();
@@ -193,15 +192,17 @@ class Game {
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
         this.gameCurrentBet = 0;
         this.advanceStage();
-        this.activePlayers.forEach((player) => {
-          player.newTurnReset();
-          //reset le status a chaque tour
-          player.playing();
-        });
-        //a verifier pour le nbdefolded
-        console.log("startingplayer",this.startingPlayerIndex,this.nbhostfolded);
-        this.focus=(this.startingPlayerIndex+this.nbhostfolded)% this.activePlayers.length;;
-        console.log("POT TOTAL", this.total);
+        if(this.currentStage !== "end" && this.currentStage !== "showdown"){
+          this.activePlayers.forEach((player) => {
+            player.newTurnReset();
+            //reset le status a chaque tour
+            player.playing();
+          });
+          //a verifier pour le nbdefolded
+          console.log("startingplayer",this.startingPlayerIndex,this.nbhostfolded);
+          this.focus=(this.startingPlayerIndex+this.nbhostfolded)% this.activePlayers.length;;
+          console.log("POT TOTAL", this.total);
+        }
       }
 
       //Faut rajouter le cas ou un joueur raise, il deviens alors le focus pour le tour puis pour pas qu'il
@@ -481,10 +482,12 @@ class Game {
       console.log("Game not active, cannot advance stage.");
       return;
     }
+    const entryStage = this.currentStage;
     const stageOrder = ["preflop", "flop", "turn", "river", "showdown", "end"];
     const currentIndex = stageOrder.indexOf(this.currentStage);
     const nextIndex = (currentIndex + 1) % stageOrder.length;
     this.currentStage = stageOrder[nextIndex];
+    csl.log('AdvanceStage',entryStage,currentIndex,nextIndex,this.currentStage);
 
     switch (this.currentStage) {
       case "flop":
