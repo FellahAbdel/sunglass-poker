@@ -8,6 +8,7 @@ class Player {
   playerActionLog = [
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
+  playerHandName = "";
 
   constructor(
     playerId,
@@ -58,6 +59,7 @@ class Player {
       playerActionLog: this.playerActionLog,
       cardsVisible: this.cardsVisible,
       isYou: id === this.playerId ? true : false,
+      playerHandName: this.playerHandName,
     };
     return view;
   }
