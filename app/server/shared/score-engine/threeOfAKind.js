@@ -25,6 +25,7 @@ function isThreeOfAKind(tableau7cartes) {
 
   // Étape 2: Trier le reste des cartes dans l'ordre décroissant et renvoyer la combinaison des cartes
   const resteCartes = tab.filter((carte) => !brelan.includes(carte));
+  resteCartes.sort((a,b) => b.number - a.number);
 
   // Combinaison des 3 cartes de même numéro et des 2 cartes les plus hautes parmi les restantes
   return [...brelan, ...resteCartes.slice(0, 2)];

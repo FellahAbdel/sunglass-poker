@@ -611,13 +611,9 @@ class Game {
     console.log("activePlayers.length:", this.activePlayers.length);
     for (let i = 0; i < this.activePlayers.length; i++) {
       let f7c = this.make7Cards(this.activePlayers[i]);
-      console.log("f7c:", f7c);
       let c = this.combinaison(f7c.cards);
-      console.log("c:", c);
       c.id = f7c.id;
-      console.log("resavantlepush:", res);
       res.push(c);
-      console.log("resapreslepush:", res);
     }
 
     return res;
@@ -641,55 +637,10 @@ class Game {
     );
     let combinationList = this.listeCombinaison(activePlayers);
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
-    console.log("maxListapresinit", maxList);
 
     if (maxList.length > 1) {
-      let winners = [];
-
-      switch (maxList[0].type) {
-        case "StraightFlush":
-          winners = scoreEngineUtils.secondCarteHaute(maxList);
-          break;
-        case "FourOfAKind":
-          winners = scoreEngineUtils.secondCarre(maxList);
-          break;
-        case "FullHouse":
-          winners = scoreEngineUtils.secondFull(maxList);
-          break;
-        case "Flush":
-          winners = scoreEngineUtils.secondCarteHaute(maxList);
-          break;
-        case "Straight":
-          winners = scoreEngineUtils.secondSuite(maxList);
-          break;
-        case "ThreeOfAKind":
-          winners = scoreEngineUtils.secondBrelan(maxList);
-          break;
-        case "TwoPair":
-          winners = scoreEngineUtils.secondDoublePaire(maxList);
-          break;
-        case "OnePair":
-          winners = scoreEngineUtils.secondPaire(maxList);
-          break;
-        case "HighCard":
-          winners = scoreEngineUtils.secondCarteHaute(maxList);
-          break;
-      }
-
-      console.log("maxListapres switch", maxList);
-      let res = [];
-      console.log("winners.length", winners.length);
-      for (let i = 0; i < winners.length; i++) {
-        for (let j = 0; j < maxList.length; j++) {
-          if (winners[i] === maxList[j].id) {
-            res.push(maxList[j]);
-          }
-        }
-      }
-      console.log("res", res);
-      return res;
+      return scoreEngineUtils.second(maxList);
     } else {
-      console.log("maxList", maxList);
       return maxList;
     }
   }

@@ -3,27 +3,10 @@
  */
 
 function isStraight(sevenCardsTab, refact = false) {
-  const refactor = function (cardList, undo = false) {
-    for (let i = 0; i < cardList.length; i++) {
-      if (!undo) {
-        if (cardList[i].number === 14) {
-          cardList[i].number = 1;
-        }
-      } else {
-        if (cardList[i].number === 1) {
-          cardList[i].number = 14;
-        }
-      }
-    }
-    return cardList;
-  };
 
   let tab = [...sevenCardsTab];
   let hand = [];
 
-  if (refact) {
-    tab = refactor(tab);
-  }
   tab.sort((a, b) => a.number - b.number);
 
   while (tab.length !== 0) {
@@ -41,10 +24,7 @@ function isStraight(sevenCardsTab, refact = false) {
     }
   }
 
-  if (refact) {
-    return hand.length === 5 ? refactor(hand, true) : false;
-  }
-  return hand.length === 5 ? hand : isStraight(sevenCardsTab, true);
+  return hand.length === 5 ? hand : false;
 }
 
 module.exports = isStraight;
