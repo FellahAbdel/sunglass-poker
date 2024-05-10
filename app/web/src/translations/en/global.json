@@ -141,7 +141,12 @@
     "logout": "You are about to log out"
   },
   "table":{
-    "total": "Total Pot"
+    "total": "Total Pot",
+    "waiting": "Waiting for the players",
+    "join": "Join the game",
+    "spectacle": "Watch the game",
+    "start": "Start the game",
+    "inGame": "You are still on the game table"
   },
   "ranking": {
     "rank" : "Rank",

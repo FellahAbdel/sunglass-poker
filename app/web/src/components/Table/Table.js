@@ -95,17 +95,17 @@ const Table = ({}) => {
           {/* Afficher le bouton "Commencer la partie" si le bouton est visible */}
           {showWaitingMessage ? (
             <div className="container-waiting">
-              <div className="txt-waiting">En attente des joueurs ...</div>
+              <div className="txt-waiting">{getTranslatedWord("table.waiting")} ...</div>
               {isMaster ? (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
-                  label={"Commencer la partie"}
+                  label={getTranslatedWord("table.start")}
                   onClick={() => startGame()}
                 />
               ) : (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
-                  label={isSpectator ? "Rejoindre la partie" : "Observer la partie"}
+                  label={isSpectator ? getTranslatedWord("table.join") : getTranslatedWord("table.spectacle")}
                   onClick={() => startGame()}
                 />
               )}
@@ -133,7 +133,7 @@ const Table = ({}) => {
       <Window />
 
       <div className={`box-onGameNotif ${isVisible ? "visible" : ""}`}>
-        You are still on the game table!
+        {getTranslatedWord("table.inGame")}!
       </div>
 
       {/*the only use of logo component - dynamique*/}
