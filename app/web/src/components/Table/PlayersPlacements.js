@@ -3,11 +3,11 @@ import PlayersProfile from "../gameTable/PlayersProfile/PlayersProfile";
 import PlayersPots from "../Table/PlayersPots";
 import { useSelector } from "react-redux";
 
-const PlayersPlacements = ({showMiddle}) => {
+const PlayersPlacements = ({ showMiddle }) => {
   //playersCardDistributed for each player
   // *** also has been used in CardsPlacements component
 
-  const playersInTable = useSelector((state) => state.game.players);
+  const playersInTable = useSelector((state) => state.game.game?.players);
   const [updatedPlayers, setUpdatedPlayers] = useState([]);
 
   const gameClass = useSelector((state) => state.game.game);
@@ -16,6 +16,7 @@ const PlayersPlacements = ({showMiddle}) => {
 
   useEffect(() => {
     setUpdatedPlayers(playersInTable);
+    console.log("playerInTAble: ", playersInTable);
   }, [playersInTable]);
 
   //const currentFocusIndex = gameClass?.focus;
@@ -46,7 +47,7 @@ const PlayersPlacements = ({showMiddle}) => {
         </div>
       ))}
       {/* Add PlayersPots component and pass updatedPlayers as props */}
-      <PlayersPots players={updatedPlayers} isVisible={showMiddle}/>
+      <PlayersPots players={updatedPlayers} isVisible={showMiddle} />
     </span>
   );
 };

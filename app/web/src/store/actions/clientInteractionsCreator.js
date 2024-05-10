@@ -18,12 +18,13 @@ export const leaveRoom = () => ({
 });
 
 export const startGame = (userId) => {
-    console.log("UserId récupéré par startGame :", userId);
-    return {
-      type: actions.START_GAME,
-      payload: { userId: userId },
-    };
+  console.log("UserId récupéré par startGame :", userId);
+  return {
+    type: actions.START_GAME,
+    payload: { userId: userId },
   };
+};
+
 
 /**
  * Should include the possible argument to create a game.
@@ -45,12 +46,12 @@ export const fold = () => ({
 
 export const showCard = (cardIndex) => ({
   type: actions.SHOW_CARD,
-  payload: { cardIndex }
+  payload: { cardIndex },
 });
 
 export const hideCard = (cardIndex) => ({
   type: actions.HIDE_CARD,
-  payload: { cardIndex }
+  payload: { cardIndex },
 });
 
 export const bet = (amount) => ({
