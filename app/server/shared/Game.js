@@ -7,37 +7,34 @@ const { clearScreenDown } = require("readline");
 const csl = require("../controller/intelligentLogging.js");
 
 class Game {
-
   /**
-   * 
-   * @param  {...Object} args {args_name: args_value ...}; 
+   *
+   * @param  {...Object} args {args_name: args_value ...};
    */
-  constructor(
-    ...args
-  ) {
+  constructor(...args) {
     let basedValue = {
-      "players": [],
-      "spectators": [],
-      "deck": new Deck(),
-      "pokerTable": new PokerTable(),
-      "master": false,
-      "blind": 0,
-      "focus": null,
-      "currentStage": "preflop",
-      "state": "waiting",
-      "total": 0,
-      "nbhostfolded": 0,
-      "gameCurrentBet": 0,
-      "startingPlayerIndex": -1,
-      "focusTurnTimer": 0,
-      "focusTurnCall": false,
-      "autoTurnDelay": 60000,
-      "restartCall": false,
-      "restartTimer": 0,
-      "restartDelay": 5000,
-      "allow_start": true,
+      players: [],
+      allPlayers: [],
+      deck: new Deck(),
+      pokerTable: new PokerTable(),
+      master: false,
+      blind: 0,
+      focus: null,
+      currentStage: "preflop",
+      state: "waiting",
+      total: 0,
+      nbhostfolded: 0,
+      gameCurrentBet: 0,
+      startingPlayerIndex: -1,
+      focusTurnTimer: 0,
+      focusTurnCall: false,
+      autoTurnDelay: 60000,
+      restartCall: false,
+      restartTimer: 0,
+      restartDelay: 5000,
+      allow_start: true,
     };
-    Object.assign(this,basedValue,...args);
+    Object.assign(this, basedValue, ...args);
     // this.activePlayers = null;
     // this.players = players;
     // this.spectators = spectators;
@@ -57,18 +54,18 @@ class Game {
   getForPlayer(id) {
     var filteredPlayer = this.players.map((player) => player.statusFor(id));
     var g = new Game({
-      "players":filteredPlayer,
-      "spectators":this.spectators,
-      "pokerTable":this.pokerTable,
-      "master":this.master,
-      "blind":this.blind,
-      "focus":this.focus,
-      "currentStage":this.currentStage,
-      "state":this.state,
-      "total":this.total,
-      "nbhostfolded":this.nbhostfolded,
-      "gameCurrentBet":this.gameCurrentBet,
-      "focusTurnTimer":this.focusTurnTimer
+      players: filteredPlayer,
+      allPlayers: this.allPlayers,
+      pokerTable: this.pokerTable,
+      master: this.master,
+      blind: this.blind,
+      focus: this.focus,
+      currentStage: this.currentStage,
+      state: this.state,
+      total: this.total,
+      nbhostfolded: this.nbhostfolded,
+      gameCurrentBet: this.gameCurrentBet,
+      focusTurnTimer: this.focusTurnTimer,
     });
     return g;
   }
@@ -77,8 +74,16 @@ class Game {
     return this.players.filter((player) => player.isActive);
   }
 
+  updatePlayersList() {
+    // Filtrer les joueurs qui ne sont pas spectateurs et qui sont actifs
+    this.players = this.allPlayers.filter((player) => !player.isSpectator);
+    console.log(
+      `Updated players list: Now includes ${this.players.length} active players.`
+    );
+  }
+
   getPlayerNameById(playerId) {
-    const player = this.players.find((p) => p.playerId === playerId);
+    const player = this.allPlayers.find((p) => p.playerId === playerId);
     if (player) {
       return player.name;
     } else {
@@ -87,46 +92,19 @@ class Game {
     }
   }
 
-  addSpectator(player) {
-    if (
-      !this.spectators.some((s) => s.getPlayerId() === player.getPlayerId())
-      && !this.players.findIndex(p => p.getPlayerId() === player.getPlayerId())
-    ) {
-      this.spectators.push(player);
-      console.log(`Spectator ${player.getPlayerId()} added.`);
-    } else {
-      console.log("Spectator already present.");
-    }
-  }
+  moveSpecOrPlayer(playerId) {
+    let player = this.allPlayers.find((p) => p.playerId === playerId);
 
-  spectatorJoinGame(spectatorId) {
-    if (this.currentStage === "showdown" || this.currentStage === "preflop") {
-      const index = this.spectators.indexOf(spectatorId);
-      if (index !== -1) {
-        this.spectators.splice(index, 1); // Retirer de la liste des spectateurs
-        this.addPlayer(spectatorId); // Ajouter à la liste des joueurs
-        console.log(
-          `Spectator ${spectatorId} has joined the game as a player.`
-        );
-      } else {
-        console.log("Spectator not found.");
-      }
-    }
-  }
-
-  convertSpectatorToPlayer(playerId) {
-    let index = this.spectators.findIndex((s) => s.getPlayerId() === playerId);
-    if (index !== -1 && this.state === "waiting") {
-      let player = this.spectators.splice(index, 1)[0];
-      this.players.push(player);
-      console.log(`Spectator ${playerId} is now a player.`);
+    // Vérifier si le joueur existe déjà et son état
+    if (player) {
+      player.toggleSpectator();
+      this.updatePlayersList();
     } else {
-      console.log("Cannot convert spectator to player.");
     }
   }
 
   getPlayerById(playerId) {
-    const player = this.players.find((p) => p.playerId === playerId);
+    const player = this.allPlayers.find((p) => p.playerId === playerId);
     if (player) {
       return player;
     } else {
@@ -197,15 +175,21 @@ class Game {
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
         this.gameCurrentBet = 0;
         this.advanceStage();
-        if(this.currentStage !== "end" && this.currentStage !== "showdown"){
+        if (this.currentStage !== "end" && this.currentStage !== "showdown") {
           this.activePlayers.forEach((player) => {
             player.newTurnReset();
             //reset le status a chaque tour
             player.playing();
           });
           //a verifier pour le nbdefolded
-          console.log("startingplayer",this.startingPlayerIndex,this.nbhostfolded);
-          this.focus=(this.startingPlayerIndex+this.nbhostfolded)% this.activePlayers.length;;
+          console.log(
+            "startingplayer",
+            this.startingPlayerIndex,
+            this.nbhostfolded
+          );
+          this.focus =
+            (this.startingPlayerIndex + this.nbhostfolded) %
+            this.activePlayers.length;
           console.log("POT TOTAL", this.total);
         }
       }
@@ -301,7 +285,9 @@ class Game {
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();
             player.raise();
-            this.focus=this.players.findIndex( p => p.getPlayerId() === player.getPlayerId());
+            this.focus = this.players.findIndex(
+              (p) => p.getPlayerId() === player.getPlayerId()
+            );
           }
         } else {
           return;
@@ -326,47 +312,34 @@ class Game {
   // }
 
   addPlayer(player) {
-    console.log("Trying to add player:", player);
-    const exists = this.players.concat(this.spectators).some(p => p.getPlayerId() === player.getPlayerId());
-    console.log("Exists in players or spectators:", exists);
-  
-    if (exists) {
-      console.log("Player already in game or spectator list.");
-      return false;
-    }
-  
-    console.log("Master ID is currently:", this.master);
-    if (player.getPlayerId() === this.master) {
+    this.allPlayers.push(player);
+    if (!player.isSpectator) {
       this.players.push(player);
-      console.log(`Master player ${player.getPlayerId()} added as active player. Players now:`, this.players);
-    } else {
-      this.spectators.push(player);
-      console.log(`Player ${player.getPlayerId()} added as spectator. Spectators now:`, this.spectators);
     }
-    return true;
+    console.log(`Player ${player.name} added.`);
   }
 
   start(playerId) {
-    if (this.master !== playerId) {
-      // Si ce n'est pas le maître, vérifier si c'est un spectateur qui veut rejoindre
-      if (this.spectators.includes(playerId)) {
-        this.spectatorJoinGame(playerId); // Tente de faire rejoindre le spectateur
-        console.log(`Spectator ${playerId} attempting to join the game.`);
-      } else {
-        console.log("Only the master can start the game");
-      }
-      return;
-    }
-    if (this.state !== "waiting") {
-      console.log("The game is not in a waiting state.");
-      return;
-    }
-    if (this.players.length <= 1) {
-      console.log("Not enough players to start the game.");
-      return;
-    }
+    if (this.master === playerId) {
+      // S'assurer que la liste des joueurs actifs est à jour avant de démarrer.
+      this.updatePlayersList();
 
-    this.newgame();
+      if (this.state !== "waiting") {
+        console.log("The game is not in a waiting state.");
+        return;
+      }
+
+      if (this.players.length <= 1) {
+        // Assurez-vous qu'il y a plus d'un joueur actif.
+        console.log("Not enough players to start the game.");
+        return;
+      }
+
+      this.newgame();
+    } else {
+      // Pour les non-maîtres
+      this.moveSpecOrPlayer(playerId);
+    }
   }
 
   reset() {
@@ -402,8 +375,6 @@ class Game {
       }
     });
     this.nbhostfolded = 0;
-    
-
 
     const firstPlayer = this.players[this.focus];
     console.log("firstplayer: ", firstPlayer);
@@ -492,7 +463,13 @@ class Game {
     const currentIndex = stageOrder.indexOf(this.currentStage);
     const nextIndex = (currentIndex + 1) % stageOrder.length;
     this.currentStage = stageOrder[nextIndex];
-    csl.log('AdvanceStage',entryStage,currentIndex,nextIndex,this.currentStage);
+    csl.log(
+      "AdvanceStage",
+      entryStage,
+      currentIndex,
+      nextIndex,
+      this.currentStage
+    );
 
     switch (this.currentStage) {
       case "flop":
@@ -534,7 +511,7 @@ class Game {
 
   resetRestartCall() {
     clearTimeout(this.resetRestartCall);
-    this.restartTimer = Date.now()+this.restartDelay;
+    this.restartTimer = Date.now() + this.restartDelay;
     this.restartCall = setTimeout(() => {
       this.allow_start = true;
     }, this.restartDelay);
