@@ -438,6 +438,8 @@ class Game {
         pokerTable cards.
   */
   flop() {
+    // Burn a card before dealing the flop
+    this.deck.burn();
     // Deal 3 cards for the flop
     console.log("je suis RENTREr DANS FLOP");
     const flopCards = this.deck.deal3Cards();
@@ -459,6 +461,9 @@ class Game {
   OUT : nothing but we push one card to the community cards (4 cards in total)
   */
   turn() {
+    // burn a card before dealing the turn
+    this.deck.burn();
+
     this.pokerTable.communityCards.push(this.deck.deal());
     console.log(this.pokerTable.communityCards);
   }
@@ -468,6 +473,9 @@ class Game {
    * OUT : nothing but we push one card to the community cards (5 cards in total)
    */
   river() {
+    // Burn a card before dealing the river
+    this.deck.burn();
+    
     this.pokerTable.communityCards.push(this.deck.deal());
     console.log(this.pokerTable.communityCards);
   }

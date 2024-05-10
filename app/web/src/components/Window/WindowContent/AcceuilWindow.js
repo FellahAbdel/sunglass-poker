@@ -51,6 +51,11 @@ const AcceuilWindow = () => {
               label={getTranslatedWord("game.joinGame")}
               onClick={() => openWindow("servers")}
             />
+            <Button
+              styleClass={" back-color1"}
+              label={"Create a new game"}
+              onClick={() => openWindow("create_table")}
+            />
           </>
         ) : (
           <>
