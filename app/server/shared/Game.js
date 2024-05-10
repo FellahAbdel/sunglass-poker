@@ -178,7 +178,6 @@ class Game {
     const originalFocus = this.focus;
     this.focus = (this.focus + 1) % this.activePlayers.length; // Utilisation de activePlayers.length pour la rotation
     // Rotation du focus tant que le joueur actuel n'est pas actif
-    console.log(".isActivedemerder",!this.players[this.focus]);
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
@@ -296,7 +295,7 @@ class Game {
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();
             player.raise();
-            this.focus=player;
+            this.focus=this.players.findIndex( p => p.getPlayerId() === player.getPlayerId());
           }
         } else {
           return;
