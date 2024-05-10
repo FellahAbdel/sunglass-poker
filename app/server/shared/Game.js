@@ -417,6 +417,8 @@ class Game {
     this.total += this.gameCurrentBet;
     this.rotateFocus();
 
+    this.currentStage="preflop";
+
     //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
 
     // console.log("length:",this.players.length);
