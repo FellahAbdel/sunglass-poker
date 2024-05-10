@@ -35,7 +35,7 @@ const Table = ({}) => {
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
-  const { isMaster, showWaitingMessage, isFocus } = useGameTable();
+  const { isMaster, showWaitingMessage, isFocus, isSpectator } = useGameTable();
 
   const dispatch = useDispatch();
 
@@ -105,7 +105,7 @@ const Table = ({}) => {
               ) : (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
-                  label={"Rejoindre la partie"}
+                  label={isSpectator ? "Rejoindre la partie" : "Observer la partie"}
                   onClick={() => startGame()}
                 />
               )}
