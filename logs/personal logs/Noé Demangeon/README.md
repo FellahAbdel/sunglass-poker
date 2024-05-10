@@ -138,4 +138,10 @@
 
 2024/05/07 : 4h00           Réunion, correction bugs, base partie.
 
-TEMPS TOTAL: 143h30min
+2024/05/07 : 1h00           Gagner une game te donne bien l'argent, simplification code, evaluation des mains des joueurs actifs uniquement.
+
+2024/05/09 : 1h00           Changement master apres chaque game (startingPlayerIndex), 1 seul joueur restant provoque fin de game.
+
+2024/05/10 : 3h00           Travail spectateurs fonctionnels. Observer, rejoindre table pendant waiting. Rejoindre table possible pendant game mais en mode spectateur.
+
+TEMPS TOTAL: 148h30min
