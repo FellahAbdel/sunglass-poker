@@ -20,7 +20,8 @@ class Game {
     total = 0,
     nbhostfolded = 0,
     gameCurrentBet = blind, // Ajoutez gameCurrentBet comme paramètre distinct
-    startingPlayerIndex = 0
+    startingPlayerIndex = 0,
+    bonusAmount = 50
   ) {
     this.activePlayers = null;
     this.players = players;
@@ -35,6 +36,7 @@ class Game {
     this.nbhostfolded = nbhostfolded;
     this.gameCurrentBet = gameCurrentBet; // Utilisez gameCurrentBet ici
     this.startingPlayerIndex = startingPlayerIndex;
+    this.bonusAmount = bonusAmount;
   }
 
   getForPlayer(id) {
@@ -222,6 +224,34 @@ class Game {
         console.log("this line got executed", this.gameCurrentBet);
         this.rotateFocus();
       }
+    }
+  }
+
+  activateBonus(player){
+    console.log("j'active le bonus du joueur : ", player.name);
+    if (this.isPlayersTurn(player.getPlayerId())) {
+      const playerBonus = player.getPlayerBonus();
+      const self = this;
+
+      if (playerBonus.ready) {
+        // On va parcourrir liste de joueur actifs dans l'ordre du tour de jeu
+        // On commence par le joueur qui a active le bonus car c'est son tour
+        // On parcours toute liste de maniere circulaire jusqu'a retomber sur lui
+        let startIndex = this.activePlayers.findIndex((p) => p.getPlayerId() === player.getPlayerId());
+        let index = startIndex;
+
+        do {
+          let p = this.activePlayers[index];
+          const playerMoney = p.getPlayerMoney();
+          const amountToBet = playerMoney < self.bonusAmount 
+                              ? playerMoney : self.bonusAmount
+          self.bet(p, amountToBet);
+          index = (index + 1) % this.activePlayers.length;
+
+        } while (index != startIndex);
+
+        player.resetPlayerBonus();
+      } 
     }
   }
 

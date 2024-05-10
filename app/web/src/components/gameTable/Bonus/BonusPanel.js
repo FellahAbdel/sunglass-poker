@@ -1,11 +1,13 @@
 import React from "react";
 import "./bonusPanel.css";
+import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import Button from "../../button/Button.tsx";
 import Clubs from "./../../assets/images/icons/white/club.png";
 import Diamonds from "./../../assets/images/icons/white/diamon.png";
 import Hearts from "./../../assets/images/icons/white/heart.png";
 import Spades from "./../../assets/images/icons/white/spade.png";
 import { useTranslation } from "../../Utiles/Translations";
+import { useDispatch } from "react-redux";
 
 const BonusPanel = ({nbHearts, nbDiamonds, nbSpades, nbClubs}) => {
   //we can use a number divisable by all the different numbers that they need
@@ -23,10 +25,13 @@ const BonusPanel = ({nbHearts, nbDiamonds, nbSpades, nbClubs}) => {
 
   const { getTranslatedWord } = useTranslation();
 
-  // const handleChangeHearts = nbHearts;
-  // const handleChangeDiamonds = nbDiamonds;
-  // const handleChangeSpades = nbSpades;
-  // const handleChangeClubs = nbClubs;
+  const dispatch = useDispatch();
+
+  // Function to handle the bonus activation action
+  const handleActivateBonus = () => {
+    dispatch(actions.activateBonus());
+  };
+
   return (
     <div className="panel-bonus">
       <div className="container-bonusCards">
@@ -42,6 +47,7 @@ const BonusPanel = ({nbHearts, nbDiamonds, nbSpades, nbClubs}) => {
 
       <Button
         styleClass={"btn-bonus back-color1"}
+        onClick={handleActivateBonus}
         label={getTranslatedWord("bonus.bonus")}
       />
     </div>

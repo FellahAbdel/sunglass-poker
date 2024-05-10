@@ -8,7 +8,8 @@ class Player {
   playerActionLog = [
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
-  playerBonus = {H:0, D:0, C:0, S:0, ready:false}
+  bonusMax = 3;
+  playerBonus = {H:0, D:0, C:0, S:0, ready:false};
 
   constructor(
     playerId,
@@ -43,6 +44,7 @@ class Player {
       ),
       playerActionLog: this.playerActionLog,
       cardsVisible: this.cardsVisible,
+      playerBonus: this.playerBonus,
     };
     return view;
   }
@@ -121,10 +123,11 @@ class Player {
 
 
   resetPlayerBonus() {
-    for (const c in this.playerBonus) {
-      if (isNaN(Object[c])) Object[c] = false;
-      else Object[c] = 0;
-    }
+    this.playerBonus.C = 0;
+    this.playerBonus.H = 0;
+    this.playerBonus.D = 0;
+    this.playerBonus.S = 0;
+    this.playerBonus.ready = false;
   }
 
   /*
@@ -169,19 +172,13 @@ class Player {
 
   addCard(card) {
     this.playerCards.push(card);
-    //let myself = this;
 
-    //randomCardsList.map((card, self=myself) => {
-    let count = 0;
     let color = card.getNumberAndColor()[1];
-    if (this.playerBonus[color] < 3) this.playerBonus[color]++;
+    if (this.playerBonus[color] < this.bonusMax) this.playerBonus[color]++;
 
-    // check if bonus is ready to use and set state to true if so
-    for (const c in this.playerBonus) {
-      if (Object[c] === 3) count++;
-    }
-    if (count === 4) this.playerBonus.ready = true;
-    //});
+    if (this.playerBonus.H === this.bonusMax && this.playerBonus.D === this.bonusMax
+        && this.playerBonus.S === this.bonusMax && this.playerBonus.C === this.bonusMax
+    ) this.playerBonus.ready = true;
   }
 
   clearHand() {

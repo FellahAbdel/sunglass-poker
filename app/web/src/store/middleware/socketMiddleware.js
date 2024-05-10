@@ -42,6 +42,9 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
     case actions.HIDE_CARD:
       comm.dispatch({ action: action });
       break;
+    case actions.ACTIVATE_BONUS:
+      comm.dispatch({ action: action });
+      break;
     case actions.LEAVE_ROOM:
       // console.log("Player wants to leave the room, emit");
       comm.leaveRoom();
