@@ -35,7 +35,7 @@ export const GameTableProvider = ({ children }) => {
   const [total, setTotal] = useState(0);
   const [gameState, setGameState] = useState("");
   const [isSpectator, setIsSpectator] = useState(false);
-
+  const [playerHandName, setPlayerHandName] = useState("");
 
   useEffect(() => {
     const isMaster =
@@ -78,7 +78,10 @@ export const GameTableProvider = ({ children }) => {
         );
         setIsSpectator(currentPlayer.isSpectator);
         console.log("setIsSpectator currentPlayer", currentPlayer);
-        console.log("setIsSpectator currentPlayer.isSpectator", currentPlayer.isSpectator);
+        console.log(
+          "setIsSpectator currentPlayer.isSpectator",
+          currentPlayer.isSpectator
+        );
 
         // Mettre à jour les cartes du joueur
         if (currentPlayer.playerCards) {
@@ -93,9 +96,7 @@ export const GameTableProvider = ({ children }) => {
           );
           setPlayerCards(cardsWithVisibility);
         }
-      }
-
-      else{
+      } else {
         setIsSpectator(true);
       }
 
@@ -114,6 +115,13 @@ export const GameTableProvider = ({ children }) => {
 
       if (gameInfo.game) {
         setGameState(gameInfo.game.state);
+      }
+
+      if (gameInfo.game.players.playerHandName !== "") {
+        setPlayerHandName(
+          gameInfo.game.players.find((p) => p.playerId === userId)
+            .playerHandName
+        );
       }
     }
   }, [gameInfo, userId]);
