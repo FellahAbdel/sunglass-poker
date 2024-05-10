@@ -168,6 +168,14 @@ const ServerPanelWindow = () => {
           />
         ))}
       </div>
+      <div className="button-container">
+        <Button
+          styleClass={"btn-gameStart back-color1"}
+          label={"Create a new game"}
+          onClick={() => openWindow("create_table")}
+        />
+      </div>
+
     </div>
   );
 };
