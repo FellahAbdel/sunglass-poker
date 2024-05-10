@@ -27,7 +27,7 @@ function isRoyalFlush(cards) {
     }
     // Si nous avons trouvé une quinte flush royale, renvoyer les cartes
     if (royalFlush.length === 5) {
-      return royalFlush;
+      return royalFlush.sort((a,b) => b.number - a.number);
     }
   }
   // Si aucune quinte flush royale n'est trouvée, renvoyer false

@@ -1,3 +1,5 @@
+const { flush } = require(".");
+
 /*
  * IN : tableau de 7 cartes
  * OUT : [], tableau des cartes qui composent la main. Au plus 5 | False si rien trouve
@@ -5,44 +7,28 @@
  */
 function isFlush(sevenCardsTab) {
   let tab = [...sevenCardsTab];
-  let colors = [[], [], [], []];
+  let colors = {H:[], C:[], D:[], S:[]};
 
   // on repartis les cartes par famille
   for (let i = 0; i < tab.length; i++) {
-    switch (tab[i].color) {
-      case "D":
-        colors[0].push(tab[i]);
-        break;
-      case "H":
-        colors[1].push(tab[i]);
-        break;
-      case "C":
-        colors[2].push(tab[i]);
-        break;
-      case "S":
-        colors[3].push(tab[i]);
-        break;
-    }
+    colors[tab[i].color].push(tab[i]);
   }
 
-  //
-  for (let i = 0; i < colors.length; i++) {
-    if (colors[i].length > 5) {
-      while (colors[i].length > 5) {
-        let index = 0;
+  let colorKeys = Object.keys(colors);
 
-        for (let j = 0; j < colors[i].length; j++) {
-          if (colors[i][j].number < colors[i][index].number) {
-            index = j;
-          }
+  // on parcours pour voir si une couleur a 5 cartes ou plus
+  for(key of colorKeys) {
+    while (colors[key].length > 5) {
+      let index = 0;
+      for (let i = 0; i < colors[key].length; i++) {
+        if (colors[key][i].number < colors[key][index].number) {
+          index = i;
         }
-
-        colors[i].splice(index, 1);
       }
+      colors[key].splice(index, 1);
 
-      return colors[i];
-    } else if (colors[i].length === 5) {
-      return colors[i];
+    } if (colors[key].length === 5){
+      return colors[key].sort((a, b) => b.number - a.number);
     }
   }
 
