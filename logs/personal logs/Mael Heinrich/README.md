@@ -144,7 +144,9 @@
 
 2024/05/10  1H      Reunion avec victor pour regler le bug du isActive puis recherche et discussions sur le pb de l'affichage du winner qui d'affiche que dans le cas ou ya un fold
 
+2024/05/10  45min   Continue de la reunion, check des bugs, message avec les mecs qui gerent le bug pour determiner un vainqueur
 
---2024/04 SEMAINE 6: 12H (TOTAL: 109H30)
 
-TEMPS TOTAL: 109H30
+--2024/04 SEMAINE 6: 12H45 (TOTAL: 110H15)
+
+TEMPS TOTAL: 110H15
