@@ -23,7 +23,7 @@ class Game {
       "total": 0,
       "nbhostfolded": 0,
       "gameCurrentBet": 0,
-      "startingPlayerIndex": 0,
+      "startingPlayerIndex": -1,
       "focusTurnTimer": 0,
       "focusTurnCall": false,
       "autoTurnDelay": 60000,
@@ -178,6 +178,7 @@ class Game {
     const originalFocus = this.focus;
     this.focus = (this.focus + 1) % this.activePlayers.length; // Utilisation de activePlayers.length pour la rotation
     // Rotation du focus tant que le joueur actuel n'est pas actif
+    console.log(".isActivedemerder",!this.players[this.focus]);
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
@@ -188,7 +189,7 @@ class Game {
     }
 
     // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
-    if (this.focus === 0 + this.nbhostfolded) {
+    if (this.focus === this.startingPlayerIndex + this.nbhostfolded) {
       console.log("argent du focus", this.players[this.focus].howmanyBetTurn());
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
         this.gameCurrentBet = 0;
@@ -198,6 +199,9 @@ class Game {
           //reset le status a chaque tour
           player.playing();
         });
+        //a verifier pour le nbdefolded
+        console.log("startingplayer",this.startingPlayerIndex,this.nbhostfolded);
+        this.focus=(this.startingPlayerIndex+this.nbhostfolded)% this.activePlayers.length;;
         console.log("POT TOTAL", this.total);
       }
 
@@ -292,6 +296,7 @@ class Game {
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();
             player.raise();
+            this.focus=player;
           }
         } else {
           return;
@@ -377,6 +382,7 @@ class Game {
       player.newRoundReset();
     });
     this.state = "active";
+    this.rotateStartingPlayer();
     this.focus = this.startingPlayerIndex;
     this.total = 0;
     this.activePlayers = this.players.filter((player) => player.isActive); // Remplir la liste des joueurs actifs
@@ -391,6 +397,9 @@ class Game {
       }
     });
     this.nbhostfolded = 0;
+    
+
+
     const firstPlayer = this.players[this.focus];
     console.log("firstplayer: ", firstPlayer);
     firstPlayer.betinitial(this.gameCurrentBet / 2);
@@ -401,9 +410,8 @@ class Game {
     console.log("nextPlayer: ", nextPlayer);
     nextPlayer.betinitial(this.gameCurrentBet);
     this.total += this.gameCurrentBet;
-
     this.rotateFocus();
-    this.rotateStartingPlayer();
+
     //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
 
     // console.log("length:",this.players.length);
