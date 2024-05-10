@@ -31,11 +31,13 @@ class Game {
       "startingPlayerIndex": -1,
       "focusTurnTimer": 0,
       "focusTurnCall": false,
-      "autoTurnDelay": 60000,
+      "autoTurnDelay": 6000,
       "restartCall": false,
       "restartTimer": 0,
       "restartDelay": 5000,
       "allow_start": true,
+      "hasAfk":false,
+      "askToRemoveAFK":false
     };
     Object.assign(this,basedValue,...args);
     // this.activePlayers = null;
@@ -162,6 +164,8 @@ class Game {
     let n = this.focus;
     return setTimeout(() => {
       csl.log("autoTurn", "Player did not play fasst enough, auto fold");
+      this.players[n].setAfk();
+      this.hasAfk = true;
       this.fold(this.players[n]);
     }, this.autoTurnDelay);
   }
@@ -218,7 +222,12 @@ class Game {
   }
 
   playerPlayed() {
+    let toCall = [];
     csl.log("classGame_PLAYER_PLAYED", "un joueur a joué");
+    if(this.hasAfk){
+      toCall.push("REMOVE_AFK");
+    }
+    return toCall;
   }
 
   updateActivePlayers() {
@@ -380,7 +389,8 @@ class Game {
   //Probmème:on devra surement clear l'affichage
   newgame() {
     if (!this.allow_start) return;
-
+    csl.log('newGame',this.askToRemoveAFK);
+    if(this.askToRemoveAFK !== false)this.askToRemoveAFK();
     this.allow_start = false;
     clearTimeout(this.restartCall);
     this.players.forEach((player) => {

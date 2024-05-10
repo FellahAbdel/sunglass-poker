@@ -26,6 +26,14 @@ class Player {
     this.currentBetTurn= currentBetTurn;
     this.isActive = isActive;
     this.isYou = false;
+    this.isAfk = false;
+  }
+
+  setAfk(){
+    this.isAfk = true;
+  }
+  unsetAfk(){
+    this.isAfk = false;
   }
 
   statusFor(id) {
