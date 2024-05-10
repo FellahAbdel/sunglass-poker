@@ -417,9 +417,11 @@ class Game {
     const winner = this.gagnant(activePlayers);
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     console.log("winner est: ", winner);
+    const winnerHandName = winner[0].type;
     console.log("winner est: ", winner[0].id);
     console.log("WINNER EST:", this.getPlayerById(winner[0].id));
     const aa = this.getPlayerById(winner[0].id);
+    aa.playerHandName = winnerHandName;
     console.log("aa", aa);
     aa.seRemplirLesPoches(this.total);
     aa.jesuislewinner();
@@ -475,7 +477,7 @@ class Game {
   river() {
     // Burn a card before dealing the river
     this.deck.burn();
-    
+
     this.pokerTable.communityCards.push(this.deck.deal());
     console.log(this.pokerTable.communityCards);
   }
