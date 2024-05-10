@@ -7,11 +7,11 @@ const csl = require("../../controller/intelligentLogging.js");
 const { strictEqual } = require("assert");
 const fileType = "gameReducer";
 
-const initialRoomState = () =>{
+const initialRoomState = () => {
   return {
     game: new game(),
     players: [], // initial players
-  }
+  };
 };
 
 const initialState = {
@@ -187,9 +187,23 @@ const gameReducer = (state = initialState, action) => {
           found = p.getPlayerId() == playerId || found;
         });
       if (found) {
-        state.answer = { status: false, alreadyIn:true, mes: "Player already inside the room",payload: { id: action.payload.tableId }};
+        state.answer = {
+          status: false,
+          alreadyIn: true,
+          mes: "Player already inside the room",
+          payload: { id: action.payload.tableId },
+        };
         failed = true;
       }
+
+      // if (room.game.state !== "waiting" && !found) {
+      //   failed = true;
+      //   state.answer = {
+      //     status: false,
+      //     alreadyIn: false,
+      //     mes: "Game already started, can't join.",
+      //   };
+      // }
       // --------------
 
       // We can add the player in the game
@@ -207,9 +221,20 @@ const gameReducer = (state = initialState, action) => {
           mes: "Successfully join room",
           payload: { id: action.payload.tableId },
         };
-        room.players = [...room.players, new Player(playerId, pseudo)];
-        // We add the player to the game class.
-        // room.game.addPlayer(room.players[room.players.length - 1]);
+        room.game.resetRestartCall();
+        const newPlayer = new Player(playerId, pseudo);
+        if (room.players.length === 0) {
+          room.game.setMaster(playerId);
+        }
+        room.game.addPlayer(newPlayer);
+        room.players = [...room.players, newPlayer];
+        state.answer = {
+          status: true,
+          mes: "Successfully joined room",
+          payload: { id: action.payload.tableId },
+        };
+
+        room.game.resetRestartCall();
         csl.log(fileType, "Added player successfully");
       } else {
         csl.error(fileType, "Failed to sit player at the table.");
@@ -252,7 +277,11 @@ const gameReducer = (state = initialState, action) => {
       return { ...state };
 
     case actions.BET:
-      answer = {success:false, mes:"Action did not go through", payload:undefined};
+      answer = {
+        success: false,
+        mes: "Action did not go through",
+        payload: undefined,
+      };
       console.log(state.rooms[action.payload.room], action);
       if (action.payload && action.payload.playerId) {
         csl.log("playerAction", " call for raise of ", action.payload.amount);
@@ -271,7 +300,7 @@ const gameReducer = (state = initialState, action) => {
         console.error("Invalid payload for bet action");
       }
 
-      return { ...state, answer:answer };
+      return { ...state, answer: answer };
 
     case actions.CHECK:
       console.log(
@@ -341,7 +370,7 @@ const gameReducer = (state = initialState, action) => {
       return { ...state };
     case actions.PLAYER_PLAYED:
       state.rooms[action.payload.room].game.playerPlayed();
-      return {...state}
+      return { ...state };
     case actions.CLEARANSWER:
       state.answer = false;
       return { ...state };

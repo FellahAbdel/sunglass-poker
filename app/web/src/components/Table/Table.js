@@ -55,10 +55,8 @@ const Table = ({}) => {
     }
   }, [isWindowOpen, isGameTableVisible]);
 
-
   useEffect(() => {
-
-    console.log("isFocus TABLE:", isFocus); 
+    console.log("isFocus TABLE:", isFocus);
   }, [isFocus]);
 
   // useEffect(() => {
@@ -78,6 +76,7 @@ const Table = ({}) => {
     dispatch(actions.startGame(userId));
   };
 
+
   return (
     // Table that becomes a container for the menus when they are activated
     <div className={classes.containerTable}>
@@ -92,20 +91,28 @@ const Table = ({}) => {
       {isGameTableVisible && !isWindowOpen && (
         <>
           {/*NEEDS DealingFlop and playersCardDistribution in it*/}
-          <PlayersPlacements showMiddle={!showWaitingMessage}/>
+          <PlayersPlacements showMiddle={!showWaitingMessage} />
           {/* Afficher le bouton "Commencer la partie" si le bouton est visible */}
           {showWaitingMessage ? (
-              <div className="container-waiting">
-                <div className="txt-waiting">En attente des joueurs ...</div>
-                {isMaster && (
-                  <Button
-                    styleClass="btn-gameStart2 back-color1"
-                    label={"Commencer la partie"}
-                    onClick={() => startGame()}
-                  />)}
-              </div>
-              ) : (<>
-                  {/*DISTRIBUTION ANIMATION :
+            <div className="container-waiting">
+              <div className="txt-waiting">En attente des joueurs ...</div>
+              {isMaster ? (
+                <Button
+                  styleClass="btn-gameStart2 back-color1"
+                  label={"Commencer la partie"}
+                  onClick={() => startGame()}
+                />
+              ) : (
+                <Button
+                  styleClass="btn-gameStart2 back-color1"
+                  label={"Rejoindre la partie"}
+                  onClick={() => startGame()}
+                />
+              )}
+            </div>
+          ) : (
+            <>
+              {/*DISTRIBUTION ANIMATION :
                   in CardPlacements you have the distribution
                   animation which gets handled with a table called 
                   "playersCardDistributed" with 10 booleen members
@@ -114,11 +121,12 @@ const Table = ({}) => {
                   playersCardDistributed is also used in PlayersPlacements
                   that shows which players gets the cards
                   */}
-                <CardsPlacements />
-                {/*NEEDS playersCardsShow and playersCardDistribution in it*/}
-                {/* <PlayersPots/>  */}
-                <TotalPot />
-              </>)}
+              <CardsPlacements />
+              {/*NEEDS playersCardsShow and playersCardDistribution in it*/}
+              {/* <PlayersPots/>  */}
+              <TotalPot />
+            </>
+          )}
         </>
       )}
       {/*All the panels other than game itself are included in window component*/}

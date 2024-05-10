@@ -15,7 +15,8 @@ const PlayersProfile = ({
   gotCards,
   playerId,
   cardsVisible,
-  isFocus
+  isFocus,
+  isYou
 }) => {
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips?.toLocaleString();
@@ -39,13 +40,13 @@ const PlayersProfile = ({
   return (
     <div className={`container-onGameProfile`}>
       <div className={`container-profileMessage ${isFocus ? "profileMessageShow" : ""}`}>
-        Your Turn !
+        {isYou ? "Your Turn" : "Their Turn"} !
       </div>
       <div className={`box-status ${status.toLowerCase()}`}>
-        {status === "waiting" ? (
+        {isFocus ? (
           <ProgressBar
             className="progressBar progressPercentage"
-            durationInSeconds={5}
+            durationInSeconds={60}
           />
         ) : (
           <div className={`box-statusText ${status.toLowerCase()}`}>
@@ -55,20 +56,20 @@ const PlayersProfile = ({
       </div>
 
       <div className={`box-playerInfo ${status.toLowerCase()} ${name === "YOU" && "you"}`}>
-        {name}
-        <br />
-        {status !== "empty" && `${formattedChips}${dollarSign}`}
+        <p>{name}
+        <br/>
+        {status !== "empty" && `${formattedChips}${dollarSign}`}</p>
       </div>
 
       {/* Appliquer renderCard pour chaque carte avant de l'envoyer au composant Card */}
       <Card
-        styleClass={`showCardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
+        styleClass={`cardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
         card={renderCard(cards[0],0)}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />
       <Card
-        styleClass={`showCardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
+        styleClass={`cardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
         card={renderCard(cards[1],1)}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}

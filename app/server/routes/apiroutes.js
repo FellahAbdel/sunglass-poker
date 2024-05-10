@@ -8,7 +8,12 @@ const { count } = require("console");
 module.exports = (app, dao, gameController) => {
   app.get("/rooms", (req, res) => {
     var roomsInfos = [];
-    roomsInfos[0] = store.getState();
+    roomsInfos[0] = store.getState().game;
+    for(var room in roomsInfos[0].rooms){
+      console.log(roomsInfos[0].rooms[room]);
+      roomsInfos[0].rooms[room].game.restartCall = (roomsInfos[0].rooms[room].game.restartCall === false) ? 0 : 1;
+      roomsInfos[0].rooms[room].game.focusTurnCall = (roomsInfos[0].rooms[room].game.focusTurnCall === false) ? 0 : 1;
+    }
     roomsInfos[1] = [];
     if (gameController !== undefined)
       for (var room in gameController.refresh) {

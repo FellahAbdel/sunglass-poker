@@ -62,12 +62,13 @@
 .handCard {
   align-self: center;
   margin-bottom: 0%;
-  width: 45%;
-  height: 80%;
+  width: 6vw;
+  height: 8.4vw;
   box-shadow: unset;
   transition: transform 2s ease;
   transform-style: preserve-3d;
 }
-.handCard img{
-  box-shadow: unset;
+.handCard .cardContainer .cardNumber{
+  font-size: 2vw;
+  left: 5%;
 }

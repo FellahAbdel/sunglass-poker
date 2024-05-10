@@ -235,6 +235,7 @@ module.exports = gameController = {
       if(state.game.rooms[action.payload.room] === undefined) return
       room = state.game.rooms[action.payload.room]
       csl.log("playerAction",room)
+      if(room.game.state !== "waiting")
       if(room.game.players.findIndex(
         (p) => p.getPlayerId() == action.payload.playerId) === room.game.focus){
           csl.log("playerAction",this.dispatch(action.payload.playerId,action));
@@ -267,6 +268,7 @@ module.exports = gameController = {
     const state = store.getState();
     if (state.game.rooms.hasOwnProperty(room)) {
       store.dispatch(actions.startGame(room, userId));
+      this.broadcastStatus(room);
     } else {
       console.error("Room does not exist:", room);
     }

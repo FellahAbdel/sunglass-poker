@@ -25,6 +25,7 @@ class Player {
     this.currentBet = currentBet;
     this.currentBetTurn= currentBetTurn;
     this.isActive = isActive;
+    this.isYou = false;
   }
 
   statusFor(id) {
@@ -42,6 +43,7 @@ class Player {
       ),
       playerActionLog: this.playerActionLog,
       cardsVisible: this.cardsVisible,
+      isYou: (id === this.playerId) ? true:false,
     };
     return view;
   }
@@ -179,12 +181,24 @@ class Player {
     this.status = "call";
   }
 
+  playing(){
+    this.status="playing";
+  }
+
+  raise(){
+    this.status="raise";
+  }
+
+  jesuislewinner(){
+    this.status="winner"
+  }
+
   bet(amount){
     if(this.playerMoney>amount){
       this.currentBet=amount;
       this.currentBetTurn+=amount;
       this.playerMoney-=amount;
-        this.status = "raise";
+        this.status = "call";
       
     }
   }

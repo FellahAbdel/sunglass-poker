@@ -2,7 +2,7 @@ const gameDescriptionModel = require("./GameDescription");
 const UserModel = require('./User');
 
 async function emptyGameDesc() {
-    await gameDescriptionModel.deleteMany({});
+    // await gameDescriptionModel.deleteMany({});
     console.log("GamesDescription emptied.");
 }
 
