@@ -33,4 +33,6 @@
 - 28/04 , travail front ChatBox : 3H
 - 04/05 ,  probleme bug npm : 1H
 - 07/05 , stund up meeting , avancement sur le chatBox ajustement du front et liaison back-front du chat : 3H30
-- TOTAL:80H
+- 09/05 , travail chatBox : 2H
+- 10/05 , resolution bug server combinaisons de jeux : 2H
+- TOTAL:84H
