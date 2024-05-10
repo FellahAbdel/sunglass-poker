@@ -7,6 +7,11 @@ const { clearScreenDown } = require("readline");
 const csl = require("../controller/intelligentLogging.js");
 
 class Game {
+
+  /**
+   * 
+   * @param  {...Object} args {args_name: args_value ...}; 
+   */
   constructor(
     ...args
   ) {
