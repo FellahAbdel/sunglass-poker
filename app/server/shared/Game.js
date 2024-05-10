@@ -313,7 +313,11 @@ class Game {
 
   addPlayer(player) {
     this.allPlayers.push(player);
-    if (!player.isSpectator) {
+    if (this.state !== 'waiting'){
+      player.isSpectator = true;
+      player.isActive = false;
+    }
+    else if (!player.isSpectator) {
       this.players.push(player);
     }
     console.log(`Player ${player.name} added.`);
