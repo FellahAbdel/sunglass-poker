@@ -1,14 +1,13 @@
 /**/
-.container-tableCards {
+.container-fiveCards {
   height: 100%;
   width: 80%;
-
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
 }
-.container-tableCards img {
+.container-fiveCards img#back {
   display: flex;
   position: absolute;
   right: 0;
@@ -23,7 +22,7 @@
   display: flex;
   align-items: center;
   width: 4vw;
-  height: auto;
+  height: 5.6vw;
   position: absolute;
   right: 0;
   z-index: 1;
@@ -31,6 +30,12 @@
   transition: transform 1s ease 0.5s, right 2s ease;
   transform-style: preserve-3d;
 }
+.tableCard .cardContainer .cardNumber{
+  font-size: 2vw;
+}
+/* .tableCard .cardContainer{
+  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.7);
+} */
 .flipped{
   transition: none !important;
 }
@@ -79,7 +84,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  font: italic small-caps 1.5vw/2 cursive;
+  font: unset;
 }
 
 /*table duck of cards*/

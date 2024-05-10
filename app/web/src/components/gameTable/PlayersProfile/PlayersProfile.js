@@ -63,13 +63,13 @@ const PlayersProfile = ({
 
       {/* Appliquer renderCard pour chaque carte avant de l'envoyer au composant Card */}
       <Card
-        styleClass={`showCardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
+        styleClass={`cardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
         card={renderCard(cards[0],0)}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />
       <Card
-        styleClass={`showCardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
+        styleClass={`cardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
         card={renderCard(cards[1],1)}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
