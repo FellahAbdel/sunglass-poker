@@ -140,7 +140,8 @@
 
 2024/05/10  2H      Ajustement des status des joeurs, discussion sur les choses a faire, debut reflexion sur certains problème  
 
+2024/05/10  2H30    Discussion avec le groupes de multiples problèmes, vocal avec noé pour certains plus spéciphiques,recherche et test sur le jeux, ajustement du rotateFocus qui n'était pas correct par rapport au regles du poker etc...
 
---2024/04 SEMAINE 6: 8H30 (TOTAL: 106H)
+--2024/04 SEMAINE 6: 11H (TOTAL: 108H30)
 
-TEMPS TOTAL: 106H
+TEMPS TOTAL: 108H30
