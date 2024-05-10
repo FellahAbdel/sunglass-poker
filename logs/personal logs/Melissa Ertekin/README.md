@@ -158,3 +158,5 @@
 
 * 2024/05/07 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Standup meeting avec les développeurs. Planification de cette semaine et précision de ce que nous allons faire les semaines à venir jusqu'au rendu. Petite démo de jeux. </i>
 
+* 2024/05/10 : <b>2h30</b> <br/> Travail individuel : <i> Travaille sur la partie communucation de projet. Commencé à diriger les documents de la communucation. Creation des faux kpis. Photoshop de faux compte instagram.  </i>
+
