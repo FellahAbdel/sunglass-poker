@@ -146,7 +146,9 @@
 
 2024/05/10  45min   Continue de la reunion, check des bugs, message avec les mecs qui gerent le bug pour determiner un vainqueur
 
+2024/05/11  45min   discussion des problèmes avec les autres, tentatives du reglage du problème du rotatefocus
 
---2024/04 SEMAINE 6: 12H45 (TOTAL: 110H15)
 
-TEMPS TOTAL: 110H15
+--2024/04 SEMAINE 6: 13H30 (TOTAL: 111H)
+
+TEMPS TOTAL: 111H
