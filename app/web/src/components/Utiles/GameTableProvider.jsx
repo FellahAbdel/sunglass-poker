@@ -117,12 +117,12 @@ export const GameTableProvider = ({ children }) => {
         setGameState(gameInfo.game.state);
       }
 
-      if (gameInfo.game.players.playerHandName !== "") {
-        setPlayerHandName(
-          gameInfo.game.players.find((p) => p.playerId === userId)
-            .playerHandName
-        );
-      }
+    //   if (gameInfo.game?.players?.playerHandName !== "") {
+    //     setPlayerHandName(
+    //       gameInfo.game.players.find((p) => p.playerId === userId)
+    //         .playerHandName
+    //     );
+    //   }
     }
   }, [gameInfo, userId]);
 
