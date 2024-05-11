@@ -1,5 +1,5 @@
 //react imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 
 import { useAuth } from "./../components/Utiles/AuthProvider";
 import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
@@ -18,14 +18,19 @@ import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
+import Button from "./../components/button/Button.tsx"
 import { useSelector } from "react-redux";
 
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
+import { useUserData } from "../components/Utiles/useUserData.jsx";
+import { useTranslation } from "../components/Utiles/Translations.jsx";
 
 const GameTable = () => {
   const { theme, animation } = useSettings();
   const { isLogged } = useAuth();
-  const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
+  const { user } = useUserData();
+  const { getTranslatedWord } = useTranslation();
+  const { openWindow ,windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
   const classes = getStyles(
     windowType,
@@ -110,6 +115,19 @@ const GameTable = () => {
           </div>
         </>
       )}
+        {/* User coins */}
+        <div className={`container-userCoins ${(windowType === "shop" || windowType === "coins") && "appear"}`}>
+        <div className="userCoinsTop">
+        {user.coins} SC
+        </div>
+          { windowType === "shop" && 
+            <Button
+                label={getTranslatedWord("shop.buyMore")}
+                styleClass={`btn-coinsShop`}
+                onClick={() => openWindow("coins")}
+              />
+          }
+      </div>
     </div>
   );
 };
