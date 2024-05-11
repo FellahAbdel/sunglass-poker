@@ -53,15 +53,18 @@ export const GameTableProvider = ({ children }) => {
   }, [gameInfo?.game?.state]);
 
   useEffect(() => {
-    if (gameInfo && gameInfo.game && gameInfo.game.focus != null) {
-      const focusPlayerId = gameInfo.game.players[gameInfo.game.focus].playerId;
-      const isFocus = focusPlayerId === userId;
-      dispatch({ type: SET_FOCUS, payload: isFocus });
+    if (gameInfo && gameInfo.game && gameInfo.game.focus != null && gameInfo.game.players && gameInfo.game.players.length > gameInfo.game.focus) {
+      const focusPlayer = gameInfo.game.players[gameInfo.game.focus];
+      if (focusPlayer) {
+        const focusPlayerId = focusPlayer.playerId;
+        const isFocus = focusPlayerId === userId;
+        dispatch({ type: SET_FOCUS, payload: isFocus });
+      }
     } else {
-      // Si 'focus' est null ou non défini, assurez-vous de réinitialiser isFocus
+      // Si 'focus' est null ou non défini, ou l'index est invalide, réinitialiser isFocus
       dispatch({ type: SET_FOCUS, payload: false });
     }
-  }, [gameInfo?.game?.focus, userId]);
+  }, [gameInfo?.game?.focus, gameInfo?.game?.players, userId]);
 
   // Mettre à jour l'argent du joueur
   useEffect(() => {
@@ -101,19 +104,19 @@ export const GameTableProvider = ({ children }) => {
       }
 
       // Mettre à jour les cartes communautaires
-      if (gameInfo.game.pokerTable.communityCards) {
+      if (gameInfo?.game.pokerTable.communityCards) {
         setCommunityCards(gameInfo.game.pokerTable.communityCards);
       }
 
-      if (gameInfo.game) {
+      if (gameInfo?.game) {
         SetGameCurrentBet(gameInfo.game.gameCurrentBet);
       }
 
-      if (gameInfo.game) {
+      if (gameInfo?.game) {
         setTotal(gameInfo.game.total);
       }
 
-      if (gameInfo.game) {
+      if (gameInfo?.game) {
         setGameState(gameInfo.game.state);
       }
 

@@ -76,7 +76,9 @@ class Game {
 
   updatePlayersList() {
     // Filtrer les joueurs qui ne sont pas spectateurs et qui sont actifs
-    this.players = this.allPlayers.filter((player) => !player.isSpectator && !player.isAFK);
+    this.players = this.allPlayers.filter(
+      (player) => !player.isSpectator && !player.isAFK
+    );
     console.log(
       `Updated players list: Now includes ${this.players.length} active players.`
     );
@@ -178,11 +180,15 @@ class Game {
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
         this.gameCurrentBet = 0;
         this.advanceStage();
-        console.log("LE FOCUS Etait:",this.focus,"et le starting:",this.startingPlayerIndex);    
-        this.focus =
-            (this.startingPlayerIndex + this.nbhostfolded);
+        console.log(
+          "LE FOCUS Etait:",
+          this.focus,
+          "et le starting:",
+          this.startingPlayerIndex
+        );
+        this.focus = this.startingPlayerIndex + this.nbhostfolded;
 
-          //SI on est PAS  dans end ou shodown
+        //SI on est PAS  dans end ou shodown
         if (this.currentStage !== "end" && this.currentStage !== "showdown") {
           this.activePlayers.forEach((player) => {
             player.newTurnReset();
@@ -208,7 +214,7 @@ class Game {
   playerPlayed() {
     let toCall = [];
     csl.log("classGame_PLAYER_PLAYED", "un joueur a joué");
-    if(this.hasAfk){
+    if (this.hasAfk) {
       toCall.push("REMOVE_AFK");
     }
     return toCall;
@@ -294,11 +300,11 @@ class Game {
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();
             player.raise();
-            console.log("lefocus avant le raise:",this.focus);
+            console.log("lefocus avant le raise:", this.focus);
             this.focus = this.players.findIndex(
               (p) => p.getPlayerId() === player.getPlayerId()
             );
-            console.log("lefocus apres le raise",this.focus);
+            console.log("lefocus apres le raise", this.focus);
           }
         } else {
           return;
@@ -322,19 +328,20 @@ class Game {
   //   }
   // }
 
-  removePlayer(playerId){
-    this.allPlayers = this.allPlayers.filter((p) => p.getPlayerId() !== playerId);
+  removePlayer(playerId) {
+    this.allPlayers = this.allPlayers.filter(
+      (p) => p.getPlayerId() !== playerId
+    );
     this.players = this.players.filter((p) => p.getPlayerId() !== playerId);
     this.updateActivePlayers();
   }
 
   addPlayer(player) {
     this.allPlayers.push(player);
-    if (this.state !== 'waiting'){
+    if (this.state !== "waiting") {
       player.isSpectator = true;
       player.isActive = false;
-    }
-    else if (!player.isSpectator) {
+    } else if (!player.isSpectator) {
       this.players.push(player);
     }
     console.log(`Player ${player.name} added.`);
@@ -383,7 +390,9 @@ class Game {
     this.rotateStartingPlayer();
     this.focus = this.startingPlayerIndex;
     this.total = 0;
-    this.activePlayers = this.players.filter((player) => player.isActive && !player.isAfk); // Remplir la liste des joueurs actifs
+    this.activePlayers = this.players.filter(
+      (player) => player.isActive && !player.isAfk
+    ); // Remplir la liste des joueurs actifs
     this.pokerTable.reset();
     this.deck = new Deck();
     this.deck.shuffle();
@@ -408,7 +417,7 @@ class Game {
     this.total += this.gameCurrentBet;
     this.rotateFocus();
 
-    this.currentStage="preflop";
+    this.currentStage = "preflop";
 
     //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
 
@@ -418,6 +427,15 @@ class Game {
 
   evaluateHands() {
     const activePlayers = this.getActivePlayers();
+    console.log(
+      "Joueurs actifs lors de la détermination du gagnant:",
+      activePlayers
+    );
+    activePlayers.forEach((player) => {
+      //Révèle les carters des joueurs actifs
+      player.revealCard(0);
+      player.revealCard(1);
+    });
     const winner = this.gagnant(activePlayers);
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     console.log("winner est: ", winner);
@@ -527,6 +545,7 @@ class Game {
       case "showdown":
         console.log("PASSE PAR LE CASE showdown");
         this.evaluateHands();
+        this.focus = null;
         this.state = "waiting";
         clearTimeout(this.focusTurnCall);
         this.resetRestartCall();
@@ -627,21 +646,17 @@ class Game {
   }
 
   //result est vide mais ça passe et this.poker.table marche pas
-  determineWinner() {
-    const results = this.listeCombinaison(this.getActivePlayers());
-    console.log("results: ", results);
-    return results;
-  }
+  // determineWinner() {
+  //   const results = this.listeCombinaison(this.getActivePlayers());
+  //   console.log("results: ", results);
+  //   return results;
+  // }
   /*
    * IN : rien
    * OUT : { [c1, ..., c5], playerId } tableau de combinaison et identifiant du gagnant
    * FUNCTION : identifie le joueur gagnant de la partie et la main avec laquelle il a gagne
    */
   gagnant(activePlayers) {
-    console.log(
-      "Joueurs actifs lors de la détermination du gagnant:",
-      activePlayers.map((p) => `${p.name}: ${p.isActive}`)
-    );
     let combinationList = this.listeCombinaison(activePlayers);
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
 
@@ -652,15 +667,15 @@ class Game {
     }
   }
 
-  showHands() {
-    this.players.forEach((player) => {
-      console.log(`${player.name}'s hand:`);
-      player.getPlayerCards().forEach((card) => {
-        console.log(card);
-      });
-      console.log();
-    });
-  }
+  // showHands() {
+  //   this.players.forEach((player) => {
+  //     console.log(`${player.name}'s hand:`);
+  //     player.getPlayerCards().forEach((card) => {
+  //       console.log(card);
+  //     });
+  //     console.log();
+  //   });
+  // }
 }
 
 // const game = new Game();
