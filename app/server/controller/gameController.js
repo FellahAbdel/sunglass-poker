@@ -55,12 +55,25 @@ module.exports = gameController = {
         if (user === undefined) {
           return { status: false, mes: "User undefined" };
         }
-        answer =await this.dao.getUserInfo(user.id);
-        if(!answer.success) return {status:false,mes:"Player not found in bdd"};
+        answer = await this.dao.getUserInfo(user.id);
+        if (!answer.success)
+          return { status: false, mes: "Player not found in bdd" };
         userInfos = answer.user;
-        csl.log(fileType, "Room: ",id,"User to add : ", user, "His infos : ",userInfos.inGame);
-        if(userInfos.inGame !== undefined && userInfos.inGame !== null && userInfos.inGame.toString() !== id){
-          return  {status:false, mes: "User already in a game."};
+        csl.log(
+          fileType,
+          "Room: ",
+          id,
+          "User to add : ",
+          user,
+          "His infos : ",
+          userInfos.inGame
+        );
+        if (
+          userInfos.inGame !== undefined &&
+          userInfos.inGame !== null &&
+          userInfos.inGame.toString() !== id
+        ) {
+          return { status: false, mes: "User already in a game." };
         }
         var answer = this.dispatch(user, actions.sit(id, user));
         state = store.getState();
@@ -75,11 +88,10 @@ module.exports = gameController = {
           //   if (this.dispatch(user, actions.startGame(id)))
           //     answer.start_game = true;
           this.broadcastStatus(id);
-        }
-        else{
-          if(answer.alreadyIn !== undefined && answer.alreadyIn){
+        } else {
+          if (answer.alreadyIn !== undefined && answer.alreadyIn) {
             this.broadcastStatus(id);
-            answer = {...answer,status:true};
+            answer = { ...answer, status: true };
           }
         }
         return answer;
@@ -113,14 +125,14 @@ module.exports = gameController = {
     }
   },
 
-  removeAfk:function(room,roomId){
-    csl.log("removeAFK",room,roomId);
+  removeAfk: function (room, roomId) {
+    csl.log("removeAFK", room, roomId);
     const copy = room.players;
-    csl.log('removeAfk','List of player :',copy);
-    for(p in copy){
-      csl.log('removeAfk',copy[p]);
-      if(copy[p].isAfk){
-        this.removePlayer(roomId,copy[p].getPlayerId());
+    csl.log("removeAfk", "List of player :", copy);
+    for (p in copy) {
+      csl.log("removeAfk", copy[p]);
+      if (copy[p].isAfk) {
+        this.removePlayer(roomId, copy[p].getPlayerId());
       }
     }
     room.hasAfk = false;
@@ -131,8 +143,8 @@ module.exports = gameController = {
     if (reponse.status) {
       this.dao.playerLeftGame(id);
       this.makeRefreshCall(room);
-      csl.log('removePlayer',this.io);
-      this.io.stopListeningToRoom(id,room);
+      csl.log("removePlayer", this.io);
+      this.io.stopListeningToRoom(id, room);
       if (reponse.payload.restant === 0) {
         this.deleteroom(room);
       }
@@ -186,14 +198,16 @@ module.exports = gameController = {
     if (state.game.rooms[room] !== undefined) {
       toSendroom = {};
       toSendroom.game = state.game.rooms[room].game.getForPlayer(id);
-      toSendroom.players = state.game.rooms[room].players.map(player => player.statusFor(id));
+      toSendroom.players = state.game.rooms[room].players.map((player) =>
+        player.statusFor(id)
+      );
       toSendroom.controlsMode = state.game.rooms[room].controlsMode;
       //csl.log('STATUS',state.game.rooms[room],toSendroom);
       // if (state.game.rooms[room].players.findIndex(player => player.getPlayerId() === id) !== -1) {
       return {
         status: true,
         mes: "Refreshing status",
-        payload:toSendroom,
+        payload: toSendroom,
       };
       // }
     }
@@ -206,22 +220,36 @@ module.exports = gameController = {
       csl.error(fileType, "player MUST be defined for newGame");
       return;
     }
-    csl.log(fileType, "Create new game inside gameController");
-    const respons = await this.dao.createGameDescription(userId, "", "", 0);
-    csl.log(fileType, "respons : ", respons);
-    if (respons.error) {
-      csl.error(fileType, "Couln't create gamedescription", gameDescr.error);
-      return;
+
+    try {
+      const pseudo = await this.dao.getUserPseudoFromUserId(userId);
+
+      csl.log(fileType, "Create new game inside gameController");
+      const respons = await this.dao.createGameDescription(
+        pseudo,
+        "",
+        "Novice",
+        0
+      );
+      csl.log(fileType, "respons : ", respons);
+      if (respons.error) {
+        csl.error(fileType, "Couln't create gamedescription", gameDescr.error);
+        return;
+      }
+      const gameDescr = respons.data;
+      const room = gameDescr._id;
+      console.log("avant le init", state.game.rooms);
+      state.game.rooms[room] = initGameRoom(room);
+      console.log("après le init", state.game.rooms);
+      this.dispatch(userId, actions.createGame(room));
+      await this.join(room, userId);
+      await this.dao.updateUserData("_id", userId, "inGame", room);
+      return room;
+    } catch (e) {
+      // Handle error from getUserNameFromUserId
+      csl.error(fileType, "Error getting user name from user id:", error);
+      throw error; // Re-throw the error for handling by the caller
     }
-    const gameDescr = respons.data;
-    const room = gameDescr._id;
-    console.log("avant le init", state.game.rooms);
-    state.game.rooms[room] = initGameRoom(room);
-    console.log("après le init", state.game.rooms);
-    this.dispatch(userId, actions.createGame(room));
-    await this.join(room, userId);
-    await this.dao.updateUserData("_id", userId, "inGame", room);
-    return room;
   },
   newGameV2: async function (userId, gameRoomId) {
     const state = store.getState();
@@ -238,42 +266,55 @@ module.exports = gameController = {
     return true;
   },
 
-  playerAction: function(action){
-    csl.log('PLAYER_ACTION','Player is affecting the game : ',action);
+  playerAction: function (action) {
+    csl.log("PLAYER_ACTION", "Player is affecting the game : ", action);
     roomId = action.payload.room;
-    if(action.type === actionsTypes.SHOW_CARD ||
-      action.type === actionsTypes.HIDE_CARD){
-      this.dispatch(action.payload.playerId,action);
-    }
-    else{
-      state = store.getState()
-      if(state.game.rooms === undefined) return
-      if(state.game.rooms[action.payload.room] === undefined) return
-      room = state.game.rooms[roomId]
-      csl.log("playerAction",room)
-      if(room.game.state !== "waiting")
-      if(room.game.players.findIndex(
-        (p) => p.getPlayerId() == action.payload.playerId) === room.game.focus){
-          csl.log("playerAction",this.dispatch(action.payload.playerId,action));
-          answer_post_action = this.dispatch(action.payload.playerId,actions.playerPlayed(roomId))
-          csl.log("playerAction",answer_post_action);
-          if(answer_post_action.success){
-            for(var caller in answer_post_action.toCall)
-            switch(answer_post_action.toCall[caller]){
-              case "REMOVE_AFK":
-                csl.log("postPlayerAction", "Asked to remove AFK");
-                this.removeAfk(room,roomId);
-                break;
-              default:
-                csl.log("postPlayerAction", "--DEFAULT-- Ask to : ",answer_post_action);
-                break;
-            }
+    if (
+      action.type === actionsTypes.SHOW_CARD ||
+      action.type === actionsTypes.HIDE_CARD
+    ) {
+      this.dispatch(action.payload.playerId, action);
+    } else {
+      state = store.getState();
+      if (state.game.rooms === undefined) return;
+      if (state.game.rooms[action.payload.room] === undefined) return;
+      room = state.game.rooms[roomId];
+      csl.log("playerAction", room);
+      if (room.game.state !== "waiting")
+        if (
+          room.game.players.findIndex(
+            (p) => p.getPlayerId() == action.payload.playerId
+          ) === room.game.focus
+        ) {
+          csl.log(
+            "playerAction",
+            this.dispatch(action.payload.playerId, action)
+          );
+          answer_post_action = this.dispatch(
+            action.payload.playerId,
+            actions.playerPlayed(roomId)
+          );
+          csl.log("playerAction", answer_post_action);
+          if (answer_post_action.success) {
+            for (var caller in answer_post_action.toCall)
+              switch (answer_post_action.toCall[caller]) {
+                case "REMOVE_AFK":
+                  csl.log("postPlayerAction", "Asked to remove AFK");
+                  this.removeAfk(room, roomId);
+                  break;
+                default:
+                  csl.log(
+                    "postPlayerAction",
+                    "--DEFAULT-- Ask to : ",
+                    answer_post_action
+                  );
+                  break;
+              }
           }
         }
     }
     this.broadcastStatus(roomId);
   },
-
 
   /**
    *
@@ -294,10 +335,10 @@ module.exports = gameController = {
 
   startGame: async function (room, userId) {
     // Logique pour démarrer le jeu
-    console.log("Starting game in room:", room, "requested by player:", userId );
+    console.log("Starting game in room:", room, "requested by player:", userId);
     const state = store.getState();
     if (state.game.rooms.hasOwnProperty(room)) {
-      await this.removeAfk(state.game.rooms[room].game,room);
+      await this.removeAfk(state.game.rooms[room].game, room);
       store.dispatch(actions.startGame(room, userId));
       this.broadcastStatus(room);
     } else {
