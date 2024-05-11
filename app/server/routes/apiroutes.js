@@ -9,10 +9,12 @@ module.exports = (app, dao, gameController) => {
   app.get("/rooms", (req, res) => {
     var roomsInfos = [];
     roomsInfos[0] = store.getState().game;
-    for(var room in roomsInfos[0].rooms){
+    for (var room in roomsInfos[0].rooms) {
       console.log(roomsInfos[0].rooms[room]);
-      roomsInfos[0].rooms[room].game.restartCall = (roomsInfos[0].rooms[room].game.restartCall === false) ? 0 : 1;
-      roomsInfos[0].rooms[room].game.focusTurnCall = (roomsInfos[0].rooms[room].game.focusTurnCall === false) ? 0 : 1;
+      roomsInfos[0].rooms[room].game.restartCall =
+        roomsInfos[0].rooms[room].game.restartCall === false ? 0 : 1;
+      roomsInfos[0].rooms[room].game.focusTurnCall =
+        roomsInfos[0].rooms[room].game.focusTurnCall === false ? 0 : 1;
     }
     roomsInfos[1] = [];
     if (gameController !== undefined)
@@ -231,18 +233,45 @@ module.exports = (app, dao, gameController) => {
   });
 
   app.get("/api/avatar-info/:userId", async (req, res) => {
-    console.log("UserID from URL:", req.params.userId); 
+    console.log("UserID from URL:", req.params.userId);
     try {
-        const userId = req.params.userId;
-        const avatarData = await dao.getAvatarInfo(userId);
-        if (avatarData) {
-            res.json(avatarData);
-        } else {
-            res.status(404).json({ message: "Avatar information not found" });
-        }
+      const userId = req.params.userId;
+      const avatarData = await dao.getAvatarInfo(userId);
+      if (avatarData) {
+        res.json(avatarData);
+      } else {
+        res.status(404).json({ message: "Avatar information not found" });
+      }
     } catch (error) {
-        console.error("Error fetching avatar information:", error);
-        res.status(500).json({ error: "Internal server error" });
+      console.error("Error fetching avatar information:", error);
+      res.status(500).json({ error: "Internal server error" });
     }
-});
+  });
+
+  app.post("/api/update-coins", verifyToken, async (req, res) => {
+    try {
+      const { userId, coinsToAdd } = req.body;
+      if (!userId || coinsToAdd === undefined) {
+        return res.status(400).json({ error: "Missing required parameters" });
+      }
+
+      const result = await dao.updateUserCoins(userId, coinsToAdd);
+
+      if (result.success) {
+        res.json({
+          success: true,
+          updatedCoins: result.updatedCoins,
+          message: "Coins updated successfully",
+        });
+      } else {
+        res.status(400).json({
+          success: false,
+          message: "Failed to update coins",
+        });
+      }
+    } catch (error) {
+      console.error("Error updating coins:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
 };

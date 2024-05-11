@@ -23,8 +23,8 @@ const BuyCoinsWindow = () => {
   
     const success = await updateUserCoins(parseInt(amount));
     if (success) {
-      openSuccessWindow("purchase.successMessage");
-      closeWindow();
+      openSuccessWindow("shop.success");
+      
     } else {
       setValidationError("Failed to purchase coins. Please try again.");
     }

@@ -528,6 +528,26 @@ module.exports = function (app, bdd) {
         };
       }
     },
+
+    updateUserCoins: async (userId, coinsToAdd) => {
+      try {
+        const user = await UserModel.findById(userId);
+        if (!user) {
+          return { success: false, message: "User not found" };
+        }
+
+        user.coins += coinsToAdd;
+        await user.save();
+        return {
+          success: true,
+          updatedCoins: user.coins,
+          message: "Coins updated successfully",
+        };
+      } catch (error) {
+        console.error("Error updating user coins:", error);
+        return { success: false, message: "Failed to update user coins" };
+      }
+    },
   };
 
   return dao;
