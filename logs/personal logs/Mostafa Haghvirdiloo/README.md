@@ -92,4 +92,23 @@
 
 * 2024/04/23 : <b> 1h </b> <br/>       Travail en TP: <i>debuggage et des petite changements , reunion en groupe</i>
 
-total: 139h00min
+* 2024/04/25 : <b> 15m </b> <br/>       Travail individuel: <i>simplification et mettre des commentaire extra dans mes codes et expliquer mon code à mes college</i>
+
+* 2024/04/27 : <b> 15m </b> <br/>       Travail individuel: <i>css pour desactivation des button visuellement, debuggage de flippingCard  </i>
+
+* 2024/04/28 : <b> 45m </b> <br/>       Travail individuel: <i>playerProfile status name correction , affichage de Turn sur playerProfile, css des buttons </i>
+
+* 2024/04/29 : <b> 15m </b> <br/>       Travail individuel: <i>des petit changement de css , changement des items de navbar </i>
+
+* 2024/05/01 : <b> 2h </b> <br/>       Travail individuel: <i>debuggage de flop animation</i>
+
+* 2024/05/02 : <b> 2h </b> <br/>       Travail individuel: <i>card component generation dynamicly</i>
+
+* 2024/05/07 : <b> 2h </b> <br/>       Travail en TP: <i>reunion en groupe, s'expliquer des bugge et les code, debuggage, winner and waiting status in playerProfile</i>
+
+* 2024/05/09 : <b> 2h </b> <br/>       Travail individuel: <i>turn message css correction , progressBar timeOut correction , playerProfile css correction</i>
+
+* 2024/05/10 : <b> 6h </b> <br/>       Travail individuel: <i>handGuide fonction pour determiner les main possible pour guider l'utilisateur, acceuil buttons layout + nouvelle button , texts update pour utiliser useTranslate , nouvelle designe des cart dynamique</i>
+
+
+total: 154h30min
