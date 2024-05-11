@@ -113,18 +113,18 @@ module.exports = gameController = {
     }
   },
 
-  removeAfk:function(room,roomId){
-    csl.log("removeAFK",room,roomId);
-    const copy = room.players;
-    csl.log('removeAfk','List of player :',copy);
-    for(p in copy){
-      csl.log('removeAfk',copy[p]);
-      if(copy[p].isAfk){
-        this.removePlayer(roomId,copy[p].getPlayerId());
-      }
-    }
-    room.hasAfk = false;
-  },
+  // removeAfk:function(room,roomId){
+  //   csl.log("removeAFK",room,roomId);
+  //   const copy = room.players;
+  //   csl.log('removeAfk','List of player :',copy);
+  //   for(p in copy){
+  //     csl.log('removeAfk',copy[p]);
+  //     if(copy[p].isAfk){
+  //       this.removePlayer(roomId,copy[p].getPlayerId());
+  //     }
+  //   }
+  //   room.hasAfk = false;
+  // },
   removePlayer: function (room, id) {
     reponse = this.dispatch(id, actions.leaveRoom(room, id));
     csl.log("removePlayer", "reponse : ", reponse);
@@ -257,18 +257,6 @@ module.exports = gameController = {
           csl.log("playerAction",this.dispatch(action.payload.playerId,action));
           answer_post_action = this.dispatch(action.payload.playerId,actions.playerPlayed(roomId))
           csl.log("playerAction",answer_post_action);
-          if(answer_post_action.success){
-            for(var caller in answer_post_action.toCall)
-            switch(answer_post_action.toCall[caller]){
-              case "REMOVE_AFK":
-                csl.log("postPlayerAction", "Asked to remove AFK");
-                this.removeAfk(room,roomId);
-                break;
-              default:
-                csl.log("postPlayerAction", "--DEFAULT-- Ask to : ",answer_post_action);
-                break;
-            }
-          }
         }
     }
     this.broadcastStatus(roomId);
@@ -297,7 +285,6 @@ module.exports = gameController = {
     console.log("Starting game in room:", room, "requested by player:", userId );
     const state = store.getState();
     if (state.game.rooms.hasOwnProperty(room)) {
-      await this.removeAfk(state.game.rooms[room].game,room);
       store.dispatch(actions.startGame(room, userId));
       this.broadcastStatus(room);
     } else {

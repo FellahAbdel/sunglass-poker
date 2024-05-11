@@ -374,10 +374,8 @@ const gameReducer = (state = initialState, action) => {
       }
       return { ...state };
     case actions.PLAYER_PLAYED:
-      let toCall = state.rooms[action.payload.room].game.playerPlayed();
-      answer = {success:false,toCall:toCall};
-      if(toCall.length > 0) answer.success = true;
-      return { ...state,answer:answer };
+      state.rooms[action.payload.room].game.playerPlayed();
+      return { ...state};
     case actions.CLEARANSWER:
       state.answer = false;
       return { ...state };

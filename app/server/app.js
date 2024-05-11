@@ -19,6 +19,8 @@ const logsocket = "socket.io.js";
 const loggameController = "gameController";
 const loggameReducer = "gameReducer";
 csl.silenced(logsocket);
+csl.silenced("Session");
+csl.silenced("bdd");
 console.log(ENV_CONST_COMM);
 
 /** Paramètres cors du serveur.

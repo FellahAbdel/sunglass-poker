@@ -91,7 +91,11 @@ class Game {
       return null;
     }
   }
-
+  
+  /**
+   * 
+   * @param {id} playerId 
+   */
   moveSpecOrPlayer(playerId) {
     let player = this.allPlayers.find((p) => p.playerId === playerId);
 
@@ -136,13 +140,27 @@ class Game {
     return this.focus;
   }
 
+  /**
+   * 
+   * @param {Player} player Player class Object
+   * @description Will set the player to afk, remove him from player and set him  as spectator 
+   * @return {void}
+   */
+  setPlayerAFK(player){
+    csl.log("setPlayerAFK","Player received:",player);
+    this.moveSpecOrPlayer(player.getPlayerId());
+    player.setAfk();
+  }
+
   createAutoTurnCall() {
     let n = this.focus;
     return setTimeout(() => {
       csl.log("autoTurn", "Player did not play fasst enough, auto fold");
-      this.players[n].setAfk();
-      this.hasAfk = true;
-      this.fold(this.players[n]);
+      if(n<this.players.length && this.players[n] !== undefined){
+        this.hasAfk = true;
+        this.fold(this.players[n]);
+        this.setPlayerAFK(this.players[n]);
+      }
     }, this.autoTurnDelay);
   }
   rotateTimer() {
@@ -203,16 +221,17 @@ class Game {
   }
 
   playerPlayed() {
-    let toCall = [];
+
+    // let toCall = [];
     csl.log("classGame_PLAYER_PLAYED", "un joueur a joué");
-    if(this.hasAfk){
-      toCall.push("REMOVE_AFK");
-    }
-    return toCall;
+    // if(this.hasAfk){
+    //   toCall.push("REMOVE_AFK");
+    // }
+    // return toCall;
   }
 
   updateActivePlayers() {
-    this.activePlayers = this.players.filter((player) => player.isActive);
+    this.activePlayers = this.players.filter((player) => player.isActive && !player.isAfk);
   }
 
   isPlayersTurn(playerId) {
