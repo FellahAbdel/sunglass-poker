@@ -174,12 +174,15 @@ class Game {
     // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
     if (this.focus === this.startingPlayerIndex + this.nbhostfolded) {
       console.log("argent du focus", this.players[this.focus].howmanyBetTurn());
+      //si l'argent de la game c est l'argent du joueurs qu'on regarde alors on reset et go next turn
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
         this.gameCurrentBet = 0;
         this.advanceStage();
+        console.log("LE FOCUS Etait:",this.focus,"et le starting:",this.startingPlayerIndex);    
         this.focus =
             (this.startingPlayerIndex + this.nbhostfolded);
-          
+
+          //SI on est PAS  dans end ou shodown
         if (this.currentStage !== "end" && this.currentStage !== "showdown") {
           this.activePlayers.forEach((player) => {
             player.newTurnReset();
@@ -291,9 +294,11 @@ class Game {
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();
             player.raise();
+            console.log("lefocus avant le raise:",this.focus);
             this.focus = this.players.findIndex(
               (p) => p.getPlayerId() === player.getPlayerId()
             );
+            console.log("lefocus apres le raise",this.focus);
           }
         } else {
           return;
