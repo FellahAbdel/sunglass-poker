@@ -72,14 +72,6 @@ const ShopWindow = () => {
           />
         ))}
       </div>
-
-      <div className="user-coins-back back-color3">
-        <Button
-          label={`${user.coins} SC`}
-          styleClass="btn-coins back-color3 user-coins-text"
-          onClick={() => openWindow("coins")}
-        />
-        </div>
     </div>
   );
 };

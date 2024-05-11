@@ -5,6 +5,7 @@ import { useUserData } from "../../../Utiles/useUserData";
 import { useWindowContext } from "../../../Utiles/WindowContext";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
+import "./buyCoins.css"
 
 const BuyCoinsWindow = () => {
   const { updateUserCoins } = useAuth();
@@ -31,7 +32,7 @@ const BuyCoinsWindow = () => {
   };
 
   return (
-    <div className="buy-coins-window">
+    <div className="container-coinsWindow">
       <form onSubmit={handlePurchase} className="buy-coins-form">
         <TextInputComponent
           name="coin-amount"
@@ -42,18 +43,12 @@ const BuyCoinsWindow = () => {
           styleClass={"input-connectionDefault input-icon-profile"}
           type="number"
         />
-        <Button
-          styleClass="btn-connectionDefault login-button back-color1"
-          type="submit"
-          label={getTranslatedWord("shop.buy")}
-        />
-
-        <Button
-          styleClass="btn-connectionDefault login-button back-color1"
-          onClick={closeWindow}
-          label={getTranslatedWord("general.close")}
-        />
       </form>
+      <Button
+          styleClass=" back-color1"
+          type="submit"
+          label={getTranslatedWord("shop.purchase")}
+        />
     </div>
   );
 };
