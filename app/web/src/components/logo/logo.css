@@ -57,14 +57,12 @@
 }
 
 .logo-profile,
-.logo-tutorial,
-.logo-coins {
+.logo-tutorial{
   bottom: 110%;
   z-index: -1;
 }
 .logo-profile img,
-.logo-tutorial img,
-.logo-coins img {
+.logo-tutorial img{
   width: 9vw;
 }
 

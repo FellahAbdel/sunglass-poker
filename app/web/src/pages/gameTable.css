@@ -112,10 +112,12 @@
 .comp-table-register,
 .comp-table-forgot,
 .comp-table-reset,
-.comp-table-settings {
+.comp-table-settings,
+.comp-table-coins {
   right: 10%;
   left: 30%;
 }
+
 .comp-table-tutorial {
   top: 0;
 }
