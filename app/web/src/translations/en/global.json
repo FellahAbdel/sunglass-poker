@@ -123,7 +123,10 @@
     "price": "price",
     "success": "Purchase successfully completed !",
     "afterTransaction": "Sun Coins after transaction",
-    "buyMore": "Buy more"
+    "buyMore": "Buy more",
+    "purchase":"Purchase",
+    "buy":"Buy"
+    
   },
   "messageLogo": {
     "tutorial": "Tutorial",

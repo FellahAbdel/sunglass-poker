@@ -149,7 +149,7 @@
   opacity: 0;
   width: fit-content;
   height: fit-content;
-  transition: top 1s ease , opacity 1s ease ;
+  transition: top 1s ease ,left 1s ease, opacity 1s ease ;
 }
 .userCoinsTop{
   width: fit-content;
@@ -170,4 +170,7 @@
 .container-userCoins.appear{
   top: 0%;
   opacity: 1;
+}
+.container-userCoins.center{
+  left:55%;
 }

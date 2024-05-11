@@ -116,18 +116,21 @@ const GameTable = () => {
         </>
       )}
         {/* User coins */}
-        <div className={`container-userCoins ${(windowType === "shop" || windowType === "coins") && "appear"}`}>
-        <div className="userCoinsTop">
-        {user.coins} SC
+        <div className={`container-userCoins 
+                        ${(windowType === "shop" || windowType === "coins") && "appear"}
+                        ${(windowType === "coins") && "center"}`}
+                      >
+          <div className="userCoinsTop">
+          {user.coins} SC
+          </div>
+            { windowType === "shop" && 
+              <Button
+                  label={getTranslatedWord("shop.buyMore")}
+                  styleClass={`btn-coinsShop`}
+                  onClick={() => openWindow("coins")}
+                />
+            }
         </div>
-          { windowType === "shop" && 
-            <Button
-                label={getTranslatedWord("shop.buyMore")}
-                styleClass={`btn-coinsShop`}
-                onClick={() => openWindow("coins")}
-              />
-          }
-      </div>
     </div>
   );
 };

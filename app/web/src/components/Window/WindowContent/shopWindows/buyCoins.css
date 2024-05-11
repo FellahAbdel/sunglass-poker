@@ -1,0 +1,9 @@
+.container-coinsWindow{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
