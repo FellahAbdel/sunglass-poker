@@ -42,7 +42,8 @@
 .logo-register,
 .logo-forgot,
 .logo-reset,
-.logo-settings {
+.logo-settings,
+.logo-coins {
   left: -90%;
   z-index: -1;
   opacity: 100%;
@@ -56,12 +57,14 @@
 }
 
 .logo-profile,
-.logo-tutorial {
+.logo-tutorial,
+.logo-coins {
   bottom: 110%;
   z-index: -1;
 }
 .logo-profile img,
-.logo-tutorial img {
+.logo-tutorial img,
+.logo-coins img {
   width: 9vw;
 }
 

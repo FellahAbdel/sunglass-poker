@@ -12,7 +12,7 @@ import { useUserData } from "../../../Utiles/useUserData";
 const ShopWindow = () => {
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
-  const { openValidationWindow } = useWindowContext();
+  const { openValidationWindow,openWindow } = useWindowContext();
   const [activeTab, setActiveTab] = useState("baseAvatar");
   const items = useItems();
   const { activateAvatar } = useAuth();
@@ -86,7 +86,7 @@ const ShopWindow = () => {
         <Button
           label={`${user.coins} SC`}
           styleClass="btn-coins back-color3 user-coins-text"
-          onClick={() => console.log('Add coins clicked')}
+          onClick={() => openWindow("coins")}
         />
         </div>
     </div>

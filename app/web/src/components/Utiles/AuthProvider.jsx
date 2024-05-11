@@ -406,6 +406,40 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUserCoins = async (coinsToAdd) => {
+    if (!state.isLogged || !user) {
+      console.error("User not logged in.");
+      return false;
+    }
+  
+    try {
+      const response = await fetch("http://localhost:3001/api/update-coins", {
+        ...CORSSETTINGS,
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          userId: user._id,
+          coinsToAdd
+        }),
+      });
+  
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Failed to update coins:", data.message);
+        return false;
+      }
+        dispatch({
+        type: "UPDATE_USER_DATA",
+        payload: { ...user, coins: data.updatedCoins }
+      });
+  
+      console.log("Coins updated successfully to:", data.updatedCoins);
+      return true;
+    } catch (error) {
+      console.error("Error updating user coins:", error);
+      return false;
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -427,6 +461,7 @@ export const AuthProvider = ({ children }) => {
         buyItem,
         activateAvatar,
         getAvatarById,
+        updateUserCoins,
       }}
     >
       {children}

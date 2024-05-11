@@ -131,7 +131,8 @@
     "create_table": "CREATE A NEW GAME",
     "validation": "Buying confirmation",
     "shop": "Store",
-    "ranking": "Rankings"
+    "ranking": "Rankings",
+    "coins": "Buy coins"
   },
   "alert": {
     "confirmExitMessage": "Are you sure you want to leave the table? You will lose all SC in play.",

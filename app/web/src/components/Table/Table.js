@@ -149,6 +149,7 @@ const Table = ({}) => {
             "validation",
             "shop",
             "ranking",
+            "coins",
           ].some((type) => windowType.includes(type))
             ? getTranslatedWord(`messageLogo.${windowType}`)
             : ""
