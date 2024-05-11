@@ -327,6 +327,22 @@ module.exports = function (app, bdd) {
 
     getAllRanking: async (page, nbRes) => {
       try {
+        const users = await UserModel.find()
+          .sort({ coins: -1 })
+          .skip((page - 1) * nbRes)
+          .limit(nbRes)
+          .select({ pseudo: 1, coins: 1 });
+
+        return { success: true, data: users };
+      } catch (err) {
+        console.error("Error fetching rankings:", err);
+        return { success: false, error: err };
+      }
+    },
+
+    /*
+    getAllRanking: async (page, nbRes) => {
+      try {
         const users = await UserModel.aggregate([
           {
             $lookup: {
@@ -353,7 +369,7 @@ module.exports = function (app, bdd) {
         console.error("Error fetching rankings:", err);
         return { success: false, error: err }; // rethrow the error after logging
       }
-    },
+    },*/
 
     getAvatarInfo: async (userId) => {
       try {
