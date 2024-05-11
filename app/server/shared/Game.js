@@ -177,6 +177,9 @@ class Game {
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
         this.gameCurrentBet = 0;
         this.advanceStage();
+        this.focus =
+            (this.startingPlayerIndex + this.nbhostfolded);
+          
         if (this.currentStage !== "end" && this.currentStage !== "showdown") {
           this.activePlayers.forEach((player) => {
             player.newTurnReset();
@@ -189,10 +192,6 @@ class Game {
             this.startingPlayerIndex,
             this.nbhostfolded
           );
-          this.focus =
-            (this.startingPlayerIndex + this.nbhostfolded) %
-            this.activePlayers.length;
-          console.log("POT TOTAL", this.total);
         }
       }
 
@@ -233,7 +232,7 @@ class Game {
         this.advanceStageToShowdown();
         return;
       }
-      if (this.focus === 0 + this.nbhostfolded) {
+      if (this.focus === this.startingPlayerIndex + this.nbhostfolded) {
         console.log("testt: aledavant:", this.nbhostfolded);
         this.rotateFocus();
         this.nbhostfolded++;
