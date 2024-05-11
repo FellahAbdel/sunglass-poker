@@ -122,7 +122,8 @@
     "cancel": "Cancel",
     "price": "price",
     "success": "Purchase successfully completed !",
-    "afterTransaction": "Sun Coins after transaction"
+    "afterTransaction": "Sun Coins after transaction",
+    "buyMore": "Buy more"
   },
   "messageLogo": {
     "tutorial": "Tutorial",
