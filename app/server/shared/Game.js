@@ -385,6 +385,7 @@ class Game {
       this.newgame();
     } else {
       // Pour les non-maîtres
+      this.getPlayerById(playerId).unsetAfk();
       this.moveSpecOrPlayer(playerId);
     }
   }
@@ -401,6 +402,13 @@ class Game {
   newgame() {
     if (!this.allow_start) return;
     this.allow_start = false;
+    this.activePlayers = this.players.filter(
+      (player) => player.isActive && !player.isAfk
+    ); // Remplir la liste des joueurs actifs
+
+    if(this.activePlayers.length <= 1){
+      return;
+    }
     clearTimeout(this.restartCall);
     this.players.forEach((player) => {
       player.newRoundReset();
@@ -409,9 +417,7 @@ class Game {
     this.rotateStartingPlayer();
     this.focus = this.startingPlayerIndex;
     this.total = 0;
-    this.activePlayers = this.players.filter(
-      (player) => player.isActive && !player.isAfk
-    ); // Remplir la liste des joueurs actifs
+    
     this.pokerTable.reset();
     this.deck = new Deck();
     this.deck.shuffle();
