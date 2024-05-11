@@ -148,7 +148,8 @@
 
 2024/05/11  45min   discussion des problèmes avec les autres, tentatives du reglage du problème du rotatefocus
 
+2024/05/11  1H      test des bugs courant, problème sur le rotatefocus, ajout de commentaires etc pour tester mais pas possible a cause des timers
 
---2024/04 SEMAINE 6: 13H30 (TOTAL: 111H)
+--2024/04 SEMAINE 6: 14H30 (TOTAL: 112H)
 
-TEMPS TOTAL: 111H
+TEMPS TOTAL: 112H
