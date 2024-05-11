@@ -548,6 +548,19 @@ module.exports = function (app, bdd) {
         return { success: false, message: "Failed to update user coins" };
       }
     },
+    getUserPseudoFromUserId: async (userId) => {
+      try {
+        const user = await UserModel.findOne({ _id: userId });
+        if (user) {
+          return user.pseudo; // Assuming user.userName is the field containing the user's name
+        } else {
+          throw new Error(`User with ID ${userId} not found`);
+        }
+      } catch (error) {
+        csl.error("bdd", "Error retrieving user data:", error);
+        throw error;
+      }
+    },
   };
 
   return dao;
