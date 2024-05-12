@@ -9,6 +9,20 @@
   --color3-light:#35240a;
 
   --color-darkGray:rgb(54, 54, 54);
+
+  --gradient-1-light:linear-gradient(20deg, rgb(0, 0, 0) -70%, var(--color1-light) 70%);
+  --gradient-1-dark:linear-gradient(20deg, rgb(0, 0, 0) -70%, var(--color1-dark) 70%);
+
+  --gradient-2-light:linear-gradient(20deg, rgb(0, 0, 0) -70%, var(--color2-light) 70%);
+  --gradient-2-dark:linear-gradient(20deg, rgb(0, 0, 0) -70%, var(--color2-dark) 70%);
+
+  --gradient-3-light:linear-gradient(20deg, rgb(0, 0, 0) -70%, var(--color3-light) 70%);
+  --gradient-3-dark:linear-gradient(20deg, rgb(0, 0, 0) -70%, var(--color3-dark) 70%);
+
+  --gradient-green:linear-gradient(20deg, rgb(0, 0, 0) -70%, var(--good-green) 70%);
+  --gradient-red:linear-gradient(20deg, rgb(0, 0, 0) -70%, var(--error-red) 70%);
+  --gradient-gray:linear-gradient(20deg, rgb(0, 0, 0) -70%, var(--color-darkGray) 70%);
+
 }
 .no-animation, .no-animation * {
   animation: none !important;
@@ -138,39 +152,4 @@
 .all-space {
   height: 100%;
   width: 100%;
-}
-
-.container-userCoins {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  left: 20%;
-  top: -10%;
-  opacity: 0;
-  width: fit-content;
-  height: fit-content;
-  transition: top 1s ease ,left 1s ease, opacity 1s ease ;
-}
-.userCoinsTop{
-  width: fit-content;
-  height: 100%;
-  border-radius: 0 0 10px 10px;
-  color: white;
-  padding: 1.5vh 2vw 1.5vh 2vw;
-  font-size: calc(0.5vh + 1vw);
-  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.7);
-  z-index: 1;
-}
-#light .userCoinsTop{
-  background: linear-gradient(120deg, rgb(0, 0, 0) -30%, var(--color1-light) 70%);
-}
-#dark .userCoinsTop{
-  background: linear-gradient(120deg, rgb(0, 0, 0) -30%, var(--color1-dark) 70%);
-}
-.container-userCoins.appear{
-  top: 0%;
-  opacity: 1;
-}
-.container-userCoins.center{
-  left:55%;
 }

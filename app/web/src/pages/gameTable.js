@@ -1,5 +1,5 @@
 //react imports
-import React, { useState, useEffect, useTransition } from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "./../components/Utiles/AuthProvider";
 import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
 import { useWindowContext } from "./../components/Utiles/WindowContext";
@@ -16,21 +16,16 @@ import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
-import Button from "./../components/button/Button.tsx"
+import DynamicBar from "../components/Navbar/DynamicBar.js";
 import { useSelector } from "react-redux";
 
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 import { useUserData } from "../components/Utiles/useUserData.jsx";
-import { useTranslation } from "../components/Utiles/Translations.jsx";
-import { withTranslation } from "./../components/Utiles/Translations.jsx";
-
-import { formatNumber } from "./../components/Utiles/NumberFormat.js"
 
 const GameTable = () => {
   const { theme, animation } = useSettings();
   const { isLogged } = useAuth();
   const { user } = useUserData();
-  const { getTranslatedWord } = useTranslation();
   const { openWindow ,windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
   const classes = getStyles(
@@ -116,21 +111,8 @@ const GameTable = () => {
           </div>
         </>
       )}
-        {/* User coins */}
-        <div className={`container-userCoins 
-                        ${(windowType === "shop" || windowType === "coins") && "appear"}
-                        ${(windowType === "coins") && "center"}`}
-                      >
-          <div className="userCoinsTop">
-          {formatNumber(user.coins)} SC
-          </div>
-          {(windowType === "shop" || windowType === "coins") &&
-            <Button
-                label={windowType === "shop" ? getTranslatedWord("shop.buyMore") : getTranslatedWord("shop.backStore")}
-                styleClass={`btn-coinsShop`}
-                onClick={windowType === "shop" ? () => openWindow("coins") : () => openWindow("shop")}
-              />}
-        </div>
+      <DynamicBar/>
+
     </div>
   );
 };
