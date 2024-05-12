@@ -4,6 +4,11 @@ const { status } = require("../controller/gameController");
 
 const { Schema, model } = mongoose;
 
+const GameStatus = {
+  WAITING: "WAITING",
+  IN_PROGRESS: "IN_PROGRESS",
+};
+
 const GameDescriptionSchema = new Schema({
   serverName: String,
   roomPassword: String,
@@ -14,7 +19,7 @@ const GameDescriptionSchema = new Schema({
   },
   status: {
     type: String,
-    default: status.WAITING,
+    default: GameStatus.WAITING,
   },  
 });
 

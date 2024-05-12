@@ -563,12 +563,14 @@ module.exports = function (app, bdd) {
     },
     getAvailableGames: async function () {
       try {
-        // Assuming you have a GameModel representing your games
-        const availableGames = await GameDescriptionModel.find({ status: "WAITING" });
-        return availableGames;
+        const availableGames = await GameDescriptionModel.find({
+          status: "WAITING",
+        });
+        // Return the fetched games along with the success status code 200
+        return { code: 200, data: availableGames };
       } catch (error) {
-        csl.error(fileType, "Error retrieving available games:", error);
-        throw error;
+        // Return the error along with the error status code 500
+        return { code: 500, error: error.message };
       }
     },
   };
