@@ -148,4 +148,6 @@
 
 2024/05/12 : 2h00           Corrections bug logique fin de game. Cartes montrés en fin de game
 
-TEMPS TOTAL: 152h30min
+2024/05/12 : 1h30           Correction bugs, vérification mots de passe pour les game. ServerName ingame
+
+TEMPS TOTAL: 154h00min
