@@ -232,6 +232,26 @@ module.exports = (app, dao, gameController) => {
     }
   });
 
+  app.get("/api/availableRooms", async (req, res) => {
+    try {
+      // Call the gameDescription function from dao
+      const result = await dao.getAvailableGames();
+
+      // Check if there was an error fetching game descriptions
+      if (result.error) {
+        // Send an error response
+        return res.status(result.code).json(result.data);
+      }
+
+      // Send a success response with the fetched game descriptions
+      res.status(result.code).json(result.data);
+    } catch (error) {
+      // Handle unexpected errors
+      console.error("Error fetching avaliable games:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
   app.get("/api/avatar-info/:userId", async (req, res) => {
     console.log("UserID from URL:", req.params.userId);
     try {
