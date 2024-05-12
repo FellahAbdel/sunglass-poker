@@ -93,10 +93,10 @@ class Game {
       return null;
     }
   }
-  
+
   /**
-   * 
-   * @param {id} playerId 
+   *
+   * @param {id} playerId
    */
   moveSpecOrPlayer(playerId) {
     let player = this.allPlayers.find((p) => p.playerId === playerId);
@@ -143,13 +143,13 @@ class Game {
   }
 
   /**
-   * 
+   *
    * @param {Player} player Player class Object
-   * @description Will set the player to afk, remove him from player and set him  as spectator 
+   * @description Will set the player to afk, remove him from player and set him  as spectator
    * @return {void}
    */
-  setPlayerAFK(player){
-    csl.log("setPlayerAFK","Player received:",player);
+  setPlayerAFK(player) {
+    csl.log("setPlayerAFK", "Player received:", player);
     this.moveSpecOrPlayer(player.getPlayerId());
     player.setAfk();
   }
@@ -158,7 +158,7 @@ class Game {
     let n = this.focus;
     return setTimeout(() => {
       csl.log("autoTurn", "Player did not play fasst enough, auto fold");
-      if(n<this.players.length && this.players[n] !== undefined){
+      if (n < this.players.length && this.players[n] !== undefined) {
         this.hasAfk = true;
         this.fold(this.players[n]);
         this.setPlayerAFK(this.players[n]);
@@ -179,13 +179,17 @@ class Game {
       return;
     }
 
+    if (this.currentStage === "showdown" || this.currentStage === "end") {
+      console.log("ROTATE FOCUS DANS END OU SHOWDOWN");
+      return;
+    }
+
     const originalFocus = this.focus;
     this.focus = (this.focus + 1) % this.activePlayers.length; // Utilisation de activePlayers.length pour la rotation
     // Rotation du focus tant que le joueur actuel n'est pas actif
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
-        this.focus = null;
         return;
       }
       this.focus = (this.focus + 1) % this.activePlayers.length;
@@ -198,6 +202,12 @@ class Game {
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
         this.gameCurrentBet = 0;
         this.advanceStage();
+        
+        if (this.currentStage === "showdown" || this.currentStage === "end") { //FIN DES TOURS
+          console.log("ROTATE FOCUS DANS END OU SHOWDOWN");
+          this.gameEnd();
+          return;
+        }
         console.log(
           "LE FOCUS Etait:",
           this.focus,
@@ -229,8 +239,23 @@ class Game {
     this.rotateTimer();
   }
 
-  playerPlayed() {
+  gameEnd(){
+    this.focus = null;
+    this.state = "waiting";
+    const activePlayers = this.getActivePlayers();
+    console.log(
+      "Joueurs actifs lors de la détermination du gagnant:",
+      activePlayers
+    );
+    activePlayers.forEach((player) => {
+      //Révèle les carters des joueurs actifs
+      player.revealCard(0);
+      player.revealCard(1);
+    });
+    this.state = "waiting";
+  }
 
+  playerPlayed() {
     // let toCall = [];
     csl.log("classGame_PLAYER_PLAYED", "un joueur a joué");
     // if(this.hasAfk){
@@ -240,7 +265,9 @@ class Game {
   }
 
   updateActivePlayers() {
-    this.activePlayers = this.players.filter((player) => player.isActive && !player.isAfk);
+    this.activePlayers = this.players.filter(
+      (player) => player.isActive && !player.isAfk
+    );
   }
 
   isPlayersTurn(playerId) {
@@ -406,7 +433,7 @@ class Game {
       (player) => player.isActive && !player.isAfk
     ); // Remplir la liste des joueurs actifs
 
-    if(this.activePlayers.length <= 1){
+    if (this.activePlayers.length <= 1) {
       return;
     }
     clearTimeout(this.restartCall);
@@ -417,7 +444,7 @@ class Game {
     this.rotateStartingPlayer();
     this.focus = this.startingPlayerIndex;
     this.total = 0;
-    
+
     this.pokerTable.reset();
     this.deck = new Deck();
     this.deck.shuffle();
@@ -569,9 +596,8 @@ class Game {
         break;
       case "showdown":
         console.log("PASSE PAR LE CASE showdown");
+        //this.state = "waiting";
         this.evaluateHands();
-        this.focus = null;
-        this.state = "waiting";
         clearTimeout(this.focusTurnCall);
         this.resetRestartCall();
         // setTimeout(() => {
@@ -580,6 +606,7 @@ class Game {
         // }, 5000);
         break;
       case "end":
+        this.focus = null;
         console.log("PASSE PAR LE CASE end");
         break;
     }
