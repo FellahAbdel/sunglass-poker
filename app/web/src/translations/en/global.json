@@ -126,7 +126,8 @@
     "buyMore": "Buy more",
     "purchase":"Purchase",
     "buy":"Buy",
-    "backStore":"Back to Store"
+    "backStore":"Back to Store",
+    "loading":"Loading"
   },
   "messageLogo": {
     "tutorial": "Tutorial",

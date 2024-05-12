@@ -1,9 +1,7 @@
 //react imports
 import React, { useState, useEffect, useTransition } from "react";
-
 import { useAuth } from "./../components/Utiles/AuthProvider";
 import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
-
 import { useWindowContext } from "./../components/Utiles/WindowContext";
 
 //css imports
@@ -24,7 +22,9 @@ import { useSelector } from "react-redux";
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 import { useUserData } from "../components/Utiles/useUserData.jsx";
 import { useTranslation } from "../components/Utiles/Translations.jsx";
-import { withTranslation } from "react-i18next";
+import { withTranslation } from "./../components/Utiles/Translations.jsx";
+
+import { NumberFormatter } from "./../components/Utiles/NumberFormat.js"
 
 const GameTable = () => {
   const { theme, animation } = useSettings();
@@ -122,7 +122,7 @@ const GameTable = () => {
                         ${(windowType === "coins") && "center"}`}
                       >
           <div className="userCoinsTop">
-          {user.coins.toLocaleString()} SC
+          {(user.coins)} SC
           </div>
           {(windowType === "shop" || windowType === "coins") &&
             <Button
