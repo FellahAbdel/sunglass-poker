@@ -123,13 +123,11 @@ const GameTable = () => {
           <div className="userCoinsTop">
           {user.coins} SC
           </div>
-            { windowType === "shop" && 
-              <Button
-                  label={getTranslatedWord("shop.buyMore")}
-                  styleClass={`btn-coinsShop`}
-                  onClick={() => openWindow("coins")}
-                />
-            }
+            <Button
+                label={windowType === "shop" ? getTranslatedWord("shop.buyMore") : getTranslatedWord("shop.backStore")}
+                styleClass={`btn-coinsShop`}
+                onClick={windowType === "shop" ? () => openWindow("coins") : () => openWindow("shop")}
+              />
         </div>
     </div>
   );

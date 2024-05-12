@@ -32,7 +32,7 @@ const BuyCoinsWindow = () => {
 
   return (
     <div className="container-coinsWindow">
-      <form onSubmit={handlePurchase} className="buy-coins-form">
+      {/* <form onSubmit={handlePurchase} className="buy-coins-form">
         <TextInputComponent
           name="coin-amount"
           value={amount}
@@ -43,11 +43,37 @@ const BuyCoinsWindow = () => {
           type="number"
         />
         <Button
-          styleClass=" back-color1"
+          styleClass=""
           type="submit"
           label={getTranslatedWord("shop.purchase")}
         />
-      </form>
+      </form> */}
+      <Button 
+        styleClass={"btn-coinBuy"}
+        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        label={"10 SC"}
+        // onClick={updateUserCoins(10)}
+        />
+      <Button 
+        styleClass={"btn-coinBuy"}
+        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        label={"100 SC"}
+        />      
+      <Button 
+        styleClass={"btn-coinBuy"}
+        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        label={"1,000 SC"}
+        />      
+      <Button 
+        styleClass={"btn-coinBuy"}
+        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        label={"10,000 SC"}
+        />
+      <Button 
+        styleClass={"btn-coinBuy"}
+        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        label={"100,000 SC"}
+        />
     </div>
   );
 };

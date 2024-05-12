@@ -21,18 +21,8 @@ const Card = ({ card, styleClass, flippingCard, flippedStyle}) => {
         alt="card"
       />
       {card ? (
-      //     <img
-      //     className="CardFront"
-      //     src={require(`./../../assets/images/card_front/${card[0]}_of_${card[1]}.png`)}
-      //     alt="card"
-      // />
+
       <div className="CardFront cardContainer" id="front">
-          {/* <img
-          className="CardFront"
-          id="front"
-          src={require(`./../../assets/images/card_front/_of_.png`)}
-          alt="card"
-        /> */}
         <div className="cardNumber">
           <div style={card[1] === "H" || card[1] === "D" ? {color: "#df1e22"} : {}}>
           {(() => {

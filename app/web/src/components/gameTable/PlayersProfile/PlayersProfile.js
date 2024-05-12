@@ -16,7 +16,8 @@ const PlayersProfile = ({
   playerId,
   cardsVisible,
   isFocus,
-  isYou
+  isYou,
+  timer
 }) => {
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips?.toLocaleString();
@@ -46,7 +47,7 @@ const PlayersProfile = ({
         {isFocus ? (
           <ProgressBar
             className="progressBar progressPercentage"
-            durationInSeconds={10}
+            durationInSeconds={timer}
           />
         ) : (
           <div className={`box-statusText ${status.toLowerCase()}`}>
