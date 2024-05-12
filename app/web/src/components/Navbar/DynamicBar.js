@@ -41,6 +41,10 @@ const DynamicBar = () =>{
                     onClick={() => openWindow("create_table")}
                 />     
             </div>
+
+            <div className="container-serverInfo back-color1">
+                Room Name
+            </div>
         </>
     )
 }

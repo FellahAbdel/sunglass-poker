@@ -34,3 +34,18 @@
   .container-userCoins.center{
     left:55%;
   }
+
+.container-serverInfo{
+  position: absolute;
+  top: 0;
+  color: aliceblue;
+  width: 10%;
+  height: 4%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 1vw 1vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+
+}
