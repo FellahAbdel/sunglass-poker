@@ -1,39 +1,50 @@
-# Ziad Ez-Zaidi
-- Séance du 30/01 / 4H
-- Réunion 03/02 cahier des charges / 30min
-- ajout de fonctionnalitées pour le cahier de charges le 03/02  /  30min 
-- Réunion du 30/02  /  3H
-- Deuxième Réunion backend le 08/02  /  2H20min
-- 4h séance réunion le 13/02
-- 1h30 apprentissage le 16/02 (node js)
-- 2h apprentissage le 17/02 (node js)
-- 2h apprentissage le 18/02 (iexpress js)
-- 4H séance réunion le 20/02 (spécification)
-- 2h30 réunion le 22/02 (spécification technique)
-- 2H30 réunion le 23/02 (finalisation de la spécification technique + répartition des fonctions)
-- 2H le 25/02 (implémentation de la focntion estFlushRoyale + tests)
-- 3H le 26/02 (implémentation des fonctions : estFull + estCarteHaute + estBrelan + tests fonction estBrelan)
-- 4h séance réunion le 27/02 (standup-meeting + réunion Backend + tests fonction estfull + tests fonction estCarteHaute )
-- 3h le 01/03 (implémentation fonction secondSuite + tests)
-- 3h le 02/03 (implémentation fonction secondPaire + tests )
-- 3h le 07/03 (correction et modification de la fonction secondpaire + tests)
-- 2h30 le 08/03 (fonction distribuer + fix bug estFull + update test.js)
-- 2h le réunion Backend (Merge de tout les branches)
-- 4h séance du 12/03 (fonction estquinteFlush + tests + merge + test d'integration )
-- 2h le 15/03 (fonction reset())
-- 3h le 19/03 (application du split + fonction test straightFlush.test.js + threeOfAKind.test.js + twoPair.test.js)
-- 2h le 22/03 (split de la classe Partie implémentation de ScorEngine équivalent de la fonction combinaisons)
-- 4h séance du 26/03 (Réunion back : on s'est mis d'accord sur le schéma à suivre pour l'intégration back et front + monté en compétence REDUX)
-- 4h le 28/03 (Réunion back + front : résolution des conflits + erreurs + changement de l'hierarchie des fichiers afin de moduler le code pour implementer les composents REDUX)
-- 5h séance du 2/04 (Réunion Front + Back & 1ere simulation de la version 1 avec le Professeur + Reglage conflits)
-- 2h le 05/04 (travaille sur le ranking )
-- 3h le 09/04 (reunion Front + back / division des nouvelles taches + debut de travaille sur nouvelle Feature chat)
-- 3h séance du 16/04 (dernièr travail sur l'Ihm avant présentation + travail sur  présentation IHM/Projet)
-- 3h séance du 22/04(Plannification et conception + Création de composants ChatBox )
-- 2h séance du 23/04 (création nouveaux composants Barre d'entrée/Liste d'utilisateurs ChatBox + monté en competence react)
-- 3h séance du 30/04 (nouvelle tache : Intégration des websockets + monté en competence websockets )
-- 2h le 02/05 (Création de fonctions pour initialiser la communication via les sockets, envoyer et recevoir des messages)
-- 2h le 03/05( Développement de sendMessage() et receiveMessage() pour gérer les interactions des utilisateurs dans la chatbox + modification UI.)
-- 3h séance du 07/05 (meeting back + standup meeting + reglage conflit entre branches + Implémentation de contrôles pour renforcer la robustesse de la gestion des sockets et éviter les erreurs d'exécution.)
-- 4h le 10/05 (Connexion de la chatbox avec le store Redux pour la gestion de l'état + correction bug avec les messages non affichés dans la chatbox après leur envoi ou réception.)
-- 4h le 11/05 (reglages des erreurs + Tests fonctionnels de l'envoi et de la réception des messages + ChatBox fonctionnel)
+## Journal de Développement - Récapitulatif des Heures
+
+### Janvier
+- **30/01** : Séance de travail - **4h**
+
+### Février
+- **03/02** : Réunion cahier des charges - **30min**
+- **03/02** : Ajout de fonctionnalités pour le cahier des charges - **30min**
+- **30/02** : Réunion - **3h**
+- **08/02** : Deuxième Réunion backend - **2h20min**
+- **13/02** : Séance réunion - **4h**
+- **16/02** : Apprentissage Node.js - **1h30**
+- **17/02** : Apprentissage Node.js - **2h**
+- **18/02** : Apprentissage Express.js - **2h**
+- **20/02** : Séance réunion (spécification) - **4h**
+- **22/02** : Réunion (spécification technique) - **2h30**
+- **23/02** : Réunion (finalisation spécification technique + répartition des fonctions) - **2h30**
+- **25/02** : Implémentation et tests de la fonction `estFlushRoyale` - **2h**
+- **26/02** : Implémentation et tests des fonctions poker (diverses) - **3h**
+- **27/02** : Réunion et tests des fonctions poker - **4h**
+
+### Mars
+- **01/03** : Implémentation fonction `secondSuite` et tests - **3h**
+- **02/03** : Implémentation fonction `secondPaire` et tests - **3h**
+- **07/03** : Correction/modification de la fonction `secondPaire` et tests - **3h**
+- **08/03** : Implémentation de la fonction `distribuer` et correction de bugs - **2h30**
+- **Back-end meeting** (Date non spécifiée) - **2h**
+- **12/03** : Fonction `estQuinteFlush` et tests - **4h**
+- **15/03** : Implémentation de la fonction `reset()` - **2h**
+- **19/03** : Application du split et tests - **3h**
+- **22/03** : Split de la classe Partie et implémentation de `ScoreEngine` - **2h**
+- **26/03** : Réunion back-end, intégration back et front - **4h**
+- **28/03** : Réunion back + front, résolution de conflits - **4h**
+
+### Avril
+- **02/04** : Première simulation de la version 1, réglage de conflits - **5h**
+- **05/04** : Travail sur le ranking - **2h**
+- **09/04** : Réunion Front + Back, division des tâches - **3h**
+- **16/04** : Préparation IHM/Projet - **3h**
+- **22/04** : Planification et conception de la ChatBox - **3h**
+- **23/04** : Création de composants pour la ChatBox - **2h**
+- **30/04** : Intégration des websockets - **3h**
+
+### Mai
+- **02/05** : Création de fonctions pour les sockets - **2h**
+- **03/05** : Développement des fonctions `sendMessage()` et `receiveMessage()` - **2h**
+- **07/05** : Réunion back + standup meeting, réglage de conflits - **3h**
+- **10/05** : Connexion de la chatbox avec Redux, corrections de bugs - **4h**
+- **11/05** : Résolution d'erreurs et tests de la chatbox - **4h**
+
