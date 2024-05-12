@@ -38,6 +38,7 @@
 .container-serverInfo{
   position: absolute;
   top: -10%;
+  left:10%;
   color: aliceblue;
   width: 10%;
   height: 4%;
