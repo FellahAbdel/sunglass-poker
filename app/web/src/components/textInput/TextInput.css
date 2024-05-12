@@ -14,22 +14,30 @@
   border: 2px solid #ccc;
   background-color: rgba(237, 242, 247, 1);
   border-bottom: 2px solid #4d6478;
-  margin-bottom: 10px;
+  margin-bottom: 1vh;
   transition: width 0.5s ease, height 0.5s ease;
 }
-
 .input-connectionDefault::placeholder {
   color: #999;
   font-size: 2vh;
 }
-
 .container-textInputComponent p {
   color: #f63e3e;
-  font-size: 17px;
-  margin-top: 1px;
-  margin-bottom: 15px;
+  font-size: 0.8vw;
+  padding: 0;
+  margin-top: 0.5vh;
+  margin-bottom: 0;
 }
-
+.input-serverRoomPassword{
+  width: 90%;
+  height: 3vh;
+  padding-left: 10%;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  background-color: rgba(237, 242, 247, 1);
+  border-bottom: 2px solid #4d6478;
+}
 .input-component-error {
   border-bottom: 2px solid #f63e3e;
 }
