@@ -438,7 +438,27 @@ export const AuthProvider = ({ children }) => {
       console.error("Error updating user coins:", error);
       return false;
     }
-  };
+  };    
+
+  const getAvailableRooms = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/availableRooms", {
+        method: "GET",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Rooms fetched successfully");
+        return data;
+      } else {
+        console.error("Failed to fetch rooms:", data.message);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching rooms:", error);
+      return null;
+    }
+  }
+
 
   return (
     <AuthContext.Provider
@@ -462,6 +482,8 @@ export const AuthProvider = ({ children }) => {
         activateAvatar,
         getAvatarById,
         updateUserCoins,
+        // fetch available rooms
+        getAvailableRooms
       }}
     >
       {children}
