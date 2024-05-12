@@ -4,25 +4,25 @@
 }
 
 #dark .back-color1 {
-  background-color: #004577;
+  background: var(--gradient-1-dark);
 }
 
 #dark .back-color2 {
-  background-color: #4d6478;
+  background: var(--gradient-2-dark);
 }
 
 #dark .back-color3 {
-  background-color: #303b44;
+  background: var(--gradient-2-dark);
 }
 
 #light .back-color1 {
-  background-color: #a57423;
+  background: var(--gradient-1-light);
 }
 #light .back-color2 {
-  background-color: #866839;
+  background: var(--gradient-2-light);
 }
 #light .back-color3 {
-  background-color: #35240a;
+  background: var(--gradient-3-light);
 }
 
 Button:hover{
@@ -95,12 +95,7 @@ Button:hover{
   font-size: 1vw;
   box-shadow: 3px 2px 4px 1px rgba(0, 0, 0, 0.3);
 }
-.btn-successWindow{
-  background-color: var(--good-green);
-  width: 30%;
-  height: 4vh;
-  border-radius: 10px;
-}
+
 
 .btn-serverPage{
   margin: 0 5px;
@@ -111,18 +106,32 @@ Button:hover{
   justify-content: center;
   margin-top: 10px;
 }
-
+.btn-successWindow{
+  background: var(--gradient-green);
+  font-size: 1vw;
+  width: 30%;
+  height: 5vh;
+  border-radius: 1vw;
+  box-shadow: 0 0 1vw rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+}
 .btn-leaveConfirmation{
-  background-color: var(--error-red);
-  width: 20%;
-  height: 4vh;
-  border-radius: 10px;
+  background: var(--gradient-red);
+  font-size: 1vw;
+  width: 25%;
+  height: 5vh;
+  border-radius: 1vw;
+  box-shadow: 0 0 1vw rgba(0, 0, 0, 0.5);
+  font-weight: 600;
 }
 .btn-leaveCancel{
-  background-color: var(--color-darkGray);
-  width: 20%;
-  height: 4vh;
-  border-radius: 10px;
+  background: var(--gradient-gray);
+  font-size: 1vw;
+  width: 25%;
+  height: 5vh;
+  border-radius: 1vw;
+  box-shadow: 0 0 1vw rgba(0, 0, 0, 0.5);
+  font-weight: 600;
 }
 .btn-mainAction {
   color: aliceblue;
@@ -214,13 +223,25 @@ Button:hover{
   margin-top: 10px;
   position: absolute;
   bottom: 13%;
-  background-color: #4d6478;
   border-radius: 20px;
   box-shadow: 0 5px 20px black;
   font-size: 1vw;
   font-weight: bold;
 }
+#dark .btn-gameStart{
+  background: var(--gradient-1-dark);
+}
 
+#light .btn-gameStart{
+  background: var(--gradient-1-light);
+}
+#dark .btn-gameJoin{
+  background: var(--gradient-2-dark);
+}
+
+#light .btn-gameJoin{
+  background: var(--gradient-2-light);
+}
 .btn-gameJoin {
   position: unset;
   margin-left: 5%;
