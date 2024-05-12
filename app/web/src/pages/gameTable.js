@@ -122,7 +122,7 @@ const GameTable = () => {
                         ${(windowType === "coins") && "center"}`}
                       >
           <div className="userCoinsTop">
-          {user.coins} SC
+          {user.coins.toLocaleString()} SC
           </div>
           {(windowType === "shop" || windowType === "coins") &&
             <Button
