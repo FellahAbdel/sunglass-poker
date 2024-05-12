@@ -144,4 +144,8 @@
 
 2024/05/10 : 3h00           Travail spectateurs fonctionnels. Observer, rejoindre table pendant waiting. Rejoindre table possible pendant game mais en mode spectateur.
 
-TEMPS TOTAL: 148h30min
+2024/05/11 : 2h00           Back + front achat coins fonctionnel
+
+2024/05/12 : 2h00           Corrections bug logique fin de game. Cartes montrés en fin de game
+
+TEMPS TOTAL: 152h30min
