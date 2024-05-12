@@ -32,12 +32,15 @@ const DynamicBar = () =>{
             </div>
 
             {/* Create a game button */}
-            {(windowType === "servers") &&
+            <div className={`container-userCoins 
+                            ${(windowType === "servers") && "appear"}`}
+                        >
                 <Button
                     label={getTranslatedWord("game.createAgame")}
                     styleClass={`btn-coinsShop btn-pnl-createAgame`}
                     onClick={() => openWindow("create_table")}
-                />}       
+                />     
+            </div>
         </>
     )
 }

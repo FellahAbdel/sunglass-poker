@@ -307,4 +307,5 @@ Button:hover{
 .btn-pnl-createAgame{
   padding: 0.7vw 1vw 0.7vw 1vw ;
   left:15%;
+  transition: top 1s ease;
 }
