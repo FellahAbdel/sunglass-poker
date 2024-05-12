@@ -17,7 +17,7 @@ const GameDescriptionSchema = new Schema({
   },
   roomPassword: {
     type: String,
-    required: true
+    required: false,
   },
   rank: String,
   players: {
@@ -32,13 +32,12 @@ const GameDescriptionSchema = new Schema({
 });
 
 GameDescriptionSchema.pre('save', async function (next) {
-  if (this.isModified('roomPassword') || this.isNew) {
+  if (this.isModified('roomPassword') && this.roomPassword) {
     this.roomPassword = await bcrypt.hash(this.roomPassword, saltRounds);
-    next();
-  } else {
-    next();
   }
+  next();
 });
+
 
 const GameDescriptionModel = model("GameDescription", GameDescriptionSchema);
 
