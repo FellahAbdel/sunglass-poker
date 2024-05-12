@@ -1,11 +1,10 @@
 import { useTranslation } from "./Translations";
 
-export function NumberFormatter({ value }) {
+export function formatNumber(value) {
     try {
-        const formattedNumber = value.toLocaleString();
-        return <div>{formattedNumber}</div>;
+        return value.toLocaleString();
     } catch (error) {
         console.error("Failed to format number:", error);
-        return <div>Error formatting number.</div>;
+        return "Error";  
     }
 }
