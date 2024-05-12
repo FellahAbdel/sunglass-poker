@@ -126,7 +126,7 @@ const gameReducer = (state = initialState, action) => {
             answer: {
               status: true,
               mes: "Player removed from room",
-              payload: { restant: updatedPlayers.length, wasMaster: isMaster },
+              payload: { restant: state.rooms[room].game.allPlayers.filter((p)=>!p.isSpectator && !p.isAfk).length, wasMaster: isMaster },
             },
             rooms: {
               ...state.rooms,

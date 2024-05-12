@@ -378,8 +378,8 @@ class Game {
     this.allPlayers = this.allPlayers.filter(
       (p) => p.getPlayerId() !== playerId
     );
-    this.players = this.players.filter((p) => p.getPlayerId() !== playerId);
-    this.updateActivePlayers();
+    // this.players = this.players.filter((p) => p.getPlayerId() !== playerId);
+    // this.updateActivePlayers();
   }
 
   addPlayer(player) {
