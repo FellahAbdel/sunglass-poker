@@ -152,7 +152,7 @@ const ServerPanelWindow = () => {
           />
         ))}
       </div>
-      <div className="pagination">
+      <div className="container-pagination">
         {Array.from(
           { length: Math.ceil(roomTableRecords.length / recordsPerPage) },
           (_, i) => i + 1
@@ -169,14 +169,6 @@ const ServerPanelWindow = () => {
           />
         ))}
       </div>
-      <div className="button-container">
-        <Button
-          styleClass={"btn-gameStart back-color1"}
-          label={"Create a new game"}
-          onClick={() => openWindow("create_table")}
-        />
-      </div>
-
     </div>
   );
 };

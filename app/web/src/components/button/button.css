@@ -246,17 +246,20 @@ Button:hover{
   position:absolute;
   top:0%;
   background-color: unset;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 #light .btn-coinsShop{
-  box-shadow: 0 0px 5px rgb(0, 0, 0);
+  box-shadow: 0 0 1vw 0.3vw var(--color1-light);
+  background: linear-gradient(120deg, var(--color3-light) -30%, var(--color1-light) 70%) ;
 }
 #dark .btn-coinsShop{
-  box-shadow: 0 0px 5px rgb(255, 255, 255);
+  box-shadow: 0 0 1vw 0.3vw var(--color1-dark);
+  background: linear-gradient(120deg, var(--color3-dark) -30%, var(--color1-dark) 70%);
 }
 .btn-coinsShop:hover{
   opacity:1;
-  border:solid 1px white;
+  filter: brightness(150%);
+  /* border:solid 1px var(--color1-light); */
   border-top: unset;
 }
 .btn-coinsShop span{
@@ -299,4 +302,9 @@ Button:hover{
 }
 #dark .btn-coinBuy img{
   filter: invert();
+}
+
+.btn-pnl-createAgame{
+  padding: 0.7vw 1vw 0.7vw 1vw ;
+  left:15%;
 }
