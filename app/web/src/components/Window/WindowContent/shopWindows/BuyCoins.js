@@ -5,7 +5,7 @@ import { useUserData } from "../../../Utiles/useUserData";
 import { useWindowContext } from "../../../Utiles/WindowContext";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
-import "./buyCoins.css"
+import "./buyCoins.css";
 
 const BuyCoinsWindow = () => {
   const { updateUserCoins } = useAuth();
@@ -21,11 +21,10 @@ const BuyCoinsWindow = () => {
       setValidationError("Please enter a valid amount");
       return;
     }
-  
+
     const success = await updateUserCoins(parseInt(amount));
     if (success) {
       openSuccessWindow("shop.success");
-      
     } else {
       setValidationError("Failed to purchase coins. Please try again.");
     }
@@ -43,12 +42,12 @@ const BuyCoinsWindow = () => {
           styleClass={"input-connectionDefault input-icon-profile"}
           type="number"
         />
-      </form>
-      <Button
+        <Button
           styleClass=" back-color1"
           type="submit"
           label={getTranslatedWord("shop.purchase")}
         />
+      </form>
     </div>
   );
 };
