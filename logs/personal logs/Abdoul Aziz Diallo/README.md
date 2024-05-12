@@ -118,4 +118,16 @@
 | 30/04 | communityCards dynamic rendering                             |                  | 2h         |           |
 |       | Front code debugging of the raise button                     |                  | 2h         |           |
 | 02/05 | Help Mael for some debugging, we got a winner                |                  | 30mn       |           |
-|       | CHECK or CALL button work at 90% it remains updating the pot |                  | 3h       |           |
+|       | CHECK or CALL button work at 90% it remains updating the pot |                  | 3h         |           |
+
+## Week 14 - _Total: 16h20mn_
+
+| Date  | Description                                                                                                                                                               | Skills developed | Time Spent | Resources |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------- | --------- |
+| 07/05 | Stand-up meeting, task definition and planning and we discuss about all potential bugs encountered so far                                                                 |                  | 4h         |           |
+| 08/05 | Live call and help Franck to solve a bug related the bonus functionality                                                                                                  |                  | 1h         |           |
+|       | Implement asynchronous fold when a player quit on a running game                                                                                                          |                  | 2h         |           |
+| 09/05 | Continue working on the custom create a game and players can join, I finally made it work.                                                                                |                  | 2.2h       |           |
+| 10/05 | I solve a bug on "gagnant" function, in case we had a draw between two players the function crash but Franck had knit solution.                                           |                  | 2h         |           |
+| 11/05 | Start : On Quick game we look at all available games if there is any on status WAITING we let the player join that room otherwise we create a custom room for that player |                  | 3h         |           |
+| 12/05 | End : Finish the implementation                                                                                                                                           |                  | 2h         |           |
