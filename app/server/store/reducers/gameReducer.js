@@ -7,9 +7,10 @@ const csl = require("../../controller/intelligentLogging.js");
 const { strictEqual } = require("assert");
 const fileType = "gameReducer";
 
-const initialRoomState = () => {
+const initialRoomState = (serverName) => {
+  csl.log('initialRoomsState',serverName);
   return {
-    game: new game(),
+    game: new game({serverName:serverName}),
     players: [], // initial players
   };
 };
@@ -49,15 +50,16 @@ const gameReducer = (state = initialState, action) => {
   var answer;
   switch (action.type) {
     case actions.CREATE_GAME:
+      if(action.payload.serverName === undefined) return state;
       csl.log(fileType, "CREATE GAME");
       // Create a new room with an initial state
       // We should have the creator of the room in the players list
-      state.rooms[action.payload.id] = initialRoomState();
+      state.rooms[action.payload.id] = initialRoomState(action.payload.serverName);
       return {
         ...state,
         rooms: {
           ...state.rooms,
-          [action.payload.id]: { ...initialRoomState() },
+          // [action.payload.id]: { ...initialRoomState() },
         },
       };
     case actions.START_GAME:

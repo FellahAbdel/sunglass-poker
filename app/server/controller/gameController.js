@@ -241,7 +241,7 @@ module.exports = gameController = {
       console.log("avant le init", state.game.rooms);
       state.game.rooms[room] = initGameRoom(room);
       console.log("après le init", state.game.rooms);
-      this.dispatch(userId, actions.createGame(room));
+      this.dispatch(userId, actions.createGame(room,pseudo));
       await this.join(room, userId);
       await this.dao.updateUserData("_id", userId, "inGame", room);
       return room;
@@ -260,7 +260,7 @@ module.exports = gameController = {
     console.log("avant le init", state.game.rooms);
     state.game.rooms[gameRoomId] = initGameRoom(gameRoomId);
     console.log("après le init", state.game.rooms);
-    this.dispatch(userId, actions.createGame(gameRoomId));
+    this.dispatch(userId, actions.createGame(gameRoomId,"default_name"));
     this.join(gameRoomId, userId);
     await this.dao.updateUserData("_id", userId, "inGame", gameRoomId);
     return true;
