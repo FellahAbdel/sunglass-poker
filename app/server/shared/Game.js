@@ -33,6 +33,7 @@ class Game {
       restartTimer: 0,
       restartDelay: 5000,
       allow_start: true,
+      serverName:""
     };
     Object.assign(this, basedValue, ...args);
     // this.activePlayers = null;
@@ -66,6 +67,7 @@ class Game {
       nbhostfolded: this.nbhostfolded,
       gameCurrentBet: this.gameCurrentBet,
       focusTurnTimer: this.focusTurnTimer,
+      serverName:this.serverName,
     });
     return g;
   }
