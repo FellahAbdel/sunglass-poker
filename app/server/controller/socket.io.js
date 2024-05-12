@@ -261,6 +261,7 @@ module.exports = function (
 
     const newGamePromise = new Promise((resolve) => {
       // Call the DAO function
+      const pseudo = socket.request.session.pseudo;
       const id = gameController.newGame(socket.request.session.userId);
 
       // Resolve the promise once the DAO function completes
@@ -321,6 +322,16 @@ module.exports = function (
     const answer = joinRoom(socket, { id: receivedGameRoomId.toString() });
     csl.log(fileType, answer);
     socket.emit("joinRoom", answer);
+  }
+
+  async function updateGameStatus(room) {
+    csl.log(fileType, "updateGameStatus called");
+    const answer = await dao.updateStatusToInProgress(room);
+    if (answer.success) {
+      csl.log(fileType, "Game status updated to in progress");
+    } else {
+      csl.error(fileType, "Failed to update game status to in progress");
+    }
   }
 
   /** Lorsqu'une page est ouverte et se connecte au back.
@@ -428,11 +439,12 @@ module.exports = function (
       }
     });
 
-    socket.on("startGame", (data) => {
+    socket.on("startGame",  (data) => {
       // console.log("Received startGame event with data:", data);
       const room = data.room;
       const userId = data.userId;
       gameController.startGame(room, userId);
+      updateGameStatus(room);
     });
 
     socket.on("showMyGame", () =>{
