@@ -52,27 +52,31 @@ const BuyCoinsWindow = () => {
         styleClass={"btn-coinBuy"}
         iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
         label={"10 SC"}
-        // onClick={updateUserCoins(10)}
+        onClick={() => updateUserCoins(10)}
         />
       <Button 
         styleClass={"btn-coinBuy"}
         iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
         label={"100 SC"}
+        onClick={() => updateUserCoins(100)}
         />      
       <Button 
         styleClass={"btn-coinBuy"}
         iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
         label={"1,000 SC"}
+        onClick={() => updateUserCoins(1000)}
         />      
       <Button 
         styleClass={"btn-coinBuy"}
         iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
         label={"10,000 SC"}
+        onClick={() => updateUserCoins(10000)}
         />
       <Button 
         styleClass={"btn-coinBuy"}
         iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
         label={"100,000 SC"}
+        onClick={() => updateUserCoins(100000)}
         />
     </div>
   );
