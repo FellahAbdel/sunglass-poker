@@ -1,6 +1,7 @@
 // Set up your Socket.io service here
 import io from "socket.io-client";
 import store from "../store/configureStore";
+import { receiveMessage } from "../store/actions/clientInteractionsCreator";
 
 const socket = io("http://localhost:3001", {
   withCredentials: true,
@@ -35,6 +36,7 @@ export const comm = {
 
   Init: function () {
     this.preFun();
+    this.initChat();
     // console.log("Init of socketio client side");
     this.Hello();
     socket.on("world", (data) => {
@@ -54,7 +56,7 @@ export const comm = {
       store.dispatch({ payload: data.payload, type: data.type });
     });
 
-    // When the client receive the status of the room 
+    // When the client receive the status of the room
     // we console log the data.
     socket.on("status", (data) => this.getStatus(data));
 
@@ -84,12 +86,10 @@ export const comm = {
     //   sessionStorage.getItem("room")
     // );
 
-    if (sessionStorage.getItem("room")) 
-    {
-        // console.log("refreshing room", sessionStorage.getItem("room"));
-        this.status();
-    }
-    else {
+    if (sessionStorage.getItem("room")) {
+      // console.log("refreshing room", sessionStorage.getItem("room"));
+      this.status();
+    } else {
       console.log("No room no status");
     }
   },
@@ -125,5 +125,18 @@ export const comm = {
     const roomId = sessionStorage.getItem("room");
     console.log("Emitting startGame with room and userId:", roomId, userId);
     socket.emit("startGame", { room: roomId, userId: userId });
+  },
+
+  sendMessage: function (message) {
+    this.preFun(); // Ensure the token is set
+    console.log("Sending chat message:", message);
+    socket.emit("sendMessage", message);
+  },
+
+  initChat: function () {
+    socket.on("receiveMessage", (message) => {
+      console.log("Chat message received:", message);
+      store.dispatch(receiveMessage(message));
+    });
   },
 };

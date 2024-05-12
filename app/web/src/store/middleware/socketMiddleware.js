@@ -46,6 +46,11 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
       // console.log("Player wants to leave the room, emit");
       comm.leaveRoom();
       break;
+    case actions.SEND_MESSAGE:
+      comm.sendMessage(action.payload);
+      break;
+    case actions.RECEIVE_MESSAGE:
+      return next(action);
 
     default:
       break;

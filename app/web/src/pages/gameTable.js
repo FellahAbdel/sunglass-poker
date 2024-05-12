@@ -13,7 +13,7 @@ import "../components/Utiles/animations.css";
 import { getStyles } from "../components/Utiles/useStyles.jsx";
 
 //components imports
-import NavbarV2 from "../components/Navbar/NavbarV2";
+import NavbarV2 from "../components/Navbar/NavbarV3.js";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";

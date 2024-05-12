@@ -24,6 +24,10 @@ export const REFRESH = "REFRESH";
 
 export const LOGIN = "LOGIN";
 
+export const MESSAGE_RCV = "RECEIVE_MESSAGE";
+
+export const MESSAGE_SEND = "SEND_MESSAGE";
+
 /**
  * _______________________________________
  *
