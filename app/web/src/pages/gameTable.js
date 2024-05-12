@@ -24,7 +24,7 @@ import { useUserData } from "../components/Utiles/useUserData.jsx";
 import { useTranslation } from "../components/Utiles/Translations.jsx";
 import { withTranslation } from "./../components/Utiles/Translations.jsx";
 
-import { NumberFormatter } from "./../components/Utiles/NumberFormat.js"
+import { formatNumber } from "./../components/Utiles/NumberFormat.js"
 
 const GameTable = () => {
   const { theme, animation } = useSettings();
@@ -122,7 +122,7 @@ const GameTable = () => {
                         ${(windowType === "coins") && "center"}`}
                       >
           <div className="userCoinsTop">
-          {(user.coins)} SC
+          {formatNumber(user.coins)} SC
           </div>
           {(windowType === "shop" || windowType === "coins") &&
             <Button

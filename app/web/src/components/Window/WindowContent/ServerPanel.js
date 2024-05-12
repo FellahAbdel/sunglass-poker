@@ -126,7 +126,7 @@ const ServerPanelWindow = () => {
         styleClass2={"container-textInputComponent2"}
         errorMessage={""}
         onChange={handleChange}
-      ></TextInputComponent>
+      />
 
       <div className="listTableHeader">
         <div className="headerItem">
