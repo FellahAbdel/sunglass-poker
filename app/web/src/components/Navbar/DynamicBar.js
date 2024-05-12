@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "./dynamicBar.css";
 import { useWindowContext } from "../Utiles/WindowContext";
 import { formatNumber } from "./../Utiles/NumberFormat";
@@ -11,7 +12,8 @@ const DynamicBar = () => {
   const { openWindow, windowType, isGameTableVisible } = useWindowContext();
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
-  const { currentGame } = useGameTable();
+
+  const serverName = useSelector((state) => state.game.game.serverName);
 
   return (
     <>
@@ -60,7 +62,7 @@ const DynamicBar = () => {
           isGameTableVisible && "appear"
         }`}
       >
-        {currentGame ? currentGame.serverName : "No Active Server"}
+        {serverName ? serverName : "No Active Server"}
       </div>
     </>
   );
