@@ -97,6 +97,7 @@
 }
 .logo-servers,
 .logo-ranking {
+  font-size: 1vw;
   z-index: -1;
   bottom: 100%;
 }
@@ -114,6 +115,7 @@
   width: 9vw;
 }
 .logo-shop {
+  font-size: 1.5vw;
   bottom: 110%;
   z-index: -1;
 }
