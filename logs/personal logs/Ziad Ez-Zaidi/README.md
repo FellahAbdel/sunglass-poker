@@ -46,5 +46,5 @@
 - **03/05** : Développement des fonctions `sendMessage()` et `receiveMessage()` - **2h**
 - **07/05** : Réunion back + standup meeting, réglage de conflits - **3h**
 - **10/05** : Connexion de la chatbox avec Redux, corrections de bugs - **4h**
-- **11/05** : Résolution d'erreurs et tests de la chatbox - **4h**
+- **11/05** : Résolution d'erreurs et tests de la chatbox et chatBox fonctionnel - **4h**
 
