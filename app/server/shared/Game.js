@@ -202,10 +202,10 @@ class Game {
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
         this.gameCurrentBet = 0;
         this.advanceStage();
-        
-        if (this.currentStage === "showdown" || this.currentStage === "end") { //FIN DES TOURS
+
+        if (this.currentStage === "showdown" || this.currentStage === "end") {
+          //FIN DES TOURS
           console.log("ROTATE FOCUS DANS END OU SHOWDOWN");
-          this.gameEnd();
           return;
         }
         console.log(
@@ -239,20 +239,20 @@ class Game {
     this.rotateTimer();
   }
 
-  gameEnd(){
+  gameEnd() {
     this.focus = null;
     this.state = "waiting";
-    const activePlayers = this.getActivePlayers();
+    this.updateActivePlayers();
     console.log(
       "Joueurs actifs lors de la détermination du gagnant:",
-      activePlayers
+      this.activePlayers.map((p) => p.name)
     );
-    activePlayers.forEach((player) => {
-      //Révèle les carters des joueurs actifs
+
+    this.activePlayers.forEach((player) => {
       player.revealCard(0);
       player.revealCard(1);
     });
-    this.state = "waiting";
+    this.resetRestartCall();
   }
 
   playerPlayed() {
@@ -395,6 +395,7 @@ class Game {
 
   start(playerId) {
     if (this.master === playerId) {
+      console.log("Le master lance la game");
       // S'assurer que la liste des joueurs actifs est à jour avant de démarrer.
       this.updatePlayersList();
 
@@ -409,6 +410,7 @@ class Game {
         return;
       }
 
+      console.log("newgame se lance");
       this.newgame();
     } else {
       // Pour les non-maîtres
@@ -428,18 +430,26 @@ class Game {
   //Probmème:on devra surement clear l'affichage
   newgame() {
     if (!this.allow_start) return;
+    console.log("Passe     if (!this.allow_start) return");
     this.allow_start = false;
-    this.activePlayers = this.players.filter(
-      (player) => player.isActive && !player.isAfk
-    ); // Remplir la liste des joueurs actifs
+    // this.activePlayers = this.players.filter(
+    //   (player) => player.isActive && !player.isAfk
+    // ); // Remplir la liste des joueurs actifs
 
-    if (this.activePlayers.length <= 1) {
-      return;
-    }
-    clearTimeout(this.restartCall);
     this.players.forEach((player) => {
       player.newRoundReset();
     });
+
+    this.updateActivePlayers();
+
+    if (this.activePlayers.length <= 1) {
+      console.log(
+        "pas assez de joueurs, if (this.activePlayers.length <= 1) {"
+      );
+      return;
+    }
+    clearTimeout(this.restartCall);
+
     this.state = "active";
     this.rotateStartingPlayer();
     this.focus = this.startingPlayerIndex;
@@ -478,17 +488,9 @@ class Game {
   }
 
   evaluateHands() {
-    const activePlayers = this.getActivePlayers();
-    console.log(
-      "Joueurs actifs lors de la détermination du gagnant:",
-      activePlayers
-    );
-    activePlayers.forEach((player) => {
-      //Révèle les carters des joueurs actifs
-      player.revealCard(0);
-      player.revealCard(1);
-    });
-    const winner = this.gagnant(activePlayers);
+    this.updateActivePlayers();
+
+    const winner = this.gagnant(this.activePlayers);
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     console.log("winner est: ", winner);
     const winnerHandName = winner[0].type;
@@ -600,6 +602,7 @@ class Game {
         this.evaluateHands();
         clearTimeout(this.focusTurnCall);
         this.resetRestartCall();
+        this.gameEnd();
         // setTimeout(() => {
         //   this.currentStage = stageOrder[nextIndex];
         //   this.advanceStage();
