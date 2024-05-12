@@ -24,6 +24,7 @@ import { useSelector } from "react-redux";
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 import { useUserData } from "../components/Utiles/useUserData.jsx";
 import { useTranslation } from "../components/Utiles/Translations.jsx";
+import { withTranslation } from "react-i18next";
 
 const GameTable = () => {
   const { theme, animation } = useSettings();
@@ -123,11 +124,12 @@ const GameTable = () => {
           <div className="userCoinsTop">
           {user.coins} SC
           </div>
+          {(windowType === "shop" || windowType === "coins") &&
             <Button
                 label={windowType === "shop" ? getTranslatedWord("shop.buyMore") : getTranslatedWord("shop.backStore")}
                 styleClass={`btn-coinsShop`}
                 onClick={windowType === "shop" ? () => openWindow("coins") : () => openWindow("shop")}
-              />
+              />}
         </div>
     </div>
   );
