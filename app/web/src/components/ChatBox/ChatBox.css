@@ -1,0 +1,42 @@
+.chatBox-V2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: none;
+    flex-direction: column;
+  }
+  
+  .chatBoxOpen-V2 {
+    display: flex;
+  }
+  
+  .btn-chatClose-V2 {
+    cursor: pointer;
+    align-self: flex-end;
+    margin: 10px;
+  }
+  
+  .input-chatBox-V2 {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .send-message-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .send-message-button img {
+    width: 20px;
+    height: 20px;
+  }
+  
