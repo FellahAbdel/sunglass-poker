@@ -152,4 +152,8 @@
 
 --2024/04 SEMAINE 6: 14H30 (TOTAL: 112H)
 
+2024/05/13 2H       recherche de bug, debugage, discussion sur certains problème, debugage partiel du rotatefocus etc...
+
+--2024/05 SEMAINE 2: 2H (TOTAL: 114H)
+
 TEMPS TOTAL: 112H
