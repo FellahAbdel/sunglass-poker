@@ -228,20 +228,6 @@ Button:hover{
   font-size: 1vw;
   font-weight: bold;
 }
-#dark .btn-gameStart{
-  background: var(--gradient-1-dark);
-}
-
-#light .btn-gameStart{
-  background: var(--gradient-1-light);
-}
-#dark .btn-gameJoin{
-  background: var(--gradient-2-dark);
-}
-
-#light .btn-gameJoin{
-  background: var(--gradient-2-light);
-}
 .btn-gameJoin {
   position: unset;
   margin-left: 5%;
