@@ -457,7 +457,30 @@ export const AuthProvider = ({ children }) => {
       console.error("Error fetching rooms:", error);
       return null;
     }
-  }
+  };
+
+  const verifyGamePassword = async (roomId, password) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/verify-game-password`, {
+        ...CORSSETTINGS,
+        body: JSON.stringify({
+          roomId,
+          password
+        }),
+      });
+  
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Password verification failed:", data.message);
+        return { success: false, error: data.message };
+      }
+  
+      return { success: data.success, roomId: data.roomId };
+    } catch (error) {
+      console.error("Error during password verification:", error);
+      return { success: false, error: "Network error or server is down" };
+    }
+  };
 
 
   return (
@@ -483,7 +506,8 @@ export const AuthProvider = ({ children }) => {
         getAvatarById,
         updateUserCoins,
         // fetch available rooms
-        getAvailableRooms
+        getAvailableRooms,
+        verifyGamePassword
       }}
     >
       {children}

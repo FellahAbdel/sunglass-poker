@@ -1,6 +1,6 @@
-// Stat.js
 const mongoose = require("mongoose");
-const { status } = require("../controller/gameController");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const { Schema, model } = mongoose;
 
@@ -10,8 +10,15 @@ const GameStatus = {
 };
 
 const GameDescriptionSchema = new Schema({
-  serverName: String,
-  roomPassword: String,
+  serverName: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  roomPassword: {
+    type: String,
+    required: true
+  },
   rank: String,
   players: {
     type: Array,
@@ -19,10 +26,20 @@ const GameDescriptionSchema = new Schema({
   },
   status: {
     type: String,
+    enum: [GameStatus.WAITING, GameStatus.IN_PROGRESS],
     default: GameStatus.WAITING,
   },  
 });
 
-const GameDescriptionModel = model("gameDescription", GameDescriptionSchema);
+GameDescriptionSchema.pre('save', async function (next) {
+  if (this.isModified('roomPassword') || this.isNew) {
+    this.roomPassword = await bcrypt.hash(this.roomPassword, saltRounds);
+    next();
+  } else {
+    next();
+  }
+});
+
+const GameDescriptionModel = model("GameDescription", GameDescriptionSchema);
 
 module.exports = GameDescriptionModel;

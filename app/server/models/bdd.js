@@ -574,6 +574,24 @@ module.exports = function (app, bdd) {
       }
     },
   };
+  dao.verifyGamePassword = async (roomId, password) => {
+    try {
+      const gameDescription = await GameDescriptionModel.findById(roomId);
+      if (!gameDescription) {
+        return { success: false, error: "Game room not found" };
+      }
+  
+      const match = await bcrypt.compare(password, gameDescription.roomPassword);
+      if (match) {
+        return { success: true };
+      } else {
+        return { success: false, error: "Incorrect password" };
+      }
+    } catch (error) {
+      console.error("Error verifying game password:", error);
+      return { success: false, error: "Internal server error" };
+    }
+  };
 
   return dao;
 };

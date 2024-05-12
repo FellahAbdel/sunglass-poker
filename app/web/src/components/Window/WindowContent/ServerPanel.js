@@ -143,6 +143,7 @@ const ServerPanelWindow = () => {
         {currentRecords.map((table, index) => (
           <ListTableItem
             key={index}
+            id={table._id}
             nom={table.serverName}
             rang={table.rank}
             onJoinClick={() => handleJoinTable(table._id)}

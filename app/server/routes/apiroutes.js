@@ -294,4 +294,22 @@ module.exports = (app, dao, gameController) => {
       res.status(500).json({ error: "Internal server error" });
     }
   });
+  app.post("/api/verify-game-password", async (req, res) => {
+    try {
+      const { roomId, password } = req.body;
+      if (!roomId || !password) {
+        return res.status(400).json({ error: "Missing room ID or password" });
+      }
+      const result = await dao.verifyGamePassword(roomId, password);
+
+      if (result.success) {
+        res.json({ success: true });
+      } else {
+        res.status(401).json({ success: false, error: "Incorrect password" });
+      }
+    } catch (error) {
+      console.error("Error verifying game password:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
 };
