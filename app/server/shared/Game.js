@@ -26,6 +26,7 @@ class Game {
       nbhostfolded: 0,
       gameCurrentBet: 0,
       startingPlayerIndex: -1,
+      playerBeforeNextTurn:null,
       focusTurnTimer: 0,
       focusTurnCall: false,
       autoTurnDelay: 2000000,//00 en plus
@@ -64,6 +65,7 @@ class Game {
       currentStage: this.currentStage,
       state: this.state,
       total: this.total,
+      playerBeforeNextTurn:this.playerBeforeNextTurn,
       nbhostfolded: this.nbhostfolded,
       gameCurrentBet: this.gameCurrentBet,
       focusTurnTimer: this.focusTurnTimer,
@@ -198,9 +200,12 @@ class Game {
     }
 
     // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
-    if (this.focus === this.startingPlayerIndex + this.nbhostfolded) {
+    //ATTENTION A VERIFIER SI ça MARCHE AVEC FOLD   //+this.nbhostfolded 
+    if (this.focus === this.playerBeforeNextTurn) {
       console.log("argent du focus", this.players[this.focus].howmanyBetTurn());
       //si l'argent de la game c est l'argent du joueurs qu'on regarde alors on reset et go next turn
+      
+      console.log("gamecurrentbet",this.gameCurrentBet,"focusamiser",this.players[this.focus].howmanyBetTurn());
       if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
         this.gameCurrentBet = 0;
         this.advanceStage();
@@ -215,8 +220,8 @@ class Game {
           this.focus,
           "et le starting:",
           this.startingPlayerIndex
-        );
-        this.focus = this.startingPlayerIndex + this.nbhostfolded;
+        );                      //+nbhostfolded
+        this.focus = this.startingPlayerIndex ;
 
         //SI on est PAS  dans end ou shodown
         if (this.currentStage !== "end" && this.currentStage !== "showdown") {
@@ -288,11 +293,11 @@ class Game {
       if (this.activePlayers.length < 2) {
         this.advanceStageToShowdown();
         return;
-      }
-      if (this.focus === this.startingPlayerIndex + this.nbhostfolded) {
+      }                     //+nbhostfolded
+      if (this.focus === this.startingPlayerIndex ) {
         
         this.rotateFocus();
-        this.nbhostfolded++;
+        //this.nbhostfolded++;
 
       } else {
         this.rotateFocus();
@@ -325,7 +330,7 @@ class Game {
             this.gameCurrentBet = player.howmanyBetTurn();
             player.raise();
             console.log("lefocus avant le raise:", this.focus);
-            this.focus = this.players.findIndex(
+            this.playerBeforeNextTurn = this.players.findIndex(
               (p) => p.getPlayerId() === player.getPlayerId()
             );
             console.log("lefocus apres le raise", this.focus);
@@ -431,6 +436,7 @@ class Game {
     this.state = "active";
     this.rotateStartingPlayer();
     this.focus = this.startingPlayerIndex;
+    this.playerBeforeNextTurn=this.startingPlayerIndex;
     this.total = 0;
 
     this.pokerTable.reset();
