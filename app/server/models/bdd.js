@@ -573,6 +573,29 @@ module.exports = function (app, bdd) {
         return { code: 500, error: error.message };
       }
     },
+    updateStatusToInProgress: async function (roomId) {
+      try {
+        const updatedRoom = await GameDescriptionModel.findOneAndUpdate(
+          { _id: roomId},
+          { $set: { status: "IN_PROGRESS" } },
+          { new: true, runValidators: true }
+        );
+        if (updatedRoom) {
+          return {
+            success: true,
+            message: "Status updated to IN_PROGRESS successfully",
+          };
+        } else {
+          return {
+            success: false,
+            message: "Failed to update status to IN_PROGRESS",
+          };
+        }
+      } catch (error) {
+        console.error("Error updating status to IN_PROGRESS:", error);
+        throw error;
+      }
+    },
   };
   dao.verifyGamePassword = async (roomId, password) => {
     try {
@@ -580,8 +603,11 @@ module.exports = function (app, bdd) {
       if (!gameDescription) {
         return { success: false, error: "Game room not found" };
       }
-  
-      const match = await bcrypt.compare(password, gameDescription.roomPassword);
+
+      const match = await bcrypt.compare(
+        password,
+        gameDescription.roomPassword
+      );
       if (match) {
         return { success: true };
       } else {
