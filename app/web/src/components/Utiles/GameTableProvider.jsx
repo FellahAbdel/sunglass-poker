@@ -13,6 +13,7 @@ import {
   SET_WAITING_MESSAGE_VISIBLE,
   SET_FOCUS,
 } from "../../store/reducers/GameTableReducer.js";
+// import game from "../../../../server/controller/game.js";
 
 // Créer un contexte pour la table de jeu
 const GameTableContext = createContext();
@@ -36,6 +37,7 @@ export const GameTableProvider = ({ children }) => {
   const [gameState, setGameState] = useState("");
   const [isSpectator, setIsSpectator] = useState(false);
   const [playerHandName, setPlayerHandName] = useState("");
+  const [serverName, setServerName] = useState("");
 
   useEffect(() => {
     const isMaster =
@@ -120,6 +122,10 @@ export const GameTableProvider = ({ children }) => {
         setGameState(gameInfo.game.state);
       }
 
+      if(gameInfo?.game?.serverName){
+        setServerName(gameInfo.game.serverName);
+      }
+
     //   if (gameInfo.game?.players?.playerHandName !== "") {
     //     setPlayerHandName(
     //       gameInfo.game.players.find((p) => p.playerId === userId)
@@ -141,6 +147,7 @@ export const GameTableProvider = ({ children }) => {
         total,
         gameState,
         isSpectator,
+        serverName,
       }}
     >
       {children}

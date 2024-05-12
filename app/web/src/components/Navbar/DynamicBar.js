@@ -12,8 +12,7 @@ const DynamicBar = () => {
   const { openWindow, windowType, isGameTableVisible } = useWindowContext();
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
-
-  const serverName = useSelector((state) => state.game.game.serverName);
+  const { serverName } = useGameTable();
 
   return (
     <>
