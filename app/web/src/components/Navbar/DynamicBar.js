@@ -7,7 +7,7 @@ import { useUserData } from "../Utiles/useUserData.jsx";
 import { useTranslation } from "./../Utiles/Translations.jsx";
 
 const DynamicBar = () =>{
-    const { openWindow ,windowType, isWindowOpen, closeWindow, isGameTableVisible } =
+    const { openWindow ,windowType , isGameTableVisible } =
     useWindowContext();
     const { user } = useUserData();
     const { getTranslatedWord } = useTranslation();
@@ -42,8 +42,8 @@ const DynamicBar = () =>{
                 />     
             </div>
 
-            <div className="container-serverInfo back-color1">
-                Room Name
+            <div className={`container-serverInfo back-color1 ${(isGameTableVisible) && "appear"}`}>
+                Server Name
             </div>
         </>
     )
