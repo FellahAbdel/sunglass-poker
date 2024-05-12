@@ -8,24 +8,35 @@ import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import TextGlitch from "./../../TextGlitch/TextGlitch.js";
 
 import { useDispatch } from "react-redux";
-import { createGame } from "../../../store/actions/clientInteractionsCreator.js";
+import { createGame, joinRoom } from "../../../store/actions/clientInteractionsCreator.js";
 
 import "./acceuil.css";
 
 const AcceuilWindow = () => {
-  const { isLogged } = useAuth();
+  const { isLogged, getAvailableRooms } = useAuth();
   const { closeWindow, openWindow, showGameTable, setWindowType } =
     useWindowContext();
   const { getTranslatedWord } = useTranslation();
   const dispatch = useDispatch();
 
-  const onClickStartGame = () => {
+  const onClickStartGame = async () => {
     if (isLogged) {
-      dispatch(createGame());
-      console.log("Utilisateur connecté, on montre la table");
-      showGameTable();
-      closeWindow();
-      setWindowType("");
+      try {
+        const availableRooms = await getAvailableRooms();
+        if (availableRooms && availableRooms.length > 0) {
+          const roomId = availableRooms[0]._id; // Supposons que vous voulez rejoindre la première room disponible
+          dispatch(joinRoom(roomId));
+          // Informer l'utilisateur que sa demande a bien été prise en compte et qu'il est en attente de la réponse du serveur
+        } else {
+          dispatch(createGame());
+        }
+        console.log("Utilisateur connecté, on montre la table");
+        showGameTable();
+        closeWindow();
+        setWindowType("");
+      } catch (error) {
+        console.error("Error while starting the game:", error);
+      }
     } else {
       console.error("User not connected trying to start a game");
     }
