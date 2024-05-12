@@ -160,3 +160,5 @@
 
 * 2024/05/10 : <b>2h30</b> <br/> Travail individuel : <i> Travaille sur la partie communucation de projet. Commencé à diriger les documents de la communucation. Creation des faux kpis. Photoshop de faux compte instagram.  </i>
 
+* 2024/05/12 : <b>2h</b> <br/> Travail individuel : <i> Surveillance projet. Travaille sur la partie communucation de projet. Continuée sur les documents de la communucation. Creation des représentations graphiques des faux kpis.  </i>
+
