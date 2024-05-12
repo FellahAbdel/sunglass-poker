@@ -324,9 +324,9 @@ module.exports = function (
     socket.emit("joinRoom", answer);
   }
 
-  async function updateGameStatus(room) {
+  async function updateGameStatus(roomId) {
     csl.log(fileType, "updateGameStatus called");
-    const answer = await dao.updateStatusToInProgress(room);
+    const answer = await dao.updateStatusToInProgress(roomId);
     if (answer.success) {
       csl.log(fileType, "Game status updated to in progress");
     } else {
