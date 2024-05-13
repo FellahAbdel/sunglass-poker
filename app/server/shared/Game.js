@@ -226,7 +226,7 @@ class Game {
           this.focus,
           "et le starting:",
           this.startingPlayerIndex
-        );                      //+nbhostfolded
+        );                      
         this.focus = this.startingPlayerIndex+this.nbhostfolded;
         this.playerBeforeNextTurn=this.focus;
 
@@ -302,11 +302,11 @@ class Game {
         return;
       }                    
       if (this.focus === this.playerBeforeNextTurn+this.nbhostfolded ) {
+        this.nbhostfolded++;
         console.log("JE SUIS",this.focus);
         this.rotateFocus();
         console.log("J'ai rotate" ,this.focus);
         this.playerBeforeNextTurn=this.focus;
-        this.nbhostfolded++;
 
       } else {
         this.rotateFocus();
