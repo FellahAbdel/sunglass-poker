@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import "./dynamicBar.css";
 import { useWindowContext } from "../Utiles/WindowContext";
 import { formatNumber } from "./../Utiles/NumberFormat";

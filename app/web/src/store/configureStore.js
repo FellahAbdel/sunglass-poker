@@ -11,8 +11,8 @@ let target = "http://localhost:3001";
 // Create Socket.io instance
 const socket = io(target, {
   withCredentials: true,
-  path:(target === vm)?"/vmProjetIntegrateurgrp9-1/socketio/":"",
-  transports: ["polling"]
+  path: target === vm ? "/vmProjetIntegrateurgrp9-1/socketio/" : "",
+  transports: ["polling"],
 });
 // Apply middleware when creating the Redux store
 const store = createStore(

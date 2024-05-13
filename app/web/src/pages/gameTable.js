@@ -17,16 +17,12 @@ import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 import DynamicBar from "../components/Navbar/DynamicBar.js";
-import { useSelector } from "react-redux";
-
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
-import { useUserData } from "../components/Utiles/useUserData.jsx";
 
 const GameTable = () => {
   const { theme, animation } = useSettings();
   const { isLogged } = useAuth();
-  const { user } = useUserData();
-  const { openWindow ,windowType, isWindowOpen, closeWindow, isGameTableVisible } =
+  const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
   const classes = getStyles(
     windowType,
@@ -35,10 +31,6 @@ const GameTable = () => {
     isWindowOpen
   );
   const { playerCards } = useGameTable();
-
-  useEffect(() => {
-    //console.log("isLogged gameTable:", isLogged);
-  }, [isLogged]);
 
   const handleCloseOnClickOutside = (event) => {
     if (isWindowOpen) {
@@ -111,8 +103,7 @@ const GameTable = () => {
           </div>
         </>
       )}
-      <DynamicBar/>
-
+      <DynamicBar />
     </div>
   );
 };
