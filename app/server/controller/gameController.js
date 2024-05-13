@@ -260,7 +260,8 @@ module.exports = gameController = {
     console.log("avant le init", state.game.rooms);
     state.game.rooms[gameRoomId] = initGameRoom(gameRoomId);
     console.log("après le init", state.game.rooms);
-    this.dispatch(userId, actions.createGame(gameRoomId,"default_name"));
+    const serverName = await this.dao.getServerNameFromGameId(gameRoomId);
+    this.dispatch(userId, actions.createGame(gameRoomId, serverName));
     this.join(gameRoomId, userId);
     await this.dao.updateUserData("_id", userId, "inGame", gameRoomId);
     return true;
