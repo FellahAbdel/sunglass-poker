@@ -6,7 +6,7 @@ const verifyToken = require("./auth");
 const { count } = require("console");
 
 module.exports = (app, dao, gameController) => {
-  app.get("/rooms", (req, res) => {
+  app.get("/api/rooms", (req, res) => {
     var roomsInfos = [];
     roomsInfos[0] = store.getState().game;
     for (var room in roomsInfos[0].rooms) {

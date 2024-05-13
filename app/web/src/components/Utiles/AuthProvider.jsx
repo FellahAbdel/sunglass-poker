@@ -104,7 +104,7 @@ export const AuthProvider = ({ children }) => {
   const getRoomTableRecords = async (token) => {
     try {
       const response = await fetch(
-        "/api/gameRoomDescription",
+        "api/gameRoomDescription",
         {
           method: "GET",
           headers: {
@@ -157,7 +157,7 @@ export const AuthProvider = ({ children }) => {
         : state.user[identifierField];
 
       const response = await fetch(
-        "/api/update-user-data",
+        "api/update-user-data",
         {
           ...CORSSETTINGS,
           headers: getAuthHeaders(),
@@ -340,7 +340,7 @@ export const AuthProvider = ({ children }) => {
   const activateAvatar = async (itemId, itemType) => {
     try {
       const response = await fetch(
-        `/api/activate-avatar`,
+        `api/activate-avatar`,
         {
           method: "POST",
           headers: getAuthHeaders(),
@@ -365,7 +365,7 @@ export const AuthProvider = ({ children }) => {
 
   const getAvatarById = async (userId) => {
     try {
-      const requestUrl = `/api/avatar-info/${userId}`;
+      const requestUrl = `api/avatar-info/${userId}`;
       //console.log("Requesting avatar data from URL:", requestUrl);
 
       const response = await fetch(requestUrl, {
@@ -463,7 +463,7 @@ export const AuthProvider = ({ children }) => {
 
   const verifyGamePassword = async (roomId, password) => {
     try {
-      const response = await fetch(`/api/verify-game-password`, {
+      const response = await fetch(`api/verify-game-password`, {
         ...CORSSETTINGS,
         body: JSON.stringify({
           roomId,

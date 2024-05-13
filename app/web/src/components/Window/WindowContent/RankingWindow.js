@@ -15,7 +15,7 @@ const RankingWindow = ({ onClose }) => {
   const fetchRankings = async (pageNum) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/get-all-ranking?page=${pageNum}&nbres=${nbRes}`,
+        `/api/get-all-ranking?page=${pageNum}&nbres=${nbRes}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
