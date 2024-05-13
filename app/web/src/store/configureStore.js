@@ -5,10 +5,13 @@ import rootReducer from "./reducers/rootReducer.js";
 import { socketMiddleware } from "./middleware/socketMiddleware"; // Adjust the path accordingly
 import io from "socket.io-client";
 
+let vm = "https://mai-projet-integrateur.u-strasbg.fr/";
+let target = "http://localhost:3001";
+
 // Create Socket.io instance
-const socket = io("https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrp9-1/socketio/", {
+const socket = io(target, {
   withCredentials: true,
-  path:"/vmProjetIntegrateurgrp9-1/socketio/",
+  path:(target === vm)?"/vmProjetIntegrateurgrp9-1/socketio/":"",
   transports: ["polling"]
 });
 // Apply middleware when creating the Redux store

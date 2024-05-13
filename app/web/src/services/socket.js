@@ -1,10 +1,13 @@
 // Set up your Socket.io service here
 import io from "socket.io-client";
 import store from "../store/configureStore";
+let vm = "https://mai-projet-integrateur.u-strasbg.fr/";
+let target = "http://localhost:3001";
 
-const socket = io("https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrp9-1/socketio/", {
+// Create Socket.io instance
+const socket = io(target, {
   withCredentials: true,
-  path:"/vmProjetIntegrateurgrp9-1/socketio/",
+  path:(target === vm)?"/vmProjetIntegrateurgrp9-1/socketio/":"",
   transports: ["polling"]
 });
 
