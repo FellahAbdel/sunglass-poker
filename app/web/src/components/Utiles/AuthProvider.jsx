@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
   // Créer une description de jeu d'un salon.
   const createGameRoom = async (serverName, password, rank, masterInfo) => {
     try {
-      const response = await fetch("/api/games", {
+      const response = await fetch("api/games", {
         ...CORSSETTINGS,
         body: JSON.stringify({
           serverName,
@@ -191,7 +191,7 @@ export const AuthProvider = ({ children }) => {
   const checkEmail = async (email) => {
     try {
       // Envoyer l'e-mail à l'utilisateur avec un lien pour réinitialiser le mot de passe
-      const response = await fetch("/api/check-email", {
+      const response = await fetch("api/check-email", {
         ...CORSSETTINGS,
         body: JSON.stringify({ email }),
       });
@@ -212,7 +212,7 @@ export const AuthProvider = ({ children }) => {
   const registerUser = async (userData) => {
     try {
       // Effectuer la requête POST vers votre API
-      const response = await fetch("/api/users", {
+      const response = await fetch("api/users", {
         ...CORSSETTINGS,
         body: JSON.stringify(userData),
       });
@@ -234,7 +234,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await fetch("/api/userInfo", {
+      const response = await fetch("api/userInfo", {
         method: "GET",
         headers: getAuthHeaders(),
       });
@@ -291,7 +291,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch("/api/items", {
+      const response = await fetch("api/items", {
         method: "GET",
       });
       let items = await response.json();
@@ -313,7 +313,7 @@ export const AuthProvider = ({ children }) => {
 
   const buyItem = async (itemId) => {
     try {
-      const response = await fetch("/api/buy-item", {
+      const response = await fetch("api/buy-item", {
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify({
@@ -415,7 +415,7 @@ export const AuthProvider = ({ children }) => {
     }
   
     try {
-      const response = await fetch("/api/update-coins", {
+      const response = await fetch("api/update-coins", {
         ...CORSSETTINGS,
         headers: getAuthHeaders(),
         body: JSON.stringify({
@@ -444,7 +444,7 @@ export const AuthProvider = ({ children }) => {
 
   const getAvailableRooms = async () => {
     try {
-      const response = await fetch("/api/availableRooms", {
+      const response = await fetch("api/availableRooms", {
         method: "GET",
       });
       const data = await response.json();
