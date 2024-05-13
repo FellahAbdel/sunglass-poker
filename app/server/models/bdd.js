@@ -573,10 +573,23 @@ module.exports = function (app, bdd) {
         return { code: 500, error: error.message };
       }
     },
+    getServerNameFromGameId: async function (gameId) {
+      try {
+        const gameRecord = await GameDescriptionModel.findOne({ _id: gameId });
+        if (gameRecord) {
+          return gameRecord.serverName;
+        } else {
+          throw new Error(`Game with ID ${gameId} not found`);
+        }
+      } catch (error) {
+        csl.error("bdd", "Error retrieving game data:", error);
+        throw error;
+      }
+    },
     updateStatusToInProgress: async function (roomId) {
       try {
         const updatedRoom = await GameDescriptionModel.findOneAndUpdate(
-          { _id: roomId},
+          { _id: roomId },
           { $set: { status: "IN_PROGRESS" } },
           { new: true, runValidators: true }
         );
