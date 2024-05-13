@@ -13,6 +13,8 @@ const CORSSETTINGS = {
   },
 };
 
+
+
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
   const { showHome } = useWindowContext();
@@ -73,7 +75,7 @@ export const AuthProvider = ({ children }) => {
   // Créer une description de jeu d'un salon.
   const createGameRoom = async (serverName, password, rank, masterInfo) => {
     try {
-      const response = await fetch("http://localhost:3001/api/games", {
+      const response = await fetch("/api/games", {
         ...CORSSETTINGS,
         body: JSON.stringify({
           serverName,
@@ -102,7 +104,7 @@ export const AuthProvider = ({ children }) => {
   const getRoomTableRecords = async (token) => {
     try {
       const response = await fetch(
-        "http://localhost:3001/api/gameRoomDescription",
+        "/api/gameRoomDescription",
         {
           method: "GET",
           headers: {
@@ -155,7 +157,7 @@ export const AuthProvider = ({ children }) => {
         : state.user[identifierField];
 
       const response = await fetch(
-        "http://localhost:3001/api/update-user-data",
+        "/api/update-user-data",
         {
           ...CORSSETTINGS,
           headers: getAuthHeaders(),
@@ -189,7 +191,7 @@ export const AuthProvider = ({ children }) => {
   const checkEmail = async (email) => {
     try {
       // Envoyer l'e-mail à l'utilisateur avec un lien pour réinitialiser le mot de passe
-      const response = await fetch("http://localhost:3001/api/check-email", {
+      const response = await fetch("/api/check-email", {
         ...CORSSETTINGS,
         body: JSON.stringify({ email }),
       });
@@ -210,7 +212,7 @@ export const AuthProvider = ({ children }) => {
   const registerUser = async (userData) => {
     try {
       // Effectuer la requête POST vers votre API
-      const response = await fetch("http://localhost:3001/api/users", {
+      const response = await fetch("/api/users", {
         ...CORSSETTINGS,
         body: JSON.stringify(userData),
       });
@@ -232,7 +234,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/userInfo", {
+      const response = await fetch("/api/userInfo", {
         method: "GET",
         headers: getAuthHeaders(),
       });
@@ -263,7 +265,7 @@ export const AuthProvider = ({ children }) => {
   // const fetchStats = async () => {
   //   try {
   //     const response = await fetch(
-  //       `http://localhost:3001/api/user-stats/${user._id}`,
+  //       `/api/user-stats/${user._id}`,
   //       {
   //         method: "GET",
   //         headers: getAuthHeaders(),
@@ -289,7 +291,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/items", {
+      const response = await fetch("/api/items", {
         method: "GET",
       });
       let items = await response.json();
@@ -311,7 +313,7 @@ export const AuthProvider = ({ children }) => {
 
   const buyItem = async (itemId) => {
     try {
-      const response = await fetch("http://localhost:3001/api/buy-item", {
+      const response = await fetch("/api/buy-item", {
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify({
@@ -338,7 +340,7 @@ export const AuthProvider = ({ children }) => {
   const activateAvatar = async (itemId, itemType) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/activate-avatar`,
+        `/api/activate-avatar`,
         {
           method: "POST",
           headers: getAuthHeaders(),
@@ -363,7 +365,7 @@ export const AuthProvider = ({ children }) => {
 
   const getAvatarById = async (userId) => {
     try {
-      const requestUrl = `http://localhost:3001/api/avatar-info/${userId}`;
+      const requestUrl = `/api/avatar-info/${userId}`;
       //console.log("Requesting avatar data from URL:", requestUrl);
 
       const response = await fetch(requestUrl, {
@@ -413,7 +415,7 @@ export const AuthProvider = ({ children }) => {
     }
   
     try {
-      const response = await fetch("http://localhost:3001/api/update-coins", {
+      const response = await fetch("/api/update-coins", {
         ...CORSSETTINGS,
         headers: getAuthHeaders(),
         body: JSON.stringify({
@@ -442,7 +444,7 @@ export const AuthProvider = ({ children }) => {
 
   const getAvailableRooms = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/availableRooms", {
+      const response = await fetch("/api/availableRooms", {
         method: "GET",
       });
       const data = await response.json();
@@ -461,7 +463,7 @@ export const AuthProvider = ({ children }) => {
 
   const verifyGamePassword = async (roomId, password) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/verify-game-password`, {
+      const response = await fetch(`/api/verify-game-password`, {
         ...CORSSETTINGS,
         body: JSON.stringify({
           roomId,
