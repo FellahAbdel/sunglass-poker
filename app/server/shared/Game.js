@@ -189,19 +189,25 @@ class Game {
     }
 
     const originalFocus = this.focus;
-    this.focus = (this.focus + 1) % this.activePlayers.length; // Utilisation de activePlayers.length pour la rotation
+    console.log("original",originalFocus);
+
+    this.focus = (this.focus + 1) % this.players.length;
+    console.log("focusapresoriginal",this.focus);
+    console.log("isACtive?",this.players[this.focus].isActive);
     // Rotation du focus tant que le joueur actuel n'est pas actif
     while (!this.players[this.focus].isActive) {
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
         return;
       }
-      this.focus = (this.focus + 1) % this.activePlayers.length;
+      this.focus = (this.focus + 1) % this.players.length;
+      console.log("Jéfékoiici",this.focus);
+      console.log("isACtivejéfé?",this.players[this.focus].isActive);
     }
 
     // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
     //ATTENTION A VERIFIER SI ça MARCHE AVEC FOLD   //+this.nbhostfolded 
-    if (this.focus === this.playerBeforeNextTurn) {
+    if (this.focus === this.playerBeforeNextTurn) { ///////////////////
       console.log("argent du focus", this.players[this.focus].howmanyBetTurn());
       //si l'argent de la game c est l'argent du joueurs qu'on regarde alors on reset et go next turn
       
@@ -298,8 +304,9 @@ class Game {
       if (this.focus === this.playerBeforeNextTurn+this.nbhostfolded ) {
         console.log("JE SUIS",this.focus);
         this.rotateFocus();
+        console.log("J'ai rotate" ,this.focus);
+        this.playerBeforeNextTurn=this.focus;
         this.nbhostfolded++;
-        //this.playerBeforeNextTurn=this.focus;
 
       } else {
         this.rotateFocus();
