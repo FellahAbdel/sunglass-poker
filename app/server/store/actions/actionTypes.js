@@ -36,6 +36,7 @@ module.exports.SIT = "SIT";
  */
 module.exports.REFRESH = "REFRESH";
 module.exports.SITTED = "SITTED";
+module.exports.KICKED = "KICKED";
 
 //####################################
 
@@ -56,3 +57,4 @@ module.exports.PLAYER_GAME_ACTION_LIST = [
   module.exports.SHOW_CARD,
   module.exports.HIDE_CARD,
 ];
+

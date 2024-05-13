@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./handCards.css";
 import Card from "../Card/Card.js";
 import { useTranslation } from "../../Utiles/Translations";
 import Button from "./../../button/Button.tsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import { useDispatch } from "react-redux";
+import { getPokerHand } from "./../../Utiles/CombinationDetection.js"
+import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
-const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
+const HandCards = ({ card1, card2, showHandCardProp }) => {
   const { getTranslatedWord } = useTranslation();
+  const [handGuide,setHandGuide] = useState();
   const dispatch = useDispatch();
+  const { communityCards } = useGameTable();
 
   // Fonction pour transformer les données de la carte en tableau [number, color]
   const formatCardData = (card) => {
     return [card.number.toString(), card.color];
   };
+
+
+  // Combine all cards into one array for hand evaluation
+  useEffect(() => {
+    if (communityCards && card1 && card2) {
+      const cardCombo = [
+        ...communityCards.map(card => formatCardData(card)),
+        formatCardData(card1),
+        formatCardData(card2)
+      ];
+      const hand = getPokerHand(cardCombo); 
+      setHandGuide(hand); 
+      console.log("cardCombo:",cardCombo)
+    }
+  }, [communityCards, card1, card2]);
+
 
   //console.log("card1", card1);
 
@@ -86,9 +106,9 @@ const HandCards = ({ card1, card2, handGuideProp, showHandCardProp }) => {
         />
       </div>
       <div className="container-hand">
-        {handGuideProp && (
+        {handGuide && (
           <div className="hand-guide slideUp">
-            {getTranslatedWord(`handGuide.${handGuideProp}`)}!
+            {getTranslatedWord(`handGuide.${handGuide}`)}!
           </div>
         )}
         <div className="container-handCard">

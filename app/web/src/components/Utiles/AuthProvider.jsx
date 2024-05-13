@@ -406,6 +406,83 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUserCoins = async (coinsToAdd) => {
+    if (!state.isLogged || !user) {
+      console.error("User not logged in.");
+      return false;
+    }
+  
+    try {
+      const response = await fetch("http://localhost:3001/api/update-coins", {
+        ...CORSSETTINGS,
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          userId: user._id,
+          coinsToAdd
+        }),
+      });
+  
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Failed to update coins:", data.message);
+        return false;
+      }
+        dispatch({
+        type: "UPDATE_USER_DATA",
+        payload: { ...user, coins: data.updatedCoins }
+      });
+  
+      console.log("Coins updated successfully to:", data.updatedCoins);
+      return true;
+    } catch (error) {
+      console.error("Error updating user coins:", error);
+      return false;
+    }
+  };    
+
+  const getAvailableRooms = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/availableRooms", {
+        method: "GET",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Rooms fetched successfully");
+        return data;
+      } else {
+        console.error("Failed to fetch rooms:", data.message);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching rooms:", error);
+      return null;
+    }
+  };
+
+  const verifyGamePassword = async (roomId, password) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/verify-game-password`, {
+        ...CORSSETTINGS,
+        body: JSON.stringify({
+          roomId,
+          password
+        }),
+      });
+  
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Password verification failed:", data.message);
+        return { success: false, error: data.message };
+      }
+  
+      return { success: data.success, roomId: data.roomId };
+    } catch (error) {
+      console.error("Error during password verification:", error);
+      return { success: false, error: "Network error or server is down" };
+    }
+  };
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -427,6 +504,10 @@ export const AuthProvider = ({ children }) => {
         buyItem,
         activateAvatar,
         getAvatarById,
+        updateUserCoins,
+        // fetch available rooms
+        getAvailableRooms,
+        verifyGamePassword
       }}
     >
       {children}

@@ -327,6 +327,22 @@ module.exports = function (app, bdd) {
 
     getAllRanking: async (page, nbRes) => {
       try {
+        const users = await UserModel.find()
+          .sort({ coins: -1 })
+          .skip((page - 1) * nbRes)
+          .limit(nbRes)
+          .select({ pseudo: 1, coins: 1 });
+
+        return { success: true, data: users };
+      } catch (err) {
+        console.error("Error fetching rankings:", err);
+        return { success: false, error: err };
+      }
+    },
+
+    /*
+    getAllRanking: async (page, nbRes) => {
+      try {
         const users = await UserModel.aggregate([
           {
             $lookup: {
@@ -353,7 +369,7 @@ module.exports = function (app, bdd) {
         console.error("Error fetching rankings:", err);
         return { success: false, error: err }; // rethrow the error after logging
       }
-    },
+    },*/
 
     getAvatarInfo: async (userId) => {
       try {
@@ -512,6 +528,108 @@ module.exports = function (app, bdd) {
         };
       }
     },
+
+    updateUserCoins: async (userId, coinsToAdd) => {
+      try {
+        const user = await UserModel.findById(userId);
+        if (!user) {
+          return { success: false, message: "User not found" };
+        }
+
+        user.coins += coinsToAdd;
+        await user.save();
+        return {
+          success: true,
+          updatedCoins: user.coins,
+          message: "Coins updated successfully",
+        };
+      } catch (error) {
+        console.error("Error updating user coins:", error);
+        return { success: false, message: "Failed to update user coins" };
+      }
+    },
+    getUserPseudoFromUserId: async (userId) => {
+      try {
+        const user = await UserModel.findOne({ _id: userId });
+        if (user) {
+          return user.pseudo; // Assuming user.userName is the field containing the user's name
+        } else {
+          throw new Error(`User with ID ${userId} not found`);
+        }
+      } catch (error) {
+        csl.error("bdd", "Error retrieving user data:", error);
+        throw error;
+      }
+    },
+    getAvailableGames: async function () {
+      try {
+        const availableGames = await GameDescriptionModel.find({
+          status: "WAITING",
+        });
+        // Return the fetched games along with the success status code 200
+        return { code: 200, data: availableGames };
+      } catch (error) {
+        // Return the error along with the error status code 500
+        return { code: 500, error: error.message };
+      }
+    },
+    getServerNameFromGameId: async function (gameId) {
+      try {
+        const gameRecord = await GameDescriptionModel.findOne({ _id: gameId });
+        if (gameRecord) {
+          return gameRecord.serverName;
+        } else {
+          throw new Error(`Game with ID ${gameId} not found`);
+        }
+      } catch (error) {
+        csl.error("bdd", "Error retrieving game data:", error);
+        throw error;
+      }
+    },
+    updateStatusToInProgress: async function (roomId) {
+      try {
+        const updatedRoom = await GameDescriptionModel.findOneAndUpdate(
+          { _id: roomId },
+          { $set: { status: "IN_PROGRESS" } },
+          { new: true, runValidators: true }
+        );
+        if (updatedRoom) {
+          return {
+            success: true,
+            message: "Status updated to IN_PROGRESS successfully",
+          };
+        } else {
+          return {
+            success: false,
+            message: "Failed to update status to IN_PROGRESS",
+          };
+        }
+      } catch (error) {
+        console.error("Error updating status to IN_PROGRESS:", error);
+        throw error;
+      }
+    },
+  };
+  dao.verifyGamePassword = async (roomId, password) => {
+    try {
+      const gameDescription = await GameDescriptionModel.findById(roomId);
+      if (!gameDescription) {
+        return { success: false, error: "Game room not found" };
+      }
+
+      const match = await bcrypt.compare(
+        password,
+        gameDescription.roomPassword
+      );
+      if (match) {
+        return { success: true };
+      } else {
+        return { success: false, error: "Incorrect password" };
+      }
+    } catch (error) {
+      console.error("Error verifying game password:", error);
+      return { success: false, error: "Internal server error" };
+    }
   };
 
   return dao;

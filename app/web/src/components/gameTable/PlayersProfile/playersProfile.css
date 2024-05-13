@@ -261,37 +261,53 @@
   border-width: 0.2vw;
 }
 
-.showCardPlayers1 img,
-.showCardPlayers2 img {
+.cardPlayers1 img#back,
+.cardPlayers2 img#back {
   width: 2.5vw;
   height: auto;
   position: absolute;
   box-shadow: -2px 2px 5px black;
 }
-.showCardPlayers1,
-.showCardPlayers2 {
+.cardPlayers1,
+.cardPlayers2 {
+  width: 2.5vw;
+  height: 3.5vw;
+  filter: drop-shadow(-2px 2 5px rgb(255, 255, 255));
   opacity: 0%;
   transform: rotate(-20deg);
-  transform-origin: left bottom;
+  transform-origin: unset;
   position: absolute;
-  transition: transform 1s ease, opacity 1s ease 0.5s;
+  transition: transform 1s ease, opacity 1s ease 0.5s, left 2s ease , bottom 1s ease;
+}
+.cardPlayers1 .cardContainer .cardNumber,
+.cardPlayers2 .cardContainer .cardNumber{
+  font-size: 0.8vw;
+  left: 10%;
+  top:10%;
+  gap:0.2vh;
 }
 .playerCardAppear {
   opacity: 100;
 }
-.showCardPlayers1 {
+.cardPlayers1 {
   left: 35%;
-  bottom: -5%;
+  bottom: -60%;
 }
-.showCardPlayers2 {
+.cardPlayers2 {
   left: 45%;
-  bottom: -5%;
+  bottom: -60%;
 }
 .flippedPlayerCards {
   transform: rotateY(180deg);
   transform-origin: center;
-  transition: transform 2s ease;
-  transform-style: preserve-3d;
 }
 
+.cardPlayers1.flippedPlayerCards {
+  left: 20%;
+  bottom: -65%;
+}
+.cardPlayers2.flippedPlayerCards {
+  left: 45%;
+  bottom: -60%;
+}
 

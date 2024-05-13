@@ -268,6 +268,16 @@
   background-color: #282828;  
 }
 
+#dark .container-coins,
+#light .container-coins{
+  width: 35vw;
+  height: 60vh;
+  border-radius: 100px;
+  background: unset;
+  background-color: #282828;  
+}
+
+
 #dark .container-validation,
 #light .container-validation{
   width: 50vw;
@@ -289,18 +299,34 @@
   background-image: unset;
   position: absolute;
 
-  border: 1px solid rgba(255, 255, 255, 0.317);
+  border: 0.1vw solid rgba(255, 255, 255, 0.317);
   width: 52vw;
   height: 30vh;
 
   border-radius: 250px 250px 180px 180px;
   transition: width 1s ease, height 1s ease, border 1s ease;
 }
+
+@keyframes lineAround {
+  0% {        
+    width: 0vw;
+    height: 0vh; 
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100% {      
+    width: 64vw;
+    height: 44vh;
+    opacity: 0; 
+  }
+}
 .table-lineAround-waiting{
   width:40vw;
   height: 20vh;
-  border: 3px solid rgba(255, 255, 255, 0.317);
-
+  border: 0.2vw solid rgba(255, 255, 255, 0.317);
+  /* animation: lineAround 2s ease-in-out infinite; */
 }
 .disappear{
   width: 0;

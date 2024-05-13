@@ -81,7 +81,7 @@ const formatCardData = (card) => {
 
   return (
     <div className={`container-cards`}>
-      <div className="container-tableCards">
+      <div className="container-fiveCards">
         {new Array(5).fill(null).map((_, index) => (
           <Card
             key={index}

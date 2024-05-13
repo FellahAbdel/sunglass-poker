@@ -14,6 +14,7 @@ import StatsWindow from "./WindowContent/StatsWindow";
 import ServerPanelWindow from "./WindowContent/ServerPanel";
 import CreateTableWindow from "./WindowContent/CreateTableWindow";
 import ShopWindow from "./WindowContent/shopWindows/ShopWindow";
+import BuyCoinsWindow from "./WindowContent/shopWindows/BuyCoins";
 import ValidationWindow from "./WindowContent/shopWindows/ValidationWindow";
 // import AcceuilWindow from "./WindowContent/AccueilWindow";
 import AcceuilWindow from "./WindowContent/AcceuilWindow";
@@ -52,6 +53,7 @@ const Window = () => {
         {(windowType==="" && !isGameTableVisible) && <AcceuilWindow />}
         {windowType === "alert" && <AlertWindow />}
         {windowType === "ranking" && <RankingWindow />}
+        {windowType === "coins" && <BuyCoinsWindow />}
       </div>
     </div>
   );

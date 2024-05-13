@@ -26,6 +26,7 @@ module.exports = function (
       csl.log("broadcastStatus", "socket io broadcast to room", room);
       io.to(room).emit("refresh", { status: true });
     },
+    stopListeningToRoom:kickOfRoom,
   };
 
 
@@ -109,7 +110,7 @@ module.exports = function (
             " id :",
             socket.request.session.userId
           );
-          socket.join(token);
+          socket.join(decoded.id);
         } catch (err) {
           csl.error(fileType, "Error with token : ", err);
           socket.disconnect();
@@ -163,6 +164,26 @@ module.exports = function (
       socket.emit("jointRoom", { status: failed, mes: "Invalid data" });
     }
     socket.request.session.save();
+  }
+
+  async function kickOfRoom(userId,room){
+    const socketsOfPlayer = io.sockets.adapter.rooms.get(userId);
+
+    if (socketsOfPlayer) {
+        // Iterate through each socket in the room
+        socketsOfPlayer.forEach(socketId => {
+            // Find the socket object by its ID
+            const socket = io.sockets.sockets.get(socketId);
+
+            // If the socket is found and it's in the specified room, remove it from the room
+            if (socket && socket.rooms.has(room)) {
+              csl.log("kickOfRoom",'KICKING ')
+                socket.emit("kicked");
+                io.to(room).emit('refresh');
+                socket.leave(room);
+            }
+        });
+    }
   }
 
   async function leaveRoom(socket) {
@@ -240,6 +261,7 @@ module.exports = function (
 
     const newGamePromise = new Promise((resolve) => {
       // Call the DAO function
+      const pseudo = socket.request.session.pseudo;
       const id = gameController.newGame(socket.request.session.userId);
 
       // Resolve the promise once the DAO function completes
@@ -300,6 +322,16 @@ module.exports = function (
     const answer = joinRoom(socket, { id: receivedGameRoomId.toString() });
     csl.log(fileType, answer);
     socket.emit("joinRoom", answer);
+  }
+
+  async function updateGameStatus(roomId) {
+    csl.log(fileType, "updateGameStatus called");
+    const answer = await dao.updateStatusToInProgress(roomId);
+    if (answer.success) {
+      csl.log(fileType, "Game status updated to in progress");
+    } else {
+      csl.error(fileType, "Failed to update game status to in progress");
+    }
   }
 
   /** Lorsqu'une page est ouverte et se connecte au back.
@@ -407,11 +439,12 @@ module.exports = function (
       }
     });
 
-    socket.on("startGame", (data) => {
+    socket.on("startGame",  (data) => {
       // console.log("Received startGame event with data:", data);
       const room = data.room;
       const userId = data.userId;
       gameController.startGame(room, userId);
+      updateGameStatus(room);
     });
 
     socket.on("showMyGame", () =>{

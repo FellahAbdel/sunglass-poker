@@ -3,8 +3,11 @@
   height: 95%;
   width: 95%;
   border-radius: 0px;
+  
   overflow: hidden;
+
 }
+
 
 .shop-tabs {
   flex: 1;
@@ -134,20 +137,5 @@
     cursor: pointer;
     text-shadow: unset;
   }
-.user-coins-back,.user-coins-text {
-  position: absolute;
-  left: 5%;
-  top: -23%;
-  width: fit-content;
-  height: 20vh;
-  padding: 0 1vw 0 1vw;
-  font-size: calc(0.5vh + 1vw);
-}
-.user-coins-back{
-  border-radius: 10px;
-  z-index: -1;
-}
-.user-coins-text{
-  color: white;
-  text-shadow: 0 0 10px white;
-}
+
+

@@ -126,7 +126,7 @@ const ServerPanelWindow = () => {
         styleClass2={"container-textInputComponent2"}
         errorMessage={""}
         onChange={handleChange}
-      ></TextInputComponent>
+      />
 
       <div className="listTableHeader">
         <div className="headerItem">
@@ -143,6 +143,7 @@ const ServerPanelWindow = () => {
         {currentRecords.map((table, index) => (
           <ListTableItem
             key={index}
+            id={table._id}
             nom={table.serverName}
             rang={table.rank}
             onJoinClick={() => handleJoinTable(table._id)}
@@ -151,7 +152,7 @@ const ServerPanelWindow = () => {
           />
         ))}
       </div>
-      <div className="pagination">
+      <div className="container-pagination">
         {Array.from(
           { length: Math.ceil(roomTableRecords.length / recordsPerPage) },
           (_, i) => i + 1
@@ -167,13 +168,6 @@ const ServerPanelWindow = () => {
             onClick={() => paginate(page)}
           />
         ))}
-      </div>
-      <div className="button-container">
-        <Button
-          styleClass={"btn-gameStart back-color1"}
-          label={"Create a new game"}
-          onClick={() => openWindow("create_table")}
-        />
       </div>
     </div>
   );

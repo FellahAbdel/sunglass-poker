@@ -1,9 +1,7 @@
 //react imports
-import React, { useState, useEffect } from "react";
-
+import React, { useEffect } from "react";
 import { useAuth } from "./../components/Utiles/AuthProvider";
 import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
-
 import { useWindowContext } from "./../components/Utiles/WindowContext";
 
 //css imports
@@ -18,14 +16,17 @@ import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import HandCards from "../components/gameTable/HandCards/HandCards";
+import DynamicBar from "../components/Navbar/DynamicBar.js";
 import { useSelector } from "react-redux";
 
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
+import { useUserData } from "../components/Utiles/useUserData.jsx";
 
 const GameTable = () => {
   const { theme, animation } = useSettings();
   const { isLogged } = useAuth();
-  const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
+  const { user } = useUserData();
+  const { openWindow ,windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
   const classes = getStyles(
     windowType,
@@ -110,6 +111,8 @@ const GameTable = () => {
           </div>
         </>
       )}
+      <DynamicBar/>
+
     </div>
   );
 };

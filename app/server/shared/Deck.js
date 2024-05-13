@@ -37,6 +37,13 @@ class Deck {
     }
   }
 
+  burn() {
+    if (this.#cardsGame.length === 0) {
+      throw new Error("Deck is empty");
+    }
+    this.#cardsGame.pop();  // Burn the top card
+  }
+
   deal() {
     if (this.#cardsGame.length === 0) {
       throw new Error("Deck is empty");

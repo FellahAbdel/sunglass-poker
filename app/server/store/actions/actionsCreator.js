@@ -107,9 +107,9 @@ module.exports.updateUserData = (data) => ({
   payload: data,
 });
 
-module.exports.createGame = (id, player = false) => ({
+module.exports.createGame = (id,serverName, player = false) => ({
   type: actions.CREATE_GAME,
-  payload: { id: id, player: player },
+  payload: { id: id, player: player,serverName:serverName },
 });
 
 module.exports.clearAnswer = () => ({
@@ -128,3 +128,8 @@ module.exports.sitted = (table, players) => ({
   type: actions.SITTED,
   payload: { table: table, players: players },
 });
+
+
+module.exports.kicked = () => ({
+  type:actions.KICKED,
+})

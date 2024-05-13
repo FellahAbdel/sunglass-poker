@@ -42,6 +42,7 @@
     "startGame": "Start a game",
     "joinGame": "Join a game",
     "createAgame": "Create a new game",
+    "quickGame":"Quick game",
     "status": "Status",
     "name": "Name",
     "gameName": "Game name",
@@ -66,7 +67,6 @@
     "hide":"Hide",
     "showB":"Show both",
     "hideB":"Hide both"
-
   },
   "gameActionPanel": {
     "raise": "Raise",
@@ -122,7 +122,12 @@
     "cancel": "Cancel",
     "price": "price",
     "success": "Purchase successfully completed !",
-    "afterTransaction": "Sun Coins after transaction"
+    "afterTransaction": "Sun Coins after transaction",
+    "buyMore": "Buy more",
+    "purchase":"Purchase",
+    "buy":"Buy",
+    "backStore":"Back to Store",
+    "loading":"Loading"
   },
   "messageLogo": {
     "tutorial": "Tutorial",
@@ -131,7 +136,8 @@
     "create_table": "CREATE A NEW GAME",
     "validation": "Buying confirmation",
     "shop": "Store",
-    "ranking": "Rankings"
+    "ranking": "Rankings",
+    "coins": "Buy coins"
   },
   "alert": {
     "confirmExitMessage": "Are you sure you want to leave the table? You will lose all SC in play.",
@@ -141,7 +147,12 @@
     "logout": "You are about to log out"
   },
   "table":{
-    "total": "Total Pot"
+    "total": "Total Pot",
+    "waiting": "Waiting for the players",
+    "join": "Join the game",
+    "spectacle": "Watch the game",
+    "start": "Start the game",
+    "inGame": "You are still on the game table"
   },
   "ranking": {
     "rank" : "Rank",

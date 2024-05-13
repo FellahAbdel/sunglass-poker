@@ -16,7 +16,8 @@ const PlayersProfile = ({
   playerId,
   cardsVisible,
   isFocus,
-  isYou
+  isYou,
+  timer
 }) => {
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips?.toLocaleString();
@@ -46,7 +47,7 @@ const PlayersProfile = ({
         {isFocus ? (
           <ProgressBar
             className="progressBar progressPercentage"
-            durationInSeconds={60}
+            durationInSeconds={timer}
           />
         ) : (
           <div className={`box-statusText ${status.toLowerCase()}`}>
@@ -63,13 +64,13 @@ const PlayersProfile = ({
 
       {/* Appliquer renderCard pour chaque carte avant de l'envoyer au composant Card */}
       <Card
-        styleClass={`showCardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
+        styleClass={`cardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
         card={renderCard(cards[0],0)}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}
       />
       <Card
-        styleClass={`showCardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
+        styleClass={`cardPlayers2 ${gotCards ? "playerCardAppear" : ""}`}
         card={renderCard(cards[1],1)}
         flippedStyle={"flippedPlayerCards"}
         flippingCard={flippingPlayerCards}

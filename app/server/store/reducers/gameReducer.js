@@ -7,11 +7,12 @@ const csl = require("../../controller/intelligentLogging.js");
 const { strictEqual } = require("assert");
 const fileType = "gameReducer";
 
-const initialRoomState = () =>{
+const initialRoomState = (serverName) => {
+  csl.log('initialRoomsState',serverName);
   return {
-    game: new game(),
+    game: new game({serverName:serverName}),
     players: [], // initial players
-  }
+  };
 };
 
 const initialState = {
@@ -46,20 +47,25 @@ const gameReducer = (state = initialState, action) => {
   csl.log(fileType, state, action);
   var room;
   var playerId;
+  var answer;
   switch (action.type) {
     case actions.CREATE_GAME:
+      if(action.payload.serverName === undefined) return state;
       csl.log(fileType, "CREATE GAME");
       // Create a new room with an initial state
       // We should have the creator of the room in the players list
-      state.rooms[action.payload.id] = initialRoomState();
+      state.rooms[action.payload.id] = initialRoomState(action.payload.serverName);
       return {
         ...state,
         rooms: {
           ...state.rooms,
-          [action.payload.id]: { ...initialRoomState() },
+          // [action.payload.id]: { ...initialRoomState() },
         },
       };
     case actions.START_GAME:
+      if(state.rooms[action.payload.id].players.length <= 1)
+        csl.log('START_GAME_EVENT',"not enough player");
+      else
       if (state.rooms[action.payload.id].game.state === "waiting") {
         csl.log("START_GAME_EVENT", "Action payload:", action.payload);
         csl.log(
@@ -103,6 +109,7 @@ const gameReducer = (state = initialState, action) => {
       playerId = action.payload.player;
       var isMaster = false;
       if (state.rooms.hasOwnProperty(room)) {
+        state.rooms[room].game.removePlayer(playerId);
         const updatedPlayers = state.rooms[room].players.filter(
           (player) => player.getPlayerId() !== playerId
         );
@@ -121,7 +128,7 @@ const gameReducer = (state = initialState, action) => {
             answer: {
               status: true,
               mes: "Player removed from room",
-              payload: { restant: updatedPlayers.length, wasMaster: isMaster },
+              payload: { restant: state.rooms[room].game.allPlayers.filter((p)=>!p.isSpectator && !p.isAfk).length, wasMaster: isMaster },
             },
             rooms: {
               ...state.rooms,
@@ -187,9 +194,23 @@ const gameReducer = (state = initialState, action) => {
           found = p.getPlayerId() == playerId || found;
         });
       if (found) {
-        state.answer = { status: false, alreadyIn:true, mes: "Player already inside the room",payload: { id: action.payload.tableId }};
+        state.answer = {
+          status: false,
+          alreadyIn: true,
+          mes: "Player already inside the room",
+          payload: { id: action.payload.tableId },
+        };
         failed = true;
       }
+
+      // if (room.game.state !== "waiting" && !found) {
+      //   failed = true;
+      //   state.answer = {
+      //     status: false,
+      //     alreadyIn: false,
+      //     mes: "Game already started, can't join.",
+      //   };
+      // }
       // --------------
 
       // We can add the player in the game
@@ -207,9 +228,20 @@ const gameReducer = (state = initialState, action) => {
           mes: "Successfully join room",
           payload: { id: action.payload.tableId },
         };
-        room.players = [...room.players, new Player(playerId, pseudo)];
-        // We add the player to the game class.
-        // room.game.addPlayer(room.players[room.players.length - 1]);
+        room.game.resetRestartCall();
+        const newPlayer = new Player(playerId, pseudo);
+        if (room.players.length === 0) {
+          room.game.setMaster(playerId);
+        }
+        room.game.addPlayer(newPlayer);
+        room.players = [...room.players, newPlayer];
+        state.answer = {
+          status: true,
+          mes: "Successfully joined room",
+          payload: { id: action.payload.tableId },
+        };
+
+        room.game.resetRestartCall();
         csl.log(fileType, "Added player successfully");
       } else {
         csl.error(fileType, "Failed to sit player at the table.");
@@ -252,7 +284,11 @@ const gameReducer = (state = initialState, action) => {
       return { ...state };
 
     case actions.BET:
-      answer = {success:false, mes:"Action did not go through", payload:undefined};
+      answer = {
+        success: false,
+        mes: "Action did not go through",
+        payload: undefined,
+      };
       console.log(state.rooms[action.payload.room], action);
       if (action.payload && action.payload.playerId) {
         csl.log("playerAction", " call for raise of ", action.payload.amount);
@@ -271,7 +307,7 @@ const gameReducer = (state = initialState, action) => {
         console.error("Invalid payload for bet action");
       }
 
-      return { ...state, answer:answer };
+      return { ...state, answer: answer };
 
     case actions.CHECK:
       console.log(
@@ -341,7 +377,7 @@ const gameReducer = (state = initialState, action) => {
       return { ...state };
     case actions.PLAYER_PLAYED:
       state.rooms[action.payload.room].game.playerPlayed();
-      return {...state}
+      return { ...state};
     case actions.CLEARANSWER:
       state.answer = false;
       return { ...state };

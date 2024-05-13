@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShopItem from "./ShopItem";
 import "./shopWindow.css";
 import { useWindowContext } from "../../../Utiles/WindowContext";
@@ -12,8 +12,8 @@ import { useUserData } from "../../../Utiles/useUserData";
 const ShopWindow = () => {
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
-  const { openValidationWindow } = useWindowContext();
-  const [activeTab, setActiveTab] = useState("baseAvatar");
+  const { openValidationWindow,openWindow } = useWindowContext();
+  const [activeTab, setActiveTab] = useState(sessionStorage.getItem('activeTab') || "baseAvatar");
   const items = useItems();
   const { activateAvatar } = useAuth();
 
@@ -24,13 +24,9 @@ const ShopWindow = () => {
     }
   };
 
-  //console.log("user : ", user);
-  //console.log("Items recu par shopItem:", items);
-  //console.log("Owned Items IDs:", ownedItemIds);
-
-  //console.log("Items for activeTab:", items[activeTab]);
-
-  //console.log("user.colorAvatar : ", user.colorAvatar);
+  useEffect(() => {
+    sessionStorage.setItem('activeTab', activeTab);
+  }, [activeTab]);
 
   const isActive = (item) => {
     if (item.category === "colorAvatar") {
@@ -75,12 +71,6 @@ const ShopWindow = () => {
             styleClass={item.owned ? "owned-item back-color1" : "back-color3"}
           />
         ))}
-      </div>
-      <div className="user-coins-back back-color3">
-        <p>{user.coins} SC</p>
-      </div>
-      <div className="user-coins-text ">
-        <p>{user.coins} SC</p>
       </div>
     </div>
   );
