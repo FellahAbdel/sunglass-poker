@@ -9,6 +9,8 @@ class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
   playerHandName = "";
+  bonusMax = 3;
+  playerBonus = {H:0, D:0, C:0, S:0, ready:false};
 
   constructor(
     playerId,
@@ -59,6 +61,7 @@ class Player {
       cardsVisible: this.cardsVisible,
       isYou: id === this.playerId ? true : false,
       playerHandName: this.playerHandName,
+      playerBonus: this.playerBonus,
     };
     return view;
   }
@@ -136,6 +139,20 @@ class Player {
     return this.playerActionLog;
   }
 
+  getPlayerBonus() {
+    return this.playerBonus;
+  }
+
+
+
+  resetPlayerBonus() {
+    this.playerBonus.C = 0;
+    this.playerBonus.H = 0;
+    this.playerBonus.D = 0;
+    this.playerBonus.S = 0;
+    this.playerBonus.ready = false;
+  }
+
   /*
    * IN : "actif", "passif"
    * OUT : rien
@@ -178,6 +195,13 @@ class Player {
 
   addCard(card) {
     this.playerCards.push(card);
+
+    let color = card.getNumberAndColor()[1];
+    if (this.playerBonus[color] < this.bonusMax) this.playerBonus[color]++;
+
+    if (this.playerBonus.H === this.bonusMax && this.playerBonus.D === this.bonusMax
+        && this.playerBonus.S === this.bonusMax && this.playerBonus.C === this.bonusMax
+    ) this.playerBonus.ready = true;
   }
 
   clearHand() {

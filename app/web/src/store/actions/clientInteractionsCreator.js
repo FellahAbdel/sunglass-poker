@@ -44,6 +44,10 @@ export const fold = () => ({
   type: actions.FOLD,
 });
 
+export const activateBonus = () => ({
+  type: actions.ACTIVATE_BONUS,
+});
+
 export const showCard = (cardIndex) => ({
   type: actions.SHOW_CARD,
   payload: { cardIndex },

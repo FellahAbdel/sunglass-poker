@@ -57,6 +57,10 @@ module.exports.hideCard = (cardIndex) => ({
   payload: { cardIndex },
 });
 
+module.exports.activateBonus = () => ({
+  type: actions.ACTIVATE_BONUS,
+});
+
 module.exports.endRound = () => ({
   type: actions.END_ROUND,
 });
