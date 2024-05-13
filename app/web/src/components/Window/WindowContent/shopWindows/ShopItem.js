@@ -11,7 +11,12 @@ const ShopItem = ({ item, onClickItem, isOwned, isActive, styleClass }) => {
   const itemName = item.names[language] || item.names["en"];
 
   return (
-    <div className={`shop-item ${styleClass} ${isOwned ? "item-owned" : "item-unowned"} ${isActive ? "active-item" : "non-active-item"}`} onClick={onClickItem}>
+    <div
+      className={`shop-item ${styleClass} ${
+        isOwned ? "item-owned" : "item-unowned"
+      } ${isActive ? "active-item" : "non-active-item"}`}
+      onClick={onClickItem}
+    >
       {isColor ? (
         // background color
         <div style={{ backgroundColor: item.imgSrc }} />

@@ -12,8 +12,10 @@ import { useUserData } from "../../../Utiles/useUserData";
 const ShopWindow = () => {
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
-  const { openValidationWindow,openWindow } = useWindowContext();
-  const [activeTab, setActiveTab] = useState(sessionStorage.getItem('activeTab') || "baseAvatar");
+  const { openValidationWindow} = useWindowContext();
+  const [activeTab, setActiveTab] = useState(
+    sessionStorage.getItem("activeTab") || "baseAvatar"
+  );
   const items = useItems();
   const { activateAvatar } = useAuth();
 
@@ -25,7 +27,7 @@ const ShopWindow = () => {
   };
 
   useEffect(() => {
-    sessionStorage.setItem('activeTab', activeTab);
+    sessionStorage.setItem("activeTab", activeTab);
   }, [activeTab]);
 
   const isActive = (item) => {

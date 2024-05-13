@@ -15,7 +15,7 @@
 
   font-weight: 800;
 }
-.container-settingsParameteres{
+.container-settingsParameteres {
   height: 50%;
   display: flex;
   align-items: start;
@@ -28,7 +28,6 @@
   font-size: calc(2vh + 1vw);
   margin-top: 0;
 }
-
 
 /* The switch - the box around the slider */
 .switch {
@@ -53,7 +52,7 @@
   justify-content: space-between;
 }
 .container-switchSettings p {
-  margin:0;
+  margin: 0;
   font-size: calc(1vh + 0.7vw);
 }
 
@@ -120,7 +119,6 @@ input:checked + .slider:before {
 }
 
 .container-switch-theme .slider:before {
-
   border-radius: unset;
   background: url(./../../assets/SunGameStudio_logo.png) no-repeat;
   background-size: 100%;
