@@ -16,3 +16,6 @@
 | 16/04/24 | tutoriel react : https://www.youtube.com/watch?v=SqcY0GlETPk | 1h20 |
 | 16/04/24 | tutoriel mongodb : https://www.youtube.com/watch?v=iYMtc8c945U | 1h |
 | 16/04/24 - 22/04/2024 | mise en place du systeme de classement des joueurs par rapport au gain maximal | 20h |
+| 08/05/24 - 11/05/2024 | Realisation de la mise en place de la onctionnalite bonus. Elle consistait dans un premier temps a permettre que les variables representant l'etat du bonus d'un joueur puissent se mettre a jour sur le front en temps reel. Puis dans un second qu'elle puisse etre actionne selon les conditions definis et s'appliquer a tous les joueurs sans perturber le cours du jeu | 27h |
+| 09/05/24 | tutoriel redux : https://www.youtube.com/watch?v=hWLFTtcnEOs | 2h |
+| 11/05/24 | Correction des bugs liees aux fonctions d'evaluation du gagnant. Ces fonctions d'une part n'etant pas normalisees, produisaient suivant des cas specifique des resultats de differentes natures provoquant des malfonctionnement. J'ai donc dans un premier temps normalise les fonctions isStraigth, isFull... pour qu'elles renvoi un resultat ordonne, ce qui a eu pour effet de ne necessiter qu'une fonction seconde pour trancher en cas d'egalite entre plusieurs joueurs.| 10h |
