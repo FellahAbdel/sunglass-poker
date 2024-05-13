@@ -86,13 +86,15 @@
 
 2024/04/16  3H15    Reunion...
 
+2024/04/17  1H30    Préparation de l'oral IHM du projet
+
 2024/04/21  2H      Lecture de tout le code pour comprendre l'implémentation pour regler un probleme pour les listes de tables
 
 2024/04/21  1H      Ajout du handle de leave room pour gerer les users autour de la table, mais il manque encore un petit morceau ou j ai besoin d aide pour le regler.
 
 2024/04/21  1H      Reunion avec victor pour voir si les fonctionnalité marchait puis discussion a propose de la suite et du travail a faire et affectation de ma futur tache.
 
---2024/04 SEMAINE 3: 9H30 (TOTAL: 74H)
+--2024/04 SEMAINE 3: 11H (TOTAL: 75H30)
 
 2024/04/22  3H      Avancement de leave room et delete room, reunion avec victor pour le fonctionnement/ voir si tout marche + affecatation de la suite (faut aussi regler avec la bdd)
 
@@ -110,7 +112,7 @@
 
 2024/04/28  1H      Mise en commentaire de bcp de console log car console illisible pour test, debut de logique pour que en cas de fold le focus saute les joueurs couché.
 
---2024/04 SEMAINE 4: 12H (TOTAL: 86H)
+--2024/04 SEMAINE 4: 12H (TOTAL: 87H30)
 
 2024/O4/30  45min   Mise en place de l'avancement dans la partie, il manque juste l'affichage mais les cartes sont bien tirer(test effectué avec des consoles log)
 
@@ -130,7 +132,7 @@
 
 2024/05/05  1H30    Reunion avec victor pour pouvoir faire marcher les boutons call raise et le bon deroulement de la partie
 
---2024/04 SEMAINE 5: 11H30 (TOTAL: 97H30)
+--2024/04 SEMAINE 5: 11H30 (TOTAL: 99H)
 
 2024/05/06  1H30    Tentatives de reglage des problemes de mises, problemes d'affichage, debut du bonus, probleme du reset,j'ai noté plein de choses a voir avec le reste du groupe 
 
@@ -150,10 +152,12 @@
 
 2024/05/11  1H      test des bugs courant, problème sur le rotatefocus, ajout de commentaires etc pour tester mais pas possible a cause des timers
 
---2024/04 SEMAINE 6: 14H30 (TOTAL: 112H)
+--2024/04 SEMAINE 6: 14H30 (TOTAL: 113H30)
 
 2024/05/13 2H       recherche de bug, debugage, discussion sur certains problème, debugage partiel du rotatefocus etc...
 
---2024/05 SEMAINE 2: 2H (TOTAL: 114H)
+2024/05/13  1H30    Reglalge du rotateFocus pour les mises et cherche la soultion pour le fold,j'ai aussi regler le probleme des mises de depart au deuxieme tour
 
-TEMPS TOTAL: 112H
+--2024/05 SEMAINE 2: 3H30 (TOTAL: 117H)
+
+TEMPS TOTAL: 117H
