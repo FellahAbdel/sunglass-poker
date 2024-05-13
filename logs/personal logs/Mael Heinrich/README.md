@@ -158,6 +158,12 @@
 
 2024/05/13  1H30    Reglalge du rotateFocus pour les mises et cherche la soultion pour le fold,j'ai aussi regler le probleme des mises de depart au deuxieme tour
 
---2024/05 SEMAINE 2: 3H30 (TOTAL: 117H)
+2024/05/13  1H30    Fin de rotateFocus fonctionel
 
-TEMPS TOTAL: 117H
+2024/05/13  1H      Test avec victor et des amis du jeux sur les VM 
+
+2024/05/13  1H      Mise en commun de tout les bugs et post sur discord de tt ce qu'il reste a faire pour le rendu final, discussion avec le groupe et écahnge sur les problèmes et autres...
+
+--2024/05 SEMAINE 2: 7H (TOTAL: 120H30)
+
+TEMPS TOTAL: 120H30
