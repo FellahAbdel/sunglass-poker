@@ -6,8 +6,11 @@ import { socketMiddleware } from "./middleware/socketMiddleware"; // Adjust the 
 import io from "socket.io-client";
 
 // Create Socket.io instance
-const socket = io("http://localhost:3001"); // Adjust the URL accordingly
-
+const socket = io("https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrp9-1/socketio/", {
+  withCredentials: true,
+  path:"/vmProjetIntegrateurgrp9-1/socketio/",
+  transports: ["polling"]
+});
 // Apply middleware when creating the Redux store
 const store = createStore(
   rootReducer,
