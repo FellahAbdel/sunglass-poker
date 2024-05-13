@@ -46,17 +46,15 @@
   opacity: 100;
 }
 
-
-
-.container-nav-lefttop{
+.container-nav-lefttop {
   display: flex;
-  align-items:flex-start;
+  align-items: flex-start;
   position: absolute;
-  left:0;
+  left: 0;
 }
 .box-chips-V2 {
   color: white;
-  margin:0;
+  margin: 0;
   width: fit-content;
   height: fit-content;
   margin: 1vw 0 0 1vw;

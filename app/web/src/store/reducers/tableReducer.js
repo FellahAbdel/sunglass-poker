@@ -1,26 +1,25 @@
 import * as actions from "../actions/clientInteractionsType.js";
 
-
 // Fonction utilitaire pour sauvegarder l'état dans sessionStorage
 const saveStateToSessionStorage = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    sessionStorage.setItem('tableState', serializedState);
+    sessionStorage.setItem("tableState", serializedState);
   } catch (err) {
-    console.error('Error saving state to sessionStorage:', err);
+    console.error("Error saving state to sessionStorage:", err);
   }
 };
 
 // Fonction utilitaire pour charger l'état depuis sessionStorage
 const loadStateFromSessionStorage = () => {
   try {
-    const serializedState = sessionStorage.getItem('tableState');
+    const serializedState = sessionStorage.getItem("tableState");
     if (serializedState === null) {
       return undefined;
     }
     return JSON.parse(serializedState);
   } catch (err) {
-    console.error('Error loading state from sessionStorage:', err);
+    console.error("Error loading state from sessionStorage:", err);
     return undefined;
   }
 };
@@ -73,9 +72,9 @@ const tableReducer = (state = initialState, action) => {
       return newStateSitted;
     case actions.LEFT_ROOM:
       // Effacer l'état sauvegardé lorsque l'utilisateur quitte la room
-      sessionStorage.removeItem('tableState');
+      sessionStorage.removeItem("tableState");
       return {
-        ...initialState
+        ...initialState,
       };
     default:
       console.log("Table reducer called");

@@ -15,18 +15,8 @@ import Window from "../Window/Window";
 import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import LogoComponent from "../logo/Logo";
-import PlayersPots from "./PlayersPots";
 import TotalPot from "./TotalPot";
 import Button from "../button/Button.tsx";
-import TextGlitch from "../TextGlitch/TextGlitch.js";
-
-//fonctions
-import {
-  delayedExecution,
-  delayedExecutionWithCancel,
-} from "./../Utiles/delay.js";
-
-import { useSelector } from "react-redux";
 
 const Table = ({}) => {
   const { userId } = useAuth();
@@ -59,10 +49,6 @@ const Table = ({}) => {
     console.log("isFocus TABLE:", isFocus);
   }, [isFocus]);
 
-  // useEffect(() => {
-  //   console.log("Game state:", gameInfo.game.state);
-  // }, [gameInfo]);
-
   const classes = getStyles(
     windowType,
     isLogged,
@@ -75,7 +61,6 @@ const Table = ({}) => {
     console.log("Starting game with roomId:");
     dispatch(actions.startGame(userId));
   };
-
 
   return (
     // Table that becomes a container for the menus when they are activated
@@ -95,7 +80,9 @@ const Table = ({}) => {
           {/* Afficher le bouton "Commencer la partie" si le bouton est visible */}
           {showWaitingMessage ? (
             <div className="container-waiting">
-              <div className="txt-waiting">{getTranslatedWord("table.waiting")} ...</div>
+              <div className="txt-waiting">
+                {getTranslatedWord("table.waiting")} ...
+              </div>
               {isMaster ? (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
@@ -105,7 +92,11 @@ const Table = ({}) => {
               ) : (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
-                  label={isSpectator ? getTranslatedWord("table.join") : getTranslatedWord("table.spectacle")}
+                  label={
+                    isSpectator
+                      ? getTranslatedWord("table.join")
+                      : getTranslatedWord("table.spectacle")
+                  }
                   onClick={() => startGame()}
                 />
               )}
@@ -148,7 +139,7 @@ const Table = ({}) => {
             "create_table",
             "validation",
             "shop",
-            "ranking"
+            "ranking",
           ].some((type) => windowType.includes(type))
             ? getTranslatedWord(`messageLogo.${windowType}`)
             : ""

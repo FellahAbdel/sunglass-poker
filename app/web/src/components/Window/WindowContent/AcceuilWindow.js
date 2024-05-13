@@ -8,9 +8,10 @@ import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import TextGlitch from "./../../TextGlitch/TextGlitch.js";
 
 import { useDispatch } from "react-redux";
-import { createGame, joinRoom } from "../../../store/actions/clientInteractionsCreator.js";
-
-import "./acceuil.css";
+import {
+  createGame,
+  joinRoom,
+} from "../../../store/actions/clientInteractionsCreator.js";
 
 const AcceuilWindow = () => {
   const { isLogged, getAvailableRooms } = useAuth();

@@ -31,6 +31,7 @@ export const GameTableProvider = ({ children }) => {
   const [playerMoney, setPlayerMoney] = useState(0);
   const [communityCards, setCommunityCards] = useState([]);
   const [gameCurrentBet, SetGameCurrentBet] = useState(0);
+  const [playerBonus, setPlayerBonus] = useState([]);
   //MAel a add mais pas sur du fonctionnement
   const [gamePlayerCurrentBet, setGamePlayerCurrentBet] = useState([]);
   const [total, setTotal] = useState(0);
@@ -101,6 +102,10 @@ export const GameTableProvider = ({ children }) => {
           );
           setPlayerCards(cardsWithVisibility);
         }
+
+        //Mettre a jour le bonus du joueur
+        setPlayerBonus(gameInfo.game.players.find((p) => p.playerId===userId).playerBonus);
+
       } else {
         setIsSpectator(true);
       }
@@ -139,6 +144,7 @@ export const GameTableProvider = ({ children }) => {
     <GameTableContext.Provider
       value={{
         ...state,
+        playerBonus,
         playerCards,
         playerMoney,
         communityCards,

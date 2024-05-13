@@ -11,7 +11,7 @@ const TextInputComponent = ({
   errorMessage,
   styleClass,
   styleClass2,
-  onKeyDown
+  onKeyDown,
 }) => {
   const hasError = errorMessage !== "";
   const { getTranslatedWord } = useTranslation();
@@ -26,7 +26,8 @@ const TextInputComponent = ({
         onChange={(e) => onChange(e)}
         onKeyDown={onKeyDown}
       />
-      {errorMessage && <p>{getTranslatedWord(errorMessage)}</p>}    </div>
+      {errorMessage && <p>{getTranslatedWord(errorMessage)}</p>}{" "}
+    </div>
   );
 };
 

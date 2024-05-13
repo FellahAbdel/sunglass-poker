@@ -19,6 +19,8 @@ export const SHOW_CARD = "SHOW_CARD";
 
 export const HIDE_CARD = "HIDE_CARD";
 
+export const ACTIVATE_BONUS = "ACTIVATE_BONUS";
+
 export const SIT = "SIT";
 
 export const REFRESH = "REFRESH";
@@ -44,6 +46,4 @@ export const SITTED = "SITTED";
 // Kicked out of the game
 export const KICKED = "KICKED";
 
-
 export const LOGGED_IN = "LOGGED_IN";
-

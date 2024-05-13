@@ -9,9 +9,10 @@ import { useUserData } from "../../Utiles/useUserData.jsx";
 import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
 const GameActionButtons = ({}) => {
-  //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet 
-  
-  const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } = useGameTable();
+  //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet
+
+  const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } =
+    useGameTable();
   console.log("gameCurrentBet :", gameCurrentBet);
   const { getTranslatedWord } = useTranslation();
   //checkValue = true -> Check
@@ -47,7 +48,7 @@ const GameActionButtons = ({}) => {
   const handleFold = () => {
     dispatch(actions.fold());
   };
-//AVANT Y AVAIS JUSTE amount, mais ça marche pas super 
+  //AVANT Y AVAIS JUSTE amount, mais ça marche pas super
   const handleBet = (amount) => {
     console.log("amount :", amount);
     amount = Math.round(amount);
@@ -60,8 +61,8 @@ const GameActionButtons = ({}) => {
     if (gameCurrentBet > 0) {
       return `${getTranslatedWord(
         "gameActionPanel.call"
-  //----------------------------------------------------AJOUT LA SOUSTRACTION DU BET DU JOUEUR ACUTELLE      
-      )} ${gameCurrentBet-gamePlayerCurrentBet} SC`;
+        //----------------------------------------------------AJOUT LA SOUSTRACTION DU BET DU JOUEUR ACUTELLE
+      )} ${gameCurrentBet - gamePlayerCurrentBet} SC`;
     } else {
       return getTranslatedWord("gameActionPanel.check");
     }
@@ -70,8 +71,8 @@ const GameActionButtons = ({}) => {
   const handleCheckOrCall = () => {
     if (gameCurrentBet > 0) {
       // Si il y a un currentBet, effectue une action "Call"
-  //-----------------------------------------------------------------------LA AUSSI    
-      dispatch(actions.bet(gameCurrentBet-gamePlayerCurrentBet));
+      //-----------------------------------------------------------------------LA AUSSI
+      dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
     } else {
       // Sinon, effectue une action "Check"
       dispatch(actions.check());
@@ -92,8 +93,8 @@ const GameActionButtons = ({}) => {
     } else {
       setShowPopup(false);
       if (raiseCoin !== 0) {
-        if(gamePlayerCurrentBet >= gameCurrentBet) handleBet((raiseCoin));
-        else handleBet((raiseCoin+(gameCurrentBet-gamePlayerCurrentBet)));
+        if (gamePlayerCurrentBet >= gameCurrentBet) handleBet(raiseCoin);
+        else handleBet(raiseCoin + (gameCurrentBet - gamePlayerCurrentBet));
       }
       // setRaiseCoin(0);
       // setCoins(coinsAfterRaise);
@@ -165,7 +166,7 @@ const GameActionButtons = ({}) => {
           styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
           onClick={() => togglePopupAndRaise()}
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
-            !isFocus && amount !== 0            
+            !isFocus && amount !== 0
               ? `${Math.round(amount)} SC`
               : `${raiseCoin ? Math.round(raiseCoin) + " SC" : ""}`
           }`}

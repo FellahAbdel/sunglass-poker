@@ -375,6 +375,30 @@ const gameReducer = (state = initialState, action) => {
         }
       }
       return { ...state };
+
+    case actions.ACTIVATE_BONUS:
+      csl.log(
+        "Handling ACTIVATE_BONUS action for player",
+        action.payload.playerId,
+        "in room",
+        action.payload.room
+      );
+      if (action.payload && action.payload.playerId) {
+        const room = state.rooms[action.payload.room];
+        const player = room.players.find(
+          (p) => p.getPlayerId() === action.payload.playerId
+        );
+
+        if (player) {
+          room.game.activateBonus(player);
+        } else {
+          console.error("Player not found for the bonus activation action");
+        }
+      } else {
+        console.error("Invalid payload for bonus activation action");
+      }
+      return { ...state };
+
     case actions.PLAYER_PLAYED:
       state.rooms[action.payload.room].game.playerPlayed();
       return { ...state};

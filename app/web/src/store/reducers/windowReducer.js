@@ -23,12 +23,10 @@ const getIsWindowOpen = () => {
   const storedWindowType = sessionStorage.getItem("windowType");
   if (storedWindowType === "alert") {
     return false;
-  }
-  else{
+  } else {
     return storedWindowType;
   }
 };
-
 
 const loadInitialState = () => {
   return {

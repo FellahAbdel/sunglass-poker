@@ -9,6 +9,7 @@ module.exports.END_ROUND = "END_ROUND";
 module.exports.RESET_GAME = "RESET_GAME";
 module.exports.SHOW_CARD = "SHOW_CARD";
 module.exports.HIDE_CARD = "HIDE_CARD";
+module.exports.ACTIVATE_BONUS = "ACTIVATE_BONUS";
 
 module.exports.LEAVE_ROOM = "LEAVE_ROOM";
 module.exports.LEFT_ROOM = "LEFT_ROOM";
@@ -56,5 +57,6 @@ module.exports.PLAYER_GAME_ACTION_LIST = [
   module.exports.RAISE,
   module.exports.SHOW_CARD,
   module.exports.HIDE_CARD,
+  module.exports.ACTIVATE_BONUS,
 ];
 

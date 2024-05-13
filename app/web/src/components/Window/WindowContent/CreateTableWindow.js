@@ -13,13 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createGameV2 } from "../../../store/actions/clientInteractionsCreator.js";
 
 const CreateGameWindow = () => {
-  const {
-    openWindow,
-    showGameTable,
-    closeWindow,
-    setWindowType,
-    openSuccessWindow,
-  } = useWindowContext();
+  const { openWindow, showGameTable, closeWindow, setWindowType } =
+    useWindowContext();
   const { createGameRoom, user } = useAuth();
 
   const dispatch = useDispatch();
@@ -33,7 +28,7 @@ const CreateGameWindow = () => {
     closeWindow();
     setWindowType("");
   };
-  
+
   useEffect(() => {
     if (gameCreated) {
       displayGameRoom();

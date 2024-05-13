@@ -5,7 +5,7 @@ import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../Utiles/Translations";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import TextInputComponent from "../../textInput/TextInput.jsx";
@@ -16,8 +16,7 @@ const ServerPanelWindow = () => {
 
   const { closeWindow, showGameTable, setWindowType } = useWindowContext();
 
-  const { getRoomTableRecords } = useAuth();
-  const { isLogged } = useAuth();
+  const { getRoomTableRecords, isLogged } = useAuth();
   const [roomTableRecords, setRoomTableRecords] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);

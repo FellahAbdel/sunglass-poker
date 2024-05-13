@@ -40,21 +40,21 @@
   }
 }
 
-.container-profileMessage{
+.container-profileMessage {
   position: absolute;
   top: 50%;
   z-index: -1;
   opacity: 0;
-  transition: opacity 0.5s ease ,top 0.5s ease;
+  transition: opacity 0.5s ease, top 0.5s ease;
 }
-.profileMessageShow{
+.profileMessageShow {
   border: 0.15vw solid white;
   border-bottom: 0;
-  border-radius: 0.5vw 0.5vw 0 0 ;
+  border-radius: 0.5vw 0.5vw 0 0;
   color: white;
   font-size: 1vw;
   padding: 2% 5% 9% 5%;
-  top:-30%;
+  top: -30%;
   opacity: 1;
 }
 
@@ -150,14 +150,13 @@
   background-color: #a57423;
   box-shadow: inset 0 0 10px 1px #a57423, 0 0 10px 1px #a57423;
 }
-.profilePic img#crown{
+.profilePic img#crown {
   width: 3.3vw;
   position: absolute;
-  top:-50%;
-  left:-25%;
+  top: -50%;
+  left: -25%;
   rotate: -15deg;
 }
-
 
 .profilePic.folded {
   filter: saturate(0);
@@ -169,8 +168,6 @@
 .box-playerInfo.folded {
   color: rgb(88, 88, 88);
 }
-
-
 
 .progressBar {
   position: absolute;
@@ -216,8 +213,8 @@
   font-size: 1vw;
   border: unset;
 }
-.box-playerInfo p{
-  margin:0;
+.box-playerInfo p {
+  margin: 0;
   margin-bottom: 7%;
 }
 
@@ -237,10 +234,10 @@
     0px 4px 2px rgba(0, 0, 0, 0.09), 0px 8px 4px rgba(0, 0, 0, 0.09),
     0px 16px 8px rgba(0, 0, 0, 0.09);
 }
-#light .box-playerInfo.you{
+#light .box-playerInfo.you {
   outline: 0.2vw solid var(--color1-light);
 }
-#dark .box-playerInfo.you{
+#dark .box-playerInfo.you {
   outline: 0.2vw solid var(--color1-dark);
 }
 .profilePic {
@@ -277,14 +274,15 @@
   transform: rotate(-20deg);
   transform-origin: unset;
   position: absolute;
-  transition: transform 1s ease, opacity 1s ease 0.5s, left 2s ease , bottom 1s ease;
+  transition: transform 1s ease, opacity 1s ease 0.5s, left 2s ease,
+    bottom 1s ease;
 }
 .cardPlayers1 .cardContainer .cardNumber,
-.cardPlayers2 .cardContainer .cardNumber{
+.cardPlayers2 .cardContainer .cardNumber {
   font-size: 0.8vw;
   left: 10%;
-  top:10%;
-  gap:0.2vh;
+  top: 10%;
+  gap: 0.2vh;
 }
 .playerCardAppear {
   opacity: 100;
@@ -310,4 +308,3 @@
   left: 45%;
   bottom: -60%;
 }
-

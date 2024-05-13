@@ -10,13 +10,11 @@ import SuccessWindow from "./WindowContent/SuccessWindow";
 import TutorialWindow from "./WindowContent/TutorialWindow";
 import SettingsWindow from "./WindowContent/SettingsWindow";
 import ProfileWindow from "./WindowContent/ProfileWindow";
-import StatsWindow from "./WindowContent/StatsWindow";
 import ServerPanelWindow from "./WindowContent/ServerPanel";
 import CreateTableWindow from "./WindowContent/CreateTableWindow";
 import ShopWindow from "./WindowContent/shopWindows/ShopWindow";
 import BuyCoinsWindow from "./WindowContent/shopWindows/BuyCoins";
 import ValidationWindow from "./WindowContent/shopWindows/ValidationWindow";
-// import AcceuilWindow from "./WindowContent/AccueilWindow";
 import AcceuilWindow from "./WindowContent/AcceuilWindow";
 import AlertWindow from "./WindowContent/AlertWindow";
 import RankingWindow from "./WindowContent/RankingWindow";
@@ -45,12 +43,11 @@ const Window = () => {
         {windowType === "tutorial" && <TutorialWindow />}
         {windowType === "settings" && <SettingsWindow />}
         {windowType === "profile" && <ProfileWindow />}
-        {windowType === "stats" && <StatsWindow />}
         {windowType === "servers" && <ServerPanelWindow />}
         {windowType === "create_table" && <CreateTableWindow />}
         {windowType === "shop" && <ShopWindow />}
         {windowType === "validation" && <ValidationWindow />}
-        {(windowType==="" && !isGameTableVisible) && <AcceuilWindow />}
+        {windowType === "" && !isGameTableVisible && <AcceuilWindow />}
         {windowType === "alert" && <AlertWindow />}
         {windowType === "ranking" && <RankingWindow />}
         {windowType === "coins" && <BuyCoinsWindow />}

@@ -1,5 +1,5 @@
 .container-text-tutorial {
-  overflow: hidden; /* Hide any overflowing content */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;

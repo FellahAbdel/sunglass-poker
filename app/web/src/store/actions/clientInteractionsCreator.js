@@ -25,7 +25,6 @@ export const startGame = (userId) => {
   };
 };
 
-
 /**
  * Should include the possible argument to create a game.
  * Rules, Gamedesc, Name etc... need to be added to the game Object too.
@@ -42,6 +41,10 @@ export const createGameV2 = (gameRoomId) => ({
 
 export const fold = () => ({
   type: actions.FOLD,
+});
+
+export const activateBonus = () => ({
+  type: actions.ACTIVATE_BONUS,
 });
 
 export const showCard = (cardIndex) => ({

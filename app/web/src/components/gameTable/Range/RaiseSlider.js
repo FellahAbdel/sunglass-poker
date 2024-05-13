@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react'; // Import useState
+import React, { useState, useEffect } from "react"; // Import useState
 import Styles from "./raiseSlider.module.css";
 
-const RaiseSlider = ({ onSliderChange , initialValue }) => {
-  const [sliderValue, setSliderValue] = useState(1); 
+const RaiseSlider = ({ onSliderChange, initialValue }) => {
+  const [sliderValue, setSliderValue] = useState(1);
 
   const handleSliderChange = (event) => {
     const value = event.target.value;
     setSliderValue(value);
-    onSliderChange(value); 
+    onSliderChange(value);
   };
   useEffect(() => {
-    setSliderValue(initialValue); 
+    setSliderValue(initialValue);
   }, [initialValue]);
 
   return (
@@ -26,7 +26,7 @@ const RaiseSlider = ({ onSliderChange , initialValue }) => {
           value={sliderValue}
           onChange={handleSliderChange}
         />
-        <div className={`${Styles.maxValue}`}>{sliderValue}%</div> 
+        <div className={`${Styles.maxValue}`}>{sliderValue}%</div>
       </div>
     </div>
   );

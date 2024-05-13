@@ -84,12 +84,42 @@ io.engine.use(Middleware);
 // Port du server
 const port = ENV_CONST_COMM.ENV_PORT_SERVER;
 
+
+// Retrieve command line arguments
+const args = process.argv.slice(2); // Exclude 'node' and 'web.js' from arguments
+
+let configserver = {
+    port_web:3000,
+    port_api:3001,
+}
+
+// Check if a parameter is provided
+if (args.length > 0) {
+    // Access the parameter (e.g., 'vm')
+    const parameter = args[0];
+
+    // Use the parameter as needed
+    console.log(`Parameter specified: ${parameter}`);
+    if(parameter === "vm"){
+        console.log("Starting in VM environnement")
+        configserver = {
+            port_web: 80,
+            port_api:10002
+        }
+    }
+} else {
+    // No parameter provided
+    console.log('No parameter specified.');
+}
+
+console.log("Starting with parameters : ",configserver);
+
 // router
 const router = require('./routes/apiroutes')(app,db,gameController);
 
 /** Démarrage du serveur.
  *
  */
-server.listen(port, () => {
-  console.log("Server is running on port " + port);
+server.listen(configserver.port_api, () => {
+  console.log("Server is running on port " + configserver.port_api);
 });
