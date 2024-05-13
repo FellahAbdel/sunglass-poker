@@ -164,6 +164,8 @@
 
 2024/05/13  1H      Mise en commun de tout les bugs et post sur discord de tt ce qu'il reste a faire pour le rendu final, discussion avec le groupe et écahnge sur les problèmes et autres...
 
---2024/05 SEMAINE 2: 7H (TOTAL: 120H30)
+2024/05/14 30min    recap avec Victor et quelque test supplémentaire sur la VM ajout de certain truc a regler pour le rendu
 
-TEMPS TOTAL: 120H30
+--2024/05 SEMAINE 2: 7H30 (TOTAL: 121H)
+
+TEMPS TOTAL: 121H
