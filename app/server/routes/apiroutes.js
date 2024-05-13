@@ -312,4 +312,20 @@ module.exports = (app, dao, gameController) => {
       res.status(500).json({ error: "Internal server error" });
     }
   });
+
+  app.get("/verify/:id/:token", async (req, res) => {
+    try {
+      
+      const result = await dao.verifyToken(req.params.id, req.params.token);
+      if (result.success) {
+        res.json(result);
+      } else {
+        res.status(400).json(result);
+      }
+  
+    } catch (error) {
+      console.error("Error verifying account");
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
 };

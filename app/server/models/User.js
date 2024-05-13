@@ -20,6 +20,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
     coins: {
       type: Number,
       required: true,

@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const crypto = import("crypto");
 const saltRounds = 10;
 
 // Modèles Mongoose
@@ -9,10 +10,13 @@ const UserModel = require("./User");
 const StatModel = require("./Stat");
 const ItemModel = require("./Item");
 const GameDescriptionModel = require("./GameDescription");
+const TokenModel = require("./Token");
 
 // Initialisation des items (si nécessaire)
 const initItems = require("./initItems");
 const resetServer = require("./resetServer");
+
+const nodemailer = require("nodemailer");
 
 const csl = require("../controller/intelligentLogging");
 // csl.silenced('bdd');
@@ -102,6 +106,16 @@ module.exports = function (app, bdd) {
         await newStat.save();
         savedUser.stat = newStat._id;
         await savedUser.save();
+
+        // creation du token associe au compte
+        let token = await new TokenModel({
+          userId: savedUser._id,
+          token: crypto.randomBytes(32).toString("hex"),
+        }).save();
+
+        // envoi du mail de confirmation
+        const message = `${process.env.BASE_URL}/user/verify/${savedUser.id}/${token.token}`;
+        await sendMail(savedUser.email, "Verify Email", message);
 
         return savedUser;
       } catch (error) {
@@ -609,6 +623,58 @@ module.exports = function (app, bdd) {
         throw error;
       }
     },
+
+    sendMail: async function(emailDest, subject, text) {
+      try {
+        const transporter = nodemailer.createTransport({
+          host: process.env.MAIL_HOST,
+          //service: process.env.MAIL_SERVICE,
+          port: 587,
+          secure: true,
+          auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS,
+          },
+        });
+    
+        await transporter.sendMail({
+          from: process.env.MAIL_USER,
+          to: emailDest,
+          subject: subject,
+          text: text,
+        });
+        console.log("email sent sucessfully");
+      } catch (error) {
+        console.log("email not sent");
+        console.log(error);
+      }
+    },
+
+    verifyMail: async function (userId, token) {
+      try {
+        // on verifie que le compte existe
+        const user = await UserModel.findById(userId);
+        if (!user) return { success: false, error: "Invalid link" };
+        
+        // on verifie que le token est valide
+        const vtoken = await TokenModel.findOne({
+          userId: user._id,
+          token: token,
+        });
+        if (!vtoken) return { success: false, error: "Invalid link" };
+        
+        // on met a jour la bdd
+        await UserModel.updateOne({ _id: user._id, verified: true });
+        await TokenModel.findByIdAndRemove(token._id);
+    
+        // le compte a correctement ete verifie
+        return { success: true }
+
+      } catch (error) {
+        console.error("Couldn't verify user account");
+        return { success: false, error: "An error occured" }
+      }
+    }
   };
   dao.verifyGamePassword = async (roomId, password) => {
     try {
