@@ -16,8 +16,7 @@ const ServerPanelWindow = () => {
 
   const { closeWindow, showGameTable, setWindowType } = useWindowContext();
 
-  const { getRoomTableRecords } = useAuth();
-  const { isLogged } = useAuth();
+  const { getRoomTableRecords, isLogged } = useAuth();
   const [roomTableRecords, setRoomTableRecords] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);

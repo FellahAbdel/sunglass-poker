@@ -484,6 +484,35 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const fetchRankings = async (pageNum, nbResults = 10) => {
+    try {
+      const response = await fetch(`/api/get-all-ranking?page=${pageNum}&nbres=${nbResults}`, {
+        method: "GET",
+        headers: {
+          ...getAuthHeaders(),
+        },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch rankings.");
+      }
+
+      return {
+        success: true,
+        rankings: data.data,
+        hasMore: data.data.length === nbResults,
+      };
+    } catch (error) {
+      console.error("Error fetching rankings:", error);
+      return {
+        success: false,
+        message: error.message || "An error occurred while fetching rankings.",
+      };
+    }
+  };
+
 
   return (
     <AuthContext.Provider
@@ -509,7 +538,8 @@ export const AuthProvider = ({ children }) => {
         updateUserCoins,
         // fetch available rooms
         getAvailableRooms,
-        verifyGamePassword
+        verifyGamePassword,
+        fetchRankings
       }}
     >
       {children}
