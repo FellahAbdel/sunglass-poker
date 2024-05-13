@@ -113,6 +113,8 @@ const gameReducer = (state = initialState, action) => {
         const updatedPlayers = state.rooms[room].players.filter(
           (player) => player.getPlayerId() !== playerId
         );
+
+        // state.rooms[room].game.players = updatedPlayers;
         // If the player who leave was the master we change the master.
         // But only if there is still at least one player in the room.
         csl.log("leaveRoom", " srggm : ", state.rooms[room]);
@@ -251,6 +253,7 @@ const gameReducer = (state = initialState, action) => {
       if (action.payload.tableId !== undefined) {
         if (state.rooms.hasOwnProperty(action.payload.tableId)) {
           delete state.rooms[action.payload.tableId];
+            csl.log(fileType, "Room " + action.payload.tableId + " deleted successfully");
         }
       }
       return {
