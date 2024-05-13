@@ -1,24 +1,19 @@
 //react imports
 import React, { useState } from "react";
-
 //css
 import "./navbarV2.css";
 //components
-//import ChipsCash from "./ChipsCash";
 import Button from "../button/Button.tsx";
 import TextInputComponent from "../textInput/TextInput.jsx";
 import { useTranslation } from "../Utiles/Translations";
 import { useAuth } from "../Utiles/AuthProvider";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
-import { useUserData } from "../Utiles/useUserData.jsx";
 import * as actions from "../../store/actions/clientInteractionsCreator.js";
 import { useDispatch } from "react-redux";
-import { comm } from "../../services/socket.js";
 import { useGameTable } from "../Utiles/GameTableProvider.jsx";
 
 const Navbar = ({}) => {
   const { isLogged, logingOut } = useAuth();
-  const { showGameTable } = useWindowContext();
   const { gameState } = useGameTable();
 
   const dispatch = useDispatch();
@@ -33,10 +28,6 @@ const Navbar = ({}) => {
     dispatch(actions.leaveRoom());
   };
 
-  const handleRefreshGame = () => {
-    comm.refresh();
-    showGameTable();
-  };
   const {
     isGameTableVisible,
     closeWindow,
@@ -45,7 +36,6 @@ const Navbar = ({}) => {
     windowType,
     isWindowOpen,
   } = useWindowContext();
-  const { user } = useUserData();
 
   const handleLogOutButton = () => {
     console.log("handleLogOutButton :", windowType);
@@ -56,8 +46,6 @@ const Navbar = ({}) => {
         message: "alert.logout",
         onConfirm: () => {
           console.log("User confirms log out");
-
-       
 
           logingOut();
           showHome();
@@ -162,13 +150,8 @@ const Navbar = ({}) => {
               </>
             )}
           </div>
-          {/* {windowType === "shop" && <p  className={`box-chips-V2`}>{user.coins} SC</p>} */}
         </div>
       )}
-
-      {/* Profile/LogIn Button 
-      isLogged ? userData.user.avatar : 
-      */}
 
       <div className="container-navMain-V2">
         {isLogged && (
@@ -201,13 +184,6 @@ const Navbar = ({}) => {
           onClick={() => openWindow("settings")}
           styleClass={`${isLogged ? "btn-settings-V2 " : "btn-settings-V2 "}`}
           iconSrc={require("./../assets/images/icons/white/settings.png")}
-        />
-
-        <Button
-          label={"REFRESH GAME PAGE"}
-          onClick={() => handleRefreshGame()}
-          styleClass={`${isLogged ? "btn-settings-V2 " : "btn-settings-V2 "}`}
-          iconSrc={require("./../assets/images/icons/white/password-repeat.png")}
         />
 
         {isLogged && !isGameTableVisible && (
