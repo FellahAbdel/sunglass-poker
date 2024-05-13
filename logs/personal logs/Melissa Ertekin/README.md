@@ -162,3 +162,6 @@
 
 * 2024/05/12 : <b>2h</b> <br/> Travail individuel : <i> Surveillance projet. Travaille sur la partie communucation de projet. Continuée sur les documents de la communucation. Creation des représentations graphiques des faux kpis.  </i>
 
+* 2024/05/13 : <b>30mins</b> <br/> Travail individuel : <i> Rédaction du compte-rendu hebdomadaire. </i>
+
+* Durant la semaine : <b>1h</b> <br/> Discussions sur discord: <i> Échanges sur le projet</i> 
