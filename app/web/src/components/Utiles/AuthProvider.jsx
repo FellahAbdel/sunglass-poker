@@ -7,7 +7,7 @@ const AuthContext = createContext();
 const CORSSETTINGS = {
   method: "POST",
   mode: "cors",
-  origin: "http://localhost:3000",
+  origin: "http://localhost:10002",
   headers: {
     "Content-Type": "application/json",
   },
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await fetch("http://localhost:3001/api/login", {
+      const response = await fetch("api/login", {
         ...CORSSETTINGS,
         body: JSON.stringify(credentials),
       });

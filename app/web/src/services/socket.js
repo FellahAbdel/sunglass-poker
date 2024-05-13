@@ -2,8 +2,10 @@
 import io from "socket.io-client";
 import store from "../store/configureStore";
 
-const socket = io("http://localhost:3001", {
+const socket = io("https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrp9-1/socketio/", {
   withCredentials: true,
+  path:"/vmProjetIntegrateurgrp9-1/socketio/",
+  transports: ["polling"]
 });
 
 /** Fonction de test de communication entre le front et le back

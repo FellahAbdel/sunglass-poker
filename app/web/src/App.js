@@ -16,7 +16,7 @@ import { GameTableProvider } from "./components/Utiles/GameTableProvider";
 function App() {
   return (
     <WindowProvider>
-      <Router>
+      <Router basename='vmProjetIntegrateurgrp9-1/'>
         <AuthProvider>
           <SettingsProvider>
             <GameTableProvider>
