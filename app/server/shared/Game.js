@@ -30,7 +30,7 @@ class Game {
       playerBeforeNextTurn:null,
       focusTurnTimer: 0,
       focusTurnCall: false,
-      autoTurnDelay: 2000000,//00 en plus
+      autoTurnDelay: 20000,
       restartCall: false,
       restartTimer: 0,
       restartDelay: 5000,
