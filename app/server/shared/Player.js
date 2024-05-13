@@ -18,6 +18,7 @@ class Player {
     currentBetTurn = 0,
     isActive = true,
     isSpectator = false
+    // isTapis=false
   ) {
     this.playerId = playerId;
     this.name = name;
@@ -29,6 +30,7 @@ class Player {
     this.isActive = isActive;
     this.isYou = false;
     this.isAfk = false;
+    // this.isTapis=isTapis;
     this.isSpectator = isSpectator;
   }
 
@@ -40,6 +42,16 @@ class Player {
     this.isAfk = false;
     this.isActive = true;
   }
+
+  // setTapis(){
+  //   this.isTapis = true;
+  //   this.isActive = false;
+  // }
+
+  // unsetTapis(){
+  //   this.isTapis = false;
+  //   this.isActive = true;
+  // }
 
   statusFor(id) {
     const view = {
@@ -199,6 +211,10 @@ class Player {
 
   call() {
     this.status = "call";
+  }
+
+  tapis(){
+    this.status="tapis";
   }
 
   playing() {

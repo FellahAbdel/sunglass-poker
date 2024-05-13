@@ -333,17 +333,30 @@ class Game {
       if (player.getPlayerMoney() >= amount) {
         //Cas ou il ajoute a sa mise pour s'équilibrer au autre
         if (amount + player.howmanyBetTurn() >= this.gameCurrentBet) {
+          // if(amount + player.howmanyBetTurn()===player.getPlayerMoney()){
+          //   player.tapis();
+          //   console.log("TAPIS");
+          // }
           player.bet(amount);
           this.total += amount;
           //on met le max a la mise a mettre
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();
-            player.raise();
-            console.log("lefocus avant le raise:", this.focus);
-            this.playerBeforeNextTurn = this.players.findIndex(
-              (p) => p.getPlayerId() === player.getPlayerId()
-            );
-            console.log("lefocus apres le raise", this.focus);
+            
+            // if(amount + player.howmanyBetTurn()===player.getPlayerMoney()){
+            //   player.tapis();
+            //   player.
+            // }
+            // else{
+              player.raise();
+              this.playerBeforeNextTurn = this.players.findIndex(
+                (p) => p.getPlayerId() === player.getPlayerId()
+              );
+
+            // }
+            
+            //console.log("lefocus avant le raise:", this.focus);
+            //console.log("lefocus apres le raise", this.focus);
           }
         } else {
           return;
