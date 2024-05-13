@@ -25,7 +25,7 @@ class Game {
       total: 0,
       nbhostfolded: 0,
       gameCurrentBet: 0,
-      startingPlayerIndex: -1,
+      startingPlayerIndex: 0,
       playerBeforeNextTurn:null,
       focusTurnTimer: 0,
       focusTurnCall: false,
@@ -221,7 +221,8 @@ class Game {
           "et le starting:",
           this.startingPlayerIndex
         );                      //+nbhostfolded
-        this.focus = this.startingPlayerIndex ;
+        this.focus = this.startingPlayerIndex+this.nbhostfolded;
+        this.playerBeforeNextTurn=this.focus;
 
         //SI on est PAS  dans end ou shodown
         if (this.currentStage !== "end" && this.currentStage !== "showdown") {
@@ -293,11 +294,12 @@ class Game {
       if (this.activePlayers.length < 2) {
         this.advanceStageToShowdown();
         return;
-      }                     //+nbhostfolded
-      if (this.focus === this.startingPlayerIndex ) {
-        
+      }                    
+      if (this.focus === this.playerBeforeNextTurn+this.nbhostfolded ) {
+        console.log("JE SUIS",this.focus);
         this.rotateFocus();
-        //this.nbhostfolded++;
+        this.nbhostfolded++;
+        //this.playerBeforeNextTurn=this.focus;
 
       } else {
         this.rotateFocus();
@@ -306,11 +308,12 @@ class Game {
   }
 
   check(player) {
-    console.log("PAR ICI");
+    console.log("AAA");
     if (this.isPlayersTurn(player.getPlayerId())) {
+      console.log("BBB",this.gameCurrentBet);
       if (this.gameCurrentBet === 0) {
+        console.log("CCC");
         player.check();
-        //this.gameCurrentBet = 0; // Pour que le joueur suivant puisse vérifier s'il le souhaite.
         this.rotateFocus();
       }
     }
@@ -433,6 +436,7 @@ class Game {
     }
     clearTimeout(this.restartCall);
 
+    this.currentStage = "preflop";
     this.state = "active";
     this.rotateStartingPlayer();
     this.focus = this.startingPlayerIndex;
@@ -461,9 +465,12 @@ class Game {
     console.log("nextPlayer: ", nextPlayer);
     nextPlayer.betinitial(this.gameCurrentBet);
     this.total += this.gameCurrentBet;
+    
     this.rotateFocus();
+    this.playerBeforeNextTurn=this.focus;
 
-    this.currentStage = "preflop";
+    //OU ICI 
+
 
     //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
 
