@@ -13,8 +13,6 @@ import {
   joinRoom,
 } from "../../../store/actions/clientInteractionsCreator.js";
 
-import "./acceuil.css";
-
 const AcceuilWindow = () => {
   const { isLogged, getAvailableRooms } = useAuth();
   const { closeWindow, openWindow, showGameTable, setWindowType } =
