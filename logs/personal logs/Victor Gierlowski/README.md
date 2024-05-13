@@ -140,13 +140,20 @@
 | 7 mai | 4 Heures | Stand-up meeting, définitions des taches de chacun, échange des bugs connue, fixation des dates et des objectifs. Répartition de taches avec Noé et Aziz sur des fonctionnalités non finalisé. Tests des VM| --
 | 9 mai | 6 Heures | Le joueur peut rejoindre sa partie déjà en cours, en join ou avec le bouton de refresh. Correction du bug qui liée la mémoire de deux partie différente du à l'objet initialState. Travail sur les  VM et les proxys mais impossible de résoudre le problème, il faudra contacter le responsable réseau, installations des dépendances et lib sur un autre serveur externe en secours pour préparer le déploiement mais manque de port à l'ouverture. Ajout d'affichage de timer sur le frontend + tour automatique pour les joueurs trop lent. Blocage des parties pendant le jeu et déblocage lors du redémarage après gagnant.| --
 | 10 mai | 6 Heures | Travail en réunion avec Mael. Echanges avec les divers équipes sur les bugs et solutions critiques. Solution pour plusieurs bugs important. Ajout des status AFK, détection automatique, suppression automatique des joueurs. | --
+| 11 mai | 2 Heures | Avancer sur divers bugs et sur les afk. Réécriture définission d'une méthode pour convenir à la version finale proche.| --
+| 12 mai | 2 Heures | Ajout de serverName. Aide au débug avec Mael . déblocage de quelques soucis.| --
 
-| TOTAL | 18 Heures || --
+| TOTAL | 22 Heures || --
 
+## Seizième semaine
+| Date | Temps passé | Description | Ressources |
+|:-------|:--:|:----: |--:|
+| 13 mai | 6 Heures | Préparation de la version finale déployable sur les VM. Résolutions des problèmes de proxy avec socketio. Correction de bugs d'appels API et socket. Rédaction des objectifs, de la situation actuelle et du fonctionnement du serveur.| --
+| TOTAL | 6 Heures || --
 
 
 
 ____
 
 # Total des heures : 
-> ## 150 Heures
+> ## 172 Heures
