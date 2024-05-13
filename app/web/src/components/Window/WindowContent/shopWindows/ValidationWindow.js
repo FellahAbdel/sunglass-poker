@@ -8,7 +8,7 @@ import { useUserData } from "../../../Utiles/useUserData";
 
 const ValidationWindow = () => {
   const { getTranslatedWord } = useTranslation();
-  const { buyItem, fetchUserInfo } = useAuth();
+  const { buyItem } = useAuth();
 
   const { loadUserStats, user } = useUserData();
 
@@ -50,11 +50,10 @@ const ValidationWindow = () => {
         <p>
           {getTranslatedWord("shop.confirmationMessage")} {selectedItem.price}{" "}
           coins?
-          <br/>
-          <b>{getTranslatedWord("shop.afterTransaction")}: {finalCoins} SC</b>
-
-
-
+          <br />
+          <b>
+            {getTranslatedWord("shop.afterTransaction")}: {finalCoins} SC
+          </b>
         </p>
         <div className="container-ValidationButtons">
           <Button

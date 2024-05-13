@@ -5,7 +5,7 @@ import { useTranslation } from "../../Utiles/Translations";
 
 
 const AlertWindow = () => {
-  const { alertParams, closeWindow } = useWindowContext();
+  const { alertParams } = useWindowContext();
   const { message, onConfirm, onCancel } = alertParams;
   const { getTranslatedWord } = useTranslation();
 

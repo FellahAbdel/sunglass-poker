@@ -8,7 +8,12 @@ function TextGlitch({ children, styleClass, glitchStyle }) {
   return (
     <div className={styleClass}>
       <div className={`${animation ? "glitch-wrapper" : ""}`}>
-        <div className={`${animation ? `glitch ${glitchStyle}` : "noAnimationGlitch" }`} data-glitch={children}>
+        <div
+          className={`${
+            animation ? `glitch ${glitchStyle}` : "noAnimationGlitch"
+          }`}
+          data-glitch={children}
+        >
           {children}
         </div>
       </div>

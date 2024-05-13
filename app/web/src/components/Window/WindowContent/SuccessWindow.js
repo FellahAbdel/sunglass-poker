@@ -12,11 +12,7 @@ const SuccessWindow = () => {
     <div className="main-SuccessWindow">
       <p>{getTranslatedWord(successMessage)}</p>
 
-      <Button
-        styleClass="btn-successWindow"
-        label="OK"
-        onClick={closeWindow}
-      />
+      <Button styleClass="btn-successWindow" label="OK" onClick={closeWindow} />
     </div>
   );
 };

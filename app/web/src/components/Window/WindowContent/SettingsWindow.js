@@ -6,8 +6,16 @@ import { useTranslation } from "../../Utiles/Translations";
 const SettingsWindow = () => {
   const { getTranslatedWord } = useTranslation();
 
-  const { theme, sound, animation,language, toggleTheme, toggleSound, toggleAnimation,changeLanguage } =
-    useSettings();
+  const {
+    theme,
+    sound,
+    animation,
+    language,
+    toggleTheme,
+    toggleSound,
+    toggleAnimation,
+    changeLanguage,
+  } = useSettings();
 
   const [themeDark, setThemeDark] = useState();
   useEffect(() => {
@@ -21,9 +29,8 @@ const SettingsWindow = () => {
     <div className="settingsMenu">
       <h1>{getTranslatedWord("navbar.settings")}</h1>
       <div className="container-settingsParameteres">
-        
         <span className="container-switchSettings">
-        <p>{getTranslatedWord("settings.sound")}</p>
+          <p>{getTranslatedWord("settings.sound")}</p>
 
           <label className="switch">
             <input type="checkbox" checked={sound} onChange={toggleSound} />
@@ -32,16 +39,19 @@ const SettingsWindow = () => {
         </span>
 
         <span className="container-switchSettings">
-        <p>{getTranslatedWord("settings.animations")}</p>
+          <p>{getTranslatedWord("settings.animations")}</p>
           <label className="switch">
-            <input type="checkbox" checked={animation} onChange={toggleAnimation} />
+            <input
+              type="checkbox"
+              checked={animation}
+              onChange={toggleAnimation}
+            />
             <span className="slider" />
           </label>
         </span>
 
-
         <span className="container-switchSettings container-switch-theme">
-        <p>{getTranslatedWord("settings.theme")}</p>
+          <p>{getTranslatedWord("settings.theme")}</p>
 
           <label className="switch">
             <input type="checkbox" checked={themeDark} onChange={toggleTheme} />

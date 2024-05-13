@@ -1,9 +1,5 @@
 import React from "react";
 import "./profileMenu.css";
-//import ClientsProfile from "./../../gameTable/PlayersProfile/PlayersProfile";
-import Button from "../../button/Button.tsx";
-//import { useAuth } from "../../AuthProvider";
-import { useWindowContext } from "../../Utiles/WindowContext";
 import { useUserData } from "../../Utiles/useUserData";
 import { useTranslation } from "../../Utiles/Translations";
 import AvatarDisplay from "../../AvatarDisplay/AvatarDisplay.jsx";
@@ -11,12 +7,15 @@ import AvatarDisplay from "../../AvatarDisplay/AvatarDisplay.jsx";
 const ProfileWindow = () => {
   const { getTranslatedWord } = useTranslation();
 
-  const { openWindow } = useWindowContext();
   const { user } = useUserData();
 
   const date = new Date(user.createdAt);
-  const formattedDate = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
-  
+  const formattedDate = date.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
     <div className="profileMenu">
       <div className="userPP">
@@ -44,7 +43,7 @@ const ProfileWindow = () => {
           <br />
           {user?.coins}
           <br />
-          {formattedDate}          <br />
+          {formattedDate} <br />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import userReducer  from "./userReducer";
+import userReducer from "./userReducer";
 import clientInteractionsReducer from "./clientInteractionsReducer";
-import tableReducer from './tableReducer';
+import tableReducer from "./tableReducer";
 
 const rootReducer = combineReducers({
   user: userReducer,

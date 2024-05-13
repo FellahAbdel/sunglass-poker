@@ -5,20 +5,19 @@
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
-  gap:2vw;
-
+  gap: 2vw;
 }
-.container-hand{
+.container-hand {
   width: 15vw;
   height: 100%;
   margin-right: 1vw;
 }
-.container-showCardsButtons{
+.container-showCardsButtons {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap:1.5vh;
+  gap: 1.5vh;
 }
 
 .hand-guide {
@@ -54,7 +53,7 @@
   height: 100%;
   flex-direction: row;
   justify-content: center;
-  gap:1vw;
+  gap: 1vw;
   margin: 0 0 10% 0;
   z-index: 0;
 }
@@ -68,7 +67,7 @@
   transition: transform 2s ease;
   transform-style: preserve-3d;
 }
-.handCard .cardContainer .cardNumber{
+.handCard .cardContainer .cardNumber {
   font-size: 2vw;
   left: 5%;
 }

@@ -9,7 +9,7 @@
   width: 19.5vw;
   height: 5vh;
   font-size: 16px;
-  padding-left: 60px; 
+  padding-left: 60px;
   border-radius: 10px;
   border: 2px solid #ccc;
   background-color: rgba(237, 242, 247, 1);
@@ -28,7 +28,7 @@
   margin-top: 0.5vh;
   margin-bottom: 0;
 }
-.input-serverRoomPassword{
+.input-serverRoomPassword {
   width: 90%;
   height: 3vh;
   padding-left: 10%;
@@ -42,31 +42,31 @@
   border-bottom: 2px solid #f63e3e;
 }
 
-.container-textInputComponent2{
+.container-textInputComponent2 {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
-.container-textInputComponent2 p{
+.container-textInputComponent2 p {
   margin: 0;
   font-size: 1vw;
 }
-.input-searchBar{
+.input-searchBar {
   width: 20.5vw;
   height: 2vw;
   opacity: 0.5;
   background-color: var(--color1-light);
   border: unset;
-  padding-left: 35px; 
+  padding-left: 35px;
   border-radius: 10px 10px 0 0;
   transition: width 0.5s ease, height 0.5s ease, font-size 1s ease;
 }
-.input-searchBar::placeholder{
+.input-searchBar::placeholder {
   font-size: 1vw;
   margin: 0;
 }
-.input-searchBar::-webkit-input-placeholder{
+.input-searchBar::-webkit-input-placeholder {
   font-size: 1vw;
   margin: 0;
 }
@@ -109,7 +109,6 @@
   background-position: 15px;
   background-size: 2.5vh;
 }
-
 
 .input-chatBox {
   position: absolute;

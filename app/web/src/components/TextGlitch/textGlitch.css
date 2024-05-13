@@ -88,17 +88,17 @@
   color: #4d6478;
 }
 
-.noAnimationGlitch{
+.noAnimationGlitch {
   position: relative;
   font-size: 1.5vw;
   font-family: "Monaco", monospace;
   font-weight: bolder;
   letter-spacing: 0.5vw;
-  text-shadow:5px 5px 10px black;
+  text-shadow: 5px 5px 10px black;
 }
-#dark .noAnimationGlitch{
+#dark .noAnimationGlitch {
   color: var(--color2-dark);
 }
-#light .noAnimationGlitch{
+#light .noAnimationGlitch {
   color: var(--color1-light);
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "../../button/Button.tsx";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../Utiles/Translations';
+import { useTranslation } from "../../Utiles/Translations";
 
 const LeavingTableWindow = () => {
-  const { closeWindow,showHome, openSuccessWindow } = useWindowContext();
+  const { closeWindow, showHome, openSuccessWindow } = useWindowContext();
   const { getTranslatedWord } = useTranslation();
 
   const handleConfirmLeave = () => {

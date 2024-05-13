@@ -30,33 +30,14 @@
   transition: transform 1s ease 0.5s, right 2s ease;
   transform-style: preserve-3d;
 }
-.tableCard .cardContainer .cardNumber{
-  font-size:1.5vw;
+.tableCard .cardContainer .cardNumber {
+  font-size: 1.5vw;
 }
-/* .tableCard .cardContainer{
-  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.7);
-} */
-.flipped{
+
+.flipped {
   transition: none !important;
 }
-/*flipping animation*/
-/* .flipped {
-    transform: rotateY(-180deg);
-    transform-origin: center;
-}
-.tableCardBack , .tableCardFront{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;   
-    box-shadow: -5px 5px 10px black;
- 
-}
-.tableCardFront{
-    transform: rotateY(-180deg);
 
-} */
 .dealingFlop0 {
   display: flex;
   right: 85%;
@@ -206,7 +187,7 @@
 }
 
 /*Money pot container*/
-.container-playerPots{
+.container-playerPots {
   width: 100%;
   height: 100%;
   display: flex;
@@ -217,11 +198,10 @@
   font-weight: 600;
   z-index: unset;
 }
-#light .container-playerPots{
+#light .container-playerPots {
   color: black;
-
 }
-#dark .container-playerPots{
+#dark .container-playerPots {
   color: white;
 }
 
@@ -234,7 +214,7 @@
 
   position: absolute;
   top: 28%;
-  left:50%;
+  left: 50%;
 
   transform: translateX(-50%);
   font-size: 2vh;
@@ -242,13 +222,13 @@
   box-shadow: inset 0 0 8px black;
   z-index: 1;
 }
-#dark .container-totalPot{
+#dark .container-totalPot {
   color: #fff;
 }
-#light .container-totalPot{
+#light .container-totalPot {
   color: #000000;
 }
-.container-playerPots div{
+.container-playerPots div {
   width: fit-content;
   white-space: nowrap;
   border-radius: 1vh;
@@ -257,44 +237,44 @@
   position: absolute;
   display: flex;
 }
-#light .container-playerPots div{
+#light .container-playerPots div {
   background-color: rgba(255, 255, 255, 0.5);
 }
-.playerPot0{
-  top:18%;
+.playerPot0 {
+  top: 18%;
 }
-.playerPot1{
-  top:18%;
+.playerPot1 {
+  top: 18%;
   right: 23%;
 }
-.playerPot2{
-  top:30%;
+.playerPot2 {
+  top: 30%;
   right: 14%;
 }
-.playerPot3{
-  bottom:30%;
-  right:12%;
+.playerPot3 {
+  bottom: 30%;
+  right: 12%;
 }
-.playerPot4{
+.playerPot4 {
   bottom: 18%;
   right: 23%;
 }
-.playerPot5{
+.playerPot5 {
   bottom: 18%;
 }
-.playerPot6{
+.playerPot6 {
   bottom: 18%;
   left: 23%;
 }
-.playerPot7{
+.playerPot7 {
   bottom: 30%;
   left: 12%;
 }
-.playerPot8{
+.playerPot8 {
   top: 30%;
   left: 14%;
 }
-.playerPot9{
-  top:18%;
+.playerPot9 {
+  top: 18%;
   left: 23%;
 }

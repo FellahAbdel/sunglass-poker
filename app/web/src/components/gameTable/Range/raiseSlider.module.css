@@ -19,23 +19,6 @@
   width: 90%;
 }
 
-/* .range .field .minValue .maxValue{
-    position: absolute;
-    font-size: 2vh;
-    font-weight: 600;
-} 
-.minValue ,.maxValue{
-    color:white;
-}
-
- .range .field .minValue {
-    left: -22px;
-}
-
-.range .field .maxValue {
-    left: -43px;
-}  */
-
 .minValue,
 .maxValue {
   font-size: 100%;
@@ -80,36 +63,3 @@
     color: rgb(190, 190, 190);
   }
 }
-
-/* 
-.range .sliderValue{
-    position: relative;
-    width: 100%;
-}
-
-.range .sliderValue span{
-    position: absolute;
-    height: 45px;
-    width: 45px;
-    color: white;
-    font-weight: 500;
-    top: -40px;
-    transform: translateX(-50%);
-    line-height: 55px;
-    z-index: 2;
-}
-
-.range .sliderValue span::after{
-    position: absolute;
-    content: "";
-    height: 45px;
-    width: 45px;
-    background: purple;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    border: 3 solid white;
-    z-index: -1;
-    border-top-left-radius: 50%;
-    border-top-right-radius: 50%;
-    border-bottom-left-radius: 50%;
-} */

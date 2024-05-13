@@ -1,5 +1,5 @@
 // TableItem.js ou TableItem.jsx
-import React, { useState , useRef } from "react";
+import React, { useState, useRef } from "react";
 import Button from "../../../button/Button.tsx";
 import locked from "../../../assets/images/icons/white/password.png";
 import unlocked from "../../../assets/images/icons/white/unlock.png";
@@ -8,16 +8,22 @@ import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import useOnClickOutside from "../../../../hooks/useOnClickOutside.js";
 
-const ListTableItem = ({ id, nom, rang, nombreDeJoueurs, ouvert, onJoinClick }) => {
+const ListTableItem = ({
+  id,
+  nom,
+  rang,
+  nombreDeJoueurs,
+  ouvert,
+  onJoinClick,
+}) => {
   const { verifyGamePassword } = useAuth();
   const { getTranslatedWord } = useTranslation();
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPasswordInput, setShowPasswordInput] = useState(false);
-  const ref = useRef(); 
+  const ref = useRef();
 
   useOnClickOutside(ref, () => setShowPasswordInput(false));
-
 
   const handleJoinClick = async () => {
     if (!ouvert) {
@@ -45,7 +51,7 @@ const ListTableItem = ({ id, nom, rang, nombreDeJoueurs, ouvert, onJoinClick }) 
   };
 
   const handleKeyDown = async (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       await checkPassword();
     }
   };
@@ -64,13 +70,14 @@ const ListTableItem = ({ id, nom, rang, nombreDeJoueurs, ouvert, onJoinClick }) 
       </div>
       <div className="rowItem">
         {nombreDeJoueurs < 10 ? (
-          <>{!showPasswordInput &&
-            <Button
-              label={getTranslatedWord("serverPanel.join")}
-              styleClass="btn-list_table back-color2"
-              onClick={handleJoinClick}
-            />
-            }
+          <>
+            {!showPasswordInput && (
+              <Button
+                label={getTranslatedWord("serverPanel.join")}
+                styleClass="btn-list_table back-color2"
+                onClick={handleJoinClick}
+              />
+            )}
             {!ouvert && showPasswordInput && (
               <TextInputComponent
                 placeholder="Enter Password"

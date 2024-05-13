@@ -2,7 +2,7 @@
 import React from "react";
 import './tutorial.css'
 
-const TutorialWindow = ({ onClose }) => {
+const TutorialWindow = ({}) => {
   return (
     <div className={`container-text-tutorial`}>
       <div className='text-tutorial'>

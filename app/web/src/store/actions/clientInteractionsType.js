@@ -46,6 +46,4 @@ export const SITTED = "SITTED";
 // Kicked out of the game
 export const KICKED = "KICKED";
 
-
 export const LOGGED_IN = "LOGGED_IN";
-

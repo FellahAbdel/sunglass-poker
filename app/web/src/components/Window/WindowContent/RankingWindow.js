@@ -6,7 +6,7 @@ import silverMedal from "../../assets/images/silver-medal.png";
 import bronzeMedal from "../../assets/images/bronze-medal.png";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
 
-const RankingWindow = ({ onClose }) => {
+const RankingWindow = ({}) => {
   const nbRes = 11;
   const [page, setPage] = useState(1);
   const [ranks, setRanks] = useState([]);

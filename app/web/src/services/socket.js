@@ -7,8 +7,8 @@ let target = "http://localhost:3001";
 // Create Socket.io instance
 const socket = io(target, {
   withCredentials: true,
-  path:(target === vm)?"/vmProjetIntegrateurgrp9-1/socketio/":"",
-  transports: ["polling"]
+  path: target === vm ? "/vmProjetIntegrateurgrp9-1/socketio/" : "",
+  transports: ["polling"],
 });
 
 /** Fonction de test de communication entre le front et le back
@@ -59,7 +59,7 @@ export const comm = {
       store.dispatch({ payload: data.payload, type: data.type });
     });
 
-    // When the client receive the status of the room 
+    // When the client receive the status of the room
     // we console log the data.
     socket.on("status", (data) => this.getStatus(data));
 
@@ -89,18 +89,16 @@ export const comm = {
     //   sessionStorage.getItem("room")
     // );
 
-    if (sessionStorage.getItem("room")) 
-    {
-        // console.log("refreshing room", sessionStorage.getItem("room"));
-        this.status();
-    }
-    else {
+    if (sessionStorage.getItem("room")) {
+      // console.log("refreshing room", sessionStorage.getItem("room"));
+      this.status();
+    } else {
       console.log("No room no status");
     }
   },
 
   // Call for the game the player is playing right now
-  refresh:function(){
+  refresh: function () {
     socket.emit("showMyGame");
   },
 
@@ -130,7 +128,7 @@ export const comm = {
     socket.emit("createGame");
   },
 
-   createGameV2: function (gameRoomId) {
+  createGameV2: function (gameRoomId) {
     this.preFun();
     // socket.emit('startGame',{room:sessionStorage.getItem('room')});
     console.log("Emit startGame from comm");

@@ -25,7 +25,7 @@
   background: var(--gradient-3-light);
 }
 
-Button:hover{
+Button:hover {
   cursor: pointer;
   text-shadow: unset;
   filter: brightness(150%);
@@ -33,7 +33,6 @@ Button:hover{
 /* Button:hover img,Button:hover span{
   filter: invert(100%);
 } */
-
 
 .btn-connectionDefault {
   width: 24.5vw;
@@ -96,8 +95,7 @@ Button:hover{
   box-shadow: 3px 2px 4px 1px rgba(0, 0, 0, 0.3);
 }
 
-
-.btn-serverPage{
+.btn-serverPage {
   margin: 0 5px;
   padding: 5px 10px;
   border: 1px solid #ccc;
@@ -106,7 +104,7 @@ Button:hover{
   justify-content: center;
   margin-top: 10px;
 }
-.btn-successWindow{
+.btn-successWindow {
   background: var(--gradient-green);
   font-size: 1vw;
   width: 30%;
@@ -115,7 +113,7 @@ Button:hover{
   box-shadow: 0 0 1vw rgba(0, 0, 0, 0.5);
   font-weight: 600;
 }
-.btn-leaveConfirmation{
+.btn-leaveConfirmation {
   background: var(--gradient-red);
   font-size: 1vw;
   width: 25%;
@@ -124,7 +122,7 @@ Button:hover{
   box-shadow: 0 0 1vw rgba(0, 0, 0, 0.5);
   font-weight: 600;
 }
-.btn-leaveCancel{
+.btn-leaveCancel {
   background: var(--gradient-gray);
   font-size: 1vw;
   width: 25%;
@@ -139,7 +137,7 @@ Button:hover{
   font-weight: 600;
   font-size: 2vh;
   height: 4vh;
-  width:10vw;
+  width: 10vw;
   padding: 0;
   cursor: pointer;
   margin-bottom: unset;
@@ -150,7 +148,7 @@ Button:hover{
   white-space: nowrap;
   text-align: center;
 }
-.btn-mainAction.disabled{
+.btn-mainAction.disabled {
   opacity: 0.5; /* Réduit l'opacité pour indiquer que le bouton est désactivé */
   cursor: not-allowed; /* Change le curseur pour indiquer que le bouton est désactivé */
   pointer-events: none; /* Désactive les événements de pointeur, ce qui rend le bouton non cliquable */
@@ -165,18 +163,19 @@ Button:hover{
   color: black;
 }
 @media (max-height: 500px) {
-  .btn-mainAction{
+  .btn-mainAction {
     font-size: 2.5vh;
     height: 7vh;
     width: 9vw;
-  }}
-.btn-showCard{
+  }
+}
+.btn-showCard {
   color: aliceblue;
   border-radius: 10px;
   font-weight: 600;
   font-size: 1.5vh;
   height: 4vh;
-  width:7vw;
+  width: 7vw;
   padding: 0;
   cursor: pointer;
   margin-bottom: unset;
@@ -189,9 +188,9 @@ Button:hover{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:5%;
+  gap: 5%;
 }
-.btn-showCard img{
+.btn-showCard img {
   width: 1.5vh;
 }
 .btn-showCard:hover {
@@ -200,11 +199,11 @@ Button:hover{
   background-color: white;
   color: black;
 }
-.btn-showCard:hover img{
+.btn-showCard:hover img {
   filter: invert(100%);
 }
 
-.btn-loadMore{
+.btn-loadMore {
   width: 15vw;
   height: 4vh;
   margin-top: 10px;
@@ -235,7 +234,7 @@ Button:hover{
   background-color: #033f61;
 }
 
-.btn-gameStart2{
+.btn-gameStart2 {
   width: 15vw;
   height: 4vh;
   border-radius: 20px;
@@ -244,75 +243,89 @@ Button:hover{
   font-weight: bold;
 }
 
-.btn-coinsShop{
-  width:fit-content;
+.btn-coinsShop {
+  width: fit-content;
   height: fit-content;
   border-radius: 0 0 0.5vw 0.5vw;
   white-space: nowrap;
-  padding: 6.5vh 1vw 0.4vw 1vw ;
-  position:absolute;
-  top:0%;
+  padding: 6.5vh 1vw 0.4vw 1vw;
+  position: absolute;
+  top: 0%;
   background-color: unset;
   opacity: 0.8;
 }
-#light .btn-coinsShop{
+#light .btn-coinsShop {
   box-shadow: 0 0 1vw 0.3vw var(--color1-light);
-  background: linear-gradient(120deg, var(--color3-light) -30%, var(--color1-light) 70%) ;
+  background: linear-gradient(
+    120deg,
+    var(--color3-light) -30%,
+    var(--color1-light) 70%
+  );
 }
-#dark .btn-coinsShop{
+#dark .btn-coinsShop {
   box-shadow: 0 0 1vw 0.3vw var(--color1-dark);
-  background: linear-gradient(120deg, var(--color3-dark) -30%, var(--color1-dark) 70%);
+  background: linear-gradient(
+    120deg,
+    var(--color3-dark) -30%,
+    var(--color1-dark) 70%
+  );
 }
-.btn-coinsShop:hover{
-  opacity:1;
+.btn-coinsShop:hover {
+  opacity: 1;
   filter: brightness(150%);
   /* border:solid 1px var(--color1-light); */
   border-top: unset;
 }
-.btn-coinsShop span{
+.btn-coinsShop span {
   font-size: calc(0.5vh + 1vw);
 }
 
-.btn-coinBuy{
+.btn-coinBuy {
   width: 90%;
   height: 15%;
   border-radius: 2vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 
-    inset 0 0 1vw rgba(0, 0, 0, 0.5),
-     0 0 1vw black;
+  box-shadow: inset 0 0 1vw rgba(0, 0, 0, 0.5), 0 0 1vw black;
 }
-#light .btn-coinBuy{
-  background: linear-gradient(120deg, var(--color3-light) -30%, var(--color1-light) 70%);
+#light .btn-coinBuy {
+  background: linear-gradient(
+    120deg,
+    var(--color3-light) -30%,
+    var(--color1-light) 70%
+  );
 }
-#dark .btn-coinBuy{
-  background: linear-gradient(120deg, var(--color3-dark) -30%, var(--color1-dark) 70%);
+#dark .btn-coinBuy {
+  background: linear-gradient(
+    120deg,
+    var(--color3-dark) -30%,
+    var(--color1-dark) 70%
+  );
 }
-.btn-coinBuy span{
+.btn-coinBuy span {
   padding-left: 10%;
   font-size: 1.8vw;
   opacity: 0.7;
   color: black;
 }
-#dark .btn-coinBuy span{
+#dark .btn-coinBuy span {
   color: white;
 }
-#light .btn-coinBuy span{
+#light .btn-coinBuy span {
   color: black;
 }
-.btn-coinBuy img{
+.btn-coinBuy img {
   width: 13%;
   padding-right: 10%;
   opacity: 0.7;
 }
-#dark .btn-coinBuy img{
+#dark .btn-coinBuy img {
   filter: invert();
 }
 
-.btn-pnl-createAgame{
-  padding: 0.7vw 1vw 0.7vw 1vw ;
-  left:15%;
+.btn-pnl-createAgame {
+  padding: 0.7vw 1vw 0.7vw 1vw;
+  left: 15%;
   transition: top 1s ease;
 }

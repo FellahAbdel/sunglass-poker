@@ -25,7 +25,6 @@ export const startGame = (userId) => {
   };
 };
 
-
 /**
  * Should include the possible argument to create a game.
  * Rules, Gamedesc, Name etc... need to be added to the game Object too.
