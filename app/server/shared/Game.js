@@ -332,42 +332,40 @@ class Game {
     //Si c'est son tour de jouer
     if (this.isPlayersTurn(player.getPlayerId())) {
       //si il a assez d'argent
+      //PEUT pas y avoir de else parce que le amount est envoyé du front, c est le front qui est bloquant
       if (player.getPlayerMoney() >= amount) {
         //Cas ou il ajoute a sa mise pour s'équilibrer au autre
-        if (amount + player.howmanyBetTurn() >= this.gameCurrentBet) {
-          if(amount + player.howmanyBetTurn()===player.getPlayerMoney()){
-            player.tapis();
+        if(amount + player.howmanyBetTurn() >= this.gameCurrentBet) {
+          if(amount===player.getPlayerMoney()){
+            player.tapis(amount);
             player.setTapis();
             console.log("TAPIS");
+            this.playerBeforeNextTurn = this.players.findIndex(
+              (p) => p.getPlayerId() === player.getPlayerId()
+            );
+            //TRUC A VERIFIER ---------------------------------------------------------------------------
+            this.playerBeforeNextTurn=(this.playerBeforeNextTurn+1)%this.activePlayers.length
           }
-          player.bet(amount);
+          else{
+            player.bet(amount);
+          }
           this.total += amount;
           //on met le max a la mise a mettre
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();
             
-            if(amount + player.howmanyBetTurn()===player.getPlayerMoney()){
-
-              player.tapis();
-              player.setTapis();
-              this.playerBeforeNextTurn = this.players.findIndex(
-                (p) => p.getPlayerId() === player.getPlayerId()
-              );
-              //TRUC A VERIFIER ---------------------------------------------------------------------------
-              this.playerBeforeNextTurn=(this.playerBeforeNextTurn+1)%this.activePlayers.length
-            }
-            else{
+            if(!player.status==="tapis"){
               player.raise();
-              this.playerBeforeNextTurn = this.players.findIndex(
-                (p) => p.getPlayerId() === player.getPlayerId()
-              );
-
-             }
+            }
+            this.playerBeforeNextTurn = this.players.findIndex(
+              (p) => p.getPlayerId() === player.getPlayerId()
+            );
             
             //console.log("lefocus avant le raise:", this.focus);
             //console.log("lefocus apres le raise", this.focus);
           }
         } else {
+          //LE TAPIS OU J'ai MISER MOINS QUE LA GAME 
           return;
         }
         //ça change juste le status si ça equivaut a un check (bet de 0)
@@ -376,13 +374,6 @@ class Game {
         }
         console.log("this line got executed", this.gameCurrentBet);
         this.rotateFocus();
-      }
-      //CAS OU ON TAPIS
-      else{
-        player.tapis();
-        player.bet(amount);
-        player.setTapis();
-        console.log("TAPIS plus de sous");
       }
     }
   }

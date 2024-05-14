@@ -249,9 +249,12 @@ class Player {
   jesuislewinner() {
     this.status = "winner";
   }
-  
-  tapis(){
+
+  tapis(amount){
     this.status="tapis";
+    this.currentBet = amount;
+    this.currentBetTurn += amount;
+    this.playerMoney -= amount;
   }
   
   bet(amount) {
