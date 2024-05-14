@@ -134,7 +134,8 @@
     "purchase":"Purchase",
     "buy":"Buy",
     "backStore":"Back to Store",
-    "loading":"Loading"
+    "loading":"Loading",
+    "coins" : "Thanks you for your donation"
   },
   "messageLogo": {
     "tutorial": "Tutorial",

@@ -1,5 +1,5 @@
 import React from "react";
-import { useWindowContext } from "../../../Utiles/WindowContext"; // Assure-toi que le chemin d'accès est correct
+import { useWindowContext } from "../../../Utiles/WindowContext";
 import "./validationWindow.css";
 import Button from "../../../button/Button.tsx";
 import { useTranslation } from "../../../Utiles/Translations";
