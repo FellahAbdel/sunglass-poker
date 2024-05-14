@@ -38,7 +38,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "electron .",
+    "electron": "electron electron-main.js",
     "electron-pack": "build --em.main=build/electron.js",
     "build-electron": "electron-builder"
   },
@@ -65,5 +65,28 @@
     "electron": "^29.1.4",
     "mini-css-extract-plugin": "^2.8.0",
     "nodemon": "^3.0.3"
+  },
+  "build": {
+    "appId": "com.example.my-electron-app",
+    "productName": "My Electron App",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "imgdesktop/*",
+      "error.html"
+    ]
+  },
+  "mac": {
+    "icon": "./build/assets/icon/SunGameStudio_logo(1).ico"
+  },
+  "win": {
+    "icon": "./build/assets/icon/SunGameStudio_logo(1).ico"
+  },
+  "linux": {
+    "icon": "./build/assets/icon/SunGameStudio_logo(1).ico"
   }
 }
