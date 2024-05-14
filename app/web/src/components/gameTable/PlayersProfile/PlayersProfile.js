@@ -45,7 +45,7 @@ const PlayersProfile = ({
       >
         {isYou ? "Your Turn" : "Their Turn"} !
       </div>
-      <div className={`box-status ${status.toLowerCase()}`}>
+      <div className={`box-status ${status.toLowerCase()} ${isFocus && "waiting"}`}>
         {isFocus ? (
           <ProgressBar
             className="progressBar progressPercentage"
@@ -59,9 +59,7 @@ const PlayersProfile = ({
       </div>
 
       <div
-        className={`box-playerInfo ${status.toLowerCase()} ${
-          name === "YOU" && "you"
-        }`}
+        className={`box-playerInfo ${status.toLowerCase()}`}
       >
         <p>
           {name}
@@ -84,8 +82,8 @@ const PlayersProfile = ({
         flippingCard={flippingPlayerCards}
       />
 
-      <div className={`profilePic ${status.toLowerCase()}`}>
-        <AvatarDisplay userId={playerId} />
+      <div className={`profilePic ${status.toLowerCase()} ${ isYou && "you" }`}>
+        <AvatarDisplay userId={playerId}/>
         {status === "winner" && (
           <img
             id="crown"

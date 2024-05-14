@@ -15,6 +15,7 @@ class Player {
   constructor(
     playerId,
     name,
+    coins,
     status = "Playing",
     currentBet = 0,
     currentBetTurn = 0,
@@ -34,6 +35,7 @@ class Player {
     this.isAfk = false;
     this.isTapis=isTapis;
     this.isSpectator = isSpectator;
+    this.playerMoney=coins;
   }
 
   setAfk(){
@@ -249,9 +251,12 @@ class Player {
   jesuislewinner() {
     this.status = "winner";
   }
-  
-  tapis(){
+
+  tapis(amount){
     this.status="tapis";
+    this.currentBet = amount;
+    this.currentBetTurn += amount;
+    this.playerMoney -= amount;
   }
   
   bet(amount) {

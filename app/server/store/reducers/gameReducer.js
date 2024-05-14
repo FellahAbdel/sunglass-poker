@@ -177,6 +177,11 @@ const gameReducer = (state = initialState, action) => {
         failed = true;
         state.answer = { status: false, mes: "player empty" };
       }
+
+      if (coins === undefined ) {
+        failed = true;
+        state.answer = { status: false, mes: "coins empty" };
+      }
       // --------------
 
       room = state.rooms[action.payload.tableId];
@@ -231,7 +236,7 @@ const gameReducer = (state = initialState, action) => {
           payload: { id: action.payload.tableId },
         };
         room.game.resetRestartCall();
-        const newPlayer = new Player(playerId, pseudo);
+        const newPlayer = new Player(playerId, pseudo, coins);
         if (room.players.length === 0) {
           room.game.setMaster(playerId);
         }
