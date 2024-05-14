@@ -2,10 +2,6 @@ import React from "react";
 import "./bonusPanel.css";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import Button from "../../button/Button.tsx";
-import Clubs from "./../../assets/images/icons/white/club.png";
-import Diamonds from "./../../assets/images/icons/white/diamon.png";
-import Hearts from "./../../assets/images/icons/white/heart.png";
-import Spades from "./../../assets/images/icons/white/spade.png";
 import { useTranslation } from "../../Utiles/Translations";
 import { useDispatch } from "react-redux";
 
@@ -35,14 +31,10 @@ const BonusPanel = ({nbHearts, nbDiamonds, nbSpades, nbClubs}) => {
   return (
     <div className="panel-bonus">
       <div className="container-bonusCards">
-        <img src={Hearts} alt="Heart" className={`box-${nbHearts}`} />
-        <img
-          src={Diamonds}
-          alt="Diamond"
-          className={`box-${nbDiamonds}`}
-        />
-        <img src={Spades} alt="Spade" className={`box-${nbSpades}`} />
-        <img src={Clubs} alt="Club" className={`box-${nbClubs}`} />
+        <img src="static/media/assets/images/icons/white/heart.png" alt="Heart" className={`box-${nbHearts}`} />
+        <img src="static/media/assets/images/icons/white/diamond.png" alt="Diamond" className={`box-${nbDiamonds}`}/>
+        <img src="static/media/assets/images/icons/white/spade.png" alt="Spade" className={`box-${nbSpades}`} />
+        <img src="static/media/assets/images/icons/white/club.png" alt="Club" className={`box-${nbClubs}`} />
       </div>
 
       <Button

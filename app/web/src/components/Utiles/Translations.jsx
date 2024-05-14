@@ -5,7 +5,7 @@ import global_fr from "../../translations/fr/global.json";
 import global_es from "../../translations/es/global.json";
 import global_de from "../../translations/de/global.json";
 import global_ch from "../../translations/ch/global.json";
-
+import global_fa from "../../translations/fa/global.json";
 
 const translations = {
   en: global_en,
@@ -13,6 +13,7 @@ const translations = {
   es: global_es,
   de: global_de,
   ch: global_ch,
+  fa: global_fa,
 };
 
 export function useTranslation() {

@@ -115,7 +115,7 @@ const GameActionButtons = ({}) => {
   console.log("raise coins (fellah)", raiseCoin);
   return (
     <div className="container-gameAction">
-      <div className="conthis user undefined is focus:  nulltainer-cashSituation">
+      <div className="conthis user undefined is focus:  null container-cashSituation">
         <div className="userCoinCashs">
           {getTranslatedWord("gameActionPanel.currentSC")}: {Math.round(coins)}
         </div>

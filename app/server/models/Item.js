@@ -8,7 +8,8 @@ const ItemSchema = new Schema({
     en: { type: String, required: true , unique: true,},
     fr: { type: String, required: false },
     es: { type: String, required: false },
-    de: { type: String, required: false }
+    de: { type: String, required: false },
+    ch: { type: String, required: false }
   },
   price: {
     type: Number,

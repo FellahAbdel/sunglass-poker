@@ -28,7 +28,7 @@ const ServerPanelWindow = () => {
   useEffect(() => {
     const updateRecordsPerPage = () => {
       const windowHeight = window.innerHeight;
-      const tableItemHeight = 150;
+      const tableItemHeight = 130;
       const maxRecordsPerPage = Math.floor(windowHeight / tableItemHeight);
       setRecordsPerPage(maxRecordsPerPage);
     };

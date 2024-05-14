@@ -46,6 +46,7 @@
     "status": "Status",
     "name": "Name",
     "gameName": "Game name",
+    "PasswordOptionnal": "Password (Optional)",
     "ranked": "Ranked",
     "players": "Players",
     "selectRank": "Select Rank",
