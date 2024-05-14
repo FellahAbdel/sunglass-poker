@@ -22,31 +22,31 @@ const BuyCoinsWindow = () => {
     <div className="container-coinsWindow">
       <Button
         styleClass={"btn-coinBuy"}
-        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
         label={"10 SC"}
         onClick={() => handleBuyCoins(10)}
       />
       <Button
         styleClass={"btn-coinBuy"}
-        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
         label={"100 SC"}
         onClick={() => handleBuyCoins(100)}
       />
       <Button
         styleClass={"btn-coinBuy"}
-        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
         label={"1,000 SC"}
         onClick={() => handleBuyCoins(1000)}
       />
       <Button
         styleClass={"btn-coinBuy"}
-        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
         label={"10,000 SC"}
         onClick={() => handleBuyCoins(10000)}
       />
       <Button
         styleClass={"btn-coinBuy"}
-        iconSrc={require("./../../../assets/images/icons/white/coinStack.png")}
+        iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
         label={"100,000 SC"}
         onClick={() => handleBuyCoins(100000)}
       />

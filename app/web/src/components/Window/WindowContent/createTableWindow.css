@@ -26,7 +26,7 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url("./../../assets/images/icons/black/arrow-down.png"); /* SVG arrow */
+  background-image: url("/public/static/media/assets/images/icons/black/arrow-down.png"); /* SVG arrow */
   background-repeat: no-repeat;
   background-position: right 5px center;
   background-size: 12px;
