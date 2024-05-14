@@ -164,4 +164,6 @@
 
 * 2024/05/13 : <b>30mins</b> <br/> Travail individuel : <i> Rédaction du compte-rendu hebdomadaire. </i>
 
+* 2024/05/13 : <b>3h</b> <br/> Travail individuel : <i> Création de site vitrine pour Sun Games Studios (pas encore finit)</i>
+
 * Durant la semaine : <b>1h</b> <br/> Discussions sur discord: <i> Échanges sur le projet</i> 
