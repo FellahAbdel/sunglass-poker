@@ -50,7 +50,8 @@
     "players": "Players",
     "selectRank": "Select Rank",
     "join": "Join",
-    "full": "Full"
+    "full": "Full",
+    "noActiveServer" : "No active server"
   },
   "handGuide": {
     "highcard": "High Card",
@@ -86,7 +87,13 @@
     "join": "Join",
     "full": "Full",
     "status": "Statut",
-    "action": "Action"
+    "action": "Action",
+    "selectRank": "Select Rank",
+    "friendly":"Friendly",
+    "intermediate":"Intermediate",
+    "advanced":"Advanced",
+    "elite":"Elite",
+    "createTheGame":"Create the Game"
   },
   "playersStatus": {
     "empty": "Empty",
