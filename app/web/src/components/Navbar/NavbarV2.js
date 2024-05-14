@@ -119,9 +119,9 @@ const Navbar = ({}) => {
       {/* Current Chips inventory and LogOut Button */}
       {isLogged && (
         <div className="container-nav-lefttop">
-          <div className={`chatBox-V2 ${isChatOpen && "chatBoxOpen-V2"}`}>
+          
             {isGameTableVisible && (
-              <>
+              <div className={`chatBox-V2 ${isChatOpen && "chatBoxOpen-V2"}`}>
                 {!isChatOpen && (
                   <Button
                     label={""}
@@ -147,10 +147,9 @@ const Navbar = ({}) => {
                     />
                   </>
                 )}
-              </>
+              </div>
             )}
           </div>
-        </div>
       )}
 
       <div className="container-navMain-V2">
