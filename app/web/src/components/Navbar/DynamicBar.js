@@ -55,12 +55,13 @@ const DynamicBar = () => {
         />
       </div>
 
+      {/* Server Name */}
       <div
         className={`container-serverInfo back-color1 ${
           isGameTableVisible && "appear"
         }`}
       >
-        {serverName ? serverName : "No Active Server"}
+        {serverName ? serverName : getTranslatedWord("game.noActiveServer")}
       </div>
     </>
   );

@@ -50,7 +50,8 @@
     "players": "Players",
     "selectRank": "Select Rank",
     "join": "Join",
-    "full": "Full"
+    "full": "Full",
+    "noActiveServer" : "No active server"
   },
   "handGuide": {
     "highcard": "High Card",
