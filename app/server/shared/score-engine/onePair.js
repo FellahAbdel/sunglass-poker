@@ -2,6 +2,11 @@
  * ...
  */
 function isOnePair(tableau7cartes) {
+  
+  if (tableau7cartes.length !== 7) {
+    return false;
+  }
+
   let tab = [...tableau7cartes];
   // Ordonne le tableau
   tab.sort(function (a, b) {

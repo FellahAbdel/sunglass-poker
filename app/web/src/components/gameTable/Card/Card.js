@@ -44,13 +44,13 @@ const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
             </div>
             <img
               className="cardColor"
-              src={`static/media/assets/images/card_type/${card[1]}.png`}
+              src={`static/media/assets/images/icons/card_type/${card[1]}.png`}
               alt="card"
             />
           </div>
           <img
             className="cardColorBig"
-            src={`static/media/assets/images/card_type/${card[1]}.png`}
+            src={`static/media/assets/images/icons/card_type/${card[1]}.png`}
             alt="card"
           />
         </div>

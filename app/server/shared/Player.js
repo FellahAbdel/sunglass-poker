@@ -239,22 +239,26 @@ class Player {
     this.status = "call";
   }
 
-  tapis(){
-    this.status="tapis";
-  }
-
+  
   playing() {
     this.status = "playing";
   }
-
+  
   raise() {
     this.status = "raise";
   }
-
+  
   jesuislewinner() {
     this.status = "winner";
   }
 
+  tapis(amount){
+    this.status="tapis";
+    this.currentBet = amount;
+    this.currentBetTurn += amount;
+    this.playerMoney -= amount;
+  }
+  
   bet(amount) {
     if (this.playerMoney > amount) {
       this.currentBet = amount;

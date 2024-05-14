@@ -57,7 +57,7 @@ const ListTableItem = ({
   return (
     <div className="tableRow" ref={ref}>
       <div className="rowItem">{nom}</div>
-      <div className="rowItem">{rang}</div>
+      <div className="rowItem">{getTranslatedWord(`serverPanel.${rang}`)}</div>
       <div className="rowItem">{nombreDeJoueurs}/10</div>
       <div className="rowItem">
         {ouvert ? (
