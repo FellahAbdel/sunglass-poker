@@ -20,7 +20,7 @@ const TextInputComponent = ({
       <input
         type={type}
         name={name}
-        placeholder={placeholder}
+        placeholder={getTranslatedWord(placeholder)}
         className={`${styleClass} ${hasError ? "input-component-error" : ""}`}
         value={value}
         onChange={(e) => onChange(e)}

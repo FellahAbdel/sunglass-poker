@@ -134,7 +134,7 @@ const CreateGameWindow = () => {
           name="serverName"
           value={formData.serverName}
           onChange={handleChange}
-          placeholder="Game name"
+          placeholder="game.gameName"
           errorMessage={validationErrors.serverName}
           styleClass="input-connectionDefault input-icon-GameName"
         />
@@ -143,7 +143,7 @@ const CreateGameWindow = () => {
           value={formData.password}
           onChange={handleChange}
           type="password"
-          placeholder="Password (optional)"
+          placeholder="game.PasswordOptionnal"
           errorMessage={validationErrors.password}
           styleClass="input-connectionDefault input-icon-password"
         />

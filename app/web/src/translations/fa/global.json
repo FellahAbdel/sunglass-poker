@@ -1,0 +1,178 @@
+{
+  "navbar": {
+    "profile": "پروفایل",
+    "chat": "چت",
+    "message": "پیام",
+    "settings": "تنظیمات",
+    "tutorial": "آموزش",
+    "exitTable": "ترک میز",
+    "exit": "بستن پنجره",
+    "logout": "خروج",
+    "login": "ورود",
+    "signin": "ثبت نام",
+    "ranking": "رتبه‌بندی"
+  },
+  "connection": {
+    "login": "ورود",
+    "signin": "ثبت نام",
+    "username": "نام کاربری",
+    "password": "رمز عبور",
+    "repeatPass": "تکرار رمز عبور",
+    "email": "ایمیل",
+    "forgotPass": "رمز عبورم را فراموش کرده‌ام",
+    "forgotPassQuestion": "رمز عبورتان را فراموش کرده‌اید؟",
+    "forgotPassEnter": "برای دریافت لینک بازنشانی رمز عبور، ایمیل خود را وارد کنید.",
+    "registerNewAcc": "ثبت نام حساب جدید",
+    "signinG": "ورود با گوگل",
+    "haveAccQuestion": "قبلاً حساب کاربری داشته‌اید؟",
+    "optional": "اختیاری",
+    "loginMessage": "وارد حساب کاربری خود شوید",
+    "registerMessage": "حساب کاربری خود را بسازید",
+    "send": "ارسال",
+    "returnConnection": "بازگشت به منوی اتصال",
+    "loginSuccess": "با موفقیت وارد شدید!"
+  },
+  "messageBox": {
+    "loginSucces": "با موفقیت وارد شدید!",
+    "ok": "تأیید"
+  },
+  "game": {
+    "loginPlay": "برای بازی وارد شوید",
+    "signupPlay": "برای بازی ثبت نام کنید",
+    "startGame": "شروع بازی",
+    "joinGame": "پیوستن به بازی",
+    "createAgame": "ساخت بازی جدید",
+    "quickGame": "بازی سریع",
+    "status": "وضعیت",
+    "name": "نام",
+    "gameName": "نام بازی",
+    "ranked": "رتبه‌بندی شده",
+    "players": "بازیکنان",
+    "selectRank": "انتخاب رتبه",
+    "join": "پیوستن",
+    "full": "پر",
+    "noActiveServer": "سرور فعال نیست"
+  },
+  "handGuide": {
+    "highcard": "کارت بالا",
+    "pair": "جفت",
+    "twoPair": "دو جفت",
+    "threeOfKind": "سه تایی",
+    "straight": "راست",
+    "flush": "فلاش",
+    "fullHouse": "فول هاوس",
+    "fourOfKind": "چهار تایی",
+    "straightFlush": "فلاش راست",
+    "royalFlush": "رویال فلاش",
+    "show": "نمایش",
+    "hide": "پنهان کردن",
+    "showB": "نمایش هر دو",
+    "hideB": "پنهان کردن هر دو"
+  },
+  "gameActionPanel": {
+    "raise": "افزایش",
+    "call": "تماس",
+    "check": "بررسی",
+    "fold": "تا کردن",
+    "currentSC": "SC کنونی شما",
+    "afterSC": "CS شما پس از افزایش"
+  },
+  "bonus": {
+    "bonus": "بونوس"
+  },
+  "serverPanel": {
+    "name": "نام",
+    "rank": "رتبه",
+    "privacy": "حریم خصوصی",
+    "join": "پیوستن",
+    "full": "پر",
+    "status": "وضعیت",
+    "action": "اقدام",
+    "selectRank": "انتخاب رتبه",
+    "friendly": "دوستانه",
+    "intermediate": "متوسط",
+    "advanced": "پیشرفته",
+    "elite": "نخبه",
+    "createTheGame": "ساخت بازی"
+  },
+  "playersStatus": {
+    "empty": "خالی",
+    "call": "تماس گرفته شده",
+    "folded": "تا شده",
+    "raise": "افزایش یافته",
+    "checked": "بررسی شده",
+    "playing": "در حال بازی",
+    "waiting": "در انتظار",
+    "winner": "برنده"
+  },
+  "settings": {
+    "mute": "بی‌صدا",
+    "sound": "صدا",
+    "theme": "تم",
+    "animations": "انیمیشن‌ها",
+    "langSelect": "انتخاب زبان"
+  },
+  "profil": {
+    "name": "نام",
+    "mail": "ایمیل",
+    "coins": "سکه‌ها",
+    "date": "تاریخ پیوستن",
+    "unknowDate": "تاریخ نامعلوم"
+  },
+  "shop": {
+    "shop": "فروشگاه",
+    "baseAvatar": "آواتارها",
+    "sunglasses": "عینک‌های آفتابی",
+    "colorAvatar": "رنگ",
+    "confirmationMessage": "آیا واقعاً می‌خواهید این مورد را خریداری کنید؟",
+    "confirm": "تأیید",
+    "cancel": "لغو",
+    "price": "قیمت",
+    "success": "خرید با موفقیت انجام شد!",
+    "afterTransaction": "سکه‌های خورشید پس از معامله",
+    "buyMore": "خرید بیشتر",
+    "purchase": "خرید",
+    "buy": "خرید",
+    "backStore": "بازگشت به فروشگاه",
+    "loading": "در حال بارگذاری",
+    "coins": "از کمک شما سپاسگزاریم"
+  },
+  "messageLogo": {
+    "tutorial": "آموزش",
+    "profile": "پروفایل",
+    "servers": "پیوستن به بازی",
+    "create_table": "ساخت بازی جدید",
+    "validation": "تأیید خرید",
+    "shop": "فروشگاه",
+    "ranking": "رتبه‌بندی‌ها",
+    "coins": "خرید سکه"
+  },
+  "alert": {
+    "confirmExitMessage": "آیا مطمئنید که می‌خواهید از میز خارج شوید؟ تمام SC در حال بازی از دست خواهید داد.",
+    "leftTableSuccess": "با موفقیت از میز خارج شدید.",
+    "confirm": "تأیید",
+    "cancel": "لغو",
+    "logout": "در حال خروج هستید"
+  },
+  "table": {
+    "total": "مجموع بانک",
+    "waiting": "در انتظار بازیکنان",
+    "join": "پیوستن به بازی",
+    "spectacle": "تماشای بازی",
+    "start": "شروع بازی",
+    "inGame": "هنوز در میز بازی هستید"
+  },
+  "ranking": {
+    "rank": "رتبه",
+    "pseudo": "نام مستعار",
+    "gain": "سود",
+    "loadMore": "بارگذاری بیشتر"
+  },
+  "error": {
+    "noAccountFound": "حسابی یافت نشد",
+    "invalidEmail": "آدرس ایمیل نامعتبر",
+    "badUsername": "نام کاربری باید حداقل ۳ کاراکتر داشته باشد",
+    "password6Characters": "رمز عبور باید حداقل ۶ کاراکتر باشد",
+    "passwordNotMatch": "رمزهای عبور مطابقت ندارند"
+  }
+}
