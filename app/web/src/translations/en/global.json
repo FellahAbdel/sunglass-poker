@@ -86,7 +86,13 @@
     "join": "Join",
     "full": "Full",
     "status": "Statut",
-    "action": "Action"
+    "action": "Action",
+    "selectRank": "Select Rank",
+    "friendly":"Friendly",
+    "intermediate":"Intermediate",
+    "advanced":"Advanced",
+    "elite":"Elite",
+    "createTheGame":"Create the Game"
   },
   "playersStatus": {
     "empty": "Empty",

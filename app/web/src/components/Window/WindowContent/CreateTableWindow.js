@@ -11,11 +11,13 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import { createGameV2 } from "../../../store/actions/clientInteractionsCreator.js";
+import { useTranslation } from "../../Utiles/Translations.jsx";
 
 const CreateGameWindow = () => {
   const { openWindow, showGameTable, closeWindow, setWindowType } =
     useWindowContext();
   const { createGameRoom, user } = useAuth();
+  const { getTranslatedWord } = useTranslation();
 
   const dispatch = useDispatch();
   const gameCreated = useSelector((state) => state.game.gameCreated);
@@ -146,7 +148,7 @@ const CreateGameWindow = () => {
           styleClass="input-connectionDefault input-icon-password"
         />
         <div className="container-select-rank">
-          <label htmlFor="rank-select">Select rank</label>
+          <label htmlFor="rank-select">{getTranslatedWord("serverPanel.selectRank")}</label>
           <select
             name="rank"
             id="rank-select"
@@ -154,17 +156,16 @@ const CreateGameWindow = () => {
             value={formData.rank}
             onChange={handleChange}
           >
-            <option value="Novice">Novice</option>
-            <option value="Intermédiaire">Intermédiaire</option>
-            <option value="Avancé">Avancé</option>
-            <option value="Élite">Élite</option>
+            <option value="Novice">{getTranslatedWord("serverPanel.friendly")}</option>
+            <option value="Intermédiaire">{getTranslatedWord("serverPanel.intermediate")}</option>
+            <option value="Avancé">{getTranslatedWord("serverPanel.advanced")}</option>
+            <option value="Élite">{getTranslatedWord("serverPanel.elite")}</option>
           </select>
         </div>
-        <p></p>
         <Button
           styleClass="btn-connectionDefault start-button back-color1"
           type="submit"
-          label="Create the Game"
+          label={getTranslatedWord("serverPanel.createTheGame")}
         />
         <br />
         <Button

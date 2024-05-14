@@ -4,15 +4,39 @@
   color: white;
 }
 
+.container-select-rank {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.container-select-rank label {
+  font-size: 1vw;
+  color: white;
+}
 .select-rank {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #cccccc;
-  background-color: white;
-  color: #333333;
+  padding: 5px 25px 5px 10px;
+  font-size: 1vw;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  color: #000000;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("./../../assets/images/icons/black/arrow-down.png"); /* SVG arrow */
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  background-size: 12px;
+}
+.select-rank::-ms-expand {
+  display: none;
+}
+.container-select-rank img {
+  width: 1vw;
+}
+.container-select-rank p {
+  margin-right: 10px;
 }
