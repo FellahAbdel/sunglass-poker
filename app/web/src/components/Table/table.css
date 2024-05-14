@@ -409,16 +409,3 @@
   font-size: 1.5vw;
   transition: bottom 1s ease;
 }
-.container-waiting {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1vh;
-  z-index: 1;
-}
-.txt-waiting {
-  font-size: 2vw;
-  color: white;
-}

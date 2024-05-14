@@ -62,3 +62,26 @@
 .container-serverInfo.appear {
   top: 0;
 }
+
+
+
+.container-waiting {
+  position: absolute;
+  top: 50%;
+  height: 10%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1vh;
+  z-index: 0;
+  transition: top 1s ease ;
+}
+.container-waiting.appear{
+  top: 3%;
+}
+.txt-waiting {
+  font-size:1.5vw;
+  color: white;
+}
