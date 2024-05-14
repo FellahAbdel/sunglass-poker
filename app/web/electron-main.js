@@ -42,7 +42,7 @@ function createWindow() {
   });
 
   // Charger l'URL initiale
-  win.loadURL("http://localhost:3000");
+  win.loadURL("https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrp9-1/");
   //win.loadURL("http://localhost:9999");
 }
 
