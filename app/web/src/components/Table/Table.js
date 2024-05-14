@@ -112,12 +112,16 @@ const Table = ({}) => {
                   playersCardDistributed is also used in PlayersPlacements
                   that shows which players gets the cards
                   */}
-              <CardsPlacements />
+              {/* <CardsPlacements />
               {/*NEEDS playersCardsShow and playersCardDistribution in it*/}
-              {/* <PlayersPots/>  */}
-              <TotalPot />
+              {/* <PlayersPots/>  }
+              <TotalPot /> */}
             </>
           )}
+          <CardsPlacements />
+          <TotalPot />
+
+
         </>
       )}
       {/*All the panels other than game itself are included in window component*/}

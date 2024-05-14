@@ -59,6 +59,7 @@ module.exports = gameController = {
         if (!answer.success)
           return { status: false, mes: "Player not found in bdd" };
         userInfos = answer.user;
+        coins=userInfos.coins;
         csl.log(
           fileType,
           "Room: ",
@@ -75,7 +76,7 @@ module.exports = gameController = {
         ) {
           return { status: false, mes: "User already in a game." };
         }
-        var answer = this.dispatch(user, actions.sit(id, user));
+        var answer = this.dispatch(user, actions.sit(id, user, coins));
         state = store.getState();
         csl.log(fileType, "answer of dispatch : ", answer);
         if (answer.status) {

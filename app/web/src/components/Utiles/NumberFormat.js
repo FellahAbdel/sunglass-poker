@@ -5,6 +5,6 @@ export function formatNumber(value) {
         return value.toLocaleString();
     } catch (error) {
         console.error("Failed to format number:", error);
-        return "Error";  
+        return 0;  
     }
 }

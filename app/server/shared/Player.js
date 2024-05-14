@@ -15,6 +15,7 @@ class Player {
   constructor(
     playerId,
     name,
+    coins,
     status = "Playing",
     currentBet = 0,
     currentBetTurn = 0,
@@ -34,6 +35,7 @@ class Player {
     this.isAfk = false;
     this.isTapis=isTapis;
     this.isSpectator = isSpectator;
+    this.playerMoney=coins;
   }
 
   setAfk(){

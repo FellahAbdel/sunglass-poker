@@ -7,14 +7,16 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "../../Utiles/Translations";
 import { useUserData } from "../../Utiles/useUserData.jsx";
 import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
+import { useAuth } from "./../../Utiles/AuthProvider";
+
 
 const GameActionButtons = ({}) => {
   //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet
 
-  const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } =
-    useGameTable();
+  const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet, showWaitingMessage, isMaster, isSpectator } = useGameTable();
   console.log("gameCurrentBet :", gameCurrentBet);
   const { getTranslatedWord } = useTranslation();
+  const { userId } = useAuth();
   //checkValue = true -> Check
   //checkValue = False -> Call
   const [checkValue] = useState(true);
@@ -112,6 +114,11 @@ const GameActionButtons = ({}) => {
     setCoins(playerMoney);
   }, [playerMoney]);
 
+  const startGame = () => {
+    console.log("Starting game with roomId:");
+    dispatch(actions.startGame(userId));
+  };
+
   console.log("raise coins (fellah)", raiseCoin);
   return (
     <div className="container-gameAction">
@@ -173,11 +180,21 @@ const GameActionButtons = ({}) => {
         />
 
         {/* Bouton "Check" ou "Call" en fonction de gameCurrentBet */}
-        <Button
-          styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
-          onClick={isFocus ? handleCheckOrCall : undefined}
-          label={getCheckOrCallLabel()}
-        />
+        {showWaitingMessage ? (
+          <Button
+            styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
+            onClick={isMaster || isSpectator ? startGame : undefined}
+            label={isSpectator
+              ? getTranslatedWord("table.join")
+              : getTranslatedWord("table.start")}
+          />
+        ) : (
+          <Button
+            styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
+            onClick={isFocus ? handleCheckOrCall : undefined}
+            label={getCheckOrCallLabel()}
+          />
+        )}
         {/* LE BOUTON FOLD */}
         <Button
           styleClass={`btn-fold btn-mainAction ${!isFocus && "disabled"}`}
