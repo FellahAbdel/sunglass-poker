@@ -168,6 +168,11 @@
 
 2024/05/14 1H30     Réglage du bug du bonus pour qu'il n'impolse pas le rotateFocus,modification de certain parametre et test de la version desktop avec le push sur VM.
 
---2024/05 SEMAINE 2: 9H (TOTAL: 122H30)
+2024/05/14  30min   Reglage du desktop executable avec toutes les maj avant la reunion
 
-TEMPS TOTAL: 122H30
+2024/05/14  4H      Reunion du mardi...
+
+
+--2024/05 SEMAINE 2: 9H (TOTAL: 127H)
+
+TEMPS TOTAL: 127H
