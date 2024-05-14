@@ -16,6 +16,8 @@ csl.silenced("refreshCall");
 const log_refresh = false;
 const log_broadcast = false;
 
+let previousPlayerAction = {};
+
 module.exports = gameController = {
   io: null,
   dao: null,
@@ -241,7 +243,7 @@ module.exports = gameController = {
       console.log("avant le init", state.game.rooms);
       state.game.rooms[room] = initGameRoom(room);
       console.log("après le init", state.game.rooms);
-      this.dispatch(userId, actions.createGame(room,pseudo));
+      this.dispatch(userId, actions.createGame(room, pseudo));
       await this.join(room, userId);
       await this.dao.updateUserData("_id", userId, "inGame", room);
       return room;
@@ -266,31 +268,63 @@ module.exports = gameController = {
     await this.dao.updateUserData("_id", userId, "inGame", gameRoomId);
     return true;
   },
-
   playerAction: function (action) {
     csl.log("PLAYER_ACTION", "Player is affecting the game : ", action);
     roomId = action.payload.room;
-    if(action.type === actionsTypes.SHOW_CARD ||
-      action.type === actionsTypes.HIDE_CARD){
-      this.dispatch(action.payload.playerId,action);
-    }
-    else{
-      state = store.getState()
-      if(state.game.rooms === undefined) return
-      if(state.game.rooms[action.payload.room] === undefined) return
-      room = state.game.rooms[roomId]
-      csl.log("playerAction",room)
-      if(room.game.state !== "waiting")
-      if(room.game.players.findIndex(
-        (p) => p.getPlayerId() == action.payload.playerId) === room.game.focus){
-          csl.log("playerAction",this.dispatch(action.payload.playerId,action));
-          answer_post_action = this.dispatch(action.payload.playerId,actions.playerPlayed(roomId))
-          csl.log("playerAction",answer_post_action);
+
+    // Vérifier si l'action est une action de montrer ou de cacher une carte
+    if (
+      action.type === actionsTypes.SHOW_CARD ||
+      action.type === actionsTypes.HIDE_CARD
+    ) {
+      this.dispatch(action.payload.playerId, action);
+    } else {
+      state = store.getState();
+      if (state.game.rooms === undefined) return;
+      if (state.game.rooms[action.payload.room] === undefined) return;
+      room = state.game.rooms[roomId];
+      csl.log("playerAction", room);
+      if (room.game.state !== "waiting") {
+        if (
+          room.game.players.findIndex(
+            (p) => p.getPlayerId() == action.payload.playerId
+          ) === room.game.focus
+        ) {
+          // Récupérer la dernière action enregistrée pour ce joueur
+          const lastPlayerAction =
+            previousPlayerAction[action.payload.playerId];
+        
+            console.log("lastPlayerAction", lastPlayerAction);
+          // Vérifier si l'action actuelle est identique à la dernière action enregistrée
+          if (
+            lastPlayerAction &&
+            lastPlayerAction.type === action.type &&
+            JSON.stringify(lastPlayerAction.payload) ===
+              JSON.stringify(action.payload)
+          ) {
+            console.log("ignored");
+            return; // Ignorer l'action si elle est identique à la dernière action enregistrée
+          }
+
+          // Si ce n'est pas le cas, traiter l'action normalement
+          csl.log(
+            "playerAction",
+            this.dispatch(action.payload.playerId, action)
+          );
+          answer_post_action = this.dispatch(
+            action.payload.playerId,
+            actions.playerPlayed(roomId)
+          );
+          csl.log("playerAction", answer_post_action);
+          previousPlayerAction[action.payload.playerId] = action;
         }
+      }
+
+    //   console.log("previsous ", previousPlayerAction);
     }
+
     this.broadcastStatus(roomId);
   },
-
   /**
    *
    * @param {id user} user
