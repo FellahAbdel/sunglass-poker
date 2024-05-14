@@ -17,7 +17,7 @@ const defaultItems = [
       en: "Crab",
       fr: "Crabe"
     },
-    price: 100,
+    price: 500,
     imgSrc: "/assets/avatar/crabe.png",
     category: "baseAvatar",
     eyePosition: { x: 50, y: 20 },
@@ -27,7 +27,7 @@ const defaultItems = [
       en: "Dolphin",
       fr: "Dauphin"
     },
-    price: 100,
+    price: 500,
     imgSrc: "/assets/avatar/dauphin.png",
     category: "baseAvatar",
     eyePosition: { x: 50, y: 43 },
@@ -37,7 +37,7 @@ const defaultItems = [
       en: "Weird Fish",
       fr: "Drole de Poisson"
     },
-    price: 100,
+    price: 500,
     imgSrc: "/assets/avatar/WeirdFish.png",
     category: "baseAvatar",
     eyePosition: { x: 50, y: 20 },
@@ -47,7 +47,7 @@ const defaultItems = [
       en: "Jellyfish",
       fr: "Méduse"
     },
-    price: 100,
+    price: 600,
     imgSrc: "/assets/avatar/jellyfish.png",
     category: "baseAvatar",
     eyePosition: { x: 50, y: 43 },
@@ -57,7 +57,7 @@ const defaultItems = [
       en: "Shark",
       fr: "Requin"
     },
-    price: 100,
+    price: 1000,
     imgSrc: "/assets/avatar/shark.png",
     category: "baseAvatar",
     eyePosition: { x: 60, y: 34 },
@@ -76,7 +76,7 @@ const defaultItems = [
       en: "Pixels",
       fr: "Pixels"
     },
-    price: 200,
+    price: 400,
     imgSrc: "/assets/sunglasses/pixels.png",
     category: "sunglasses",
   },
@@ -85,7 +85,7 @@ const defaultItems = [
       en: "3D",
       fr: "3D"
     },
-    price: 200,
+    price: 300,
     imgSrc: "/assets/sunglasses/3dsunglasse.png",
     category: "sunglasses",
   },
@@ -94,7 +94,7 @@ const defaultItems = [
       en: "Ski Green",
       fr: "Ski Vert"
     },
-    price: 50,
+    price: 200,
     imgSrc: "/assets/sunglasses/skisunglassgreen.png",
     category: "sunglasses",
   },
@@ -103,7 +103,7 @@ const defaultItems = [
       en: "Underwater",
       fr: "Sous L'eau"
     },
-    price: 50,
+    price: 200,
     imgSrc: "/assets/sunglasses/sousleau.png",
     category: "sunglasses",
   },
@@ -112,7 +112,7 @@ const defaultItems = [
       en: "Monocle",
       fr: "Monocle"
     },
-    price: 50,
+    price: 300,
     imgSrc: "/assets/sunglasses/monocle.png",
     category: "sunglasses",
   },
@@ -121,7 +121,7 @@ const defaultItems = [
       en: "Double Monocle",
       fr: "Double Monocle"
     },
-    price: 50,
+    price: 800,
     imgSrc: "/assets/sunglasses/doublemonocle.png",
     category: "sunglasses",
   },
@@ -130,7 +130,7 @@ const defaultItems = [
       en: "Black",
       fr: "Noir"
     },
-    price: 100,
+    price: 1000,
     imgSrc: "#000000",
     category: "colorAvatar",
   },
@@ -139,7 +139,7 @@ const defaultItems = [
       en: "White",
       fr: "Blanc"
     },
-    price: 100,
+    price: 0,
     imgSrc: "#FFFFFF",
     category: "colorAvatar",
   },
@@ -157,7 +157,7 @@ const defaultItems = [
       en: "Sand",
       fr: "Sable"
     },
-    price: 10,
+    price: 100,
     imgSrc: "#F4BF6F",
     category: "colorAvatar",
   },
@@ -166,7 +166,7 @@ const defaultItems = [
       en: "Pine Green Khaki",
       fr: "Vert sapin kaki"
     },
-    price: 10,
+    price: 100,
     imgSrc: "#085E5B",
     category: "colorAvatar",
   },
@@ -175,7 +175,7 @@ const defaultItems = [
       en: "Lightning Blue",
       fr: "Bleu éclair"
     },
-    price: 10,
+    price: 100,
     imgSrc: "#53EABD",
     category: "colorAvatar",
   },
@@ -184,7 +184,7 @@ const defaultItems = [
       en: "Toxic Blue",
       fr: "Bleu toxique"
     },
-    price: 10,
+    price: 200,
     imgSrc: "#2353DB",
     category: "colorAvatar",
   },
@@ -193,7 +193,7 @@ const defaultItems = [
       en: "Sunset",
       fr: "Couché de soleil"
     },
-    price: 10,
+    price: 200,
     imgSrc: "#F68028",
     category: "colorAvatar",
   }
