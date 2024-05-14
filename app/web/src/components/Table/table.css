@@ -239,7 +239,7 @@
 #light .container-coins {
   width: 35vw;
   height: 60vh;
-  border-radius: 10vw;
+  border-radius: 6vw;
   background: unset;
   background-color: #282828;
 }

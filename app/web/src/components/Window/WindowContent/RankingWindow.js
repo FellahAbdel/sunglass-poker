@@ -3,7 +3,7 @@ import { useTranslation } from "../../Utiles/Translations";
 import Button from "../../button/Button.tsx";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
 
-const RankingWindow = ({}) => {
+const RankingWindow = () => {
   const nbRes = 11;
   const [page, setPage] = useState(1);
   const [ranks, setRanks] = useState([]);

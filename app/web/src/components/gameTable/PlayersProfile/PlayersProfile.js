@@ -88,6 +88,7 @@ const PlayersProfile = ({
           <img
             id="crown"
             src="static/media//assets/images/icons/white/crown.png"
+            alt="crown"
           />
         )}
       </div>

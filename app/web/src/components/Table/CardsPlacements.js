@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import Card from "../gameTable/Card/Card";
-import useAudio from "../../hooks/useAudio";
+// import useAudio from "../../hooks/useAudio";
 import { useGameTable } from "../Utiles/GameTableProvider";
 
-const CardsPlacements = ({}) => {
+const CardsPlacements = () => {
   // const playersInTable = useSelector((state) => state.game.activePlayers);
   const { communityCards } = useGameTable();
   const [flipped, setFlipped] = useState(communityCards.map(() => false)); // to stop the transition animation to happend more than once
   //playersCardDistributed for each player
   // *** also has been used in PlayersPlacements component
   // *** here only for animation purposes
-  const [playing, togglePlay] = useAudio("static/media/assets/sounds/soundEffect-card1.mp3");
+  // const [playing, togglePlay] = useAudio("static/media/assets/sounds/soundEffect-card1.mp3");
   const timeoutRefs = useRef([]);
 
   // useEffect(() => {
@@ -20,7 +20,7 @@ const CardsPlacements = ({}) => {
   // const initialDistribution = Array.from({length: 10}, (_, i) => i < playersInTable.length);
   // const playersCardDistributed = useState(initialDistribution);
 
-  const [playersCardDistributed, setPlayersCardDistributed] = useState([
+  const [playersCardDistributed] = useState([
     1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
   // {
@@ -47,7 +47,7 @@ const CardsPlacements = ({}) => {
   useEffect(() => {
     localStorage.setItem("dealingFlop", JSON.stringify(dealingFlop));
     setFlipped(flipped.map((f, index) => f || dealingFlop[index]));
-    togglePlay();
+    // togglePlay();
   }, [dealingFlop]);
 
   // Update dealingFlop based on communityCards with sequential timing
