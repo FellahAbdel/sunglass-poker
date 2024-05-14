@@ -105,7 +105,8 @@
     "checked": "Checked",
     "playing": "Playing",
     "waiting": "Waiting",
-    "winner":"Winner"
+    "winner":"Winner",
+    "tapis":"ALL IN"
   },
   "settings": {
     "mute": "Mute",
