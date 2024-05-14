@@ -13,7 +13,7 @@ export function getStyles(
     compTable: `comp-table
       ${isGameTableVisible && !isWindowOpen && "comp-table-inGame"}
       ${effectiveWindowType ? `comp-table-${effectiveWindowType}` : ""}
-      ${(showWaitingMessage && isGameTableVisible) && "comp-table-waitingMessage"}
+      ${(showWaitingMessage && isGameTableVisible && !isWindowOpen) && "comp-table-waitingMessage"}
       `,
 
     //Table itself

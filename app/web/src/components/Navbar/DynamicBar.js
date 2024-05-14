@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 
 const DynamicBar = () => {
   const { userId } = useAuth();
-  const { openWindow, windowType, isGameTableVisible } = useWindowContext();
+  const { openWindow, windowType, isGameTableVisible, isWindowOpen } = useWindowContext();
   const { isMaster, showWaitingMessage , isSpectator } = useGameTable();
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
@@ -83,7 +83,7 @@ const DynamicBar = () => {
 
       {/* Waiting panel and start button */}
       {isGameTableVisible && 
-        <div className={`container-waiting ${showWaitingMessage && "appear"}`}>
+        <div className={`container-waiting ${showWaitingMessage && isGameTableVisible && !isWindowOpen && "appear"}`}>
           <div className="txt-waiting">
             {getTranslatedWord("table.waiting")}
           </div>
