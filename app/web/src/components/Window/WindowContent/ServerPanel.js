@@ -120,7 +120,7 @@ const ServerPanelWindow = () => {
   return (
     <div className="listTableWindowPanel">
       <TextInputComponent
-        placeholder="Search room"
+        placeholder="serverPanel.search"
         styleClass={"input-connectionDefault input-searchBar input-icon-search"}
         styleClass2={"container-textInputComponent2"}
         errorMessage={""}

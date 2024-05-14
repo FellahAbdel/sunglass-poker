@@ -94,7 +94,8 @@
     "intermediate":"Intermediate",
     "advanced":"Advanced",
     "elite":"Elite",
-    "createTheGame":"Create the Game"
+    "createTheGame":"Create the Game",
+    "search": "Search Room"
   },
   "playersStatus": {
     "empty": "Empty",
