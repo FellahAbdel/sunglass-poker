@@ -1,8 +1,6 @@
 // TableItem.js ou TableItem.jsx
 import React, { useState, useRef } from "react";
 import Button from "../../../button/Button.tsx";
-import locked from "../../../assets/images/icons/white/password.png";
-import unlocked from "../../../assets/images/icons/white/unlock.png";
 import { useTranslation } from "../../../Utiles/Translations";
 import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
@@ -63,9 +61,9 @@ const ListTableItem = ({
       <div className="rowItem">{nombreDeJoueurs}/10</div>
       <div className="rowItem">
         {ouvert ? (
-          <img src={unlocked} alt="Open" />
+          <img src="static/media/assets/images/icons/white/unlock.png" alt="Open" />
         ) : (
-          <img src={locked} alt="Closed" />
+          <img src="static/media/assets/images/icons/white/password.png" alt="Closed" />
         )}
       </div>
       <div className="rowItem">

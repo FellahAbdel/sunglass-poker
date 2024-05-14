@@ -1,8 +1,5 @@
 import React from "react";
 import "./card.css";
-import cardBackLight from "./../../assets/images/card-design-light.png";
-import cardBackDark from "./../../assets/images/card-design-dark.png";
-
 import { useSettings } from "../../Utiles/SettingsContext";
 
 const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
@@ -17,7 +14,7 @@ const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
       <img
         className="CardBack"
         id="back"
-        src={theme === "light" ? cardBackLight : cardBackDark}
+        src={theme === "light" ? "static/media/assets/images/card-design-light.png" : "static/media/assets/images/card-design-dark.png"}
         alt="card"
       />
       {card ? (
@@ -47,13 +44,13 @@ const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
             </div>
             <img
               className="cardColor"
-              src={require(`./../../assets/images/card_type/${card[1]}.png`)}
+              src={`static/media/assets/images/card_type/${card[1]}.png`}
               alt="card"
             />
           </div>
           <img
             className="cardColorBig"
-            src={require(`./../../assets/images/card_type/${card[1]}.png`)}
+            src={`static/media/assets/images/card_type/${card[1]}.png`}
             alt="card"
           />
         </div>

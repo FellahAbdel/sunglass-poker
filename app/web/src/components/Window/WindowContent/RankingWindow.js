@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "../../Utiles/Translations";
 import Button from "../../button/Button.tsx";
-import goldMedal from "../../assets/images/gold-medal.png";
-import silverMedal from "../../assets/images/silver-medal.png";
-import bronzeMedal from "../../assets/images/bronze-medal.png";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
 
 const RankingWindow = ({}) => {
@@ -46,10 +43,10 @@ const RankingWindow = ({}) => {
                 <img
                   src={
                     index === 0
-                      ? goldMedal
+                      ? "static/media/assets/images/gold-medal.png"
                       : index === 1
-                      ? silverMedal
-                      : bronzeMedal
+                      ? "static/media/assets/images/silver-medal.png"
+                      : "static/media/assets/images/bronze-medal.png"
                   }
                   alt="medal"
                 />

@@ -89,7 +89,7 @@ const PlayersProfile = ({
         {status === "winner" && (
           <img
             id="crown"
-            src={require("./../../assets/images/icons/white/crown.png")}
+            src="static/media//assets/images/icons/white/crown.png"
           />
         )}
       </div>
