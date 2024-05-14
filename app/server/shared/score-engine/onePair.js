@@ -31,7 +31,7 @@ function isOnePair(tableau7cartes) {
     maMain[1] = p1c2;
 
     for (let t = 2; t < 5; t++) {
-      if (tab[compteur].number === p1c1.number) {
+      if (tab[compteur]?.number === p1c1.number) {
         compteur += 2;
       }
       maMain[t] = tab[compteur];

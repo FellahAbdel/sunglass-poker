@@ -119,14 +119,14 @@ const Navbar = ({}) => {
       {/* Current Chips inventory and LogOut Button */}
       {isLogged && (
         <div className="container-nav-lefttop">
-          <div className={`chatBox-V2 ${isChatOpen && "chatBoxOpen-V2"}`}>
+          
             {isGameTableVisible && (
-              <>
+              <div className={`chatBox-V2 ${isChatOpen && "chatBoxOpen-V2"}`}>
                 {!isChatOpen && (
                   <Button
                     label={""}
                     onClick={handleChatOpen}
-                    iconSrc={require("./../assets/images/icons/white/chat.png")}
+                    iconSrc="static/media/assets/images/icons/white/chat.png"
                   />
                 )}
 
@@ -135,7 +135,7 @@ const Navbar = ({}) => {
                     <img
                       className={"btn-chatClose-V2"}
                       onClick={handleChatClose}
-                      src={require("./../assets/images/icons/white/cross.png")}
+                      src="static/media/assets/images/icons/white/cross.png"
                       alt="exit-chat"
                     />
                     <TextInputComponent
@@ -147,10 +147,9 @@ const Navbar = ({}) => {
                     />
                   </>
                 )}
-              </>
+              </div>
             )}
           </div>
-        </div>
       )}
 
       <div className="container-navMain-V2">
@@ -166,7 +165,7 @@ const Navbar = ({}) => {
                 isLogged ? openWindow("profile") : openWindow("login")
               }
               styleClass={`${isLogged ? "btn-profile-V2 " : "btn-logIn-V2 "}`}
-              iconSrc={require("./../assets/images/icons/white/profile.png")}
+              iconSrc="static/media/assets/images/icons/white/profile.png"
             />
             <Button
               label={getTranslatedWord("navbar.ranking")}
@@ -174,7 +173,7 @@ const Navbar = ({}) => {
               styleClass={`${
                 isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "
               }`}
-              iconSrc={require("./../assets/images/icons/white/ranking.png")}
+              iconSrc="static/media/assets/images/icons/white/ranking.png"
             />
           </>
         )}
@@ -183,7 +182,7 @@ const Navbar = ({}) => {
           label={getTranslatedWord("navbar.settings")}
           onClick={() => openWindow("settings")}
           styleClass={`${isLogged ? "btn-settings-V2 " : "btn-settings-V2 "}`}
-          iconSrc={require("./../assets/images/icons/white/settings.png")}
+          iconSrc="static/media/assets/images/icons/white/settings.png"
         />
 
         {isLogged && !isGameTableVisible && (
@@ -191,14 +190,14 @@ const Navbar = ({}) => {
             label={getTranslatedWord("shop.shop")}
             onClick={() => openWindow("shop")}
             styleClass="btn-shop-V2"
-            iconSrc={require("./../assets/images/icons/white/shop.png")}
+            iconSrc="static/media/assets/images/icons/white/shop.png"
           />
         )}
         <Button
           label={getTranslatedWord("navbar.tutorial")}
           onClick={() => openWindow("tutorial")}
           styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
-          iconSrc={require("./../assets/images/icons/white/tutorial.png")}
+          iconSrc="static/media/assets/images/icons/white/tutorial.png"
         />
 
         {isLogged && (
@@ -206,7 +205,7 @@ const Navbar = ({}) => {
             label={label}
             onClick={handleLogOutButton}
             styleClass="btn-exit-V2"
-            iconSrc={require("./../assets/images/icons/white/exit.png")}
+            iconSrc="static/media/assets/images/icons/white/exit.png"
           />
         )}
       </div>
