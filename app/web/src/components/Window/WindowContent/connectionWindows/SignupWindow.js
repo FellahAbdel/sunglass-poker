@@ -166,7 +166,7 @@ const SignUpWindow = () => {
       <Button
         styleClass="btn-connectionDefault google-button back-color3"
         label={getTranslatedWord("connection.signinG")}
-        iconSrc={require("./../../../assets/images/icons/white/google.png")}
+        iconSrc="static/media/assets/images/icons/white/google.png"
         iconStyle={true}
       />
 

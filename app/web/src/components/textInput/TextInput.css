@@ -71,32 +71,32 @@
   margin: 0;
 }
 .input-icon-search {
-  background: url("./../assets/images/icons/black/search.png") no-repeat,
+  background: url("/public/static/media/assets/images/icons/black/search.png") no-repeat,
     rgb(255, 255, 255);
   background-position: 10px;
   background-size: 2vh;
 }
 
 .input-icon-email {
-  background: url("./../assets/images/icons/black/email.png") no-repeat,
+  background: url("/public/static/media/assets/images/icons/black/email.png") no-repeat,
     rgb(255, 255, 255);
   background-position: 20px;
   background-size: 2.5vh;
 }
 .input-icon-profile {
-  background: url("./../assets/images/icons/black/profile.png") no-repeat,
+  background: url("/public/static/media/assets/images/icons/black/profile.png") no-repeat,
     rgb(255, 255, 255);
   background-position: 20px;
   background-size: 2.5vh;
 }
 .input-icon-password {
-  background: url("./../assets/images/icons/black/password.png") no-repeat,
+  background: url("/public/static/media/assets/images/icons/black/password.png") no-repeat,
     rgb(255, 255, 255);
   background-position: 15px;
   background-size: 2.5vh;
 }
 .input-icon-passwordRepeat {
-  background: url("./../assets/images/icons/black/password-repeat.png")
+  background: url("/public/static/media/assets/images/icons/black/password-repeat.png")
       no-repeat,
     rgb(255, 255, 255);
   background-position: 15px;
@@ -104,7 +104,7 @@
 }
 
 .input-icon-GameName {
-  background: url("./../assets/images/icons/black/name.png") no-repeat,
+  background: url("/public/static/media/assets/images/icons/black/name.png") no-repeat,
     rgb(255, 255, 255);
   background-position: 15px;
   background-size: 2.5vh;

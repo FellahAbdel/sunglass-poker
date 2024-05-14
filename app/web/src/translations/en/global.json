@@ -46,11 +46,13 @@
     "status": "Status",
     "name": "Name",
     "gameName": "Game name",
+    "PasswordOptionnal": "Password (Optional)",
     "ranked": "Ranked",
     "players": "Players",
     "selectRank": "Select Rank",
     "join": "Join",
-    "full": "Full"
+    "full": "Full",
+    "noActiveServer" : "No active server"
   },
   "handGuide": {
     "highcard": "High Card",
@@ -86,7 +88,13 @@
     "join": "Join",
     "full": "Full",
     "status": "Statut",
-    "action": "Action"
+    "action": "Action",
+    "selectRank": "Select Rank",
+    "friendly":"Friendly",
+    "intermediate":"Intermediate",
+    "advanced":"Advanced",
+    "elite":"Elite",
+    "createTheGame":"Create the Game"
   },
   "playersStatus": {
     "empty": "Empty",
@@ -127,7 +135,8 @@
     "purchase":"Purchase",
     "buy":"Buy",
     "backStore":"Back to Store",
-    "loading":"Loading"
+    "loading":"Loading",
+    "coins" : "Thanks you for your donation"
   },
   "messageLogo": {
     "tutorial": "Tutorial",

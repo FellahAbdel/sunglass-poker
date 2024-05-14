@@ -30,7 +30,7 @@ class Game {
       playerBeforeNextTurn:null,
       focusTurnTimer: 0,
       focusTurnCall: false,
-      autoTurnDelay: 2000000,//00 en plus
+      autoTurnDelay: 20000,
       restartCall: false,
       restartTimer: 0,
       restartDelay: 5000,
@@ -334,17 +334,37 @@ class Game {
       if (player.getPlayerMoney() >= amount) {
         //Cas ou il ajoute a sa mise pour s'équilibrer au autre
         if (amount + player.howmanyBetTurn() >= this.gameCurrentBet) {
+          if(amount + player.howmanyBetTurn()===player.getPlayerMoney()){
+            player.tapis();
+            player.setTapis();
+            console.log("TAPIS");
+          }
           player.bet(amount);
           this.total += amount;
           //on met le max a la mise a mettre
           if (this.gameCurrentBet < player.howmanyBetTurn()) {
             this.gameCurrentBet = player.howmanyBetTurn();
-            player.raise();
-            console.log("lefocus avant le raise:", this.focus);
-            this.playerBeforeNextTurn = this.players.findIndex(
-              (p) => p.getPlayerId() === player.getPlayerId()
-            );
-            console.log("lefocus apres le raise", this.focus);
+            
+            if(amount + player.howmanyBetTurn()===player.getPlayerMoney()){
+
+              player.tapis();
+              player.setTapis();
+              this.playerBeforeNextTurn = this.players.findIndex(
+                (p) => p.getPlayerId() === player.getPlayerId()
+              );
+              //TRUC A VERIFIER ---------------------------------------------------------------------------
+              this.playerBeforeNextTurn=(this.playerBeforeNextTurn+1)%this.activePlayers.length
+            }
+            else{
+              player.raise();
+              this.playerBeforeNextTurn = this.players.findIndex(
+                (p) => p.getPlayerId() === player.getPlayerId()
+              );
+
+             }
+            
+            //console.log("lefocus avant le raise:", this.focus);
+            //console.log("lefocus apres le raise", this.focus);
           }
         } else {
           return;
@@ -355,6 +375,13 @@ class Game {
         }
         console.log("this line got executed", this.gameCurrentBet);
         this.rotateFocus();
+      }
+      //CAS OU ON TAPIS
+      else{
+        player.tapis();
+        player.bet(amount);
+        player.setTapis();
+        console.log("TAPIS plus de sous");
       }
     }
   }
@@ -377,7 +404,8 @@ class Game {
           const playerMoney = p.getPlayerMoney();
           const amountToBet = playerMoney < self.bonusAmount 
                               ? playerMoney : self.bonusAmount
-          self.bet(p, amountToBet);
+          p.betBonus(amountToBet);
+          this.total+=amountToBet;
           index = (index + 1) % this.activePlayers.length;
 
         } while (index != startIndex);
@@ -626,6 +654,14 @@ class Game {
       case "showdown":
         console.log("PASSE PAR LE CASE showdown");
         //this.state = "waiting";
+        //------------------------------------------------------------------------------------------------
+        this.players.forEach((player) => {
+          if(player.status==="tapis"){
+            player.isActive=true;
+
+          }
+        });
+        this.updateActivePlayers();
         this.evaluateHands();
         clearTimeout(this.focusTurnCall);
         this.resetRestartCall();

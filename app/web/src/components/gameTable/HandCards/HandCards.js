@@ -58,10 +58,10 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
 
   // Icônes des symboles de cartes
   const cardIcons = {
-    H: require("./../../assets/images/icons/white/heart.png"),
-    D: require("./../../assets/images/icons/white/diamon.png"), // Correction du nom du fichier
-    C: require("./../../assets/images/icons/white/club.png"),
-    S: require("./../../assets/images/icons/white/spade.png"),
+    H: "static/media/assets/images/icons/white/heart.png",
+    D: "static/media/assets/images/icons/white/diamon.png", 
+    C: "static/media/assets/images/icons/white/club.png",
+    S: "static/media/assets/images/icons/white/spade.png",
   };
 
   return (

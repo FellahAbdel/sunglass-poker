@@ -9,7 +9,7 @@ class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
   playerHandName = "";
-  bonusMax = 3;
+  bonusMax = 2;
   playerBonus = {H:0, D:0, C:0, S:0, ready:false};
 
   constructor(
@@ -19,7 +19,8 @@ class Player {
     currentBet = 0,
     currentBetTurn = 0,
     isActive = true,
-    isSpectator = false
+    isSpectator = false,
+    isTapis=false
   ) {
     this.playerId = playerId;
     this.name = name;
@@ -31,6 +32,7 @@ class Player {
     this.isActive = isActive;
     this.isYou = false;
     this.isAfk = false;
+    this.isTapis=isTapis;
     this.isSpectator = isSpectator;
   }
 
@@ -40,6 +42,16 @@ class Player {
   }
   unsetAfk(){
     this.isAfk = false;
+    this.isActive = true;
+  }
+
+  setTapis(){
+    this.isTapis = true;
+    this.isActive = false;
+  }
+
+  unsetTapis(){
+    this.isTapis = false;
     this.isActive = true;
   }
 
@@ -225,6 +237,10 @@ class Player {
     this.status = "call";
   }
 
+  tapis(){
+    this.status="tapis";
+  }
+
   playing() {
     this.status = "playing";
   }
@@ -253,6 +269,12 @@ class Player {
       this.playerMoney -= amount;
       //status a definir:
       // this.status = "raise";
+    }
+  }
+
+  betBonus(amount) {
+    if (this.playerMoney > amount) {
+      this.playerMoney -= amount;
     }
   }
 

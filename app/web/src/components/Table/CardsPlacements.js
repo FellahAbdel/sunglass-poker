@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Card from "../gameTable/Card/Card";
 import useAudio from "../../hooks/useAudio";
 import { useGameTable } from "../Utiles/GameTableProvider";
-import soundSrc from "./../assets/sounds/soundEffect-card1.mp3";
 
 const CardsPlacements = ({}) => {
   // const playersInTable = useSelector((state) => state.game.activePlayers);
@@ -11,7 +10,7 @@ const CardsPlacements = ({}) => {
   //playersCardDistributed for each player
   // *** also has been used in PlayersPlacements component
   // *** here only for animation purposes
-  const [playing, togglePlay] = useAudio(soundSrc);
+  const [playing, togglePlay] = useAudio("static/media/assets/sounds/soundEffect-card1.mp3");
   const timeoutRefs = useRef([]);
 
   // useEffect(() => {

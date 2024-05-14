@@ -46,6 +46,8 @@
     radial-gradient(var(--error-red) 15%, transparent 20%) 8px 8.5px;
   --dark-background-color: #282828;
   --dark-background-size: 16px 16px;
+  /* --dark-background-size: 1vw 1vw; */
+
   --inGame-dark-shadow-box: inset 0px 10px 10vw 3vw rgb(0, 0, 0),
     inset 0 -5px 0 1vw var(--color3-dark), inset 0 0 0 0 transparent,
     0 0px 1vw 0vw #0000005f, 0 5px 1vw 1vw #164f81, 0 5px 0 1vw rgb(0, 0, 0),
@@ -120,7 +122,9 @@
 .container-inGame {
   width: 65vw;
   height: 45vh;
-  border-radius: 250px 250px 180px 180px;
+  /* border-radius: 250px 250px 180px 180px; */
+  border-radius: 30vw 30vw 20vw 20vw;
+
 }
 #dark .container-inGame {
   box-shadow: var(--inGame-dark-shadow-box);
@@ -129,7 +133,7 @@
   background-size: 16px 12px; */
 
   background-image: radial-gradient(#bababa0c 40%, #000000),
-    url("./../assets/images/texture/carpetlow-bnw.jpg");
+    url("/public/static/media/assets/images/texture/carpetlow-bnw.jpg");
   background-size: 77vw;
   background-position: center;
   background-repeat: no-repeat;
@@ -137,7 +141,7 @@
 #light .container-inGame {
   box-shadow: var(--inGame-light-shadow-box);
   background-image: radial-gradient(#ffd9002e 50%, #000000),
-    url("./../assets/images/texture/carpetlow.jpg");
+    url("/public/static/media/assets/images/texture/carpetlow.jpg");
   background-size: 77vw;
   background-position: center;
   background-repeat: no-repeat;
@@ -150,10 +154,10 @@
 .container-profile {
   width: 65vw;
   height: 50vh;
-  border-radius: 150px;
+  border-radius: 15vw;
 }
 .container-settings {
-  border-radius: 150px;
+  border-radius: 10vw;
   width: 30vw;
   height: 50vh;
 }
@@ -161,7 +165,7 @@
 .container-register,
 .container-forgot,
 .container-reset {
-  border-radius: 100px;
+  border-radius: 10vw;
   width: 40vw;
   height: 80vh;
 }
@@ -169,7 +173,7 @@
 #dark .container-servers,
 #light .container-ranking,
 #dark .container-ranking {
-  border-radius: 60px;
+  border-radius: 4vw;
   width: 80vw;
   height: 70vh;
   background: unset;
@@ -180,14 +184,14 @@
 #dark .container-tutorial {
   width: 60vw;
   height: 50vh;
-  border-radius: 50px;
+  border-radius: 4vw;
   background: unset;
   background-color: rgb(43, 41, 41);
 }
 #light .container-success {
   width: 50vw;
   height: 40vh;
-  border-radius: 100px;
+  border-radius: 10vw;
   box-shadow: var(--green-box-shadow);
   background: var(--green-light-background);
   background-color: var(--light-background-color);
@@ -206,7 +210,7 @@
 #light .container-alert {
   width: 60vw;
   height: 40vh;
-  border-radius: 100px;
+  border-radius: 10vw;
   box-shadow: var(--red-box-shadow);
   background: var(--red-light-background);
   background-color: var(--light-background-color);
@@ -215,7 +219,7 @@
 #dark .container-alert {
   width: 60vw;
   height: 40vh;
-  border-radius: 100px;
+  border-radius: 10vw;
   box-shadow: var(--red-box-shadow);
   background: var(--red-dark-background);
   background-color: var(--dark-background-color);
@@ -226,7 +230,7 @@
 #light .container-shop {
   width: 65vw;
   height: 50vh;
-  border-radius: 50px;
+  border-radius: 5vw;
   background: unset;
   background-color: #282828;
 }
@@ -235,7 +239,7 @@
 #light .container-coins {
   width: 35vw;
   height: 60vh;
-  border-radius: 100px;
+  border-radius: 10vw;
   background: unset;
   background-color: #282828;
 }
@@ -244,14 +248,14 @@
 #light .container-validation {
   width: 50vw;
   height: 50vh;
-  border-radius: 250px;
+  border-radius: 20vw;
   background: unset;
   background-color: #282828;
 }
 .container-create_table {
   width: 35vw;
   height: 55vh;
-  border-radius: 100px;
+  border-radius: 10vw;
 }
 
 /*the line inside the table*/
@@ -265,7 +269,7 @@
   width: 52vw;
   height: 30vh;
 
-  border-radius: 250px 250px 180px 180px;
+  border-radius: 30vw 30vw 20vw 20vw;
   transition: width 1s ease, height 1s ease, border 1s ease;
 }
 
