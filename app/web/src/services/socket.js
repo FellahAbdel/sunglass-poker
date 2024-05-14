@@ -1,4 +1,5 @@
 // Set up your Socket.io service here
+import { receiveMessage } from "../store/actions/clientInteractionsCreator";
 import io from "socket.io-client";
 import store from "../store/configureStore";
 let vm = "https://mai-projet-integrateur.u-strasbg.fr/";
@@ -40,6 +41,7 @@ export const comm = {
 
   Init: function () {
     this.preFun();
+    this.initChat();
     // console.log("Init of socketio client side");
     this.Hello();
     socket.on("world", (data) => {
@@ -140,5 +142,18 @@ export const comm = {
     const roomId = sessionStorage.getItem("room");
     console.log("Emitting startGame with room and userId:", roomId, userId);
     socket.emit("startGame", { room: roomId, userId: userId });
+  },
+
+  sendMessage: function (message) {
+    this.preFun(); // Ensure the token is set
+    console.log("Sending chat message:", message);
+    socket.emit("sendMessage", message);
+  },
+
+  initChat: function () {
+    socket.on("receiveMessage", (message) => {
+      console.log("Chat message received:", message);
+      store.dispatch(receiveMessage(message));
+    });
   },
 };

@@ -26,18 +26,22 @@ module.exports = function (
       csl.log("broadcastStatus", "socket io broadcast to room", room);
       io.to(room).emit("refresh", { status: true });
     },
-    stopListeningToRoom:kickOfRoom,
+    stopListeningToRoom: kickOfRoom,
   };
 
-
-  async function findPlayerRoom(socket,userId){
-    answer = await dao.getUserInfo(userId)
-    csl.log("ManualRequestForGame",answer);
-    if(answer.success){
+  async function findPlayerRoom(socket, userId) {
+    answer = await dao.getUserInfo(userId);
+    csl.log("ManualRequestForGame", answer);
+    if (answer.success) {
       userInfos = answer.user;
-      csl.log("ManualRequestForGame",userInfos.inGame,userInfos.inGame!==null,userInfos.inGame!==undefined)
-      if(userInfos.inGame !== null && userInfos.inGame !== undefined){
-        joinRoom(socket,{id:userInfos.inGame.toString()});
+      csl.log(
+        "ManualRequestForGame",
+        userInfos.inGame,
+        userInfos.inGame !== null,
+        userInfos.inGame !== undefined
+      );
+      if (userInfos.inGame !== null && userInfos.inGame !== undefined) {
+        joinRoom(socket, { id: userInfos.inGame.toString() });
       }
     }
   }
@@ -166,23 +170,23 @@ module.exports = function (
     socket.request.session.save();
   }
 
-  async function kickOfRoom(userId,room){
+  async function kickOfRoom(userId, room) {
     const socketsOfPlayer = io.sockets.adapter.rooms.get(userId);
 
     if (socketsOfPlayer) {
-        // Iterate through each socket in the room
-        socketsOfPlayer.forEach(socketId => {
-            // Find the socket object by its ID
-            const socket = io.sockets.sockets.get(socketId);
+      // Iterate through each socket in the room
+      socketsOfPlayer.forEach((socketId) => {
+        // Find the socket object by its ID
+        const socket = io.sockets.sockets.get(socketId);
 
-            // If the socket is found and it's in the specified room, remove it from the room
-            if (socket && socket.rooms.has(room)) {
-              csl.log("kickOfRoom",'KICKING ')
-                socket.emit("kicked");
-                io.to(room).emit('refresh');
-                socket.leave(room);
-            }
-        });
+        // If the socket is found and it's in the specified room, remove it from the room
+        if (socket && socket.rooms.has(room)) {
+          csl.log("kickOfRoom", "KICKING ");
+          socket.emit("kicked");
+          io.to(room).emit("refresh");
+          socket.leave(room);
+        }
+      });
     }
   }
 
@@ -269,7 +273,7 @@ module.exports = function (
     });
 
     // Wait for the promise to resolve
-    newGamePromise.then( async (id) => {
+    newGamePromise.then(async (id) => {
       csl.log(fileType, id, " >- id game created");
       if (id === undefined) {
         csl.error(fileType, "Refused to create new game");
@@ -362,6 +366,12 @@ module.exports = function (
       socket.request.session.destroy();
     }, SESSION_DURATION);
 
+    socket.on("sendMessage", (data) => {
+      const { message } = data; // Assurez-vous que le message contient les informations nécessaires
+      console.log(`Message received: ${message}`);
+      socket.broadcast.emit("receiveMessage", data); // Diffuse le message à tous les clients connectés
+    });
+
     socket.on("status", (data) => {
       if (socket.request.session.userId) {
         csl.log(
@@ -439,7 +449,7 @@ module.exports = function (
       }
     });
 
-    socket.on("startGame",  (data) => {
+    socket.on("startGame", (data) => {
       // console.log("Received startGame event with data:", data);
       const room = data.room;
       const userId = data.userId;
@@ -447,11 +457,11 @@ module.exports = function (
       updateGameStatus(room);
     });
 
-    socket.on("showMyGame", () =>{
-      if(socket.request.session.userId){
-        findPlayerRoom(socket,socket.request.session.userId);
+    socket.on("showMyGame", () => {
+      if (socket.request.session.userId) {
+        findPlayerRoom(socket, socket.request.session.userId);
       }
-    })
+    });
 
     socket.request.session.save();
   });

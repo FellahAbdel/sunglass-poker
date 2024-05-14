@@ -1,0 +1,54 @@
+export const initialState = {
+  isLogged: false,
+  user: null,
+};
+
+export function userReducer(state = initialState, action) {
+  const { type, payload } = action;
+
+  switch (type) {
+    case "LOGIN":
+      // Exemple de payload pour l'action LOGIN
+      // payload pourrait être les données de l'utilisateur
+      const loggedInUser = {
+        id: 1,
+        username: "john_doe",
+        email: "john@example.com",
+        role: "user",
+      };
+
+      return {
+        ...state,
+        isLogged: true,
+        user: loggedInUser,
+      };
+
+    case "LOGOUT":
+      // L'action LOGOUT ne nécessite généralement pas de payload
+      return {
+        ...state,
+        isLogged: false,
+        user: null,
+      };
+
+    case "UPDATE_USER_DATA":
+      // Exemple de payload pour l'action UPDATE_USER_DATA
+      // payload pourrait être un objet avec les données utilisateur à mettre à jour
+      const updatedUserData = {
+        email: "new_email@example.com",
+        firstName: "John",
+        lastName: "Doe",
+      };
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...updatedUserData,
+        },
+      };
+
+    default:
+      return state;
+  }
+}

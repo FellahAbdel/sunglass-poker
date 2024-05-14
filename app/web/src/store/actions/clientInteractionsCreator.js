@@ -91,3 +91,13 @@ export const loggedIn = (user) => ({
   type: actions.LOGGED_IN,
   payload: user,
 });
+
+export const receiveMessage = (message) => ({
+  type: actions.MESSAGE_RCV,
+  payload: message,
+});
+
+export const sendMessage = (message) => ({
+  type: actions.MESSAGE_SEND,
+  payload: message,
+});

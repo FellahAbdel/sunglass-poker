@@ -47,3 +47,7 @@ export const SITTED = "SITTED";
 export const KICKED = "KICKED";
 
 export const LOGGED_IN = "LOGGED_IN";
+
+export const MESSAGE_RCV = "RECEIVE_MESSAGE";
+
+export const MESSAGE_SEND = "SEND_MESSAGE";

@@ -12,9 +12,9 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
       break;
 
     case actions.CREATE_GAME:
-        // console.log("emit createGame (socketMiddleware)");
-        // once the server finish creating the game,
-        // the client store will receive a SITTED event.
+      // console.log("emit createGame (socketMiddleware)");
+      // once the server finish creating the game,
+      // the client store will receive a SITTED event.
       comm.createGame();
       break;
     case actions.CREATE_GAME_V2:
@@ -53,6 +53,11 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
       // console.log("Player wants to leave the room, emit");
       comm.leaveRoom();
       break;
+    case actions.MESSAGE_SEND:
+      comm.sendMessage(action.payload);
+      break;
+    case actions.MESSAGE_RCV:
+      return next(action);
 
     default:
       break;
