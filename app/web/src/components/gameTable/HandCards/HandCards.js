@@ -59,7 +59,7 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
   // Icônes des symboles de cartes
   const cardIcons = {
     H: "static/media/assets/images/icons/white/heart.png",
-    D: "static/media/assets/images/icons/white/diamon.png", 
+    D: "static/media/assets/images/icons/white/diamond.png", 
     C: "static/media/assets/images/icons/white/club.png",
     S: "static/media/assets/images/icons/white/spade.png",
   };
