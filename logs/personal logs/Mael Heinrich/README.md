@@ -166,6 +166,8 @@
 
 2024/05/14 30min    recap avec Victor et quelque test supplémentaire sur la VM ajout de certain truc a regler pour le rendu
 
---2024/05 SEMAINE 2: 7H30 (TOTAL: 121H)
+2024/05/14 1H30     Réglage du bug du bonus pour qu'il n'impolse pas le rotateFocus,modification de certain parametre et test de la version desktop avec le push sur VM.
 
-TEMPS TOTAL: 121H
+--2024/05 SEMAINE 2: 9H (TOTAL: 122H30)
+
+TEMPS TOTAL: 122H30
