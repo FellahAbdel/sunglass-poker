@@ -1,4 +1,4 @@
-# Melissa Ertekin | Temps Totale : 112h30
+# Melissa Ertekin | Temps Totale : 124h30
 
 
 ### Semaine 0 : 30 Janvier - 05 Février  | Temps Totale: 5h
@@ -154,7 +154,7 @@
 
 * 2024/05/06 : <b>1h</b> <br/> Travail individuel : <i> Surveillance des journaux et Trello.  Demandes de feedback. Rédaction du compte-rendu hebdomadaire. </i>
 
-### Semaine 14 : 6 Mai - 13 Mai | Temps Totale:
+### Semaine 14 : 6 Mai - 13 Mai | Temps Totale: 12h
 
 * 2024/05/07 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Standup meeting avec les développeurs. Planification de cette semaine et précision de ce que nous allons faire les semaines à venir jusqu'au rendu. Petite démo de jeux. </i>
 
@@ -167,3 +167,8 @@
 * 2024/05/13 : <b>3h</b> <br/> Travail individuel : <i> Création de site vitrine pour Sun Games Studios (pas encore finit)</i>
 
 * Durant la semaine : <b>1h</b> <br/> Discussions sur discord: <i> Échanges sur le projet</i> 
+
+### Semaine 15 : 13 Mai - 21 Mai | Temps Totale: 
+
+* 2024/05/14 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Réunion avec les développeurs et planification de la semaine </i>
+
