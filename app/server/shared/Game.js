@@ -179,7 +179,8 @@ class Game {
   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
-    if (this.activePlayers.length < 2) {
+    if (this.activePlayers.length < 2 && !this.players[this.focus].status==="tapis") {
+
       this.advanceStageToShowdown();
       return;
     }
