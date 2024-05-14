@@ -1,5 +1,3 @@
-import { useTranslation } from "./Translations";
-
 export function formatNumber(value) {
     try {
         return value.toLocaleString();

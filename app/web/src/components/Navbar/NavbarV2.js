@@ -12,7 +12,7 @@ import * as actions from "../../store/actions/clientInteractionsCreator.js";
 import { useDispatch } from "react-redux";
 import { useGameTable } from "../Utiles/GameTableProvider.jsx";
 
-const Navbar = ({}) => {
+const Navbar = () => {
   const { isLogged, logingOut } = useAuth();
   const { gameState } = useGameTable();
 

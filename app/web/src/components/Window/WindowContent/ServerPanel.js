@@ -91,7 +91,6 @@ const ServerPanelWindow = () => {
   }, [searchText]); //Mise à jour à chaque fois que le texte est changé
 
   console.log("roomsTableRecords : ", roomTableRecords); // Log the fetched roomTableRecords data to the console
-  const { openWindow } = useWindowContext();
 
   const handleJoinTable = (id) => {
     // Logique pour rejoindre une table à faire
@@ -120,7 +119,7 @@ const ServerPanelWindow = () => {
   return (
     <div className="listTableWindowPanel">
       <TextInputComponent
-        placeholder="Search room"
+        placeholder="serverPanel.search"
         styleClass={"input-connectionDefault input-searchBar input-icon-search"}
         styleClass2={"container-textInputComponent2"}
         errorMessage={""}

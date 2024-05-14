@@ -24,13 +24,14 @@ const GameTable = () => {
   const { isLogged } = useAuth();
   const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
+  const { playerBonus, playerCards ,showWaitingMessage } = useGameTable();
   const classes = getStyles(
     windowType,
     isLogged,
     isGameTableVisible,
-    isWindowOpen
+    isWindowOpen,
+    showWaitingMessage
   );
-  const { playerBonus, playerCards } = useGameTable();
 
   const handleCloseOnClickOutside = (event) => {
     if (isWindowOpen) {
@@ -73,7 +74,7 @@ const GameTable = () => {
       {isGameTableVisible && !isWindowOpen && (
         <>
           <div
-            className={`comp-bonus  ${isWindowOpen ? "slideDown" : "slideUp"}`}
+            className={`comp-bonus  ${(isWindowOpen || showWaitingMessage) ? "slideDown" : "slideUp"}`}
           >
             {playerBonus !== undefined && ( 
               <BonusPanel 
@@ -86,10 +87,10 @@ const GameTable = () => {
           </div>
           <div
             className={`comp-gameAction ${
-              isWindowOpen ? "slideDown" : "slideUp"
+              (isWindowOpen || showWaitingMessage)? "slideDown" : "slideUp"
             }`}
           >
-            <GameActionPanel />
+            {<GameActionPanel/>}
           </div>
 
           <div
