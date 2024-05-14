@@ -9,7 +9,7 @@ class Player {
     // {action, mise} ex: [{"fold", 0}, {"raise", 120}, ...]
   ]; //
   playerHandName = "";
-  bonusMax = 3;
+  bonusMax = 2;
   playerBonus = {H:0, D:0, C:0, S:0, ready:false};
 
   constructor(
@@ -269,6 +269,12 @@ class Player {
       this.playerMoney -= amount;
       //status a definir:
       // this.status = "raise";
+    }
+  }
+
+  betBonus(amount) {
+    if (this.playerMoney > amount) {
+      this.playerMoney -= amount;
     }
   }
 

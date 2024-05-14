@@ -57,7 +57,7 @@
   transition: background-image 1s ease;
 }
 #dark .box-2 {
-  background-image: linear-gradient(0deg, #004577 50%, rgba(0, 0, 0, 0) 70%);
+  background-image: linear-gradient(0deg, #004577 50%, rgba(0, 0, 0, 0) 100%);
   transition: background-image 1s ease;
 }
 #dark .box-3 {
@@ -70,7 +70,7 @@
   transition: background-image 1s ease;
 }
 #light .box-2 {
-  background-image: linear-gradient(0deg, #a57423 50%, rgba(0, 0, 0, 0) 70%);
+  background-image: linear-gradient(0deg, #a57423 50%, rgba(0, 0, 0, 0) 100%);
   transition: background-image 1s ease;
 }
 #light .box-3 {

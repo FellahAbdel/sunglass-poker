@@ -390,7 +390,8 @@ class Game {
           const playerMoney = p.getPlayerMoney();
           const amountToBet = playerMoney < self.bonusAmount 
                               ? playerMoney : self.bonusAmount
-          self.bet(p, amountToBet);
+          p.betBonus(amountToBet);
+          this.total+=amountToBet;
           index = (index + 1) % this.activePlayers.length;
 
         } while (index != startIndex);
