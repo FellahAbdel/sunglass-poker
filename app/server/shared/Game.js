@@ -622,8 +622,21 @@ class Game {
       const aa = this.getPlayerById(winner[0].id);
       aa.playerHandName = winnerHandName;
       console.log("aa", aa);
-      aa.seRemplirLesPoches(this.total);
-      aa.jesuislewinner();
+      if(aa.getStatus()==='tapis'){
+        const maxwin=this.total-(aa.betTotal*2)
+        aa.seRemplirLesPoches(maxwin);
+        this.total-=maxwin;
+        aa.isActive = false;
+        //l'update esr fait au debut de la fonction
+        aa.jesuislewinner();
+        if(this.total>0){
+          this.evaluateHands();
+        }
+      }
+      else{
+        aa.seRemplirLesPoches(this.total);
+        aa.jesuislewinner();
+      }
     }
   }
 
