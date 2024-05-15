@@ -5,7 +5,6 @@ import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
 import { useWindowContext } from "./../components/Utiles/WindowContext";
 
 //css imports
-import "./reset.css";
 import "./gameTable.css";
 import "../components/Utiles/animations.css";
 import { getStyles } from "../components/Utiles/useStyles.jsx";
@@ -51,13 +50,14 @@ const GameTable = () => {
 
   return (
     <div
-      className={`container-main resetall ${animation ? "" : "no-animation"}`}
+      className={`container-main ${animation ? "" : "no-animation"}`}
       id={theme}
       onClick={handleCloseOnClickOutside}
     >
       {/* css Pattern background */}
 
-      <img className="backdrop"  src="static/media/assets/images/backdrop/backdrop2.jpg" alt="backdrop"/>
+      {theme === "light" &&<img className="backdrop"  src="static/media/assets/images/backdrop/backdrop2.jpg" alt="backdrop"/>}
+      <div className="backdrop"/>
       <div className="backdrop2"/>
 
       {/* Navbar or header */}
