@@ -607,7 +607,7 @@ class Game {
   evaluateHands() {
     this.updateActivePlayers();
     this.players = this.activePlayers;
-    const winner = this.gagnant(this.activePlayers);
+    let winner = this.gagnant(this.activePlayers);
     if(winner === undefined){
       csl.log('evaluateHands',"winner is undefined, players must have all left or something wrong happend.");
       return;
@@ -616,10 +616,11 @@ class Game {
 
     // Si le winner n'est pas un tableau c'est une victoire par défaut car le dernier joueur
     if(!Array.isArray(winner)){
-      winner.playerHandName = "Last player";
-      winner.seRemplirLesPoches(this.total);
-      winner.jesuislewinner();
-      return;
+      winner = [winner];
+      // winner.playerHandName = "Last player";
+      // winner.seRemplirLesPoches(this.total);
+      // winner.jesuislewinner();
+      // return;
     }
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     console.log("winner est: ", winner);
@@ -641,15 +642,20 @@ class Game {
       aa.playerHandName = winnerHandName;
       console.log("aa", aa);
       if(aa.getStatus()==='tapis'){
-        const maxwin=this.total-(aa.betTotal*2)
-        aa.seRemplirLesPoches(maxwin);
-        this.total-=maxwin;
+        const maxwin=aa.betTotal*2;
+        const prend = (maxwin <= this.total) ? maxwin : this.total
+        aa.seRemplirLesPoches(prend);
+        this.total-=prend;
         aa.isActive = false;
+        csl.log('evaluateHandsWinnerTapis',maxwin,this.total, aa.isActive)
         //l'update esr fait au debut de la fonction
         aa.jesuislewinner();
         if(this.total>0){
           this.evaluateHands();
         }
+        //
+        if(this.activePlayers.find(p => p.getPlayerId() === aa.getPlayerId()) === undefined)
+          this.activePlayers.push(aa);
       }
       else{
         aa.seRemplirLesPoches(this.total);
@@ -755,12 +761,12 @@ class Game {
         console.log("PASSE PAR LE CASE showdown");
         //this.state = "waiting";
         //------------------------------------------------------------------------------------------------
-        this.players.forEach((player) => {
-          if(player.status==="tapis"){
-            player.isActive=true;
+        // this.players.forEach((player) => {
+        //   if(player.status==="tapis"){
+        //     player.isActive=true;
 
-          }
-        });
+        //   }
+        // });
         this.updateActivePlayers();
         this.evaluateHands();
         clearTimeout(this.focusTurnCall);
@@ -876,10 +882,10 @@ class Game {
    */
   gagnant(activePlayers) {
     if(this.activePlayers.length === 0) return undefined;
-    if(this.activePlayers.length === 1) return this.activePlayers[0];
+    if(this.activePlayers.length === 1) return {player:this.activePlayers[0],id:this.activePlayers[0].getPlayerId(),type:"dernier joueur"};
     let combinationList = this.listeCombinaison(activePlayers);
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
-
+    csl.log('gagnant',maxList,combinationList);
     if (maxList.length > 1) {
       return scoreEngineUtils.second(maxList);
     } else {

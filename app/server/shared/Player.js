@@ -256,6 +256,7 @@ class Player {
     this.status="tapis";
     this.currentBet = amount;
     this.currentBetTurn += amount;
+    this.betTotal += amount;
     this.playerMoney -= amount;
   }
   
