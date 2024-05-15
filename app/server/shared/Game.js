@@ -202,12 +202,24 @@ class Game {
 
   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
+    this.activePlayers.map(p => console.log(p.status === "tapis"));
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
-    const remainingPlayersCount = this.activePlayers.filter(player => player.status !== "tapis").length;
-    const dernierPasTapis = this.activePlayers.find(player => player.status !== "tapis");
-
-    if (this.activePlayers.length < 2||(remainingPlayersCount<=1 && (dernierPasTapis.howmanyBetTurn()===this.gameCurrentBet))) {
+    let someoneTapis = (this.activePlayers.find(player => player.status === "tapis") !== undefined);
+    // Si personne tapis et que le nombre de joueur est 1 alors plus personne ne joue on a un gagnant
+    csl.log('rotateFocus',someoneTapis) 
+    if(!someoneTapis && this.activePlayers.filter(p => p.state !== "folded").length === 1){
+      csl.log('rotateFocus', "No one has tapied and there is only one player left")
+      this.advanceStageToShowdown();
+      return;
+    }
+    
+    let remainingPlayersCount = this.activePlayers.filter(player => player.status !== "tapis").length;
+    let dernierPasTapis = this.activePlayers.find(player => player.status !== "tapis");
+    csl.log('rotateFocus',dernierPasTapis,this.activePlayers.length,remainingPlayersCount,dernierPasTapis);
+    // Plus de joueur qui ne sont pas tapis alors on va jusqu'à la fin
+    if ((dernierPasTapis === undefined) && someoneTapis) {
       // this.advanceStageToShowdown();
+      clearTimeout(this.focusTurnCall)
       while(this.currentStage !== "showdown"){
         this.advanceStage();
       }
@@ -227,12 +239,18 @@ class Game {
     console.log("isACtive?",this.players[this.focus].isActive);
     // Rotation du focus tant que le joueur actuel n'est pas actif
     while (!this.players[this.focus].isActive||(this.players[this.focus].getStatus()==="tapis")) {
+      console.log("Player qu'on regarde :" ,this.players[this.focus].isActive,this.players[this.focus].getStatus);
+      this.focus = (this.focus + 1) % this.players.length;
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
+        clearTimeout(this.focusTurnCall)
+        while(this.currentStage !== "showdown"){
+          this.advanceStage();
+        }
         return;
       }
-      this.focus = (this.focus + 1) % this.players.length;
     }
+    console.log("Le focus Après : ",this.focus);
 
     // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
     //ATTENTION A VERIFIER SI ça MARCHE AVEC FOLD   //+this.nbhostfolded 
@@ -328,10 +346,10 @@ class Game {
       player.fold();
       // this.updateActivePlayers();
       console.log("NOmbre de joururs actif :", this.activePlayers.length);
-      // if (this.activePlayers.length < 2) {
-      //   this.advanceStageToShowdown();
-      //   return;
-      // }                    
+      if (this.activePlayers.length < 2) {
+        this.advanceStageToShowdown();
+        return;
+      }                    
       if (this.focus === this.playerBeforeNextTurn+this.nbhostfolded ) {
         this.nbhostfolded++;
         console.log("JE SUIS",this.focus);
@@ -406,8 +424,8 @@ class Game {
             this.playerBeforeNextTurn=(this.playerBeforeNextTurn+1)%this.activePlayers.length
             this.total += amount;
 
-
-          return;
+            this.rotateFocus(); 
+            return;
           }
         }
         //ça change juste le status si ça equivaut a un check (bet de 0)
