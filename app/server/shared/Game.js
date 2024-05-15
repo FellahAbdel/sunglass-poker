@@ -181,8 +181,9 @@ class Game {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
     const remainingPlayersCount = this.activePlayers.filter(player => player.status !== "tapis").length;
+    const dernierPasTapis = this.activePlayers.find(player => player.status !== "tapis");
 
-    if (this.activePlayers.length < 2||remainingPlayersCount<=1) {
+    if (this.activePlayers.length < 2||(remainingPlayersCount<=1 && (dernierPasTapis.howmanyBetTurn()===this.gameCurrentBet))) {
       // this.advanceStageToShowdown();
       while(this.currentStage !== "showdown"){
         this.advanceStage();
