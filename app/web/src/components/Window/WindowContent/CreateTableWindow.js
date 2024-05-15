@@ -111,7 +111,7 @@ const CreateGameWindow = () => {
             // Afficher un message d'erreur indiquant que le jeu existe déjà
             setValidationErrors((prevErrors) => ({
               ...prevErrors,
-              serverName: "Game name already exists",
+              serverName: getTranslatedWord("serverPanel.gameExist"),
             }));
           } else {
             // Autres erreurs
@@ -171,7 +171,7 @@ const CreateGameWindow = () => {
         <Button
           styleClass="btn-connectionDefault start-button back-color2"
           type="button"
-          label="Join a Game"
+          label={getTranslatedWord("game.joinGame")}
           // ICI QUE JE DOIT CHANGER (MAEL)
           //pas ici mais apres
 

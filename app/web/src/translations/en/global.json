@@ -98,7 +98,8 @@
     "search": "Search Room",
     "Friendly":"Friendly",
     "Avancé":"Advenced",
-    "Élite":"Elite"
+    "Élite":"Elite",
+    "gameExist": "Game name already exists"
   },
   "playersStatus": {
     "empty": "Empty",
