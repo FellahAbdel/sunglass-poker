@@ -76,6 +76,13 @@ const tableReducer = (state = initialState, action) => {
       return {
         ...initialState,
       };
+    case actions.EMPTY_PAYLOAD:
+        return {
+            ...state,
+            gameStarted: false,
+            gameCreated: false,
+            payload: action.payload,
+        };
     default:
       console.log("Table reducer called");
       return state;

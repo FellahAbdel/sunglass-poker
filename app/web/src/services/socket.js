@@ -54,10 +54,46 @@ export const comm = {
       }
     });
 
+    let leftReceived = false;
+
+
     socket.on("event", (data) => {
-      // console.log("event receive (from server) [socket.js]: ", data);
-      store.dispatch({ payload: data.payload, type: data.type });
+      // Logique pour traiter l'événement "LEFT"
+      if (data.type === "LEFT_ROOM") {
+        store.dispatch({ payload: data.payload, type: data.type });
+        leftReceived = true;
+      } else if (leftReceived && data.type === "REFRESH") {
+        // Si un "REFRESH" est reçu après "LEFT", effectuer deux dispatches
+        store.dispatch({ payload: data.payload, type: data.type });
+        store.dispatch({ payload: "", type: "EMPTY_PAYLOAD" }); // Dispatch avec un payload vide
+        leftReceived = false;
+      } else {
+        // Pour tous les autres types d'événements
+        store.dispatch({ payload: data.payload, type: data.type });
+      }
     });
+
+    // socket.on("event", (data) => {
+    //   // console.log("event receive (from server) [socket.js]: ", data);
+    //   store.dispatch({ payload: data.payload, type: data.type });
+    // });
+    // socket.on("event", (data) => {
+    //   const room = sessionStorage.getItem("room");
+    //   if (room) {
+    //     const state = store.getState().game.rooms[room];
+    //     if (
+    //       state &&
+    //       state.players.find(
+    //         (player) => player.id === socket.request.session.userId
+    //       )
+    //     ) {
+    //       store.dispatch({ payload: data.payload, type: data.type });
+    //     } else {
+    //       // Le joueur a quitté la partie, gérer l'état initial du jeu
+    //       // (Peut-être en réinitialisant l'état de l'interface utilisateur)
+    //     }
+    //   }
+    // });
 
     // When the client receive the status of the room
     // we console log the data.
