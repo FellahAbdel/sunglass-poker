@@ -23,31 +23,31 @@ const BuyCoinsWindow = () => {
       <Button
         styleClass={"btn-coinBuy"}
         iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
-        label={"10 SC"}
-        onClick={() => handleBuyCoins(10)}
-      />
-      <Button
-        styleClass={"btn-coinBuy"}
-        iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
-        label={"100 SC"}
+        label={"100 SC - 1€"}
         onClick={() => handleBuyCoins(100)}
       />
       <Button
         styleClass={"btn-coinBuy"}
         iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
-        label={"1,000 SC"}
+        label={"1,000 SC - 10€"}
         onClick={() => handleBuyCoins(1000)}
       />
       <Button
         styleClass={"btn-coinBuy"}
         iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
-        label={"10,000 SC"}
+        label={"10,000 SC - 100€"}
         onClick={() => handleBuyCoins(10000)}
       />
       <Button
         styleClass={"btn-coinBuy"}
         iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
-        label={"100,000 SC"}
+        label={"5,000 SC - 500€"}
+        onClick={() => handleBuyCoins(50000)}
+      />
+      <Button
+        styleClass={"btn-coinBuy"}
+        iconSrc={"static/media/assets/images/icons/white/coinStack.png"}
+        label={"100,000 SC - 1000€"}
         onClick={() => handleBuyCoins(100000)}
       />
     </div>
