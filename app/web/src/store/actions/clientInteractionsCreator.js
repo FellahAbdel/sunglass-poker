@@ -91,3 +91,7 @@ export const loggedIn = (user) => ({
   type: actions.LOGGED_IN,
   payload: user,
 });
+
+export const emptyPayload = () => ({
+  type: actions.EMPTY_PAYLOAD,
+});

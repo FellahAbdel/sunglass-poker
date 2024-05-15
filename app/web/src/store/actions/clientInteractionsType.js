@@ -47,3 +47,5 @@ export const SITTED = "SITTED";
 export const KICKED = "KICKED";
 
 export const LOGGED_IN = "LOGGED_IN";
+
+export const EMPTY_PAYLOAD = "EMPTY_PAYLOAD";
