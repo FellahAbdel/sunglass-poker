@@ -291,15 +291,12 @@ module.exports = gameController = {
             (p) => p.getPlayerId() == action.payload.playerId
           ) === room.game.focus
         ) {
-          // Récupérer la dernière action enregistrée pour ce joueur
-          const lastPlayerAction =
-            previousPlayerAction[action.payload.playerId];
+          // // Récupérer la dernière action enregistrée pour ce joueur
+          // const lastPlayerAction =
+          //   previousPlayerAction[action.payload.playerId];
         
-            console.log("lastPlayerAction", lastPlayerAction);
-          // Vérifier si l'action actuelle est identique à la dernière action enregistrée
-
-          //C'est pas bon parce que un joueur peut jouer 2 fois de suite si ta pas compris demande moi (Maël)
-
+          //   console.log("lastPlayerAction", lastPlayerAction);
+          // // Vérifier si l'action actuelle est identique à la dernière action enregistrée
           // if (
           //   lastPlayerAction &&
           //   lastPlayerAction.type === action.type &&
@@ -317,7 +314,7 @@ module.exports = gameController = {
           );
           answer_post_action = this.dispatch(
             action.payload.playerId,
-            actions.playerPlayed(roomId)
+            actions.playerPlayed(roomId,action)
           );
           csl.log("playerAction", answer_post_action);
           previousPlayerAction[action.payload.playerId] = action;
