@@ -164,12 +164,23 @@ class Game {
   /**
    * 
    * @param {Player} player to play for. Will  set him afk. 
+   * @param {left=false} left if the player left or it was an afk. By default we guess it's an afk.
    */
 
-  autoTurn(player){
-    this.hasAfk = true;
-    this.fold(player);
-    this.setPlayerAFK(player);
+  autoTurn(player,left=false){
+    // If the player left on purpose we need to make sure we don't break the round of focus.
+    // If it's his turn we do the same as for the afk person, otherwise we need to force afk even if it's not his turn.
+    if(left && this.focus  !== this.activePlayers.findIndex(p => p.getPlayerId() === player.getPlayerId())){
+      // Not his turn so we set him afk but we don't do the rotate. He will be skipped automatically.
+      csl.log("autoTurn","player leave, async play fold custom");
+      player.fold();
+      player.setAfk();
+      this.nbhostfolded++;
+    }else{
+      this.hasAfk = true;
+      this.fold(player);
+      this.setPlayerAFK(player);
+    }
   }
 
 
@@ -178,7 +189,8 @@ class Game {
     return setTimeout(() => {
       csl.log("autoTurn", "Player did not play fasst enough, auto fold");
       if (n < this.activePlayers.length && this.activePlayers[n] !== undefined) {
-        this.autoTurn(this.activePlayers[n])
+        if(this.focus === n)
+          this.autoTurn(this.activePlayers[n])
       }
     }, this.autoTurnDelay);
   }
@@ -311,9 +323,9 @@ class Game {
   }
 
   fold(player) {
-    // if (this.isPlayersTurn(player.getPlayerId())) {
+    if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
-      this.updateActivePlayers();
+      // this.updateActivePlayers();
       console.log("NOmbre de joururs actif :", this.activePlayers.length);
       // if (this.activePlayers.length < 2) {
       //   this.advanceStageToShowdown();
@@ -329,7 +341,7 @@ class Game {
       } else {
         this.rotateFocus();
       }
-    // }
+    }
   }
 
   check(player) {
@@ -447,7 +459,7 @@ class Game {
 
   removePlayer(playerId) {
     let player = this.allPlayers.find(p => p.getPlayerId() === playerId);
-    this.autoTurn(player);
+    this.autoTurn(player,true);
     this.allPlayers = this.allPlayers.filter(
       (p) => p.getPlayerId() !== playerId
     );
@@ -575,7 +587,7 @@ class Game {
 
   evaluateHands() {
     this.updateActivePlayers();
-
+    this.players = this.activePlayers;
     const winner = this.gagnant(this.activePlayers);
     if(winner === undefined){
       csl.log('evaluateHands',"winner is undefined, players must have all left or something wrong happend.");
