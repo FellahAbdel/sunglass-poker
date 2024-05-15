@@ -291,21 +291,21 @@ module.exports = gameController = {
             (p) => p.getPlayerId() == action.payload.playerId
           ) === room.game.focus
         ) {
-          // Récupérer la dernière action enregistrée pour ce joueur
-          const lastPlayerAction =
-            previousPlayerAction[action.payload.playerId];
+          // // Récupérer la dernière action enregistrée pour ce joueur
+          // const lastPlayerAction =
+          //   previousPlayerAction[action.payload.playerId];
         
-            console.log("lastPlayerAction", lastPlayerAction);
-          // Vérifier si l'action actuelle est identique à la dernière action enregistrée
-          if (
-            lastPlayerAction &&
-            lastPlayerAction.type === action.type &&
-            JSON.stringify(lastPlayerAction.payload) ===
-              JSON.stringify(action.payload)
-          ) {
-            console.log("ignored");
-            return; // Ignorer l'action si elle est identique à la dernière action enregistrée
-          }
+          //   console.log("lastPlayerAction", lastPlayerAction);
+          // // Vérifier si l'action actuelle est identique à la dernière action enregistrée
+          // if (
+          //   lastPlayerAction &&
+          //   lastPlayerAction.type === action.type &&
+          //   JSON.stringify(lastPlayerAction.payload) ===
+          //     JSON.stringify(action.payload)
+          // ) {
+          //   console.log("ignored");
+          //   return; // Ignorer l'action si elle est identique à la dernière action enregistrée
+          // }
 
           // Si ce n'est pas le cas, traiter l'action normalement
           csl.log(
@@ -314,7 +314,7 @@ module.exports = gameController = {
           );
           answer_post_action = this.dispatch(
             action.payload.playerId,
-            actions.playerPlayed(roomId)
+            actions.playerPlayed(roomId,action)
           );
           csl.log("playerAction", answer_post_action);
           previousPlayerAction[action.payload.playerId] = action;
