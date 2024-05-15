@@ -37,7 +37,7 @@
     "start:local": "cross-env NODE_ENV=local dotenv -e configenv/.env -- npm start",
     "start:vm": "cross-env NODE_ENV=vm dotenv -e configenv/.env.vm -- sudo npm start",
     "build": "react-scripts build",
-    "buildvm": "react-scripts build && ./post-build.sh"
+    "buildvm": "react-scripts build && ./post-build.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron": "electron electron-main.js",
