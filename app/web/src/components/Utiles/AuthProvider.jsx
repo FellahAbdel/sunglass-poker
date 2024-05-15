@@ -13,8 +13,6 @@ const CORSSETTINGS = {
   },
 };
 
-
-
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
   const { showHome } = useWindowContext();
@@ -103,15 +101,12 @@ export const AuthProvider = ({ children }) => {
 
   const getRoomTableRecords = async (token) => {
     try {
-      const response = await fetch(
-        "api/gameRoomDescription",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch("api/gameRoomDescription", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch roomTableRecords");
       } else {
@@ -156,19 +151,16 @@ export const AuthProvider = ({ children }) => {
         ? identifierValue
         : state.user[identifierField];
 
-      const response = await fetch(
-        "api/update-user-data",
-        {
-          ...CORSSETTINGS,
-          headers: getAuthHeaders(),
-          body: JSON.stringify({
-            field,
-            value,
-            identifierType,
-            identifierValue: identifier,
-          }),
-        }
-      );
+      const response = await fetch("api/update-user-data", {
+        ...CORSSETTINGS,
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          field,
+          value,
+          identifierType,
+          identifierValue: identifier,
+        }),
+      });
 
       const data = await response.json();
 
@@ -339,14 +331,11 @@ export const AuthProvider = ({ children }) => {
 
   const activateAvatar = async (itemId, itemType) => {
     try {
-      const response = await fetch(
-        `api/activate-avatar`,
-        {
-          method: "POST",
-          headers: getAuthHeaders(),
-          body: JSON.stringify({ userId: user._id, itemId, itemType }),
-        }
-      );
+      const response = await fetch(`api/activate-avatar`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ userId: user._id, itemId, itemType }),
+      });
       const data = await response.json();
       if (data.success) {
         dispatch({ type: "UPDATE_USER_AVATAR", payload: { itemId, itemType } });
@@ -413,34 +402,34 @@ export const AuthProvider = ({ children }) => {
       console.error("User not logged in.");
       return false;
     }
-  
+
     try {
       const response = await fetch("api/update-coins", {
         ...CORSSETTINGS,
         headers: getAuthHeaders(),
         body: JSON.stringify({
           userId: user._id,
-          coinsToAdd
+          coinsToAdd,
         }),
       });
-  
+
       const data = await response.json();
       if (!response.ok) {
         console.error("Failed to update coins:", data.message);
         return false;
       }
-        dispatch({
+      dispatch({
         type: "UPDATE_USER_DATA",
-        payload: { ...user, coins: data.updatedCoins }
+        payload: { ...user, coins: data.updatedCoins },
       });
-  
+
       console.log("Coins updated successfully to:", data.updatedCoins);
       return true;
     } catch (error) {
       console.error("Error updating user coins:", error);
       return false;
     }
-  };    
+  };
 
   const getAvailableRooms = async () => {
     try {
@@ -467,16 +456,16 @@ export const AuthProvider = ({ children }) => {
         ...CORSSETTINGS,
         body: JSON.stringify({
           roomId,
-          password
+          password,
         }),
       });
-  
+
       const data = await response.json();
       if (!response.ok) {
         console.error("Password verification failed:", data.message);
         return { success: false, error: data.message };
       }
-  
+
       return { success: data.success, roomId: data.roomId };
     } catch (error) {
       console.error("Error during password verification:", error);
@@ -486,19 +475,21 @@ export const AuthProvider = ({ children }) => {
 
   const fetchRankings = async (pageNum, nbResults = 10) => {
     try {
-      const response = await fetch(`/api/get-all-ranking?page=${pageNum}&nbres=${nbResults}`, {
-        method: "GET",
-        headers: {
-          ...getAuthHeaders(),
-        },
-      });
-
-      const data = await response.json();
+      const response = await fetch(
+        `api/get-all-ranking?page=${pageNum}&nbres=${nbResults}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
-        throw new Error(data.message || "Failed to fetch rankings.");
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
+      const data = await response.json();
       return {
         success: true,
         rankings: data.data,
@@ -512,7 +503,6 @@ export const AuthProvider = ({ children }) => {
       };
     }
   };
-
 
   return (
     <AuthContext.Provider
@@ -539,7 +529,7 @@ export const AuthProvider = ({ children }) => {
         // fetch available rooms
         getAvailableRooms,
         verifyGamePassword,
-        fetchRankings
+        fetchRankings,
       }}
     >
       {children}
