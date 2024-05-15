@@ -191,7 +191,9 @@ class Game {
   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
-    if (this.activePlayers.length < 2) {
+    const remainingPlayersCount = this.activePlayers.filter(player => player.status !== "tapis").length;
+
+    if (this.activePlayers.length < 2||remainingPlayersCount<=1) {
       // this.advanceStageToShowdown();
       while(this.currentStage !== "showdown"){
         this.advanceStage();
@@ -249,7 +251,9 @@ class Game {
           this.activePlayers.forEach((player) => {
             player.newTurnReset();
             //reset le status a chaque tour
-            player.playing();
+            if (player.status !== "tapis") {
+              player.playing();
+            }
           });
           //a verifier pour le nbdefolded
           console.log(
