@@ -176,7 +176,14 @@
 
 2024/05/15  1H      Avancement du tapis
 
+2024/05/15  1H      Avancement du tapis encore+test avec victor sur les vm
+                        
+2024/05/15  30min   Suite logique allin reglage des bug avec victor
+                        
+2024/05/15  1H      Implmentation des pots séparées si le winner est un mec qui avait un petit tapis
 
---2024/05 SEMAINE 2: 15H30 (TOTAL: 129H)
+2024/05/16  1H20    Reunion avec victor pour regler tous les soucis des derniers ajout afin que cela soit fonctionnel puis push sur les VM
 
-TEMPS TOTAL: 129H
+--2024/05 SEMAINE 2: 19H20 (TOTAL: 132H50)
+
+TEMPS TOTAL: 132H40
