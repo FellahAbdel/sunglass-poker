@@ -7,7 +7,7 @@ module.exports.gameLobby = (idGame) => ({
 
 module.exports.playerPlayed = (room) => ({
   type:actions.PLAYER_PLAYED,
-  payload: { room:room }
+  payload: { room:room}
 })
 
 module.exports.startGame = (idGame, userId) => {

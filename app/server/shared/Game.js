@@ -5,6 +5,7 @@ const scoreEngineUtils = require("./ScoreEngineUtils.js");
 const Players = require("./Player.js");
 const { clearScreenDown } = require("readline");
 const csl = require("../controller/intelligentLogging.js");
+const { clearTimeout } = require("timers");
 
 class Game {
   /**
@@ -160,14 +161,36 @@ class Game {
     player.setAfk();
   }
 
+  /**
+   * 
+   * @param {Player} player to play for. Will  set him afk. 
+   * @param {left=false} left if the player left or it was an afk. By default we guess it's an afk.
+   */
+
+  autoTurn(player,left=false){
+    // If the player left on purpose we need to make sure we don't break the round of focus.
+    // If it's his turn we do the same as for the afk person, otherwise we need to force afk even if it's not his turn.
+    if(left && this.focus  !== this.activePlayers.findIndex(p => p.getPlayerId() === player.getPlayerId())){
+      // Not his turn so we set him afk but we don't do the rotate. He will be skipped automatically.
+      csl.log("autoTurn","player leave, async play fold custom");
+      player.fold();
+      player.setAfk();
+      this.nbhostfolded++;
+    }else{
+      this.hasAfk = true;
+      this.fold(player);
+      this.setPlayerAFK(player);
+    }
+  }
+
+
   createAutoTurnCall() {
     let n = this.focus;
     return setTimeout(() => {
       csl.log("autoTurn", "Player did not play fasst enough, auto fold");
-      if (n < this.players.length && this.players[n] !== undefined) {
-        this.hasAfk = true;
-        this.fold(this.players[n]);
-        this.setPlayerAFK(this.players[n]);
+      if (n < this.activePlayers.length && this.activePlayers[n] !== undefined) {
+        if(this.focus === n)
+          this.autoTurn(this.activePlayers[n])
       }
     }, this.autoTurnDelay);
   }
@@ -293,7 +316,7 @@ class Game {
   }
 
   isPlayersTurn(playerId) {
-    if (this.focus === null || this.players[this.focus].playerId !== playerId) {
+    if (this.focus === null || this.activePlayers[this.focus].playerId !== playerId) {
       console.error("It's not this player's turn.");
       return false;
     }
@@ -303,7 +326,7 @@ class Game {
   fold(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
-      this.updateActivePlayers();
+      // this.updateActivePlayers();
       console.log("NOmbre de joururs actif :", this.activePlayers.length);
       // if (this.activePlayers.length < 2) {
       //   this.advanceStageToShowdown();
@@ -436,6 +459,8 @@ class Game {
   // }
 
   removePlayer(playerId) {
+    let player = this.allPlayers.find(p => p.getPlayerId() === playerId);
+    this.autoTurn(player,true);
     this.allPlayers = this.allPlayers.filter(
       (p) => p.getPlayerId() !== playerId
     );
@@ -443,6 +468,7 @@ class Game {
     // this.updateActivePlayers();
   }
 
+  
   addPlayer(player) {
     this.allPlayers.push(player);
     if (this.state !== "waiting") {
@@ -562,8 +588,21 @@ class Game {
 
   evaluateHands() {
     this.updateActivePlayers();
-
+    this.players = this.activePlayers;
     const winner = this.gagnant(this.activePlayers);
+    if(winner === undefined){
+      csl.log('evaluateHands',"winner is undefined, players must have all left or something wrong happend.");
+      return;
+    } 
+
+
+    // Si le winner n'est pas un tableau c'est une victoire par défaut car le dernier joueur
+    if(!Array.isArray(winner)){
+      winner.playerHandName = "Last player";
+      winner.seRemplirLesPoches(this.total);
+      winner.jesuislewinner();
+      return;
+    }
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     console.log("winner est: ", winner);
     const nbwinner= winner.length;
@@ -805,6 +844,8 @@ class Game {
    * FUNCTION : identifie le joueur gagnant de la partie et la main avec laquelle il a gagne
    */
   gagnant(activePlayers) {
+    if(this.activePlayers.length === 0) return undefined;
+    if(this.activePlayers.length === 1) return this.activePlayers[0];
     let combinationList = this.listeCombinaison(activePlayers);
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
 
@@ -813,6 +854,17 @@ class Game {
     } else {
       return maxList;
     }
+  }
+
+
+  /**
+   * To call to destroy the room. It will remove all timer etc...
+   * 
+   */
+  destroy() {
+    csl.log('DESTROY', "Game is being destroy. Clearing timeout.");
+    clearTimeout(this.focusTurnCall);
+    clearTimeout(this.restartCall);
   }
 
   // showHands() {

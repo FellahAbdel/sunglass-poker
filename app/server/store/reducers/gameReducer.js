@@ -114,7 +114,7 @@ const gameReducer = (state = initialState, action) => {
           (player) => player.getPlayerId() !== playerId
         );
 
-        state.rooms[room].game.players = updatedPlayers;
+        // state.rooms[room].game.players = updatedPlayers;
         // If the player who leave was the master we change the master.
         // But only if there is still at least one player in the room.
         csl.log("leaveRoom", " srggm : ", state.rooms[room]);
@@ -257,6 +257,7 @@ const gameReducer = (state = initialState, action) => {
     case actions.DELETE_ROOM:
       if (action.payload.tableId !== undefined) {
         if (state.rooms.hasOwnProperty(action.payload.tableId)) {
+          state.rooms[action.payload.tableId].game.destroy();
           delete state.rooms[action.payload.tableId];
             csl.log(fileType, "Room " + action.payload.tableId + " deleted successfully");
         }
@@ -357,7 +358,7 @@ const gameReducer = (state = initialState, action) => {
         const player = showRoom.players.find(
           (p) => p.getPlayerId() === showPlayerId
         );
-        if (player) {
+        if (player && player.isActive) {
           player.revealCard(showCardIndex);
         }
       }
