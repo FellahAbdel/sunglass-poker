@@ -180,7 +180,6 @@ class Game {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
     if (this.activePlayers.length < 2 && !this.players[this.focus].status==="tapis") {
-
       this.advanceStageToShowdown();
       return;
     }
@@ -360,7 +359,7 @@ class Game {
             this.playerBeforeNextTurn = this.players.findIndex(
               (p) => p.getPlayerId() === player.getPlayerId()
             );
-            
+
             //console.log("lefocus avant le raise:", this.focus);
             //console.log("lefocus apres le raise", this.focus);
           }

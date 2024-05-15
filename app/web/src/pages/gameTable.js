@@ -57,8 +57,8 @@ const GameTable = () => {
     >
       {/* css Pattern background */}
 
-      <div className="backdrop" />
-      <div className="backdrop2" />
+      <img className="backdrop"  src="static/media/assets/images/backdrop/backdrop2.jpg" alt="backdrop"/>
+      <div className="backdrop2"/>
 
       {/* Navbar or header */}
       <div className="comp-navbar">

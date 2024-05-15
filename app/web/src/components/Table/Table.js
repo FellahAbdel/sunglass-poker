@@ -20,7 +20,7 @@ const Table = ({}) => {
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
-  const { isMaster, showWaitingMessage, isFocus, isSpectator } = useGameTable();
+  const { showWaitingMessage, isFocus } = useGameTable();
 
 
   useEffect(() => {

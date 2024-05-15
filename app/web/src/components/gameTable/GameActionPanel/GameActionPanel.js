@@ -23,15 +23,15 @@ const GameActionButtons = ({}) => {
   //sliderValue text -> percentage of the raise
   const dispatch = useDispatch();
   const [sliderValueText, setSliderValueText] = useState();
-  const { user } = useUserData();
+  // const { user } = useUserData();
   const [coins, setCoins] = useState(playerMoney);
   const [raiseCoin, setRaiseCoin] = useState(0);
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(coins);
   const [amount, setAmount] = useState(0);
 
-  let checkOrCall = checkValue
-    ? getTranslatedWord("gameActionPanel.check")
-    : getTranslatedWord("gameActionPanel.call");
+  // let checkOrCall = checkValue
+  //   ? getTranslatedWord("gameActionPanel.check")
+  //   : getTranslatedWord("gameActionPanel.call");
 
   useEffect(() => {
     const newRaiseCoin = (coins * sliderValueText) / 100;
