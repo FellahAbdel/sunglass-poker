@@ -297,15 +297,18 @@ module.exports = gameController = {
         
             console.log("lastPlayerAction", lastPlayerAction);
           // Vérifier si l'action actuelle est identique à la dernière action enregistrée
-          if (
-            lastPlayerAction &&
-            lastPlayerAction.type === action.type &&
-            JSON.stringify(lastPlayerAction.payload) ===
-              JSON.stringify(action.payload)
-          ) {
-            console.log("ignored");
-            return; // Ignorer l'action si elle est identique à la dernière action enregistrée
-          }
+
+          //C'est pas bon parce que un joueur peut jouer 2 fois de suite si ta pas compris demande moi (Maël)
+
+          // if (
+          //   lastPlayerAction &&
+          //   lastPlayerAction.type === action.type &&
+          //   JSON.stringify(lastPlayerAction.payload) ===
+          //     JSON.stringify(action.payload)
+          // ) {
+          //   console.log("ignored");
+          //   return; // Ignorer l'action si elle est identique à la dernière action enregistrée
+          // }
 
           // Si ce n'est pas le cas, traiter l'action normalement
           csl.log(
