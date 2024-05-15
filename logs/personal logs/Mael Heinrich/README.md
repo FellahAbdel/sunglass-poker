@@ -158,6 +158,25 @@
 
 2024/05/13  1H30    Reglalge du rotateFocus pour les mises et cherche la soultion pour le fold,j'ai aussi regler le probleme des mises de depart au deuxieme tour
 
---2024/05 SEMAINE 2: 3H30 (TOTAL: 117H)
+2024/05/13  1H30    Fin de rotateFocus fonctionel
 
-TEMPS TOTAL: 117H
+2024/05/13  1H      Test avec victor et des amis du jeux sur les VM 
+
+2024/05/13  1H      Mise en commun de tout les bugs et post sur discord de tt ce qu'il reste a faire pour le rendu final, discussion avec le groupe et écahnge sur les problèmes et autres...
+
+2024/05/14 30min    recap avec Victor et quelque test supplémentaire sur la VM ajout de certain truc a regler pour le rendu
+
+2024/05/14 1H30     Réglage du bug du bonus pour qu'il n'impolse pas le rotateFocus,modification de certain parametre et test de la version desktop avec le push sur VM.
+
+2024/05/14  30min   Reglage du desktop executable avec toutes les maj avant la reunion
+
+2024/05/14  4H      Reunion du mardi...
+
+2024/05/15  1H      Réglage de soucis suite au precedent push, check de certains probleme, ajout du cas ou ya egalité
+
+2024/05/15  1H      Avancement du tapis
+
+
+--2024/05 SEMAINE 2: 15H30 (TOTAL: 129H)
+
+TEMPS TOTAL: 129H
