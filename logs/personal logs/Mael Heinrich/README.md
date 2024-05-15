@@ -172,7 +172,11 @@
 
 2024/05/14  4H      Reunion du mardi...
 
+2024/05/15  1H      Réglage de soucis suite au precedent push, check de certains probleme, ajout du cas ou ya egalité
 
---2024/05 SEMAINE 2: 13H30 (TOTAL: 127H)
+2024/05/15  1H      Avancement du tapis
 
-TEMPS TOTAL: 127H
+
+--2024/05 SEMAINE 2: 15H30 (TOTAL: 129H)
+
+TEMPS TOTAL: 129H
