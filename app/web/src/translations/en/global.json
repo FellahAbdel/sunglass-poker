@@ -95,7 +95,10 @@
     "advanced":"Advanced",
     "elite":"Elite",
     "createTheGame":"Create the Game",
-    "search": "Search Room"
+    "search": "Search Room",
+    "Friendly":"Friendly",
+    "Avancé":"Advenced",
+    "Élite":"Elite"
   },
   "playersStatus": {
     "empty": "Empty",
@@ -106,8 +109,7 @@
     "tapis":"ALL IN",
     "playing": "Playing",
     "waiting": "Waiting",
-    "winner":"Winner",
-    "tapis":"ALL IN"
+    "winner":"Winner"
   },
   "settings": {
     "mute": "Mute",
