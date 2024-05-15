@@ -49,12 +49,10 @@ class Player {
 
   setTapis(){
     this.isTapis = true;
-    this.isActive = false;
   }
 
   unsetTapis(){
     this.isTapis = false;
-    this.isActive = true;
   }
 
   statusFor(id) {

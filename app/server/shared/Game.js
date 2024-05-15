@@ -179,8 +179,11 @@ class Game {
   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
-    if (this.activePlayers.length < 2 && !this.players[this.focus].status==="tapis") {
-      this.advanceStageToShowdown();
+    if (this.activePlayers.length < 2) {
+      // this.advanceStageToShowdown();
+      while(this.currentStage !== "showdown"){
+        this.advanceStage();
+      }
       return;
     }
 
@@ -196,14 +199,12 @@ class Game {
     console.log("focusapresoriginal",this.focus);
     console.log("isACtive?",this.players[this.focus].isActive);
     // Rotation du focus tant que le joueur actuel n'est pas actif
-    while (!this.players[this.focus].isActive) {
+    while (!this.players[this.focus].isActive||(this.players[this.focus].getStatus()==="tapis")) {
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
         return;
       }
       this.focus = (this.focus + 1) % this.players.length;
-      console.log("Jéfékoiici",this.focus);
-      console.log("isACtivejéfé?",this.players[this.focus].isActive);
     }
 
     // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
@@ -298,10 +299,10 @@ class Game {
       player.fold();
       this.updateActivePlayers();
       console.log("NOmbre de joururs actif :", this.activePlayers.length);
-      if (this.activePlayers.length < 2) {
-        this.advanceStageToShowdown();
-        return;
-      }                    
+      // if (this.activePlayers.length < 2) {
+      //   this.advanceStageToShowdown();
+      //   return;
+      // }                    
       if (this.focus === this.playerBeforeNextTurn+this.nbhostfolded ) {
         this.nbhostfolded++;
         console.log("JE SUIS",this.focus);
@@ -365,7 +366,20 @@ class Game {
           }
         } else {
           //LE TAPIS OU J'ai MISER MOINS QUE LA GAME 
+          if(amount===player.getPlayerMoney()){
+            player.tapis(amount);
+            player.setTapis();
+            console.log("TAPIS");
+            this.playerBeforeNextTurn = this.players.findIndex(
+              (p) => p.getPlayerId() === player.getPlayerId()
+            );
+            //TRUC A VERIFIER ---------------------------------------------------------------------------
+            this.playerBeforeNextTurn=(this.playerBeforeNextTurn+1)%this.activePlayers.length
+            this.total += amount;
+
+
           return;
+          }
         }
         //ça change juste le status si ça equivaut a un check (bet de 0)
         if (amount === 0) {

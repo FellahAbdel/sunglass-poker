@@ -59,10 +59,18 @@ const GameActionButtons = ({}) => {
   // Met à jour la valeur du bouton "Check" ou "Call" en fonction de gameCurrentBet
   const getCheckOrCallLabel = () => {
     if (gameCurrentBet > 0) {
-      return `${getTranslatedWord(
-        "gameActionPanel.call"
-        //----------------------------------------------------AJOUT LA SOUSTRACTION DU BET DU JOUEUR ACUTELLE
-      )} ${gameCurrentBet - gamePlayerCurrentBet} SC`;
+      //le cas du tapis de ce qui me reste
+      if(playerMoney<(gameCurrentBet-gamePlayerCurrentBet)){
+        return `${getTranslatedWord(
+          "gameActionPanel.call"
+        )} ${playerMoney} SC`;
+      }
+      //le cas classic du call
+      else{
+        return `${getTranslatedWord(
+          "gameActionPanel.call"
+          )} ${gameCurrentBet - gamePlayerCurrentBet} SC`;
+      }
     } else {
       return getTranslatedWord("gameActionPanel.check");
     }
