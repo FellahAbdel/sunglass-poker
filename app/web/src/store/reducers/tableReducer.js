@@ -24,11 +24,13 @@ const loadStateFromSessionStorage = () => {
   }
 };
 
-const initialState = loadStateFromSessionStorage() || {
+const emptyState = {
   players: [],
   gameStarted: false,
   gameCreated: false,
 };
+const initialState = loadStateFromSessionStorage() || emptyState; 
+
 
 const tableReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -77,12 +79,8 @@ const tableReducer = (state = initialState, action) => {
         ...initialState,
       };
     case actions.EMPTY_PAYLOAD:
-        return {
-            ...state,
-            gameStarted: false,
-            gameCreated: false,
-            payload: action.payload,
-        };
+        console.log('EMPTY PAYLOAD');
+        return emptyState;
     default:
       console.log("Table reducer called");
       return state;
