@@ -114,7 +114,7 @@ const gameReducer = (state = initialState, action) => {
           (player) => player.getPlayerId() !== playerId
         );
 
-        // state.rooms[room].game.players = updatedPlayers;
+        state.rooms[room].game.players = updatedPlayers;
         // If the player who leave was the master we change the master.
         // But only if there is still at least one player in the room.
         csl.log("leaveRoom", " srggm : ", state.rooms[room]);
