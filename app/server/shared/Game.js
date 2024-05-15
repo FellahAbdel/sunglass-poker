@@ -18,7 +18,7 @@ class Game {
       deck: new Deck(),
       pokerTable: new PokerTable(),
       master: false,
-      blind: 0,
+      blind: 40,
       focus: null,
       currentStage: "preflop",
       state: "waiting",
@@ -35,7 +35,8 @@ class Game {
       restartTimer: 0,
       restartDelay: 5000,
       allow_start: true,
-      serverName:""
+      serverName:"",
+      firstRoundForRoom:true,
     };
     Object.assign(this, basedValue, ...args);
     // this.activePlayers = null;
@@ -446,7 +447,12 @@ class Game {
     if (this.state !== "waiting") {
       player.isSpectator = true;
       player.isActive = false;
-    } else if (!player.isSpectator) {
+    } else if (!player.isSpectator && player.getPlayerMoney() >= this.blind) {
+      //If not the first round, we make people pay to join.
+      //If they can't, it's cancel.
+      if(!this.firstRoundForRoom){
+        player.bet(this.blind);
+      }
       this.players.push(player);
     }
     console.log(`Player ${player.name} added.`);
@@ -509,13 +515,15 @@ class Game {
     }
     clearTimeout(this.restartCall);
 
+    // Room first round is starting, new player will pay to join
+    this.firstRoundForRoom =false;
+
     this.currentStage = "preflop";
     this.state = "active";
     this.rotateStartingPlayer();
     this.focus = this.startingPlayerIndex;
     this.playerBeforeNextTurn=this.startingPlayerIndex;
     this.total = 0;
-
     this.pokerTable.reset();
     this.deck = new Deck();
     this.deck.shuffle();
