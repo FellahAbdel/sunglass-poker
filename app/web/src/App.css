@@ -42,6 +42,10 @@
   height: 0px;
 }
 
+* {
+  scrollbar-width: none;
+}
+
 *::-webkit-scrollbar-track {
   background: #272727;
 }
