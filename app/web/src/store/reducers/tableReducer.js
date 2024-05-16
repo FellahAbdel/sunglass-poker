@@ -29,6 +29,7 @@ const emptyState = {
   gameStarted: false,
   gameCreated: false,
   playerSited: false,
+  playerLeft: false,
 };
 const initialState = loadStateFromSessionStorage() || emptyState; 
 
@@ -80,6 +81,7 @@ const tableReducer = (state = initialState, action) => {
       sessionStorage.removeItem("tableState");
       return {
         ...initialState,
+        playerLeft: true,
       };
     case actions.EMPTY_PAYLOAD:
         console.log('EMPTY PAYLOAD');

@@ -1,5 +1,5 @@
 //react imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //css
 import "./navbarV2.css";
 //components
@@ -9,12 +9,21 @@ import { useTranslation } from "../Utiles/Translations";
 import { useAuth } from "../Utiles/AuthProvider";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import * as actions from "../../store/actions/clientInteractionsCreator.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGameTable } from "../Utiles/GameTableProvider.jsx";
 
 const Navbar = () => {
   const { isLogged, logingOut } = useAuth();
   const { gameState } = useGameTable();
+
+  const isPlayerLeft = useSelector((state) => state.game.playerLeft);
+
+  // useEffect to show the home page when the player leaves the table successfully
+  useEffect(() => {
+    if (isPlayerLeft) {
+      showHome();
+    }
+  }, [isPlayerLeft]);
 
   const dispatch = useDispatch();
 
@@ -64,7 +73,12 @@ const Navbar = () => {
         onConfirm: () => {
           console.log("L'utilisateur quitte la table");
           handleleaveRoom();
-          showHome();
+
+          // Before showing the home page, we need to to be sure
+          // that the server has processed the leaveRoom request
+
+          //   showHome();
+          // We use the isPlayerLeft state to show the home page above.
         },
         onCancel: () => {
           closeWindow();
@@ -119,37 +133,36 @@ const Navbar = () => {
       {/* Current Chips inventory and LogOut Button */}
       {isLogged && (
         <div className="container-nav-lefttop">
-          
-            {isGameTableVisible && (
-              <div className={`chatBox-V2 ${isChatOpen && "chatBoxOpen-V2"}`}>
-                {!isChatOpen && (
-                  <Button
-                    label={""}
-                    onClick={handleChatOpen}
-                    iconSrc="static/media/assets/images/icons/white/chat.png"
-                  />
-                )}
+          {isGameTableVisible && (
+            <div className={`chatBox-V2 ${isChatOpen && "chatBoxOpen-V2"}`}>
+              {!isChatOpen && (
+                <Button
+                  label={""}
+                  onClick={handleChatOpen}
+                  iconSrc="static/media/assets/images/icons/white/chat.png"
+                />
+              )}
 
-                {isChatOpen && (
-                  <>
-                    <img
-                      className={"btn-chatClose-V2"}
-                      onClick={handleChatClose}
-                      src="static/media/assets/images/icons/white/cross.png"
-                      alt="exit-chat"
-                    />
-                    <TextInputComponent
-                      name="Message"
-                      value={handleNull}
-                      onChange={handleNull}
-                      placeholder={"Messages"}
-                      styleClass={"input-chatBox-V2"}
-                    />
-                  </>
-                )}
-              </div>
-            )}
-          </div>
+              {isChatOpen && (
+                <>
+                  <img
+                    className={"btn-chatClose-V2"}
+                    onClick={handleChatClose}
+                    src="static/media/assets/images/icons/white/cross.png"
+                    alt="exit-chat"
+                  />
+                  <TextInputComponent
+                    name="Message"
+                    value={handleNull}
+                    onChange={handleNull}
+                    placeholder={"Messages"}
+                    styleClass={"input-chatBox-V2"}
+                  />
+                </>
+              )}
+            </div>
+          )}
+        </div>
       )}
 
       <div className="container-navMain-V2">
