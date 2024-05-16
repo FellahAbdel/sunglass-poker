@@ -120,6 +120,9 @@ class Game {
         console.log(
           `Player ${player.name} cannot rejoin the table due to insufficient coins.`
         );
+        player.isSpectator = true;
+        player.isActive = false;
+        this.updatePlayersList();
         return;
       } else {
         player.toggleSpectator();

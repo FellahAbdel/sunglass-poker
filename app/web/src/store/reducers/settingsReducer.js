@@ -1,5 +1,5 @@
 export const initialState = {
-  theme: localStorage.getItem("theme") || "dark",
+  theme: localStorage.getItem("theme") || "light",
   sound: localStorage.getItem("sound") === "true",
   language: localStorage.getItem("language") || "en",
   animation: localStorage.getItem("animation") === "true" || false,
