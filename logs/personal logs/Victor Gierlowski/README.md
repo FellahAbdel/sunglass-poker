@@ -151,11 +151,12 @@
 | 14 mai | 4 Heures | Test avec le prof ==> Définition des fonctionnalité importante manquante. Liste des bugs connue, définition d'un ordre de priorité. Set des derniers fonctionnalités importante. Résolution de bugs, setup d'un proxy pour le sous domaine du site de comm. Test de la version desktop. Amélioration des scripts sur la VM. | --
 | 15 mai | 3 Heures | Nouveau script sur la VM. Résolution de bugs sur le gagnant. Observation de bugs et test avec Mael et testeurs volontaires (15minutes). Résolution de bugs avec les folds asynchrones et synchrone (Left && AFK) | --
 | 15 mai | 2 Heures | Résolutions des multiples winner. Résolution des tapis + multis tapis. Test sur les VM avec beta-testeurs pour découvrir les bugs. | --
-| TOTAL | 15 Heures || --
+| 16 mai | 4 Heures | Réunion courte avec Mostafa Noe Mael (Aziz) + tests. Fix d'un bug suite à l'ajout de commentaire. Recherche de bugs et de solutions. Nouvelles version sur la VM + bugs.  Création d'une nouvelle fonction rotateFocus. | --
+| TOTAL | 19 Heures || --
 
 
 
 ____
 
 # Total des heures : 
-> ## 181 Heures
+> ## 185 Heures
