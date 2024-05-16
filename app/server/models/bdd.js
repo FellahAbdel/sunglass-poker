@@ -396,6 +396,7 @@ module.exports = function (app, bdd) {
       }
     },
 
+    //Ranking function with the stats of player, but the stats are not setups yet so we only use coins
     /*
     getAllRanking: async (page, nbRes) => {
       try {
