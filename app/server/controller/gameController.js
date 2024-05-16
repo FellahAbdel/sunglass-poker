@@ -331,7 +331,7 @@ module.exports = gameController = {
       const respons = await this.dao.createGameDescription(
         pseudo,
         "",
-        "Novice",
+        "friendly",
         0
       );
       csl.log(fileType, "respons : ", respons);

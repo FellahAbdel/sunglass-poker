@@ -105,11 +105,9 @@ const GameActionButtons = ({}) => {
     } else {
       setShowPopup(false);
       if (raiseCoin !== 0) {
-        if (gamePlayerCurrentBet >= gameCurrentBet) handleBet(raiseCoin);
-        else handleBet(raiseCoin + (gameCurrentBet - gamePlayerCurrentBet));
+        const totalAmount = raiseCoin + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
+        handleBet(totalAmount);
       }
-      // setRaiseCoin(0);
-      // setCoins(coinsAfterRaise);
     }
   };
 
@@ -180,7 +178,7 @@ const GameActionButtons = ({}) => {
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
             !isFocus && amount !== 0
               ? `${Math.round(amount)} SC`
-              : `${raiseCoin ? Math.round(raiseCoin) + " SC" : ""}`
+              : `${raiseCoin ? Math.round(raiseCoin + Math.max(0, gameCurrentBet - gamePlayerCurrentBet)) + " SC" : ""}`
           }`}
         />
 
