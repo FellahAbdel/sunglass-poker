@@ -78,9 +78,13 @@ const GameActionButtons = ({}) => {
 
   const handleCheckOrCall = () => {
     if (gameCurrentBet > 0) {
-      // Si il y a un currentBet, effectue une action "Call"
-      //-----------------------------------------------------------------------LA AUSSI
-      dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
+      //le tapis de ce qui reste
+      if (playerMoney < (gameCurrentBet - gamePlayerCurrentBet)) {
+        dispatch(actions.bet(playerMoney));
+      } else {
+        // Le cas classique du call
+        dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
+      }
     } else {
       // Sinon, effectue une action "Check"
       dispatch(actions.check());

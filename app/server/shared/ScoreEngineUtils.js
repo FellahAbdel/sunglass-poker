@@ -1,3 +1,5 @@
+const csl = require("../controller/intelligentLogging.js");
+
 /*
  * IN : [{ poid, main, type }, ...] tableau des poids des mains des joueurs
  * OUT : [{ poid, main, type }, ...] tableau du/des maximum(s) des poids
@@ -8,6 +10,7 @@ function maximums(playerHandWeightList, getter) {
   let maxWeight = getter(playerHandWeightList[0]);
 
   for (let i = 0; i < playerHandWeightList.length; i++) {
+    csl.log('maximumsIterations',getter(playerHandWeightList[i]));
     if (getter(playerHandWeightList[i]) > maxWeight) {
       maximums.splice(0, maximums.length);
       maximums.push(playerHandWeightList[i]);
@@ -16,6 +19,7 @@ function maximums(playerHandWeightList, getter) {
       maximums.push(playerHandWeightList[i]);
     }
   }
+  csl.log(["scoreengine","maximums"],maximums,maxWeight);
 
   return maximums;
 }

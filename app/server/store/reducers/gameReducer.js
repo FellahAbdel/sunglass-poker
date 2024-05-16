@@ -358,7 +358,7 @@ const gameReducer = (state = initialState, action) => {
         const player = showRoom.players.find(
           (p) => p.getPlayerId() === showPlayerId
         );
-        if (player) {
+        if (player && player.isActive) {
           player.revealCard(showCardIndex);
         }
       }

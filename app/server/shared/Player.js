@@ -19,6 +19,7 @@ class Player {
     status = "Playing",
     currentBet = 0,
     currentBetTurn = 0,
+    betTotal=0,
     isActive = true,
     isSpectator = false,
     isTapis=false
@@ -30,6 +31,7 @@ class Player {
     this.playerActionLog = [];
     this.currentBet = currentBet;
     this.currentBetTurn = currentBetTurn;
+    this.betTotal=betTotal;
     this.isActive = isActive;
     this.isYou = false;
     this.isAfk = false;
@@ -254,6 +256,7 @@ class Player {
     this.status="tapis";
     this.currentBet = amount;
     this.currentBetTurn += amount;
+    this.betTotal += amount;
     this.playerMoney -= amount;
   }
   
@@ -263,6 +266,7 @@ class Player {
       this.currentBetTurn += amount;
       this.playerMoney -= amount;
       this.status = "call";
+      this.betTotal+=amount;
     }
   }
 
@@ -271,6 +275,7 @@ class Player {
       this.currentBet = amount;
       this.currentBetTurn += amount;
       this.playerMoney -= amount;
+      this.betTotal+=amount;
       //status a definir:
       // this.status = "raise";
     }
@@ -290,6 +295,7 @@ class Player {
     this.isActive = true;
     this.cardsVisible = [false, false];
     this.status = "Playing";
+    this.betTotal=0;
     // Ajouter d'autres réinitialisations si nécessaire
   }
 

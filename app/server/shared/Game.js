@@ -164,12 +164,23 @@ class Game {
   /**
    * 
    * @param {Player} player to play for. Will  set him afk. 
+   * @param {left=false} left if the player left or it was an afk. By default we guess it's an afk.
    */
 
-  autoTurn(player){
-    this.hasAfk = true;
-    this.fold(player);
-    this.setPlayerAFK(player);
+  autoTurn(player,left=false){
+    // If the player left on purpose we need to make sure we don't break the round of focus.
+    // If it's his turn we do the same as for the afk person, otherwise we need to force afk even if it's not his turn.
+    if(left && this.focus  !== this.activePlayers.findIndex(p => p.getPlayerId() === player.getPlayerId())){
+      // Not his turn so we set him afk but we don't do the rotate. He will be skipped automatically.
+      csl.log("autoTurn","player leave, async play fold custom");
+      player.fold();
+      player.setAfk();
+      this.nbhostfolded++;
+    }else{
+      this.hasAfk = true;
+      this.fold(player);
+      this.setPlayerAFK(player);
+    }
   }
 
 
@@ -178,7 +189,8 @@ class Game {
     return setTimeout(() => {
       csl.log("autoTurn", "Player did not play fasst enough, auto fold");
       if (n < this.activePlayers.length && this.activePlayers[n] !== undefined) {
-        this.autoTurn(this.activePlayers[n])
+        if(this.focus === n)
+          this.autoTurn(this.activePlayers[n])
       }
     }, this.autoTurnDelay);
   }
@@ -190,11 +202,24 @@ class Game {
 
   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
+    this.activePlayers.map(p => console.log(p.status === "tapis"));
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
-    const remainingPlayersCount = this.activePlayers.filter(player => player.status !== "tapis").length;
-
-    if (this.activePlayers.length < 2||remainingPlayersCount<=1) {
+    let someoneTapis = (this.activePlayers.find(player => player.status === "tapis") !== undefined);
+    // Si personne tapis et que le nombre de joueur est 1 alors plus personne ne joue on a un gagnant
+    csl.log('rotateFocus',someoneTapis) 
+    if(!someoneTapis && this.activePlayers.filter(p => p.state !== "folded").length === 1){
+      csl.log('rotateFocus', "No one has tapied and there is only one player left")
+      this.advanceStageToShowdown();
+      return;
+    }
+    
+    let remainingPlayersCount = this.activePlayers.filter(player => player.status !== "tapis").length;
+    let dernierPasTapis = this.activePlayers.find(player => player.status !== "tapis");
+    csl.log('rotateFocus',dernierPasTapis,this.activePlayers.length,remainingPlayersCount,dernierPasTapis);
+    // Plus de joueur qui ne sont pas tapis alors on va jusqu'à la fin
+    if ((dernierPasTapis === undefined) && someoneTapis) {
       // this.advanceStageToShowdown();
+      clearTimeout(this.focusTurnCall)
       while(this.currentStage !== "showdown"){
         this.advanceStage();
       }
@@ -214,12 +239,18 @@ class Game {
     console.log("isACtive?",this.players[this.focus].isActive);
     // Rotation du focus tant que le joueur actuel n'est pas actif
     while (!this.players[this.focus].isActive||(this.players[this.focus].getStatus()==="tapis")) {
+      console.log("Player qu'on regarde :" ,this.players[this.focus].isActive,this.players[this.focus].getStatus);
+      this.focus = (this.focus + 1) % this.players.length;
       if (this.focus === originalFocus) {
         console.log("No active players available. Setting focus to null.");
+        clearTimeout(this.focusTurnCall)
+        while(this.currentStage !== "showdown"){
+          this.advanceStage();
+        }
         return;
       }
-      this.focus = (this.focus + 1) % this.players.length;
     }
+    console.log("Le focus Après : ",this.focus);
 
     // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
     //ATTENTION A VERIFIER SI ça MARCHE AVEC FOLD   //+this.nbhostfolded 
@@ -311,14 +342,14 @@ class Game {
   }
 
   fold(player) {
-    // if (this.isPlayersTurn(player.getPlayerId())) {
+    if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
-      this.updateActivePlayers();
+      // this.updateActivePlayers();
       console.log("NOmbre de joururs actif :", this.activePlayers.length);
-      // if (this.activePlayers.length < 2) {
-      //   this.advanceStageToShowdown();
-      //   return;
-      // }                    
+      if (this.activePlayers.length < 2) {
+        this.advanceStageToShowdown();
+        return;
+      }                    
       if (this.focus === this.playerBeforeNextTurn+this.nbhostfolded ) {
         this.nbhostfolded++;
         console.log("JE SUIS",this.focus);
@@ -329,7 +360,7 @@ class Game {
       } else {
         this.rotateFocus();
       }
-    // }
+    }
   }
 
   check(player) {
@@ -393,8 +424,8 @@ class Game {
             this.playerBeforeNextTurn=(this.playerBeforeNextTurn+1)%this.activePlayers.length
             this.total += amount;
 
-
-          return;
+            this.rotateFocus(); 
+            return;
           }
         }
         //ça change juste le status si ça equivaut a un check (bet de 0)
@@ -447,7 +478,7 @@ class Game {
 
   removePlayer(playerId) {
     let player = this.allPlayers.find(p => p.getPlayerId() === playerId);
-    this.autoTurn(player);
+    this.autoTurn(player,true);
     this.allPlayers = this.allPlayers.filter(
       (p) => p.getPlayerId() !== playerId
     );
@@ -575,8 +606,8 @@ class Game {
 
   evaluateHands() {
     this.updateActivePlayers();
-
-    const winner = this.gagnant(this.activePlayers);
+    this.players = this.activePlayers;
+    let winner = this.gagnant(this.activePlayers);
     if(winner === undefined){
       csl.log('evaluateHands',"winner is undefined, players must have all left or something wrong happend.");
       return;
@@ -585,10 +616,11 @@ class Game {
 
     // Si le winner n'est pas un tableau c'est une victoire par défaut car le dernier joueur
     if(!Array.isArray(winner)){
-      winner.playerHandName = "Last player";
-      winner.seRemplirLesPoches(this.total);
-      winner.jesuislewinner();
-      return;
+      winner = [winner];
+      // winner.playerHandName = "Last player";
+      // winner.seRemplirLesPoches(this.total);
+      // winner.jesuislewinner();
+      // return;
     }
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     console.log("winner est: ", winner);
@@ -609,8 +641,26 @@ class Game {
       const aa = this.getPlayerById(winner[0].id);
       aa.playerHandName = winnerHandName;
       console.log("aa", aa);
-      aa.seRemplirLesPoches(this.total);
-      aa.jesuislewinner();
+      if(aa.getStatus()==='tapis'){
+        const maxwin=aa.betTotal*2;
+        const prend = (maxwin <= this.total) ? maxwin : this.total
+        aa.seRemplirLesPoches(prend);
+        this.total-=prend;
+        aa.isActive = false;
+        csl.log('evaluateHandsWinnerTapis',maxwin,this.total, aa.isActive)
+        //l'update esr fait au debut de la fonction
+        aa.jesuislewinner();
+        if(this.total>0){
+          this.evaluateHands();
+        }
+        //
+        if(this.activePlayers.find(p => p.getPlayerId() === aa.getPlayerId()) === undefined)
+          this.activePlayers.push(aa);
+      }
+      else{
+        aa.seRemplirLesPoches(this.total);
+        aa.jesuislewinner();
+      }
     }
   }
 
@@ -711,12 +761,12 @@ class Game {
         console.log("PASSE PAR LE CASE showdown");
         //this.state = "waiting";
         //------------------------------------------------------------------------------------------------
-        this.players.forEach((player) => {
-          if(player.status==="tapis"){
-            player.isActive=true;
+        // this.players.forEach((player) => {
+        //   if(player.status==="tapis"){
+        //     player.isActive=true;
 
-          }
-        });
+        //   }
+        // });
         this.updateActivePlayers();
         this.evaluateHands();
         clearTimeout(this.focusTurnCall);
@@ -832,10 +882,10 @@ class Game {
    */
   gagnant(activePlayers) {
     if(this.activePlayers.length === 0) return undefined;
-    if(this.activePlayers.length === 1) return this.activePlayers[0];
+    if(this.activePlayers.length === 1) return {player:this.activePlayers[0],id:this.activePlayers[0].getPlayerId(),type:"dernier joueur"};
     let combinationList = this.listeCombinaison(activePlayers);
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
-
+    csl.log('gagnant',maxList,combinationList);
     if (maxList.length > 1) {
       return scoreEngineUtils.second(maxList);
     } else {
