@@ -19,6 +19,7 @@ const GameActionButtons = ({}) => {
   const [amount, setAmount] = useState(min); //amount to raise
   const [showPopup, setShowPopup] = useState(false); // popUp to show raise panel
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(0); // calculating the amount that player will be left after the raise to show before
+  const [raiseConfirmed, setRaiseConfirmed] = useState(false); // New state variable to track confirmation  
   const dispatch = useDispatch();
 
 
@@ -32,6 +33,7 @@ const GameActionButtons = ({}) => {
     setAmount((prevAmount) => {
       const newAmount = Math.min(prevAmount + step, max);
       setCoinsAfterRaise(coins - newAmount);
+      setAmountInput(formatNumber(newAmount));
       return newAmount;
     });
   };
@@ -40,6 +42,7 @@ const GameActionButtons = ({}) => {
     setAmount((prevAmount) => {
       const newAmount = Math.max(prevAmount - step, min);
       setCoinsAfterRaise(coins - newAmount);
+      setAmountInput(formatNumber(newAmount));
       return newAmount;
     });
   };
@@ -60,17 +63,21 @@ const GameActionButtons = ({}) => {
   };
 
   const handleRaise = () => {
+    if ()
     if (!showPopup) {
       setShowPopup(true);
+      setRaiseConfirmed(false); // Reset raise confirmation
     } else {
-      if (amount < min || amount > max) {
-        const validatedAmount = Math.max(min, Math.min(max, amount));
-        setAmount(validatedAmount);
-      }
-      else{
-        const totalAmount = amount + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
-        handleBet(totalAmount);
+      const validatedAmount = Math.max(min, Math.min(max, amount));
+      setAmount(validatedAmount);
+      setAmountInput(formatNumber(validatedAmount));
+      
+
+      if (raiseConfirmed) {
+        const totalAmount = validatedAmount + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
+        handleBet(totalAmount); // Second click: perform the raise
         setShowPopup(false);
+        setRaiseConfirmed(false); // Reset raise confirmation
       }
     }
   };
@@ -126,9 +133,9 @@ const GameActionButtons = ({}) => {
       setCoinsAfterRaise(coins - amount);
     },[amount]);
 
-    // useEffect(() => {
-    //   setCoins(playerMoney);
-    // }, [playerMoney]);  
+    useEffect(() => {
+      setCoins(playerMoney);
+    }, [playerMoney]);  
 
     console.log("raise coins:", amount);
 
@@ -188,20 +195,20 @@ const GameActionButtons = ({}) => {
         {/* LEBOUTON BET */}
         <Button
           styleClass={`btn-mainAction ${!isFocus && "disabled"} ${("isFocus" && amount !== 0 && showPopup) && "back-color1" }`}
-          onClick={handleRaise()}
+          onClick={handleRaise}
           label={`${getTranslatedWord("gameActionPanel.raise")}`}
         />
 
         {/* Bouton "Check" ou "Call" en fonction de gameCurrentBet */}
         <Button
           styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
-          onClick={handleCheckOrCall()}
+          onClick={handleCheckOrCall}
           label={getCheckOrCallLabel()}
         />
         {/* LE BOUTON FOLD */}
         <Button
           styleClass={`btn-fold btn-mainAction ${!isFocus && "disabled"}`}
-          onClick={handleFold()}
+          onClick={handleFold}
           label={getTranslatedWord("gameActionPanel.fold")}
         />
       </div>
