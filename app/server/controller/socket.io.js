@@ -424,7 +424,8 @@ module.exports = function (
    * @param {object} socket - The socket object triggering the event.
    * @param {string} receivedGameRoomId - The ID of the game room received from the client.
    */
-  function createGameV2(socket, receivedGameRoomId) {
+  function createGameV2(socket, data) {
+    receivedGameRoomId = data.gameRoomId;
     // Log that the 'createGameV2' event is called
     csl.log(fileType, "createGameV2 called (from socket.io.js)");
 

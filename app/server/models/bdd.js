@@ -669,9 +669,11 @@ module.exports = function (app, bdd) {
     },
 
     getServerNameFromGameId: async function (gameId) {
+      csl.log('getServerNameFromGameId',"Argument gameId: ",gameId);
+      if(gameId.gameRoomId !== undefined)
+        gameId = gameId.gameRoomId;
       try {
-        // Find game by ID and return its server name
-        const gameRecord = await GameDescriptionModel.findOne({ _id: gameId });
+        gameRecord = await GameDescriptionModel.findOne({ _id: gameId });
         if (gameRecord) {
           return gameRecord.serverName;
         } else {
