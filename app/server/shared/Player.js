@@ -91,7 +91,7 @@ class Player {
   }
 
   toggleSpectator() {
-    if (this.isSpectator && this.canJoinTable()) {
+    if (this.isSpectator && !this.canJoinTable()) {
       console.log(`Player ${this.name} cannot rejoin the table due to insufficient coins.`);
       this.isSpectator=true;
       this.isActive=false;
