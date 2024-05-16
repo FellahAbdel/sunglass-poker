@@ -209,13 +209,13 @@ class Game {
       );
       if (n < this.players.length && this.players[n] !== undefined) {
         csl.log("autoTurn", "player still exist");
-        if (this.focus === n) this.autoTurn(this.activePlayers[n]);
+        if (this.focus === n) this.autoTurn(this.players[n]);
       }
     }, this.autoTurnDelay);
   }
   rotateTimer() {
     clearTimeout(this.focusTurnCall);
-    if (this.state !== "waiting") {
+    if (this.state !== "waiting" && this.stage !== "end" && this.stage !== "showdown") {
       this.focusTurnCall = this.createAutoTurnCall();
       this.focusTurnTimer = Date.now() + this.autoTurnDelay;
     }
@@ -223,7 +223,6 @@ class Game {
 
   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
-    this.activePlayers.map((p) => console.log(p.status === "tapis"));
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
     let someoneTapis =
       this.activePlayers.find((player) => player.status === "tapis") !==
@@ -297,59 +296,90 @@ class Game {
       }
     }
     console.log("Le focus Après : ", this.focus);
+    
+
+    /**
+     * on ne finit un tour  que si tout le monde a payé assez ou a tapis
+     * ET que tout le monde a parlé au moins 1 fois.
+     */
+    let allplayedenough_orTapis = 0; // nbr de joueurs qui ont payé
+    let alltalkedThisTurn = 0;      // nbr de joueurs qui  ont parlé
+    this.activePlayers.map(p => {allplayedenough_orTapis += (p.isTapis === true || p.currentBetTurn === this.gameCurrentBet);csl.log('iterate',p.currentBetTurn);}); 
+    this.activePlayers.map(p =>alltalkedThisTurn += (p.talkedThisTurn === true));   
+    let aPlength = this.activePlayers.length // nbr de joueurs total 
+    csl.log('rotateFocusVictor', "Comptes : ",
+    allplayedenough_orTapis,
+    alltalkedThisTurn,
+    this.currentBetTurn
+    );
+    if(allplayedenough_orTapis === aPlength && alltalkedThisTurn === aPlength){
+      csl.log('rotateFocusVictor','finit le tour');
+
+      // On a finit le tour
+      // On reset les champs des joueurs pour le prochain tour.
+      this.activePlayers.map(p => p.newTurnReset());
+      this.gameCurrentBet = 0;
+      this.advanceStage();
+      // return;
+    }
+    // Sinon quelqu'un doit encore jouer.
+
+
 
     // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
     //ATTENTION A VERIFIER SI ça MARCHE AVEC FOLD   //+this.nbhostfolded
-    if (this.focus === this.playerBeforeNextTurn) {
-      ///////////////////
-      console.log("argent du focus", this.players[this.focus].howmanyBetTurn());
-      //si l'argent de la game c est l'argent du joueurs qu'on regarde alors on reset et go next turn
+    // if (this.focus === this.playerBeforeNextTurn) {
+    //   ///////////////////
+    //   console.log("argent du focus", this.players[this.focus].howmanyBetTurn());
+    //   //si l'argent de la game c est l'argent du joueurs qu'on regarde alors on reset et go next turn
 
-      console.log(
-        "gamecurrentbet",
-        this.gameCurrentBet,
-        "focusamiser",
-        this.players[this.focus].howmanyBetTurn()
-      );
-      if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
-        this.gameCurrentBet = 0;
-        this.advanceStage();
+    //   console.log(
+    //     "gamecurrentbet",
+    //     this.gameCurrentBet,
+    //     "focusamiser",
+    //     this.players[this.focus].howmanyBetTurn()
+    //   );
+    //   if (this.gameCurrentBet === this.players[this.focus].howmanyBetTurn()) {
+    //     this.gameCurrentBet = 0;
+    //     this.advanceStage();
 
-        if (this.currentStage === "showdown" || this.currentStage === "end") {
-          //FIN DES TOURS
-          console.log("ROTATE FOCUS DANS END OU SHOWDOWN");
-          return;
-        }
-        console.log(
-          "LE FOCUS Etait:",
-          this.focus,
-          "et le starting:",
-          this.startingPlayerIndex
-        );
-        this.focus = this.startingPlayerIndex + this.nbhostfolded;
-        this.playerBeforeNextTurn = this.focus;
+    //     if (this.currentStage === "showdown" || this.currentStage === "end") {
+    //       //FIN DES TOURS
+    //       console.log("ROTATE FOCUS DANS END OU SHOWDOWN");
+    //       return;
+    //     }
+    //     console.log(
+    //       "LE FOCUS Etait:",
+    //       this.focus,
+    //       "et le starting:",
+    //       this.startingPlayerIndex
+    //     );
+    //     this.focus = this.startingPlayerIndex + this.nbhostfolded;
+    //     this.playerBeforeNextTurn = this.focus;
+    //     if(this.focus >= this.players.length)
+    //       return this.rotateFocus();
 
-        //SI on est PAS  dans end ou shodown
-        if (this.currentStage !== "end" && this.currentStage !== "showdown") {
-          this.activePlayers.forEach((player) => {
-            player.newTurnReset();
-            //reset le status a chaque tour
-            if (player.status !== "tapis") {
-              player.playing();
-            }
-          });
-          //a verifier pour le nbdefolded
-          console.log(
-            "startingplayer",
-            this.startingPlayerIndex,
-            this.nbhostfolded
-          );
-        }
-      }
+    //     //SI on est PAS  dans end ou shodown
+    //     if (this.currentStage !== "end" && this.currentStage !== "showdown") {
+    //       this.activePlayers.forEach((player) => {
+    //         player.newTurnReset();
+    //         //reset le status a chaque tour
+    //         if (player.status !== "tapis") {
+    //           player.playing();
+    //         }
+    //       });
+    //       //a verifier pour le nbdefolded
+    //       console.log(
+    //         "startingplayer",
+    //         this.startingPlayerIndex,
+    //         this.nbhostfolded
+    //       );
+    //     }
+    //   }
 
-      //Faut rajouter le cas ou un joueur raise, il deviens alors le focus pour le tour puis pour pas qu'il
-      //puisse reparler si tt le monde égalise et qu on reviens sur lui
-    } // Le joueur n'était pas le dernier à jouer ou tout le monde n'as pas misé autant.
+    //   //Faut rajouter le cas ou un joueur raise, il deviens alors le focus pour le tour puis pour pas qu'il
+    //   //puisse reparler si tt le monde égalise et qu on reviens sur lui
+    // } // Le joueur n'était pas le dernier à jouer ou tout le monde n'as pas misé autant.
 
     this.rotateTimer();
   }
@@ -387,11 +417,11 @@ class Game {
 
   isPlayersTurn(playerId) {
     csl.log("isPlayersTurn", playerId, this.focus, this.activePlayers);
-    if (this.focus < 0 || this.focus > this.activePlayers.length)
+    if (this.focus < 0 || this.focus > this.players.length)
       this.rotateFocus();
     if (
       this.focus === null ||
-      this.activePlayers[this.focus].playerId !== playerId
+      this.players[this.focus].playerId !== playerId
     ) {
       console.error("It's not this player's turn.");
       return false;
@@ -402,30 +432,27 @@ class Game {
   fold(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
-      this.updateActivePlayers();
-      console.log("NOmbre de joururs actif :", this.activePlayers.length);
-      if (this.activePlayers.length < 2) {
-        this.advanceStageToShowdown();
-        return;
-      }
-      if (this.focus === this.playerBeforeNextTurn + this.nbhostfolded) {
-        this.nbhostfolded++;
+      // if (this.focus === this.playerBeforeNextTurn) {
+        // this.nbhostfolded++;
         console.log("JE SUIS", this.focus);
         this.rotateFocus();
         console.log("J'ai rotate", this.focus);
-        this.playerBeforeNextTurn = this.focus;
-      } else {
-        this.rotateFocus();
-      }
+        // this.playerBeforeNextTurn = this.focus;
+      // } else {
+        // this.rotateFocus();
+      // }
+      // this.updateActivePlayers();
+      console.log("NOmbre de joururs actif :", this.activePlayers.length);
+      // if (this.activePlayers.length < 2) {
+      //   this.advanceStageToShowdown();
+      //   return;
+      // }
     }
   }
 
   check(player) {
-    console.log("AAA");
     if (this.isPlayersTurn(player.getPlayerId())) {
-      console.log("BBB", this.gameCurrentBet);
       if (this.gameCurrentBet === 0) {
-        console.log("CCC");
         player.check();
         this.rotateFocus();
       }
@@ -444,12 +471,12 @@ class Game {
             player.tapis(amount);
             player.setTapis();
             console.log("TAPIS");
-            this.playerBeforeNextTurn = this.players.findIndex(
-              (p) => p.getPlayerId() === player.getPlayerId()
-            );
+            // this.playerBeforeNextTurn = this.players.findIndex(
+            //   (p) => p.getPlayerId() === player.getPlayerId()
+            // );
             //TRUC A VERIFIER ---------------------------------------------------------------------------
-            this.playerBeforeNextTurn =
-              (this.playerBeforeNextTurn + 1) % this.activePlayers.length;
+            // this.playerBeforeNextTurn =
+            //   (this.playerBeforeNextTurn + 1) % this.activePlayers.length;
           } else {
             player.bet(amount);
           }
@@ -461,9 +488,9 @@ class Game {
             if (!player.status === "tapis") {
               player.raise();
             }
-            this.playerBeforeNextTurn = this.players.findIndex(
-              (p) => p.getPlayerId() === player.getPlayerId()
-            );
+            // this.playerBeforeNextTurn = this.players.findIndex(
+            //   (p) => p.getPlayerId() === player.getPlayerId()
+            // );
 
             //console.log("lefocus avant le raise:", this.focus);
             //console.log("lefocus apres le raise", this.focus);
@@ -474,12 +501,12 @@ class Game {
             player.tapis(amount);
             player.setTapis();
             console.log("TAPIS");
-            this.playerBeforeNextTurn = this.players.findIndex(
-              (p) => p.getPlayerId() === player.getPlayerId()
-            );
+            // this.playerBeforeNextTurn = this.players.findIndex(
+            //   (p) => p.getPlayerId() === player.getPlayerId()
+            // );
             //TRUC A VERIFIER ---------------------------------------------------------------------------
-            this.playerBeforeNextTurn =
-              (this.playerBeforeNextTurn + 1) % this.activePlayers.length;
+            // this.playerBeforeNextTurn =
+            //   (this.playerBeforeNextTurn + 1) % this.activePlayers.length;
             this.total += amount;
 
             this.rotateFocus();
@@ -537,7 +564,8 @@ class Game {
 
   removePlayer(playerId) {
     let player = this.allPlayers.find((p) => p.getPlayerId() === playerId);
-    this.autoTurn(player, true);
+    if(this.focus === this.players.findIndex(p => p.getPlayerId() === playerId))
+      this.autoTurn(player, true);
     this.allPlayers = this.allPlayers.filter(
       (p) => p.getPlayerId() !== playerId
     );
@@ -677,7 +705,7 @@ class Game {
 
   evaluateHands() {
     this.updateActivePlayers();
-    this.players = this.activePlayers;
+    // this.players = this.activePlayers;
     let winner = this.gagnant(this.activePlayers);
     if (winner === undefined) {
       csl.log(
@@ -714,11 +742,12 @@ class Game {
       aa.playerHandName = winnerHandName;
       console.log("aa", aa);
       if (aa.getStatus() === "tapis") {
-        const maxwin = aa.betTotal * this.activePlayers.length;
+        const maxwin = aa.betTotal * (this.activePlayers.filter(p => !p.alreadyWon)).length;
         const prend = maxwin <= this.total ? maxwin : this.total;
         aa.seRemplirLesPoches(prend);
         this.total -= prend;
-        aa.isActive = false;
+        // aa.isActive = false;
+        aa.alreadyWon = true;
         csl.log("evaluateHandsWinnerTapis", maxwin, this.total, aa.isActive);
         //l'update esr fait au debut de la fonction
         aa.jesuislewinner();
@@ -726,12 +755,7 @@ class Game {
           this.evaluateHands();
         }
         //
-        if (
-          this.activePlayers.find(
-            (p) => p.getPlayerId() === aa.getPlayerId()
-          ) === undefined
-        )
-          this.activePlayers.push(aa);
+        
       } else {
         aa.seRemplirLesPoches(this.total);
         aa.jesuislewinner();
