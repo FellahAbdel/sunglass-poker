@@ -251,11 +251,10 @@ class Game {
       "rotateFocus",
       dernierPasTapis,
       this.activePlayers.length,
-      remainingPlayersCount,
-      dernierPasTapis
+      remainingPlayersCount
     );
     // Plus de joueur qui ne sont pas tapis alors on va jusqu'à la fin
-    if (dernierPasTapis === undefined && someoneTapis) {
+    if (remainingPlayersCount <= 1 && someoneTapis) {
       // this.advanceStageToShowdown();
       clearTimeout(this.focusTurnCall);
       while (this.currentStage !== "showdown") {
@@ -283,7 +282,7 @@ class Game {
       console.log(
         "Player qu'on regarde :",
         this.players[this.focus].isActive,
-        this.players[this.focus].getStatus
+        this.players[this.focus].getStatus()
       );
       this.focus = (this.focus + 1) % this.players.length;
       if (this.focus === originalFocus) {
@@ -317,7 +316,11 @@ class Game {
 
       // On a finit le tour
       // On reset les champs des joueurs pour le prochain tour.
-      this.activePlayers.map(p => p.newTurnReset());
+      this.activePlayers.map(p => {
+        p.newTurnReset();
+        if(p.status !== "tapis") {p.playing();}
+      });
+      this.players.map(p => p.gameCurrentBet = 0);
       this.gameCurrentBet = 0;
       this.advanceStage();
       // return;
