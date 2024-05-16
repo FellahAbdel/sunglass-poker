@@ -14,6 +14,7 @@ import NavbarV2 from "../components/Navbar/NavbarV2";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
 import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
+import GameActionPanelV2 from "../components/gameTable/GameActionPanel/GameActionPanelV2";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 import DynamicBar from "../components/Navbar/DynamicBar.js";
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
