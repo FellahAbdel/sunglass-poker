@@ -574,8 +574,11 @@ module.exports = function (app, bdd) {
       }
     },
     getServerNameFromGameId: async function (gameId) {
+      csl.log('getServerNameFromGameId',"Argument gameId: ",gameId);
+      if(gameId.gameRoomId !== undefined)
+        gameId = gameId.gameRoomId;
       try {
-        const gameRecord = await GameDescriptionModel.findOne({ _id: gameId });
+        gameRecord = await GameDescriptionModel.findOne({ _id: gameId });
         if (gameRecord) {
           return gameRecord.serverName;
         } else {
