@@ -13,7 +13,7 @@ const ListTableItem = ({
   nombreDeJoueurs,
   ouvert,
   onJoinClick,
-  isLoading,
+  isJoining,
 }) => {
   const { verifyGamePassword } = useAuth();
   const { getTranslatedWord } = useTranslation();
@@ -79,7 +79,7 @@ const ListTableItem = ({
             {!showPasswordInput && (
               <Button
                 label={getTranslatedWord("serverPanel.join")}
-                styleClass={`btn-list_table back-color2 ${isLoading ? 'loading' : ''}`}
+                styleClass={`btn-list_table back-color2 ${isJoining ? 'loading' : ''}`}
                 onClick={handleJoinClick}
               />
             )}
