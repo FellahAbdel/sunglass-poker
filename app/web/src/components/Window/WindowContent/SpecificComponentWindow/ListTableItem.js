@@ -13,6 +13,7 @@ const ListTableItem = ({
   nombreDeJoueurs,
   ouvert,
   onJoinClick,
+  isLoading,
 }) => {
   const { verifyGamePassword } = useAuth();
   const { getTranslatedWord } = useTranslation();
@@ -61,9 +62,15 @@ const ListTableItem = ({
       <div className="rowItem">{nombreDeJoueurs}/10</div>
       <div className="rowItem">
         {ouvert ? (
-          <img src="static/media/assets/images/icons/white/unlock.png" alt="Open" />
+          <img
+            src="static/media/assets/images/icons/white/unlock.png"
+            alt="Open"
+          />
         ) : (
-          <img src="static/media/assets/images/icons/white/password.png" alt="Closed" />
+          <img
+            src="static/media/assets/images/icons/white/password.png"
+            alt="Closed"
+          />
         )}
       </div>
       <div className="rowItem">
@@ -72,7 +79,7 @@ const ListTableItem = ({
             {!showPasswordInput && (
               <Button
                 label={getTranslatedWord("serverPanel.join")}
-                styleClass="btn-list_table back-color2"
+                styleClass={`btn-list_table back-color2 ${isLoading ? 'loading' : ''}`}
                 onClick={handleJoinClick}
               />
             )}

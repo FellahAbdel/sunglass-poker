@@ -83,3 +83,28 @@
   width: 2vw;
   height: auto;
 }
+
+/* serverPanel.css */
+.joining {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.joining::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -25,6 +25,7 @@ const ServerPanelWindow = () => {
   const [searchText, setSearchText] = useState("");
 
   const isPlayerSited = useSelector((state) => state.game.playerSited);
+  const [isLoading, setIsLoading] = useState(false);
 
   const displayGameRoom = () => {
     // Your logic to display the game room goes here
@@ -118,8 +119,10 @@ const ServerPanelWindow = () => {
       // il faudra qu'on informe le joueur que sa demande a bien été prise en compte
       // et qu'il est en attente de la réponse du serveur.
       if (isPlayerSited) {
+        setIsLoading(false);
         displayGameRoom();
       }else {
+        setIsLoading(true);
         console.log("server hasn't responded yet");
       }
     }
@@ -165,6 +168,7 @@ const ServerPanelWindow = () => {
             onJoinClick={() => handleJoinTable(table._id)}
             nombreDeJoueurs={table.players.length}
             ouvert={table.roomPassword ? false : true}
+            loading={isLoading}
           />
         ))}
       </div>
