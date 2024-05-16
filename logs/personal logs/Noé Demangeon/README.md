@@ -150,4 +150,12 @@
 
 2024/05/12 : 1h30           Correction bugs, vérification mots de passe pour les game. ServerName ingame
 
-TEMPS TOTAL: 154h00min
+2024/05/13 : 1h00           Correction bugs ranking + suppression code / formatage
+
+2024/05/14 : 4h00           Réunion, traductions, début all-in, communication
+
+2024/05/15 : 0h30           Correction bug ranking
+
+2024/05/16 : 3h00           Test jeu pour débug, correction bug, code pour gérer les joueurs avec 0 SC, fin traductions, message erreur creategame
+
+TEMPS TOTAL: 162h30min
