@@ -108,14 +108,14 @@ const GameActionButtons = ({}) => {
       if (gameCurrentBet > 0) {
         //le tapis de ce qui reste
         if (playerMoney < (gameCurrentBet - gamePlayerCurrentBet)) {
-          dispatch(actions.bet(playerMoney));
+          // dispatch(actions.bet(playerMoney));
         } else {
           // Le cas classique du call
-          dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
+          // dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
         }
       } else {
         // Sinon, effectue une action "Check"
-        dispatch(actions.check());
+        // dispatch(actions.check());
       }  
       setAmount(min);
       setShowPopup(false);
