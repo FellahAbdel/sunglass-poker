@@ -424,8 +424,7 @@ module.exports = function (
    * @param {object} socket - The socket object triggering the event.
    * @param {string} receivedGameRoomId - The ID of the game room received from the client.
    */
-  function createGameV2(socket, data) {
-    receivedGameRoomId = data.gameRoomId;
+  function createGameV2(socket, receivedGameRoomId) {
     // Log that the 'createGameV2' event is called
     csl.log(fileType, "createGameV2 called (from socket.io.js)");
 
@@ -458,7 +457,7 @@ module.exports = function (
     store.dispatch({ type: actions.GAME_LOBBY });
 
     // Get the updated state of the Redux store
-    const state = store.getState();
+    state = store.getState();
 
     // Send an event to the socket to update the client's game lobby state
     sendEvent(socket, actcrea.gameLobby(state.game.rooms[receivedGameRoomId]));
@@ -580,9 +579,10 @@ module.exports = function (
 
     // Listen for 'createGameV2' event
     socket.on("createGameV2", (data) => {
+      const receivedGameRoomId = data.gameRoomId;
       if (socket.request.session.userId) {
         // Create new game V2
-        createGameV2(socket, data);
+        createGameV2(socket, receivedGameRoomId);
       }
     });
 
