@@ -162,8 +162,9 @@
   width: 3.3vw;
   position: absolute;
   top: -50%;
-  left: -25%;
-  rotate: -15deg;
+  left: -27%;
+  rotate: -20deg;
+  filter: drop-shadow(0 0 1vw var(--color1-light)) drop-shadow(0 0 1vw var(--color1-light)) ;
 }
 
 .profilePic.folded {
