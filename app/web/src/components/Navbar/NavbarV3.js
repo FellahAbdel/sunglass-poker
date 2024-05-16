@@ -1,7 +1,7 @@
 // React imports
 import React, { useState } from "react";
 // CSS file for styling
-import "./navbarV2.css";
+import "./navbarV3.css";
 // Reusable components
 import Button from "../button/Button.tsx";
 import TextInputComponent from "../textInput/TextInput.jsx";
@@ -140,7 +140,7 @@ const Navbar = ({}) => {
                 <Button
                   label={""}
                   onClick={handleChatOpen}
-                  iconSrc={require("./../assets/images/icons/white/chat.png")}
+                  iconSrc={"static/media/assets/images/icons/white/chat.png"}
                 />
               )}
 
@@ -149,9 +149,11 @@ const Navbar = ({}) => {
                   <img
                     className="btn-chatClose-V2"
                     onClick={handleChatClose}
-                    src={require("./../assets/images/icons/white/cross.png")}
+                    src={"static/media/assets/images/icons/white/cross.png"}
                     alt="exit-chat"
                   />
+
+                  {/* liste des messages */}
                   <div className="message-list">
                     {messages.map((message, index) => (
                       <div key={index} className="message">
@@ -159,19 +161,27 @@ const Navbar = ({}) => {
                       </div>
                     ))}
                   </div>
-                  <TextInputComponent
-                    name="Message"
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder={"Messages"}
-                    styleClass="input-chatBox-V2"
-                  />
-                  <Button
-                    label={"Send"}
-                    onClick={handleSendMessage}
-                    styleClass="send-message-button"
-                    iconSrc={require("./../assets/images/icons/white/return.png")} // Assurez-vous d'avoir une icône d'envoi
-                  />
+
+                  {/* formulaire d'envoi de message */}
+                  <div className="chat-input">
+                    <input
+                      type="text"
+                      name="Message"
+                      placeholder="Messages"
+                      className="text-input-1"
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                    />
+
+                    <Button
+                      label={"Send"}
+                      onClick={handleSendMessage}
+                      styleClass="send-message-button"
+                      iconSrc={
+                        "static/media/assets/images/icons/white/return.png"
+                      } // Assurez-vous d'avoir une icône d'envoi
+                    />
+                  </div>
                 </>
               )}
             </div>
@@ -192,7 +202,7 @@ const Navbar = ({}) => {
                 isLogged ? openWindow("profile") : openWindow("login")
               }
               styleClass={`${isLogged ? "btn-profile-V2 " : "btn-logIn-V2 "}`}
-              iconSrc={require("./../assets/images/icons/white/profile.png")}
+              iconSrc={"static/media/assets/images/icons/white/profile.png"}
             />
             <Button
               label={getTranslatedWord("navbar.ranking")}
@@ -200,7 +210,7 @@ const Navbar = ({}) => {
               styleClass={`${
                 isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "
               }`}
-              iconSrc={require("./../assets/images/icons/white/ranking.png")}
+              iconSrc={"static/media/assets/images/icons/white/ranking.png"}
             />
           </>
         )}
@@ -208,28 +218,28 @@ const Navbar = ({}) => {
           label={getTranslatedWord("navbar.settings")}
           onClick={() => openWindow("settings")}
           styleClass="btn-settings-V2"
-          iconSrc={require("./../assets/images/icons/white/settings.png")}
+          iconSrc={"static/media/assets/images/icons/white/settings.png"}
         />
         {isLogged && !isGameTableVisible && (
           <Button
             label={getTranslatedWord("shop.shop")}
             onClick={() => openWindow("shop")}
             styleClass="btn-shop-V2"
-            iconSrc={require("./../assets/images/icons/white/shop.png")}
+            iconSrc={"static/media/assets/images/icons/white/shop.png"}
           />
         )}
         <Button
           label={getTranslatedWord("navbar.tutorial")}
           onClick={() => openWindow("tutorial")}
           styleClass="btn-tutorial-V2"
-          iconSrc={require("./../assets/images/icons/white/tutorial.png")}
+          iconSrc={"static/media/assets/images/icons/white/tutorial.png"}
         />
         {isLogged && (
           <Button
             label={label}
             onClick={handleLogOutButton}
             styleClass="btn-exit-V2"
-            iconSrc={require("./../assets/images/icons/white/exit.png")}
+            iconSrc={"static/media/assets/images/icons/white/exit.png"}
           />
         )}
       </div>
