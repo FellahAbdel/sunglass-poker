@@ -41,7 +41,7 @@ const CreateGameWindow = () => {
   const [formData, setFormData] = useState({
     serverName: "",
     password: "",
-    rank: "Friendly",
+    rank: "friendly",
   });
 
   const [validationErrors, setValidationErrors] = useState({
@@ -156,10 +156,10 @@ const CreateGameWindow = () => {
             value={formData.rank}
             onChange={handleChange}
           >
-            <option value="Novice">{getTranslatedWord("serverPanel.friendly")}</option>
-            <option value="Intermédiaire">{getTranslatedWord("serverPanel.intermediate")}</option>
-            <option value="Avancé">{getTranslatedWord("serverPanel.advanced")}</option>
-            <option value="Élite">{getTranslatedWord("serverPanel.elite")}</option>
+            <option value="friendly">{getTranslatedWord("serverPanel.friendly")}</option>
+            <option value="intermediate">{getTranslatedWord("serverPanel.intermediate")}</option>
+            <option value="advanced">{getTranslatedWord("serverPanel.advanced")}</option>
+            <option value="elite">{getTranslatedWord("serverPanel.elite")}</option>
           </select>
         </div>
         <Button

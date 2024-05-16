@@ -96,9 +96,6 @@
     "elite":"Elite",
     "createTheGame":"Create the Game",
     "search": "Search Room",
-    "Friendly":"Friendly",
-    "Avancé":"Advenced",
-    "Élite":"Elite",
     "gameExist": "Game name already exists"
   },
   "playersStatus": {
