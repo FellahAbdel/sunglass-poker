@@ -186,6 +186,9 @@
 
 2024/05/16 40min    Test avec des amis sur la VM les bugs puis je les ai repertorié sur le discord
 
---2024/05 SEMAINE 2: 20 (TOTAL: 133H30)
+2024/05/16  30min   Test sur le VM des bugs avec les paires qui détermine le mauvais gagnant ainsi que les brelan + autre cartes 
 
-TEMPS TOTAL: 133H30
+
+--2024/05 SEMAINE 2: 20H30 (TOTAL: 134H)
+
+TEMPS TOTAL: 134H
