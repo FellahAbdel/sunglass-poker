@@ -15,7 +15,7 @@ import { getStyles } from "../components/Utiles/useStyles.jsx";
 import NavbarV2 from "../components/Navbar/NavbarV2";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
-import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
+import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanelV2";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
