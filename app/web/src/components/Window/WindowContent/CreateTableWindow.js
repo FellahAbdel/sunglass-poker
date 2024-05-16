@@ -96,17 +96,7 @@ const CreateGameWindow = () => {
           masterInfo
         );
 
-        if (result) {
-          // We dispatch the action to start the game
-          const gameRoomId = result;
-          console.log("Game created with ID:", gameRoomId);
-          dispatch(createGameV2(gameRoomId));
-          // We have to wait for the game to be created before closing the window
-          // And then we sent the user to the game room
-          //   showGameTable();
-          //   closeWindow();
-          //   setWindowType("");
-        } else if (result && result.error) {
+        if (result && result.error) {
           if (result.error === "game_exists") {
             // Afficher un message d'erreur indiquant que le jeu existe déjà
             setValidationErrors((prevErrors) => ({
@@ -117,6 +107,17 @@ const CreateGameWindow = () => {
             // Autres erreurs
             console.error("Failed to create game:", result.error);
           }
+        }
+        else if (result) {
+          // We dispatch the action to start the game
+          const gameRoomId = result;
+          console.log("Game created with ID:", gameRoomId);
+          dispatch(createGameV2(gameRoomId));
+          // We have to wait for the game to be created before closing the window
+          // And then we sent the user to the game room
+          //   showGameTable();
+          //   closeWindow();
+          //   setWindowType("");
         }
       } catch (error) {
         console.error("Error creating game:", error);

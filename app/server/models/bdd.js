@@ -488,17 +488,15 @@ module.exports = function (app, bdd) {
         // Check if a game with the same serverName exists, if so, delete it
         const existingGame = await GameDescriptionModel.findOne({ serverName });
         if (existingGame) {
-          await GameDescriptionModel.deleteOne({ serverName });
+          return {
+            error: true,
+            code: 400,
+            data: { error: "game_exists",
+            field: "game",
+            message: "Game name already exists" },
+          };          
         }
-        //   return {
-        //     error: true,
-        //     code: 400,
-        //     data: { error: "game_exists",
-        //     field: "game",
-        //     message: "Game name already exists" },
-        //   };
-        // }
-
+           
         // Create a new game description with provided parameters
         const gameDescription = new GameDescriptionModel({
           serverName,
