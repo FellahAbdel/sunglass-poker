@@ -5,7 +5,7 @@ import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../Utiles/Translations";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import TextInputComponent from "../../textInput/TextInput.jsx";
@@ -23,6 +23,22 @@ const ServerPanelWindow = () => {
   const [recordsPerPage, setRecordsPerPage] = useState(6);
 
   const [searchText, setSearchText] = useState("");
+
+  const isPlayerSited = useSelector((state) => state.game.playerSited);
+
+  const displayGameRoom = () => {
+    // Your logic to display the game room goes here
+    console.log("Game room displayed!");
+    showGameTable();
+    closeWindow();
+    setWindowType("");
+  };
+  useEffect(() => {
+    if (isPlayerSited) {
+      displayGameRoom();
+      console.log("playerSited (useEffect)", isPlayerSited);
+    }
+  }, [isPlayerSited]);
 
   //Gère le nombre de tables affichées par page
   useEffect(() => {
@@ -101,9 +117,11 @@ const ServerPanelWindow = () => {
       // TODO :
       // il faudra qu'on informe le joueur que sa demande a bien été prise en compte
       // et qu'il est en attente de la réponse du serveur.
-      showGameTable();
-      closeWindow();
-      setWindowType("");
+      if (isPlayerSited) {
+        displayGameRoom();
+      }else {
+        console.log("server hasn't responded yet");
+      }
     }
   };
 

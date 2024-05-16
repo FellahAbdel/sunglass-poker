@@ -10,6 +10,7 @@ import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 const GameActionButtons = ({}) => {
   //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet
   const [value, setValue] = useState(0);
+  const minValue = 0; // Set your minimum value here
 
   const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } =
     useGameTable();
@@ -28,21 +29,23 @@ const GameActionButtons = ({}) => {
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(coins);
   const [amount, setAmount] = useState(0);
 
-  const handleIncrement = () => {
-    setValue((prevValue) => {
-      const newValue = Math.min(prevValue + 10, coins);
-      // onChange(newValue);
-      return newValue;
-    });
+  const handleDecrement = () => {
+    setValue(prevValue => Math.max(prevValue - 1, minValue));
   };
 
-  const handleDecrement = () => {
-    setValue((prevValue) => {
-      const newValue = Math.max(prevValue - 5, 0);
-      // onChange(newValue);
-      return newValue;
-    });
+  const handleIncrement = () => {
+    setValue(prevValue => prevValue + 1);
   };
+
+  const handleInputChange = (e) => {
+    const newValue = parseInt(e.target.value, 10);
+    if (!isNaN(newValue)) {
+      setValue(Math.max(newValue, minValue));
+    } else {
+      setValue(minValue);
+    }
+  };
+
 
   return (
     <div className="container-gameAction">
@@ -83,7 +86,13 @@ const GameActionButtons = ({}) => {
           </div>
           <div className={`container-raiseAdjuster`}>
             <Button styleClass="btn-raiseDecrement" label={"−"} onClick={handleDecrement}/>
-            <div className="raiseValueDisplay">{value} SC</div>
+              <input
+                type="number"
+                className="raiseValueDisplay"
+                value={value}
+                onChange={handleInputChange}
+                min={minValue}
+              /> SC            
             <Button styleClass="btn-raiseIncrement" label={"+"} onClick={handleIncrement}/>
           </div>
 
