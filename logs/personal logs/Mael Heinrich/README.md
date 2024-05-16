@@ -184,6 +184,8 @@
 
 2024/05/16  1H20    Reunion avec victor pour regler tous les soucis des derniers ajout afin que cela soit fonctionnel puis push sur les VM
 
---2024/05 SEMAINE 2: 19H20 (TOTAL: 132H50)
+2024/05/16 40min    Test avec des amis sur la VM les bugs puis je les ai repertorié sur le discord
 
-TEMPS TOTAL: 132H40
+--2024/05 SEMAINE 2: 20 (TOTAL: 133H30)
+
+TEMPS TOTAL: 133H30
