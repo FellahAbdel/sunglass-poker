@@ -9,122 +9,209 @@ import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
 const GameActionButtons = ({}) => {
   //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet
-  const [value, setValue] = useState(0);
-  const minValue = 0; // Set your minimum value here
-
-  const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } =
-    useGameTable();
+  const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } = useGameTable();
   console.log("gameCurrentBet :", gameCurrentBet);
   const { getTranslatedWord } = useTranslation();
-  //checkValue = true -> Check
-  //checkValue = False -> Call
-  const [checkValue] = useState(true);
-  //to open the raise range
-  const [showPopup, setShowPopup] = useState(false);
-  //sliderValue text -> percentage of the raise
-  const dispatch = useDispatch();
-  const [sliderValueText, setSliderValueText] = useState();
   const [coins, setCoins] = useState(playerMoney);
-  const [raiseCoin, setRaiseCoin] = useState(0);
-  const [coinsAfterRaise, setCoinsAfterRaise] = useState(coins);
-  const [amount, setAmount] = useState(0);
+  const [min , setMin] = useState(20); // minimum amount to raise
+  const [max , setMax] = useState(coins); // maximum amount to raise set to coins
+  const [step , setStep] = useState(Math.floor(coins / 10)); // toggle coin steps : setted to 10% of the coins
+  const [amount, setAmount] = useState(min); //amount to raise
+  const [showPopup, setShowPopup] = useState(false); // popUp to show raise panel
+  const [coinsAfterRaise, setCoinsAfterRaise] = useState(0); // calculating the amount that player will be left after the raise to show before
+  const [raiseConfirmed, setRaiseConfirmed] = useState(false); // New state variable to track confirmation  
+  const dispatch = useDispatch();
 
-  const handleDecrement = () => {
-    setValue(prevValue => Math.max(prevValue - 1, minValue));
+
+  const formatNumber = (number) => {
+    return new Intl.NumberFormat().format(number);
   };
+
+  const [amountInput, setAmountInput] = useState(formatNumber(min));
 
   const handleIncrement = () => {
-    setValue(prevValue => prevValue + 1);
+    setAmount((prevAmount) => {
+      const newAmount = Math.min(prevAmount + step, max);
+      setCoinsAfterRaise(coins - newAmount);
+      setAmountInput(formatNumber(newAmount));
+      return newAmount;
+    });
   };
 
-  const handleInputChange = (e) => {
-    const newValue = parseInt(e.target.value, 10);
-    if (!isNaN(newValue)) {
-      setValue(Math.max(newValue, minValue));
-    } else {
-      setValue(minValue);
+  const handleDecrement = () => {
+    setAmount((prevAmount) => {
+      const newAmount = Math.max(prevAmount - step, min);
+      setCoinsAfterRaise(coins - newAmount);
+      setAmountInput(formatNumber(newAmount));
+      return newAmount;
+    });
+  };
+
+  const handleChange = (event) => {
+    const newAmount = event.target.value.replace(/,/g, '');
+    if (/^\d*$/.test(newAmount)) { // Ensure only non-decimal numbers are allowed
+      setAmountInput(newAmount === '' ? '' : formatNumber(newAmount));
+      setAmount(newAmount === '' ? '' : Number(newAmount));
     }
   };
 
+  const handleBet = (amount) => {
+    console.log("amount :", amount);
+    amount = Math.round(amount);
+    dispatch(actions.bet(amount));
+    setAmount(amount);
+  };
+
+  const handleRaise = () => {
+    if ()
+    if (!showPopup) {
+      setShowPopup(true);
+      setRaiseConfirmed(false); // Reset raise confirmation
+    } else {
+      const validatedAmount = Math.max(min, Math.min(max, amount));
+      setAmount(validatedAmount);
+      setAmountInput(formatNumber(validatedAmount));
+      
+
+      if (raiseConfirmed) {
+        const totalAmount = validatedAmount + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
+        handleBet(totalAmount); // Second click: perform the raise
+        setShowPopup(false);
+        setRaiseConfirmed(false); // Reset raise confirmation
+      }
+    }
+  };
+
+  // Met à jour la valeur du bouton "Check" ou "Call" en fonction de gameCurrentBet
+  const getCheckOrCallLabel = () => {
+    if (gameCurrentBet > 0) {
+      //le cas du tapis de ce qui me reste
+      if(playerMoney<(gameCurrentBet-gamePlayerCurrentBet)){
+        return `${getTranslatedWord(
+          "gameActionPanel.call"
+        )} ${playerMoney} SC`;
+      }
+      //le cas classic du call
+      else{
+        return `${getTranslatedWord(
+          "gameActionPanel.call"
+          )} ${gameCurrentBet - gamePlayerCurrentBet} SC`;
+      }
+    } else {
+      return getTranslatedWord("gameActionPanel.check");
+    }
+  };
+
+  const handleCheckOrCall = () =>{
+    if (isFocus){
+      if (gameCurrentBet > 0) {
+        //le tapis de ce qui reste
+        if (playerMoney < (gameCurrentBet - gamePlayerCurrentBet)) {
+          dispatch(actions.bet(playerMoney));
+        } else {
+          // Le cas classique du call
+          dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
+        }
+      } else {
+        // Sinon, effectue une action "Check"
+        dispatch(actions.check());
+      }  
+      setAmount(min);
+      setShowPopup(false);
+    }
+  }
+
+  const handleFold = () =>{
+      if (isFocus){
+        setAmount(min);
+        setShowPopup(false);
+        dispatch(actions.fold());
+      }
+    }
+
+    useEffect( () =>{
+      setCoinsAfterRaise(coins - amount);
+    },[amount]);
+
+    useEffect(() => {
+      setCoins(playerMoney);
+    }, [playerMoney]);  
+
+    console.log("raise coins:", amount);
 
   return (
     <div className="container-gameAction">
       <div className="container-cashSituation">
         <div className="userCoinCashs">
-          {getTranslatedWord("gameActionPanel.currentSC")}: {Math.round(coins)}
+          {getTranslatedWord("gameActionPanel.currentSC")}: {coins}
         </div>
-        {showPopup && (coinsAfterRaise || sliderValueText !== 0) ? (
+        {showPopup && (coinsAfterRaise || amount) && (
           <div className="userCoinCashs">
             {getTranslatedWord("gameActionPanel.afterSC")}:{" "}
-            {Math.round(coinsAfterRaise)}
+            {(coinsAfterRaise)}
           </div>
-        ) : (
-          ""
         )}
       </div>
+      {showPopup && (<>
           <div className="container-raiseButtons">
-          <Button
+            <Button
               styleClass={"btn-mainAction"}
-              onClick={() => setValue(0)}
+              onClick={() => setAmount(min)}
               label={"Min"}
             />
             <Button
               styleClass={"btn-mainAction"}
-              onClick={() => setValue(coins/2)}
+              onClick={() => setAmount(min)}
+              label={"1/4"}
+            />
+            <Button
+              styleClass={"btn-mainAction"}
+              onClick={() => setAmount(coins/2)}
               label={"1/2"}
             />
             <Button
               styleClass={"btn-mainAction"}
-              onClick={() => setValue(coins*3/4)}
+              onClick={() => setAmount(coins*3/4)}
               label={"3/4"}
             />
             <Button
               styleClass={"btn-mainAction"}
-              onClick={() => setValue(coins)}
+              onClick={() => setAmount(coins)}
               label={"All in"}
             />
           </div>
           <div className={`container-raiseAdjuster`}>
-            <Button styleClass="btn-raiseDecrement" label={"−"} onClick={handleDecrement}/>
+            <Button styleClass="btn-raiseDecrement" label={"−"} onClick={handleDecrement} disabled={amount <= min}/>
               <input
-                type="number"
+                type="text"
                 className="raiseValueDisplay"
-                value={value}
-                onChange={handleInputChange}
-                min={minValue}
-              /> SC            
-            <Button styleClass="btn-raiseIncrement" label={"+"} onClick={handleIncrement}/>
-          </div>
-
+                value={amount === '' ? '' : formatNumber(amount)}
+                onChange={handleChange}
+              />SC
+            <Button styleClass="btn-raiseIncrement" label={"+"} onClick={handleIncrement} disabled={amount >= max}/>
+      </div>
+          </>)}
       <div className={`container-ActionButtons`}>
-        {/* LEBOUTON BET MAIS faut reclické alors jsp ou mettre le handle */}
+        {/* LEBOUTON BET */}
         <Button
-          styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
-          onClick={() => null}
-          label={`${getTranslatedWord("gameActionPanel.raise")} ${
-            !isFocus && amount !== 0
-              ? `${Math.round(amount)} SC`
-              : `${raiseCoin ? Math.round(raiseCoin) + " SC" : ""}`
-          }`}
+          styleClass={`btn-mainAction ${!isFocus && "disabled"} ${("isFocus" && amount !== 0 && showPopup) && "back-color1" }`}
+          onClick={handleRaise}
+          label={`${getTranslatedWord("gameActionPanel.raise")}`}
         />
 
         {/* Bouton "Check" ou "Call" en fonction de gameCurrentBet */}
         <Button
           styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
-          onClick={isFocus ? null : undefined}
-          label={ getTranslatedWord("gameActionPanel.check")
-             || getTranslatedWord("gameActionPanel.call")}
+          onClick={handleCheckOrCall}
+          label={getCheckOrCallLabel()}
         />
         {/* LE BOUTON FOLD */}
         <Button
           styleClass={`btn-fold btn-mainAction ${!isFocus && "disabled"}`}
-          onClick={isFocus ? null : undefined}
+          onClick={handleFold}
           label={getTranslatedWord("gameActionPanel.fold")}
         />
       </div>
-      {/* <div className={`rangeSlider ${showPopup ? "rangeSlider-open" : ""}`}>
-        <RaiseSlider initialValue={25} onSliderChange={handleSliderChange} />
-      </div> */}
     </div>
   );
 };
