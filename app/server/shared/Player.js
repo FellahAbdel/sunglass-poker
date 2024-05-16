@@ -10,7 +10,7 @@ class Player {
   ]; //
   playerHandName = "";
   bonusMax = 2;
-  playerBonus = {H:0, D:0, C:0, S:0, ready:false};
+  playerBonus = { H: 0, D: 0, C: 0, S: 0, ready: false };
 
   constructor(
     playerId,
@@ -19,10 +19,10 @@ class Player {
     status = "Playing",
     currentBet = 0,
     currentBetTurn = 0,
-    betTotal=0,
+    betTotal = 0,
     isActive = true,
     isSpectator = false,
-    isTapis=false
+    isTapis = false
   ) {
     this.playerId = playerId;
     this.name = name;
@@ -31,29 +31,29 @@ class Player {
     this.playerActionLog = [];
     this.currentBet = currentBet;
     this.currentBetTurn = currentBetTurn;
-    this.betTotal=betTotal;
+    this.betTotal = betTotal;
     this.isActive = isActive;
     this.isYou = false;
     this.isAfk = false;
-    this.isTapis=isTapis;
+    this.isTapis = isTapis;
     this.isSpectator = isSpectator;
-    this.playerMoney=coins;
+    this.playerMoney = coins;
   }
 
-  setAfk(){
+  setAfk() {
     this.isAfk = true;
     this.isActive = false;
   }
-  unsetAfk(){
+  unsetAfk() {
     this.isAfk = false;
     this.isActive = true;
   }
 
-  setTapis(){
+  setTapis() {
     this.isTapis = true;
   }
 
-  unsetTapis(){
+  unsetTapis() {
     this.isTapis = false;
   }
 
@@ -85,10 +85,22 @@ class Player {
       this.cardsVisible[cardIndex] = true;
     }
   }
+
+  canJoinTable() {
+    return this.getPlayerMoney() > 0;
+  }
+
   toggleSpectator() {
+    if (this.isSpectator && !this.canJoinTable()) {
+      console.log(`Player ${this.name} cannot rejoin the table due to insufficient coins.`);
+      return;
+    }
     this.isSpectator = !this.isSpectator;
     if (this.isSpectator) {
       this.isActive = false;
+      this.newRoundReset();
+    } else {
+      this.isActive = true;
     }
   }
 
@@ -157,8 +169,6 @@ class Player {
     return this.playerBonus;
   }
 
-
-
   resetPlayerBonus() {
     this.playerBonus.C = 0;
     this.playerBonus.H = 0;
@@ -213,9 +223,13 @@ class Player {
     let color = card.getNumberAndColor()[1];
     if (this.playerBonus[color] < this.bonusMax) this.playerBonus[color]++;
 
-    if (this.playerBonus.H === this.bonusMax && this.playerBonus.D === this.bonusMax
-        && this.playerBonus.S === this.bonusMax && this.playerBonus.C === this.bonusMax
-    ) this.playerBonus.ready = true;
+    if (
+      this.playerBonus.H === this.bonusMax &&
+      this.playerBonus.D === this.bonusMax &&
+      this.playerBonus.S === this.bonusMax &&
+      this.playerBonus.C === this.bonusMax
+    )
+      this.playerBonus.ready = true;
   }
 
   clearHand() {
@@ -239,34 +253,33 @@ class Player {
     this.status = "call";
   }
 
-  
   playing() {
     this.status = "playing";
   }
-  
+
   raise() {
     this.status = "raise";
   }
-  
+
   jesuislewinner() {
     this.status = "winner";
   }
 
-  tapis(amount){
-    this.status="tapis";
+  tapis(amount) {
+    this.status = "tapis";
     this.currentBet = amount;
     this.currentBetTurn += amount;
     this.betTotal += amount;
     this.playerMoney -= amount;
   }
-  
+
   bet(amount) {
     if (this.playerMoney > amount) {
       this.currentBet = amount;
       this.currentBetTurn += amount;
       this.playerMoney -= amount;
       this.status = "call";
-      this.betTotal+=amount;
+      this.betTotal += amount;
     }
   }
 
@@ -275,7 +288,7 @@ class Player {
       this.currentBet = amount;
       this.currentBetTurn += amount;
       this.playerMoney -= amount;
-      this.betTotal+=amount;
+      this.betTotal += amount;
       //status a definir:
       // this.status = "raise";
     }
@@ -295,7 +308,7 @@ class Player {
     this.isActive = true;
     this.cardsVisible = [false, false];
     this.status = "Playing";
-    this.betTotal=0;
+    this.betTotal = 0;
     // Ajouter d'autres réinitialisations si nécessaire
   }
 
