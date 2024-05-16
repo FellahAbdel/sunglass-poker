@@ -162,6 +162,10 @@ Button:hover {
   background-color: white;
   color: black;
 }
+.btn-mainAction.raise{
+  border: unset;
+  background: var(--gradient-red);
+}
 @media (max-height: 500px) {
   .btn-mainAction {
     font-size: 2.5vh;
