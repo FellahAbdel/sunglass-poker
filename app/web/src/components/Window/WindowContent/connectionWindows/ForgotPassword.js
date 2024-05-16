@@ -75,7 +75,7 @@ const ForgotPassword = ({ showSuccess }) => {
           styleClass="btn-connectionDefault button login-button back-color3"
           type="temporary"
           onClick={() => openWindow("reset")}
-          label="TEMPORARY BUTTON"
+          label={getTranslatedWord("connection.temporary")}
         />
       </form>
       <Button

@@ -5,7 +5,7 @@ const defaultItems = [
     names: {
       en: "Sun",
       fr: "Soleil",
-      zh: "太阳",
+      ch: "太阳",
       es: "Sol",
       de: "Sonne"
     },
@@ -18,7 +18,7 @@ const defaultItems = [
     names: {
       en: "Crab",
       fr: "Crabe",
-      zh: "蟹",
+      ch: "蟹",
       es: "Cangrejo",
       de: "Krabbe"
     },
@@ -31,7 +31,7 @@ const defaultItems = [
     names: {
       en: "Dolphin",
       fr: "Dauphin",
-      zh: "海豚",
+      ch: "海豚",
       es: "Delfín",
       de: "Delfin"
     },
@@ -44,7 +44,7 @@ const defaultItems = [
     names: {
       en: "Weird Fish",
       fr: "Drole de Poisson",
-      zh: "奇怪的鱼",
+      ch: "奇怪的鱼",
       es: "Pez extraño",
       de: "Seltsamer Fisch"
     },
@@ -57,7 +57,7 @@ const defaultItems = [
     names: {
       en: "Jellyfish",
       fr: "Méduse",
-      zh: "水母",
+      ch: "水母",
       es: "Medusa",
       de: "Qualle"
     },
@@ -70,7 +70,7 @@ const defaultItems = [
     names: {
       en: "Shark",
       fr: "Requin",
-      zh: "鲨鱼",
+      ch: "鲨鱼",
       es: "Tiburón",
       de: "Hai"
     },
@@ -83,7 +83,7 @@ const defaultItems = [
     names: {
       en: "Nothing",
       fr: "Rien",
-      zh: "无",
+      ch: "无",
       es: "Nada",
       de: "Nichts"
     },
@@ -95,7 +95,7 @@ const defaultItems = [
     names: {
       en: "Pixels",
       fr: "Pixels",
-      zh: "像素",
+      ch: "像素",
       es: "Píxeles",
       de: "Pixel"
     },
@@ -107,7 +107,7 @@ const defaultItems = [
     names: {
       en: "3D",
       fr: "3D",
-      zh: "三维",
+      ch: "三维",
       es: "3D",
       de: "3D"
     },
@@ -119,7 +119,7 @@ const defaultItems = [
     names: {
       en: "Ski Green",
       fr: "Ski Vert",
-      zh: "绿色滑雪",
+      ch: "绿色滑雪",
       es: "Esquí Verde",
       de: "Grüner Ski"
     },
@@ -131,7 +131,7 @@ const defaultItems = [
     names: {
       en: "Underwater",
       fr: "Sous L'eau",
-      zh: "水下",
+      ch: "水下",
       es: "Bajo el agua",
       de: "Unterwasser"
     },
@@ -143,7 +143,7 @@ const defaultItems = [
     names: {
       en: "Monocle",
       fr: "Monocle",
-      zh: "单片眼镜",
+      ch: "单片眼镜",
       es: "Monóculo",
       de: "Monokel"
     },
@@ -155,7 +155,7 @@ const defaultItems = [
     names: {
       en: "Double Monocle",
       fr: "Double Monocle",
-      zh: "双片单镜",
+      ch: "双片单镜",
       es: "Doble Monóculo",
       de: "Doppelmonokel"
     },
@@ -167,7 +167,7 @@ const defaultItems = [
     names: {
       en: "Black",
       fr: "Noir",
-      zh: "黑色",
+      ch: "黑色",
       es: "Negro",
       de: "Schwarz"
     },
@@ -179,7 +179,7 @@ const defaultItems = [
     names: {
       en: "White",
       fr: "Blanc",
-      zh: "白色",
+      ch: "白色",
       es: "Blanco",
       de: "Weiß"
     },
@@ -191,7 +191,7 @@ const defaultItems = [
     names: {
       en: "Red",
       fr: "Rouge",
-      zh: "红色",
+      ch: "红色",
       es: "Rojo",
       de: "Rot"
     },
@@ -203,7 +203,7 @@ const defaultItems = [
     names: {
       en: "Sand",
       fr: "Sable",
-      zh: "沙色",
+      ch: "沙色",
       es: "Arena",
       de: "Sand"
     },
@@ -215,7 +215,7 @@ const defaultItems = [
     names: {
       en: "Pine Green Khaki",
       fr: "Vert sapin kaki",
-      zh: "松树绿卡其",
+      ch: "松树绿卡其",
       es: "Caqui verde pino",
       de: "Kieferngrün Khaki"
     },
@@ -227,7 +227,7 @@ const defaultItems = [
     names: {
       en: "Lightning Blue",
       fr: "Bleu éclair",
-      zh: "闪电蓝",
+      ch: "闪电蓝",
       es: "Azul relámpago",
       de: "Blitzblau"
     },
@@ -239,7 +239,7 @@ const defaultItems = [
     names: {
       en: "Toxic Blue",
       fr: "Bleu toxique",
-      zh: "有毒蓝",
+      ch: "有毒蓝",
       es: "Azul tóxico",
       de: "Giftiges Blau"
     },
@@ -251,7 +251,7 @@ const defaultItems = [
     names: {
       en: "Sunset",
       fr: "Couché de soleil",
-      zh: "日落",
+      ch: "日落",
       es: "Puesta de sol",
       de: "Sonnenuntergang"
     },

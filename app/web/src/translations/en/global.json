@@ -30,7 +30,10 @@
     "registerMessage": "Create your account",
     "send": "Send",
     "returnConnection": "Return to connection menu",
-    "loginSuccess": "Logged with success !"
+    "loginSuccess": "Logged with success !",
+    "resetPassword":"Reset your password",
+    "enterNewPassword":"Enter your new password here :",
+    "temporary": "TEMPORARY BUTTON"
   },
   "messageBox": {
     "loginSucces": "Logged in with succes!",
