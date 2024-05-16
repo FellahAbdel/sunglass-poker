@@ -107,8 +107,8 @@ const ResetPasswordWindow = ({ showSuccess }) => {
 
   return (
     <div className="box">
-      <div className="login-page-title">Reset your password</div>
-      <div className="login-page-text">Enter your new password here :</div>
+      <div className="login-page-title">{getTranslatedWord("connection.resetPassword")}</div>
+      <div className="login-page-text">{getTranslatedWord("connection.enterNewPassword")}</div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent //Temporaire, il faudrait que l'e-mail soit passé en parametre et récupéré dans le mail du user
           name="email"
@@ -139,13 +139,13 @@ const ResetPasswordWindow = ({ showSuccess }) => {
         <Button
           styleClass="btn-connectionDefault back-color1"
           type="submit"
-          label="Send"
+          label={getTranslatedWord("connection.send")}
         />
       </form>
       <Button
         styleClass="btn-connectionDefault back-color3"
         onClick={() => openWindow("login")}
-        label="Return to connection menu"
+        label={getTranslatedWord("connection.returnConnection")}
       />
       <p></p>
     </div>
