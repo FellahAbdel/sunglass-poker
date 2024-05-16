@@ -172,3 +172,7 @@
 
 * 2024/05/14 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Réunion avec les développeurs et planification de la semaine </i>
 
+* 2024/05/16 : <b>1h</b> <br/> Travail individuel : <i> Surveillance projet. Les assignation pour le rendu final.
+
+* 2024/05/16 : <b>2h30</b> <br/> Travail individuel : <i> Finir le site vitrine pour Sun Games Studio. Finir le rapport de la communucation. </i>
+
