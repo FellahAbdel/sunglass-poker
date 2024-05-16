@@ -188,7 +188,9 @@
 
 2024/05/16  30min   Test sur le VM des bugs avec les paires qui détermine le mauvais gagnant ainsi que les brelan + autre cartes 
 
+2024/05/16  3H      Reunion discord avec Victor puis ensuite avec Noé en plus pour tester parler des bugs regler des problèmes gèrer la suite etc...
 
---2024/05 SEMAINE 2: 20H30 (TOTAL: 134H)
 
-TEMPS TOTAL: 134H
+--2024/05 SEMAINE 2: 23H30 (TOTAL: 137H)
+
+TEMPS TOTAL: 137H
