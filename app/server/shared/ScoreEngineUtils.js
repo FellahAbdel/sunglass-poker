@@ -28,7 +28,7 @@ function second(playerCombinationList) {
   let biggerHands = [...playerCombinationList];
 
   for (let i=0; i < biggerHands[0].hand.length; i++) {
-    biggerHands = maximums(biggerHands, (ob) => ob.hand[i]);
+    biggerHands = maximums(biggerHands, (ob) => ob.hand[i].number);
     if (biggerHands.length === 1) break;
   }
 
