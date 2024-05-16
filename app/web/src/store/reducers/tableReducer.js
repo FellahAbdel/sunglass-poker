@@ -28,10 +28,11 @@ const emptyState = {
   players: [],
   gameStarted: false,
   gameCreated: false,
+  playerSited: false,
 };
 const initialState = loadStateFromSessionStorage() || emptyState; 
 
-
+console.log("initialState", initialState);
 const tableReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.GAME_STARTED:
@@ -68,8 +69,10 @@ const tableReducer = (state = initialState, action) => {
         ...state,
         gameCreated: true,
         gameStarted: true,
+        playerSited: true,
         players: action.payload.players,
       };
+      console.log("newStateSitted", newStateSitted);
       saveStateToSessionStorage(newStateSitted);
       return newStateSitted;
     case actions.LEFT_ROOM:
