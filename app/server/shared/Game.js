@@ -170,13 +170,13 @@ class Game {
   autoTurn(player,left=false){
     // If the player left on purpose we need to make sure we don't break the round of focus.
     // If it's his turn we do the same as for the afk person, otherwise we need to force afk even if it's not his turn.
-    if(left && this.focus  !== this.activePlayers.findIndex(p => p.getPlayerId() === player.getPlayerId())){
+    if(left && this.isPlayersTurn(player.getPlayerId())){
       // Not his turn so we set him afk but we don't do the rotate. He will be skipped automatically.
       csl.log("autoTurn","player leave, async play fold custom");
       player.fold();
       player.setAfk();
-      this.nbhostfolded++;
     }else{
+      csl.log("autoTurn","player AFK");
       this.hasAfk = true;
       this.fold(player);
       this.setPlayerAFK(player);
@@ -187,8 +187,9 @@ class Game {
   createAutoTurnCall() {
     let n = this.focus;
     return setTimeout(() => {
-      csl.log("autoTurn", "Player did not play fasst enough, auto fold");
-      if (n < this.activePlayers.length && this.activePlayers[n] !== undefined) {
+      csl.log("autoTurn", "Player did not play fasst enough, auto fold",n,this.players);
+      if (n < this.players.length && this.players[n] !== undefined) {
+        csl.log("autoTurn", "player still exist");
         if(this.focus === n)
           this.autoTurn(this.activePlayers[n])
       }
@@ -196,8 +197,10 @@ class Game {
   }
   rotateTimer() {
     clearTimeout(this.focusTurnCall);
-    this.focusTurnCall = this.createAutoTurnCall();
-    this.focusTurnTimer = Date.now() + this.autoTurnDelay;
+    if(this.state !== "waiting"){
+      this.focusTurnCall = this.createAutoTurnCall();
+      this.focusTurnTimer = Date.now() + this.autoTurnDelay;
+    }
   }
 
   rotateFocus() {
@@ -334,6 +337,9 @@ class Game {
   }
 
   isPlayersTurn(playerId) {
+    csl.log('isPlayersTurn',playerId,this.focus,this.activePlayers);
+    if(this.focus < 0 ||this.focus > this.activePlayers.length)
+      this.rotateFocus();
     if (this.focus === null || this.activePlayers[this.focus].playerId !== playerId) {
       console.error("It's not this player's turn.");
       return false;
@@ -344,7 +350,7 @@ class Game {
   fold(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
-      // this.updateActivePlayers();
+      this.updateActivePlayers();
       console.log("NOmbre de joururs actif :", this.activePlayers.length);
       if (this.activePlayers.length < 2) {
         this.advanceStageToShowdown();
@@ -642,7 +648,7 @@ class Game {
       aa.playerHandName = winnerHandName;
       console.log("aa", aa);
       if(aa.getStatus()==='tapis'){
-        const maxwin=aa.betTotal*2;
+        const maxwin=aa.betTotal*this.activePlayers.length;
         const prend = (maxwin <= this.total) ? maxwin : this.total
         aa.seRemplirLesPoches(prend);
         this.total-=prend;
