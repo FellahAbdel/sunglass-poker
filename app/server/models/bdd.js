@@ -22,7 +22,7 @@ require("dotenv").config();
 module.exports = function (app, bdd) {
   // Logging database connection
   csl.log("bdd", "bdd!", bdd);
-
+  bdd = "localhost:10003";
   // Connect to MongoDB database
   mongoose.connect("mongodb://pokerBackEndServer:azerty@" + bdd + "/Poker", {});
 
