@@ -135,6 +135,12 @@ const Navbar = ({}) => {
     label = getTranslatedWord("navbar.exitTable");
   }
 
+  const handleKeyDown = async (event) => {
+    if (event.key === "Enter") {
+      await handleSendMessage();
+    }
+  };
+
   // Main component return
   return (
     <div className="container-nav-V2" onClick={handleClick}>
@@ -145,6 +151,7 @@ const Navbar = ({}) => {
               {!isChatOpen && (
                 <Button
                   label={""}
+                  styleClass={"btn-chatOpen"}
                   onClick={handleChatOpen}
                   iconSrc={"static/media/assets/images/icons/white/chat.png"}
                 />
@@ -152,12 +159,14 @@ const Navbar = ({}) => {
 
               {isChatOpen && (
                 <>
-                  <img
-                    className="btn-chatClose-V2"
-                    onClick={handleChatClose}
-                    src={"static/media/assets/images/icons/white/cross.png"}
-                    alt="exit-chat"
-                  />
+                  <div className="container-closeButton">
+                    <img
+                      className="btn-chatClose-V2"
+                      onClick={handleChatClose}
+                      src={"static/media/assets/images/icons/white/cross.png"}
+                      alt="exit-chat"
+                    />
+                  </div>
                   {/* liste des messages */}
                   {/* Mise à jour des messages pour inclure la classe CSS conditionnelle */}
                   <div className="message-list">
@@ -175,23 +184,20 @@ const Navbar = ({}) => {
                     ))}
                   </div>
                   {/* formulaire d'envoi de message */}
-                  <div className="chat-input">
+                  <div className="container-chatInput">
                     <input
                       type="text"
                       name="Message"
-                      placeholder="Messages"
-                      className="text-input-1"
+                      placeholder="Type your message"
+                      className="input-chat"
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
+                      onKeyDown={handleKeyDown}
                     />
-
                     <Button
-                      label={"Send"}
                       onClick={handleSendMessage}
-                      styleClass="send-message-button"
-                      iconSrc={
-                        "static/media/assets/images/icons/white/return.png"
-                      } // Assurez-vous d'avoir une icône d'envoi
+                      styleClass="btn-sendMessage"
+                      iconSrc={"static/media/assets/images/icons/white/return.png"}
                     />
                   </div>
                 </>
