@@ -12,12 +12,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 10%;
 }
 .userCoinCashs {
   color: white;
   text-shadow: 0 0 15px black;
   opacity: 0.5;
+  font-size: 0.8vw;
 }
 .container-raiseButtons {
   width: 100%;
