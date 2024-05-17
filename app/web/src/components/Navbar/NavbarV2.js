@@ -35,6 +35,13 @@ const Navbar = () => {
     }
 
     dispatch(actions.leaveRoom());
+
+    if (isPlayerLeft) {
+      console.log("Player left the table successfully");
+      showHome();
+    }else{
+        console.log("Player did not leave the table successfully");
+    }
   };
 
   const {
