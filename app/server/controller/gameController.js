@@ -10,8 +10,8 @@ const store = require("../store/configStore");
 const csl = require("./intelligentLogging");
 const { userInfo } = require("os");
 const fileType = "gameController";
-csl.silenced("Status");
-csl.silenced("refreshCall");
+// csl.silenced("Status");
+// csl.silenced("refreshCall");
 
 let previousPlayerAction = {};
 

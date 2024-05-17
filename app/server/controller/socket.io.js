@@ -12,7 +12,7 @@ const hydra = require("./hydrateSpecifics"); // Hydra module for action hydratio
 const fileType = "socket.io.js";
 
 // Silencing broadcastStatus logging
-csl.silenced("broadcastStatus");
+// csl.silenced("broadcastStatus");
 
 // Duration of a session in milliseconds
 const SESSION_DURATION = 2 ** 31 - 1;

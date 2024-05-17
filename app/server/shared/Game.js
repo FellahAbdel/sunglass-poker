@@ -176,7 +176,7 @@ class Game {
    */
   setPlayerAFK(player) {
     csl.log("setPlayerAFK", "Player received:", player);
-    this.moveSpecOrPlayer(player.getPlayerId());
+    // this.moveSpecOrPlayer(player.getPlayerId());
     player.setAfk();
     if (player.playerId === this.master) {
       console.log("Le master est AFK");
@@ -196,6 +196,8 @@ class Game {
     if (left && this.isPlayersTurn(player.getPlayerId())) {
       // Not his turn so we set him afk but we don't do the rotate. He will be skipped automatically.
       csl.log("autoTurn", "player leave, async play fold custom");
+      if(this.players.findIndex(p => p.getPlayerId() === player.getPlayerId()) < this.focus)
+        this.focus--;
       player.fold();
       player.setAfk();
     } else {
@@ -291,8 +293,8 @@ class Game {
     console.log("original", originalFocus);
 
     this.focus = (this.focus + 1) % this.players.length;
-    console.log("focusapresoriginal", this.focus);
-    console.log("isACtive?", this.players[this.focus].isActive);
+    csl.log("rotateFocus","focusapresoriginal", this.focus);
+    csl.log("rotateFocus","isACtive?", this.players[this.focus].isActive);
     // Rotation du focus tant que le joueur actuel n'est pas actif
     while (
       !this.players[this.focus].isActive ||
@@ -313,7 +315,7 @@ class Game {
         return;
       }
     }
-    console.log("Le focus Après : ", this.focus);
+    csl.log("rotateFocus","Le focus Après : ", this.focus);
 
     /**
      * on ne finit un tour  que si tout le monde a payé assez ou a tapis
@@ -877,7 +879,10 @@ class Game {
           this.evaluateHands();
         }
       } else {
-        console.log("winner est undefined");
+        csl.log('evaluateHands',"He won everything",aa.name);
+        aa.seRemplirLesPoches(this.total);
+        aa.jesuislewinner();
+        this.total = 0;
       }
     }
   }
