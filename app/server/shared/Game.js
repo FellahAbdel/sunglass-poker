@@ -253,14 +253,17 @@ class Game {
       this.activePlayers.length,
       remainingPlayersCount
     );
+
     // Plus de joueur qui ne sont pas tapis alors on va jusqu'à la fin
-    if (remainingPlayersCount <= 1 && someoneTapis) {
-      // this.advanceStageToShowdown();
-      clearTimeout(this.focusTurnCall);
-      while (this.currentStage !== "showdown") {
-        this.advanceStage();
-      }
-      return;
+    if (remainingPlayersCount <= 1 && someoneTapis && 
+      ((dernierPasTapis === undefined) || (dernierPasTapis.talkedThisTurn && dernierPasTapis.currentBetTurn === this.gameCurrentBet))) {
+        
+        // this.advanceStageToShowdown();
+        clearTimeout(this.focusTurnCall);
+        while (this.currentStage !== "showdown") {
+          this.advanceStage();
+        }
+        return;
     }
 
     if (this.currentStage === "showdown" || this.currentStage === "end") {
