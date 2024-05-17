@@ -22,7 +22,8 @@ class Player {
     betTotal = 0,
     isActive = true,
     isSpectator = false,
-    isTapis = false
+    isTapis = false,
+    alreadyWon = false
   ) {
     this.playerId = playerId;
     this.name = name;
@@ -38,6 +39,8 @@ class Player {
     this.isTapis = isTapis;
     this.isSpectator = isSpectator;
     this.playerMoney = coins;
+    this.alreadyWon = alreadyWon;
+    this.alltalkedThisTurn = false;
   }
 
   setAfk() {
@@ -243,15 +246,18 @@ class Player {
   }
 
   fold() {
+    this.talkedThisTurn = true;
     this.status = "folded";
     this.isActive = false;
   }
 
   check() {
+    this.talkedThisTurn = true;
     this.status = "checked";
   }
 
   call() {
+    this.talkedThisTurn = true;
     this.status = "call";
   }
 
@@ -260,6 +266,7 @@ class Player {
   }
 
   raise() {
+    this.talkedThisTurn = true;
     this.status = "raise";
   }
 
@@ -268,6 +275,7 @@ class Player {
   }
 
   tapis(amount) {
+    this.talkedThisTurn = true;
     this.status = "tapis";
     this.currentBet = amount;
     this.currentBetTurn += amount;
@@ -277,6 +285,7 @@ class Player {
 
   bet(amount) {
     if (this.playerMoney > amount) {
+      this.talkedThisTurn = true;
       this.currentBet = amount;
       this.currentBetTurn += amount;
       this.playerMoney -= amount;
@@ -308,13 +317,17 @@ class Player {
     this.currentBet = 0;
     this.currentBetTurn = 0;
     this.isActive = true;
+    this.isAfk = false;
+    this.alreadyWon = false;
     this.cardsVisible = [false, false];
     this.status = "Playing";
     this.betTotal = 0;
+    this.talkedThisTurn = false;
     // Ajouter d'autres réinitialisations si nécessaire
   }
 
   newTurnReset() {
+    this.talkedThisTurn = false;
     this.currentBetTurn = 0;
   }
 }

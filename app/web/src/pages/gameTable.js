@@ -91,7 +91,7 @@ const GameTable = () => {
               (isWindowOpen || showWaitingMessage)? "slideDown" : "slideUp"
             }`}
           >
-            {<GameActionPanel/>}
+            {<GameActionPanelV2/>}
           </div>
 
           <div

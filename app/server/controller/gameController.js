@@ -13,9 +13,6 @@ const fileType = "gameController";
 csl.silenced("Status");
 csl.silenced("refreshCall");
 
-const log_refresh = false;
-const log_broadcast = false;
-
 let previousPlayerAction = {};
 
 module.exports = gameController = {
@@ -230,15 +227,13 @@ module.exports = gameController = {
       // Check if the specified room exists in the game state.
       if (!state.game.rooms.hasOwnProperty(room)) {
         // If the room does not exist, log an error and return.
-        if (log_broadcast)
-          csl.error("refreshCall", "Room expired or does not exist");
+        csl.error("refreshCall", "Room expired or does not exist");
         return;
       }
 
       const players = state.game.rooms[room].players;
 
       // Log the broadcast call.
-      if (log_broadcast)
         csl.log(
           "refreshCall",
           "gameController call for broadcast on ",
@@ -249,7 +244,6 @@ module.exports = gameController = {
 
       // If there are no players in the room, clear the refresh call if set.
       if (players.length == 0) {
-        if (log_broadcast)
           csl.log(
             fileType,
             "No player in room, refresh call will be removed if set."
@@ -271,7 +265,7 @@ module.exports = gameController = {
       this.io.broadcastStatus(room);
     } else {
       // If no WebSocket connection is available, log an error.
-      if (log_broadcast) csl.error(fileType, "No io to broadcast");
+      csl.error(fileType, "No io to broadcast");
     }
   },
 

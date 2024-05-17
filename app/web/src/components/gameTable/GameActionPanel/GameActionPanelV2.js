@@ -14,12 +14,12 @@ const GameActionButtons = ({}) => {
   const { getTranslatedWord } = useTranslation();
   const [coins, setCoins] = useState(playerMoney);
   const [min , setMin] = useState(20); // minimum amount to raise
-  const [max , setMax] = useState(coins); // maximum amount to raise set to coins
+  const [max , setMax] = useState(playerMoney); // maximum amount to raise set to coins
   const [step , setStep] = useState(Math.floor(coins / 10)); // toggle coin steps : setted to 10% of the coins
   const [amount, setAmount] = useState(min); //amount to raise
   const [showPopup, setShowPopup] = useState(false); // popUp to show raise panel
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(0); // calculating the amount that player will be left after the raise to show before
-  const [raiseConfirmed, setRaiseConfirmed] = useState(false); // New state variable to track confirmation  
+  // const [raiseConfirmed, setRaiseConfirmed] = useState(false); // New state variable to track confirmation  
   const dispatch = useDispatch();
 
 
@@ -27,13 +27,10 @@ const GameActionButtons = ({}) => {
     return new Intl.NumberFormat().format(number);
   };
 
-  const [amountInput, setAmountInput] = useState(formatNumber(min));
-
   const handleIncrement = () => {
     setAmount((prevAmount) => {
       const newAmount = Math.min(prevAmount + step, max);
       setCoinsAfterRaise(coins - newAmount);
-      setAmountInput(formatNumber(newAmount));
       return newAmount;
     });
   };
@@ -42,42 +39,41 @@ const GameActionButtons = ({}) => {
     setAmount((prevAmount) => {
       const newAmount = Math.max(prevAmount - step, min);
       setCoinsAfterRaise(coins - newAmount);
-      setAmountInput(formatNumber(newAmount));
       return newAmount;
     });
   };
 
   const handleChange = (event) => {
-    const newAmount = event.target.value.replace(/,/g, '');
-    if (/^\d*$/.test(newAmount)) { // Ensure only non-decimal numbers are allowed
-      setAmountInput(newAmount === '' ? '' : formatNumber(newAmount));
-      setAmount(newAmount === '' ? '' : Number(newAmount));
+    const input = event.target.value;
+    // Remove commas for parsing
+    const newAmount = parseInt(input.replace(/,/g, ''), 10);
+    if (!isNaN(newAmount)) { // Only update if the parsed value is a valid number
+        setAmount(newAmount); // Update the actual number
     }
-  };
+    console.log("handleChange amount:", amount);
+    console.log("handleChange newAmount:", newAmount);
+};
 
   const handleBet = (amount) => {
-    console.log("amount :", amount);
+    console.log("handleBet amount :", amount);
     amount = Math.round(amount);
     dispatch(actions.bet(amount));
     setAmount(amount);
   };
 
   const handleRaise = () => {
-    if ()
     if (!showPopup) {
       setShowPopup(true);
-      setRaiseConfirmed(false); // Reset raise confirmation
     } else {
-      const validatedAmount = Math.max(min, Math.min(max, amount));
-      setAmount(validatedAmount);
-      setAmountInput(formatNumber(validatedAmount));
-      
-
-      if (raiseConfirmed) {
-        const totalAmount = validatedAmount + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
-        handleBet(totalAmount); // Second click: perform the raise
+      if (amount < min || amount > max) {
+        const validatedAmount = Math.max(min, Math.min(max, amount));
+        setAmount(validatedAmount);
+      }
+      else{
+        const totalAmount = amount + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
+        handleBet(totalAmount);
+        setAmount(min);
         setShowPopup(false);
-        setRaiseConfirmed(false); // Reset raise confirmation
       }
     }
   };
@@ -137,7 +133,10 @@ const GameActionButtons = ({}) => {
       setCoins(playerMoney);
     }, [playerMoney]);  
 
-    console.log("raise coins:", amount);
+    useEffect(() => {
+      setMax(coins);
+      setStep(Math.floor(coins / 10));
+    }, [coins]);
 
   return (
     <div className="container-gameAction">
@@ -161,7 +160,7 @@ const GameActionButtons = ({}) => {
             />
             <Button
               styleClass={"btn-mainAction"}
-              onClick={() => setAmount(min)}
+              onClick={() => setAmount(coins/4)}
               label={"1/4"}
             />
             <Button
@@ -181,20 +180,20 @@ const GameActionButtons = ({}) => {
             />
           </div>
           <div className={`container-raiseAdjuster`}>
-            <Button styleClass="btn-raiseDecrement" label={"−"} onClick={handleDecrement} disabled={amount <= min}/>
+            <Button styleClass="btn-raiseDecrement" label={"−"} onClick={handleDecrement}/>
               <input
                 type="text"
                 className="raiseValueDisplay"
                 value={amount === '' ? '' : formatNumber(amount)}
                 onChange={handleChange}
               />SC
-            <Button styleClass="btn-raiseIncrement" label={"+"} onClick={handleIncrement} disabled={amount >= max}/>
+            <Button styleClass="btn-raiseIncrement" label={"+"} onClick={handleIncrement}/>
       </div>
           </>)}
       <div className={`container-ActionButtons`}>
         {/* LEBOUTON BET */}
         <Button
-          styleClass={`btn-mainAction ${!isFocus && "disabled"} ${("isFocus" && amount !== 0 && showPopup) && "back-color1" }`}
+          styleClass={`btn-mainAction ${!isFocus && "disabled"} ${(isFocus && amount !== 0 && showPopup) && "raise" }`}
           onClick={handleRaise}
           label={`${getTranslatedWord("gameActionPanel.raise")}`}
         />
