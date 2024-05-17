@@ -15,7 +15,7 @@ const GameActionButtons = ({}) => {
   const [coins, setCoins] = useState(playerMoney);
   const [min , setMin] = useState(20); // minimum amount to raise
   const [max , setMax] = useState(playerMoney); // maximum amount to raise set to coins
-  const [step , setStep] = useState(Math.floor(coins / 10)); // toggle coin steps : setted to 10% of the coins
+  const [step , setStep] = useState(Math.floor(coins / 5)); // toggle coin steps : setted to 5% of the coins
   const [amount, setAmount] = useState(min); //amount to raise
   const [showPopup, setShowPopup] = useState(false); // popUp to show raise panel
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(0); // calculating the amount that player will be left after the raise to show before
@@ -142,12 +142,19 @@ const GameActionButtons = ({}) => {
     <div className="container-gameAction">
       <div className="container-cashSituation">
         <div className="userCoinCashs">
-          {getTranslatedWord("gameActionPanel.currentSC")}: {coins}
+          {getTranslatedWord("gameActionPanel.currentSC")}:{" "}
+          {formatNumber(coins)}
         </div>
+        {showPopup && gamePlayerCurrentBet && (coinsAfterRaise || amount) && (
+          <div className="userCoinCashs">
+            {getTranslatedWord("gameActionPanel.totalRaise")}:{" "}
+            {formatNumber(gamePlayerCurrentBet + amount)}
+          </div>
+        )}
         {showPopup && (coinsAfterRaise || amount) && (
           <div className="userCoinCashs">
             {getTranslatedWord("gameActionPanel.afterSC")}:{" "}
-            {(coinsAfterRaise)}
+            {formatNumber(coinsAfterRaise)}
           </div>
         )}
       </div>
