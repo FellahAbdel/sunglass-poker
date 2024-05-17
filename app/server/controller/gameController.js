@@ -103,10 +103,12 @@ module.exports = gameController = {
         // Check if the user is already in a game.
         if (
           userInfos.inGame !== undefined &&
-          userInfos.inGame !== null &&
-          userInfos.inGame.toString() !== id
+          userInfos.inGame !== null
         ) {
-          return { status: false, mes: "User already in a game." };
+          // he's in a game, we check if it's a game that exist on our side and if it's this one
+          if(userInfos.inGame.toString() !== id &&
+          state.game.rooms.hasOwnProperty(userInfos.inGame.toString()))
+            return { status: false, mes: "User already in a game." };
         }
 
         // Dispatch the sit action for the user.
