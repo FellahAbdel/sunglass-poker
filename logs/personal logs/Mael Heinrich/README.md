@@ -190,7 +190,9 @@
 
 2024/05/16  3H      Reunion discord avec Victor puis ensuite avec Noé en plus pour tester parler des bugs regler des problèmes gèrer la suite etc...
 
+2024/05/17  1H      Test avec victor du nouveaurotatefocus et des dernier push, ça a l'air plus stable
 
---2024/05 SEMAINE 2: 23H30 (TOTAL: 137H)
 
-TEMPS TOTAL: 137H
+--2024/05 SEMAINE 2: 24H30 (TOTAL: 138H)
+
+TEMPS TOTAL: 138H
