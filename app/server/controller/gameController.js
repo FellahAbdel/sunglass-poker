@@ -202,7 +202,7 @@ module.exports = gameController = {
     // If the player was successfully removed.
     if (reponse.status) {
       // Update database to reflect player leaving the game.
-      this.dao.playerLeftGame(id);
+      this.dao.playerLeftGame(id, room);
 
       // Set up refresh for the room.
       this.makeRefreshCall(room);
