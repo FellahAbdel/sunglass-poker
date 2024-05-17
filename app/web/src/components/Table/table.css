@@ -151,6 +151,14 @@
   width: 50vw;
   height: 45vh;
 }
+
+.container-loading {
+  min-width: 25vw;
+  width: 25vw;
+  height: 25vw;
+  border-radius: 30vw;
+}
+
 .container-profile {
   width: 65vw;
   height: 50vh;
@@ -390,9 +398,13 @@
 }
 .container-ranking .box-onGameNotif.visible {
   bottom: -15%;
+  opacity: 1;
+
 }
 .container-settings .box-onGameNotif.visible {
   bottom: -20%;
+  opacity: 1;
+
 }
 .container-shop .box-onGameNotif.visible,
 .container-profile .box-onGameNotif.visible,
@@ -400,6 +412,8 @@
 .container-alert .box-onGameNotif.visible,
 .container-validation .box-onGameNotif.visible {
   bottom: -25%;
+  opacity: 1;
+
 }
 .box-onGameNotif {
   position: absolute;
@@ -408,4 +422,5 @@
   color: white;
   font-size: 1.5vw;
   transition: bottom 1s ease;
+  opacity: 0;
 }

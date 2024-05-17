@@ -109,6 +109,7 @@ const Table = ({}) => {
             ? getTranslatedWord(`messageLogo.${windowType}`)
             : ""
         }`}
+        loading = {windowType==="loading"}
       />
     </div>
   );

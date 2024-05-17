@@ -18,6 +18,8 @@ import ValidationWindow from "./WindowContent/shopWindows/ValidationWindow";
 import AcceuilWindow from "./WindowContent/AcceuilWindow";
 import AlertWindow from "./WindowContent/AlertWindow";
 import RankingWindow from "./WindowContent/RankingWindow";
+import LoadingWindow from "./WindowContent/LoadingWindow";
+
 
 import { useWindowContext } from "../Utiles/WindowContext";
 
@@ -51,6 +53,7 @@ const Window = () => {
         {windowType === "alert" && <AlertWindow />}
         {windowType === "ranking" && <RankingWindow />}
         {windowType === "coins" && <BuyCoinsWindow />}
+        {windowType === "loading" && <LoadingWindow />}
       </div>
     </div>
   );

@@ -99,7 +99,6 @@ const ListTableItem = ({
           <Button
             label={getTranslatedWord("serverPanel.full")}
             styleClass="btn-list_table btn-list_table_full"
-            disabled
           />
         )}
       </div>

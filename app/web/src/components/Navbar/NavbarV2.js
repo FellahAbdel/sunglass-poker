@@ -201,7 +201,7 @@ const Navbar = () => {
         <Button
           label={getTranslatedWord("navbar.settings")}
           onClick={() => openWindow("settings")}
-          styleClass={`${isLogged ? "btn-settings-V2 " : "btn-settings-V2 "}`}
+          styleClass={`btn-settings-V2`}
           iconSrc="static/media/assets/images/icons/white/settings.png"
         />
 

@@ -14,7 +14,7 @@ const ServerPanelWindow = () => {
   const dispatch = useDispatch();
   const { getTranslatedWord } = useTranslation();
 
-  const { closeWindow, showGameTable, setWindowType } = useWindowContext();
+  const { closeWindow, showGameTable, setWindowType , openWindow } = useWindowContext();
 
   const { getRoomTableRecords, isLogged } = useAuth();
   const [roomTableRecords, setRoomTableRecords] = useState([]);
@@ -25,7 +25,6 @@ const ServerPanelWindow = () => {
   const [searchText, setSearchText] = useState("");
 
   const isPlayerSited = useSelector((state) => state.game.playerSited);
-  const [isJoining, setIsJoining] = useState(false);
 
   const displayGameRoom = () => {
     // Your logic to display the game room goes here
@@ -37,7 +36,7 @@ const ServerPanelWindow = () => {
   useEffect(() => {
     if (isPlayerSited) {
       displayGameRoom();
-      console.log("playerSited (useEffect)", isPlayerSited);
+      console.log("playerSited", isPlayerSited);
     }
   }, [isPlayerSited]);
 
@@ -112,19 +111,13 @@ const ServerPanelWindow = () => {
   console.log("roomsTableRecords : ", roomTableRecords); // Log the fetched roomTableRecords data to the console
 
   const handleJoinTable = (id) => {
-    // Logique pour rejoindre une table à faire
     if (isLogged) {
-      console.log("Le joueur veut rejoindre la partie (fellah) ", id);
+      console.log("Attempting to join room with ID:", id);
+      openWindow("loading");
       dispatch(actions.joinRoom(id));
-
-      // TODO :
-      // il faudra qu'on informe le joueur que sa demande a bien été prise en compte
-      // et qu'il est en attente de la réponse du serveur.
       if (isPlayerSited) {
-        setIsJoining(false);
         displayGameRoom();
       } else {
-        setIsJoining(true);
         console.log("server hasn't responded yet");
       }
     }
@@ -171,7 +164,6 @@ const ServerPanelWindow = () => {
             onJoinClick={() => handleJoinTable(table._id)}
             nombreDeJoueurs={table.players.length}
             ouvert={table.roomPassword ? false : true}
-            joining={isJoining}
           />
         ))}
       </div>
