@@ -192,7 +192,8 @@
 
 2024/05/17  1H      Test avec victor du nouveaurotatefocus et des dernier push, ça a l'air plus stable
 
+2024/05/18  2H      Test et correction de bugs en vocal avec victor et noé, check de se qu il reste a faire etc...
 
---2024/05 SEMAINE 2: 24H30 (TOTAL: 138H)
+--2024/05 SEMAINE 2: 26H30 (TOTAL: 140H)
 
-TEMPS TOTAL: 138H
+TEMPS TOTAL: 140H
