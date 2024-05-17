@@ -162,6 +162,14 @@ Button:hover {
   background-color: white;
   color: black;
 }
+.btn-mainAction.raise{
+  border: unset;
+  background: var(--gradient-red);
+}
+.btn-mainAction.call{
+  border: unset;
+  background: var(--gradient-green);
+}
 @media (max-height: 500px) {
   .btn-mainAction {
     font-size: 2.5vh;
@@ -173,10 +181,11 @@ Button:hover {
   color: aliceblue;
   border-radius: 10px;
   font-weight: 600;
-  font-size: 1.5vh;
-  height: 4vh;
-  width: 7vw;
-  padding: 0;
+  font-size: calc(0.5vh+0.5vw);
+  height: fit-content;
+  width: fit-content;
+  min-width: 7vw;
+  padding: 5%;
   cursor: pointer;
   margin-bottom: unset;
   box-shadow: unset;

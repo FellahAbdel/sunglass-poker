@@ -5,8 +5,8 @@ import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
 
-const ForgotPassword = ({ showSuccess }) => {
-  const { openWindow } = useWindowContext();
+const ForgotPassword = ({}) => {
+  const { openWindow, openSuccessWindow } = useWindowContext();
   const { checkEmail } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
@@ -26,23 +26,21 @@ const ForgotPassword = ({ showSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      // Effectuer la vérification de l'e-mail en utilisant la fonction de AuthProvider
       const result = await checkEmail(formData.email);
 
+      console.log("Resultats :", result);
+
       if (result === true) {
-        showSuccess("Reset password email sent successfully.");
+        openSuccessWindow(getTranslatedWord("connection.successMail"));
       } else if (result === "not-found") {
-        // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
-        setValidationError("Email not found");
+        setValidationError("error.emailNotFound");
       } else {
-        // Autres erreurs
         console.error("Failed to found the mail.");
+        setValidationError("error.emailNotFound");
       }
     } catch (error) {
       console.error("Error:", error);
-      // Afficher le message d'erreur à l'utilisateur
       setValidationError(
         "Failed to send reset password email. Please check your email address."
       );
@@ -75,7 +73,7 @@ const ForgotPassword = ({ showSuccess }) => {
           styleClass="btn-connectionDefault button login-button back-color3"
           type="temporary"
           onClick={() => openWindow("reset")}
-          label="TEMPORARY BUTTON"
+          label={getTranslatedWord("connection.temporary")}
         />
       </form>
       <Button

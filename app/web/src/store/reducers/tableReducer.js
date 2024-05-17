@@ -24,12 +24,16 @@ const loadStateFromSessionStorage = () => {
   }
 };
 
-const initialState = loadStateFromSessionStorage() || {
+const emptyState = {
   players: [],
   gameStarted: false,
   gameCreated: false,
+  playerSited: false,
+  playerLeft: false,
 };
+const initialState = loadStateFromSessionStorage() || emptyState; 
 
+console.log("initialState", initialState);
 const tableReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.GAME_STARTED:
@@ -66,8 +70,11 @@ const tableReducer = (state = initialState, action) => {
         ...state,
         gameCreated: true,
         gameStarted: true,
+        playerSited: true,
+        playerLeft: false,
         players: action.payload.players,
       };
+      console.log("newStateSitted", newStateSitted);
       saveStateToSessionStorage(newStateSitted);
       return newStateSitted;
     case actions.LEFT_ROOM:
@@ -75,7 +82,11 @@ const tableReducer = (state = initialState, action) => {
       sessionStorage.removeItem("tableState");
       return {
         ...initialState,
+        playerLeft: true,
       };
+    case actions.EMPTY_PAYLOAD:
+        console.log('EMPTY PAYLOAD');
+        return emptyState;
     default:
       console.log("Table reducer called");
       return state;

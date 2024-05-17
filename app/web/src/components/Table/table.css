@@ -158,8 +158,8 @@
 }
 .container-settings {
   border-radius: 10vw;
-  width: 30vw;
-  height: 50vh;
+  width: 32vw;
+  height: 52vh;
 }
 .container-login,
 .container-register,
@@ -239,7 +239,7 @@
 #light .container-coins {
   width: 35vw;
   height: 60vh;
-  border-radius: 10vw;
+  border-radius: 6vw;
   background: unset;
   background-color: #282828;
 }
@@ -408,17 +408,4 @@
   color: white;
   font-size: 1.5vw;
   transition: bottom 1s ease;
-}
-.container-waiting {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1vh;
-  z-index: 1;
-}
-.txt-waiting {
-  font-size: 2vw;
-  color: white;
 }

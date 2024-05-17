@@ -5,7 +5,7 @@ import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../Utiles/Translations";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import TextInputComponent from "../../textInput/TextInput.jsx";
@@ -24,12 +24,29 @@ const ServerPanelWindow = () => {
 
   const [searchText, setSearchText] = useState("");
 
+  const isPlayerSited = useSelector((state) => state.game.playerSited);
+  const [isJoining, setIsJoining] = useState(false);
+
+  const displayGameRoom = () => {
+    // Your logic to display the game room goes here
+    console.log("Game room displayed!");
+    showGameTable();
+    closeWindow();
+    setWindowType("");
+  };
+  useEffect(() => {
+    if (isPlayerSited) {
+      displayGameRoom();
+      console.log("playerSited (useEffect)", isPlayerSited);
+    }
+  }, [isPlayerSited]);
+
   //Gère le nombre de tables affichées par page
   useEffect(() => {
     const updateRecordsPerPage = () => {
       const windowHeight = window.innerHeight;
       const tableItemHeight = 130;
-      const maxRecordsPerPage = Math.floor(windowHeight / tableItemHeight);
+      const maxRecordsPerPage = Math.floor((windowHeight*0.90) / tableItemHeight);
       setRecordsPerPage(maxRecordsPerPage);
     };
 
@@ -91,7 +108,6 @@ const ServerPanelWindow = () => {
   }, [searchText]); //Mise à jour à chaque fois que le texte est changé
 
   console.log("roomsTableRecords : ", roomTableRecords); // Log the fetched roomTableRecords data to the console
-  const { openWindow } = useWindowContext();
 
   const handleJoinTable = (id) => {
     // Logique pour rejoindre une table à faire
@@ -102,9 +118,13 @@ const ServerPanelWindow = () => {
       // TODO :
       // il faudra qu'on informe le joueur que sa demande a bien été prise en compte
       // et qu'il est en attente de la réponse du serveur.
-      showGameTable();
-      closeWindow();
-      setWindowType("");
+      if (isPlayerSited) {
+        setIsJoining(false);
+        displayGameRoom();
+      }else {
+        setIsJoining(true);
+        console.log("server hasn't responded yet");
+      }
     }
   };
 
@@ -148,6 +168,7 @@ const ServerPanelWindow = () => {
             onJoinClick={() => handleJoinTable(table._id)}
             nombreDeJoueurs={table.players.length}
             ouvert={table.roomPassword ? false : true}
+            joining={isJoining}
           />
         ))}
       </div>

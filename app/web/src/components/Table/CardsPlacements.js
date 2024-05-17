@@ -2,15 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import Card from "../gameTable/Card/Card";
 import useAudio from "../../hooks/useAudio";
 import { useGameTable } from "../Utiles/GameTableProvider";
+import useDeepEffect from "../../hooks/useDeepEffect"
 
-const CardsPlacements = ({}) => {
+const CardsPlacements = () => {
   // const playersInTable = useSelector((state) => state.game.activePlayers);
   const { communityCards } = useGameTable();
   const [flipped, setFlipped] = useState(communityCards.map(() => false)); // to stop the transition animation to happend more than once
   //playersCardDistributed for each player
   // *** also has been used in PlayersPlacements component
   // *** here only for animation purposes
-  const [playing, togglePlay] = useAudio("static/media/assets/sounds/soundEffect-card1.mp3");
+  // const [playing, togglePlay] = useAudio("static/media/assets/sounds/soundEffect-card1.mp3");
   const timeoutRefs = useRef([]);
 
   // useEffect(() => {
@@ -20,9 +21,17 @@ const CardsPlacements = ({}) => {
   // const initialDistribution = Array.from({length: 10}, (_, i) => i < playersInTable.length);
   // const playersCardDistributed = useState(initialDistribution);
 
-  const [playersCardDistributed, setPlayersCardDistributed] = useState([
+  const [playersCardDistributed] = useState([
     1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
+
+  // const updateDealingFlopIfChanged = (newFlop) => {
+  //   setDealingFlop((prevFlop) => {
+  //     // Check if the new flop is different from the previous
+  //     const isDifferent = newFlop.some((item, index) => item !== prevFlop[index]);
+  //     return isDifferent ? newFlop : prevFlop;
+  //   });
+  // };
   // {
   /*DISTRIBUTION ANIMATION :
   in CardPlacements you have the distribution
@@ -37,17 +46,34 @@ const CardsPlacements = ({}) => {
   //   fifth one   = turn  -> dealingFlop[2]
   // const [dealingFlop, setDealingFlop] = useState([false,false,false,false,false]);
 
+  const cardFlipSounds = [
+    "static/media/assets/sounds/soundEffect-card1.mp3",
+    "static/media/assets/sounds/soundEffect-card1.mp3",
+    "static/media/assets/sounds/soundEffect-card1.mp3",
+    "static/media/assets/sounds/soundEffect-card1.mp3",
+    "static/media/assets/sounds/soundEffect-card1.mp3"  ];
+
+  const [playing, togglePlay] = useAudio(cardFlipSounds);
+
+
   // Initialize dealingFlop from local storage or set to default if not available
   const [dealingFlop, setDealingFlop] = useState(() => {
     const saved = localStorage.getItem("dealingFlop");
     return saved ? JSON.parse(saved) : [false, false, false, false, false];
   });
 
-  // Store dealingFlop in local storage whenever it changes
-  useEffect(() => {
+  // useDeepEffect(() => {
+  //   dealingFlop.forEach((flop, index) => {
+  //       if (flop) {
+  //           togglePlay(index); 
+  //       }
+  //   });
+  // }, [dealingFlop]); 
+
+
+  useDeepEffect(() => {
     localStorage.setItem("dealingFlop", JSON.stringify(dealingFlop));
     setFlipped(flipped.map((f, index) => f || dealingFlop[index]));
-    togglePlay();
   }, [dealingFlop]);
 
   // Update dealingFlop based on communityCards with sequential timing
@@ -64,7 +90,6 @@ const CardsPlacements = ({}) => {
         setDealingFlop((prev) =>
           prev.map((item, idx) => (idx === index ? card !== null : item))
         );
-        // togglePlay(index);  // Play sound when the card is revealed
       }, 1000 * index);
       timeoutRefs.current.push(timeout);
     });

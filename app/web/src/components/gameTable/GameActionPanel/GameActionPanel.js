@@ -23,15 +23,15 @@ const GameActionButtons = ({}) => {
   //sliderValue text -> percentage of the raise
   const dispatch = useDispatch();
   const [sliderValueText, setSliderValueText] = useState();
-  const { user } = useUserData();
+  // const { user } = useUserData();
   const [coins, setCoins] = useState(playerMoney);
   const [raiseCoin, setRaiseCoin] = useState(0);
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(coins);
   const [amount, setAmount] = useState(0);
 
-  let checkOrCall = checkValue
-    ? getTranslatedWord("gameActionPanel.check")
-    : getTranslatedWord("gameActionPanel.call");
+  // let checkOrCall = checkValue
+  //   ? getTranslatedWord("gameActionPanel.check")
+  //   : getTranslatedWord("gameActionPanel.call");
 
   useEffect(() => {
     const newRaiseCoin = (coins * sliderValueText) / 100;
@@ -59,10 +59,18 @@ const GameActionButtons = ({}) => {
   // Met à jour la valeur du bouton "Check" ou "Call" en fonction de gameCurrentBet
   const getCheckOrCallLabel = () => {
     if (gameCurrentBet > 0) {
-      return `${getTranslatedWord(
-        "gameActionPanel.call"
-        //----------------------------------------------------AJOUT LA SOUSTRACTION DU BET DU JOUEUR ACUTELLE
-      )} ${gameCurrentBet - gamePlayerCurrentBet} SC`;
+      //le cas du tapis de ce qui me reste
+      if(playerMoney<(gameCurrentBet-gamePlayerCurrentBet)){
+        return `${getTranslatedWord(
+          "gameActionPanel.call"
+        )} ${playerMoney} SC`;
+      }
+      //le cas classic du call
+      else{
+        return `${getTranslatedWord(
+          "gameActionPanel.call"
+          )} ${gameCurrentBet - gamePlayerCurrentBet} SC`;
+      }
     } else {
       return getTranslatedWord("gameActionPanel.check");
     }
@@ -70,9 +78,13 @@ const GameActionButtons = ({}) => {
 
   const handleCheckOrCall = () => {
     if (gameCurrentBet > 0) {
-      // Si il y a un currentBet, effectue une action "Call"
-      //-----------------------------------------------------------------------LA AUSSI
-      dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
+      //le tapis de ce qui reste
+      if (playerMoney < (gameCurrentBet - gamePlayerCurrentBet)) {
+        dispatch(actions.bet(playerMoney));
+      } else {
+        // Le cas classique du call
+        dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
+      }
     } else {
       // Sinon, effectue une action "Check"
       dispatch(actions.check());
@@ -93,11 +105,9 @@ const GameActionButtons = ({}) => {
     } else {
       setShowPopup(false);
       if (raiseCoin !== 0) {
-        if (gamePlayerCurrentBet >= gameCurrentBet) handleBet(raiseCoin);
-        else handleBet(raiseCoin + (gameCurrentBet - gamePlayerCurrentBet));
+        const totalAmount = raiseCoin + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
+        handleBet(totalAmount);
       }
-      // setRaiseCoin(0);
-      // setCoins(coinsAfterRaise);
     }
   };
 
@@ -168,7 +178,7 @@ const GameActionButtons = ({}) => {
           label={`${getTranslatedWord("gameActionPanel.raise")} ${
             !isFocus && amount !== 0
               ? `${Math.round(amount)} SC`
-              : `${raiseCoin ? Math.round(raiseCoin) + " SC" : ""}`
+              : `${raiseCoin ? Math.round(raiseCoin + Math.max(0, gameCurrentBet - gamePlayerCurrentBet)) + " SC" : ""}`
           }`}
         />
 

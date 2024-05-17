@@ -10,10 +10,10 @@ import {
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
 
-const ResetPasswordWindow = ({ showSuccess }) => {
+const ResetPasswordWindow = ({}) => {
   const { getTranslatedWord } = useTranslation();
-  const { openWindow } = useWindowContext();
-  const { updateUserData } = useAuth();
+  const { openWindow, openSuccessWindow } = useWindowContext();
+  const { changePassword } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -33,7 +33,6 @@ const ResetPasswordWindow = ({ showSuccess }) => {
       [e.target.name]: e.target.value,
     });
 
-    // Réinitialiser le message d'erreur associé au champ modifié
     setValidationErrors((prevErrors) => ({
       ...prevErrors,
       [e.target.name]: "",
@@ -42,25 +41,21 @@ const ResetPasswordWindow = ({ showSuccess }) => {
 
   const validateForm = () => {
     const errors = {
-      pseudo: "",
       email: "",
       password: "",
       repeatPassword: "",
     };
 
-    // Validation de l'e-mail
     const emailValidation = validateEmail(formData.email);
     if (!emailValidation.isValid) {
       errors.email = emailValidation.errorMessage;
     }
 
-    // Validation du mot de passe
     const passwordValidation = validatePassword(formData.password);
     if (!passwordValidation.isValid) {
       errors.password = passwordValidation.errorMessage;
     }
 
-    // Validation de la correspondance des mots de passe
     const passwordMatchValidation = validatePasswordMatch(
       formData.password,
       formData.repeatPassword
@@ -70,8 +65,6 @@ const ResetPasswordWindow = ({ showSuccess }) => {
     }
 
     setValidationErrors(errors);
-
-    // Vérifie si tous les champs sont valides
     return Object.values(errors).every((error) => error === "");
   };
 
@@ -82,23 +75,17 @@ const ResetPasswordWindow = ({ showSuccess }) => {
 
     if (validateForm()) {
       try {
-        // Utilisez la fonction générique pour mettre à jour le mot de passe dans la base de données
-        const result = await updateUserData(
-          "password",
-          password,
-          "email",
-          email
-        );
+        const result = await changePassword(email, password);
 
         if (result === true) {
-          showSuccess("Password changed!");
+          openSuccessWindow(getTranslatedWord("connection.successReset"));
         } else {
           console.error("Error changing password:", result.error);
-          validationErrors.email = "Email not found";
+          setValidationErrors("error.emailNotFound");
         }
       } catch (error) {
         console.error("Error changing password:", error);
-        validationErrors.email = "Email not found";
+        setValidationErrors("error.emailNotFound");
       }
     } else {
       console.error("Form validation failed");
@@ -107,10 +94,14 @@ const ResetPasswordWindow = ({ showSuccess }) => {
 
   return (
     <div className="box">
-      <div className="login-page-title">Reset your password</div>
-      <div className="login-page-text">Enter your new password here :</div>
+      <div className="login-page-title">
+        {getTranslatedWord("connection.resetPassword")}
+      </div>
+      <div className="login-page-text">
+        {getTranslatedWord("connection.enterNewPassword")}
+      </div>
       <form onSubmit={handleSubmit} className="myForm">
-        <TextInputComponent //Temporaire, il faudrait que l'e-mail soit passé en parametre et récupéré dans le mail du user
+        <TextInputComponent
           name="email"
           value={formData.email}
           onChange={handleChange}
@@ -139,15 +130,14 @@ const ResetPasswordWindow = ({ showSuccess }) => {
         <Button
           styleClass="btn-connectionDefault back-color1"
           type="submit"
-          label="Send"
+          label={getTranslatedWord("connection.send")}
         />
       </form>
       <Button
         styleClass="btn-connectionDefault back-color3"
         onClick={() => openWindow("login")}
-        label="Return to connection menu"
+        label={getTranslatedWord("connection.returnConnection")}
       />
-      <p></p>
     </div>
   );
 };

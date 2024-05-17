@@ -13,8 +13,6 @@ const CORSSETTINGS = {
   },
 };
 
-
-
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
   const { showHome } = useWindowContext();
@@ -103,15 +101,12 @@ export const AuthProvider = ({ children }) => {
 
   const getRoomTableRecords = async (token) => {
     try {
-      const response = await fetch(
-        "api/gameRoomDescription",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch("api/gameRoomDescription", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch roomTableRecords");
       } else {
@@ -136,44 +131,34 @@ export const AuthProvider = ({ children }) => {
     return state.user;
   };
 
-  const updateUserData = async (
-    field,
-    value,
-    identifierType = "pseudo",
-    identifierValue
-  ) => {
+  const updateUserData = async (field, value, identifierType = "pseudo", identifierValue) => {
     try {
       const isEmailIdentifier = identifierType === "email";
-      // Utilisation de state.isLogged et state.user pour vérifier la connexion et accéder aux informations utilisateur
       if (!isEmailIdentifier && (!state.isLogged || !state.user)) {
         console.error("User not logged in.");
         return;
       }
-
+  
       const identifierField = isEmailIdentifier ? "email" : "pseudo";
-      // Utilisation de state.user pour déterminer la valeur d'identifiant si nécessaire
-      const identifier = isEmailIdentifier
-        ? identifierValue
-        : state.user[identifierField];
-
-      const response = await fetch(
-        "api/update-user-data",
-        {
-          ...CORSSETTINGS,
-          headers: getAuthHeaders(),
-          body: JSON.stringify({
-            field,
-            value,
-            identifierType,
-            identifierValue: identifier,
-          }),
-        }
-      );
-
+      const identifier = isEmailIdentifier ? identifierValue : state.user[identifierField];
+  
+      const response = await fetch("api/update-user-data", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          ...getAuthHeaders(),
+        },
+        body: JSON.stringify({
+          field,
+          value,
+          identifierType,
+          identifierValue: identifier,
+        }),
+      });
+  
       const data = await response.json();
-
+  
       if (data.success) {
-        // Dispatch d'une action pour mettre à jour l'état utilisateur si la mise à jour est réussie
         dispatch({
           type: "UPDATE_USER_DATA",
           payload: { ...state.user, [field]: value },
@@ -182,9 +167,11 @@ export const AuthProvider = ({ children }) => {
         return true;
       } else {
         console.error(`Failed to update ${field}:`, data.message);
+        return { error: data.message };
       }
     } catch (error) {
       console.error(`Error updating ${field}:`, error);
+      return { error: error.message };
     }
   };
 
@@ -198,14 +185,16 @@ export const AuthProvider = ({ children }) => {
 
       const data = await response.json();
 
-      if (data.success) {
-        console.log("Reset password email sent successfully.");
+      if (response.ok) {
+        console.log("Email envoyé avec succes !");
+        return true;
       } else {
-        console.error("not-found");
-        return "not-found";
+        console.error("Mail not found");
+        return { error: data.error, field: data.field };
       }
     } catch (error) {
-      console.error("Error sending reset password email:", error);
+      console.error("Erreur lors de l'envoi du mail", error);
+      return false;
     }
   };
 
@@ -339,14 +328,11 @@ export const AuthProvider = ({ children }) => {
 
   const activateAvatar = async (itemId, itemType) => {
     try {
-      const response = await fetch(
-        `api/activate-avatar`,
-        {
-          method: "POST",
-          headers: getAuthHeaders(),
-          body: JSON.stringify({ userId: user._id, itemId, itemType }),
-        }
-      );
+      const response = await fetch(`api/activate-avatar`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ userId: user._id, itemId, itemType }),
+      });
       const data = await response.json();
       if (data.success) {
         dispatch({ type: "UPDATE_USER_AVATAR", payload: { itemId, itemType } });
@@ -413,34 +399,34 @@ export const AuthProvider = ({ children }) => {
       console.error("User not logged in.");
       return false;
     }
-  
+
     try {
       const response = await fetch("api/update-coins", {
         ...CORSSETTINGS,
         headers: getAuthHeaders(),
         body: JSON.stringify({
           userId: user._id,
-          coinsToAdd
+          coinsToAdd,
         }),
       });
-  
+
       const data = await response.json();
       if (!response.ok) {
         console.error("Failed to update coins:", data.message);
         return false;
       }
-        dispatch({
+      dispatch({
         type: "UPDATE_USER_DATA",
-        payload: { ...user, coins: data.updatedCoins }
+        payload: { ...user, coins: data.updatedCoins },
       });
-  
+
       console.log("Coins updated successfully to:", data.updatedCoins);
       return true;
     } catch (error) {
       console.error("Error updating user coins:", error);
       return false;
     }
-  };    
+  };
 
   const getAvailableRooms = async () => {
     try {
@@ -467,16 +453,16 @@ export const AuthProvider = ({ children }) => {
         ...CORSSETTINGS,
         body: JSON.stringify({
           roomId,
-          password
+          password,
         }),
       });
-  
+
       const data = await response.json();
       if (!response.ok) {
         console.error("Password verification failed:", data.message);
         return { success: false, error: data.message };
       }
-  
+
       return { success: data.success, roomId: data.roomId };
     } catch (error) {
       console.error("Error during password verification:", error);
@@ -486,19 +472,21 @@ export const AuthProvider = ({ children }) => {
 
   const fetchRankings = async (pageNum, nbResults = 10) => {
     try {
-      const response = await fetch(`/api/get-all-ranking?page=${pageNum}&nbres=${nbResults}`, {
-        method: "GET",
-        headers: {
-          ...getAuthHeaders(),
-        },
-      });
-
-      const data = await response.json();
+      const response = await fetch(
+        `api/get-all-ranking?page=${pageNum}&nbres=${nbResults}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
-        throw new Error(data.message || "Failed to fetch rankings.");
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
+      const data = await response.json();
       return {
         success: true,
         rankings: data.data,
@@ -513,6 +501,31 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  
+  const changePassword = async (email, newPassword) => {
+    try {
+      const response = await fetch("api/change-password", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, newPassword }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Password changed successfully!");
+        return true;
+      } else {
+        console.error("Error changing password:", data.message);
+        return { error: data.message };
+      }
+    } catch (error) {
+      console.error("Error changing password:", error);
+      return false;
+    }
+  };
 
   return (
     <AuthContext.Provider
@@ -539,7 +552,8 @@ export const AuthProvider = ({ children }) => {
         // fetch available rooms
         getAvailableRooms,
         verifyGamePassword,
-        fetchRankings
+        fetchRankings,
+        changePassword,
       }}
     >
       {children}

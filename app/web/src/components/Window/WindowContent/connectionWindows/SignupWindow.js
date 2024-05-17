@@ -92,7 +92,7 @@ const SignUpWindow = () => {
         const result = await registerUser(formData);
 
         if (result === true) {
-          openSuccessWindow("Account created with success!");
+          openSuccessWindow(getTranslatedWord("connection.successAccount"));
         } else if (result && result.error) {
           if (result.error === "user_exists") {
             // Affichez un message d'erreur indiquant que l'utilisateur existe déjà
@@ -163,12 +163,12 @@ const SignUpWindow = () => {
         />
       </form>
 
-      <Button
+      {/* <Button
         styleClass="btn-connectionDefault google-button back-color3"
         label={getTranslatedWord("connection.signinG")}
         iconSrc="static/media/assets/images/icons/white/google.png"
         iconStyle={true}
-      />
+      /> */}
 
       <Button
         onClick={() => openWindow("login")}

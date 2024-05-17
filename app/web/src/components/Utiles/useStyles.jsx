@@ -2,7 +2,8 @@ export function getStyles(
   windowType,
   isLogged,
   isGameTableVisible,
-  isWindowOpen
+  isWindowOpen,
+  showWaitingMessage
 ) {
   // Utiliser 'accueil' comme fallback si windowType est vide et isGameTableVisible est false
   const effectiveWindowType = windowType || (!isGameTableVisible ? "accueil" : "");
@@ -12,6 +13,7 @@ export function getStyles(
     compTable: `comp-table
       ${isGameTableVisible && !isWindowOpen && "comp-table-inGame"}
       ${effectiveWindowType ? `comp-table-${effectiveWindowType}` : ""}
+      ${(showWaitingMessage && isGameTableVisible && !isWindowOpen) && "comp-table-waitingMessage"}
       `,
 
     //Table itself

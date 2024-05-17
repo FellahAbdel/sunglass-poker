@@ -49,6 +49,11 @@ const gameReducer = (state = initialState, action) => {
   var playerId;
   var answer;
   switch (action.type) {
+    case actions.SET_DAO:
+      return  {
+        ...state,
+        dao:action.payload.dao
+      };
     case actions.CREATE_GAME:
       if(action.payload.serverName === undefined) return state;
       csl.log(fileType, "CREATE GAME");
@@ -113,6 +118,8 @@ const gameReducer = (state = initialState, action) => {
         const updatedPlayers = state.rooms[room].players.filter(
           (player) => player.getPlayerId() !== playerId
         );
+
+        // state.rooms[room].game.players = updatedPlayers;
         // If the player who leave was the master we change the master.
         // But only if there is still at least one player in the room.
         csl.log("leaveRoom", " srggm : ", state.rooms[room]);
@@ -234,7 +241,9 @@ const gameReducer = (state = initialState, action) => {
           payload: { id: action.payload.tableId },
         };
         room.game.resetRestartCall();
-        const newPlayer = new Player(playerId, pseudo, coins);
+        let newPlayer = new Player(playerId, pseudo, coins);
+        newPlayer.updateUserCoins = state.dao.updateUserCoins;
+        csl.log(['gameReducer','new Player'],"player created : ", newPlayer)
         if (room.players.length === 0) {
           room.game.setMaster(playerId);
         }
@@ -255,7 +264,9 @@ const gameReducer = (state = initialState, action) => {
     case actions.DELETE_ROOM:
       if (action.payload.tableId !== undefined) {
         if (state.rooms.hasOwnProperty(action.payload.tableId)) {
+          state.rooms[action.payload.tableId].game.destroy();
           delete state.rooms[action.payload.tableId];
+            csl.log(fileType, "Room " + action.payload.tableId + " deleted successfully");
         }
       }
       return {
@@ -354,7 +365,7 @@ const gameReducer = (state = initialState, action) => {
         const player = showRoom.players.find(
           (p) => p.getPlayerId() === showPlayerId
         );
-        if (player) {
+        if (player && player.isActive) {
           player.revealCard(showCardIndex);
         }
       }

@@ -30,7 +30,13 @@
     "registerMessage": "Create your account",
     "send": "Send",
     "returnConnection": "Return to connection menu",
-    "loginSuccess": "Logged with success !"
+    "loginSuccess": "Logged with success !",
+    "successMail":"Reset password email sent successfully",
+    "successAccount":"Account created with success !",
+    "resetPassword":"Reset your password",
+    "successReset":"You successfully changed password",
+    "enterNewPassword":"Enter your new password here :",
+    "temporary": "TEMPORARY BUTTON"
   },
   "messageBox": {
     "loginSucces": "Logged in with succes!",
@@ -75,8 +81,9 @@
     "call": "Call",
     "check": "Check",
     "fold": "Fold",
-    "currentSC": "Your current SC",
-    "afterSC": "Your CS after raise"
+    "currentSC": "Current SC",
+    "afterSC": "CS after raise",
+    "totalRaise": "Total round raise"
   },
   "bonus": {
     "bonus": "BONUS"
@@ -95,7 +102,8 @@
     "advanced":"Advanced",
     "elite":"Elite",
     "createTheGame":"Create the Game",
-    "search": "Search Room"
+    "search": "Search Room",
+    "gameExist": "Game name already exists"
   },
   "playersStatus": {
     "empty": "Empty",
@@ -103,6 +111,7 @@
     "folded": "Fold",
     "raise": "Raised",
     "checked": "Checked",
+    "tapis":"ALL IN",
     "playing": "Playing",
     "waiting": "Waiting",
     "winner":"Winner"
@@ -175,6 +184,7 @@
     "invalidEmail":"Invalid email address",
     "badUsername":"Username must have at least 3 characters",
     "password6Characters":"Password must have at least 6 characters",
-    "passwordNotMatch":"Passwords do not match"
+    "passwordNotMatch":"Passwords do not match",
+    "emailNotFound" : "Email not found"
   }
 }

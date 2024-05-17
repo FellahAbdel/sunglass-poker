@@ -98,12 +98,12 @@ const LoginWindow = () => {
         styleClass="btn-connectionDefault register-button back-color1"
         label={getTranslatedWord("connection.registerNewAcc")}
       />
-      <Button
+      {/* <Button
         styleClass="btn-connectionDefault google-button back-color3"
         label={getTranslatedWord("connection.signinG")}
         iconSrc="static/media/assets/images/icons/white/google.png"
         iconStyle={true}
-      />
+      /> */}
     </div>
   );
 };

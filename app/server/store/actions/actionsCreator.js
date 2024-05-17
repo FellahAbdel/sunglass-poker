@@ -7,7 +7,7 @@ module.exports.gameLobby = (idGame) => ({
 
 module.exports.playerPlayed = (room) => ({
   type:actions.PLAYER_PLAYED,
-  payload: { room:room }
+  payload: { room:room}
 })
 
 module.exports.startGame = (idGame, userId) => {
@@ -137,3 +137,9 @@ module.exports.sitted = (table, players) => ({
 module.exports.kicked = () => ({
   type:actions.KICKED,
 })
+
+
+module.exports.setDao = (dao) => ({
+  type:actions.SET_DAO,
+  payload:{dao:dao}
+});

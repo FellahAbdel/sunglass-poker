@@ -41,7 +41,7 @@ const CreateGameWindow = () => {
   const [formData, setFormData] = useState({
     serverName: "",
     password: "",
-    rank: "Friendly",
+    rank: "friendly",
   });
 
   const [validationErrors, setValidationErrors] = useState({
@@ -96,7 +96,19 @@ const CreateGameWindow = () => {
           masterInfo
         );
 
-        if (result) {
+        if (result && result.error) {
+          if (result.error === "game_exists") {
+            // Afficher un message d'erreur indiquant que le jeu existe déjà
+            setValidationErrors((prevErrors) => ({
+              ...prevErrors,
+              serverName: getTranslatedWord("serverPanel.gameExist"),
+            }));
+          } else {
+            // Autres erreurs
+            console.error("Failed to create game:", result.error);
+          }
+        }
+        else if (result) {
           // We dispatch the action to start the game
           const gameRoomId = result;
           console.log("Game created with ID:", gameRoomId);
@@ -106,17 +118,6 @@ const CreateGameWindow = () => {
           //   showGameTable();
           //   closeWindow();
           //   setWindowType("");
-        } else if (result && result.error) {
-          if (result.error === "game_exists") {
-            // Afficher un message d'erreur indiquant que le jeu existe déjà
-            setValidationErrors((prevErrors) => ({
-              ...prevErrors,
-              serverName: "Game name already exists",
-            }));
-          } else {
-            // Autres erreurs
-            console.error("Failed to create game:", result.error);
-          }
         }
       } catch (error) {
         console.error("Error creating game:", error);
@@ -156,10 +157,10 @@ const CreateGameWindow = () => {
             value={formData.rank}
             onChange={handleChange}
           >
-            <option value="Novice">{getTranslatedWord("serverPanel.friendly")}</option>
-            <option value="Intermédiaire">{getTranslatedWord("serverPanel.intermediate")}</option>
-            <option value="Avancé">{getTranslatedWord("serverPanel.advanced")}</option>
-            <option value="Élite">{getTranslatedWord("serverPanel.elite")}</option>
+            <option value="friendly">{getTranslatedWord("serverPanel.friendly")}</option>
+            <option value="intermediate">{getTranslatedWord("serverPanel.intermediate")}</option>
+            <option value="advanced">{getTranslatedWord("serverPanel.advanced")}</option>
+            <option value="elite">{getTranslatedWord("serverPanel.elite")}</option>
           </select>
         </div>
         <Button
@@ -171,7 +172,7 @@ const CreateGameWindow = () => {
         <Button
           styleClass="btn-connectionDefault start-button back-color2"
           type="button"
-          label="Join a Game"
+          label={getTranslatedWord("game.joinGame")}
           // ICI QUE JE DOIT CHANGER (MAEL)
           //pas ici mais apres
 

@@ -101,3 +101,6 @@ export const sendMessage = (message) => ({
   type: actions.MESSAGE_SEND,
   payload: message,
 });
+export const emptyPayload = () => ({
+  type: actions.EMPTY_PAYLOAD,
+});
