@@ -256,7 +256,9 @@ class Game {
         "rotateFocus",
         "No one has tapied and there is only one player left"
       );
-      this.advanceStageToShowdown();
+      while (this.currentStage !== "showdown") {
+        this.advanceStage();
+      }
       return;
     }
 
