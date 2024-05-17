@@ -19,6 +19,11 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
     return [card.number.toString(), card.color];
   };
 
+  const getCardLabel = (number) => {
+    const faceCards = { 11: 'J', 12: 'Q', 13: 'K', 14: 'A' };
+    return faceCards[number] || number;
+  };
+
   // Combine all cards into one array for hand evaluation
   useEffect(() => {
     if (communityCards && card1 && card2) {
@@ -73,8 +78,8 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
           }
           label={
             card1.isVisible
-              ? `${getTranslatedWord("handGuide.hide")} ${card1.number} of `
-              : `${getTranslatedWord("handGuide.show")} ${card1.number} of `
+              ? `${getTranslatedWord("handGuide.hide")} ${getCardLabel(card1.number)} of `
+              : `${getTranslatedWord("handGuide.show")} ${getCardLabel(card1.number)} of `
           }
           iconSrc={cardIcons[card1.color]}
           onClick={() => toggleShowCard(0, card1)}
@@ -84,9 +89,9 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
             card2.isVisible ? "btn-showCard disabled" : "btn-showCard"
           }
           label={
-            card2.isVisible
-              ? `${getTranslatedWord("handGuide.hide")} ${card2.number} of `
-              : `${getTranslatedWord("handGuide.show")} ${card2.number} of `
+            card1.isVisible
+              ? `${getTranslatedWord("handGuide.hide")} ${getCardLabel(card2.number)} of `
+              : `${getTranslatedWord("handGuide.show")} ${getCardLabel(card2.number)} of `
           }
           iconSrc={cardIcons[card2.color]}
           onClick={() => toggleShowCard(1, card2)}
