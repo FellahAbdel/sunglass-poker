@@ -158,11 +158,18 @@ const Navbar = ({}) => {
                     src={"static/media/assets/images/icons/white/cross.png"}
                     alt="exit-chat"
                   />
-
                   {/* liste des messages */}
+                  {/* Mise à jour des messages pour inclure la classe CSS conditionnelle */}
                   <div className="message-list">
                     {messages.map((msg, index) => (
-                      <div key={index} className="message">
+                      <div
+                        key={index}
+                        className={`message ${
+                          msg.sender === user.pseudo
+                            ? "own-message"
+                            : "other-message"
+                        }`}
+                      >
                         <strong>{msg.sender}: </strong> {msg.message}
                       </div>
                     ))}
