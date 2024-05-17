@@ -46,7 +46,9 @@ const ServerPanelWindow = () => {
     const updateRecordsPerPage = () => {
       const windowHeight = window.innerHeight;
       const tableItemHeight = 130;
-      const maxRecordsPerPage = Math.floor((windowHeight*0.90) / tableItemHeight);
+      const maxRecordsPerPage = Math.floor(
+        (windowHeight * 0.9) / tableItemHeight
+      );
       setRecordsPerPage(maxRecordsPerPage);
     };
 
@@ -121,7 +123,7 @@ const ServerPanelWindow = () => {
       if (isPlayerSited) {
         setIsJoining(false);
         displayGameRoom();
-      }else {
+      } else {
         setIsJoining(true);
         console.log("server hasn't responded yet");
       }
@@ -136,6 +138,7 @@ const ServerPanelWindow = () => {
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const totalPages = Math.ceil(roomTableRecords.length / recordsPerPage);
 
   return (
     <div className="listTableWindowPanel">
@@ -173,21 +176,56 @@ const ServerPanelWindow = () => {
         ))}
       </div>
       <div className="container-pagination">
-        {Array.from(
-          { length: Math.ceil(roomTableRecords.length / recordsPerPage) },
-          (_, i) => i + 1
-        ).map((page) => (
+        {/* Bouton pour la première page */}
+        <Button
+          styleClass={
+            currentPage === 1
+              ? "back-color1 btn-serverPage"
+              : "back-color3 btn-serverPage"
+          }
+          label={"1"}
+          onClick={() => paginate(1)}
+        />
+
+        {/* Bouton pour la page précédente (n-1) */}
+        {currentPage > 2 && (
           <Button
-            key={page}
+            styleClass={"back-color3 btn-serverPage"}
+            label={currentPage - 1}
+            onClick={() => paginate(currentPage - 1)}
+          />
+        )}
+
+        {/* Bouton pour la page actuelle (n) */}
+        {currentPage !== 1 && currentPage !== totalPages && (
+          <Button
+            styleClass={"back-color1 btn-serverPage"}
+            label={currentPage}
+            onClick={() => paginate(currentPage)}
+          />
+        )}
+
+        {/* Bouton pour la page suivante (n+1) */}
+        {currentPage < totalPages - 1 && (
+          <Button
+            styleClass={"back-color3 btn-serverPage"}
+            label={currentPage + 1}
+            onClick={() => paginate(currentPage + 1)}
+          />
+        )}
+
+        {/* Bouton pour la dernière page */}
+        {totalPages > 1 && (
+          <Button
             styleClass={
-              page === currentPage
+              currentPage === totalPages
                 ? "back-color1 btn-serverPage"
                 : "back-color3 btn-serverPage"
             }
-            label={page}
-            onClick={() => paginate(page)}
+            label={totalPages}
+            onClick={() => paginate(totalPages)}
           />
-        ))}
+        )}
       </div>
     </div>
   );
