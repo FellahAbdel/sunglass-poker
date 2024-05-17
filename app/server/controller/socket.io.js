@@ -313,7 +313,9 @@ module.exports = function (
 
         // Send a 'leftRoom' event to the player
         sendEvent(socket, actcrea.leftRoom());
-      }
+      } else csl.error(fileType, "Error in leaveRoom");
+    } else {
+      csl.error(fileType, "Error in leaveRoom");
     }
   }
 
