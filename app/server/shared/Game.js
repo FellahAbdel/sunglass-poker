@@ -191,6 +191,7 @@ class Game {
    */
 
   autoTurn(player, left = false) {
+    
     // If the player left on purpose we need to make sure we don't break the round of focus.
     // If it's his turn we do the same as for the afk person, otherwise we need to force afk even if it's not his turn.
     if (left && this.isPlayersTurn(player.getPlayerId())) {
@@ -205,6 +206,9 @@ class Game {
       this.hasAfk = true;
       this.fold(player);
       this.setPlayerAFK(player);
+    }
+    if(this.master === player.getPlayerId()){
+      this.checkForNewMaster();
     }
   }
 
