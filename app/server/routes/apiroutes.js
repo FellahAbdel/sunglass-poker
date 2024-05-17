@@ -312,4 +312,20 @@ module.exports = (app, dao, gameController) => {
       res.status(500).json({ error: "Internal server error" });
     }
   });
+
+  app.put("/api/change-password", async (req, res) => {
+    try {
+      const { email, newPassword } = req.body;
+      const result = await dao.changePassword(email, newPassword);
+      
+      if (result.success) {
+        res.json(result);
+      } else {
+        res.status(400).json(result);
+      }
+    } catch (error) {
+      console.error("Error changing password:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
 };

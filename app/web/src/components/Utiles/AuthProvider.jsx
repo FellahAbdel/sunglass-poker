@@ -131,29 +131,23 @@ export const AuthProvider = ({ children }) => {
     return state.user;
   };
 
-  const updateUserData = async (
-    field,
-    value,
-    identifierType = "pseudo",
-    identifierValue
-  ) => {
+  const updateUserData = async (field, value, identifierType = "pseudo", identifierValue) => {
     try {
       const isEmailIdentifier = identifierType === "email";
-      // Utilisation de state.isLogged et state.user pour vérifier la connexion et accéder aux informations utilisateur
       if (!isEmailIdentifier && (!state.isLogged || !state.user)) {
         console.error("User not logged in.");
         return;
       }
-
+  
       const identifierField = isEmailIdentifier ? "email" : "pseudo";
-      // Utilisation de state.user pour déterminer la valeur d'identifiant si nécessaire
-      const identifier = isEmailIdentifier
-        ? identifierValue
-        : state.user[identifierField];
-
+      const identifier = isEmailIdentifier ? identifierValue : state.user[identifierField];
+  
       const response = await fetch("api/update-user-data", {
-        ...CORSSETTINGS,
-        headers: getAuthHeaders(),
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          ...getAuthHeaders(),
+        },
         body: JSON.stringify({
           field,
           value,
@@ -161,11 +155,10 @@ export const AuthProvider = ({ children }) => {
           identifierValue: identifier,
         }),
       });
-
+  
       const data = await response.json();
-
+  
       if (data.success) {
-        // Dispatch d'une action pour mettre à jour l'état utilisateur si la mise à jour est réussie
         dispatch({
           type: "UPDATE_USER_DATA",
           payload: { ...state.user, [field]: value },
@@ -174,9 +167,11 @@ export const AuthProvider = ({ children }) => {
         return true;
       } else {
         console.error(`Failed to update ${field}:`, data.message);
+        return { error: data.message };
       }
     } catch (error) {
       console.error(`Error updating ${field}:`, error);
+      return { error: error.message };
     }
   };
 
@@ -506,6 +501,32 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  
+  const changePassword = async (email, newPassword) => {
+    try {
+      const response = await fetch("api/change-password", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, newPassword }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Password changed successfully!");
+        return true;
+      } else {
+        console.error("Error changing password:", data.message);
+        return { error: data.message };
+      }
+    } catch (error) {
+      console.error("Error changing password:", error);
+      return false;
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -532,6 +553,7 @@ export const AuthProvider = ({ children }) => {
         getAvailableRooms,
         verifyGamePassword,
         fetchRankings,
+        changePassword,
       }}
     >
       {children}

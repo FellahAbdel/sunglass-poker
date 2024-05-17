@@ -32,7 +32,9 @@
     "returnConnection": "Return to connection menu",
     "loginSuccess": "Logged with success !",
     "successMail":"Reset password email sent successfully",
+    "successAccount":"Account created with success !",
     "resetPassword":"Reset your password",
+    "successReset":"You successfully changed password",
     "enterNewPassword":"Enter your new password here :",
     "temporary": "TEMPORARY BUTTON"
   },

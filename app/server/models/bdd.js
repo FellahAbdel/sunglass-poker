@@ -733,5 +733,33 @@ module.exports = function (app, bdd) {
     }
   };
 
+  dao.changePassword = async (email, newPassword) => {
+    try {
+      // Hash the new password
+      const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+  
+      // Find the user by email and update the password
+      const updatedUser = await UserModel.findOneAndUpdate(
+        { email: email },
+        { $set: { password: hashedPassword } },
+        { new: true, runValidators: true }
+      );
+  
+      // Check if the user was found and the password updated
+      if (updatedUser) {
+        return { success: true, message: "Password updated successfully" };
+      } else {
+        return { success: false, message: "User not found" };
+      }
+    } catch (error) {
+      // Log and handle the error
+      console.error("Error updating password:", error);
+      return { success: false, message: "Failed to update password" };
+    }
+  };
+  
+
+  
+
   return dao;
 };
