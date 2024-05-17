@@ -22,7 +22,7 @@ require("dotenv").config();
 module.exports = function (app, bdd) {
   // Logging database connection
   csl.log("bdd", "bdd!", bdd);
-  bdd = "localhost:10003";
+//   bdd = "localhost:10003";
   // Connect to MongoDB database
   mongoose.connect("mongodb://pokerBackEndServer:azerty@" + bdd + "/Poker", {});
 
@@ -572,19 +572,24 @@ module.exports = function (app, bdd) {
       }
     },
 
-    playerLeftGame: async function (id) {
+    playerLeftGame: async function (id, roomId) {
       try {
         // Find the user by ID
-        const user = await UserModel.findById(id);
+        // const user = await UserModel.findById(id);
+        console.log("this ", user, " is leaving the game");
 
         // Find the game description by user's inGame ID
-        const gameDesc = await GameDescriptionModel.findById(user.inGame);
+        const gameDesc = await GameDescriptionModel.findById(roomId);
+        console.log("he was in game ", user.inGame, " and the gameDesc is ", gameDesc);
 
+        console.log("game players before remove", gameDesc.players);
         // If game description exists, remove the player's ID from the players array
         if (gameDesc !== null) {
           gameDesc.players = gameDesc.players.filter((p) => p === id);
           await gameDesc.save();
         }
+
+        console.log("game players after remove", gameDesc.players);
 
         // Reset the user's inGame status to null
         user.inGame = null;
