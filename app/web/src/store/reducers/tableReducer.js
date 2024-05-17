@@ -71,6 +71,7 @@ const tableReducer = (state = initialState, action) => {
         gameCreated: true,
         gameStarted: true,
         playerSited: true,
+        playerLeft: false,
         players: action.payload.players,
       };
       console.log("newStateSitted", newStateSitted);
