@@ -87,6 +87,7 @@ const ListTableItem = ({
               <TextInputComponent
                 placeholder="Enter Password"
                 value={password}
+                type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 errorMessage={passwordError}
                 styleClass="input-serverRoomPassword"
