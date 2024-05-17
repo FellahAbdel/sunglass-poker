@@ -171,64 +171,72 @@ const Navbar = () => {
           )}
         </div>
       )}
-
-      <div className="container-navMain-V2">
-        {isLogged && (
-          <>
+      {windowType !== "loading" &&
+        <div className="container-navMain-V2">
+          {windowType !== "" && !isGameTableVisible &&
             <Button
-              label={
-                isLogged
-                  ? getTranslatedWord("navbar.profile")
-                  : getTranslatedWord("navbar.login")
-              }
-              onClick={() =>
-                isLogged ? openWindow("profile") : openWindow("login")
-              }
-              styleClass={`${isLogged ? "btn-profile-V2 " : "btn-logIn-V2 "}`}
-              iconSrc="static/media/assets/images/icons/white/profile.png"
-            />
+            label={getTranslatedWord("navbar.home")}
+            onClick={() => openWindow("")}
+            iconSrc="static/media/assets/images/icons/white/home.png"
+          />
+          }
+          {isLogged && (
+            <>
+              <Button
+                label={
+                  isLogged
+                    ? getTranslatedWord("navbar.profile")
+                    : getTranslatedWord("navbar.login")
+                }
+                onClick={() =>
+                  isLogged ? openWindow("profile") : openWindow("login")
+                }
+                styleClass={`${isLogged ? "btn-profile-V2 " : "btn-logIn-V2 "}`}
+                iconSrc="static/media/assets/images/icons/white/profile.png"
+              />
+              <Button
+                label={getTranslatedWord("navbar.ranking")}
+                onClick={() => openWindow("ranking")}
+                styleClass={`${
+                  isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "
+                }`}
+                iconSrc="static/media/assets/images/icons/white/ranking.png"
+              />
+            </>
+          )}
+
+          <Button
+            label={getTranslatedWord("navbar.settings")}
+            onClick={() => openWindow("settings")}
+            styleClass={`btn-settings-V2`}
+            iconSrc="static/media/assets/images/icons/white/settings.png"
+          />
+
+          {isLogged && !isGameTableVisible && (
             <Button
-              label={getTranslatedWord("navbar.ranking")}
-              onClick={() => openWindow("ranking")}
-              styleClass={`${
-                isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "
-              }`}
-              iconSrc="static/media/assets/images/icons/white/ranking.png"
+              label={getTranslatedWord("shop.shop")}
+              onClick={() => openWindow("shop")}
+              styleClass="btn-shop-V2"
+              iconSrc="static/media/assets/images/icons/white/shop.png"
             />
-          </>
-        )}
-
-        <Button
-          label={getTranslatedWord("navbar.settings")}
-          onClick={() => openWindow("settings")}
-          styleClass={`btn-settings-V2`}
-          iconSrc="static/media/assets/images/icons/white/settings.png"
-        />
-
-        {isLogged && !isGameTableVisible && (
+          )}
           <Button
-            label={getTranslatedWord("shop.shop")}
-            onClick={() => openWindow("shop")}
-            styleClass="btn-shop-V2"
-            iconSrc="static/media/assets/images/icons/white/shop.png"
+            label={getTranslatedWord("navbar.tutorial")}
+            onClick={() => openWindow("tutorial")}
+            styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
+            iconSrc="static/media/assets/images/icons/white/tutorial.png"
           />
-        )}
-        <Button
-          label={getTranslatedWord("navbar.tutorial")}
-          onClick={() => openWindow("tutorial")}
-          styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
-          iconSrc="static/media/assets/images/icons/white/tutorial.png"
-        />
 
-        {isLogged && (
-          <Button
-            label={label}
-            onClick={handleLogOutButton}
-            styleClass="btn-exit-V2"
-            iconSrc="static/media/assets/images/icons/white/exit.png"
-          />
-        )}
-      </div>
+          {isLogged && (
+            <Button
+              label={label}
+              onClick={handleLogOutButton}
+              styleClass="btn-exit-V2"
+              iconSrc="static/media/assets/images/icons/white/exit.png"
+            />
+          )}
+        </div>
+      }
     </div>
   );
 };

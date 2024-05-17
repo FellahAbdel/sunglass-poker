@@ -10,7 +10,8 @@
     "logout": "Log out",
     "login": "Log in",
     "signin": "Sign Up",
-    "ranking" : "Ranking"
+    "ranking" : "Ranking",
+    "home": "Home"
   },
   "connection": {
     "login": "Log in",
