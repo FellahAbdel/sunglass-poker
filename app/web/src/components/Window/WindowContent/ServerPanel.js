@@ -46,7 +46,7 @@ const ServerPanelWindow = () => {
     const updateRecordsPerPage = () => {
       const windowHeight = window.innerHeight;
       const tableItemHeight = 130;
-      const maxRecordsPerPage = Math.floor(windowHeight / tableItemHeight);
+      const maxRecordsPerPage = Math.floor((windowHeight*0.90) / tableItemHeight);
       setRecordsPerPage(maxRecordsPerPage);
     };
 

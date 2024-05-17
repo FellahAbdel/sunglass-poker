@@ -190,14 +190,16 @@ export const AuthProvider = ({ children }) => {
 
       const data = await response.json();
 
-      if (data.success) {
-        console.log("Reset password email sent successfully.");
+      if (response.ok) {
+        console.log("Email envoyé avec succes !");
+        return true;
       } else {
-        console.error("not-found");
-        return "not-found";
+        console.error("Mail not found");
+        return { error: data.error, field: data.field };
       }
     } catch (error) {
-      console.error("Error sending reset password email:", error);
+      console.error("Erreur lors de l'envoi du mail", error);
+      return false;
     }
   };
 

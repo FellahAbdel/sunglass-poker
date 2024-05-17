@@ -174,7 +174,7 @@ module.exports = function (app, bdd) {
     checkEmail: async (email) => {
       try {
         // Find user by email
-        const user = await UserModel.findOne({ email });
+        const user = await UserModel.findOne({ email: email });
         if (user) {
           // If user exists, return exists:true with a message
           return { exists: true, message: "E-mail exists in the database" };
