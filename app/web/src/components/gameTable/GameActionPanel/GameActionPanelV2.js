@@ -127,7 +127,7 @@ const GameActionButtons = ({}) => {
 
     useEffect( () =>{
       setCoinsAfterRaise(coins - amount);
-    },[amount]);
+    },[amount, coins]);
 
     useEffect(() => {
       setCoins(playerMoney);
