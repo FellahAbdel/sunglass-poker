@@ -440,6 +440,7 @@ class Game {
     this.resetRestartCall();
     setTimeout(() => {
       if (this.allow_start) {
+        this.movePlayersWithZeroCoinsToSpectators();
         this.updatePlayersList();
         if (this.players.length <= 1) {
           // Assurez-vous qu'il y a plus d'un joueur actif.
