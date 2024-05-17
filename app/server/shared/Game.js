@@ -278,6 +278,7 @@ class Game {
     ) {
       // this.advanceStageToShowdown();
       clearTimeout(this.focusTurnCall);
+      this.players.forEach(p => {this.total+=p.currentBetTurn;p.currentBetTurn =0;});
       while (this.currentStage !== "showdown") {
         this.advanceStage();
       }
