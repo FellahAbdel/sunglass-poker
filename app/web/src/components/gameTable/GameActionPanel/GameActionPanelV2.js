@@ -21,6 +21,7 @@ const GameActionButtons = ({}) => {
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(0); // calculating the amount that player will be left after the raise to show before
   // const [raiseConfirmed, setRaiseConfirmed] = useState(false); // New state variable to track confirmation  
   const dispatch = useDispatch();
+  const [callActive , setCallActive] = useState(false);
 
 
   const formatNumber = (number) => {
@@ -68,10 +69,11 @@ const GameActionButtons = ({}) => {
       if (amount < min || amount > max) {
         const validatedAmount = Math.max(min, Math.min(max, amount));
         setAmount(validatedAmount);
+
       }
       else{
-        const totalAmount = amount + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
-        handleBet(totalAmount);
+        const totalAmount =  amount + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
+        handleBet(amount);
         setAmount(min);
         setShowPopup(false);
       }
@@ -80,9 +82,9 @@ const GameActionButtons = ({}) => {
 
   // Met à jour la valeur du bouton "Check" ou "Call" en fonction de gameCurrentBet
   const getCheckOrCallLabel = () => {
-    if (gameCurrentBet > 0) {
+    if ((gameCurrentBet > 0) && (gameCurrentBet !== gamePlayerCurrentBet)) {
       //le cas du tapis de ce qui me reste
-      if(playerMoney<(gameCurrentBet-gamePlayerCurrentBet)){
+      if(playerMoney<=(gameCurrentBet-gamePlayerCurrentBet)){
         return `${getTranslatedWord(
           "gameActionPanel.call"
         )} ${playerMoney} SC`;
@@ -126,8 +128,23 @@ const GameActionButtons = ({}) => {
     }
 
     useEffect( () =>{
+      if (gameCurrentBet) {
+        setMin(gameCurrentBet-gamePlayerCurrentBet);
+      }
+      else {
+        setMin(20);
+      }
+    },[gameCurrentBet]);
+
+    useEffect( () =>{
       setCoinsAfterRaise(coins - amount);
     },[amount, coins]);
+
+    useEffect( () =>{
+      if (!isFocus){
+        setShowPopup(false);
+      }
+    },[isFocus]);
 
     useEffect(() => {
       setCoins(playerMoney);
@@ -135,8 +152,9 @@ const GameActionButtons = ({}) => {
 
     useEffect(() => {
       setMax(coins);
-      setStep(Math.floor(coins / 10));
+      setStep(Math.floor(coins / 5));
     }, [coins]);
+
 
   return (
     <div className="container-gameAction">
@@ -145,18 +163,22 @@ const GameActionButtons = ({}) => {
           {getTranslatedWord("gameActionPanel.currentSC")}:{" "}
           {formatNumber(coins)}
         </div>
-        {showPopup && gamePlayerCurrentBet && (coinsAfterRaise || amount) && (
-          <div className="userCoinCashs">
-            {getTranslatedWord("gameActionPanel.totalRaise")}:{" "}
-            {formatNumber(gamePlayerCurrentBet + amount)}
-          </div>
-        )}
-        {showPopup && (coinsAfterRaise || amount) && (
+
+        {showPopup && (coinsAfterRaise || amount) && ( <>
           <div className="userCoinCashs">
             {getTranslatedWord("gameActionPanel.afterSC")}:{" "}
             {formatNumber(coinsAfterRaise)}
           </div>
-        )}
+          {gamePlayerCurrentBet  ? (
+            <div className="userCoinCashs">
+              {getTranslatedWord("gameActionPanel.totalRaise")}:{" "}
+              {formatNumber(gamePlayerCurrentBet)}
+               + 
+              {formatNumber(amount)}
+            </div>
+            ) : (null)
+          }
+        </>)}
       </div>
       {showPopup && (<>
           <div className="container-raiseButtons">
@@ -167,17 +189,17 @@ const GameActionButtons = ({}) => {
             />
             <Button
               styleClass={"btn-mainAction"}
-              onClick={() => setAmount(coins/4)}
+              onClick={() => setAmount(Math.floor(coins/4))}
               label={"1/4"}
             />
             <Button
               styleClass={"btn-mainAction"}
-              onClick={() => setAmount(coins/2)}
+              onClick={() => setAmount(Math.floor(coins/2))}
               label={"1/2"}
             />
             <Button
               styleClass={"btn-mainAction"}
-              onClick={() => setAmount(coins*3/4)}
+              onClick={() => setAmount(Math.floor(coins*3/4))}
               label={"3/4"}
             />
             <Button
@@ -207,7 +229,7 @@ const GameActionButtons = ({}) => {
 
         {/* Bouton "Check" ou "Call" en fonction de gameCurrentBet */}
         <Button
-          styleClass={`btn-mainAction ${!isFocus && "disabled"}`}
+          styleClass={`btn-mainAction ${!isFocus && "disabled"} ${callActive && "call"}`}
           onClick={handleCheckOrCall}
           label={getCheckOrCallLabel()}
         />

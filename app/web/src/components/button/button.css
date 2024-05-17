@@ -166,6 +166,10 @@ Button:hover {
   border: unset;
   background: var(--gradient-red);
 }
+.btn-mainAction.call{
+  border: unset;
+  background: var(--gradient-green);
+}
 @media (max-height: 500px) {
   .btn-mainAction {
     font-size: 2.5vh;
