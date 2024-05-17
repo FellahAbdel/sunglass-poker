@@ -125,6 +125,7 @@ class Game {
         this.updatePlayersList();
         return;
       } else {
+        player.playing();
         player.toggleSpectator();
         this.updatePlayersList();
       }
