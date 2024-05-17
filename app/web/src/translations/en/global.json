@@ -79,8 +79,9 @@
     "call": "Call",
     "check": "Check",
     "fold": "Fold",
-    "currentSC": "Your current SC",
-    "afterSC": "Your CS after raise"
+    "currentSC": "Current SC",
+    "afterSC": "CS after raise",
+    "totalRaise": "Total round raise"
   },
   "bonus": {
     "bonus": "BONUS"
