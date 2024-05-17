@@ -125,6 +125,8 @@
 .message-list {
   height: 100%;
   width: 100%;
+  margin-bottom:5% ;
+  margin-top:5% ;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -150,8 +152,8 @@
 }
 
 .message {
-  padding: 5px;
-  margin: 5px;
+  padding: 0.3vw;
+  margin: 0.2vw;
   border-radius: 5px;
 }
 
