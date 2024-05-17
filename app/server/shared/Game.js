@@ -215,7 +215,11 @@ class Game {
   }
   rotateTimer() {
     clearTimeout(this.focusTurnCall);
-    if (this.state !== "waiting" && this.stage !== "end" && this.stage !== "showdown") {
+    if (
+      this.state !== "waiting" &&
+      this.stage !== "end" &&
+      this.stage !== "showdown"
+    ) {
       this.focusTurnCall = this.createAutoTurnCall();
       this.focusTurnTimer = Date.now() + this.autoTurnDelay;
     }
@@ -255,15 +259,19 @@ class Game {
     );
 
     // Plus de joueur qui ne sont pas tapis alors on va jusqu'à la fin
-    if (remainingPlayersCount <= 1 && someoneTapis && 
-      ((dernierPasTapis === undefined) || (dernierPasTapis.talkedThisTurn && dernierPasTapis.currentBetTurn === this.gameCurrentBet))) {
-        
-        // this.advanceStageToShowdown();
-        clearTimeout(this.focusTurnCall);
-        while (this.currentStage !== "showdown") {
-          this.advanceStage();
-        }
-        return;
+    if (
+      remainingPlayersCount <= 1 &&
+      someoneTapis &&
+      (dernierPasTapis === undefined ||
+        (dernierPasTapis.talkedThisTurn &&
+          dernierPasTapis.currentBetTurn === this.gameCurrentBet))
+    ) {
+      // this.advanceStageToShowdown();
+      clearTimeout(this.focusTurnCall);
+      while (this.currentStage !== "showdown") {
+        this.advanceStage();
+      }
+      return;
     }
 
     if (this.currentStage === "showdown" || this.currentStage === "end") {
@@ -298,39 +306,49 @@ class Game {
       }
     }
     console.log("Le focus Après : ", this.focus);
-    
 
     /**
      * on ne finit un tour  que si tout le monde a payé assez ou a tapis
      * ET que tout le monde a parlé au moins 1 fois.
      */
     let allplayedenough_orTapis = 0; // nbr de joueurs qui ont payé
-    let alltalkedThisTurn = 0;      // nbr de joueurs qui  ont parlé
-    this.activePlayers.map(p => {allplayedenough_orTapis += (p.isTapis === true || p.currentBetTurn === this.gameCurrentBet);csl.log('iterate',p.currentBetTurn);}); 
-    this.activePlayers.map(p =>alltalkedThisTurn += (p.talkedThisTurn === true));   
-    let aPlength = this.activePlayers.length // nbr de joueurs total 
-    csl.log('rotateFocusVictor', "Comptes : ",
-    allplayedenough_orTapis,
-    alltalkedThisTurn,
-    this.currentBetTurn
+    let alltalkedThisTurn = 0; // nbr de joueurs qui  ont parlé
+    this.activePlayers.map((p) => {
+      allplayedenough_orTapis +=
+        p.isTapis === true || p.currentBetTurn === this.gameCurrentBet;
+      csl.log("iterate", p.currentBetTurn);
+    });
+    this.activePlayers.map(
+      (p) => (alltalkedThisTurn += p.talkedThisTurn === true)
     );
-    if(allplayedenough_orTapis === aPlength && alltalkedThisTurn === aPlength){
-      csl.log('rotateFocusVictor','finit le tour');
+    let aPlength = this.activePlayers.length; // nbr de joueurs total
+    csl.log(
+      "rotateFocusVictor",
+      "Comptes : ",
+      allplayedenough_orTapis,
+      alltalkedThisTurn,
+      this.currentBetTurn
+    );
+    if (
+      allplayedenough_orTapis === aPlength &&
+      alltalkedThisTurn === aPlength
+    ) {
+      csl.log("rotateFocusVictor", "finit le tour");
 
       // On a finit le tour
       // On reset les champs des joueurs pour le prochain tour.
-      this.activePlayers.map(p => {
+      this.activePlayers.map((p) => {
         p.newTurnReset();
-        if(p.status !== "tapis") {p.playing();}
+        if (p.status !== "tapis") {
+          p.playing();
+        }
       });
-      this.players.map(p => p.gameCurrentBet = 0);
+      this.players.map((p) => (p.gameCurrentBet = 0));
       this.gameCurrentBet = 0;
       this.advanceStage();
       // return;
     }
     // Sinon quelqu'un doit encore jouer.
-
-
 
     // Gérer la fin du tour si le joueur actuel a misé le montant attendu et s'il est revenu au point de départ
     //ATTENTION A VERIFIER SI ça MARCHE AVEC FOLD   //+this.nbhostfolded
@@ -423,12 +441,8 @@ class Game {
 
   isPlayersTurn(playerId) {
     csl.log("isPlayersTurn", playerId, this.focus, this.activePlayers);
-    if (this.focus < 0 || this.focus > this.players.length)
-      this.rotateFocus();
-    if (
-      this.focus === null ||
-      this.players[this.focus].playerId !== playerId
-    ) {
+    if (this.focus < 0 || this.focus > this.players.length) this.rotateFocus();
+    if (this.focus === null || this.players[this.focus].playerId !== playerId) {
       console.error("It's not this player's turn.");
       return false;
     }
@@ -439,13 +453,13 @@ class Game {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
       // if (this.focus === this.playerBeforeNextTurn) {
-        // this.nbhostfolded++;
-        console.log("JE SUIS", this.focus);
-        this.rotateFocus();
-        console.log("J'ai rotate", this.focus);
-        // this.playerBeforeNextTurn = this.focus;
+      // this.nbhostfolded++;
+      console.log("JE SUIS", this.focus);
+      this.rotateFocus();
+      console.log("J'ai rotate", this.focus);
+      // this.playerBeforeNextTurn = this.focus;
       // } else {
-        // this.rotateFocus();
+      // this.rotateFocus();
       // }
       // this.updateActivePlayers();
       console.log("NOmbre de joururs actif :", this.activePlayers.length);
@@ -570,7 +584,9 @@ class Game {
 
   removePlayer(playerId) {
     let player = this.allPlayers.find((p) => p.getPlayerId() === playerId);
-    if(this.focus === this.players.findIndex(p => p.getPlayerId() === playerId))
+    if (
+      this.focus === this.players.findIndex((p) => p.getPlayerId() === playerId)
+    )
       this.autoTurn(player, true);
     this.allPlayers = this.allPlayers.filter(
       (p) => p.getPlayerId() !== playerId
@@ -817,11 +833,8 @@ class Game {
           csl.log("evaluateHands","Money left, check for another winner.");
           this.evaluateHands();
         }
-        //
-        
-      } else {
-        aa.seRemplirLesPoches(this.total);
-        aa.jesuislewinner();
+      }else {
+        console.log("winner est undefined");
       }
     }
   }
