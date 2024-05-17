@@ -20,10 +20,12 @@ module.exports = gameController = {
   dao: null,
   refresh: {},
   /**
-   * @param {*} dao
+   * @param {dao} dao
    */
   init: function (dao) {
+    csl.log('initGameController');
     this.dao = dao;
+    store.dispatch(actions.setDao(dao));
   },
 
   /**

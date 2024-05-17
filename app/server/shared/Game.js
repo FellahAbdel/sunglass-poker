@@ -581,31 +581,87 @@ class Game {
 
   addPlayer(player) {
     this.allPlayers.push(player);
-    if (this.state !== "waiting" || player.getPlayerMoney() <= 0) {
+    if (this.state !== "waiting" || player.playerMoney <= 0) {
+      csl.log('gameObject : addPlayer',"either or both is true: ",
+        "Game is running :",this.state !== "waiting", this.state,
+        "\nPlayer has no money :", player.playerMoney <= 0,player.playerMoney 
+      );
       player.isSpectator = true;
       player.isActive = false;
-    } else if (!player.isSpectator && player.getPlayerMoney() >= this.blind) {
+    } else if (!player.isSpectator && player.playerMoney >= this.blind) {
       //If not the first round, we make people pay to join.
       //If they can't, it's cancel.
       if (!this.firstRoundForRoom) {
         player.bet(this.blind);
       }
       this.players.push(player);
+      this.checkForNewMaster();
     }
+    console.log(player.playerMoney);
     console.log(`Player ${player.name} added.`);
   }
 
   movePlayersWithZeroCoinsToSpectators() {
     this.players.forEach((player) => {
-      if (player.getPlayerMoney() <= 0) {
+      if (player.playerMoney <= 0) {
         player.isSpectator = true;
         player.isActive = false;
         console.log(
           `Player ${player.name} moved to spectators due to insufficient coins.`
         );
-      }
+      } // if he has money and his the first we encouter, he's the potential new master if the master has no money.
+      
     });
+    this.checkForNewMaster();
     this.updatePlayersList();
+  }
+  
+  checkForNewMaster(){
+    let setNewMaster = false;
+
+    // We check first to see if there is a master. If not we will need to either defined or set null again
+    if(this.master === undefined ||this.master === null){
+      csl.log("checkForNewMaster whereIsTheMaster","There's no master, searching is needed");
+      setNewMaster = true;
+    } // Otherwise we check to see if the master has : 
+      //                                                - Enough Coins
+      //                                                - Is not afk      
+    else{
+      let M = this.allPlayers.find(p => p.getPlayerId() === this.master);
+      if(M.playerMoney <= 0 || M.isAFK){
+        csl.log('checkForNewMaster comonMan', "Master can no longer be. We change it.")
+        setNewMaster = true;
+      }
+    }
+
+
+    // If we required a new master we search for a potential master
+    //  Otherwise null ?
+    if(setNewMaster){  
+      csl.log("checkForNewMaster search Warrant","Start iterations to find new master")
+      let potentialMaster = undefined
+      this.players.forEach(player => {
+        // A potentialMaster is : 
+        //                          - Not AFK
+        //                          - Not Spectator
+        //                          - has Money
+        if(player.playerMoney >= 0 && !player.isSpectator && !player.isAfk){
+          if(potentialMaster === undefined)
+            potentialMaster = player.getPlayerId();
+        }
+      })
+
+      if(potentialMaster){
+        this.setMaster(potentialMaster);
+        csl.log("checkForNewMaster Assignement", "New master set to :",this.master);
+      }
+      else{
+        this.setMaster(null);
+        csl.log("checkForNewMaster failed","Master is set to null. Somethings could break. Where are the players ? :'( ") 
+      }
+    }else{
+      csl.log('checkForNewMaster Noneed', "Master did not required to be changed.");
+    }
   }
 
   start(playerId) {
@@ -744,11 +800,11 @@ class Game {
       const winnerHandName = winner[0].type;
       console.log("winner est: ", winner[0].id);
       console.log("WINNER EST:", this.getPlayerById(winner[0].id));
-      const aa = this.getPlayerById(winner[0].id);
+      const aa = this.players.find(p => p.getPlayerId() === winner[0].id);
       aa.playerHandName = winnerHandName;
       console.log("aa", aa);
       if (aa.getStatus() === "tapis") {
-        const maxwin = aa.betTotal * (this.activePlayers.filter(p => !p.alreadyWon)).length;
+        let maxwin = aa.betTotal * (this.activePlayers.filter(p => !p.alreadyWon)).length;
         const prend = maxwin <= this.total ? maxwin : this.total;
         aa.seRemplirLesPoches(prend);
         this.total -= prend;
@@ -758,6 +814,7 @@ class Game {
         //l'update esr fait au debut de la fonction
         aa.jesuislewinner();
         if (this.total > 0) {
+          csl.log("evaluateHands","Money left, check for another winner.");
           this.evaluateHands();
         }
         //
@@ -993,7 +1050,7 @@ class Game {
         id: this.activePlayers[0].getPlayerId(),
         type: "dernier joueur",
       };
-    let combinationList = this.listeCombinaison(activePlayers);
+    let combinationList = this.listeCombinaison(activePlayers.filter(p => !p.alreadyWon));
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
     csl.log("gagnant", maxList, combinationList);
     if (maxList.length > 1) {

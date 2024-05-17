@@ -41,7 +41,39 @@ class Player {
     this.playerMoney = coins;
     this.alreadyWon = alreadyWon;
     this.alltalkedThisTurn = false;
+
+    return new Proxy(this, {
+      set: (target, property, value) => {
+        console.log('proxyMoney called');
+        if (property === 'playerMoney') {
+          target.updateMoneyInDatabase(value - target.playerMoney)
+            .then(() => {
+              target.playerMoney = value;
+            })
+            .catch(error => {
+              console.error('Failed to update money in database:', error);
+            });
+        } else {
+          target[property] = value;
+        }
+        return true;
+      },
+      get: (target, property) => {
+        if (property === 'playerMoney') {
+          return target.playerMoney;
+        }
+        return target[property];
+      }
+    });
   }
+
+  async updateMoneyInDatabase(coinsToAdd) {
+    const result = await this.updateUserCoins(this.playerId, coinsToAdd);
+    if (!result.success) {
+      throw new Error(result.message);
+    }
+  }
+
 
   setAfk() {
     this.isAfk = true;

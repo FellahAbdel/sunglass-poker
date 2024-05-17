@@ -49,6 +49,11 @@ const gameReducer = (state = initialState, action) => {
   var playerId;
   var answer;
   switch (action.type) {
+    case actions.SET_DAO:
+      return  {
+        ...state,
+        dao:action.payload.dao
+      };
     case actions.CREATE_GAME:
       if(action.payload.serverName === undefined) return state;
       csl.log(fileType, "CREATE GAME");
@@ -236,7 +241,9 @@ const gameReducer = (state = initialState, action) => {
           payload: { id: action.payload.tableId },
         };
         room.game.resetRestartCall();
-        const newPlayer = new Player(playerId, pseudo, coins);
+        let newPlayer = new Player(playerId, pseudo, coins);
+        newPlayer.updateUserCoins = state.dao.updateUserCoins;
+        csl.log(['gameReducer','new Player'],"player created : ", newPlayer)
         if (room.players.length === 0) {
           room.game.setMaster(playerId);
         }

@@ -137,3 +137,9 @@ module.exports.sitted = (table, players) => ({
 module.exports.kicked = () => ({
   type:actions.KICKED,
 })
+
+
+module.exports.setDao = (dao) => ({
+  type:actions.SET_DAO,
+  payload:{dao:dao}
+});

@@ -60,3 +60,5 @@ module.exports.PLAYER_GAME_ACTION_LIST = [
   module.exports.ACTIVATE_BONUS,
 ];
 
+
+module.exports.SET_DAO = "SET_DAO";
