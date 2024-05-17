@@ -22,7 +22,7 @@ require("dotenv").config();
 module.exports = function (app, bdd) {
   // Logging database connection
   csl.log("bdd", "bdd!", bdd);
-//   bdd = "localhost:10003";
+  //   bdd = "localhost:10003";
   // Connect to MongoDB database
   mongoose.connect("mongodb://pokerBackEndServer:azerty@" + bdd + "/Poker", {});
 
@@ -491,12 +491,14 @@ module.exports = function (app, bdd) {
           return {
             error: true,
             code: 400,
-            data: { error: "game_exists",
-            field: "game",
-            message: "Game name already exists" },
-          };          
+            data: {
+              error: "game_exists",
+              field: "game",
+              message: "Game name already exists",
+            },
+          };
         }
-           
+
         // Create a new game description with provided parameters
         const gameDescription = new GameDescriptionModel({
           serverName,
@@ -575,17 +577,23 @@ module.exports = function (app, bdd) {
     playerLeftGame: async function (id, roomId) {
       try {
         // Find the user by ID
-        // const user = await UserModel.findById(id);
+        const user = await UserModel.findById(id);
         console.log("this ", user, " is leaving the game");
-
+        
+        console.log("user in game", user.inGame);
         // Find the game description by user's inGame ID
         const gameDesc = await GameDescriptionModel.findById(roomId);
-        console.log("he was in game ", user.inGame, " and the gameDesc is ", gameDesc);
+        console.log(
+          "he was in game ",
+          roomId,
+          " and the gameDesc is ",
+          gameDesc
+        );
 
         console.log("game players before remove", gameDesc.players);
         // If game description exists, remove the player's ID from the players array
         if (gameDesc !== null) {
-          gameDesc.players = gameDesc.players.filter((p) => p === id);
+          gameDesc.players = gameDesc.players.filter((p) => p !== id);
           await gameDesc.save();
         }
 
@@ -672,9 +680,8 @@ module.exports = function (app, bdd) {
     },
 
     getServerNameFromGameId: async function (gameId) {
-      csl.log('getServerNameFromGameId',"Argument gameId: ",gameId);
-      if(gameId.gameRoomId !== undefined)
-        gameId = gameId.gameRoomId;
+      csl.log("getServerNameFromGameId", "Argument gameId: ", gameId);
+      if (gameId.gameRoomId !== undefined) gameId = gameId.gameRoomId;
       try {
         gameRecord = await GameDescriptionModel.findOne({ _id: gameId });
         if (gameRecord) {
@@ -742,14 +749,14 @@ module.exports = function (app, bdd) {
     try {
       // Hash the new password
       const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
-  
+
       // Find the user by email and update the password
       const updatedUser = await UserModel.findOneAndUpdate(
         { email: email },
         { $set: { password: hashedPassword } },
         { new: true, runValidators: true }
       );
-  
+
       // Check if the user was found and the password updated
       if (updatedUser) {
         return { success: true, message: "Password updated successfully" };
@@ -762,9 +769,6 @@ module.exports = function (app, bdd) {
       return { success: false, message: "Failed to update password" };
     }
   };
-  
-
-  
 
   return dao;
 };
