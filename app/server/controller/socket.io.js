@@ -366,10 +366,18 @@ module.exports = function (
       socket.request.session.destroy();
     }, SESSION_DURATION);
 
+    // Nouveau code pour gérer l'expéditeur du message
     socket.on("sendMessage", (data) => {
-      const { message } = data; // Assurez-vous que le message contient les informations nécessaires
-      console.log(`Message received: ${message}`);
-      socket.broadcast.emit("receiveMessage", data); // Diffuse le message à tous les clients connectés
+      const { message, sender } = data;
+      const room = socket.request.session.userRoom; // Utilisation de l'ID de la salle stocké dans la session de socket
+      if (room) {
+        console.log(
+          `Message received from ${sender} in room ${room}: ${message}`
+        );
+        socket.to(room).emit("receiveMessage", { message, sender }); // Diffuser le message à tous les autres utilisateurs dans la salle
+      } else {
+        console.log(`No room found for user ${sender}`);
+      }
     });
 
     socket.on("status", (data) => {

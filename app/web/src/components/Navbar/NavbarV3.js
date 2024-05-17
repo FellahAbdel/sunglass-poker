@@ -16,7 +16,8 @@ import * as actions from "../../store/actions/clientInteractionsCreator.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = ({}) => {
-  const { isLogged, logingOut } = useAuth();
+  const { isLogged, logingOut, user } = useAuth();
+  console.log("User in Navbar:", user); // Ajoutez ce log pour vérifier le contenu de user
   const { gameState } = useGameTable();
   const dispatch = useDispatch();
   // Local state for chat open/close and message input
@@ -32,7 +33,11 @@ const Navbar = ({}) => {
 
   const handleSendMessage = () => {
     if (newMessage.trim()) {
-      dispatch(actions.sendMessage(newMessage));
+      const messageData = {
+        message: newMessage,
+        sender: user.pseudo, // Inclure le pseudo de l'utilisateur
+      };
+      dispatch(actions.sendMessage(messageData));
       setNewMessage("");
     }
   };
@@ -118,6 +123,7 @@ const Navbar = ({}) => {
     setisChatOpen(false);
   };
   const messages = useSelector((state) => state.chat.messages);
+  console.log("Messages in Navbar:", messages); // Vérifiez ici si les messages contiennent l'expéditeur
 
   // Determine the label based on the context
   let label;
@@ -155,13 +161,12 @@ const Navbar = ({}) => {
 
                   {/* liste des messages */}
                   <div className="message-list">
-                    {messages.map((message, index) => (
+                    {messages.map((msg, index) => (
                       <div key={index} className="message">
-                        {message}
+                        <strong>{msg.sender}: </strong> {msg.message}
                       </div>
                     ))}
                   </div>
-
                   {/* formulaire d'envoi de message */}
                   <div className="chat-input">
                     <input
