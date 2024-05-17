@@ -13,9 +13,14 @@
   border-radius: 10px;
   border: 2px solid #ccc;
   background-color: rgba(237, 242, 247, 1);
-  border-bottom: 2px solid #4d6478;
   margin-bottom: 1vh;
   transition: width 0.5s ease, height 0.5s ease;
+}
+#dark .input-connectionDefault{
+  border-bottom: 2px solid var(--color1-dark);
+}
+#light .input-connectionDefault{
+  border-bottom: 2px solid var(--color1-light);
 }
 .input-connectionDefault::placeholder {
   color: #999;
@@ -25,8 +30,8 @@
   color: #f63e3e;
   font-size: 0.8vw;
   padding: 0;
-  margin-top: 0.5vh;
-  margin-bottom: 0;
+  margin-top: -0.7vh;
+  margin-bottom: 2vh;
 }
 .input-serverRoomPassword {
   width: 90%;
@@ -38,7 +43,8 @@
   background-color: rgba(237, 242, 247, 1);
   border-bottom: 2px solid #4d6478;
 }
-.input-component-error {
+#dark .input-component-error,
+#light .input-component-error {
   border-bottom: 2px solid #f63e3e;
 }
 
