@@ -289,6 +289,7 @@ class Game {
         (dernierPasTapis.talkedThisTurn &&
           dernierPasTapis.currentBetTurn === this.gameCurrentBet))
     ) {
+      csl.log(['evaluateHands','lastAvecTapis'],"lastPasTapis: ",dernierPasTapis, "Game Current bet:",this.gameCurrentBet);
       // this.advanceStageToShowdown();
       clearTimeout(this.focusTurnCall);
       // this.players.forEach(p => {this.total+=p.currentBetTurn;p.currentBetTurn =0;});
@@ -530,10 +531,10 @@ class Game {
       csl.log("bet", `before the bet : ${this.total}`);
       /*
             **** RAISE *****
-        si :   0 < gameCurrentBet < mise < allin
+        si :   0 < gameCurrentBet < miseTotal < allin
         
             **** CALL *****
-        si :  mise = gameCurrentBet
+        si :  miseTotal = gameCurrentBet != allin
 
             **** CHECK *****
         si :   0 = mise = gameCurrentBet
@@ -542,40 +543,45 @@ class Game {
         si :   mise = playerMoney
       */
 
-      // Si le player mise moins que son argent.
-      if (player.playerMoney >= amount) {
-        if (amount + player.howmanyBetTurn() >= this.gameCurrentBet) {
-          //   --- RAISE  ---
-          player.raise();
 
-          // Raise de tout son argent ==> TAPIS
-          if (amount === player.playerMoney) {
-            player.tapis(amount);
-            player.setTapis();
-            console.log("TAPIS");
-          } //  Raise simple sinon
-          else {
-            player.bet(amount);
-            if (amount === this.gameCurrentBet) player.call();
-          }
-
-          //Change le maximum du tour + incrémente le pot.
-          this.total += amount;
-          this.gameCurrentBet = player.howmanyBetTurn();
-        }
-      } //else if (amount === 0) {
-      //   player.check();
-      // }
-      // Si le joueur a misé plus que son argent.
-      // Il mise alors le total de son argent. Donc TAPIS
-      else {
-        //ICI ya des problèmes, l'argent n'est pas dans le pot 
-        amount = player.getPlayerMoney();
-        player.tapis(amount);
-        player.setTapis();
-        console.log("TAPIS");
-        this.total += amount;
+     //   --- RAISE  ---
+      if(this.gameCurrentBet < amount+player.currentBet &&
+         amount < player.getPlayerMoney()
+      ){
+        this.total+=amount;
+        player.raise();
+        player.bet(amount);
+        this.gameCurrentBet = player.currentBet;
       }
+     //   --- CALL  ---
+      else if((amount+player.currentBet) === this.gameCurrentBet &&
+              amount !== player.getPlayerMoney()
+      ) {
+        this.total+=amount;
+        player.bet(amount);
+        player.call();
+      }
+      //   --- CHECK  ---
+      else if(amount === 0 &&
+             this.gameCurrentBet === 0
+      ){
+        player.check();
+      }
+      //   --- TAPIS  ---
+      else if(amount >= player.getPlayerMoney()){
+        this.total+=player.getPlayerMoney();
+        if(player.getPlayerMoney() >= this.gameCurrentBet)
+          this.gameCurrentBet = player.getPlayerMoney();
+        player.tapis(player.getPlayerMoney());
+        player.setTapis();
+      }
+      //   --- FAILED  ---
+      else{
+        csl.log('betfailed',"player bet is not valid.",amount,player.getPlayerMoney(),this.gameCurrentBet);
+        return;
+      }
+      if(player.currentBet > this.gameCurrentBet)
+        this.gameCurrentBet =player.currentBet 
       csl.log("bet", "gameCurrentBet after this bet : ", this.gameCurrentBet);
       csl.log("bet", `After the bet : ${this.total}`);
       this.rotateFocus();
@@ -636,7 +642,7 @@ class Game {
 
   addPlayer(player) {
     this.allPlayers.push(player);
-    if (this.state !== "waiting" || player.playerMoney <= 0) {
+    if (this.state !== "waiting" || player.getPlayerMoney() <= 0) {
       csl.log(
         "gameObject : addPlayer",
         "either or both is true: ",
@@ -644,12 +650,12 @@ class Game {
         this.state !== "waiting",
         this.state,
         "\nPlayer has no money :",
-        player.playerMoney <= 0,
-        player.playerMoney
+        player.getPlayerMoney() <= 0,
+        player.getPlayerMoney()
       );
       player.isSpectator = true;
       player.isActive = false;
-    } else if (!player.isSpectator && player.playerMoney >= this.blind) {
+    } else if (!player.isSpectator && player.getPlayerMoney() >= this.blind) {
       //If not the first round, we make people pay to join.
       //If they can't, it's cancel.
       if (!this.firstRoundForRoom) {
@@ -658,13 +664,13 @@ class Game {
       this.players.push(player);
       this.checkForNewMaster();
     }
-    console.log(player.playerMoney);
+    console.log(player.getPlayerMoney());
     console.log(`Player ${player.name} added.`);
   }
 
   movePlayersWithZeroCoinsToSpectators() {
     this.players.forEach((player) => {
-      if (player.playerMoney <= 0) {
+      if (player.getPlayerMoney() <= 0) {
         player.movePlayerToSpectator();
         if (this.master === player.getPlayerId()) {
           this.checkForNewMaster();
@@ -706,7 +712,7 @@ class Game {
     //                                                - Is not afk
     else {
       let M = this.allPlayers.find((p) => p.getPlayerId() === this.master);
-      if (M.playerMoney <= 0 || M.isAFK) {
+      if (M.getPlayerMoney() <= 0 || M.isAFK) {
         csl.log(
           "checkForNewMaster comonMan",
           "Master can no longer be. We change it."
@@ -729,7 +735,7 @@ class Game {
         //                          - Not Spectator
         //                          - has Money
         //                          - Not the old master (ofc)
-        if (player.playerMoney >= 0 && !player.isSpectator && !player.isAfk) {
+        if (player.getPlayerMoney() >= 0 && !player.isSpectator && !player.isAfk) {
           if (potentialMaster === undefined)
             if (
               this.master === null ||
@@ -886,8 +892,10 @@ class Game {
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     console.log("winner est: ", winner);
     const nbwinner = winner.length;
-    this.players.forEach((p) => (p.decrementalTotal = p.betTotal));
+    this.players.forEach((p) => {(p.decrementalTotal =(p.decrementalTotal === undefined)?p.betTotal:p.decrementalTotal);csl.log('Mise par joueur a gagné',`${p.name} : ${p.decrementalTotal}`)});
     if (nbwinner >= 2) {
+      let totalWinnerBet  = 0;
+      winner.forEach(w => totalWinnerBet += this.getPlayerById(w.id).betTotal); 
       for (let i = 0; i < nbwinner; i++) {
         csl.log(
           ["evaluateHands", "multiwinner"],
@@ -897,22 +905,16 @@ class Game {
         );
         const winnerHandName = winner[i].type;
         const winPlayer = this.getPlayerById(winner[i].id);
-        let maxwin = winPlayer.betTotal || this.total;
-        let prend = 0;
-        let x = 0;
-        this.activePlayers.forEach((p) => {
-          x =
-            Math.ceil(p.decrementalTotal / 2) >= maxwin
-              ? maxwin
-              : Math.ceil(p.decrementalTotal / 2);
-          prend += x;
-          p.decrementalTotal -= x;
-        });
+        let coef = winPlayer.betTotal/totalWinnerBet;
+        let prend = Math.floor((coef) * this.total);
+        csl.log("pritwinner",`il avait un coef de  ${coef} le droit à  par joueur et a prit ${prend}`)
         winPlayer.playerHandName = winnerHandName;
-        winPlayer.playerMoney += prend;
-        // winPlayer.seRemplirLesPoches(this.total / nbwinner);
+        winPlayer.localMoney += prend;
+        this.total-= prend;
         winPlayer.jesuislewinner();
       }
+      // Le reste va au croupier :) 
+      this.total = 0;
     } else {
       const winnerHandName = winner[0].type;
       const winPlayer = this.players.find(
@@ -937,22 +939,28 @@ class Game {
 
       let prend = 0;
       let x = 0;
-      this.activePlayers.forEach((p) => {
-        x = p.decrementalTotal >= maxwin ? maxwin : p.decrementalTotal;
-        prend += x;
-        p.decrementalTotal -= x;
+      this.players.forEach((p) => {
+        // if(!p.alreadyWon){
+          x = (p.decrementalTotal >= maxwin ) ?
+           maxwin :
+           p.decrementalTotal;
+          prend += x;
+          p.decrementalTotal -= x;
+          csl.log("evaluateHandswinnerperPlayerTake",`winner prend ${x} à ${p.name}`)
+        // }
       });
       // const prend = maxwin <= this.total ? maxwin : this.total;
-      const oldMoney = winPlayer.playerMoney;
-      winPlayer.playerMoney += prend;
+      const oldMoney = winPlayer.localMoney;
+      winPlayer.localMoney += prend;
       this.total -= prend;
       winPlayer.alreadyWon = true;
       csl.log(
         "evaluateHandsWinnerTapis",
-        `Il a pu gagner par joueur ${maxwin}`,
-        `Il reste ${this.total}`,
-        `Il avait : ${oldMoney} à la fin du round`,
-        `Il a désormais : ${winPlayer.playerMoney}`
+        `Il a pu gagner par joueur ${maxwin} \n`,
+        `Il a prit au total : ${prend}  \n`,
+        `Il reste ${this.total} \n`,
+        `Il avait : ${oldMoney} à la fin du round\n`,
+        `Il a désormais : ${winPlayer.localMoney}\n`
       );
       //l'update esr fait au debut de la fonction
       winPlayer.jesuislewinner();
@@ -961,6 +969,7 @@ class Game {
         this.evaluateHands();
       }
     }
+    this.players.forEach(p => p.playerMoney = p.localMoney);
   }
 
   //Debut de fonction pour le bonus, a terminer

@@ -41,6 +41,8 @@ class Player {
     this.playerMoney = coins;
     this.alreadyWon = alreadyWon;
     this.alltalkedThisTurn = false;
+    this.localMoney = coins;
+    this.decrementalTotal = undefined;
 
     return new Proxy(this, {
       set: (target, property, value) => {
@@ -153,7 +155,7 @@ class Player {
   }
 
   seRemplirLesPoches(total) {
-    this.playerMoney += total;
+    this.localMoney += total;
   }
 
   settimeLastAnswer(t) {
@@ -200,7 +202,7 @@ class Player {
   }
 
   getPlayerMoney() {
-    return this.playerMoney;
+    return this.localMoney;
   }
 
   getPlayerActionLog() {
@@ -236,15 +238,6 @@ class Player {
   setCards(randomCardsList) {
     this.playerCards = randomCardsList;
   }
-
-  /*
-   * IN : NUMBER somme a miser
-   * OUT : rien
-   * FUNCTION : déduire la somme misée de la somme des moneys
-   */
-  // bet(moneyToBet) {
-  //   this.playerMoney -= moneyToBet;
-  // }
 
   howmanyBetTurn() {
     return this.currentBetTurn;
@@ -317,25 +310,25 @@ class Player {
     this.currentBet = amount;
     this.currentBetTurn += amount;
     this.betTotal += amount;
-    this.playerMoney -= amount;
+    this.localMoney = 0;
   }
 
   bet(amount) {
-    if (this.playerMoney >= amount) {
+    if (this.localMoney >= amount) {
       this.talkedThisTurn = true;
       this.currentBet = amount;
       this.currentBetTurn += amount;
-      this.playerMoney -= amount;
+      this.localMoney -= amount;
       // this.status = "call";
       this.betTotal += amount;
     }
   }
 
   betinitial(amount) {
-    if (this.playerMoney >= amount) {
+    if (this.localMoney >= amount) {
       this.currentBet = amount;
       this.currentBetTurn += amount;
-      this.playerMoney -= amount;
+      this.localMoney -= amount;
       this.betTotal += amount;
       //status a definir:
       // this.status = "raise";
@@ -343,8 +336,9 @@ class Player {
   }
 
   betBonus(amount) {
-    if (this.playerMoney > amount) {
-      this.playerMoney -= amount;
+    if (this.localMoney > amount) {
+      this.localMoney -= amount;
+      this.betTotal += amount;
     }
   }
 
@@ -360,6 +354,8 @@ class Player {
     this.status = "Playing";
     this.betTotal = 0;
     this.talkedThisTurn = false;
+    this.decrementalTotal = undefined;
+    this.playerMoney = this.localMoney;
     // Ajouter d'autres réinitialisations si nécessaire
   }
 

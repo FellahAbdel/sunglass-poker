@@ -24,6 +24,14 @@ csl.silenced("bdd");
 csl.silenced("broadcastStatus");
 csl.silenced("refreshCall");
 csl.silenced("identify");
+csl.silenced("showMyGame");
+csl.silenced("myNameIs");
+csl.silenced("sendSuccess");
+csl.silenced("ManualRequestForGame");
+csl.silenced("gameReducer")
+csl.silenced("gameController")
+csl.silenced("Event")
+
 console.log(ENV_CONST_COMM);
 
 /** Paramètres cors du serveur.
