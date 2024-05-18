@@ -64,7 +64,7 @@ const socketProxy = createProxyMiddleware('/socketio', {
     pathRewrite: {
         '^/socketio': 'socket.io/'  // Remove the '/socketio' prefix
     },
-//    ws:true,
+    ws:true,
     onProxyReq: logProxyRequest
 });
 

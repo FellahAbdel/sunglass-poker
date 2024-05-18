@@ -120,8 +120,7 @@ class Game {
         console.log(
           `Player ${player.name} cannot rejoin the table due to insufficient coins.`
         );
-        player.isSpectator = true;
-        player.isActive = false;
+        player.movePlayerToSpectator();
         this.updatePlayersList();
         return;
       } else {
@@ -192,13 +191,19 @@ class Game {
    */
 
   autoTurn(player, left = false) {
-    
+    if (this.master === player.getPlayerId()) {
+      this.checkForNewMaster(true);
+    }
     // If the player left on purpose we need to make sure we don't break the round of focus.
     // If it's his turn we do the same as for the afk person, otherwise we need to force afk even if it's not his turn.
     if (left && this.isPlayersTurn(player.getPlayerId())) {
       // Not his turn so we set him afk but we don't do the rotate. He will be skipped automatically.
       csl.log("autoTurn", "player leave, async play fold custom");
-      if(this.players.findIndex(p => p.getPlayerId() === player.getPlayerId()) < this.focus)
+      if (
+        this.players.findIndex(
+          (p) => p.getPlayerId() === player.getPlayerId()
+        ) < this.focus
+      )
         this.focus--;
       player.fold();
       player.setAfk();
@@ -208,8 +213,11 @@ class Game {
       this.fold(player);
       this.setPlayerAFK(player);
     }
-    if(this.master === player.getPlayerId()){
+    if (this.master === player.getPlayerId()) {
       this.checkForNewMaster();
+    }
+    if (this.state === "waiting") {
+      this.moveAfkPlayersToSpectators();
     }
   }
 
@@ -244,19 +252,19 @@ class Game {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
     let someoneTapis =
-      this.activePlayers.find((player) => player.status === "tapis") !==
-      undefined;
+      this.activePlayers.filter((player) => player.status === "tapis").length >=
+      0;
     // Si personne tapis et que le nombre de joueur est 1 alors plus personne ne joue on a un gagnant
     csl.log("rotateFocus", someoneTapis);
-    if (
-      !someoneTapis &&
-      this.activePlayers.filter((p) => p.state !== "folded").length === 1
-    ) {
+    if (this.activePlayers.filter((p) => p.state !== "folded").length <= 1) {
       csl.log(
         "rotateFocus",
         "No one has tapied and there is only one player left"
       );
       this.advanceStageToShowdown();
+      // while (this.currentStage !== "showdown") {
+      //   this.advanceStage();
+      // }
       return;
     }
 
@@ -283,7 +291,7 @@ class Game {
     ) {
       // this.advanceStageToShowdown();
       clearTimeout(this.focusTurnCall);
-      this.players.forEach(p => {this.total+=p.currentBetTurn;p.currentBetTurn =0;});
+      // this.players.forEach(p => {this.total+=p.currentBetTurn;p.currentBetTurn =0;});
       while (this.currentStage !== "showdown") {
         this.advanceStage();
       }
@@ -299,8 +307,8 @@ class Game {
     console.log("original", originalFocus);
 
     this.focus = (this.focus + 1) % this.players.length;
-    csl.log("rotateFocus","focusapresoriginal", this.focus);
-    csl.log("rotateFocus","isACtive?", this.players[this.focus].isActive);
+    csl.log("rotateFocus", "focusapresoriginal", this.focus);
+    csl.log("rotateFocus", "isACtive?", this.players[this.focus].isActive);
     // Rotation du focus tant que le joueur actuel n'est pas actif
     while (
       !this.players[this.focus].isActive ||
@@ -321,7 +329,7 @@ class Game {
         return;
       }
     }
-    csl.log("rotateFocus","Le focus Après : ", this.focus);
+    csl.log("rotateFocus", "Le focus Après : ", this.focus);
 
     /**
      * on ne finit un tour  que si tout le monde a payé assez ou a tapis
@@ -359,7 +367,10 @@ class Game {
           p.playing();
         }
       });
-      this.players.map((p) => (p.gameCurrentBet = 0));
+      this.players.map((p) => {
+        this.total += p.currentBetTurn;
+        p.currentBetTurn = 0;
+      });
       this.gameCurrentBet = 0;
       this.advanceStage();
       // return;
@@ -425,6 +436,7 @@ class Game {
   }
 
   gameEnd() {
+    this.moveAfkPlayersToSpectators();
     this.focus = null;
     this.state = "waiting";
     this.updateActivePlayers();
@@ -438,8 +450,10 @@ class Game {
       player.revealCard(1);
     });
     this.resetRestartCall();
+    this.updatePlayersList();
     setTimeout(() => {
       if (this.allow_start) {
+        this.movePlayersWithZeroCoinsToSpectators();
         this.updatePlayersList();
         if (this.players.length <= 1) {
           // Assurez-vous qu'il y a plus d'un joueur actif.
@@ -508,66 +522,62 @@ class Game {
   }
 
   bet(player, amount) {
-    //Si c'est son tour de jouer
+    /*  On laisse le joueur bet si
+                                  - c'est son tour
+                                  - il a assez d'argent
+    */
     if (this.isPlayersTurn(player.getPlayerId())) {
-      //si il a assez d'argent
-      //PEUT pas y avoir de else parce que le amount est envoyé du front, c est le front qui est bloquant
-      if (player.getPlayerMoney() >= amount) {
-        //Cas ou il ajoute a sa mise pour s'équilibrer au autre
+      csl.log("bet", `before the bet : ${this.total}`);
+      /*
+            **** RAISE *****
+        si :   0 < gameCurrentBet < mise < allin
+        
+            **** CALL *****
+        si :  mise = gameCurrentBet
+
+            **** CHECK *****
+        si :   0 = mise = gameCurrentBet
+
+            **** ALLIN *****
+        si :   mise = playerMoney
+      */
+
+      // Si le player mise moins que son argent.
+      if (player.playerMoney >= amount) {
         if (amount + player.howmanyBetTurn() >= this.gameCurrentBet) {
-          if (amount === player.getPlayerMoney()) {
+          //   --- RAISE  ---
+          player.raise();
+
+          // Raise de tout son argent ==> TAPIS
+          if (amount === player.playerMoney) {
             player.tapis(amount);
             player.setTapis();
             console.log("TAPIS");
-            // this.playerBeforeNextTurn = this.players.findIndex(
-            //   (p) => p.getPlayerId() === player.getPlayerId()
-            // );
-            //TRUC A VERIFIER ---------------------------------------------------------------------------
-            // this.playerBeforeNextTurn =
-            //   (this.playerBeforeNextTurn + 1) % this.activePlayers.length;
-          } else {
+          } //  Raise simple sinon
+          else {
             player.bet(amount);
+            if (amount === this.gameCurrentBet) player.call();
           }
+
+          //Change le maximum du tour + incrémente le pot.
           this.total += amount;
-          //on met le max a la mise a mettre
-          if (this.gameCurrentBet < player.howmanyBetTurn()) {
-            this.gameCurrentBet = player.howmanyBetTurn();
-
-            if (!player.status === "tapis") {
-              player.raise();
-            }
-            // this.playerBeforeNextTurn = this.players.findIndex(
-            //   (p) => p.getPlayerId() === player.getPlayerId()
-            // );
-
-            //console.log("lefocus avant le raise:", this.focus);
-            //console.log("lefocus apres le raise", this.focus);
-          }
-        } else {
-          //LE TAPIS OU J'ai MISER MOINS QUE LA GAME
-          if (amount === player.getPlayerMoney()) {
-            player.tapis(amount);
-            player.setTapis();
-            console.log("TAPIS");
-            // this.playerBeforeNextTurn = this.players.findIndex(
-            //   (p) => p.getPlayerId() === player.getPlayerId()
-            // );
-            //TRUC A VERIFIER ---------------------------------------------------------------------------
-            // this.playerBeforeNextTurn =
-            //   (this.playerBeforeNextTurn + 1) % this.activePlayers.length;
-            this.total += amount;
-
-            this.rotateFocus();
-            return;
-          }
+          this.gameCurrentBet = player.howmanyBetTurn();
         }
-        //ça change juste le status si ça equivaut a un check (bet de 0)
-        if (amount === 0) {
-          player.check();
-        }
-        console.log("this line got executed", this.gameCurrentBet);
-        this.rotateFocus();
+      } else if (amount === 0) {
+        player.check();
       }
+      // Si le joueur a misé plus que son argent.
+      // Il mise alors le total de son argent. Donc TAPIS
+      else {
+        amount = player.playerMoney;
+        player.tapis(amount);
+        player.setTapis();
+        console.log("TAPIS");
+        this.total += amount;
+      }
+      csl.log("bet", "gameCurrentBet after this bet : ", this.gameCurrentBet);
+      csl.log("bet", `After the bet : ${this.total}`);
+      this.rotateFocus();
     }
   }
 
@@ -654,22 +664,37 @@ class Game {
   movePlayersWithZeroCoinsToSpectators() {
     this.players.forEach((player) => {
       if (player.playerMoney <= 0) {
-        player.isSpectator = true;
-        player.isActive = false;
-        console.log(
-          `Player ${player.name} moved to spectators due to insufficient coins.`
-        );
+        player.movePlayerToSpectator();
+        if (this.master === player.getPlayerId()) {
+          this.checkForNewMaster();
+        }
       } // if he has money and his the first we encouter, he's the potential new master if the master has no money.
     });
-    this.checkForNewMaster();
     this.updatePlayersList();
   }
 
-  checkForNewMaster() {
-    let setNewMaster = false;
+  moveAfkPlayersToSpectators() {
+    this.players.forEach((player) => {
+      if (player.isAfk) {
+        player.movePlayerToSpectator();
+        if (this.master === player.getPlayerId()) {
+          this.checkForNewMaster();
+        }
+      }
+    });
+    this.updatePlayersList();
+  }
+
+  checkForNewMaster(forced = false) {
+    //setNewMaster can be forced.
+    let setNewMaster = forced;
 
     // We check first to see if there is a master. If not we will need to either defined or set null again
-    if (this.master === undefined || this.master === null) {
+    if (
+      this.master === undefined ||
+      this.master === null ||
+      !this.allPlayers.find((p) => p.getPlayerId() === this.master)
+    ) {
       csl.log(
         "checkForNewMaster whereIsTheMaster",
         "There's no master, searching is needed"
@@ -702,9 +727,15 @@ class Game {
         //                          - Not AFK
         //                          - Not Spectator
         //                          - has Money
+        //                          - Not the old master (ofc)
         if (player.playerMoney >= 0 && !player.isSpectator && !player.isAfk) {
           if (potentialMaster === undefined)
-            potentialMaster = player.getPlayerId();
+            if (
+              this.master === null ||
+              this.master === undefined ||
+              this.master !== player.getPlayerId()
+            )
+              potentialMaster = player.getPlayerId();
         }
       });
 
@@ -854,41 +885,79 @@ class Game {
     // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     console.log("winner est: ", winner);
     const nbwinner = winner.length;
+    this.players.forEach((p) => (p.decrementalTotal = p.betTotal));
     if (nbwinner >= 2) {
       for (let i = 0; i < nbwinner; i++) {
+        csl.log(
+          ["evaluateHands", "multiwinner"],
+          "Iteration sur le winner",
+          i,
+          winner[i]
+        );
         const winnerHandName = winner[i].type;
-        const aa = this.getPlayerById(winner[i].id);
-        aa.playerHandName = winnerHandName;
-        aa.seRemplirLesPoches(this.total / nbwinner);
-        aa.jesuislewinner();
+        const winPlayer = this.getPlayerById(winner[i].id);
+        let maxwin = winPlayer.betTotal || this.total;
+        let prend = 0;
+        let x = 0;
+        this.activePlayers.forEach((p) => {
+          x =
+            Math.ceil(p.decrementalTotal / 2) >= maxwin
+              ? maxwin
+              : Math.ceil(p.decrementalTotal / 2);
+          prend += x;
+          p.decrementalTotal -= x;
+        });
+        winPlayer.playerHandName = winnerHandName;
+        winPlayer.playerMoney += prend;
+        // winPlayer.seRemplirLesPoches(this.total / nbwinner);
+        winPlayer.jesuislewinner();
       }
     } else {
       const winnerHandName = winner[0].type;
-      console.log("winner est: ", winner[0].id);
-      console.log("WINNER EST:", this.getPlayerById(winner[0].id));
-      const aa = this.players.find((p) => p.getPlayerId() === winner[0].id);
-      aa.playerHandName = winnerHandName;
-      console.log("aa", aa);
-      if (aa.getStatus() === "tapis") {
-        let maxwin =
-          aa.betTotal * this.activePlayers.filter((p) => !p.alreadyWon).length;
-        const prend = maxwin <= this.total ? maxwin : this.total;
-        aa.seRemplirLesPoches(prend);
-        this.total -= prend;
-        // aa.isActive = false;
-        aa.alreadyWon = true;
-        csl.log("evaluateHandsWinnerTapis", maxwin, this.total, aa.isActive);
-        //l'update esr fait au debut de la fonction
-        aa.jesuislewinner();
-        if (this.total > 0) {
-          csl.log("evaluateHands", "Money left, check for another winner.");
-          this.evaluateHands();
-        }
-      } else {
-        csl.log('evaluateHands',"He won everything",aa.name);
-        aa.seRemplirLesPoches(this.total);
-        aa.jesuislewinner();
-        this.total = 0;
+      const winPlayer = this.players.find(
+        (p) => p.getPlayerId() === winner[0].id
+      );
+      winPlayer.playerHandName = winnerHandName;
+      csl.log(
+        ["evaluateHands", "Solowinner"],
+        "Id du winner est: ",
+        winner[0].id
+      );
+      csl.log(
+        ["evaluateHands", "Solowinner"],
+        "Objet Player du gagnat:",
+        winPlayer
+      );
+      let maxwin = winPlayer.betTotal; //* this.activePlayers.filter((p) => !p.alreadyWon).length;
+
+      /*
+       *** Un joueur ne peut gagner que jusqu'à ce qu'il a miser par joueur ***
+       */
+
+      let prend = 0;
+      let x = 0;
+      this.activePlayers.forEach((p) => {
+        x = p.decrementalTotal >= maxwin ? maxwin : p.decrementalTotal;
+        prend += x;
+        p.decrementalTotal -= x;
+      });
+      // const prend = maxwin <= this.total ? maxwin : this.total;
+      const oldMoney = winPlayer.playerMoney;
+      winPlayer.playerMoney += prend;
+      this.total -= prend;
+      winPlayer.alreadyWon = true;
+      csl.log(
+        "evaluateHandsWinnerTapis",
+        `Il a pu gagner par joueur ${maxwin}`,
+        `Il reste ${this.total}`,
+        `Il avait : ${oldMoney} à la fin du round`,
+        `Il a désormais : ${winPlayer.playerMoney}`
+      );
+      //l'update esr fait au debut de la fonction
+      winPlayer.jesuislewinner();
+      if (this.total > 0) {
+        csl.log("evaluateHands", "Money left, check for another winner.");
+        this.evaluateHands();
       }
     }
   }
@@ -1087,9 +1156,9 @@ class Game {
   listeCombinaison(activePlayers) {
     let res = [];
 
-    console.log("activePlayers.length:", this.activePlayers.length);
-    for (let i = 0; i < this.activePlayers.length; i++) {
-      let f7c = this.make7Cards(this.activePlayers[i]);
+    console.log("activePlayers.length:", activePlayers.length);
+    for (let i = 0; i < activePlayers.length; i++) {
+      let f7c = this.make7Cards(activePlayers[i]);
       let c = this.combinaison(f7c.cards);
       c.id = f7c.id;
       res.push(c);
@@ -1118,7 +1187,7 @@ class Game {
         type: "dernier joueur",
       };
     let combinationList = this.listeCombinaison(
-      activePlayers.filter((p) => !p.alreadyWon)
+      activePlayers.filter((p) => p.alreadyWon === false)
     );
     let maxList = scoreEngineUtils.maximums(combinationList, (x) => x.weight);
     csl.log("gagnant", maxList, combinationList);
@@ -1138,33 +1207,6 @@ class Game {
     clearTimeout(this.focusTurnCall);
     clearTimeout(this.restartCall);
   }
-
-  // showHands() {
-  //   this.players.forEach((player) => {
-  //     console.log(`${player.name}'s hand:`);
-  //     player.getPlayerCards().forEach((card) => {
-  //       console.log(card);
-  //     });
-  //     console.log();
-  //   });
-  // }
 }
-
-// const game = new Game();
-// console.log(game);
-
-// game.start();
-
-// console.log(game);
-
-// // game.showHands();
-
-// game.flop();
-
-// game.turn();
-
-// game.river();
-
-// game.make7Cards(game.players[0]);
 
 module.exports = Game;

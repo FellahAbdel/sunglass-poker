@@ -44,14 +44,15 @@ class Player {
 
     return new Proxy(this, {
       set: (target, property, value) => {
-        console.log('proxyMoney called');
-        if (property === 'playerMoney') {
-          target.updateMoneyInDatabase(value - target.playerMoney)
+        console.log("proxyMoney called");
+        if (property === "playerMoney") {
+          target
+            .updateMoneyInDatabase(value - target.playerMoney)
             .then(() => {
               target.playerMoney = value;
             })
-            .catch(error => {
-              console.error('Failed to update money in database:', error);
+            .catch((error) => {
+              console.error("Failed to update money in database:", error);
             });
         } else {
           target[property] = value;
@@ -59,11 +60,11 @@ class Player {
         return true;
       },
       get: (target, property) => {
-        if (property === 'playerMoney') {
+        if (property === "playerMoney") {
           return target.playerMoney;
         }
         return target[property];
-      }
+      },
     });
   }
 
@@ -73,7 +74,6 @@ class Player {
       throw new Error(result.message);
     }
   }
-
 
   setAfk() {
     this.isAfk = true;
@@ -127,18 +127,23 @@ class Player {
 
   toggleSpectator() {
     if (this.isSpectator && !this.canJoinTable()) {
-      console.log(`Player ${this.name} cannot rejoin the table due to insufficient coins.`);
-      this.isSpectator=true;
-      this.isActive=false;
+      this.movePlayerToSpectator();
       return;
     }
-    this.isSpectator = !this.isSpectator;
-    if (this.isSpectator) {
-      this.isActive = false;
-      this.newRoundReset();
+    if (!this.isSpectator) {
+      this.movePlayerToSpectator();
+      return;
     } else {
+      this.isSpectator = false;
       this.isActive = true;
+      return;
     }
+  }
+
+  movePlayerToSpectator() {
+    this.newRoundReset();
+    this.isSpectator = true;
+    this.isActive = false;
   }
 
   hideCard(cardIndex) {
@@ -316,18 +321,18 @@ class Player {
   }
 
   bet(amount) {
-    if (this.playerMoney > amount) {
+    if (this.playerMoney >= amount) {
       this.talkedThisTurn = true;
       this.currentBet = amount;
       this.currentBetTurn += amount;
       this.playerMoney -= amount;
-      this.status = "call";
+      // this.status = "call";
       this.betTotal += amount;
     }
   }
 
   betinitial(amount) {
-    if (this.playerMoney > amount) {
+    if (this.playerMoney >= amount) {
       this.currentBet = amount;
       this.currentBetTurn += amount;
       this.playerMoney -= amount;
@@ -349,7 +354,7 @@ class Player {
     this.currentBet = 0;
     this.currentBetTurn = 0;
     this.isActive = true;
-    this.isAfk = false;
+    // this.isAfk = false;
     this.alreadyWon = false;
     this.cardsVisible = [false, false];
     this.status = "Playing";

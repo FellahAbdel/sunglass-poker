@@ -34,7 +34,7 @@ const GameTable = () => {
   );
 
   const handleCloseOnClickOutside = (event) => {
-    if (isWindowOpen) {
+    if (isWindowOpen && windowType !== "loading") {
       closeWindow();
     }
   };

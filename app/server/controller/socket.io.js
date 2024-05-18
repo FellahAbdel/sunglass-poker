@@ -312,11 +312,11 @@ module.exports = function (
         );
 
         // Send a 'leftRoom' event to the player
-        sendEvent(socket, actcrea.leftRoom());
       } else csl.error(fileType, "Error in leaveRoom - user not in game");
     } else {
       csl.error(fileType, "Error in leaveRoom - response not successful");
     }
+    sendEvent(socket, actcrea.leftRoom());
   }
 
   /**
