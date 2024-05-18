@@ -5,6 +5,10 @@ import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
 
+/**
+ * ForgotPassword provides a form for users to request a password reset link via email.
+ * It validates user input and displays appropriate feedback messages.
+ */
 const ForgotPassword = ({}) => {
   const { openWindow, openSuccessWindow } = useWindowContext();
   const { checkEmail } = useAuth();
@@ -12,9 +16,12 @@ const ForgotPassword = ({}) => {
     email: "",
   });
   const { getTranslatedWord } = useTranslation();
-
   const [validationError, setValidationError] = useState("");
 
+  /**
+   * Handles changes to form inputs, updating local state and resetting validation errors.
+   * @param {Object} e - Event object from the form element.
+   */
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,6 +31,10 @@ const ForgotPassword = ({}) => {
     setValidationError("");
   };
 
+  /**
+   * Handles the form submission to send a password reset request.
+   * @param {Object} e - Event object to prevent default form submission behavior.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

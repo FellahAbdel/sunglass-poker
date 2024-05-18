@@ -1,4 +1,3 @@
-// forgotPassword.jsx
 import React, { useState } from "react";
 import Button from "../../../button/Button.tsx";
 import TextInputComponent from "../../../textInput/TextInput.jsx";
@@ -12,6 +11,10 @@ import {
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
 
+/**
+ * SignUpWindow provides a user interface for registering a new account.
+ * It includes form fields for user information and performs client-side validation.
+ */
 const SignUpWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const { openSuccessWindow, openWindow } = useWindowContext();
@@ -30,6 +33,10 @@ const SignUpWindow = () => {
     repeatPassword: "",
   });
 
+  /**
+   * Updates form data and clears associated validation errors when user edits an input.
+   * @param {Object} e - Event object from the input change.
+   */
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -43,6 +50,10 @@ const SignUpWindow = () => {
     }));
   };
 
+  /**
+   * Validates all form fields using utility functions and updates the validationErrors state.
+   * @returns {boolean} True if all form fields are valid, false otherwise.
+   */
   const validateForm = () => {
     const errors = {
       pseudo: "",
@@ -84,6 +95,10 @@ const SignUpWindow = () => {
     return Object.values(errors).every((error) => error === "");
   };
 
+  /**
+   * Handles form submission for registering a new user.
+   * @param {Object} e - Event object to prevent default form submission.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 

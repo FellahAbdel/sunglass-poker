@@ -4,10 +4,18 @@ import {
   initialState,
 } from "../../store/reducers/settingsReducer";
 
+// Create a context for managing settings state throughout the application.
 const SettingsContext = createContext();
 
+// Custom hook to provide easy access to the settings context.
 export const useSettings = () => useContext(SettingsContext);
 
+/**
+ * SettingsProvider is a component that provides settings state and dispatcher methods
+ * to its child components via a React context.
+ *
+ * @param {object} props - Component props containing children to render within the provider.
+ */
 export const SettingsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(settingsReducer, initialState);
 

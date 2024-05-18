@@ -5,19 +5,20 @@
     "message": "Message",
     "settings": "Paramètres",
     "tutorial": "Tutoriel",
-    "exitTable": "Quitter La Table",
-    "exit": "Fermer La Fenêtre",
+    "exitTable": "Quitter la table",
+    "exit": "Fermer la fenêtre",
     "logout": "Déconnexion",
     "login": "Connexion",
     "signin": "Inscription",
-    "ranking": "Classement" 
+    "ranking": "Classement",
+    "home": "Accueil"
   },
   "connection": {
     "login": "Connexion",
     "signin": "Inscription",
     "username": "Nom d'utilisateur",
     "password": "Mot de passe",
-    "repeatPass": "Répéter votre mot de passe",
+    "repeatPass": "Répétez votre mot de passe",
     "email": "Email",
     "forgotPass": "J'ai oublié mon mot de passe",
     "forgotPassQuestion": "Mot de passe oublié ?",
@@ -26,121 +27,165 @@
     "signinG": "Se connecter avec Google",
     "haveAccQuestion": "Vous avez déjà un compte ?",
     "optional": "Optionnel",
-    "loginMessage": "Se connecter à son compte",
-    "registerMessage": "Créer son compte",
+    "loginMessage": "Connectez-vous à votre compte",
+    "registerMessage": "Créez votre compte",
     "send": "Envoyer",
-    "returnConnection": "Retourner au menu de connection",
-    "loginSuccess": "Connexion réussit !"
+    "returnConnection": "Retour au menu de connexion",
+    "loginSuccess": "Connexion réussie !",
+    "successMail": "Email de réinitialisation de mot de passe envoyé avec succès",
+    "successAccount": "Compte créé avec succès !",
+    "resetPassword": "Réinitialisez votre mot de passe",
+    "successReset": "Votre mot de passe a été changé avec succès",
+    "enterNewPassword": "Entrez votre nouveau mot de passe ici :",
+    "temporary": "BOUTON TEMPORAIRE"
   },
   "messageBox": {
-    "loginSucces": "Connecté avec succès !",
-    "ok": "D'accord"
+    "loginSucces": "Connexion réussie !",
+    "ok": "Ok"
   },
   "game": {
     "loginPlay": "Connectez-vous pour jouer",
-    "signupPlay": "Créer un compter pour jouer",
+    "signupPlay": "Inscrivez-vous pour jouer",
     "startGame": "Commencer une partie",
     "joinGame": "Rejoindre une partie",
     "createAgame": "Créer une nouvelle partie",
+    "quickGame": "Partie rapide",
     "status": "Statut",
     "name": "Nom",
     "gameName": "Nom de la partie",
-    "ranked": "Classé",
+    "PasswordOptionnal": "Mot de passe (Optionnel)",
+    "ranked": "Classée",
     "players": "Joueurs",
-    "selectRank": "Sélectionnez le rang",
-    "join": "Rejoindre",
-    "full": "Complet"
-  },
-  "serverPanel": {
-    "name": "Nom",
-    "rank": "Rang",
-    "privacy": "Privé",
+    "selectRank": "Sélectionner le rang",
     "join": "Rejoindre",
     "full": "Complet",
-    "status": "Statut",
-    "action": "Action"
+    "noActiveServer": "Aucun serveur actif"
   },
   "handGuide": {
     "highcard": "Carte haute",
     "pair": "Paire",
-    "twoPair": "Double Paire",
+    "twoPair": "Double paire",
     "threeOfKind": "Brelan",
     "straight": "Suite",
     "flush": "Couleur",
     "fullHouse": "Full",
     "fourOfKind": "Carré",
-    "straightFlush": "Quinte Flush",
-    "royalFlush": "Quinte Flush Royale",
-    "show":"show",
-    "hide":"hide"
+    "straightFlush": "Quinte flush",
+    "royalFlush": "Quinte flush royale",
+    "show": "Montrer",
+    "hide": "Cacher",
+    "showB": "Montrer les deux",
+    "hideB": "Cacher les deux"
   },
   "gameActionPanel": {
     "raise": "Relancer",
     "call": "Suivre",
-    "check": "Vérifier",
-    "fold": "Se coucher"
+    "check": "Checker",
+    "fold": "Se coucher",
+    "currentSC": "SC actuel",
+    "afterSC": "SC après relance",
+    "totalRaise": "Relance totale"
   },
   "bonus": {
     "bonus": "BONUS"
   },
+  "serverPanel": {
+    "name": "Nom",
+    "rank": "Rang",
+    "privacy": "Confidentialité",
+    "join": "Rejoindre",
+    "full": "Complet",
+    "status": "Statut",
+    "action": "Action",
+    "selectRank": "Sélectionner le rang",
+    "friendly": "Amical",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé",
+    "elite": "Élite",
+    "createTheGame": "Créer la partie",
+    "search": "Rechercher une salle",
+    "gameExist": "Le nom de la partie existe déjà"
+  },
   "playersStatus": {
     "empty": "Vide",
-    "called": "Suivi",
-    "fold": "Se couche",
-    "raised": "Relancé",
-    "checked": "Vérifié",
-    "playing": "En jeu"
+    "call": "A suivi",
+    "folded": "S'est couché",
+    "raise": "A relancé",
+    "checked": "A checké",
+    "tapis": "ALL IN",
+    "playing": "En train de jouer",
+    "waiting": "En attente",
+    "winner": "Gagnant"
   },
   "settings": {
     "mute": "Muet",
+    "sound": "Son",
     "theme": "Thème",
+    "animations": "Animations",
     "langSelect": "Sélectionnez une langue"
   },
   "profil": {
     "name": "Nom",
-    "mail": "Mail",
-    "coins": "Crédits",
-    "date": "Date création compte",
-    "unknowDate":"Date inconnue"
-
+    "mail": "Email",
+    "coins": "Pièces",
+    "date": "Date d'inscription",
+    "unknowDate": "Date inconnue"
   },
   "shop": {
-    "shop": "Magasin",
+    "shop": "Boutique",
     "baseAvatar": "Avatars",
-    "sunglasses": "Lunettes",
+    "sunglasses": "Lunettes de soleil",
     "colorAvatar": "Couleur",
-    "confirmationMessage": "Êtes-vous sûr de vouloir acheter cet élément pour ",
+    "confirmationMessage": "Voulez-vous vraiment acheter cet article pour ",
     "confirm": "Confirmer",
     "cancel": "Annuler",
     "price": "prix",
-    "success": "Achat réalisé avec succès !"
+    "success": "Achat réussi !",
+    "afterTransaction": "Pièces après la transaction",
+    "buyMore": "Acheter plus",
+    "purchase": "Achat",
+    "buy": "Acheter",
+    "backStore": "Retour à la boutique",
+    "loading": "Chargement",
+    "coins": "Merci pour votre donation"
   },
   "messageLogo": {
     "tutorial": "Tutoriel",
     "profile": "Profil",
-    "listeTable": "REJOINDRE UNE PARTIE",
-    "createTable": "CRÉER UNE NOUVELLE PARTIE",
+    "servers": "REJOINDRE UNE PARTIE",
+    "create_table": "CRÉER UNE NOUVELLE PARTIE",
     "validation": "Confirmation d'achat",
-    "shop": "Boutique"
+    "shop": "Boutique",
+    "ranking": "Classements",
+    "coins": "Acheter des pièces"
   },
-  "alert":{
-    "confirmExitMessage" : "Etes-vous sûr de vouloir quitter la table ? Vous allez perdre vos SC en jeu",
-    "confirm" : "Confirmer",
-    "cancel" : "Annuler",
-    "logout" : "Vous êtes sur le point de vous déconnecter"
+  "alert": {
+    "confirmExitMessage": "Êtes-vous sûr de vouloir quitter la table ? Vous perdrez tous les SC en jeu.",
+    "leftTableSuccess": "Vous avez quitté la table avec succès.",
+    "confirm": "Confirmer",
+    "cancel": "Annuler",
+    "logout": "Vous êtes sur le point de vous déconnecter"
+  },
+  "table": {
+    "total": "Pot total",
+    "waiting": "En attente des joueurs",
+    "join": "Rejoindre la partie",
+    "spectacle": "Regarder la partie",
+    "start": "Commencer la partie",
+    "inGame": "Vous êtes encore à la table de jeu"
   },
   "ranking": {
-    "rank" : "Rang",
-    "pseudo" : "Pseudo",
-    "gain" : "Gain",
-    "loadMore" : "Voir plus"
+    "rank": "Rang",
+    "pseudo": "Pseudonyme",
+    "gain": "Gain",
+    "loadMore": "Charger plus"
   },
-    "error": {
-      "noAccountFound": "Aucun compte trouvé",
-      "invalidEmail": "Adresse email invalide",
-      "badUsername": "Le nom d'utilisateur doit comporter au moins 3 caractères",
-      "password6Characters": "Le mot de passe doit contenir au moins 6 caractères",
-      "passwordNotMatch": "Les mots de passe ne correspondent pas"
-    }
-  
+  "error": {
+    "noAccountFound": "Aucun compte trouvé",
+    "invalidEmail": "Adresse email invalide",
+    "badUsername": "Le nom d'utilisateur doit comporter au moins 3 caractères",
+    "password6Characters": "Le mot de passe doit comporter au moins 6 caractères",
+    "passwordNotMatch": "Les mots de passe ne correspondent pas",
+    "emailNotFound": "Email non trouvé"
+  }
 }

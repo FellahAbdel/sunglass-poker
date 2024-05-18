@@ -10,7 +10,7 @@
     "logout": "Log out",
     "login": "Log in",
     "signin": "Sign Up",
-    "ranking" : "Ranking",
+    "ranking": "Ranking",
     "home": "Home"
   },
   "connection": {
@@ -21,26 +21,26 @@
     "repeatPass": "Repeat your password",
     "email": "email",
     "forgotPass": "I forgot my password",
-    "forgotPassQuestion": "Forgot your password ?",
-    "forgotPassEnter": "Enter your email to recieve a password reset link.",
+    "forgotPassQuestion": "Forgot your password?",
+    "forgotPassEnter": "Enter your email to receive a password reset link.",
     "registerNewAcc": "Register new account",
     "signinG": "Sign in with google",
-    "haveAccQuestion": "Already have an account ?",
+    "haveAccQuestion": "Already have an account?",
     "optional": "Optional",
     "loginMessage": "Login to your account",
     "registerMessage": "Create your account",
     "send": "Send",
     "returnConnection": "Return to connection menu",
-    "loginSuccess": "Logged with success !",
-    "successMail":"Reset password email sent successfully",
-    "successAccount":"Account created with success !",
-    "resetPassword":"Reset your password",
-    "successReset":"You successfully changed password",
-    "enterNewPassword":"Enter your new password here :",
+    "loginSuccess": "Logged with success!",
+    "successMail": "Reset password email sent successfully",
+    "successAccount": "Account created with success!",
+    "resetPassword": "Reset your password",
+    "successReset": "You successfully changed password",
+    "enterNewPassword": "Enter your new password here:",
     "temporary": "TEMPORARY BUTTON"
   },
   "messageBox": {
-    "loginSucces": "Logged in with succes!",
+    "loginSuccess": "Logged in with success!",
     "ok": "Ok"
   },
   "game": {
@@ -49,7 +49,7 @@
     "startGame": "Start a game",
     "joinGame": "Join a game",
     "createAgame": "Create a new game",
-    "quickGame":"Quick game",
+    "quickGame": "Quick game",
     "status": "Status",
     "name": "Name",
     "gameName": "Game name",
@@ -59,7 +59,7 @@
     "selectRank": "Select Rank",
     "join": "Join",
     "full": "Full",
-    "noActiveServer" : "No active server"
+    "noActiveServer": "No active server"
   },
   "handGuide": {
     "highcard": "High Card",
@@ -72,10 +72,10 @@
     "fourOfKind": "Four of a Kind",
     "straightFlush": "Straight Flush",
     "royalFlush": "Royal Flush",
-    "show":"Show",
-    "hide":"Hide",
-    "showB":"Show both",
-    "hideB":"Hide both"
+    "show": "Show",
+    "hide": "Hide",
+    "showB": "Show both",
+    "hideB": "Hide both"
   },
   "gameActionPanel": {
     "raise": "Raise",
@@ -83,7 +83,7 @@
     "check": "Check",
     "fold": "Fold",
     "currentSC": "Current SC",
-    "afterSC": "CS after raise",
+    "afterSC": "SC after raise",
     "totalRaise": "Total round raise"
   },
   "bonus": {
@@ -98,11 +98,11 @@
     "status": "Statut",
     "action": "Action",
     "selectRank": "Select Rank",
-    "friendly":"Friendly",
-    "intermediate":"Intermediate",
-    "advanced":"Advanced",
-    "elite":"Elite",
-    "createTheGame":"Create the Game",
+    "friendly": "Friendly",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "elite": "Elite",
+    "createTheGame": "Create the Game",
     "search": "Search Room",
     "gameExist": "Game name already exists"
   },
@@ -112,10 +112,10 @@
     "folded": "Fold",
     "raise": "Raised",
     "checked": "Checked",
-    "tapis":"ALL IN",
+    "tapis": "ALL IN",
     "playing": "Playing",
     "waiting": "Waiting",
-    "winner":"Winner"
+    "winner": "Winner"
   },
   "settings": {
     "mute": "Mute",
@@ -124,12 +124,12 @@
     "animations": "Animations",
     "langSelect": "Select a language"
   },
-  "profil": {
+  "profile": {
     "name": "Name",
     "mail": "Mail",
     "coins": "Coins",
     "date": "Joined Date",
-    "unknowDate":"Unknown Date"
+    "unknownDate": "Unknown Date"
   },
   "shop": {
     "shop": "Shop",
@@ -140,14 +140,14 @@
     "confirm": "Confirm",
     "cancel": "Cancel",
     "price": "price",
-    "success": "Purchase successfully completed !",
+    "success": "Purchase successfully completed!",
     "afterTransaction": "Sun Coins after transaction",
     "buyMore": "Buy more",
-    "purchase":"Purchase",
-    "buy":"Buy",
-    "backStore":"Back to Store",
-    "loading":"Loading",
-    "coins" : "Thanks you for your donation"
+    "purchase": "Purchase",
+    "buy": "Buy",
+    "backStore": "Back to Store",
+    "loading": "Loading",
+    "coins": "Thank you for your donation"
   },
   "messageLogo": {
     "tutorial": "Tutorial",
@@ -166,7 +166,7 @@
     "cancel": "Cancel",
     "logout": "You are about to log out"
   },
-  "table":{
+  "table": {
     "total": "Total Pot",
     "waiting": "Waiting for the players",
     "join": "Join the game",
@@ -175,17 +175,17 @@
     "inGame": "You are still on the game table"
   },
   "ranking": {
-    "rank" : "Rank",
-    "pseudo" : "Pseudonym",
-    "gain" : "Gain",
-    "loadMore" : "Load more"
+    "rank": "Rank",
+    "pseudo": "Pseudonym",
+    "gain": "Gain",
+    "loadMore": "Load more"
   },
-  "error":{
-    "noAccountFound":"No account found",
-    "invalidEmail":"Invalid email address",
-    "badUsername":"Username must have at least 3 characters",
-    "password6Characters":"Password must have at least 6 characters",
-    "passwordNotMatch":"Passwords do not match",
-    "emailNotFound" : "Email not found"
+  "error": {
+    "noAccountFound": "No account found",
+    "invalidEmail": "Invalid email address",
+    "badUsername": "Username must have at least 3 characters",
+    "password6Characters": "Password must have at least 6 characters",
+    "passwordNotMatch": "Passwords do not match",
+    "emailNotFound": "Email not found"
   }
 }

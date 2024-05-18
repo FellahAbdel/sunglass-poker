@@ -132,7 +132,7 @@
   background-color: var(--dark-background-color);
   background-size: 16px 12px; */
 
-  background-image: radial-gradient(#bababa0c 40%, #000000),
+  background: radial-gradient(#bababa0c 40%, #000000),
     url("/public/static/media/assets/images/texture/carpetlow-bnw.jpg");
   background-size: 77vw;
   background-position: center;
@@ -140,7 +140,7 @@
 }
 #light .container-inGame {
   box-shadow: var(--inGame-light-shadow-box);
-  background-image: radial-gradient(#ffd9002e 50%, #000000),
+  background: radial-gradient(#ffd9002e 50%, #000000),
     url("/public/static/media/assets/images/texture/carpetlow.jpg");
   background-size: 77vw;
   background-position: center;

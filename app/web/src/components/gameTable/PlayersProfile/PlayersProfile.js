@@ -5,6 +5,23 @@ import Card from "../Card/Card";
 import { useTranslation } from "../../Utiles/Translations";
 import AvatarDisplay from "../../AvatarDisplay/AvatarDisplay.jsx";
 
+/**
+ * PlayersProfile displays individual player information including status, chips count,
+ * name, cards, and also a progress bar when it's the player's turn to act.
+ *
+ * Props:
+ *  - status: String indicating the player's game status (e.g., 'active', 'folded').
+ *  - chips: Number indicating the amount of chips the player has.
+ *  - name: String representing the player's name.
+ *  - cards: Array of card objects the player holds.
+ *  - flippingPlayerCards: Boolean to control card flip animations.
+ *  - gotCards: Boolean indicating if the player has cards.
+ *  - playerId: Unique identifier for the player.
+ *  - cardsVisible: Array of booleans indicating visibility of each card.
+ *  - isFocus: Boolean indicating if it is the player's turn.
+ *  - isYou: Boolean to specify if the profile is of the user themselves.
+ *  - timer: Number representing the countdown time for player's action.
+ */
 const PlayersProfile = ({
   status,
   chips,
@@ -21,10 +38,11 @@ const PlayersProfile = ({
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips?.toLocaleString();
   const dollarSign = " SC";
-  console.log("isFocus playersProfile :", isFocus);
 
-  console.log("Player status (fellah):", status);
-  // Fonction pour transformer et valider les cartes
+  console.log("isFocus playersProfile :", isFocus);
+  console.log("Player status:", status);
+
+  // Function to format and validate cards for display
   const renderCard = (card, index) => {
     if (cardsVisible[index] === true) {
       if (card && card.number !== undefined && card.color !== undefined) {
@@ -68,7 +86,7 @@ const PlayersProfile = ({
         </p>
       </div>
 
-      {/* Appliquer renderCard pour chaque carte avant de l'envoyer au composant Card */}
+      {/* Display cards conditionally based on their visibility */}
       <Card
         styleClass={`cardPlayers1 ${gotCards ? "playerCardAppear" : ""}`}
         card={renderCard(cards[0], 0)}

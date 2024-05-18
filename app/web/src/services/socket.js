@@ -11,6 +11,8 @@ const socket = io(target, {
   transports: ["polling"],
 });
 
+
+
 /** Fonction de test de communication entre le front et le back
  *
  * Le front envoie un Hello avec des données et le back le log
@@ -20,11 +22,13 @@ const socket = io(target, {
  */
 export const comm = {
   token: null,
-
-  preFun: function () {
-    this.token = sessionStorage.getItem("authToken");
-    // console.log("(fellahClient) Token is ", this.token);
-    socket.emit("myNameIs", this.token);
+  authenticated:false,
+  preFun: function (init =false) {
+    if(!this.authenticated){
+      this.token = sessionStorage.getItem("authToken");
+      console.log("PREFUN Token is ", this.token);
+      socket.emit("myNameIs", {token:this.token,init:init});
+    }
   },
 
   Hello: function () {
@@ -39,8 +43,8 @@ export const comm = {
   },
 
   Init: function () {
-    this.preFun();
-    // console.log("Init of socketio client side");
+    this.preFun(true);
+    console.log("Init of socketio client side");
     this.Hello();
     socket.on("world", (data) => {
       // console.log(data);
@@ -102,6 +106,24 @@ export const comm = {
     // When the client receive an refresh event, we call the refresh function
     //
     socket.on("refresh", (data) => this.handleNewsRefresh(data));
+    // He asked if he was in game to get the infos.
+    socket.on('askedForGame',() => {
+      socket.emit('showMyGame');
+    });
+
+    socket.on('identifySuccessfull',() => {
+      this.authenticated=true;
+      clearInterval(this.tryAuth);
+      setTimeout(() => {
+        clearInterval(this.tryAuth);
+        this.tryAuth = setInterval(() => {
+          this.authenticated =false;
+          this.preFun(true)
+        },1000)
+      }, 5000);
+    });
+    clearInterval(this.tryAuth);
+    this.tryAuth = setInterval(() => {this.authenticated =false;this.preFun(true)},2000);
   },
 
   status: function () {
@@ -178,3 +200,4 @@ export const comm = {
     socket.emit("startGame", { room: roomId, userId: userId });
   },
 };
+

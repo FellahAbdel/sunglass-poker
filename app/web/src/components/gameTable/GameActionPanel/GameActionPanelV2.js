@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./gameActionPanelV2.css";
-import RaiseSlider from "../Range/RaiseSlider";
 import Button from "../../button/Button.tsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "../../Utiles/Translations";
 import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
+/**
+ * GameActionButtons provides an interface for user actions in a game context,
+ * such as betting, raising, checking, calling, and folding.
+ */
 const GameActionButtons = ({}) => {
-  //------------------------------------------------------LA FAUDRAIT AJOUTER gamePlayerCurrentBet
   const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } = useGameTable();
   console.log("gameCurrentBet :", gameCurrentBet);
   const { getTranslatedWord } = useTranslation();
@@ -23,11 +25,16 @@ const GameActionButtons = ({}) => {
   const dispatch = useDispatch();
   const [callActive , setCallActive] = useState(false);
 
-
+  /**
+   * Formats a number to a readable string with commas.
+   * @param {number} number - The number to format.
+   * @returns {string} The formatted number.
+   */
   const formatNumber = (number) => {
     return new Intl.NumberFormat().format(number);
   };
 
+  // Increments the bet amount within the allowable range
   const handleIncrement = () => {
     setAmount((prevAmount) => {
       const newAmount = Math.min(prevAmount + step, max);
@@ -36,6 +43,7 @@ const GameActionButtons = ({}) => {
     });
   };
 
+  // Decrements the bet amount within the allowable range
   const handleDecrement = () => {
     setAmount((prevAmount) => {
       const newAmount = Math.max(prevAmount - step, min);
@@ -44,6 +52,7 @@ const GameActionButtons = ({}) => {
     });
   };
 
+  // Handles direct input changes to the bet amount
   const handleChange = (event) => {
     const input = event.target.value;
     // Remove commas for parsing
@@ -55,6 +64,7 @@ const GameActionButtons = ({}) => {
     console.log("handleChange newAmount:", newAmount);
 };
 
+  // Commits the bet with the Redux action
   const handleBet = (amount) => {
     console.log("handleBet amount :", amount);
     amount = Math.round(amount);
@@ -62,6 +72,7 @@ const GameActionButtons = ({}) => {
     setAmount(amount);
   };
 
+  // Toggles the raise panel or submits the raise
   const handleRaise = () => {
     if (!showPopup) {
       setShowPopup(true);
@@ -80,16 +91,14 @@ const GameActionButtons = ({}) => {
     }
   };
 
-  // Met à jour la valeur du bouton "Check" ou "Call" en fonction de gameCurrentBet
+  // Updates the label for the check/call button based on current game state
   const getCheckOrCallLabel = () => {
     if ((gameCurrentBet > 0) && (gameCurrentBet !== gamePlayerCurrentBet)) {
-      //le cas du tapis de ce qui me reste
       if(playerMoney<=(gameCurrentBet-gamePlayerCurrentBet)){
         return `${getTranslatedWord(
           "gameActionPanel.call"
         )} ${playerMoney} SC`;
       }
-      //le cas classic du call
       else{
         return `${getTranslatedWord(
           "gameActionPanel.call"
@@ -100,18 +109,16 @@ const GameActionButtons = ({}) => {
     }
   };
 
+  // Handles the check or call action
   const handleCheckOrCall = () =>{
     if (isFocus){
       if (gameCurrentBet > 0) {
-        //le tapis de ce qui reste
         if (playerMoney < (gameCurrentBet - gamePlayerCurrentBet)) {
           dispatch(actions.bet(playerMoney));
         } else {
-          // Le cas classique du call
           dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
         }
       } else {
-        // Sinon, effectue une action "Check"
         dispatch(actions.check());
       }  
       setAmount(min);
@@ -119,6 +126,7 @@ const GameActionButtons = ({}) => {
     }
   }
 
+  // Handles the fold action
   const handleFold = () =>{
       if (isFocus){
         setAmount(min);
@@ -127,33 +135,37 @@ const GameActionButtons = ({}) => {
       }
     }
 
-    useEffect( () =>{
-      if (gameCurrentBet) {
-        setMin(gameCurrentBet-gamePlayerCurrentBet);
-      }
-      else {
-        setMin(20);
-      }
-    },[gameCurrentBet]);
+  // Effect to update minimum bet when the game's current bet changes
+  useEffect( () =>{
+    if (gameCurrentBet) {
+      setMin(gameCurrentBet-gamePlayerCurrentBet);
+    }
+    else {
+      setMin(20);
+    }
+  },[gameCurrentBet]);
 
-    useEffect( () =>{
-      setCoinsAfterRaise(coins - amount);
-    },[amount, coins]);
+  // Effect to adjust the player's remaining coins after setting a bet amount
+  useEffect( () =>{
+    setCoinsAfterRaise(coins - amount);
+  },[amount, coins]);
 
-    useEffect( () =>{
-      if (!isFocus){
-        setShowPopup(false);
-      }
-    },[isFocus]);
+  // Hide the raise panel when the player is not focused
+  useEffect( () =>{
+    if (!isFocus){
+      setShowPopup(false);
+    }
+  },[isFocus]);
 
-    useEffect(() => {
-      setCoins(playerMoney);
-    }, [playerMoney]);  
+  // Update local state with the latest player money amount
+  useEffect(() => {
+    setCoins(playerMoney);
+  }, [playerMoney]);  
 
-    useEffect(() => {
-      setMax(coins);
-      setStep(Math.floor(coins / 5));
-    }, [coins]);
+  useEffect(() => {
+    setMax(coins);
+    setStep(Math.floor(coins / 5));
+  }, [coins]);
 
 
   return (
@@ -180,6 +192,7 @@ const GameActionButtons = ({}) => {
           }
         </>)}
       </div>
+      {/* UI for bet sizing quick select buttons and the bet size input */}
       {showPopup && (<>
           <div className="container-raiseButtons">
             <Button
@@ -219,21 +232,18 @@ const GameActionButtons = ({}) => {
             <Button styleClass="btn-raiseIncrement" label={"+"} onClick={handleIncrement}/>
       </div>
           </>)}
+      {/* Main action buttons for raising, checking/calling, and folding */}
       <div className={`container-ActionButtons`}>
-        {/* LEBOUTON BET */}
         <Button
           styleClass={`btn-mainAction ${!isFocus && "disabled"} ${(isFocus && amount !== 0 && showPopup) && "raise" }`}
           onClick={handleRaise}
           label={`${getTranslatedWord("gameActionPanel.raise")}`}
         />
-
-        {/* Bouton "Check" ou "Call" en fonction de gameCurrentBet */}
         <Button
           styleClass={`btn-mainAction ${!isFocus && "disabled"} ${callActive && "call"}`}
           onClick={handleCheckOrCall}
           label={getCheckOrCallLabel()}
         />
-        {/* LE BOUTON FOLD */}
         <Button
           styleClass={`btn-fold btn-mainAction ${!isFocus && "disabled"}`}
           onClick={handleFold}

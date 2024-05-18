@@ -8,17 +8,35 @@ import { useDispatch } from "react-redux";
 import { getPokerHand } from "./../../Utiles/CombinationDetection.js";
 import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 
+/**
+ * HandCards displays the player's hand in a poker game and allows the user to toggle visibility of each card.
+ * It also evaluates the current hand based on community cards and updates the hand guide accordingly.
+ *
+ * Props:
+ * - card1: Object representing the first card.
+ * - card2: Object representing the second card.
+ * - showHandCardProp: Boolean to control the card flipping animation.
+ */
 const HandCards = ({ card1, card2, showHandCardProp }) => {
   const { getTranslatedWord } = useTranslation();
   const [handGuide, setHandGuide] = useState();
   const dispatch = useDispatch();
   const { communityCards } = useGameTable();
 
-  // Fonction pour transformer les données de la carte en tableau [number, color]
+  /**
+   * Formats the card data into an array of number and color.
+   * @param {Object} card - The card object to format.
+   * @returns {Array} The formatted card data as [number, color].
+   */
   const formatCardData = (card) => {
     return [card.number.toString(), card.color];
   };
 
+  /**
+   * Returns the label for a card number, using face card symbols if applicable.
+   * @param {number} number - The card number to convert.
+   * @returns {string|number} The label for the card number.
+   */
   const getCardLabel = (number) => {
     const faceCards = { 11: 'J', 12: 'Q', 13: 'K', 14: 'A' };
     return faceCards[number] || number;
@@ -38,8 +56,11 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
     }
   }, [communityCards, card1, card2]);
 
-  //console.log("card1", card1);
-
+  /**
+   * Toggles the visibility of a single card.
+   * @param {number} cardIndex - Index of the card to toggle.
+   * @param {Object} card - The card object.
+   */
   const toggleShowCard = (cardIndex, card) => {
     if (card.isVisible) {
       dispatch(actions.hideCard(cardIndex));
@@ -48,10 +69,12 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
     }
   };
 
+  /**
+   * Toggles the visibility of both cards.
+   * Determines visibility based on the current state of either card.
+  */
   const toggleBothCards = () => {
-    // Vérifie si au moins une carte est visible
     const anyVisible = card1.isVisible || card2.isVisible;
-    // Masquer les deux cartes si au moins une est visible, sinon montrer les deux
     if (anyVisible) {
       if (card1.isVisible) dispatch(actions.hideCard(0));
       if (card2.isVisible) dispatch(actions.hideCard(1));
@@ -61,7 +84,7 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
     }
   };
 
-  // Icônes des symboles de cartes
+  // Map of card color icons.
   const cardIcons = {
     H: "static/media/assets/images/icons/white/heart.png",
     D: "static/media/assets/images/icons/white/diamond.png", 
