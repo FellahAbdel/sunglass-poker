@@ -127,20 +127,23 @@ class Player {
 
   toggleSpectator() {
     if (this.isSpectator && !this.canJoinTable()) {
-      console.log(
-        `Player ${this.name} cannot rejoin the table due to insufficient coins.`
-      );
-      this.isSpectator = true;
-      this.isActive = false;
+      this.movePlayerToSpectator();
       return;
     }
-    this.isSpectator = !this.isSpectator;
-    if (this.isSpectator) {
-      this.isActive = false;
-      this.newRoundReset();
+    if (!this.isSpectator) {
+      this.movePlayerToSpectator();
+      return;
     } else {
+      this.isSpectator = false;
       this.isActive = true;
+      return;
     }
+  }
+
+  movePlayerToSpectator() {
+    this.newRoundReset();
+    this.isSpectator = true;
+    this.isActive = false;
   }
 
   hideCard(cardIndex) {
