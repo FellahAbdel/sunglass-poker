@@ -20,9 +20,12 @@ import AlertWindow from "./WindowContent/AlertWindow";
 import RankingWindow from "./WindowContent/RankingWindow";
 import LoadingWindow from "./WindowContent/LoadingWindow";
 
-
 import { useWindowContext } from "../Utiles/WindowContext";
 
+/**
+ * The Window component acts as a container for various modal windows in the application.
+ * It renders different content based on the current window type from the context.
+ */
 const Window = () => {
   const { windowType, isGameTableVisible } = useWindowContext();
 

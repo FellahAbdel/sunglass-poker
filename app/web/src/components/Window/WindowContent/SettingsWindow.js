@@ -3,6 +3,10 @@ import "./settingsMenu.css";
 import { useSettings } from "../../Utiles/SettingsContext";
 import { useTranslation } from "../../Utiles/Translations";
 
+/**
+ * SettingsWindow component provides a UI for the user to manage their settings
+ * including theme, sound, animations, and language preferences.
+ */
 const SettingsWindow = () => {
   const { getTranslatedWord } = useTranslation();
 
@@ -18,9 +22,13 @@ const SettingsWindow = () => {
   } = useSettings();
 
   const [themeDark, setThemeDark] = useState();
+
+  // Effect to set the theme toggle based on the current theme.
   useEffect(() => {
     setThemeDark(theme === "dark");
   }, [theme]);
+  
+  // Handle language change event.
   const handleLanguageChange = (event) => {
     changeLanguage(event.target.value);
   };
@@ -72,8 +80,8 @@ const SettingsWindow = () => {
             <option value="fr">Français</option>
             <option value="es">Español</option>
             <option value="de">Deutsch</option>
-            <option value="ch">Chinois</option>
-            <option value="fa">Persan</option>
+            <option value="ch">中文 </option>
+            <option value="fa">فارسی</option>
           </select>
         </span>
       </div>

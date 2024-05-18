@@ -13,6 +13,10 @@ import {
   joinRoom,
 } from "../../../store/actions/clientInteractionsCreator.js";
 
+/**
+ * AcceuilWindow component serves as the home screen for users to start or join games.
+ * It provides different functionalities based on the user's authentication status.
+ */
 const AcceuilWindow = () => {
   const { isLogged, getAvailableRooms } = useAuth();
   const { closeWindow, openWindow, showGameTable, setWindowType } =
@@ -20,6 +24,9 @@ const AcceuilWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const dispatch = useDispatch();
 
+  /**
+   * Handles the logic to start or join a game based on the availability of game rooms.
+   */
   const onClickStartGame = async () => {
     if (isLogged) {
       try {

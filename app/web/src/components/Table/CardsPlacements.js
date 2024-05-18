@@ -4,6 +4,11 @@ import useAudio from "../../hooks/useAudio";
 import { useGameTable } from "../Utiles/GameTableProvider";
 import useDeepEffect from "../../hooks/useDeepEffect"
 
+/**
+ * CardsPlacements manages the display and animation of community cards and
+ * transition animations for player cards during a game. It also handles sound effects
+ * associated with card placements.
+ */
 const CardsPlacements = () => {
   // const playersInTable = useSelector((state) => state.game.activePlayers);
   const { communityCards } = useGameTable();
@@ -46,6 +51,7 @@ const CardsPlacements = () => {
   //   fifth one   = turn  -> dealingFlop[2]
   // const [dealingFlop, setDealingFlop] = useState([false,false,false,false,false]);
 
+  // Audio control for flipping card sound effects
   const cardFlipSounds = [
     "static/media/assets/sounds/soundEffect-card1.mp3",
     "static/media/assets/sounds/soundEffect-card1.mp3",
@@ -100,6 +106,7 @@ const CardsPlacements = () => {
     return () => timeoutRefs.current.forEach(clearTimeout);
   }, []);
 
+  // Helper function to format card data for rendering
   const formatCardData = (card) => {
     return card ? [card.number.toString(), card.color] : null;
   };

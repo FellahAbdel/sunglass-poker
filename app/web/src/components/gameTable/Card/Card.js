@@ -2,6 +2,17 @@ import React from "react";
 import "./card.css";
 import { useSettings } from "../../Utiles/SettingsContext";
 
+/**
+ * Card displays a playing card that can be flipped between its front and back.
+ * It supports dynamic theming and card content based on provided props.
+ * 
+ * Props:
+ * - card: Array representing the card data, with the first element as the number or face ('A', 'J', 'Q', 'K')
+ *        and the second element as the suit ('H', 'D', 'C', 'S').
+ * - styleClass: String representing the additional CSS class for styling the card container.
+ * - flippingCard: Boolean to control if the card should show the flip animation.
+ * - flippedStyle: String for additional CSS class when the card is flipped.
+ */
 const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
   const { theme } = useSettings();
 

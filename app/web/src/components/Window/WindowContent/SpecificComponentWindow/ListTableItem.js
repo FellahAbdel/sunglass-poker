@@ -1,4 +1,3 @@
-// TableItem.js ou TableItem.jsx
 import React, { useState, useRef } from "react";
 import Button from "../../../button/Button.tsx";
 import { useTranslation } from "../../../Utiles/Translations";
@@ -6,6 +5,19 @@ import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import useOnClickOutside from "../../../../hooks/useOnClickOutside.js";
 
+/**
+ * ListTableItem component displays a single row in a list of game tables,
+ * providing options to join open or password-protected tables.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.id - Unique ID of the table.
+ * @param {string} props.nom - Name of the table.
+ * @param {string} props.rang - Security level or rank of the table.
+ * @param {number} props.nombreDeJoueurs - Current number of players.
+ * @param {boolean} props.ouvert - Indicates if the table is open or password-protected.
+ * @param {Function} props.onJoinClick - Function to execute when joining the table.
+ * @param {boolean} props.isJoining - Indicates if the join process is in progress.
+ */
 const ListTableItem = ({
   id,
   nom,
@@ -15,15 +27,18 @@ const ListTableItem = ({
   onJoinClick,
   isJoining,
 }) => {
-  const { verifyGamePassword } = useAuth();
-  const { getTranslatedWord } = useTranslation();
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [showPasswordInput, setShowPasswordInput] = useState(false);
-  const ref = useRef();
+  const { verifyGamePassword } = useAuth(); // Hook to authenticate against the game's password.
+  const { getTranslatedWord } = useTranslation(); 
+  const [password, setPassword] = useState(""); // State to store the input password.
+  const [passwordError, setPasswordError] = useState(""); // State to store potential password errors.
+  const [showPasswordInput, setShowPasswordInput] = useState(false); // State to toggle password input visibility.
+  const ref = useRef(); // Ref for the component to manage click outside behavior.
 
-  useOnClickOutside(ref, () => setShowPasswordInput(false));
+  useOnClickOutside(ref, () => setShowPasswordInput(false)); // Hook to handle click outside the component.
 
+  /**
+   * Handles the click action to join the game, which might require password validation.
+   */
   const handleJoinClick = async () => {
     if (!ouvert) {
       if (!showPasswordInput) {
@@ -36,6 +51,9 @@ const ListTableItem = ({
     }
   };
 
+  /**
+   * Validates the entered password against the server's password.
+   */
   const checkPassword = async () => {
     if (password.trim() === "") {
       setPasswordError("Please enter the password");
@@ -48,7 +66,10 @@ const ListTableItem = ({
       onJoinClick(id);
     }
   };
-
+  
+  /**
+   * Handles the Enter key press to submit the password.
+   */
   const handleKeyDown = async (event) => {
     if (event.key === "Enter") {
       await checkPassword();

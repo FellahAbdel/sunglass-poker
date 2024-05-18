@@ -10,7 +10,10 @@ import { useGameTable } from "../Utiles/GameTableProvider.jsx";
 import * as actions from "../../store/actions/clientInteractionsCreator.js";
 import { useDispatch } from "react-redux";
 
-
+/**
+ * DynamicBar displays a dynamic UI based on the context of user interactions and game state.
+ * It features user coins, game controls, and server status based on various conditions from context providers.
+ */
 const DynamicBar = () => {
   const { userId } = useAuth();
   const { openWindow, windowType, isGameTableVisible, isWindowOpen } = useWindowContext();
@@ -20,12 +23,15 @@ const DynamicBar = () => {
   const { serverName } = useGameTable();
   const dispatch = useDispatch();
 
+  /**
+   * Starts the game by dispatching the startGame action with the user's ID.
+   */
   const startGame = () => {
-    // Logique pour commencer la partie
     console.log("Starting game with roomId:");
     dispatch(actions.startGame(userId));
   };
 
+  // Effect to log the waiting message state for debugging.
   useEffect(() => {
     console.log("showWaitingMessage:", showWaitingMessage);
   }, [showWaitingMessage]);

@@ -1,20 +1,20 @@
-//LoginWindow.js
 import React, { useState } from "react";
 import Button from "../../../button/Button.tsx";
 import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
-
 import { useDispatch } from "react-redux";
 import { loggedIn } from "../../../../store/actions/clientInteractionsCreator.js";
 
+/**
+ * LoginWindow provides a user interface for logging into the application.
+ * It handles user input for username and password, validates them, and processes the login.
+ */
 const LoginWindow = () => {
   const dispatch = useDispatch();
   const { getTranslatedWord } = useTranslation();
-
   const { openSuccessWindow, openWindow } = useWindowContext();
-
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -25,6 +25,10 @@ const LoginWindow = () => {
   });
   const { login } = useAuth();
 
+  /**
+   * Updates form data state when input fields change.
+   * @param {Object} e - Event object from form inputs.
+   */
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -32,6 +36,10 @@ const LoginWindow = () => {
     });
   };
 
+  /**
+   * Handles the form submission event, performs the login, and processes the result.
+   * @param {Object} e - Event object to prevent default form submission behavior.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 

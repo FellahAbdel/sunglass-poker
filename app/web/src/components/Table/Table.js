@@ -3,7 +3,6 @@ import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
 import { useTranslation } from "../Utiles/Translations";
 import { useGameTable } from "../Utiles/GameTableProvider.jsx";
-
 //CSS
 import "./table.css";
 import "./tableCards.css";
@@ -14,7 +13,11 @@ import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import LogoComponent from "../logo/Logo";
 import TotalPot from "./TotalPot";
-
+/**
+ * The Table component serves as the primary UI container for the game, 
+ * including players' placements, cards, and other game-related information 
+ * based on the visibility state controlled through window context.
+ */
 const Table = ({}) => {
   const { isWindowOpen, windowType, isGameTableVisible } = useWindowContext();
   const { isLogged } = useAuth();
@@ -22,15 +25,17 @@ const Table = ({}) => {
   const [isVisible, setIsVisible] = useState(false);
   const { showWaitingMessage, isFocus } = useGameTable();
 
-
+  // Effect to log window open status
   useEffect(() => {
     console.log("isWindowOpen a changé :", isWindowOpen);
   }, [isWindowOpen]);
 
+  // Effect to log login status
   useEffect(() => {
     console.log("isLogged Table:", isLogged);
   }, [isLogged]);
 
+  // Update visibility based on window and game table visibility states
   useEffect(() => {
     if (isWindowOpen && isGameTableVisible) {
       setIsVisible(true);
@@ -39,10 +44,12 @@ const Table = ({}) => {
     }
   }, [isWindowOpen, isGameTableVisible]);
 
+  // Log focus state changes
   useEffect(() => {
     console.log("isFocus TABLE:", isFocus);
   }, [isFocus]);
 
+  // Dynamic class assignment based on current UI context
   const classes = getStyles(
     windowType,
     isLogged,
@@ -64,35 +71,21 @@ const Table = ({}) => {
       {/* Game Components */}
       {isGameTableVisible && !isWindowOpen && (
         <>
-          {/*NEEDS DealingFlop and playersCardDistribution in it*/}
           <PlayersPlacements showMiddle={!showWaitingMessage} />
-          {/* Afficher le bouton "Commencer la partie" si le bouton est visible */}
-
-          {/*DISTRIBUTION ANIMATION :
-          in CardPlacements you have the distribution
-          animation which gets handled with a table called 
-          "playersCardDistributed" with 10 booleen members
-          representing each players that gets a card
-          
-          playersCardDistributed is also used in PlayersPlacements
-          that shows which players gets the cards
-          */}
-          {/* <CardsPlacements />
-          {/*NEEDS playersCardsShow and playersCardDistribution in it*/}
-          {/* <PlayersPots/>  
-          <TotalPot /> */}
           <CardsPlacements />
           <TotalPot />
         </>
       )}
-      {/*All the panels other than game itself are included in window component*/}
+
+      {/* Window component for rendering non-game related UI elements */}
       <Window />
 
+      {/* notifying the player that they are still in game in case they open an other window while playing */}
       <div className={`box-onGameNotif ${isVisible ? "visible" : ""}`}>
         {getTranslatedWord("table.inGame")}!
       </div>
 
-      {/*the only use of logo component - dynamique*/}
+      {/* Dynamic usage of the LogoComponent, content changes based on the current window type */}
       <LogoComponent
         styleClass={classes.logoComponent}
         label={`

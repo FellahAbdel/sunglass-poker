@@ -13,6 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { createGameV2 } from "../../../store/actions/clientInteractionsCreator.js";
 import { useTranslation } from "../../Utiles/Translations.jsx";
 
+/**
+ * Provides a UI for users to create a new game room or join an existing one,
+ * including server name input, optional password, and rank selection.
+ */
 const CreateGameWindow = () => {
   const { openWindow, showGameTable, closeWindow, setWindowType } =
     useWindowContext();

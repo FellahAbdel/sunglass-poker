@@ -10,38 +10,42 @@
     "logout": "登出",
     "login": "登录",
     "signin": "注册",
-    "ranking": "排名"
+    "ranking": "排名",
+    "home": "首页"
   },
   "connection": {
     "login": "登录",
     "signin": "注册",
     "username": "用户名",
     "password": "密码",
-    "repeatPass": "重复您的密码",
-    "email": "电子邮件",
+    "repeatPass": "重复密码",
+    "email": "电子邮箱",
     "forgotPass": "我忘记了密码",
-    "forgotPassQuestion": "忘记密码了吗？",
-    "forgotPassEnter": "输入您的电子邮件以接收密码重置链接。",
+    "forgotPassQuestion": "忘记密码？",
+    "forgotPassEnter": "输入你的电子邮箱以接收重置密码的链接。",
     "registerNewAcc": "注册新账户",
-    "signinG": "使用 Google 登录",
-    "haveAccQuestion": "已经有账户了吗？",
+    "signinG": "使用Google登录",
+    "haveAccQuestion": "已经有账户？",
     "optional": "可选",
-    "loginMessage": "登录到您的账户",
-    "registerMessage": "创建您的账户",
+    "loginMessage": "登录到你的账户",
+    "registerMessage": "创建你的账户",
     "send": "发送",
     "returnConnection": "返回连接菜单",
     "loginSuccess": "登录成功！",
-    "resetPassword": "重置您的密码",
-    "enterNewPassword": "在此输入您的新密码："
-    
+    "successMail": "重置密码的邮件发送成功",
+    "successAccount": "账户创建成功！",
+    "resetPassword": "重置你的密码",
+    "successReset": "你已成功更改密码",
+    "enterNewPassword": "在此输入新密码：",
+    "temporary": "临时按钮"
   },
   "messageBox": {
     "loginSucces": "登录成功！",
-    "ok": "确定"
+    "ok": "好的"
   },
   "game": {
-    "loginPlay": "登录以游戏",
-    "signupPlay": "注册以游戏",
+    "loginPlay": "登录后才能玩",
+    "signupPlay": "注册后才能玩",
     "startGame": "开始游戏",
     "joinGame": "加入游戏",
     "createAgame": "创建新游戏",
@@ -49,16 +53,17 @@
     "status": "状态",
     "name": "名称",
     "gameName": "游戏名称",
-    "ranked": "排名",
+    "PasswordOptionnal": "密码（可选）",
+    "ranked": "排位",
     "players": "玩家",
     "selectRank": "选择排名",
     "join": "加入",
     "full": "已满",
-    "noActiveServer": "没有活跃的服务器"
+    "noActiveServer": "没有活动的服务器"
   },
   "handGuide": {
-    "highcard": "最高牌",
-    "pair": "一对",
+    "highcard": "高牌",
+    "pair": "对子",
     "twoPair": "两对",
     "threeOfKind": "三条",
     "straight": "顺子",
@@ -75,35 +80,39 @@
   "gameActionPanel": {
     "raise": "加注",
     "call": "跟注",
-    "check": "让牌",
+    "check": "看牌",
     "fold": "弃牌",
-    "currentSC": "您当前的SC",
-    "afterSC": "加注后的CS"
+    "currentSC": "当前SC",
+    "afterSC": "加注后的SC",
+    "totalRaise": "本轮总加注"
   },
   "bonus": {
     "bonus": "奖金"
   },
   "serverPanel": {
     "name": "名称",
-    "rank": "等级",
+    "rank": "排名",
     "privacy": "隐私",
     "join": "加入",
     "full": "已满",
     "status": "状态",
-    "action": "行动",
-    "selectRank": "选择等级",
+    "action": "操作",
+    "selectRank": "选择排名",
     "friendly": "友好",
     "intermediate": "中级",
     "advanced": "高级",
     "elite": "精英",
-    "createTheGame": "创建游戏"
+    "createTheGame": "创建游戏",
+    "search": "搜索房间",
+    "gameExist": "游戏名称已存在"
   },
   "playersStatus": {
-    "empty": "空的",
-    "call": "已跟注",
-    "folded": "已弃牌",
-    "raise": "已加注",
-    "checked": "已让牌",
+    "empty": "空",
+    "call": "跟注",
+    "folded": "弃牌",
+    "raise": "加注",
+    "checked": "看牌",
+    "tapis": "全押",
     "playing": "正在玩",
     "waiting": "等待中",
     "winner": "胜利者"
@@ -117,7 +126,7 @@
   },
   "profil": {
     "name": "名称",
-    "mail": "邮件",
+    "mail": "邮箱",
     "coins": "金币",
     "date": "加入日期",
     "unknowDate": "未知日期"
@@ -125,20 +134,20 @@
   "shop": {
     "shop": "商店",
     "baseAvatar": "头像",
-    "sunglasses": "墨镜",
+    "sunglasses": "太阳镜",
     "colorAvatar": "颜色",
-    "confirmationMessage": "您真的想购买这个商品吗？",
+    "confirmationMessage": "你确定要购买这个物品，价格为 ",
     "confirm": "确认",
     "cancel": "取消",
     "price": "价格",
-    "success": "购买成功完成！",
-    "afterTransaction": "交易后的太阳币",
+    "success": "购买成功！",
+    "afterTransaction": "交易后的Sun Coins",
     "buyMore": "购买更多",
     "purchase": "购买",
     "buy": "买",
     "backStore": "返回商店",
     "loading": "加载中",
-    "coins": "感谢您的捐赠"
+    "coins": "感谢你的捐赠"
   },
   "messageLogo": {
     "tutorial": "教程",
@@ -151,19 +160,19 @@
     "coins": "购买金币"
   },
   "alert": {
-    "confirmExitMessage": "您确定要离开桌子吗？您将失去所有在玩的SC。",
-    "leftTableSuccess": "您已成功离开桌子。",
+    "confirmExitMessage": "你确定要离开桌子吗？你会失去所有正在玩的SC。",
+    "leftTableSuccess": "你已成功离开桌子。",
     "confirm": "确认",
     "cancel": "取消",
-    "logout": "您即将登出"
+    "logout": "你即将登出"
   },
   "table": {
-    "total": "总奖池",
+    "total": "总底池",
     "waiting": "等待玩家",
     "join": "加入游戏",
     "spectacle": "观看游戏",
     "start": "开始游戏",
-    "inGame": "您仍在游戏桌上"
+    "inGame": "你还在游戏桌上"
   },
   "ranking": {
     "rank": "排名",
@@ -172,10 +181,11 @@
     "loadMore": "加载更多"
   },
   "error": {
-    "noAccountFound": "找不到账户",
+    "noAccountFound": "没有找到账户",
     "invalidEmail": "无效的电子邮箱地址",
-    "badUsername": "用户名至少需要3个字符",
-    "password6Characters": "密码至少需要6个字符",
-    "passwordNotMatch": "密码不匹配"
+    "badUsername": "用户名必须至少有3个字符",
+    "password6Characters": "密码必须至少有6个字符",
+    "passwordNotMatch": "密码不匹配",
+    "emailNotFound": "未找到电子邮箱"
   }
 }

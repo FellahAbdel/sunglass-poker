@@ -10,6 +10,10 @@ import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
 import TextInputComponent from "../../textInput/TextInput.jsx";
 
+/**
+ * ServerPanelWindow component manages the display of available game rooms,
+ * including pagination, search functionality, and the ability to join rooms.
+ */
 const ServerPanelWindow = () => {
   const dispatch = useDispatch();
   const { getTranslatedWord } = useTranslation();
@@ -26,13 +30,15 @@ const ServerPanelWindow = () => {
 
   const isPlayerSited = useSelector((state) => state.game.playerSited);
 
+  // Displays the game room UI when the player is sited. => used in loadingWindo
   const displayGameRoom = () => {
-    // Your logic to display the game room goes here
     console.log("Game room displayed!");
     showGameTable();
     closeWindow();
     setWindowType("");
   };
+
+  // UseEffect to handle the player sited state and display the game room accordingly.
   useEffect(() => {
     if (isPlayerSited) {
       displayGameRoom();
@@ -40,7 +46,7 @@ const ServerPanelWindow = () => {
     }
   }, [isPlayerSited]);
 
-  //Gère le nombre de tables affichées par page
+  // Manage the number of tables displayed per page based on window height.
   useEffect(() => {
     const updateRecordsPerPage = () => {
       const windowHeight = window.innerHeight;
@@ -68,6 +74,7 @@ const ServerPanelWindow = () => {
     setSearchText(event.target.value); // Mettre à jour le texte de recherche lorsqu'il y a un changement dans la barre de recherche
   };
 
+  // Fetch room table records from the server and update the state.
   useEffect(() => {
     const fetchRoomTableRecords = async () => {
       try {
@@ -109,7 +116,8 @@ const ServerPanelWindow = () => {
   }, [searchText]); //Mise à jour à chaque fois que le texte est changé
 
   console.log("roomsTableRecords : ", roomTableRecords); // Log the fetched roomTableRecords data to the console
-
+  
+  // Handle the logic for joining a table.
   const handleJoinTable = (id) => {
     if (isLogged) {
       console.log("Attempting to join room with ID:", id);

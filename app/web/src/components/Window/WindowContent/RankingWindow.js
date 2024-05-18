@@ -3,6 +3,10 @@ import { useTranslation } from "../../Utiles/Translations";
 import Button from "../../button/Button.tsx";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
 
+/**
+ * RankingWindow component fetches and displays a paginated list of user rankings,
+ * including their rank, username (pseudo), and coin balance (SC).
+ */
 const RankingWindow = () => {
   const nbRes = 11;
   const [page, setPage] = useState(1);
@@ -11,6 +15,11 @@ const RankingWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const { fetchRankings } = useAuth();
 
+  /**
+   * Fetch rankings data from the server and update the state.
+   *
+   * @param {number} pageNum - The page number to fetch.
+   */
   const loadRankings = async (pageNum) => {
     const response = await fetchRankings(pageNum, nbRes);
     if (response.success) {
@@ -23,7 +32,8 @@ const RankingWindow = () => {
       console.error("Failed to fetch rankings:", response.message);
     }
   };
-
+  
+  // Fetch the initial rankings data when the component mounts.
   useEffect(() => {
     loadRankings(1);
   }, []);

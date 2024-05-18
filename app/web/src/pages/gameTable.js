@@ -13,7 +13,6 @@ import { getStyles } from "../components/Utiles/useStyles.jsx";
 import NavbarV2 from "../components/Navbar/NavbarV2";
 import BonusPanel from "../components/gameTable/Bonus/BonusPanel";
 import Table from "../components/Table/Table";
-import GameActionPanel from "../components/gameTable/GameActionPanel/GameActionPanel";
 import GameActionPanelV2 from "../components/gameTable/GameActionPanel/GameActionPanelV2";
 import HandCards from "../components/gameTable/HandCards/HandCards";
 import DynamicBar from "../components/Navbar/DynamicBar.js";
@@ -33,21 +32,22 @@ const GameTable = () => {
     showWaitingMessage
   );
 
+  // Handle closing the window when clicking outside
   const handleCloseOnClickOutside = (event) => {
     if (isWindowOpen && windowType !== "loading") {
       closeWindow();
     }
   };
 
+  // Log player cards and bonus when they change
   useEffect(() => {
     console.log("Player cards and bonus received:", playerCards, playerBonus);
   }, [playerBonus, playerCards]);
 
+  // Prevent event propagation when clicking inside the box
   const handleBoxClick = (event) => {
     event.stopPropagation();
   };
-
-  //-----------------------------------------inGame functions to test
 
   return (
     <div
@@ -56,7 +56,6 @@ const GameTable = () => {
       onClick={handleCloseOnClickOutside}
     >
       {/* css Pattern background */}
-
       {theme === "light" &&<img className="backdrop"  src="static/media/assets/images/backdrop/backdrop2.jpg" alt="backdrop"/>}
       <div className="backdrop"/>
       <div className="backdrop2"/>
@@ -91,7 +90,7 @@ const GameTable = () => {
               (isWindowOpen || showWaitingMessage)? "slideDown" : "slideUp"
             }`}
           >
-            {<GameActionPanelV2/>}
+            <GameActionPanelV2/>
           </div>
 
           <div
