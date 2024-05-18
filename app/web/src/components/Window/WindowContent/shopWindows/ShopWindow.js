@@ -9,16 +9,23 @@ import AvatarDisplay from "../../../AvatarDisplay/AvatarDisplay.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useUserData } from "../../../Utiles/useUserData";
 
+/**
+ * ShopWindow component provides a user interface for browsing and activating various avatars and accessories.
+ */
 const ShopWindow = () => {
-  const { user } = useUserData();
-  const { getTranslatedWord } = useTranslation();
-  const { openValidationWindow} = useWindowContext();
+  const { user } = useUserData(); // Retrieves user data including owned items.
+  const { getTranslatedWord } = useTranslation(); // Provides translation based on current language.
+  const { openValidationWindow} = useWindowContext(); // Used to open modal windows for confirmations.
   const [activeTab, setActiveTab] = useState(
-    sessionStorage.getItem("activeTab") || "baseAvatar"
+    sessionStorage.getItem("activeTab") || "baseAvatar"  // Maintains state of the currently active tab in the shop.
   );
-  const items = useItems();
-  const { activateAvatar } = useAuth();
+  const items = useItems(); // Custom hook to fetch and organize shop items by categories.
+  const { activateAvatar } = useAuth(); // Auth service method to activate a selected avatar.
 
+  /**
+   * Handles activation of an avatar or accessory.
+   * @param {string} itemId - The ID of the item to be activated.
+   */
   const handleActivateAvatar = async (itemId) => {
     const success = await activateAvatar(itemId);
     if (!success) {
@@ -26,10 +33,16 @@ const ShopWindow = () => {
     }
   };
 
+  // Update sessionStorage when the active tab changes to persist state across reloads.
   useEffect(() => {
     sessionStorage.setItem("activeTab", activeTab);
   }, [activeTab]);
 
+  /**
+   * Determines if a shop item is active based on user's current selection.
+   * @param {Object} item - The shop item to check.
+   * @returns {boolean} Indicates if the item is the currently active avatar or accessory.
+   */
   const isActive = (item) => {
     if (item.category === "colorAvatar") {
       return user.colorAvatar.imgSrc === item.imgSrc;
@@ -44,6 +57,7 @@ const ShopWindow = () => {
   return (
     <div className="shop-window">
       <div className="shop-tabs">
+        {/* Render tab buttons for different item categories */}
         {Object.keys(items).map((tab) => (
           <Button
             key={tab}
@@ -59,6 +73,7 @@ const ShopWindow = () => {
         </div>
       </div>
       <div className="items-display">
+        {/* Map through items in the active tab and render each as ShopItem */}
         {items[activeTab].owned.concat(items[activeTab].unowned).map((item) => (
           <ShopItem
             key={item._id}

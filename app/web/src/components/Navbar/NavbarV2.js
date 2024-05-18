@@ -1,8 +1,5 @@
-//react imports
 import React, { useEffect, useState } from "react";
-//css
 import "./navbarV2.css";
-//components
 import Button from "../button/Button.tsx";
 import TextInputComponent from "../textInput/TextInput.jsx";
 import { useTranslation } from "../Utiles/Translations";
@@ -12,6 +9,10 @@ import * as actions from "../../store/actions/clientInteractionsCreator.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useGameTable } from "../Utiles/GameTableProvider.jsx";
 
+/**
+ * Navbar provides a dynamic navigation bar based on game and user session state.
+ * It handles actions like logging out, leaving rooms, opening various windows, etc.
+ */
 const Navbar = () => {
   const { isLogged, logingOut } = useAuth();
   const { gameState } = useGameTable();
@@ -33,9 +34,7 @@ const Navbar = () => {
       // On le force à fold.
       dispatch(actions.fold());
     }
-
     dispatch(actions.leaveRoom());
-
     if (isPlayerLeft) {
       console.log("Player left the table successfully");
       showHome();
@@ -44,6 +43,7 @@ const Navbar = () => {
     }
   };
 
+  // Handles the logout and room leave logic with confirmation dialogs
   const {
     isGameTableVisible,
     closeWindow,
@@ -131,6 +131,7 @@ const Navbar = () => {
 
   const handleNull = () => {};
 
+  // Defines label based on the window type
   let label;
   if (windowType === "accueil") {
     label = getTranslatedWord("navbar.logout");

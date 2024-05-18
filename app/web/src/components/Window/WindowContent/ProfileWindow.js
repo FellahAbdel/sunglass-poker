@@ -4,11 +4,16 @@ import { useUserData } from "../../Utiles/useUserData";
 import { useTranslation } from "../../Utiles/Translations";
 import AvatarDisplay from "../../AvatarDisplay/AvatarDisplay.jsx";
 
+/**
+ * ProfileWindow component displays the user's profile information,
+ * including their avatar, name, email, coin balance, and account creation date.
+ */
 const ProfileWindow = () => {
   const { getTranslatedWord } = useTranslation();
 
   const { user } = useUserData();
 
+  // Format the account creation date for display.
   const date = new Date(user.createdAt);
   const formattedDate = date.toLocaleDateString("fr-FR", {
     day: "numeric",

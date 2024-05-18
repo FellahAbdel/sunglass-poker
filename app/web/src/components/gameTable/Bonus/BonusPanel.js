@@ -5,6 +5,16 @@ import Button from "../../button/Button.tsx";
 import { useTranslation } from "../../Utiles/Translations";
 import { useDispatch } from "react-redux";
 
+/**
+ * BonusPanel displays a UI panel for activating game bonuses 
+ * based on the number of various card symbols collected.
+ * 
+ * Props:
+ * - nbHearts: Number of heart cards collected.
+ * - nbDiamonds: Number of diamond cards collected.
+ * - nbSpades: Number of spade cards collected.
+ * - nbClubs: Number of club cards collected.
+ */
 const BonusPanel = ({nbHearts, nbDiamonds, nbSpades, nbClubs}) => {
   //we can use a number divisable by all the different numbers that they need
   //to fill the bonus boxes and back-end will manage the part of the variable
@@ -23,7 +33,10 @@ const BonusPanel = ({nbHearts, nbDiamonds, nbSpades, nbClubs}) => {
 
   const dispatch = useDispatch();
 
-  // Function to handle the bonus activation action
+  /**
+   * handleActivateBonus triggers the bonus activation action.
+   * It dispatches the activateBonus action to the redux store.
+   */
   const handleActivateBonus = () => {
     dispatch(actions.activateBonus());
   };

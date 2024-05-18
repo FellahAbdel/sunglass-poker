@@ -4,11 +4,18 @@ import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import "./buyCoins.css";
 import { useWindowContext } from "../../../Utiles/WindowContext";
 
+/**
+ * BuyCoinsWindow provides a user interface for purchasing virtual coins.
+ * It displays various purchasing options and handles the purchase transactions.
+ */
 const BuyCoinsWindow = () => {
   const { updateUserCoins } = useAuth();
   const { openSuccessWindow } = useWindowContext();
 
-
+  /**
+   * Initiates the purchase of coins and handles the result.
+   * @param {number} amount - The amount of coins to buy.
+   */
   const handleBuyCoins = async (amount) => {
     const result = await updateUserCoins(amount);
     if (result === true) {
