@@ -200,7 +200,11 @@ class Game {
     if (left && this.isPlayersTurn(player.getPlayerId())) {
       // Not his turn so we set him afk but we don't do the rotate. He will be skipped automatically.
       csl.log("autoTurn", "player leave, async play fold custom");
-      if(this.players.findIndex(p => p.getPlayerId() === player.getPlayerId()) < this.focus)
+      if (
+        this.players.findIndex(
+          (p) => p.getPlayerId() === player.getPlayerId()
+        ) < this.focus
+      )
         this.focus--;
       player.fold();
       player.setAfk();
@@ -210,7 +214,12 @@ class Game {
       this.fold(player);
       this.setPlayerAFK(player);
     }
-    
+    if (this.master === player.getPlayerId()) {
+      this.checkForNewMaster();
+    }
+    if(this.state === "waiting"){
+      this.moveAfkPlayersToSpectators();
+    }
   }
 
   createAutoTurnCall() {
@@ -299,8 +308,8 @@ class Game {
     console.log("original", originalFocus);
 
     this.focus = (this.focus + 1) % this.players.length;
-    csl.log("rotateFocus","focusapresoriginal", this.focus);
-    csl.log("rotateFocus","isACtive?", this.players[this.focus].isActive);
+    csl.log("rotateFocus", "focusapresoriginal", this.focus);
+    csl.log("rotateFocus", "isACtive?", this.players[this.focus].isActive);
     // Rotation du focus tant que le joueur actuel n'est pas actif
     while (
       !this.players[this.focus].isActive ||
@@ -321,7 +330,7 @@ class Game {
         return;
       }
     }
-    csl.log("rotateFocus","Le focus Après : ", this.focus);
+    csl.log("rotateFocus", "Le focus Après : ", this.focus);
 
     /**
      * on ne finit un tour  que si tout le monde a payé assez ou a tapis
@@ -425,6 +434,7 @@ class Game {
   }
 
   gameEnd() {
+    this.moveAfkPlayersToSpectators();
     this.focus = null;
     this.state = "waiting";
     this.updateActivePlayers();
@@ -438,6 +448,7 @@ class Game {
       player.revealCard(1);
     });
     this.resetRestartCall();
+    this.updatePlayersList();
     setTimeout(() => {
       if (this.allow_start) {
         this.movePlayersWithZeroCoinsToSpectators();
@@ -661,6 +672,19 @@ class Game {
       } // if he has money and his the first we encouter, he's the potential new master if the master has no money.
     });
     this.checkForNewMaster();
+    this.updatePlayersList();
+  }
+
+  moveAfkPlayersToSpectators(){
+    this.players.forEach((player) => {
+      if (player.isAfk) {
+        player.isSpectator = true;
+        player.isActive = false;
+        if (this.master === player.getPlayerId()) {
+          this.checkForNewMaster();
+        }
+      } 
+    });
     this.updatePlayersList();
   }
 
