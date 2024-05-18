@@ -192,7 +192,10 @@ class Game {
    */
 
   autoTurn(player, left = false) {
-    
+    if(this.master === player.getPlayerId()){
+      player.status
+      this.checkForNewMaster(true);
+    }
     // If the player left on purpose we need to make sure we don't break the round of focus.
     // If it's his turn we do the same as for the afk person, otherwise we need to force afk even if it's not his turn.
     if (left && this.isPlayersTurn(player.getPlayerId())) {
@@ -208,9 +211,7 @@ class Game {
       this.fold(player);
       this.setPlayerAFK(player);
     }
-    if(this.master === player.getPlayerId()){
-      this.checkForNewMaster();
-    }
+    
   }
 
   createAutoTurnCall() {
@@ -285,7 +286,7 @@ class Game {
     ) {
       // this.advanceStageToShowdown();
       clearTimeout(this.focusTurnCall);
-      this.players.forEach(p => {this.total+=p.currentBetTurn;p.currentBetTurn =0;});
+      // this.players.forEach(p => {this.total+=p.currentBetTurn;p.currentBetTurn =0;});
       while (this.currentStage !== "showdown") {
         this.advanceStage();
       }
@@ -511,66 +512,61 @@ class Game {
   }
 
   bet(player, amount) {
-    //Si c'est son tour de jouer
+    /*  On laisse le joueur bet si
+                                  - c'est son tour
+                                  - il a assez d'argent
+    */
     if (this.isPlayersTurn(player.getPlayerId())) {
-      //si il a assez d'argent
-      //PEUT pas y avoir de else parce que le amount est envoyé du front, c est le front qui est bloquant
-      if (player.getPlayerMoney() >= amount) {
-        //Cas ou il ajoute a sa mise pour s'équilibrer au autre
+    /*
+            **** RAISE *****
+        si :   0 < gameCurrentBet < mise < allin
+        
+            **** CALL *****
+        si :  mise = gameCurrentBet
+
+            **** CHECK *****
+        si :   0 = mise = gameCurrentBet
+
+            **** ALLIN *****
+        si :   mise = playerMoney
+      */
+
+      // Si le player mise moins que son argent.
+      if (player.playerMoney >= amount) {
         if (amount + player.howmanyBetTurn() >= this.gameCurrentBet) {
-          if (amount === player.getPlayerMoney()) {
+          //   --- RAISE  ---
+          player.raise();
+
+          // Raise de tout son argent ==> TAPIS
+          if (amount === player.playerMoney) {
             player.tapis(amount);
             player.setTapis();
             console.log("TAPIS");
-            // this.playerBeforeNextTurn = this.players.findIndex(
-            //   (p) => p.getPlayerId() === player.getPlayerId()
-            // );
-            //TRUC A VERIFIER ---------------------------------------------------------------------------
-            // this.playerBeforeNextTurn =
-            //   (this.playerBeforeNextTurn + 1) % this.activePlayers.length;
-          } else {
+          } //  Raise simple sinon 
+          else {
             player.bet(amount);
           }
+
+          //Change le maximum du tour + incrémente le pot.
           this.total += amount;
-          //on met le max a la mise a mettre
-          if (this.gameCurrentBet < player.howmanyBetTurn()) {
-            this.gameCurrentBet = player.howmanyBetTurn();
-
-            if (!player.status === "tapis") {
-              player.raise();
-            }
-            // this.playerBeforeNextTurn = this.players.findIndex(
-            //   (p) => p.getPlayerId() === player.getPlayerId()
-            // );
-
-            //console.log("lefocus avant le raise:", this.focus);
-            //console.log("lefocus apres le raise", this.focus);
-          }
-        } else {
-          //LE TAPIS OU J'ai MISER MOINS QUE LA GAME
-          if (amount === player.getPlayerMoney()) {
-            player.tapis(amount);
-            player.setTapis();
-            console.log("TAPIS");
-            // this.playerBeforeNextTurn = this.players.findIndex(
-            //   (p) => p.getPlayerId() === player.getPlayerId()
-            // );
-            //TRUC A VERIFIER ---------------------------------------------------------------------------
-            // this.playerBeforeNextTurn =
-            //   (this.playerBeforeNextTurn + 1) % this.activePlayers.length;
-            this.total += amount;
-
-            this.rotateFocus();
-            return;
-          }
+          this.gameCurrentBet = player.howmanyBetTurn();
         }
-        //ça change juste le status si ça equivaut a un check (bet de 0)
-        if (amount === 0) {
-          player.check();
-        }
-        console.log("this line got executed", this.gameCurrentBet);
+      }
+      else if (amount === 0) {
+        player.check();
+      } 
+      // Si le joueur a misé plus que son argent.
+      // Il mise alors le total de son argent. Donc TAPIS
+      else {
+        amount = player.playerMoney;
+        player.tapis(amount);
+        player.setTapis();
+        console.log("TAPIS");
+        this.total += amount;
         this.rotateFocus();
       }
+      csl.log("bet", "gameCurrentBet after this bet : ",this.gameCurrentBet);
+      this.rotateFocus();
     }
   }
 
@@ -668,8 +664,9 @@ class Game {
     this.updatePlayersList();
   }
 
-  checkForNewMaster() {
-    let setNewMaster = false;
+  checkForNewMaster(forced=false) {
+    //setNewMaster can be forced.
+    let setNewMaster = forced;
 
     // We check first to see if there is a master. If not we will need to either defined or set null again
     if (this.master === undefined || this.master === null) {
@@ -705,9 +702,11 @@ class Game {
         //                          - Not AFK
         //                          - Not Spectator
         //                          - has Money
+        //                          - Not the old master (ofc)
         if (player.playerMoney >= 0 && !player.isSpectator && !player.isAfk) {
           if (potentialMaster === undefined)
-            potentialMaster = player.getPlayerId();
+            if(this.master===null || this.master === undefined || this.master !== player.getPlayerId())
+              potentialMaster = player.getPlayerId();
         }
       });
 

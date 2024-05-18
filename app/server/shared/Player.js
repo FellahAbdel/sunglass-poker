@@ -349,7 +349,7 @@ class Player {
     this.currentBet = 0;
     this.currentBetTurn = 0;
     this.isActive = true;
-    this.isAfk = false;
+    // this.isAfk = false;
     this.alreadyWon = false;
     this.cardsVisible = [false, false];
     this.status = "Playing";
