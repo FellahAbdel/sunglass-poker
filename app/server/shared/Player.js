@@ -323,7 +323,7 @@ class Player {
       this.currentBet = amount;
       this.currentBetTurn += amount;
       this.playerMoney -= amount;
-      this.status = "call";
+      // this.status = "call";
       this.betTotal += amount;
     }
   }
@@ -351,7 +351,7 @@ class Player {
     this.currentBet = 0;
     this.currentBetTurn = 0;
     this.isActive = true;
-    this.isAfk = false;
+    // this.isAfk = false;
     this.alreadyWon = false;
     this.cardsVisible = [false, false];
     this.status = "Playing";
