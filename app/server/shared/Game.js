@@ -192,13 +192,16 @@ class Game {
    */
 
   autoTurn(player, left = false) {
-    
     // If the player left on purpose we need to make sure we don't break the round of focus.
     // If it's his turn we do the same as for the afk person, otherwise we need to force afk even if it's not his turn.
     if (left && this.isPlayersTurn(player.getPlayerId())) {
       // Not his turn so we set him afk but we don't do the rotate. He will be skipped automatically.
       csl.log("autoTurn", "player leave, async play fold custom");
-      if(this.players.findIndex(p => p.getPlayerId() === player.getPlayerId()) < this.focus)
+      if (
+        this.players.findIndex(
+          (p) => p.getPlayerId() === player.getPlayerId()
+        ) < this.focus
+      )
         this.focus--;
       player.fold();
       player.setAfk();
@@ -208,8 +211,11 @@ class Game {
       this.fold(player);
       this.setPlayerAFK(player);
     }
-    if(this.master === player.getPlayerId()){
+    if (this.master === player.getPlayerId()) {
       this.checkForNewMaster();
+    }
+    if(this.state === "waiting"){
+      this.moveAfkPlayersToSpectators();
     }
   }
 
@@ -285,7 +291,10 @@ class Game {
     ) {
       // this.advanceStageToShowdown();
       clearTimeout(this.focusTurnCall);
-      this.players.forEach(p => {this.total+=p.currentBetTurn;p.currentBetTurn =0;});
+      this.players.forEach((p) => {
+        this.total += p.currentBetTurn;
+        p.currentBetTurn = 0;
+      });
       while (this.currentStage !== "showdown") {
         this.advanceStage();
       }
@@ -301,8 +310,8 @@ class Game {
     console.log("original", originalFocus);
 
     this.focus = (this.focus + 1) % this.players.length;
-    csl.log("rotateFocus","focusapresoriginal", this.focus);
-    csl.log("rotateFocus","isACtive?", this.players[this.focus].isActive);
+    csl.log("rotateFocus", "focusapresoriginal", this.focus);
+    csl.log("rotateFocus", "isACtive?", this.players[this.focus].isActive);
     // Rotation du focus tant que le joueur actuel n'est pas actif
     while (
       !this.players[this.focus].isActive ||
@@ -323,7 +332,7 @@ class Game {
         return;
       }
     }
-    csl.log("rotateFocus","Le focus Après : ", this.focus);
+    csl.log("rotateFocus", "Le focus Après : ", this.focus);
 
     /**
      * on ne finit un tour  que si tout le monde a payé assez ou a tapis
@@ -427,6 +436,7 @@ class Game {
   }
 
   gameEnd() {
+    this.moveAfkPlayersToSpectators();
     this.focus = null;
     this.state = "waiting";
     this.updateActivePlayers();
@@ -440,6 +450,7 @@ class Game {
       player.revealCard(1);
     });
     this.resetRestartCall();
+    this.updatePlayersList();
     setTimeout(() => {
       if (this.allow_start) {
         this.movePlayersWithZeroCoinsToSpectators();
@@ -668,6 +679,19 @@ class Game {
     this.updatePlayersList();
   }
 
+  moveAfkPlayersToSpectators(){
+    this.players.forEach((player) => {
+      if (player.isAfk) {
+        player.isSpectator = true;
+        player.isActive = false;
+        if (this.master === player.getPlayerId()) {
+          this.checkForNewMaster();
+        }
+      } 
+    });
+    this.updatePlayersList();
+  }
+
   checkForNewMaster() {
     let setNewMaster = false;
 
@@ -888,7 +912,7 @@ class Game {
           this.evaluateHands();
         }
       } else {
-        csl.log('evaluateHands',"He won everything",aa.name);
+        csl.log("evaluateHands", "He won everything", aa.name);
         aa.seRemplirLesPoches(this.total);
         aa.jesuislewinner();
         this.total = 0;

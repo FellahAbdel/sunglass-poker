@@ -44,14 +44,15 @@ class Player {
 
     return new Proxy(this, {
       set: (target, property, value) => {
-        console.log('proxyMoney called');
-        if (property === 'playerMoney') {
-          target.updateMoneyInDatabase(value - target.playerMoney)
+        console.log("proxyMoney called");
+        if (property === "playerMoney") {
+          target
+            .updateMoneyInDatabase(value - target.playerMoney)
             .then(() => {
               target.playerMoney = value;
             })
-            .catch(error => {
-              console.error('Failed to update money in database:', error);
+            .catch((error) => {
+              console.error("Failed to update money in database:", error);
             });
         } else {
           target[property] = value;
@@ -59,11 +60,11 @@ class Player {
         return true;
       },
       get: (target, property) => {
-        if (property === 'playerMoney') {
+        if (property === "playerMoney") {
           return target.playerMoney;
         }
         return target[property];
-      }
+      },
     });
   }
 
@@ -73,7 +74,6 @@ class Player {
       throw new Error(result.message);
     }
   }
-
 
   setAfk() {
     this.isAfk = true;
@@ -127,9 +127,11 @@ class Player {
 
   toggleSpectator() {
     if (this.isSpectator && !this.canJoinTable()) {
-      console.log(`Player ${this.name} cannot rejoin the table due to insufficient coins.`);
-      this.isSpectator=true;
-      this.isActive=false;
+      console.log(
+        `Player ${this.name} cannot rejoin the table due to insufficient coins.`
+      );
+      this.isSpectator = true;
+      this.isActive = false;
       return;
     }
     this.isSpectator = !this.isSpectator;
