@@ -196,8 +196,8 @@
 
 2024/05/18  2H      Test et retest et reretest et aide victor et noe a regler des bugs
 
+2024/05/18  1H  Test des derniers modif et tentative de debug sur une cas particulier du tapis+échange avec d'autre membre sur divers problemes/debat
 
+--2024/05 SEMAINE 2: 29H30 (TOTAL: 143H)
 
---2024/05 SEMAINE 2: 28H30 (TOTAL: 142H)
-
-TEMPS TOTAL: 142H
+TEMPS TOTAL: 143H
