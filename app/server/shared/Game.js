@@ -545,6 +545,8 @@ class Game {
           } //  Raise simple sinon 
           else {
             player.bet(amount);
+            if(amount === this.gameCurrentBet)
+              player.call();
           }
 
           //Change le maximum du tour + incrémente le pot.
