@@ -21,6 +21,8 @@ const loggameReducer = "gameReducer";
 csl.silenced(logsocket);
 csl.silenced("Session");
 csl.silenced("bdd");
+csl.silenced("broadcastStatus");
+csl.silenced("refreshCall");
 console.log(ENV_CONST_COMM);
 
 /** Paramètres cors du serveur.

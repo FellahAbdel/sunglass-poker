@@ -316,7 +316,7 @@ class Player {
   }
 
   bet(amount) {
-    if (this.playerMoney > amount) {
+    if (this.playerMoney >= amount) {
       this.talkedThisTurn = true;
       this.currentBet = amount;
       this.currentBetTurn += amount;
@@ -327,7 +327,7 @@ class Player {
   }
 
   betinitial(amount) {
-    if (this.playerMoney > amount) {
+    if (this.playerMoney >= amount) {
       this.currentBet = amount;
       this.currentBetTurn += amount;
       this.playerMoney -= amount;
