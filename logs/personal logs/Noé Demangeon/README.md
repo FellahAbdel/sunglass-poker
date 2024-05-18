@@ -158,4 +158,10 @@
 
 2024/05/16 : 3h00           Test jeu pour débug, correction bug, code pour gérer les joueurs avec 0 SC, fin traductions, message erreur creategame
 
-TEMPS TOTAL: 162h30min
+2024/05/17 : 3h00           Correction bugs game, restart automatique, changement masters. Changement boutons pages Serverpannel. Fonction changement mot de passe + checkEmail fonctionnelles
+
+2024/05/17 : 4h00           Session tests avec Maël et Victor, debuggage.
+
+2024/05/18 : 4h00           Traductions, quitter loading page amélioré. Début rédaction rapport.
+
+TEMPS TOTAL: 173h30min
