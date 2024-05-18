@@ -15,13 +15,13 @@ const CORSSETTINGS = {
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
-  const { showHome } = useWindowContext();
+  const { showHome,  windowType} = useWindowContext();
   const { isLogged, user } = state;
 
   useEffect(() => {
-    const authToken = sessionStorage.getItem("authToken"); // Ou localStorage selon votre préférence
+    const authToken = sessionStorage.getItem("authToken");
     if (authToken) {
-      fetchUserInfo(authToken); // Récupérer les informations de l'utilisateur à partir du token
+      fetchUserInfo(authToken);
       dispatch({
         type: "LOGIN",
         payload: {
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
         },
       });
     }
-  }, []);
+  }, [windowType]);
 
   const getAuthHeaders = () => {
     const token = sessionStorage.getItem("authToken");
