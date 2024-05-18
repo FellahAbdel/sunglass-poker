@@ -563,13 +563,14 @@ class Game {
           this.total += amount;
           this.gameCurrentBet = player.howmanyBetTurn();
         }
-      } else if (amount === 0) {
-        player.check();
-      }
+      } //else if (amount === 0) {
+      //   player.check();
+      // }
       // Si le joueur a misé plus que son argent.
       // Il mise alors le total de son argent. Donc TAPIS
       else {
-        amount = player.playerMoney;
+        //ICI ya des problèmes, l'argent n'est pas dans le pot 
+        amount = player.getPlayerMoney();
         player.tapis(amount);
         player.setTapis();
         console.log("TAPIS");

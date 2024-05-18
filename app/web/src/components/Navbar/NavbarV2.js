@@ -39,8 +39,8 @@ const Navbar = () => {
     if (isPlayerLeft) {
       console.log("Player left the table successfully");
       showHome();
-    }else{
-        console.log("Player did not leave the table successfully");
+    } else {
+      console.log("Player did not leave the table successfully");
     }
   };
 
@@ -71,6 +71,11 @@ const Navbar = () => {
           closeWindow();
         },
       });
+    } else if (windowType === "loading") {
+      //console.log("L'utilisateur quitte la table en waiting");
+      //handleleaveRoom();
+      closeWindow();
+      return;
     } else if (windowType !== "") {
       closeWindow();
     } else if (isGameTableVisible) {
@@ -171,15 +176,15 @@ const Navbar = () => {
           )}
         </div>
       )}
-      {windowType !== "loading" &&
+      {windowType !== "loading" && (
         <div className="container-navMain-V2">
-          {windowType !== "" && !isGameTableVisible &&
+          {windowType !== "" && !isGameTableVisible && (
             <Button
-            label={getTranslatedWord("navbar.home")}
-            onClick={() => openWindow("")}
-            iconSrc="static/media/assets/images/icons/white/home.png"
-          />
-          }
+              label={getTranslatedWord("navbar.home")}
+              onClick={() => openWindow("")}
+              iconSrc="static/media/assets/images/icons/white/home.png"
+            />
+          )}
           {isLogged && (
             <>
               <Button
@@ -236,7 +241,21 @@ const Navbar = () => {
             />
           )}
         </div>
-      }
+      )}
+      {windowType === "loading" && (
+        <>
+          <div className="container-navMain-V2">
+            {isLogged && (
+              <Button
+                label={label}
+                onClick={handleLogOutButton}
+                styleClass="btn-exit-V2"
+                iconSrc="static/media/assets/images/icons/white/exit.png"
+              />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
