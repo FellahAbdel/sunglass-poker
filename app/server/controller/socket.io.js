@@ -127,18 +127,18 @@ module.exports = function (
    */
   async function identify(socket, token) {
     // Logging user identification attempt with token
-    csl.log(fileType, "User is identifying himself with token ", token);
+    csl.log("identify", "User is identifying himself with token ", token);
 
     // Check if the token is null
     if (token === null) {
       // If token is null, handle session destruction and socket disconnection (code commented out)
-      // csl.log(fileType,'Destroy socket for ', socket.id);
+      // csl.log("identify",'Destroy socket for ', socket.id);
       // io.in(socket.request.session.id).disconnectSockets(true);
       // socket.request.session.destroy();
       // socket.disconnect();
     } else {
       // If token is not null
-      csl.log(fileType, socket.rooms, socket.rooms.has(token));
+      csl.log("identify", socket.rooms, socket.rooms.has(token));
 
       // Check if the socket is not already in the room identified by the token
       if (!socket.rooms.has(token)) {
@@ -151,7 +151,7 @@ module.exports = function (
 
           // Logging session ID and joining the room with the session ID
           csl.log(
-            fileType,
+            "identify",
             "Session id : ",
             socket.id,
             " join room session:",
@@ -174,7 +174,7 @@ module.exports = function (
 
           // Logging session information after user login
           csl.log(
-            "Session",
+            "identify",
             "Logged in user's session pseudo:",
             socket.request.session.pseudo,
             " id :",
@@ -183,6 +183,7 @@ module.exports = function (
 
           // Join the room identified by the decoded user ID
           socket.join(decoded.id);
+          return true;
         } catch (err) {
           // Handle errors with token verification
           csl.error(fileType, "Error with token : ", err);
@@ -192,6 +193,7 @@ module.exports = function (
         }
       }
     }
+    return false;
   }
 
   /**
@@ -525,9 +527,17 @@ module.exports = function (
     });
 
     // Listen for 'myNameIs' event
-    socket.on("myNameIs", (token) => {
+    socket.on("myNameIs", (data) => {
+      csl.log('myNameIs',data,socket.alreadyCalled);
       // Identify the user with the provided token
-      identify(socket, token);
+      if(identify(socket, data.token)){
+        if(socket.alreadyCalled === undefined || (Date.now() - socket.alreadyCalled > 1000))
+        csl.log('sendSuccess',"Auth correct");
+        socket.emit('identifySuccessfull');
+        socket.alreadyCalled = Date.now();
+        if(data.init)
+          socket.emit('askedForGame');
+      }
     });
 
     // Listen for 'joinRoom' event
@@ -599,6 +609,7 @@ module.exports = function (
 
     // Listen for 'showMyGame' event
     socket.on("showMyGame", () => {
+      csl.log("showMyGame","socketEvent received",socket.request.session.userId);
       if (socket.request.session.userId) {
         // Find player's room
         findPlayerRoom(socket, socket.request.session.userId);

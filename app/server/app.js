@@ -23,6 +23,7 @@ csl.silenced("Session");
 csl.silenced("bdd");
 csl.silenced("broadcastStatus");
 csl.silenced("refreshCall");
+csl.silenced("identify");
 console.log(ENV_CONST_COMM);
 
 /** Paramètres cors du serveur.

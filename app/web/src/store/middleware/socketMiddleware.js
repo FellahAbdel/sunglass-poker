@@ -1,6 +1,8 @@
 // Redux middleware
 import { comm } from "../../services/socket.js";
-
+window.addEventListener('DOMContentLoaded', (event) => {
+  comm.Init();
+});
 const actions = require("../actions/clientInteractionsType.js");
 
 export const socketMiddleware = (socket) => (store) => (next) => (action) => {
