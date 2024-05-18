@@ -5,70 +5,86 @@
     "message": "Nachricht",
     "settings": "Einstellungen",
     "tutorial": "Tutorial",
-    "exit": "Beenden",
-    "logout": "Ausloggen",
-    "login": "Einloggen",
+    "exitTable": "Den Tisch verlassen",
+    "exit": "Fenster schließen",
+    "logout": "Abmelden",
+    "login": "Anmelden",
     "signin": "Registrieren",
-    "ranking": "Rangfolge"
+    "ranking": "Rangliste",
+    "home": "Startseite"
   },
   "connection": {
-    "login": "Einloggen",
+    "login": "Anmelden",
     "signin": "Registrieren",
     "username": "Benutzername",
     "password": "Passwort",
-    "repeatPass": "Passwort wiederholen",
+    "repeatPass": "Wiederhole dein Passwort",
     "email": "E-Mail",
     "forgotPass": "Ich habe mein Passwort vergessen",
     "forgotPassQuestion": "Passwort vergessen?",
-    "forgotPassEnter": "Geben Sie Ihre E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten.",
-    "registerNewAcc": "Neues Konto erstellen",
+    "forgotPassEnter": "Gib deine E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten.",
+    "registerNewAcc": "Neues Konto registrieren",
     "signinG": "Mit Google anmelden",
-    "haveAccQuestion": "Sie haben bereits ein Konto?",
+    "haveAccQuestion": "Hast du schon ein Konto?",
     "optional": "Optional",
-    "loginMessage": "Melden Sie sich bei Ihrem Konto an",
-    "registerMessage": "Erstellen Sie Ihr Konto",
+    "loginMessage": "Melde dich bei deinem Konto an",
+    "registerMessage": "Erstelle dein Konto",
     "send": "Senden",
-    "returnConnection": "Zurück zum Anmeldebildschirm"
+    "returnConnection": "Zurück zum Verbindungsmenü",
+    "loginSuccess": "Erfolgreich angemeldet!",
+    "successMail": "E-Mail zum Zurücksetzen des Passworts erfolgreich gesendet",
+    "successAccount": "Konto erfolgreich erstellt!",
+    "resetPassword": "Setze dein Passwort zurück",
+    "successReset": "Dein Passwort wurde erfolgreich geändert",
+    "enterNewPassword": "Gib hier dein neues Passwort ein:",
+    "temporary": "TEMPORÄRER BUTTON"
   },
   "messageBox": {
     "loginSucces": "Erfolgreich angemeldet!",
-    "ok": "OK"
+    "ok": "Ok"
   },
   "game": {
-    "loginPlay": "Einloggen, um zu spielen",
-    "startGame": "Spiel starten",
-    "joinGame": "Spiel beitreten",
-    "createAgame": "Neues Spiel erstellen",
+    "loginPlay": "Melde dich an, um zu spielen",
+    "signupPlay": "Registriere dich, um zu spielen",
+    "startGame": "Ein Spiel starten",
+    "joinGame": "Einem Spiel beitreten",
+    "createAgame": "Ein neues Spiel erstellen",
+    "quickGame": "Schnelles Spiel",
     "status": "Status",
     "name": "Name",
     "gameName": "Spielname",
-    "ranked": "Eingestuft",
+    "PasswordOptionnal": "Passwort (Optional)",
+    "ranked": "Rangliste",
     "players": "Spieler",
     "selectRank": "Rang auswählen",
     "join": "Beitreten",
     "full": "Voll",
-    "confirmExitMessage": "Sind Sie sicher, dass Sie den Tisch verlassen möchten? Sie werden alle SC im Spiel verlieren.",
-    "leftTableSuccess": "Sie haben den Tisch erfolgreich verlassen.",
-    "confirm": "Bestätigen",
-    "cancel": "Abbrechen"
+    "noActiveServer": "Kein aktiver Server"
   },
   "handGuide": {
-    "highcard": "Höchste Karte",
+    "highcard": "Hohe Karte",
     "pair": "Paar",
     "twoPair": "Zwei Paare",
-    "threeOfKind": "Drei Gleiche",
+    "threeOfKind": "Drilling",
     "straight": "Straße",
     "flush": "Flush",
     "fullHouse": "Full House",
-    "fourOfKind": "Vier Gleiche",
+    "fourOfKind": "Vierling",
     "straightFlush": "Straight Flush",
-    "royalFlush": "Royal Flush"
+    "royalFlush": "Royal Flush",
+    "show": "Zeigen",
+    "hide": "Verstecken",
+    "showB": "Beide zeigen",
+    "hideB": "Beide verstecken"
   },
   "gameActionPanel": {
     "raise": "Erhöhen",
     "call": "Mitgehen",
-    "check": "Checken",
-    "fold": "Passen"
+    "check": "Schieben",
+    "fold": "Passen",
+    "currentSC": "Aktueller SC",
+    "afterSC": "SC nach Erhöhung",
+    "totalRaise": "Gesamterhöhungen"
   },
   "bonus": {
     "bonus": "BONUS"
@@ -80,48 +96,96 @@
     "join": "Beitreten",
     "full": "Voll",
     "status": "Status",
-    "action": "Aktion"
+    "action": "Aktion",
+    "selectRank": "Rang auswählen",
+    "friendly": "Freundlich",
+    "intermediate": "Mittelstufe",
+    "advanced": "Fortgeschritten",
+    "elite": "Elite",
+    "createTheGame": "Das Spiel erstellen",
+    "search": "Raum suchen",
+    "gameExist": "Spielname existiert bereits"
   },
   "playersStatus": {
     "empty": "Leer",
-    "called": "Gecallt",
-    "fold": "Gepasst",
-    "raised": "Erhöht",
-    "checked": "Gecheckt",
-    "playing": "Spielt"
+    "call": "Mitgegangen",
+    "folded": "Gepasst",
+    "raise": "Erhöht",
+    "checked": "Geschoben",
+    "tapis": "ALL IN",
+    "playing": "Spielt",
+    "waiting": "Wartet",
+    "winner": "Gewinner"
   },
   "settings": {
-    "mute": "Stummschalten",
+    "mute": "Stumm",
+    "sound": "Ton",
     "theme": "Thema",
+    "animations": "Animationen",
     "langSelect": "Sprache auswählen"
   },
   "profil": {
     "name": "Name",
     "mail": "E-Mail",
     "coins": "Münzen",
-    "date": "Beitrittsdatum"
+    "date": "Beitrittsdatum",
+    "unknowDate": "Unbekanntes Datum"
   },
   "shop": {
     "shop": "Shop",
-    "avatars": "Avatare",
-    "sunglasses": "Karten",
-    "color": "Hintergrundbilder",
-    "confirmationMessage": "Möchten Sie diesen Artikel wirklich für ",
+    "baseAvatar": "Avatare",
+    "sunglasses": "Sonnenbrillen",
+    "colorAvatar": "Farbe",
+    "confirmationMessage": "Möchtest du diesen Artikel wirklich für kaufen",
     "confirm": "Bestätigen",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "price": "Preis",
+    "success": "Kauf erfolgreich abgeschlossen!",
+    "afterTransaction": "Sun Coins nach der Transaktion",
+    "buyMore": "Mehr kaufen",
+    "purchase": "Kauf",
+    "buy": "Kaufen",
+    "backStore": "Zurück zum Shop",
+    "loading": "Laden",
+    "coins": "Danke für deine Spende"
   },
   "messageLogo": {
     "tutorial": "Tutorial",
     "profile": "Profil",
-    "listeTable": "EINEM SPIEL BEITRETEN",
-    "createTable": "NEUES SPIEL ERSTELLEN",
+    "servers": "EINEM SPIEL BEITRETEN",
+    "create_table": "EIN NEUES SPIEL ERSTELLEN",
     "validation": "Kaufbestätigung",
-    "shop": "Einkaufsladen"
+    "shop": "Shop",
+    "ranking": "Ranglisten",
+    "coins": "Münzen kaufen"
+  },
+  "alert": {
+    "confirmExitMessage": "Bist du sicher, dass du den Tisch verlassen möchtest? Du verlierst alle im Spiel befindlichen SC.",
+    "leftTableSuccess": "Du hast den Tisch erfolgreich verlassen.",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen",
+    "logout": "Du bist dabei, dich abzumelden"
+  },
+  "table": {
+    "total": "Gesamtpot",
+    "waiting": "Warten auf die Spieler",
+    "join": "Dem Spiel beitreten",
+    "spectacle": "Das Spiel beobachten",
+    "start": "Das Spiel starten",
+    "inGame": "Du bist noch am Spieltisch"
   },
   "ranking": {
     "rank": "Rang",
     "pseudo": "Pseudonym",
-    "gain": "Gewinnen",
+    "gain": "Gewinn",
     "loadMore": "Mehr laden"
+  },
+  "error": {
+    "noAccountFound": "Kein Konto gefunden",
+    "invalidEmail": "Ungültige E-Mail-Adresse",
+    "badUsername": "Der Benutzername muss mindestens 3 Zeichen haben",
+    "password6Characters": "Das Passwort muss mindestens 6 Zeichen haben",
+    "passwordNotMatch": "Die Passwörter stimmen nicht überein",
+    "emailNotFound": "E-Mail nicht gefunden"
   }
 }
