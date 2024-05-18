@@ -194,9 +194,10 @@
 
 2024/05/18  2H      Test et correction de bugs en vocal avec victor et noé, check de se qu il reste a faire etc...
 
-2024/05/18  1H      Test et retest et reretest et aide victor et noe a regler des bugs
+2024/05/18  2H      Test et retest et reretest et aide victor et noe a regler des bugs
 
 
---2024/05 SEMAINE 2: 27H30 (TOTAL: 141H)
 
-TEMPS TOTAL: 141H
+--2024/05 SEMAINE 2: 28H30 (TOTAL: 142H)
+
+TEMPS TOTAL: 142H
