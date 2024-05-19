@@ -554,7 +554,7 @@ class Game {
         this.gameCurrentBet = player.currentBetTurn;
       }
      //   --- CALL  ---
-      else if((amount+player.currentBet) === this.gameCurrentBet &&
+      else if((amount+player.currentBetTurn) === this.gameCurrentBet &&
               amount !== player.localMoney
       ) {
         this.total+=amount;
@@ -570,8 +570,8 @@ class Game {
       //   --- TAPIS  ---
       else if(amount >= player.localMoney){
         this.total+=player.localMoney;
-        if(this.gameCurrentBet < player.localMoney+player.currentBet)
-          this.gameCurrentBet = player.localMoney+player.currentBet;
+        if(this.gameCurrentBet < player.localMoney+player.currentBetTurn)
+          this.gameCurrentBet = player.localMoney+player.currentBetTurn;
         player.tapis(player.localMoney);
         player.setTapis();
       }
@@ -580,7 +580,7 @@ class Game {
         csl.log('betfailed',"player bet is not valid.",amount,player.localMoney,this.gameCurrentBet);
         return;
       }
-      if(player.currentBet > this.gameCurrentBet)
+      if(player.currentBetTurn > this.gameCurrentBet)
         this.gameCurrentBet =player.currentBetTurn;
       csl.log("bet", "gameCurrentBet after this bet : ", this.gameCurrentBet);
       csl.log("bet", `After the bet : ${this.total}`);
