@@ -15,7 +15,7 @@ export const WindowProvider = ({ children }) => {
     if (state.windowType === "alert") {
       dispatch({ type: "SET_WINDOW_TYPE", payload: "accueil" });
     }
-  }, [state.windowType]);
+  }, []);
 
   const setWindowOpen = (isOpen) => {
     dispatch({ type: "TOGGLE_WINDOW_OPEN", payload: isOpen });
@@ -46,6 +46,8 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openWindow = (type, params = {}) => {
+    console.log(`Opening window: ${type}`, params);
+
     if (state.windowType === type && state.isWindowOpen) {
       closeWindow();
       return;
@@ -71,6 +73,7 @@ export const WindowProvider = ({ children }) => {
   };
 
   const closeWindow = () => {
+    console.log("Fermeture de la fenêtre");
     setAlertParams({ message: "", onConfirm: () => {}, onCancel: () => {} });
     setWindowOpen(false);
     if (state.isGameTableVisible) {
@@ -92,6 +95,9 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openSuccessWindow = (message, redirect = "") => {
+    console.log(
+      `Ouverture de la fenêtre de succès avec le message : ${message}`
+    );
     setSuccessMessage(message);
     setRedirectAfterSuccess(redirect);
     setWindowType("success");
@@ -99,6 +105,9 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openValidationWindow = (item) => {
+    console.log(
+      `Ouverture de la fenêtre de validation pour l'élément : ${item.imgSrc}`
+    );
     dispatch({ type: "SET_SELECTED_ITEM", payload: item });
     dispatch({ type: "SET_WINDOW_TYPE", payload: "validation" });
     dispatch({ type: "TOGGLE_WINDOW_OPEN", payload: true });
@@ -109,7 +118,7 @@ export const WindowProvider = ({ children }) => {
   };
 
   const onClickStartGame = () => {
-    openWindow("game");
+    openWindow("game"); // Assurez-vous que 'game' est géré dans votre reducer pour `windowType`
   };
 
   // Effets pour gérer la persistance de sessionStorage
