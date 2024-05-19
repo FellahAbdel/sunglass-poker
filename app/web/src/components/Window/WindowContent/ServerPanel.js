@@ -18,7 +18,8 @@ const ServerPanelWindow = () => {
   const dispatch = useDispatch();
   const { getTranslatedWord } = useTranslation();
 
-  const { closeWindow, showGameTable, setWindowType , openWindow } = useWindowContext();
+  const { closeWindow, showGameTable, setWindowType, openWindow } =
+    useWindowContext();
 
   const { getRoomTableRecords, isLogged } = useAuth();
   const [roomTableRecords, setRoomTableRecords] = useState([]);
@@ -115,8 +116,12 @@ const ServerPanelWindow = () => {
     fetchRoomTableRecords();
   }, [searchText]); //Mise à jour à chaque fois que le texte est changé
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchText]);
+
   console.log("roomsTableRecords : ", roomTableRecords); // Log the fetched roomTableRecords data to the console
-  
+
   // Handle the logic for joining a table.
   const handleJoinTable = (id) => {
     if (isLogged) {
