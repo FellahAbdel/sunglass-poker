@@ -452,7 +452,11 @@ class Game {
       if (this.allow_start) {
         this.movePlayersWithZeroCoinsToSpectators();
         this.updatePlayersList();
-        if (this.players.length <= 1) {
+        if (this.state!=="waiting"){
+          console.log("game is already started");
+          return;
+        }
+        else if (this.players.length <= 1) {
           // Assurez-vous qu'il y a plus d'un joueur actif.
           console.log("Not enough players to start the game.");
           return;
