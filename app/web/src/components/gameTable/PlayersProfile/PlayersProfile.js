@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import "./playersProfile.css";
 import ProgressBar from "../../Utiles/ProgressBar";
 import Card from "../Card/Card";
@@ -40,8 +40,27 @@ const PlayersProfile = ({
   const formattedChips = chips?.toLocaleString();
   const dollarSign = " SC";
 
-  console.log("isFocus playersProfile :", isFocus);
-  console.log("Player status:", status);
+  useEffect(() => {
+    console.log("playerHandName :",playerHandName);
+  }, [playerHandName]);
+  useEffect(() => {
+    console.log("isFocus playersProfile :", isFocus);
+  }, [isFocus]);
+  useEffect(() => {
+    console.log("Player status:", status);
+  }, [status]);
+
+  /**
+   * Converts the first character of a string to lowercase and retains the rest as is.
+   * Useful for converting PascalCase or other formats to camelCase.
+   * 
+   * @param {string} str - The string to convert to camelCase.
+   * @return {string} The camelCased string.
+   */
+  function toCamelCase(str) {
+    if (!str) return str; 
+    return str.charAt(0).toLowerCase() + str.slice(1);
+  }
 
   // Function to format and validate cards for display
   const renderCard = (card, index) => {
@@ -58,11 +77,16 @@ const PlayersProfile = ({
   return (
     <div className={`container-onGameProfile`}>
       <div
-        className={`container-profileMessage ${
-          isFocus ? "profileMessageShow" : ""
-        }`}
-      >
-        {isYou ? "Your Turn" : "Their Turn"} !
+        className={`container-profileMessage 
+                    ${isFocus || (status === "winner") && "profileMessageShow"}`}>
+
+          {status === "winner" && playerHandName ? 
+            getTranslatedWord(`handGuide.${toCamelCase(playerHandName)}`)
+            : (
+                isFocus && 
+                  (isYou ? getTranslatedWord("game.yourTurn") + "!" : getTranslatedWord("game.theirTurn") + "!")
+            )
+          }
       </div>
       <div className={`box-status ${status.toLowerCase()} ${isFocus && "waiting"}`}>
         {isFocus ? (
@@ -84,8 +108,6 @@ const PlayersProfile = ({
           {name}
           <br />
           {status !== "empty" && `${formattedChips}${dollarSign}`}
-          <br />
-          {playerHandName}
         </p>
       </div>
 
