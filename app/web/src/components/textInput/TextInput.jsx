@@ -4,7 +4,7 @@ import { useTranslation } from "../Utiles/Translations";
 /**
  * TextInputComponent creates a styled input field with optional error handling.
  * It uses a translation hook for localized placeholders and error messages.
- * 
+ *
  * Props:
  *  - name: String representing the input's name attribute.
  *  - placeholder: String identifier for translation of the input's placeholder text.
@@ -42,7 +42,7 @@ const TextInputComponent = ({
         onChange={(e) => onChange(e)}
         onKeyDown={onKeyDown}
       ></input>
-      <img className="texxtInput-icon" src={iconSrc}/>
+      <img className="texxtInput-icon" src={iconSrc} />
       {errorMessage && <p>{getTranslatedWord(errorMessage)}</p>}{" "}
     </div>
   );
