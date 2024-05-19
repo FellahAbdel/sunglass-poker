@@ -49,6 +49,7 @@ const PlayersPlacements = ({ showMiddle }) => {
             isFocus={currentFocusIndex === index}
             isYou={player.isYou}
             timer={20}
+            playerHandName={player.playerHandName}
           />
         </div>
       ))}

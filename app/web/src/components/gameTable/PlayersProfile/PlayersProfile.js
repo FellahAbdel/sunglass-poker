@@ -34,6 +34,7 @@ const PlayersProfile = ({
   isFocus,
   isYou,
   timer,
+  playerHandName,
 }) => {
   const { getTranslatedWord } = useTranslation();
   const formattedChips = chips?.toLocaleString();
@@ -83,6 +84,8 @@ const PlayersProfile = ({
           {name}
           <br />
           {status !== "empty" && `${formattedChips}${dollarSign}`}
+          <br />
+          {playerHandName}
         </p>
       </div>
 

@@ -78,6 +78,7 @@ export const GameTableProvider = ({ children }) => {
       console.log("j'actualise depuis:", gameInfo);
       if (currentPlayer) {
         setPlayerMoney(currentPlayer.playerMoney);
+        setPlayerHandName(currentPlayer.playerHandName);
         setGamePlayerCurrentBet(
           gameInfo.game.players.find((p) => p.playerId === userId)
             .currentBetTurn
@@ -154,6 +155,7 @@ export const GameTableProvider = ({ children }) => {
         gameState,
         isSpectator,
         serverName,
+        playerHandName
       }}
     >
       {children}
