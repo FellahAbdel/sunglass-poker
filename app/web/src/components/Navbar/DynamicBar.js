@@ -109,22 +109,24 @@ const DynamicBar = () => {
           </div>
           {!notEnoughSC && (
             <>
-              {isMaster && numberOfPlayers > 2 ? (
+              {numberOfPlayers > 2 ? (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
                   label={getTranslatedWord("table.start")}
                   onClick={() => startGame()}
                 />
               ) : (
-                <Button
-                  styleClass="btn-gameStart2 back-color1"
-                  label={
-                    isSpectator
-                      ? getTranslatedWord("table.join")
-                      : getTranslatedWord("table.spectacle")
-                  }
-                  onClick={() => startGame()}
-                />
+                !isMaster && (
+                  <Button
+                    styleClass="btn-gameStart2 back-color1"
+                    label={
+                      isSpectator
+                        ? getTranslatedWord("table.join")
+                        : getTranslatedWord("table.spectacle")
+                    }
+                    onClick={() => startGame()}
+                  />
+                )
               )}
             </>
           )}
