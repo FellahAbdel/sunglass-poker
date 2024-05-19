@@ -46,7 +46,6 @@
     radial-gradient(var(--error-red) 15%, transparent 20%) 8px 8.5px;
   --dark-background-color: #282828;
   --dark-background-size: 16px 16px;
-  /* --dark-background-size: 1vw 1vw; */
 
   --inGame-dark-shadow-box: inset 0px 10px 10vw 3vw rgb(0, 0, 0),
     inset 0 -5px 0 1vw var(--color3-dark), inset 0 0 0 0 transparent,
@@ -122,16 +121,10 @@
 .container-inGame {
   width: 65vw;
   height: 45vh;
-  /* border-radius: 250px 250px 180px 180px; */
   border-radius: 30vw 30vw 20vw 20vw;
-
 }
 #dark .container-inGame {
   box-shadow: var(--inGame-dark-shadow-box);
-  /* background:var(--isLogged-dark-background);
-  background-color: var(--dark-background-color);
-  background-size: 16px 12px; */
-
   background: radial-gradient(#bababa0c 40%, #000000);
   background-size: 77vw;
   background-position: center;
@@ -314,7 +307,6 @@
   width: 40vw;
   height: 20vh;
   border: 0.2vw solid rgba(255, 255, 255, 0.317);
-  /* animation: lineAround 2s ease-in-out infinite; */
 }
 .disappear {
   width: 0;

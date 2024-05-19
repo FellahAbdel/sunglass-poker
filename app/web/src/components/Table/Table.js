@@ -15,8 +15,8 @@ import LogoComponent from "../logo/Logo";
 import TotalPot from "./TotalPot";
 import { useSettings } from "../Utiles/SettingsContext.jsx";
 /**
- * The Table component serves as the primary UI container for the game, 
- * including players' placements, cards, and other game-related information 
+ * The Table component serves as the primary UI container for the game,
+ * including players' placements, cards, and other game-related information
  * based on the visibility state controlled through window context.
  */
 const Table = ({}) => {
@@ -26,7 +26,7 @@ const Table = ({}) => {
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const { showWaitingMessage, isFocus } = useGameTable();
-  
+
   // Update visibility based on window and game table visibility states
   useEffect(() => {
     if (isWindowOpen && isGameTableVisible) {
@@ -54,11 +54,16 @@ const Table = ({}) => {
     // Table that becomes a container for the menus when they are activated
     <div className={classes.containerTable}>
       {/* table carpet in game */}
-      <img 
+      <img
         className={`table-carpet 
-                    ${isGameTableVisible && !isWindowOpen && "appear"}`} 
-        src={`${theme === "dark" ? "static/media/assets/images/texture/carpetlow-bnw.jpg" : "static/media/assets/images/texture/carpetlow.jpg"}`} 
-        alt="table carpet"/>
+                    ${isGameTableVisible && !isWindowOpen && "appear"}`}
+        src={`${
+          theme === "dark"
+            ? "static/media/assets/images/texture/carpetlow-bnw.jpg"
+            : "static/media/assets/images/texture/carpetlow.jpg"
+        }`}
+        alt="table carpet"
+      />
 
       {/* the white border line around the table in the middle */}
       <div
@@ -101,7 +106,7 @@ const Table = ({}) => {
             ? getTranslatedWord(`messageLogo.${windowType}`)
             : ""
         }`}
-        loading = {windowType==="loading"}
+        loading={windowType === "loading"}
       />
     </div>
   );
