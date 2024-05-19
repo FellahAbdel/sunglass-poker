@@ -19,12 +19,22 @@ const Navbar = () => {
 
   const isPlayerLeft = useSelector((state) => state.game.playerLeft);
 
+  // Handles the logout and room leave logic with confirmation dialogs
+  const {
+    isGameTableVisible,
+    closeWindow,
+    openWindow,
+    showHome,
+    windowType,
+    isWindowOpen,
+  } = useWindowContext();
+
   // useEffect to show the home page when the player leaves the table successfully
   useEffect(() => {
     if (isPlayerLeft) {
       showHome();
     }
-  }, [isPlayerLeft]);
+  }, [isPlayerLeft, showHome]);
 
   const dispatch = useDispatch();
 
@@ -36,78 +46,51 @@ const Navbar = () => {
     }
     dispatch(actions.leaveRoom());
     if (isPlayerLeft) {
-      console.log("Player left the table successfully");
       showHome();
     } else {
-      console.log("Player did not leave the table successfully");
     }
   };
 
-  // Handles the logout and room leave logic with confirmation dialogs
-  const {
-    isGameTableVisible,
-    closeWindow,
-    openWindow,
-    showHome,
-    windowType,
-    isWindowOpen,
-  } = useWindowContext();
-
   const handleLogOutButton = () => {
-    console.log("handleLogOutButton :", windowType);
-    console.log("isLogged :", isLogged);
     if (windowType === "accueil") {
-      console.log("Open log out alert");
       openWindow("alert", {
         message: "alert.logout",
         onConfirm: () => {
-          console.log("User confirms log out");
 
           logingOut();
           showHome();
         },
         onCancel: () => {
-          console.log("User cancels log out");
           closeWindow();
         },
       });
     } else if (windowType === "loading") {
-      //console.log("L'utilisateur quitte la table en waiting");
-      //handleleaveRoom();
       closeWindow();
       return;
     } else if (windowType !== "") {
       closeWindow();
     } else if (isGameTableVisible) {
-      console.log("Open leaving table alert");
       openWindow("alert", {
         message: "alert.confirmExitMessage",
         onConfirm: () => {
-          console.log("L'utilisateur quitte la table");
           handleleaveRoom();
 
           // Before showing the home page, we need to to be sure
           // that the server has processed the leaveRoom request
-
-          //   showHome();
           // We use the isPlayerLeft state to show the home page above.
         },
         onCancel: () => {
           closeWindow();
-          console.log("L'utilisateur a choisi de rester sur la table");
         },
       });
     } else {
-      console.log("Open log out alert");
       openWindow("alert", {
         message: "alert.logout",
         onConfirm: () => {
-          console.log("User confirms log out");
           logingOut();
           showHome();
         },
         onCancel: () => {
-          console.log("User cancels log out");
           closeWindow();
         },
       });
@@ -141,42 +124,13 @@ const Navbar = () => {
     label = getTranslatedWord("navbar.exitTable");
   }
 
+  const toAboutMe = () => {
+    window.open('https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrp9-1/sunglass-studio', '_blank', 'noopener,noreferrer');
+    }
+  
+
   return (
     <div className="container-nav-V2" onClick={handleClick}>
-      {/* Current Chips inventory and LogOut Button */}
-      {isLogged && (
-        <div className="container-nav-lefttop">
-          {isGameTableVisible && (
-            <div className={`chatBox-V2 ${isChatOpen && "chatBoxOpen-V2"}`}>
-              {!isChatOpen && (
-                <Button
-                  label={""}
-                  onClick={handleChatOpen}
-                  iconSrc="static/media/assets/images/icons/white/chat.png"
-                />
-              )}
-
-              {isChatOpen && (
-                <>
-                  <img
-                    className={"btn-chatClose-V2"}
-                    onClick={handleChatClose}
-                    src="static/media/assets/images/icons/white/cross.png"
-                    alt="exit-chat"
-                  />
-                  <TextInputComponent
-                    name="Message"
-                    value={handleNull}
-                    onChange={handleNull}
-                    placeholder={"Messages"}
-                    styleClass={"input-chatBox-V2"}
-                  />
-                </>
-              )}
-            </div>
-          )}
-        </div>
-      )}
       {windowType !== "loading" && (
         <div className="container-navMain-V2">
           {windowType !== "" && !isGameTableVisible && (
@@ -232,7 +186,12 @@ const Navbar = () => {
             styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
             iconSrc="static/media/assets/images/icons/white/tutorial.png"
           />
-
+          <Button
+            label={getTranslatedWord("navbar.info")}
+            onClick={toAboutMe}
+            styleClass={`btn-settings-V2`}
+            iconSrc="static/media/assets/images/icons/white/info.png"
+          />
           {isLogged && (
             <Button
               label={label}

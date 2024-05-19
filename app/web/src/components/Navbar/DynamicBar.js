@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./dynamicBar.css";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext";
-import { formatNumber } from "./../Utiles/NumberFormat";
 import Button from "./../button/Button.tsx";
 import { useUserData } from "../Utiles/useUserData.jsx";
 import { useTranslation } from "./../Utiles/Translations.jsx";
@@ -16,25 +15,25 @@ import { useDispatch } from "react-redux";
  */
 const DynamicBar = () => {
   const { userId } = useAuth();
-  const { openWindow, windowType, isGameTableVisible, isWindowOpen } = useWindowContext();
-  const { isMaster, showWaitingMessage , isSpectator } = useGameTable();
+  const { openWindow, windowType, isGameTableVisible, isWindowOpen } =
+    useWindowContext();
+  const { isMaster, showWaitingMessage, isSpectator } = useGameTable();
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
   const { serverName } = useGameTable();
   const dispatch = useDispatch();
+  const [notEnoughSC, setNotEnoughSC] = useState(user?.coins <= 40);
 
   /**
    * Starts the game by dispatching the startGame action with the user's ID.
    */
   const startGame = () => {
-    console.log("Starting game with roomId:");
     dispatch(actions.startGame(userId));
   };
 
-  // Effect to log the waiting message state for debugging.
   useEffect(() => {
-    console.log("showWaitingMessage:", showWaitingMessage);
-  }, [showWaitingMessage]);
+    setNotEnoughSC(user?.coins <= 40);
+  }, [user?.coins]);
 
   return (
     <>
@@ -48,7 +47,7 @@ const DynamicBar = () => {
                             }
                             ${windowType === "coins" && "center"}`}
       >
-        <div className="userCoinsTop">{formatNumber(user.coins)} SC</div>
+        <div className="userCoinsTop">{user.coins} SC</div>
         {(windowType === "shop" || windowType === "coins") && (
           <Button
             label={
@@ -88,30 +87,44 @@ const DynamicBar = () => {
       </div>
 
       {/* Waiting panel and start button */}
-      {isGameTableVisible && 
-        <div className={`container-waiting ${showWaitingMessage && isGameTableVisible && !isWindowOpen && "appear"}`}>
+      {isGameTableVisible && (
+        <div
+          className={`container-waiting ${
+            showWaitingMessage &&
+            isGameTableVisible &&
+            !isWindowOpen &&
+            "appear"
+          }`}
+        >
           <div className="txt-waiting">
-            {getTranslatedWord("table.waiting")}
+            {notEnoughSC
+              ? getTranslatedWord("game.notEnoughSC")
+              : getTranslatedWord("table.waiting")}{" "}
+            !
           </div>
-          {isMaster ? (
-            <Button
-              styleClass="btn-gameStart2 back-color1"
-              label={getTranslatedWord("table.start")}
-              onClick={() => startGame()}
-            />
-          ) : (
-            <Button
-              styleClass="btn-gameStart2 back-color1"
-              label={
-                isSpectator
-                  ? getTranslatedWord("table.join")
-                  : getTranslatedWord("table.spectacle")
-              }
-              onClick={() => startGame()}
-            />
+          {!notEnoughSC && (
+            <>
+              {isMaster ? (
+                <Button
+                  styleClass="btn-gameStart2 back-color1"
+                  label={getTranslatedWord("table.start")}
+                  onClick={() => startGame()}
+                />
+              ) : (
+                <Button
+                  styleClass="btn-gameStart2 back-color1"
+                  label={
+                    isSpectator
+                      ? getTranslatedWord("table.join")
+                      : getTranslatedWord("table.spectacle")
+                  }
+                  onClick={() => startGame()}
+                />
+              )}
+            </>
           )}
         </div>
-      }
+      )}
     </>
   );
 };

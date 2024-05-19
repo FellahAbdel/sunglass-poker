@@ -6,8 +6,6 @@ const functionMapper = {
 
 const getInitialWindowType = () => {
   const storedWindowType = sessionStorage.getItem("windowType");
-  const isGameTableVisible =
-    sessionStorage.getItem("isGameTableVisible") === "true";
 
   if (storedWindowType === "alert") {
     return "";
@@ -64,9 +62,6 @@ const TOGGLE_GAME_TABLE_VISIBLE = "TOGGLE_GAME_TABLE_VISIBLE";
 
 // Reducer
 export function windowReducer(state = initialState, action) {
-  console.log("Action Received:", action);
-  console.log("Current State before update:", state);
-
   let nextState = { ...state };
 
   switch (action.type) {

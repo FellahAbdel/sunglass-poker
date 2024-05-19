@@ -30,9 +30,6 @@ Button:hover {
   text-shadow: unset;
   filter: brightness(150%);
 }
-/* Button:hover img,Button:hover span{
-  filter: invert(100%);
-} */
 
 .btn-connectionDefault {
   width: 24.5vw;
@@ -162,11 +159,11 @@ Button:hover {
   background-color: white;
   color: black;
 }
-.btn-mainAction.raise{
+.btn-mainAction.raise {
   border: unset;
   background: var(--gradient-red);
 }
-.btn-mainAction.call{
+.btn-mainAction.call {
   border: unset;
   background: var(--gradient-green);
 }
@@ -226,7 +223,8 @@ Button:hover {
 }
 
 .btn-gameStart {
-  width: 15vw;
+  min-width: 15vw;
+  width: fit-content;
   height: 4vh;
   margin-top: 10px;
   position: absolute;

@@ -55,7 +55,13 @@ export const SettingsProvider = ({ children }) => {
 
   return (
     <SettingsContext.Provider
-      value={{ ...state, toggleTheme, toggleSound, toggleAnimation, changeLanguage }}
+      value={{
+        ...state,
+        toggleTheme,
+        toggleSound,
+        toggleAnimation,
+        changeLanguage,
+      }}
     >
       {children}
     </SettingsContext.Provider>

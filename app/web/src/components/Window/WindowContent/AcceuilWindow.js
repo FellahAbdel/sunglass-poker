@@ -38,7 +38,6 @@ const AcceuilWindow = () => {
         } else {
           dispatch(createGame());
         }
-        console.log("Utilisateur connecté, on montre la table");
         showGameTable();
         closeWindow();
         setWindowType("");

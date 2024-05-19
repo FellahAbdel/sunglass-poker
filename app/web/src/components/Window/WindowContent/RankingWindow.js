@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "../../Utiles/Translations";
 import Button from "../../button/Button.tsx";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
@@ -20,7 +20,7 @@ const RankingWindow = () => {
    *
    * @param {number} pageNum - The page number to fetch.
    */
-  const loadRankings = async (pageNum) => {
+  const loadRankings = useCallback(async (pageNum) => {
     const response = await fetchRankings(pageNum, nbRes);
     if (response.success) {
       setPage(pageNum);
@@ -31,12 +31,12 @@ const RankingWindow = () => {
     } else {
       console.error("Failed to fetch rankings:", response.message);
     }
-  };
-  
+  }, [fetchRankings]);
+
   // Fetch the initial rankings data when the component mounts.
   useEffect(() => {
     loadRankings(1);
-  }, []);
+  }, [loadRankings]);
 
   return (
     <div className="listTableWindow">

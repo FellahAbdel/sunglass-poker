@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
@@ -11,17 +11,17 @@ const LoadingWindow = () => {
   const isPlayerSited = useSelector((state) => state.game.playerSited);
 
   //for server joining from ServerPanel
-  useEffect(() => {
+  const handlePlayerSited = useCallback(() => {
     if (isPlayerSited) {
-      setTimeout(function () {
-        console.log("Game room displayed!");
-        showGameTable();
-        closeWindow();
-        setWindowType("");
-        console.log("playerSited", isPlayerSited);
-      }, 100);
+      showGameTable();
+      closeWindow();
+      setWindowType("");
     }
-  }, [isPlayerSited]);
+  }, [isPlayerSited, showGameTable, closeWindow, setWindowType]);
+
+  useEffect(() => {
+    handlePlayerSited();
+  }, [isPlayerSited, handlePlayerSited]);
 
   return <div className="main-loadingWindow"></div>;
 };

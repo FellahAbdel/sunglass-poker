@@ -14,7 +14,7 @@ import { useTranslation } from "../../../Utiles/Translations.jsx";
  * ResetPasswordWindow provides a form for users to reset their password.
  * It includes validation for email, new password, and password confirmation.
  */
-const ResetPasswordWindow = ({}) => {
+const ResetPasswordWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const { openWindow, openSuccessWindow } = useWindowContext();
   const { changePassword } = useAuth();
@@ -79,7 +79,7 @@ const ResetPasswordWindow = ({}) => {
     setValidationErrors(errors);
     return Object.values(errors).every((error) => error === "");
   };
-  
+
   /**
    * Handles the form submission, performing the password change operation.
    * @param {Object} e - Event object to prevent default form submission.
@@ -123,7 +123,8 @@ const ResetPasswordWindow = ({}) => {
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationErrors.email}
-          styleClass={"input-connectionDefault input-icon-email"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/email.png"
         />
         <TextInputComponent
           name="password"
@@ -132,7 +133,8 @@ const ResetPasswordWindow = ({}) => {
           type="password"
           placeholder={getTranslatedWord("connection.password")}
           errorMessage={validationErrors.password}
-          styleClass={"input-connectionDefault input-icon-password"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password.png"
         />
         <TextInputComponent
           name="repeatPassword"
@@ -141,7 +143,8 @@ const ResetPasswordWindow = ({}) => {
           type="password"
           placeholder={getTranslatedWord("connection.repeatPass")}
           errorMessage={validationErrors.repeatPassword}
-          styleClass={"input-connectionDefault input-icon-passwordRepeat"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password-repeat.png"
         />
         <Button
           styleClass="btn-connectionDefault back-color1"

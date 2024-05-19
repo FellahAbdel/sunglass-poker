@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "./AuthProvider";
 import { useWindowContext } from "./WindowContext";
 
@@ -11,7 +11,7 @@ export const useUserData = () => {
     return `${process.env.PUBLIC_URL}${relativePath}`;
   };
 
-  const loadUserStats = async () => {
+  const loadUserStats = useCallback(async () => {
     if (windowType === "stats" && user?._id) {
       try {
         const fetchedStats = await fetchStats();
@@ -20,15 +20,13 @@ export const useUserData = () => {
         console.error("Error fetching user stats:", error);
       }
     }
-  };
+  }, [windowType, user?._id, fetchStats]);  
 
   useEffect(() => {
     loadUserStats();
-  }, [windowType, user?._id, fetchStats]);
+  }, [windowType, user?._id, fetchStats, loadUserStats]);
 
   useEffect(() => {
-    console.log("Current user data:", user);
-
     const loadUserStats = async () => {
       if (windowType === "stats" && user?._id) {
         try {

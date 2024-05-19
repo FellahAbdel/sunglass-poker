@@ -13,27 +13,19 @@ import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import LogoComponent from "../logo/Logo";
 import TotalPot from "./TotalPot";
+import { useSettings } from "../Utiles/SettingsContext.jsx";
 /**
- * The Table component serves as the primary UI container for the game, 
- * including players' placements, cards, and other game-related information 
+ * The Table component serves as the primary UI container for the game,
+ * including players' placements, cards, and other game-related information
  * based on the visibility state controlled through window context.
  */
-const Table = ({}) => {
+const Table = () => {
+  const { theme } = useSettings();
   const { isWindowOpen, windowType, isGameTableVisible } = useWindowContext();
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const { showWaitingMessage, isFocus } = useGameTable();
-
-  // Effect to log window open status
-  useEffect(() => {
-    console.log("isWindowOpen a changé :", isWindowOpen);
-  }, [isWindowOpen]);
-
-  // Effect to log login status
-  useEffect(() => {
-    console.log("isLogged Table:", isLogged);
-  }, [isLogged]);
 
   // Update visibility based on window and game table visibility states
   useEffect(() => {
@@ -43,11 +35,6 @@ const Table = ({}) => {
       setIsVisible(false);
     }
   }, [isWindowOpen, isGameTableVisible]);
-
-  // Log focus state changes
-  useEffect(() => {
-    console.log("isFocus TABLE:", isFocus);
-  }, [isFocus]);
 
   // Dynamic class assignment based on current UI context
   const classes = getStyles(
@@ -61,6 +48,18 @@ const Table = ({}) => {
   return (
     // Table that becomes a container for the menus when they are activated
     <div className={classes.containerTable}>
+      {/* table carpet in game */}
+      <img
+        className={`table-carpet 
+                    ${isGameTableVisible && !isWindowOpen && "appear"}`}
+        src={`${
+          theme === "dark"
+            ? "static/media/assets/images/texture/carpetlow-bnw.jpg"
+            : "static/media/assets/images/texture/carpetlow.jpg"
+        }`}
+        alt="table carpet"
+      />
+
       {/* the white border line around the table in the middle */}
       <div
         className={`${!isWindowOpen ? "table-lineAround" : ""} 
@@ -102,7 +101,7 @@ const Table = ({}) => {
             ? getTranslatedWord(`messageLogo.${windowType}`)
             : ""
         }`}
-        loading = {windowType==="loading"}
+        loading={windowType === "loading"}
       />
     </div>
   );

@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import PlayersProfile from "../gameTable/PlayersProfile/PlayersProfile";
 import PlayersPots from "../Table/PlayersPots";
 import { useSelector } from "react-redux";
+import { useAuth } from "./../Utiles/AuthProvider.jsx";
 
 /**
  * PlayersPlacements manages the display of player profiles and pots on the game table.
  * It listens for updates to the players in the game and renders each player's profile.
- * 
+ *
  * Props:
  *  - showMiddle: Boolean to control the visibility of the middle section (usually pots in the game).
  */
 const PlayersPlacements = ({ showMiddle }) => {
+  const { fetchUserInfo } = useAuth();
 
   // Retrieves the list of players from the Redux store's game state
   const playersInTable = useSelector((state) => state.game.game?.players);
@@ -23,14 +25,8 @@ const PlayersPlacements = ({ showMiddle }) => {
   // Updates the list of players whenever there's a change in the Redux state
   useEffect(() => {
     setUpdatedPlayers(playersInTable);
-    console.log("playerInTAble: ", playersInTable);
-  }, [playersInTable]);
-
-  //const currentFocusIndex = gameClass?.focus;
-  //console.log("currentFocusIndex",currentFocusIndex, gameClass.focus);
-
-  // Fetches the current stack value with a fallback to 0 if not defined
-  const currentStack = gameClass?.pokerTable?.stack || 0;
+    fetchUserInfo();
+  }, [playersInTable, fetchUserInfo]);
 
   return (
     <span className={`profiles`}>
@@ -49,6 +45,7 @@ const PlayersPlacements = ({ showMiddle }) => {
             isFocus={currentFocusIndex === index}
             isYou={player.isYou}
             timer={20}
+            playerHandName={player.playerHandName}
           />
         </div>
       ))}

@@ -31,7 +31,7 @@ const emptyState = {
   playerSited: false,
   playerLeft: false,
 };
-const initialState = loadStateFromSessionStorage() || emptyState; 
+const initialState = loadStateFromSessionStorage() || emptyState;
 
 console.log("initialState", initialState);
 const tableReducer = (state = initialState, action) => {
@@ -85,8 +85,8 @@ const tableReducer = (state = initialState, action) => {
         playerLeft: true,
       };
     case actions.EMPTY_PAYLOAD:
-        console.log('EMPTY PAYLOAD');
-        return emptyState;
+      console.log("EMPTY PAYLOAD");
+      return emptyState;
     default:
       console.log("Table reducer called");
       return state;

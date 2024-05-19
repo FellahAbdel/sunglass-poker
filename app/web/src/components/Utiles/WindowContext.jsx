@@ -12,14 +12,7 @@ export const WindowProvider = ({ children }) => {
   const [state, dispatch] = useReducer(windowReducer, initialState);
 
   useEffect(() => {
-    console.log("isWindowOpen:", state.isWindowOpen);
-    console.log("windowType:", state.windowType);
-    console.log("isGameTableVisible:", state.isGameTableVisible);
-    console.log("connectionWindowOpen:", state.connectionWindowOpen);
-  }, [state.isWindowOpen, state.windowType, state.isGameTableVisible, state.connectionWindowOpen]);
-
-  useEffect(() => {
-    if (state.windowType === 'alert') {
+    if (state.windowType === "alert") {
       dispatch({ type: "SET_WINDOW_TYPE", payload: "accueil" });
     }
   }, []);
@@ -53,7 +46,6 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openWindow = (type, params = {}) => {
-    console.log(`Opening window: ${type}`, params);
 
     if (state.windowType === type && state.isWindowOpen) {
       closeWindow();
@@ -80,7 +72,6 @@ export const WindowProvider = ({ children }) => {
   };
 
   const closeWindow = () => {
-    console.log("Fermeture de la fenêtre");
     setAlertParams({ message: "", onConfirm: () => {}, onCancel: () => {} });
     setWindowOpen(false);
     if (state.isGameTableVisible) {

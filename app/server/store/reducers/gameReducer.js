@@ -44,7 +44,7 @@ const begin = (state) => {
 };
 
 const gameReducer = (state = initialState, action) => {
-  csl.log(fileType, state, action);
+  // csl.log(fileType, state, action);
   var room;
   var playerId;
   var answer;

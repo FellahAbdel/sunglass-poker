@@ -11,8 +11,6 @@ const socket = io(target, {
   transports: ["polling"],
 });
 
-
-
 /** Fonction de test de communication entre le front et le back
  *
  * Le front envoie un Hello avec des données et le back le log
@@ -22,12 +20,12 @@ const socket = io(target, {
  */
 export const comm = {
   token: null,
-  authenticated:false,
-  preFun: function (init =false) {
-    if(!this.authenticated){
+  authenticated: false,
+  preFun: function (init = false) {
+    if (!this.authenticated) {
       this.token = sessionStorage.getItem("authToken");
       console.log("PREFUN Token is ", this.token);
-      socket.emit("myNameIs", {token:this.token,init:init});
+      socket.emit("myNameIs", { token: this.token, init: init });
     }
   },
 
@@ -59,7 +57,6 @@ export const comm = {
     });
 
     let leftReceived = false;
-
 
     socket.on("event", (data) => {
       // Logique pour traiter l'événement "LEFT"
@@ -107,23 +104,26 @@ export const comm = {
     //
     socket.on("refresh", (data) => this.handleNewsRefresh(data));
     // He asked if he was in game to get the infos.
-    socket.on('askedForGame',() => {
-      socket.emit('showMyGame');
+    socket.on("askedForGame", () => {
+      socket.emit("showMyGame");
     });
 
-    socket.on('identifySuccessfull',() => {
-      this.authenticated=true;
+    socket.on("identifySuccessfull", () => {
+      this.authenticated = true;
       clearInterval(this.tryAuth);
       setTimeout(() => {
         clearInterval(this.tryAuth);
         this.tryAuth = setInterval(() => {
-          this.authenticated =false;
-          this.preFun(true)
-        },1000)
+          this.authenticated = false;
+          this.preFun(true);
+        }, 1000);
       }, 5000);
     });
     clearInterval(this.tryAuth);
-    this.tryAuth = setInterval(() => {this.authenticated =false;this.preFun(true)},2000);
+    this.tryAuth = setInterval(() => {
+      this.authenticated = false;
+      this.preFun(true);
+    }, 1000);
   },
 
   status: function () {
@@ -200,4 +200,3 @@ export const comm = {
     socket.emit("startGame", { room: roomId, userId: userId });
   },
 };
-

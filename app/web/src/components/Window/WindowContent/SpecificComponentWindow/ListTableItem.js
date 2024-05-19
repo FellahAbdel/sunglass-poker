@@ -28,7 +28,7 @@ const ListTableItem = ({
   isJoining,
 }) => {
   const { verifyGamePassword } = useAuth(); // Hook to authenticate against the game's password.
-  const { getTranslatedWord } = useTranslation(); 
+  const { getTranslatedWord } = useTranslation();
   const [password, setPassword] = useState(""); // State to store the input password.
   const [passwordError, setPasswordError] = useState(""); // State to store potential password errors.
   const [showPasswordInput, setShowPasswordInput] = useState(false); // State to toggle password input visibility.
@@ -66,7 +66,7 @@ const ListTableItem = ({
       onJoinClick(id);
     }
   };
-  
+
   /**
    * Handles the Enter key press to submit the password.
    */
@@ -100,7 +100,9 @@ const ListTableItem = ({
             {!showPasswordInput && (
               <Button
                 label={getTranslatedWord("serverPanel.join")}
-                styleClass={`btn-list_table back-color2 ${isJoining ? 'loading' : ''}`}
+                styleClass={`btn-list_table back-color2 ${
+                  isJoining ? "loading" : ""
+                }`}
                 onClick={handleJoinClick}
               />
             )}
@@ -112,6 +114,7 @@ const ListTableItem = ({
                 onChange={(e) => setPassword(e.target.value)}
                 errorMessage={passwordError}
                 styleClass="input-serverRoomPassword"
+                styleClass2="input-serverRoomPassword2"
                 onKeyDown={handleKeyDown}
               />
             )}

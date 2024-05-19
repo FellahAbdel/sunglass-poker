@@ -17,7 +17,7 @@ const ShopItem = ({ item, onClickItem, isOwned, isActive, styleClass }) => {
 
   // Determines if the item should be rendered as a color block.
   const isColor = item.imgSrc && item.imgSrc.startsWith("#");
-  
+
   // Get the item name in the current language or fall back to English.
   const itemName = item.names[language] || item.names["en"];
 

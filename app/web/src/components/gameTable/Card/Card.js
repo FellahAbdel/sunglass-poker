@@ -5,7 +5,7 @@ import { useSettings } from "../../Utiles/SettingsContext";
 /**
  * Card displays a playing card that can be flipped between its front and back.
  * It supports dynamic theming and card content based on provided props.
- * 
+ *
  * Props:
  * - card: Array representing the card data, with the first element as the number or face ('A', 'J', 'Q', 'K')
  *        and the second element as the suit ('H', 'D', 'C', 'S').
@@ -25,7 +25,11 @@ const Card = ({ card, styleClass, flippingCard, flippedStyle }) => {
       <img
         className="CardBack"
         id="back"
-        src={theme === "light" ? "static/media/assets/images/card-design-light.png" : "static/media/assets/images/card-design-dark.png"}
+        src={
+          theme === "light"
+            ? "static/media/assets/images/card-design-light.png"
+            : "static/media/assets/images/card-design-dark.png"
+        }
         alt="card"
       />
       {card ? (

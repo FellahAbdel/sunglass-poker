@@ -48,14 +48,14 @@
   opacity: 0;
   transition: opacity 0.5s ease, top 0.5s ease;
 }
+
 .profileMessageShow {
   border: 0.15vw solid white;
-  border-bottom: 0;
-  border-radius: 0.5vw 0.5vw 0 0;
+  border-radius: 0.5vw;
   color: white;
   font-size: 1vw;
   padding: 2% 5% 9% 5%;
-  top: -30%;
+  top: -33%;
   opacity: 1;
 }
 
@@ -71,7 +71,7 @@
   padding: 0;
   box-shadow: 0 0 10px black;
   border-radius: 20px;
-  z-index: unset;
+  z-index: 1;
 
   border-style: solid;
   border-width: 2px;
@@ -89,14 +89,17 @@
   background-color: rgb(24, 146, 176);
   border-color: rgb(89, 89, 89);
 }
+
 .box-statusText {
   font-size: 1vw;
   z-index: unset;
   color: rgb(255, 255, 255);
 }
+
 #light .box-statusText {
   color: rgb(255, 255, 255);
 }
+
 #dark .box-statusText.folded {
   color: rgb(255, 255, 255);
 }
@@ -114,13 +117,16 @@
 #dark .box-status.waiting {
   box-shadow: inset 0 0 10px 1px rgb(0, 255, 98), 0 0 10px 1px rgb(0, 255, 98);
 }
+
 #light .box-status.waiting {
   box-shadow: unset;
   background-color: #00a674;
 }
+
 #dark .box-status.raise {
   box-shadow: inset 0 0 10px 1px rgb(255, 0, 0), 0 0 10px 1px rgb(255, 0, 0);
 }
+
 #light .box-status.raise {
   background-color: rgb(254, 111, 68);
   box-shadow: inset 0 0 10px 1px rgb(255, 0, 0), 0 0 10px 1px rgb(255, 0, 0);
@@ -128,11 +134,14 @@
 
 #dark .box-status.tapis {
   background-color: var(--color3-dark);
-  box-shadow: inset 0 0 10px 1px var(--color1-dark), 0 0 30px 10px var(--color1-dark);
+  box-shadow: inset 0 0 10px 1px var(--color1-dark),
+    0 0 30px 10px var(--color1-dark);
 }
+
 #light .box-status.tapis {
   background-color: var(--color3-light);
-  box-shadow: inset 0 0 10px 1px var(--color1-light), 0 0 30px 10px var(--color2-light);
+  box-shadow: inset 0 0 10px 1px var(--color1-light),
+    0 0 30px 10px var(--color2-light);
 }
 
 #dark .box-status.empty {
@@ -143,6 +152,7 @@
   width: 105%;
   border-radius: 13px;
 }
+
 #light .box-status.empty {
   box-shadow: inset 0 0 10px 0px rgb(255, 255, 255),
     0 0 10px 0px rgb(255, 255, 255);
@@ -152,29 +162,35 @@
   width: 105%;
   border-radius: 13px;
 }
+
 #dark .box-status.winner {
   box-shadow: inset 0 0 10px 1px #ff9d00, 0 0 10px 1px #ff9d00;
 }
+
 #light .box-status.winner {
   background-color: #a57423;
   box-shadow: inset 0 0 10px 1px #a57423, 0 0 10px 1px #a57423;
 }
+
 .profilePic img#crown {
   width: 3.3vw;
   position: absolute;
   top: -50%;
   left: -27%;
   rotate: -20deg;
-  filter: drop-shadow(0 0 1vw var(--color1-light)) drop-shadow(0 0 1vw var(--color1-light)) ;
+  filter: drop-shadow(0 0 1vw var(--color1-light))
+    drop-shadow(0 0 1vw var(--color1-light));
 }
 
 .profilePic.folded {
   filter: saturate(0);
   filter: brightness(40%);
 }
+
 .profilePic.empty {
   filter: blur(3px);
 }
+
 .box-playerInfo.folded {
   color: rgb(88, 88, 88);
 }
@@ -222,7 +238,9 @@
   border-radius: 1vw;
   font-size: 1vw;
   border: unset;
+  backdrop-filter: blur(5px);
 }
+
 .box-playerInfo p {
   margin: 0;
   margin-bottom: 7%;
@@ -244,12 +262,15 @@
     0px 4px 2px rgba(0, 0, 0, 0.09), 0px 8px 4px rgba(0, 0, 0, 0.09),
     0px 16px 8px rgba(0, 0, 0, 0.09);
 }
+
 #light .profilePic.you {
   outline: 0.2vw solid var(--color2-light);
 }
+
 #dark .profilePic.you {
   outline: 0.2vw solid var(--color2-dark);
 }
+
 .profilePic {
   position: absolute;
   left: -35%;
@@ -263,6 +284,7 @@
 #dark .profilePic {
   border-color: black;
 }
+
 #light .profilePic {
   border-color: rgba(0, 0, 0, 0.204);
   border-width: 0.2vw;
@@ -275,6 +297,7 @@
   position: absolute;
   box-shadow: -2px 2px 5px black;
 }
+
 .cardPlayers1,
 .cardPlayers2 {
   width: 2.5vw;
@@ -287,6 +310,7 @@
   transition: transform 1s ease, opacity 1s ease 0.5s, left 2s ease,
     bottom 1s ease;
 }
+
 .cardPlayers1 .cardContainer .cardNumber,
 .cardPlayers2 .cardContainer .cardNumber {
   font-size: 0.8vw;
@@ -294,17 +318,21 @@
   top: 10%;
   gap: 0.2vh;
 }
+
 .playerCardAppear {
   opacity: 100;
 }
+
 .cardPlayers1 {
   left: 35%;
   bottom: -60%;
 }
+
 .cardPlayers2 {
   left: 45%;
   bottom: -60%;
 }
+
 .flippedPlayerCards {
   transform: rotateY(180deg);
   transform-origin: center;
@@ -314,6 +342,7 @@
   left: 20%;
   bottom: -65%;
 }
+
 .cardPlayers2.flippedPlayerCards {
   left: 45%;
   bottom: -60%;

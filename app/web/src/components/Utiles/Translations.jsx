@@ -19,7 +19,7 @@ const translations = {
 /**
  * Custom hook to provide translated strings based on the current application language.
  * Falls back to English if the translation in the selected language is not available.
- * 
+ *
  * @returns {Object} Object containing a single function `getTranslatedWord` to fetch a translated string.
  */
 export function useTranslation() {
@@ -32,7 +32,7 @@ export function useTranslation() {
    */
   const getTranslatedWord = (keyPath) => {
     const keys = keyPath.split(".");
-    
+
     /**
      * Attempts to find a translation for a specific language.
      * @param {string} lang - The language code for which to find the translation.
@@ -46,11 +46,12 @@ export function useTranslation() {
       }
       return result;
     };
-    
+
     let translation = findTranslation(language);
 
+    //Si on ne trouve pas traduction, on prend celle en anglais.
     if (!translation) {
-      translation = findTranslation('en');
+      translation = findTranslation("en");
     }
 
     return translation || keyPath;

@@ -73,7 +73,6 @@ module.exports = gameController = {
    * @returns {object} - An object indicating the status of the join operation.
    */
   join: async function (id, user) {
-    csl.log(fileType, this);
     var state = store.getState();
 
     // Check if game rooms are defined in the state.

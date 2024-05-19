@@ -46,7 +46,6 @@
     radial-gradient(var(--error-red) 15%, transparent 20%) 8px 8.5px;
   --dark-background-color: #282828;
   --dark-background-size: 16px 16px;
-  /* --dark-background-size: 1vw 1vw; */
 
   --inGame-dark-shadow-box: inset 0px 10px 10vw 3vw rgb(0, 0, 0),
     inset 0 -5px 0 1vw var(--color3-dark), inset 0 0 0 0 transparent,
@@ -122,30 +121,39 @@
 .container-inGame {
   width: 65vw;
   height: 45vh;
-  /* border-radius: 250px 250px 180px 180px; */
   border-radius: 30vw 30vw 20vw 20vw;
-
 }
 #dark .container-inGame {
   box-shadow: var(--inGame-dark-shadow-box);
-  /* background:var(--isLogged-dark-background);
-  background-color: var(--dark-background-color);
-  background-size: 16px 12px; */
-
-  background: radial-gradient(#bababa0c 40%, #000000),
-    url("/public/static/media/assets/images/texture/carpetlow-bnw.jpg");
+  background: radial-gradient(#bababa0c 40%, #000000);
   background-size: 77vw;
   background-position: center;
   background-repeat: no-repeat;
 }
 #light .container-inGame {
   box-shadow: var(--inGame-light-shadow-box);
-  background: radial-gradient(#ffd9002e 50%, #000000),
-    url("/public/static/media/assets/images/texture/carpetlow.jpg");
+  background: radial-gradient(#ffd9002e 50%, #000000);
   background-size: 77vw;
   background-position: center;
   background-repeat: no-repeat;
 }
+.table-carpet {
+  position: absolute;
+  border-radius: 0;
+  width: 0;
+  height: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 2s ease, height 0.7s ease, width 0.7s ease,
+    border-radius 1s ease;
+}
+.table-carpet.appear {
+  opacity: 1;
+  width: 65vw;
+  height: 45vh;
+  border-radius: 30vw 30vw 20vw 20vw;
+}
+
 /*Windows size change*/
 .container-accueil {
   width: 50vw;
@@ -300,7 +308,6 @@
   width: 40vw;
   height: 20vh;
   border: 0.2vw solid rgba(255, 255, 255, 0.317);
-  /* animation: lineAround 2s ease-in-out infinite; */
 }
 .disappear {
   width: 0;
@@ -399,12 +406,10 @@
 .container-ranking .box-onGameNotif.visible {
   bottom: -15%;
   opacity: 1;
-
 }
 .container-settings .box-onGameNotif.visible {
   bottom: -20%;
   opacity: 1;
-
 }
 .container-shop .box-onGameNotif.visible,
 .container-profile .box-onGameNotif.visible,
@@ -413,7 +418,6 @@
 .container-validation .box-onGameNotif.visible {
   bottom: -25%;
   opacity: 1;
-
 }
 .box-onGameNotif {
   position: absolute;

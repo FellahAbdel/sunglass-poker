@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./serverPanel.css";
 import Button from "../../button/Button.tsx";
 import ListTableItem from "./SpecificComponentWindow/ListTableItem";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../Utiles/Translations";
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../Utiles/AuthProvider.jsx";
 import * as actions from "../../../store/actions/clientInteractionsCreator.js";
@@ -18,7 +17,8 @@ const ServerPanelWindow = () => {
   const dispatch = useDispatch();
   const { getTranslatedWord } = useTranslation();
 
-  const { closeWindow, showGameTable, setWindowType , openWindow } = useWindowContext();
+  const { closeWindow, showGameTable, setWindowType, openWindow } =
+    useWindowContext();
 
   const { getRoomTableRecords, isLogged } = useAuth();
   const [roomTableRecords, setRoomTableRecords] = useState([]);
@@ -30,21 +30,19 @@ const ServerPanelWindow = () => {
 
   const isPlayerSited = useSelector((state) => state.game.playerSited);
 
-  // Displays the game room UI when the player is sited. => used in loadingWindo
-  const displayGameRoom = () => {
-    console.log("Game room displayed!");
+  // Displays the game room UI when the player is sited. => used in loadingWindow
+  const displayGameRoom = useCallback(() => {
     showGameTable();
     closeWindow();
     setWindowType("");
-  };
+  }, [showGameTable, closeWindow, setWindowType]);
 
   // UseEffect to handle the player sited state and display the game room accordingly.
   useEffect(() => {
     if (isPlayerSited) {
       displayGameRoom();
-      console.log("playerSited", isPlayerSited);
     }
-  }, [isPlayerSited]);
+  }, [isPlayerSited, displayGameRoom]);
 
   // Manage the number of tables displayed per page based on window height.
   useEffect(() => {
@@ -113,20 +111,20 @@ const ServerPanelWindow = () => {
     };
 
     fetchRoomTableRecords();
-  }, [searchText]); //Mise à jour à chaque fois que le texte est changé
+  }, [searchText, getRoomTableRecords]); //Mise à jour à chaque fois que le texte est changé
 
-  console.log("roomsTableRecords : ", roomTableRecords); // Log the fetched roomTableRecords data to the console
-  
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchText]);
+
   // Handle the logic for joining a table.
   const handleJoinTable = (id) => {
     if (isLogged) {
-      console.log("Attempting to join room with ID:", id);
       openWindow("loading");
       dispatch(actions.joinRoom(id));
       if (isPlayerSited) {
         displayGameRoom();
       } else {
-        console.log("server hasn't responded yet");
       }
     }
   };
@@ -145,7 +143,8 @@ const ServerPanelWindow = () => {
     <div className="listTableWindowPanel">
       <TextInputComponent
         placeholder="serverPanel.search"
-        styleClass={"input-connectionDefault input-searchBar input-icon-search"}
+        styleClass={"input-connectionDefault input-searchBar"}
+        iconSrc="static/media/assets/images/icons/black/search.png"
         styleClass2={"container-textInputComponent2"}
         errorMessage={""}
         onChange={handleChange}

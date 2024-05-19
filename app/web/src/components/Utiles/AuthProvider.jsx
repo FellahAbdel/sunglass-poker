@@ -1,5 +1,11 @@
 // AuthProvider.js
-import React, { createContext, useContext, useEffect, useReducer } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useCallback,
+} from "react";
 import { useWindowContext } from "./WindowContext";
 import { userReducer, initialState } from "../../store/reducers/userReducer";
 
@@ -15,21 +21,8 @@ const CORSSETTINGS = {
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
-  const { showHome,  windowType} = useWindowContext();
+  const { showHome, windowType } = useWindowContext();
   const { isLogged, user } = state;
-
-  useEffect(() => {
-    const authToken = sessionStorage.getItem("authToken");
-    if (authToken) {
-      fetchUserInfo(authToken);
-      dispatch({
-        type: "LOGIN",
-        payload: {
-          token: authToken,
-        },
-      });
-    }
-  }, [windowType]);
 
   const getAuthHeaders = () => {
     const token = sessionStorage.getItem("authToken");
@@ -38,6 +31,61 @@ export const AuthProvider = ({ children }) => {
       "Content-Type": "application/json",
     };
   };
+
+  const fetchUserInfo = useCallback(async () => {
+    try {
+      const authToken = sessionStorage.getItem("authToken");
+      if (!authToken) {
+        console.error("No auth token found");
+        return;
+      }
+
+      const response = await fetch("api/userInfo", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "API responded with an error.");
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            ...data.user,
+          },
+        });
+      } else {
+        console.error(
+          "Impossible de récupérer les informations de l'utilisateur"
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des informations de l'utilisateur :",
+        error
+      );
+    }
+  }, [dispatch]);
+  useEffect(() => {
+    const authToken = sessionStorage.getItem("authToken");
+    if (authToken) {
+      fetchUserInfo();
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          token: authToken,
+        },
+      });
+    }
+  }, [windowType, fetchUserInfo]);
 
   const login = async (credentials) => {
     try {
@@ -58,7 +106,7 @@ export const AuthProvider = ({ children }) => {
           type: "LOGIN",
           payload: { ...data.userData, token: data.token },
         });
-        fetchUserInfo(data.token); // Charger les informations utilisateur
+        fetchUserInfo(); // Charger les informations utilisateur
         return true;
       } else {
         console.error("Erreur de login:", data.message);
@@ -85,8 +133,6 @@ export const AuthProvider = ({ children }) => {
 
       const data = await response.json();
       if (response.ok) {
-        console.log("Game created successfully");
-        console.log("Game data:", data);
         // Additional logic if needed
         return data._id;
       } else {
@@ -110,7 +156,6 @@ export const AuthProvider = ({ children }) => {
       if (!response.ok) {
         throw new Error("Failed to fetch roomTableRecords");
       } else {
-        console.log("roomTableRecords fetched successfully");
         const data = await response.json();
         return data;
       }
@@ -131,17 +176,24 @@ export const AuthProvider = ({ children }) => {
     return state.user;
   };
 
-  const updateUserData = async (field, value, identifierType = "pseudo", identifierValue) => {
+  const updateUserData = async (
+    field,
+    value,
+    identifierType = "pseudo",
+    identifierValue
+  ) => {
     try {
       const isEmailIdentifier = identifierType === "email";
       if (!isEmailIdentifier && (!state.isLogged || !state.user)) {
         console.error("User not logged in.");
         return;
       }
-  
+
       const identifierField = isEmailIdentifier ? "email" : "pseudo";
-      const identifier = isEmailIdentifier ? identifierValue : state.user[identifierField];
-  
+      const identifier = isEmailIdentifier
+        ? identifierValue
+        : state.user[identifierField];
+
       const response = await fetch("api/update-user-data", {
         method: "PUT",
         headers: {
@@ -155,15 +207,14 @@ export const AuthProvider = ({ children }) => {
           identifierValue: identifier,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (data.success) {
         dispatch({
           type: "UPDATE_USER_DATA",
           payload: { ...state.user, [field]: value },
         });
-        console.log(`${field} updated successfully.`);
         return true;
       } else {
         console.error(`Failed to update ${field}:`, data.message);
@@ -186,7 +237,6 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Email envoyé avec succes !");
         return true;
       } else {
         console.error("Mail not found");
@@ -209,7 +259,6 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Utilisateur créé avec succès!");
         return true;
       } else {
         console.error("Erreur lors de la création de l'utilisateur");
@@ -220,59 +269,6 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   };
-
-  const fetchUserInfo = async () => {
-    try {
-      const response = await fetch("api/userInfo", {
-        method: "GET",
-        headers: getAuthHeaders(),
-      });
-      const data = await response.json();
-
-      console.log("Réponse de /api/userInfo:", data); // Log pour voir la réponse
-
-      if (data.success) {
-        dispatch({
-          type: "LOGIN",
-          payload: {
-            ...data.user,
-          },
-        });
-      } else {
-        console.error(
-          "Impossible de récupérer les informations de l'utilisateur"
-        );
-      }
-    } catch (error) {
-      console.error(
-        "Erreur lors de la récupération des informations de l'utilisateur :",
-        error
-      );
-    }
-  };
-
-  // const fetchStats = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `/api/user-stats/${user._id}`,
-  //       {
-  //         method: "GET",
-  //         headers: getAuthHeaders(),
-  //       }
-  //     );
-  //     const data = await response.json();
-  //     console.log("Data fetched from fetchStats:", data);
-  //     if (data.success) {
-  //       return data.stats; // Supposons que la réponse contient un objet stats dans data.stats
-  //     } else {
-  //       console.error("Failed to fetch user stats");
-  //       return null;
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching user stats:", error);
-  //     return null;
-  //   }
-  // };
 
   const resolveImagePath = (relativePath) => {
     return `${process.env.PUBLIC_URL}${relativePath}`;
@@ -289,7 +285,6 @@ export const AuthProvider = ({ children }) => {
           ...item,
           imgSrc: resolveImagePath(item.imgSrc),
         }));
-        console.log("Items chargés : ", items);
 
         return items;
       } else {
@@ -312,7 +307,6 @@ export const AuthProvider = ({ children }) => {
       });
       const data = await response.json();
       if (data.success) {
-        console.log(data.message);
         dispatch({ type: "UPDATE_USER", payload: data.user });
         fetchUserInfo();
         return true;
@@ -336,7 +330,6 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
       if (data.success) {
         dispatch({ type: "UPDATE_USER_AVATAR", payload: { itemId, itemType } });
-        console.log("Avatar component activated successfully");
         fetchUserInfo();
         return true;
       } else {
@@ -352,7 +345,6 @@ export const AuthProvider = ({ children }) => {
   const getAvatarById = async (userId) => {
     try {
       const requestUrl = `api/avatar-info/${userId}`;
-      //console.log("Requesting avatar data from URL:", requestUrl);
 
       const response = await fetch(requestUrl, {
         method: "GET",
@@ -366,10 +358,8 @@ export const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      //console.log("Parsed Data Received:", data);
 
       if (data && data.baseAvatar && data.sunglasses && data.colorAvatar) {
-        console.log("Data fields are correctly structured and present.");
         return {
           baseAvatar: {
             imgSrc: data.baseAvatar.imgSrc,
@@ -420,7 +410,6 @@ export const AuthProvider = ({ children }) => {
         payload: { ...user, coins: data.updatedCoins },
       });
 
-      console.log("Coins updated successfully to:", data.updatedCoins);
       return true;
     } catch (error) {
       console.error("Error updating user coins:", error);
@@ -435,7 +424,6 @@ export const AuthProvider = ({ children }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        console.log("Rooms fetched successfully");
         return data;
       } else {
         console.error("Failed to fetch rooms:", data.message);
@@ -501,7 +489,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  
   const changePassword = async (email, newPassword) => {
     try {
       const response = await fetch("api/change-password", {
@@ -515,7 +502,6 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Password changed successfully!");
         return true;
       } else {
         console.error("Error changing password:", data.message);
@@ -543,17 +529,16 @@ export const AuthProvider = ({ children }) => {
         registerUser,
         state,
         dispatch,
-        //fetchStats,
         fetchItems,
         buyItem,
         activateAvatar,
         getAvatarById,
         updateUserCoins,
-        // fetch available rooms
         getAvailableRooms,
         verifyGamePassword,
         fetchRankings,
         changePassword,
+        fetchUserInfo,
       }}
     >
       {children}

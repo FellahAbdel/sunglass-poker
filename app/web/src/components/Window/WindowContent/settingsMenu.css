@@ -21,7 +21,7 @@
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
-  gap:2vh;
+  gap: 2vh;
 }
 
 .settingsMenu h1 {
@@ -121,7 +121,8 @@ input:checked + .slider:before {
 
 .container-switch-theme .slider:before {
   border-radius: unset;
-  background: url("/public/static/media/assets/SunGameStudio_logo.png") no-repeat;
+  background: url("/public/static/media/assets/SunGameStudio_logo.png")
+    no-repeat;
   background-size: 100%;
   background-position: center;
 }
@@ -131,7 +132,8 @@ input:checked + .slider:before {
 }
 
 .container-switch-theme input:checked + .slider:before {
-  background: url("/public/static/media/assets/SunGameStudio_logo_dark.png") no-repeat;
+  background: url("/public/static/media/assets/SunGameStudio_logo_dark.png")
+    no-repeat;
   background-size: 100%;
   background-position: center;
 }

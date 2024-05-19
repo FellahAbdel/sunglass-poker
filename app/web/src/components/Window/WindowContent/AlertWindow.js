@@ -13,25 +13,24 @@ const AlertWindow = () => {
   const { message, onConfirm, onCancel } = alertParams;
   const { getTranslatedWord } = useTranslation();
 
-
   return (
     <div className="main-SuccessWindow">
       <p>{getTranslatedWord(message)}</p>
       <div className="container-leaveButtons">
-      <Button
-        styleClass="btn-leaveConfirmation"
-        label={getTranslatedWord("alert.confirm")}
-        onClick={() => {
-          onConfirm();
-        }}
-      />
-      <Button
-        styleClass="btn-leaveCancel"
-        label={getTranslatedWord("alert.cancel")}
-        onClick={() => {
-          onCancel();
-        }}
-      />
+        <Button
+          styleClass="btn-leaveConfirmation"
+          label={getTranslatedWord("alert.confirm")}
+          onClick={() => {
+            onConfirm();
+          }}
+        />
+        <Button
+          styleClass="btn-leaveCancel"
+          label={getTranslatedWord("alert.cancel")}
+          onClick={() => {
+            onCancel();
+          }}
+        />
       </div>
     </div>
   );

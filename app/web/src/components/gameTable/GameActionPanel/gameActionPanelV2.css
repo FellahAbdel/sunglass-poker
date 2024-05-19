@@ -37,10 +37,10 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  color:white;
+  color: white;
 }
-.raiseValueDisplay{
-  color:rgb(255, 255, 255) ;
+.raiseValueDisplay {
+  color: rgb(255, 255, 255);
   font-size: 1.5vw;
   font-weight: bold;
   background-color: rgba(0, 0, 0, 0.5);
@@ -52,7 +52,7 @@
   padding: 1%;
 }
 .btn-raiseDecrement,
-.btn-raiseIncrement{
+.btn-raiseIncrement {
   width: 3vw;
   height: 3vw;
   margin: 1vw;
@@ -61,7 +61,6 @@
   background-color: unset;
   border: solid 1px white;
 }
-
 
 .container-ActionButtons {
   width: 100%;
@@ -81,4 +80,3 @@
     width: none;
   }
 }
-

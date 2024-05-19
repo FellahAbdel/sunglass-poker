@@ -64,8 +64,6 @@
   top: 0;
 }
 
-
-
 .container-waiting {
   position: absolute;
   top: 50%;
@@ -77,12 +75,15 @@
   flex-direction: column;
   gap: 1vh;
   z-index: 0;
-  transition: top 1s ease ;
+  transition: top 1s ease, opacity 1s ease;
+  opacity: 0;
 }
-.container-waiting.appear{
+.container-waiting.appear {
   top: 3%;
+  opacity: 1;
 }
 .txt-waiting {
-  font-size:1.5vw;
+  font-size: 1.5vw;
   color: white;
+  white-space: nowrap;
 }

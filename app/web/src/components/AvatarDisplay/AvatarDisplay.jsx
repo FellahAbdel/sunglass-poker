@@ -3,10 +3,10 @@ import { useAuth } from "../Utiles/AuthProvider";
 import "./avatarDisplay.css";
 
 /**
- * AvatarDisplay is a component that displays the user's avatar based on the userId prop. 
- * It fetches avatar data either for the specified userId or the logged-in user, and 
+ * AvatarDisplay is a component that displays the user's avatar based on the userId prop.
+ * It fetches avatar data either for the specified userId or the logged-in user, and
  * displays elements like base avatar, sunglasses, and a background color.
- * 
+ *
  * Props:
  * - userId: String or Number representing the ID of the user whose avatar should be displayed.
  */
@@ -15,7 +15,7 @@ const AvatarDisplay = ({ userId }) => {
 
   // State for storing avatar data
   const [avatar, setAvatar] = useState({
-    baseAvatar: {}, 
+    baseAvatar: {},
     sunglasses: {},
     colorAvatar: "#FFFFFF",
   });

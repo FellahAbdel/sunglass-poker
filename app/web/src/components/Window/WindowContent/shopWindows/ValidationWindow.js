@@ -13,9 +13,10 @@ import { useUserData } from "../../../Utiles/useUserData";
 const ValidationWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const { buyItem } = useAuth(); // Function to trigger item purchase
-  const { loadUserStats, user } = useUserData(); // Loads user stats and contains user data
-  const { selectedItem, openSuccessWindow, openWindow } = useWindowContext();
-  
+  const { user } = useUserData();
+  const { selectedItem, openSuccessWindow, openWindow, setSelectedItem } =
+    useWindowContext();
+
   // Guard clause to ensure there is a selected item to process
   if (!selectedItem) return null;
 
@@ -32,12 +33,12 @@ const ValidationWindow = () => {
     const success = await buyItem(selectedItem._id);
     if (success) {
       openSuccessWindow("shop.success", "shop");
-      loadUserStats();
+      setSelectedItem(null);
     } else {
       console.error("Erreur lors de l'achat");
     }
   };
-  
+
   // Calculate remaining coins after the transaction
   const finalCoins = user.coins - selectedItem.price;
 
