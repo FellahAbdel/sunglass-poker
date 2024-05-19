@@ -636,7 +636,8 @@ class Game {
     this.allPlayers = this.allPlayers.filter(
       (p) => p.getPlayerId() !== playerId
     );
-    // this.players = this.players.filter((p) => p.getPlayerId() !== playerId);
+    if(this.state === "waiting")
+      this.players = this.players.filter((p) => p.getPlayerId() !== playerId);
     // this.updateActivePlayers();
   }
 

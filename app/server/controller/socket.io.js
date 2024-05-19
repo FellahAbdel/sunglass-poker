@@ -510,11 +510,10 @@ module.exports = function (
       // Identify the user with the provided token
       if (identify(socket, data.token)) {
         session_timer.refresh();
-        if (socket.alreadyCalled[kindOfTimer] === undefined || (Date.now() - socket.alreadyCalled[kindOfTimer] > 1000)){
+        if (socket.alreadyCalled[kindOfTimer] === undefined || (Date.now() - socket.alreadyCalled[kindOfTimer] > 2000)){
           csl.log('sendSuccess', "Auth correct");
           socket.emit('identifySuccessfull');
           socket.alreadyCalled[kindOfTimer] = Date.now();
-          if(kindOfTimer === 1)
             socket.emit('askedForGame');
         }
       }
