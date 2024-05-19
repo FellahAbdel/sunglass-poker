@@ -202,6 +202,9 @@
 
 2024/05/19  1H30    Rédaction de rapport et réunion avec Victor aziz mos et noé pour des tests.
 
---2024/05 SEMAINE 2: 31H30 (TOTAL: 145H)
+2024/05/19  3H      Reunion avec tout le monde (aziz victor mos et noé) pour test général + fini la video blender
 
-TEMPS TOTAL: 145H
+
+--2024/05 SEMAINE 2: 34H30 (TOTAL: 148H)
+
+TEMPS TOTAL: 148H
