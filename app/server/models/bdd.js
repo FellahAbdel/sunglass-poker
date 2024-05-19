@@ -573,31 +573,26 @@ module.exports = function (app, bdd) {
         throw error;
       }
     },
-
+    
     playerLeftGame: async function (id, roomId) {
       try {
         // Find the user by ID
         const user = await UserModel.findById(id);
-        console.log("this ", user, " is leaving the game");
-        
-        console.log("user in game", user.inGame);
+
         // Find the game description by user's inGame ID
-        const gameDesc = await GameDescriptionModel.findById(roomId);
-        console.log(
-          "he was in game ",
-          roomId,
-          " and the gameDesc is ",
-          gameDesc
-        );
+        const gameDesc = await GameDescriptionModel.findById(user.inGame);
+
+        console.log("this ", user, " is leaving the game");
 
         console.log("game players before remove", gameDesc.players);
+
         // If game description exists, remove the player's ID from the players array
         if (gameDesc !== null) {
           gameDesc.players = gameDesc.players.filter((p) => p !== id);
           await gameDesc.save();
         }
-
         console.log("game players after remove", gameDesc.players);
+
 
         // Reset the user's inGame status to null
         user.inGame = null;
