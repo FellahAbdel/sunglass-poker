@@ -339,9 +339,9 @@ class Game {
     let allplayedenough_orTapis = 0; // nbr de joueurs qui ont payé
     let alltalkedThisTurn = 0; // nbr de joueurs qui  ont parlé
     this.activePlayers.map((p) => {
-      allplayedenough_orTapis +=
-        p.isTapis === true || p.currentBetTurn === this.gameCurrentBet;
-      csl.log("iterate", p.currentBetTurn);
+      if(p.isTapis || (p.currentBetTurn === this.gameCurrentBet))
+        allplayedenough_orTapis +=1
+      csl.log("iterate", `Playerbet : ${p.currentBetTurn} =?= ${this.gameCurrentBet} ; ${p.isTapis}`);
     });
     this.activePlayers.map(
       (p) => (alltalkedThisTurn += p.talkedThisTurn === true)
@@ -352,7 +352,7 @@ class Game {
       "Comptes : ",
       allplayedenough_orTapis,
       alltalkedThisTurn,
-      this.currentBetTurn
+      this.gameCurrentBet
     );
     if (
       allplayedenough_orTapis === aPlength &&
@@ -528,7 +528,7 @@ class Game {
                                   - il a assez d'argent
     */
     if (this.isPlayersTurn(player.getPlayerId())) {
-      csl.log("bet", `before the bet : ${this.total}`);
+      csl.log("bet", `before the bet : total = ${this.total} pMoney = ${player.localMoney} pbet = ${player.currentBet} pcurrentBet = ${player.currentBetTurn} amount = ${amount} GameCurrentBet = ${this.gameCurrentBet}`);
       /*
             **** RAISE *****
         si :   0 < gameCurrentBet < miseTotal < allin
@@ -546,16 +546,16 @@ class Game {
 
      //   --- RAISE  ---
       if(this.gameCurrentBet < amount+player.currentBet &&
-         amount < player.getPlayerMoney()
+         amount < player.localMoney
       ){
         this.total+=amount;
         player.raise();
         player.bet(amount);
-        this.gameCurrentBet = player.currentBet;
+        this.gameCurrentBet = player.currentBetTurn;
       }
      //   --- CALL  ---
       else if((amount+player.currentBet) === this.gameCurrentBet &&
-              amount !== player.getPlayerMoney()
+              amount !== player.localMoney
       ) {
         this.total+=amount;
         player.bet(amount);
@@ -568,20 +568,20 @@ class Game {
         player.check();
       }
       //   --- TAPIS  ---
-      else if(amount >= player.getPlayerMoney()){
-        this.total+=player.getPlayerMoney();
-        if(player.getPlayerMoney() >= this.gameCurrentBet)
-          this.gameCurrentBet = player.getPlayerMoney();
-        player.tapis(player.getPlayerMoney());
+      else if(amount >= player.localMoney){
+        this.total+=player.localMoney;
+        if(player.localMoney >= this.gameCurrentBet)
+          this.gameCurrentBet = player.localMoney+player.currentBetTurn;
+        player.tapis(player.localMoney);
         player.setTapis();
       }
       //   --- FAILED  ---
       else{
-        csl.log('betfailed',"player bet is not valid.",amount,player.getPlayerMoney(),this.gameCurrentBet);
+        csl.log('betfailed',"player bet is not valid.",amount,player.localMoney,this.gameCurrentBet);
         return;
       }
       if(player.currentBet > this.gameCurrentBet)
-        this.gameCurrentBet =player.currentBet 
+        this.gameCurrentBet =player.currentBetTurn;
       csl.log("bet", "gameCurrentBet after this bet : ", this.gameCurrentBet);
       csl.log("bet", `After the bet : ${this.total}`);
       this.rotateFocus();
@@ -605,7 +605,7 @@ class Game {
 
         do {
           let p = this.activePlayers[index];
-          const playerMoney = p.getPlayerMoney();
+          const playerMoney = p.localMoney;
           const amountToBet =
             playerMoney < self.bonusAmount ? playerMoney : self.bonusAmount;
           p.betBonus(amountToBet);
@@ -642,7 +642,8 @@ class Game {
 
   addPlayer(player) {
     this.allPlayers.push(player);
-    if (this.state !== "waiting" || player.getPlayerMoney() <= 0) {
+    const coins = player.getPlayerMoney() 
+    if (this.state !== "waiting" || coins <= 0) {
       csl.log(
         "gameObject : addPlayer",
         "either or both is true: ",
@@ -650,12 +651,12 @@ class Game {
         this.state !== "waiting",
         this.state,
         "\nPlayer has no money :",
-        player.getPlayerMoney() <= 0,
-        player.getPlayerMoney()
+        coins <= 0,
+        coins
       );
       player.isSpectator = true;
       player.isActive = false;
-    } else if (!player.isSpectator && player.getPlayerMoney() >= this.blind) {
+    } else if (!player.isSpectator && coins >= this.blind) {
       //If not the first round, we make people pay to join.
       //If they can't, it's cancel.
       if (!this.firstRoundForRoom) {
@@ -664,7 +665,7 @@ class Game {
       this.players.push(player);
       this.checkForNewMaster();
     }
-    console.log(player.getPlayerMoney());
+    console.log(coins);
     console.log(`Player ${player.name} added.`);
   }
 
@@ -712,7 +713,7 @@ class Game {
     //                                                - Is not afk
     else {
       let M = this.allPlayers.find((p) => p.getPlayerId() === this.master);
-      if (M.getPlayerMoney() <= 0 || M.isAFK) {
+      if (M.localMoney <= 0 || M.isAFK) {
         csl.log(
           "checkForNewMaster comonMan",
           "Master can no longer be. We change it."
@@ -735,7 +736,7 @@ class Game {
         //                          - Not Spectator
         //                          - has Money
         //                          - Not the old master (ofc)
-        if (player.getPlayerMoney() >= 0 && !player.isSpectator && !player.isAfk) {
+        if (player.localMoney >= 0 && !player.isSpectator && !player.isAfk) {
           if (potentialMaster === undefined)
             if (
               this.master === null ||

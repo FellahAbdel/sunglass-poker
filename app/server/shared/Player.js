@@ -104,7 +104,7 @@ class Player {
       isActive: this.isActive,
       isSpectator: this.isSpectator,
       timeLastAnswer: this.timeLastAnswer,
-      playerMoney: this.playerMoney,
+      playerMoney: this.localMoney,
       playerCards: this.playerCards.map((card, index) =>
         this.cardsVisible[index] || id === this.playerId ? card : null
       ),
@@ -202,7 +202,7 @@ class Player {
   }
 
   getPlayerMoney() {
-    return this.localMoney;
+    return this.playerMoney;
   }
 
   getPlayerActionLog() {
