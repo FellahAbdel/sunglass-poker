@@ -121,12 +121,12 @@ export const isPair = cards => {
 export const getPokerHand = cards => {
   if (cards.length < 5) return '';
   if (isStraightFlush(cards)) return "straightFlush";
-  if (isFourOfAKind(cards)) return "fourOfKind";
+  if (isFourOfAKind(cards)) return "fourOfAKind";
   if (isFullHouse(cards)) return "fullHouse";
   if (isFlush(cards)) return "flush";
   if (isStraight(cards)) return "straight";
-  if (isThreeOfAKind(cards)) return "threeOfKind";
+  if (isThreeOfAKind(cards)) return "threeOfAKind";
   if (isTwoPairs(cards)) return "twoPair";
-  if (isPair(cards)) return "pair";
-  return "highcard";
+  if (isPair(cards)) return "onePair";
+  return "highCard";
 };
