@@ -100,11 +100,9 @@ const DynamicBar = () => {
           <div className="txt-waiting">
             {notEnoughSC
               ? getTranslatedWord("game.notEnoughSC")
-              : getTranslatedWord("table.waiting")}{" "}
-            !
-            {numberOfPlayers < 2 && isMaster
+              : numberOfPlayers < 2 && isMaster
               ? getTranslatedWord("game.notEnoughPlayer")
-              : getTranslatedWord("table.waiting")}{" "}
+              : getTranslatedWord("table.waiting")}
             !
           </div>
           {!notEnoughSC && (
