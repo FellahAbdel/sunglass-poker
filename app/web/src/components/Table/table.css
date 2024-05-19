@@ -132,20 +132,25 @@
   background-color: var(--dark-background-color);
   background-size: 16px 12px; */
 
-  background-image: radial-gradient(#bababa0c 40%, #000000),
-    url("/public/static/media/assets/images/texture/carpetlow-bnw.jpg");
+  background: radial-gradient(#bababa0c 40%, #000000);
   background-size: 77vw;
   background-position: center;
   background-repeat: no-repeat;
 }
 #light .container-inGame {
   box-shadow: var(--inGame-light-shadow-box);
-  background-image: radial-gradient(#ffd9002e 50%, #000000),
-    url("/public/static/media/assets/images/texture/carpetlow.jpg");
+  background: radial-gradient(#ffd9002e 50%, #000000);
   background-size: 77vw;
   background-position: center;
   background-repeat: no-repeat;
 }
+.table-carpet{
+  width: 65vw;
+  height: 45vh;
+  border-radius: 30vw 30vw 20vw 20vw;
+  z-index: -1;
+}
+
 /*Windows size change*/
 .container-accueil {
   width: 50vw;

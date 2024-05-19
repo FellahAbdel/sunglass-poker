@@ -13,12 +13,14 @@ import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
 import LogoComponent from "../logo/Logo";
 import TotalPot from "./TotalPot";
+import { useSettings } from "../Utiles/SettingsContext.jsx";
 /**
  * The Table component serves as the primary UI container for the game, 
  * including players' placements, cards, and other game-related information 
  * based on the visibility state controlled through window context.
  */
 const Table = ({}) => {
+  const { theme } = useSettings();
   const { isWindowOpen, windowType, isGameTableVisible } = useWindowContext();
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
@@ -61,6 +63,14 @@ const Table = ({}) => {
   return (
     // Table that becomes a container for the menus when they are activated
     <div className={classes.containerTable}>
+      {/* table carpet in game */}
+      {isGameTableVisible && !isWindowOpen &&
+        (theme === "dark" ? 
+          <img className="table-carpet" src="static/media/assets/images/texture/carpetlow-bnw.jpg" alt="table carpet"/>
+        :
+          <img className="table-carpet" src="static/media/assets/images/texture/carpetlow.jpg" alt="table carpet"/>
+        )
+      }
       {/* the white border line around the table in the middle */}
       <div
         className={`${!isWindowOpen ? "table-lineAround" : ""} 
