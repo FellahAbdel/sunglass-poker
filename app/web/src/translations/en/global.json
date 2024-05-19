@@ -40,7 +40,7 @@
     "temporary": "TEMPORARY BUTTON"
   },
   "messageBox": {
-    "loginSuccess": "Logged in with success!",
+    "loginSucces": "Logged in with success!",
     "ok": "Ok"
   },
   "game": {
@@ -128,7 +128,7 @@
     "animations": "Animations",
     "langSelect": "Select a language"
   },
-  "profile": {
+  "profil": {
     "name": "Name",
     "mail": "Mail",
     "coins": "Coins",
