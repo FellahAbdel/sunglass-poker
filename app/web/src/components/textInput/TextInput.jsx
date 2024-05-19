@@ -42,7 +42,7 @@ const TextInputComponent = ({
         onChange={(e) => onChange(e)}
         onKeyDown={onKeyDown}
       ></input>
-      <img className="texxtInput-icon" src={iconSrc} alt="icon" />
+      {iconSrc && <img className="texxtInput-icon" src={iconSrc} alt="icon" />}
       {errorMessage && <p>{getTranslatedWord(errorMessage)}</p>}{" "}
     </div>
   );
