@@ -72,8 +72,6 @@ const Navbar = () => {
         },
       });
     } else if (windowType === "loading") {
-      //console.log("L'utilisateur quitte la table en waiting");
-      //handleleaveRoom();
       closeWindow();
       return;
     } else if (windowType !== "") {
@@ -88,8 +86,6 @@ const Navbar = () => {
 
           // Before showing the home page, we need to to be sure
           // that the server has processed the leaveRoom request
-
-          //   showHome();
           // We use the isPlayerLeft state to show the home page above.
         },
         onCancel: () => {
@@ -217,7 +213,6 @@ const Navbar = () => {
             styleClass={`btn-settings-V2`}
             iconSrc="static/media/assets/images/icons/white/settings.png"
           />
-
 
           {isLogged && !isGameTableVisible && (
             <Button

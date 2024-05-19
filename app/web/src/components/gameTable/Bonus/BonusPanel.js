@@ -6,16 +6,16 @@ import { useTranslation } from "../../Utiles/Translations";
 import { useDispatch } from "react-redux";
 
 /**
- * BonusPanel displays a UI panel for activating game bonuses 
+ * BonusPanel displays a UI panel for activating game bonuses
  * based on the number of various card symbols collected.
- * 
+ *
  * Props:
  * - nbHearts: Number of heart cards collected.
  * - nbDiamonds: Number of diamond cards collected.
  * - nbSpades: Number of spade cards collected.
  * - nbClubs: Number of club cards collected.
  */
-const BonusPanel = ({nbHearts, nbDiamonds, nbSpades, nbClubs}) => {
+const BonusPanel = ({ nbHearts, nbDiamonds, nbSpades, nbClubs }) => {
   //we can use a number divisable by all the different numbers that they need
   //to fill the bonus boxes and back-end will manage the part of the variable
   //bonus numbers to show graphiquly
@@ -44,10 +44,26 @@ const BonusPanel = ({nbHearts, nbDiamonds, nbSpades, nbClubs}) => {
   return (
     <div className="panel-bonus">
       <div className="container-bonusCards">
-        <img src="static/media/assets/images/icons/white/heart.png" alt="Heart" className={`box-${nbHearts}`} />
-        <img src="static/media/assets/images/icons/white/diamond.png" alt="Diamond" className={`box-${nbDiamonds}`}/>
-        <img src="static/media/assets/images/icons/white/spade.png" alt="Spade" className={`box-${nbSpades}`} />
-        <img src="static/media/assets/images/icons/white/club.png" alt="Club" className={`box-${nbClubs}`} />
+        <img
+          src="static/media/assets/images/icons/white/heart.png"
+          alt="Heart"
+          className={`box-${nbHearts}`}
+        />
+        <img
+          src="static/media/assets/images/icons/white/diamond.png"
+          alt="Diamond"
+          className={`box-${nbDiamonds}`}
+        />
+        <img
+          src="static/media/assets/images/icons/white/spade.png"
+          alt="Spade"
+          className={`box-${nbSpades}`}
+        />
+        <img
+          src="static/media/assets/images/icons/white/club.png"
+          alt="Club"
+          className={`box-${nbClubs}`}
+        />
       </div>
 
       <Button

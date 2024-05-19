@@ -1,4 +1,4 @@
-import React , {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./playersProfile.css";
 import ProgressBar from "../../Utiles/ProgressBar";
 import Card from "../Card/Card";
@@ -41,7 +41,7 @@ const PlayersProfile = ({
   const dollarSign = " SC";
 
   useEffect(() => {
-    console.log("playerHandName :",playerHandName);
+    console.log("playerHandName :", playerHandName);
   }, [playerHandName]);
   useEffect(() => {
     console.log("isFocus playersProfile :", isFocus);
@@ -53,12 +53,12 @@ const PlayersProfile = ({
   /**
    * Converts the first character of a string to lowercase and retains the rest as is.
    * Useful for converting PascalCase or other formats to camelCase.
-   * 
+   *
    * @param {string} str - The string to convert to camelCase.
    * @return {string} The camelCased string.
    */
   function toCamelCase(str) {
-    if (!str) return str; 
+    if (!str) return str;
     return str.charAt(0).toLowerCase() + str.slice(1);
   }
 
@@ -78,17 +78,20 @@ const PlayersProfile = ({
     <div className={`container-onGameProfile`}>
       <div
         className={`container-profileMessage 
-                    ${isFocus || (status === "winner") && "profileMessageShow"}`}>
-
-          {status === "winner" && playerHandName ? 
-            getTranslatedWord(`handGuide.${toCamelCase(playerHandName)}`)
-            : (
-                isFocus && 
-                  (isYou ? getTranslatedWord("game.yourTurn") + "!" : getTranslatedWord("game.theirTurn") + "!")
-            )
-          }
+                    ${
+                      isFocus || (status === "winner" && "profileMessageShow")
+                    }`}
+      >
+        {status === "winner" && playerHandName
+          ? getTranslatedWord(`handGuide.${toCamelCase(playerHandName)}`)
+          : isFocus &&
+            (isYou
+              ? getTranslatedWord("game.yourTurn") + "!"
+              : getTranslatedWord("game.theirTurn") + "!")}
       </div>
-      <div className={`box-status ${status.toLowerCase()} ${isFocus && "waiting"}`}>
+      <div
+        className={`box-status ${status.toLowerCase()} ${isFocus && "waiting"}`}
+      >
         {isFocus ? (
           <ProgressBar
             className="progressBar progressPercentage"
@@ -101,9 +104,7 @@ const PlayersProfile = ({
         )}
       </div>
 
-      <div
-        className={`box-playerInfo ${status.toLowerCase()}`}
-      >
+      <div className={`box-playerInfo ${status.toLowerCase()}`}>
         <p>
           {name}
           <br />
@@ -125,8 +126,8 @@ const PlayersProfile = ({
         flippingCard={flippingPlayerCards}
       />
 
-      <div className={`profilePic ${status.toLowerCase()} ${ isYou && "you" }`}>
-        <AvatarDisplay userId={playerId}/>
+      <div className={`profilePic ${status.toLowerCase()} ${isYou && "you"}`}>
+        <AvatarDisplay userId={playerId} />
         {status === "winner" && (
           <img
             id="crown"

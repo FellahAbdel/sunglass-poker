@@ -38,32 +38,33 @@
   padding-left: 1.5vw;
 }
 
-.logo-loading{
-  bottom:unset;
+.logo-loading {
+  bottom: unset;
 }
-.container-logoParts{
-  height:100%;
+.container-logoParts {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.logo-core,.logo-flare{
-  position:absolute;
-  width:100%;
+.logo-core,
+.logo-flare {
+  position: absolute;
+  width: 100%;
 }
-.logo-flare.loading{
+.logo-flare.loading {
   animation: spin 5s ease-in-out infinite;
 }
 @keyframes spin {
   0% {
-      transform: rotate(0deg) scale(100%);
+    transform: rotate(0deg) scale(100%);
   }
   50% {
-      transform: rotate(360deg) scale(120%);
+    transform: rotate(360deg) scale(120%);
   }
   100% {
     transform: rotate(0deg) scale(100%);
-}
+  }
 }
 
 .logo-login,

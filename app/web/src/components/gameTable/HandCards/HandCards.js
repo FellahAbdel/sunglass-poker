@@ -38,7 +38,7 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
    * @returns {string|number} The label for the card number.
    */
   const getCardLabel = (number) => {
-    const faceCards = { 11: 'J', 12: 'Q', 13: 'K', 14: 'A' };
+    const faceCards = { 11: "J", 12: "Q", 13: "K", 14: "A" };
     return faceCards[number] || number;
   };
 
@@ -72,7 +72,7 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
   /**
    * Toggles the visibility of both cards.
    * Determines visibility based on the current state of either card.
-  */
+   */
   const toggleBothCards = () => {
     const anyVisible = card1.isVisible || card2.isVisible;
     if (anyVisible) {
@@ -87,7 +87,7 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
   // Map of card color icons.
   const cardIcons = {
     H: "static/media/assets/images/icons/white/heart.png",
-    D: "static/media/assets/images/icons/white/diamond.png", 
+    D: "static/media/assets/images/icons/white/diamond.png",
     C: "static/media/assets/images/icons/white/club.png",
     S: "static/media/assets/images/icons/white/spade.png",
   };
@@ -101,8 +101,12 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
           }
           label={
             card1.isVisible
-              ? `${getTranslatedWord("handGuide.hide")} ${getCardLabel(card1.number)} of `
-              : `${getTranslatedWord("handGuide.show")} ${getCardLabel(card1.number)} of `
+              ? `${getTranslatedWord("handGuide.hide")} ${getCardLabel(
+                  card1.number
+                )} of `
+              : `${getTranslatedWord("handGuide.show")} ${getCardLabel(
+                  card1.number
+                )} of `
           }
           iconSrc={cardIcons[card1.color]}
           onClick={() => toggleShowCard(0, card1)}
@@ -113,8 +117,12 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
           }
           label={
             card1.isVisible
-              ? `${getTranslatedWord("handGuide.hide")} ${getCardLabel(card2.number)} of `
-              : `${getTranslatedWord("handGuide.show")} ${getCardLabel(card2.number)} of `
+              ? `${getTranslatedWord("handGuide.hide")} ${getCardLabel(
+                  card2.number
+                )} of `
+              : `${getTranslatedWord("handGuide.show")} ${getCardLabel(
+                  card2.number
+                )} of `
           }
           iconSrc={cardIcons[card2.color]}
           onClick={() => toggleShowCard(1, card2)}
