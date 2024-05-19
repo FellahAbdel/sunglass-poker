@@ -123,7 +123,7 @@ export const comm = {
     this.tryAuth = setInterval(() => {
       this.authenticated = false;
       this.preFun(true);
-    }, 2000);
+    }, 1000);
   },
 
   status: function () {
