@@ -15,7 +15,7 @@ export const WindowProvider = ({ children }) => {
     if (state.windowType === "alert") {
       dispatch({ type: "SET_WINDOW_TYPE", payload: "accueil" });
     }
-  }, []);
+  }, [state.windowType]);
 
   const setWindowOpen = (isOpen) => {
     dispatch({ type: "TOGGLE_WINDOW_OPEN", payload: isOpen });

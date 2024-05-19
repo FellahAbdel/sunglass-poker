@@ -27,7 +27,7 @@ const PlayersPlacements = ({ showMiddle }) => {
     setUpdatedPlayers(playersInTable);
     console.log("playerInTAble: ", playersInTable);
     fetchUserInfo();
-  }, [playersInTable]);
+  }, [playersInTable, fetchUserInfo]);
 
   return (
     <span className={`profiles`}>

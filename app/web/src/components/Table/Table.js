@@ -19,7 +19,7 @@ import { useSettings } from "../Utiles/SettingsContext.jsx";
  * including players' placements, cards, and other game-related information
  * based on the visibility state controlled through window context.
  */
-const Table = ({}) => {
+const Table = () => {
   const { theme } = useSettings();
   const { isWindowOpen, windowType, isGameTableVisible } = useWindowContext();
   const { isLogged } = useAuth();

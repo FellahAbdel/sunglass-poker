@@ -43,7 +43,7 @@ export const GameTableProvider = ({ children }) => {
     const isMaster =
       gameInfo && gameInfo.game && gameInfo.game.master === userId;
     dispatch({ type: SET_MASTER, payload: isMaster });
-  }, [userId, gameInfo?.game?.master]);
+  }, [userId, gameInfo]);
 
   useEffect(() => {
     if (gameInfo && gameInfo.game && gameInfo.game.state) {
@@ -52,7 +52,7 @@ export const GameTableProvider = ({ children }) => {
         payload: gameInfo.game.state === "waiting",
       });
     }
-  }, [gameInfo?.game?.state]);
+  }, [gameInfo]);
 
   useEffect(() => {
     if (
@@ -72,7 +72,7 @@ export const GameTableProvider = ({ children }) => {
       // Si 'focus' est null ou non défini, ou l'index est invalide, réinitialiser isFocus
       dispatch({ type: SET_FOCUS, payload: false });
     }
-  }, [gameInfo?.game?.focus, gameInfo?.game?.players, userId]);
+  }, [gameInfo, userId]);
 
   // Mettre à jour l'argent du joueur
   useEffect(() => {

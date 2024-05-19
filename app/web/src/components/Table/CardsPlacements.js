@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Card from "../gameTable/Card/Card";
 import { useGameTable } from "../Utiles/GameTableProvider";
 import useDeepEffect from "../../hooks/useDeepEffect";
@@ -33,15 +33,7 @@ const CardsPlacements = () => {
     setFlipped(flipped.map((f, index) => f || dealingFlop[index]));
   }, [dealingFlop]);
 
-  // Update dealingFlop based on communityCards with sequential timing
-  useEffect(() => {
-    if (communityCards && communityCards.length > 0) {
-      updateDealingFlopSequentially();
-      console.log("communityCards: ", communityCards);
-    }
-  }, [communityCards]);
-
-  const updateDealingFlopSequentially = () => {
+  const updateDealingFlopSequentially = useCallback(() => {
     communityCards.forEach((card, index) => {
       const timeout = setTimeout(() => {
         setDealingFlop((prev) =>
@@ -50,11 +42,20 @@ const CardsPlacements = () => {
       }, 1000 * index);
       timeoutRefs.current.push(timeout);
     });
-  };
+  }, [communityCards]);
+
+  // Update dealingFlop based on communityCards with sequential timing
+  useEffect(() => {
+    if (communityCards && communityCards.length > 0) {
+      updateDealingFlopSequentially();
+      console.log("communityCards: ", communityCards);
+    }
+  }, [communityCards, updateDealingFlopSequentially]);
 
   // Clear timeouts on component unmount
   useEffect(() => {
-    return () => timeoutRefs.current.forEach(clearTimeout);
+    const timeouts = timeoutRefs.current;
+    return () => timeouts.forEach(clearTimeout);
   }, []);
 
   // Helper function to format card data for rendering

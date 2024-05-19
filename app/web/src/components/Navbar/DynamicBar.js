@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./dynamicBar.css";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext";
-import { formatNumber } from "./../Utiles/NumberFormat";
 import Button from "./../button/Button.tsx";
 import { useUserData } from "../Utiles/useUserData.jsx";
 import { useTranslation } from "./../Utiles/Translations.jsx";

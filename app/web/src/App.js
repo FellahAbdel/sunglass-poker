@@ -1,7 +1,4 @@
-// import { useAuth, getUserInfo } from "../AuthProvider";
-// import React, { useState } from 'react';
 import "./App.css";
-// import { BrowserRouter as Router, Route, Routes }from 'react-router-dom';
 import GameTable from "./pages/gameTable";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -14,7 +11,7 @@ import { GameTableProvider } from "./components/Utiles/GameTableProvider";
 function App() {
   return (
     <WindowProvider>
-      <Router basename=''>
+      <Router basename="">
         <AuthProvider>
           <SettingsProvider>
             <GameTableProvider>

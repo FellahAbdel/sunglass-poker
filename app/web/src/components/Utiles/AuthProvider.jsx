@@ -1,5 +1,11 @@
 // AuthProvider.js
-import React, { createContext, useContext, useEffect, useReducer } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useCallback,
+} from "react";
 import { useWindowContext } from "./WindowContext";
 import { userReducer, initialState } from "../../store/reducers/userReducer";
 
@@ -18,6 +24,48 @@ export const AuthProvider = ({ children }) => {
   const { showHome, windowType } = useWindowContext();
   const { isLogged, user } = state;
 
+  const getAuthHeaders = () => {
+    const token = sessionStorage.getItem("authToken");
+    return {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+  };
+
+  const fetchUserInfo = useCallback(
+    async (authToken) => {
+      try {
+        const response = await fetch("api/userInfo", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          dispatch({
+            type: "LOGIN",
+            payload: {
+              ...data.user,
+            },
+          });
+        } else {
+          console.error(
+            "Impossible de récupérer les informations de l'utilisateur"
+          );
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des informations de l'utilisateur :",
+          error
+        );
+      }
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
     if (authToken) {
@@ -29,15 +77,7 @@ export const AuthProvider = ({ children }) => {
         },
       });
     }
-  }, [windowType]);
-
-  const getAuthHeaders = () => {
-    const token = sessionStorage.getItem("authToken");
-    return {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    };
-  };
+  }, [windowType, fetchUserInfo]);
 
   const login = async (credentials) => {
     try {
@@ -219,34 +259,6 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Erreur lors de la création de l'utilisateur :", error);
       return false;
-    }
-  };
-
-  const fetchUserInfo = async () => {
-    try {
-      const response = await fetch("api/userInfo", {
-        method: "GET",
-        headers: getAuthHeaders(),
-      });
-      const data = await response.json();
-
-      if (data.success) {
-        dispatch({
-          type: "LOGIN",
-          payload: {
-            ...data.user,
-          },
-        });
-      } else {
-        console.error(
-          "Impossible de récupérer les informations de l'utilisateur"
-        );
-      }
-    } catch (error) {
-      console.error(
-        "Erreur lors de la récupération des informations de l'utilisateur :",
-        error
-      );
     }
   };
 

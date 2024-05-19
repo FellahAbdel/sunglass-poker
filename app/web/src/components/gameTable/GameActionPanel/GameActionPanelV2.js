@@ -10,7 +10,7 @@ import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
  * GameActionButtons provides an interface for user actions in a game context,
  * such as betting, raising, checking, calling, and folding.
  */
-const GameActionButtons = ({}) => {
+const GameActionButtons = () => {
   const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } =
     useGameTable();
   console.log("gameCurrentBet :", gameCurrentBet);
@@ -23,7 +23,7 @@ const GameActionButtons = ({}) => {
   const [showPopup, setShowPopup] = useState(false); // popUp to show raise panel
   const [coinsAfterRaise, setCoinsAfterRaise] = useState(0); // calculating the amount that player will be left after the raise to show before
   const dispatch = useDispatch();
-  
+
   /**
    * Formats a number to a readable string with commas.
    * @param {number} number - The number to format.
@@ -81,8 +81,6 @@ const GameActionButtons = ({}) => {
         const validatedAmount = Math.max(min, Math.min(max, amount));
         setAmount(validatedAmount);
       } else {
-        const totalAmount =
-          amount + Math.max(0, gameCurrentBet - gamePlayerCurrentBet);
         handleBet(amount);
         setAmount(min);
         setShowPopup(false);
@@ -138,7 +136,7 @@ const GameActionButtons = ({}) => {
     } else {
       setMin(20);
     }
-  }, [gameCurrentBet]);
+  }, [gameCurrentBet, gamePlayerCurrentBet]);
 
   // Effect to adjust the player's remaining coins after setting a bet amount
   useEffect(() => {

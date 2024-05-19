@@ -19,12 +19,22 @@ const Navbar = () => {
 
   const isPlayerLeft = useSelector((state) => state.game.playerLeft);
 
+  // Handles the logout and room leave logic with confirmation dialogs
+  const {
+    isGameTableVisible,
+    closeWindow,
+    openWindow,
+    showHome,
+    windowType,
+    isWindowOpen,
+  } = useWindowContext();
+
   // useEffect to show the home page when the player leaves the table successfully
   useEffect(() => {
     if (isPlayerLeft) {
       showHome();
     }
-  }, [isPlayerLeft]);
+  }, [isPlayerLeft, showHome]);
 
   const dispatch = useDispatch();
 
@@ -42,16 +52,6 @@ const Navbar = () => {
       console.log("Player did not leave the table successfully");
     }
   };
-
-  // Handles the logout and room leave logic with confirmation dialogs
-  const {
-    isGameTableVisible,
-    closeWindow,
-    openWindow,
-    showHome,
-    windowType,
-    isWindowOpen,
-  } = useWindowContext();
 
   const handleLogOutButton = () => {
     console.log("handleLogOutButton :", windowType);
