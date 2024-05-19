@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Card from "../gameTable/Card/Card";
 import { useGameTable } from "../Utiles/GameTableProvider";
-import useDeepEffect from "../../hooks/useDeepEffect";
 
 /**
  * CardsPlacements manages the display and animation of community cards and
- * transition animations for player cards during a game. It also handles sound effects
- * associated with card placements.
+ * transition animations for player cards during a game.
+ * 
  */
 const CardsPlacements = () => {
   const { communityCards } = useGameTable();
@@ -16,19 +15,13 @@ const CardsPlacements = () => {
   // *** here only for animation purposes
   const timeoutRefs = useRef([]);
 
-  /*DISTRIBUTION ANIMATION :
-  in CardPlacements you have the distribution
-  animation which gets handled with a table called 
-  "playersCardDistributed" with 10 booleen members
-  representing each players that gets a card*/
-
   // Initialize dealingFlop from local storage or set to default if not available
   const [dealingFlop, setDealingFlop] = useState(() => {
     const saved = localStorage.getItem("dealingFlop");
     return saved ? JSON.parse(saved) : [false, false, false, false, false];
   });
 
-  useDeepEffect(() => {
+  useEffect(() => {
     localStorage.setItem("dealingFlop", JSON.stringify(dealingFlop));
     setFlipped(flipped.map((f, index) => f || dealingFlop[index]));
   }, [dealingFlop]);
@@ -39,7 +32,7 @@ const CardsPlacements = () => {
         setDealingFlop((prev) =>
           prev.map((item, idx) => (idx === index ? card !== null : item))
         );
-      }, 1000 * index);
+      }, 2000 * index);
       timeoutRefs.current.push(timeout);
     });
   }, [communityCards]);
