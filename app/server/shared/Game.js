@@ -711,9 +711,10 @@ class Game {
     } // Otherwise we check to see if the master has :
     //                                                - Enough Coins
     //                                                - Is not afk
+    //                                                - Is not spec
     else {
       let M = this.allPlayers.find((p) => p.getPlayerId() === this.master);
-      if (M.localMoney <= 0 || M.isAFK) {
+      if (M.localMoney <= 0 || M.isAFK || M.isSpectator) {
         csl.log(
           "checkForNewMaster comonMan",
           "Master can no longer be. We change it."
