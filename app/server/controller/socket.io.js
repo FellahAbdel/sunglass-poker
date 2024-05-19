@@ -502,21 +502,20 @@ module.exports = function (
       let token = undefined;
       if (typeof data === "object" && data.id !== undefined) {
         token = data.token;
-        kindOfTimer
+        kindOfTimer = (data.init === true);
       }
+      if(socket.alreadyCalled === undefined)
+        socket.alreadyCalled = {0:Date.now()-1000,1:Date.now()-1000};
       csl.log('myNameIs', data, socket.alreadyCalled);
       // Identify the user with the provided token
       if (identify(socket, data.token)) {
         session_timer.refresh();
-        if()
-        if (socket.alreadyCalled === undefined || (Date.now() - socket.alreadyCalled > 1000)){
+        if (socket.alreadyCalled[kindOfTimer] === undefined || (Date.now() - socket.alreadyCalled[kindOfTimer] > 1000)){
           csl.log('sendSuccess', "Auth correct");
-          if (data.init){
-            socket.emit('identifySuccessfull');
-            socket.alreadyCalled = Date.now();
-
+          socket.emit('identifySuccessfull');
+          socket.alreadyCalled[kindOfTimer] = Date.now();
+          if(kindOfTimer === 1)
             socket.emit('askedForGame');
-          }
         }
       }
     });

@@ -113,8 +113,8 @@ export const comm = {
       clearInterval(this.tryAuth);
       setTimeout(() => {
         clearInterval(this.tryAuth);
+        this.authenticated = false;
         this.tryAuth = setInterval(() => {
-          this.authenticated = false;
           this.preFun(true);
         }, 1000);
       }, 5000);
