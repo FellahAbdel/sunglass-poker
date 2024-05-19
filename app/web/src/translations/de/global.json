@@ -20,7 +20,7 @@
     "password": "Passwort",
     "repeatPass": "Wiederhole dein Passwort",
     "email": "E-Mail",
-    "forgotPass": "Ich habe mein Passwort vergessen",
+    "forgotPass": "Passwort vergessen",
     "forgotPassQuestion": "Passwort vergessen?",
     "forgotPassEnter": "Gib deine E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten.",
     "registerNewAcc": "Neues Konto registrieren",
@@ -44,8 +44,8 @@
     "ok": "Ok"
   },
   "game": {
-    "loginPlay": "Melde dich an, um zu spielen",
-    "signupPlay": "Registriere dich, um zu spielen",
+    "loginPlay": "Melde dich an",
+    "signupPlay": "Registriere dich",
     "startGame": "Ein Spiel starten",
     "joinGame": "Einem Spiel beitreten",
     "createAgame": "Ein neues Spiel erstellen",
