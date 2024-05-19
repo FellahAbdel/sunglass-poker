@@ -109,6 +109,7 @@ const CreateGameWindow = () => {
         } else if (result) {
           // We dispatch the action to start the game
           const gameRoomId = result;
+          openWindow("loading");
           dispatch(createGameV2(gameRoomId));
         }
       } catch (error) {
