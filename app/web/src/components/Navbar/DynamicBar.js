@@ -17,7 +17,8 @@ const DynamicBar = () => {
   const { userId } = useAuth();
   const { openWindow, windowType, isGameTableVisible, isWindowOpen } =
     useWindowContext();
-  const { isMaster, showWaitingMessage, isSpectator } = useGameTable();
+  const { isMaster, showWaitingMessage, isSpectator, numberOfPlayers } =
+    useGameTable();
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
   const { serverName } = useGameTable();
@@ -99,27 +100,31 @@ const DynamicBar = () => {
           <div className="txt-waiting">
             {notEnoughSC
               ? getTranslatedWord("game.notEnoughSC")
-              : getTranslatedWord("table.waiting")}{" "}
+              : numberOfPlayers < 2 && isMaster
+              ? getTranslatedWord("game.notEnoughPlayer")
+              : getTranslatedWord("table.waiting")}
             !
           </div>
           {!notEnoughSC && (
             <>
-              {isMaster ? (
+              {numberOfPlayers >= 2 && isMaster ? (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
                   label={getTranslatedWord("table.start")}
                   onClick={() => startGame()}
                 />
               ) : (
-                <Button
-                  styleClass="btn-gameStart2 back-color1"
-                  label={
-                    isSpectator
-                      ? getTranslatedWord("table.join")
-                      : getTranslatedWord("table.spectacle")
-                  }
-                  onClick={() => startGame()}
-                />
+                !isMaster && (
+                  <Button
+                    styleClass="btn-gameStart2 back-color1"
+                    label={
+                      isSpectator
+                        ? getTranslatedWord("table.join")
+                        : getTranslatedWord("table.spectacle")
+                    }
+                    onClick={() => startGame()}
+                  />
+                )
               )}
             </>
           )}

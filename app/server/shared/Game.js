@@ -38,6 +38,7 @@ class Game {
       allow_start: true,
       serverName: "",
       firstRoundForRoom: true,
+      firstToTalk:0,
     };
     Object.assign(this, basedValue, ...args);
     // this.activePlayers = null;
@@ -369,6 +370,20 @@ class Game {
         p.currentBetTurn = 0;
       });
       this.gameCurrentBet = 0;
+      this.focus = this.firstToTalk;
+      while (
+        !this.players[this.focus].isActive ||
+        this.players[this.focus].getStatus() === "tapis"
+      ) {
+        this.focus = (this.focus + 1) % this.players.length;
+        if (this.focus === originalFocus) {
+          clearTimeout(this.focusTurnCall);
+          while (this.currentStage !== "showdown") {
+            this.advanceStage();
+          }
+          return;
+        }
+      }
       this.advanceStage();
       // return;
     }
@@ -554,7 +569,7 @@ class Game {
         this.gameCurrentBet = player.currentBetTurn;
       }
      //   --- CALL  ---
-      else if((amount+player.currentBet) === this.gameCurrentBet &&
+      else if((amount+player.currentBetTurn) === this.gameCurrentBet &&
               amount !== player.localMoney
       ) {
         this.total+=amount;
@@ -570,8 +585,8 @@ class Game {
       //   --- TAPIS  ---
       else if(amount >= player.localMoney){
         this.total+=player.localMoney;
-        if(this.gameCurrentBet < player.localMoney+player.currentBet)
-          this.gameCurrentBet = player.localMoney+player.currentBet;
+        if(this.gameCurrentBet < player.localMoney+player.currentBetTurn)
+          this.gameCurrentBet = player.localMoney+player.currentBetTurn;
         player.tapis(player.localMoney);
         player.setTapis();
       }
@@ -580,7 +595,7 @@ class Game {
         csl.log('betfailed',"player bet is not valid.",amount,player.localMoney,this.gameCurrentBet);
         return;
       }
-      if(player.currentBet > this.gameCurrentBet)
+      if(player.currentBetTurn > this.gameCurrentBet)
         this.gameCurrentBet =player.currentBetTurn;
       csl.log("bet", "gameCurrentBet after this bet : ", this.gameCurrentBet);
       csl.log("bet", `After the bet : ${this.total}`);
@@ -636,7 +651,8 @@ class Game {
     this.allPlayers = this.allPlayers.filter(
       (p) => p.getPlayerId() !== playerId
     );
-    // this.players = this.players.filter((p) => p.getPlayerId() !== playerId);
+    if(this.state === "waiting")
+      this.players = this.players.filter((p) => p.getPlayerId() !== playerId);
     // this.updateActivePlayers();
   }
 
@@ -836,8 +852,9 @@ class Game {
     this.currentStage = "preflop";
     this.state = "active";
     this.rotateStartingPlayer();
-    this.focus = this.startingPlayerIndex;
-    this.playerBeforeNextTurn = this.startingPlayerIndex;
+    this.firstToTalk = this.firstToTalk % this.players.length;
+    this.focus = this.firstToTalk;
+    this.firstToTalk++;
     this.total = 0;
     this.pokerTable.reset();
     this.deck = new Deck();
@@ -855,7 +872,7 @@ class Game {
     console.log("firstplayer: ", firstPlayer);
     firstPlayer.betinitial(this.gameCurrentBet / 2);
     this.total += this.gameCurrentBet / 2;
-
+    
     this.rotateFocus();
     const nextPlayer = this.players[this.focus];
     console.log("nextPlayer: ", nextPlayer);
@@ -863,8 +880,7 @@ class Game {
     this.total += this.gameCurrentBet;
 
     this.rotateFocus();
-    this.playerBeforeNextTurn = this.focus;
-
+    this.firstToTalk = this.focus;
     //OU ICI
 
     //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
@@ -899,6 +915,7 @@ class Game {
     this.players.forEach((p) => {(p.decrementalTotal =(p.decrementalTotal === undefined)?p.betTotal:p.decrementalTotal);csl.log('Mise par joueur a gagné',`${p.name} : ${p.decrementalTotal}`)});
     if (nbwinner >= 2) {
       let totalWinnerBet  = 0;
+      const FULLTOTAL = this.total;
       winner.forEach(w => totalWinnerBet += this.getPlayerById(w.id).betTotal); 
       for (let i = 0; i < nbwinner; i++) {
         csl.log(
@@ -910,7 +927,7 @@ class Game {
         const winnerHandName = winner[i].type;
         const winPlayer = this.getPlayerById(winner[i].id);
         let coef = winPlayer.betTotal/totalWinnerBet;
-        let prend = Math.floor((coef) * this.total);
+        let prend = Math.floor((coef) * FULLTOTAL);
         csl.log("pritwinner",`il avait un coef de  ${coef} le droit à  par joueur et a prit ${prend}`)
         winPlayer.playerHandName = winnerHandName;
         winPlayer.localMoney += prend;

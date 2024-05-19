@@ -67,6 +67,8 @@
 .login-page-text {
   color: white;
   font-size: 1vw;
+  width: 23vw;
+  margin-bottom: 3vh;
 }
 .container-leaveButtons {
   width: 100%;
