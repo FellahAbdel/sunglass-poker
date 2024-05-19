@@ -12,14 +12,7 @@ export const WindowProvider = ({ children }) => {
   const [state, dispatch] = useReducer(windowReducer, initialState);
 
   useEffect(() => {
-    console.log("isWindowOpen:", state.isWindowOpen);
-    console.log("windowType:", state.windowType);
-    console.log("isGameTableVisible:", state.isGameTableVisible);
-    console.log("connectionWindowOpen:", state.connectionWindowOpen);
-  }, [state.isWindowOpen, state.windowType, state.isGameTableVisible, state.connectionWindowOpen]);
-
-  useEffect(() => {
-    if (state.windowType === 'alert') {
+    if (state.windowType === "alert") {
       dispatch({ type: "SET_WINDOW_TYPE", payload: "accueil" });
     }
   }, []);
@@ -53,8 +46,6 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openWindow = (type, params = {}) => {
-    console.log(`Opening window: ${type}`, params);
-
     if (state.windowType === type && state.isWindowOpen) {
       closeWindow();
       return;
@@ -80,7 +71,6 @@ export const WindowProvider = ({ children }) => {
   };
 
   const closeWindow = () => {
-    console.log("Fermeture de la fenêtre");
     setAlertParams({ message: "", onConfirm: () => {}, onCancel: () => {} });
     setWindowOpen(false);
     if (state.isGameTableVisible) {
@@ -102,9 +92,6 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openSuccessWindow = (message, redirect = "") => {
-    console.log(
-      `Ouverture de la fenêtre de succès avec le message : ${message}`
-    );
     setSuccessMessage(message);
     setRedirectAfterSuccess(redirect);
     setWindowType("success");
@@ -112,9 +99,6 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openValidationWindow = (item) => {
-    console.log(
-      `Ouverture de la fenêtre de validation pour l'élément : ${item.imgSrc}`
-    );
     dispatch({ type: "SET_SELECTED_ITEM", payload: item });
     dispatch({ type: "SET_WINDOW_TYPE", payload: "validation" });
     dispatch({ type: "TOGGLE_WINDOW_OPEN", payload: true });
@@ -125,7 +109,7 @@ export const WindowProvider = ({ children }) => {
   };
 
   const onClickStartGame = () => {
-    openWindow("game"); // Assurez-vous que 'game' est géré dans votre reducer pour `windowType`
+    openWindow("game");
   };
 
   // Effets pour gérer la persistance de sessionStorage

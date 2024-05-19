@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 /**
  * Progressbar component that visually counts down from a specified duration and displays a filling bar.
- * 
+ *
  * Props:
  *  - durationInSeconds: The starting number of seconds for the countdown.
  */
@@ -13,7 +13,7 @@ export default function Progressbar({ durationInSeconds }) {
   // Effect handles the countdown logic and updates the filled percentage
   useEffect(() => {
     const interval = setInterval(() => {
-      setCount(prevCount => prevCount - 1);
+      setCount((prevCount) => prevCount - 1);
     }, 1000);
 
     if (count === 0) {

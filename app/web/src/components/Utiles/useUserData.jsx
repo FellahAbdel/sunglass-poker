@@ -27,8 +27,6 @@ export const useUserData = () => {
   }, [windowType, user?._id, fetchStats]);
 
   useEffect(() => {
-    console.log("Current user data:", user);
-
     const loadUserStats = async () => {
       if (windowType === "stats" && user?._id) {
         try {

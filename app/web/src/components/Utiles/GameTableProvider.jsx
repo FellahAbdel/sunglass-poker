@@ -13,7 +13,6 @@ import {
   SET_WAITING_MESSAGE_VISIBLE,
   SET_FOCUS,
 } from "../../store/reducers/GameTableReducer.js";
-// import game from "../../../../server/controller/game.js";
 
 // Créer un contexte pour la table de jeu
 const GameTableContext = createContext();
@@ -56,7 +55,13 @@ export const GameTableProvider = ({ children }) => {
   }, [gameInfo?.game?.state]);
 
   useEffect(() => {
-    if (gameInfo && gameInfo.game && gameInfo.game.focus != null && gameInfo.game.players && gameInfo.game.players.length > gameInfo.game.focus) {
+    if (
+      gameInfo &&
+      gameInfo.game &&
+      gameInfo.game.focus != null &&
+      gameInfo.game.players &&
+      gameInfo.game.players.length > gameInfo.game.focus
+    ) {
       const focusPlayer = gameInfo.game.players[gameInfo.game.focus];
       if (focusPlayer) {
         const focusPlayerId = focusPlayer.playerId;
@@ -75,7 +80,6 @@ export const GameTableProvider = ({ children }) => {
       const currentPlayer = gameInfo.game.players.find(
         (player) => player.playerId === userId
       );
-      console.log("j'actualise depuis:", gameInfo);
       if (currentPlayer) {
         setPlayerMoney(currentPlayer.playerMoney);
         setPlayerHandName(currentPlayer.playerHandName);
@@ -84,11 +88,6 @@ export const GameTableProvider = ({ children }) => {
             .currentBetTurn
         );
         setIsSpectator(currentPlayer.isSpectator);
-        console.log("setIsSpectator currentPlayer", currentPlayer);
-        console.log(
-          "setIsSpectator currentPlayer.isSpectator",
-          currentPlayer.isSpectator
-        );
 
         // Mettre à jour les cartes du joueur
         if (currentPlayer.playerCards) {
@@ -105,8 +104,9 @@ export const GameTableProvider = ({ children }) => {
         }
 
         //Mettre a jour le bonus du joueur
-        setPlayerBonus(gameInfo.game.players.find((p) => p.playerId===userId).playerBonus);
-
+        setPlayerBonus(
+          gameInfo.game.players.find((p) => p.playerId === userId).playerBonus
+        );
       } else {
         setIsSpectator(true);
       }
@@ -128,16 +128,9 @@ export const GameTableProvider = ({ children }) => {
         setGameState(gameInfo.game.state);
       }
 
-      if(gameInfo?.game?.serverName){
+      if (gameInfo?.game?.serverName) {
         setServerName(gameInfo.game.serverName);
       }
-
-    //   if (gameInfo.game?.players?.playerHandName !== "") {
-    //     setPlayerHandName(
-    //       gameInfo.game.players.find((p) => p.playerId === userId)
-    //         .playerHandName
-    //     );
-    //   }
     }
   }, [gameInfo, userId]);
 
@@ -155,7 +148,7 @@ export const GameTableProvider = ({ children }) => {
         gameState,
         isSpectator,
         serverName,
-        playerHandName
+        playerHandName,
       }}
     >
       {children}
