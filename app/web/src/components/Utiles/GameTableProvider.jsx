@@ -38,6 +38,8 @@ export const GameTableProvider = ({ children }) => {
   const [isSpectator, setIsSpectator] = useState(false);
   const [playerHandName, setPlayerHandName] = useState("");
   const [serverName, setServerName] = useState("");
+  const [numberOfPlayers, setNumberOfPlayers] = useState(0);
+
 
   useEffect(() => {
     const isMaster =
@@ -131,6 +133,7 @@ export const GameTableProvider = ({ children }) => {
       if (gameInfo?.game?.serverName) {
         setServerName(gameInfo.game.serverName);
       }
+      setNumberOfPlayers(gameInfo.game.players.length);
     }
   }, [gameInfo, userId]);
 
@@ -149,6 +152,7 @@ export const GameTableProvider = ({ children }) => {
         isSpectator,
         serverName,
         playerHandName,
+        numberOfPlayers,
       }}
     >
       {children}

@@ -17,7 +17,8 @@ const DynamicBar = () => {
   const { userId } = useAuth();
   const { openWindow, windowType, isGameTableVisible, isWindowOpen } =
     useWindowContext();
-  const { isMaster, showWaitingMessage, isSpectator } = useGameTable();
+  const { isMaster, showWaitingMessage, isSpectator, numberOfPlayers } =
+    useGameTable();
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
   const { serverName } = useGameTable();
@@ -101,8 +102,12 @@ const DynamicBar = () => {
               ? getTranslatedWord("game.notEnoughSC")
               : getTranslatedWord("table.waiting")}{" "}
             !
+            {numberOfPlayers<2 && isMaster
+              ? getTranslatedWord("game.notEnoughPlayer")
+              : getTranslatedWord("table.waiting")}{" "}
+            !
           </div>
-          {!notEnoughSC && (
+          {!notEnoughSC && numberOfPlayers<2 (
             <>
               {isMaster ? (
                 <Button
