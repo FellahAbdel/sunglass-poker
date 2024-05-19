@@ -11,7 +11,8 @@
     "login": "Log in",
     "signin": "Sign Up",
     "ranking": "Ranking",
-    "home": "Home"
+    "home": "Home",
+    "info":"About Us"
   },
   "connection": {
     "login": "Log in",

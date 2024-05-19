@@ -218,6 +218,7 @@ const Navbar = () => {
             iconSrc="static/media/assets/images/icons/white/settings.png"
           />
 
+
           {isLogged && !isGameTableVisible && (
             <Button
               label={getTranslatedWord("shop.shop")}
@@ -232,7 +233,12 @@ const Navbar = () => {
             styleClass={`${isLogged ? "btn-tutorial-V2 " : "btn-tutorial-V2 "}`}
             iconSrc="static/media/assets/images/icons/white/tutorial.png"
           />
-
+          <Button
+            label={getTranslatedWord("navbar.info")}
+            onClick={() => null}
+            styleClass={`btn-settings-V2`}
+            iconSrc="static/media/assets/images/icons/white/info.png"
+          />
           {isLogged && (
             <Button
               label={label}
