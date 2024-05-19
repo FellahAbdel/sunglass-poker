@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./navbarV2.css";
 import Button from "../button/Button.tsx";
-import TextInputComponent from "../textInput/TextInput.jsx";
 import { useTranslation } from "../Utiles/Translations";
 import { useAuth } from "../Utiles/AuthProvider";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
@@ -101,18 +100,6 @@ const Navbar = () => {
     e.stopPropagation();
   };
   const { getTranslatedWord } = useTranslation();
-
-  const [isChatOpen, setisChatOpen] = useState(false);
-
-  const handleChatOpen = () => {
-    setisChatOpen(true);
-  };
-
-  const handleChatClose = () => {
-    setisChatOpen(false);
-  };
-
-  const handleNull = () => {};
 
   // Defines label based on the window type
   let label;

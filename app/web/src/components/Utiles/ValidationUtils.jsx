@@ -2,10 +2,23 @@
 
 // Validation pseudo
 export const validateUsername = (username) => {
-  // Vérifiez si le pseudo a au moins 3 caractères
+  if (username.length < 3) {
+    return {
+      isValid: false,
+      errorMessage: "error.badUsername",
+    };
+  }
+
+  if (username.length > 20) {
+    return {
+      isValid: false,
+      errorMessage: "error.usernameTooLong",
+    };
+  }
+
   return {
-    isValid: username.length >= 3,
-    errorMessage: "error.badUsername",
+    isValid: true,
+    errorMessage: "",
   };
 };
 
