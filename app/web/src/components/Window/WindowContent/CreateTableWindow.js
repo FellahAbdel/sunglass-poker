@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./createTableWindow.css";
-import Button from "../../button/Button.tsx"; // Assurez-vous que le chemin est correct
+import Button from "../../button/Button.tsx";
 import TextInputComponent from "../../textInput/TextInput";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 import { useAuth } from "../../Utiles/AuthProvider";
@@ -20,27 +20,23 @@ import { useTranslation } from "../../Utiles/Translations.jsx";
 const CreateGameWindow = () => {
   const { openWindow, showGameTable, closeWindow, setWindowType } =
     useWindowContext();
-  const { createGameRoom, user } = useAuth();
+  const { createGameRoom } = useAuth();
   const { getTranslatedWord } = useTranslation();
 
   const dispatch = useDispatch();
   const gameCreated = useSelector((state) => state.game.gameCreated);
 
-  // Define your function to display the game room
-  const displayGameRoom = () => {
-    // Your logic to display the game room goes here
-    console.log("Game room displayed!");
+  const displayGameRoom = useCallback(() => {
     showGameTable();
     closeWindow();
     setWindowType("");
-  };
+  }, [showGameTable, closeWindow, setWindowType]);
 
   useEffect(() => {
     if (gameCreated) {
       displayGameRoom();
-      console.log("gameCreated (useEffect)", gameCreated);
     }
-  }, [gameCreated]);
+  }, [gameCreated, displayGameRoom]);
 
   const [formData, setFormData] = useState({
     serverName: "",
@@ -88,9 +84,8 @@ const CreateGameWindow = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Create an object with only the _id and pseudo fields from the user
-    const masterInfo = 0; // master
+    const masterInfo = 0;
 
-    console.log("user", user);
     if (validateForm()) {
       try {
         const result = await createGameRoom(
@@ -111,17 +106,10 @@ const CreateGameWindow = () => {
             // Autres erreurs
             console.error("Failed to create game:", result.error);
           }
-        }
-        else if (result) {
+        } else if (result) {
           // We dispatch the action to start the game
           const gameRoomId = result;
-          console.log("Game created with ID:", gameRoomId);
           dispatch(createGameV2(gameRoomId));
-          // We have to wait for the game to be created before closing the window
-          // And then we sent the user to the game room
-          //   showGameTable();
-          //   closeWindow();
-          //   setWindowType("");
         }
       } catch (error) {
         console.error("Error creating game:", error);
@@ -153,10 +141,11 @@ const CreateGameWindow = () => {
           errorMessage={validationErrors.password}
           styleClass="input-connectionDefault"
           iconSrc="static/media/assets/images/icons/black/password.png"
-
         />
         <div className="container-select-rank">
-          <label htmlFor="rank-select">{getTranslatedWord("serverPanel.selectRank")}</label>
+          <label htmlFor="rank-select">
+            {getTranslatedWord("serverPanel.selectRank")}
+          </label>
           <select
             name="rank"
             id="rank-select"
@@ -164,10 +153,18 @@ const CreateGameWindow = () => {
             value={formData.rank}
             onChange={handleChange}
           >
-            <option value="friendly">{getTranslatedWord("serverPanel.friendly")}</option>
-            <option value="intermediate">{getTranslatedWord("serverPanel.intermediate")}</option>
-            <option value="advanced">{getTranslatedWord("serverPanel.advanced")}</option>
-            <option value="elite">{getTranslatedWord("serverPanel.elite")}</option>
+            <option value="friendly">
+              {getTranslatedWord("serverPanel.friendly")}
+            </option>
+            <option value="intermediate">
+              {getTranslatedWord("serverPanel.intermediate")}
+            </option>
+            <option value="advanced">
+              {getTranslatedWord("serverPanel.advanced")}
+            </option>
+            <option value="elite">
+              {getTranslatedWord("serverPanel.elite")}
+            </option>
           </select>
         </div>
         <Button

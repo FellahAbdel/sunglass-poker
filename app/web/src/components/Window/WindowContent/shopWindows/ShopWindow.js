@@ -13,11 +13,11 @@ import { useUserData } from "../../../Utiles/useUserData";
  * ShopWindow component provides a user interface for browsing and activating various avatars and accessories.
  */
 const ShopWindow = () => {
-  const { user } = useUserData(); // Retrieves user data including owned items.
-  const { getTranslatedWord } = useTranslation(); // Provides translation based on current language.
-  const { openValidationWindow} = useWindowContext(); // Used to open modal windows for confirmations.
+  const { user } = useUserData();
+  const { getTranslatedWord } = useTranslation();
+  const { openValidationWindow } = useWindowContext();
   const [activeTab, setActiveTab] = useState(
-    sessionStorage.getItem("activeTab") || "baseAvatar"  // Maintains state of the currently active tab in the shop.
+    sessionStorage.getItem("activeTab") || "baseAvatar" // Maintains state of the currently active tab in the shop.
   );
   const items = useItems(); // Custom hook to fetch and organize shop items by categories.
   const { activateAvatar } = useAuth(); // Auth service method to activate a selected avatar.
@@ -45,11 +45,11 @@ const ShopWindow = () => {
    */
   const isActive = (item) => {
     if (item.category === "colorAvatar") {
-      return user.colorAvatar.imgSrc === item.imgSrc;
+      return user?.colorAvatar?.imgSrc === item.imgSrc;
     } else if (item.category === "sunglasses") {
-      return user.sunglasses?._id === item._id;
+      return user?.sunglasses?._id === item._id;
     } else if (item.category === "baseAvatar") {
-      return user.baseAvatar?._id === item._id;
+      return user?.baseAvatar?._id === item._id;
     }
     return false;
   };
@@ -57,7 +57,6 @@ const ShopWindow = () => {
   return (
     <div className="shop-window">
       <div className="shop-tabs">
-        {/* Render tab buttons for different item categories */}
         {Object.keys(items).map((tab) => (
           <Button
             key={tab}
@@ -73,21 +72,25 @@ const ShopWindow = () => {
         </div>
       </div>
       <div className="items-display">
-        {/* Map through items in the active tab and render each as ShopItem */}
-        {items[activeTab].owned.concat(items[activeTab].unowned).map((item) => (
-          <ShopItem
-            key={item._id}
-            item={item}
-            isOwned={item.owned}
-            isActive={isActive(item)}
-            onClickItem={() =>
-              item.owned
-                ? handleActivateAvatar(item._id)
-                : openValidationWindow(item)
-            }
-            styleClass={item.owned ? "owned-item back-color1" : "back-color3"}
-          />
-        ))}
+        {items[activeTab] &&
+          items[activeTab]?.owned
+            ?.concat(items[activeTab].unowned)
+            .map((item) => (
+              <ShopItem
+                key={item._id}
+                item={item}
+                isOwned={item.owned}
+                isActive={isActive(item)}
+                onClickItem={() =>
+                  item.owned
+                    ? handleActivateAvatar(item._id)
+                    : openValidationWindow(item)
+                }
+                styleClass={
+                  item.owned ? "owned-item back-color1" : "back-color3"
+                }
+              />
+            ))}
       </div>
     </div>
   );

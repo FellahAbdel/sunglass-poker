@@ -49,7 +49,6 @@ const LoginWindow = () => {
       if (loginResult === true) {
         openSuccessWindow("connection.loginSuccess");
         dispatch(loggedIn());
-        console.log("dipatch loggedIn()");
       } else if (loginResult || loginResult.error === "invalid_credentials") {
         // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
         setValidationErrors({
@@ -90,7 +89,6 @@ const LoginWindow = () => {
           errorMessage={validationErrors.password}
           styleClass={"input-connectionDefault"}
           iconSrc="static/media/assets/images/icons/black/password.png"
-
         />
         <Button
           styleClass="btn-connectionDefault login-button back-color1"

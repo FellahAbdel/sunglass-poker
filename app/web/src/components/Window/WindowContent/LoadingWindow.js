@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useWindowContext } from "../../Utiles/WindowContext.jsx";
 
@@ -7,24 +7,25 @@ import { useWindowContext } from "../../Utiles/WindowContext.jsx";
  * It listens for changes in the `playerSited` state from the Redux store to transition the UI.
  */
 const LoadingWindow = () => {
-    const { closeWindow, showGameTable, setWindowType } = useWindowContext();
-    const isPlayerSited = useSelector((state) => state.game.playerSited);
+  const { closeWindow, showGameTable, setWindowType } = useWindowContext();
+  const isPlayerSited = useSelector((state) => state.game.playerSited);
 
-    //for server joining from ServerPanel
-    useEffect(() => {
-        if (isPlayerSited) {
-            console.log("Game room displayed!");
-            showGameTable();
-            closeWindow();
-            setWindowType("");
-            console.log("playerSited", isPlayerSited);
-        }
-    }, [isPlayerSited]);
+  //for server joining from ServerPanel
+  const handlePlayerSited = useCallback(() => {
+    if (isPlayerSited) {
+      console.log("Game room displayed!");
+      showGameTable();
+      closeWindow();
+      setWindowType("");
+      console.log("playerSited", isPlayerSited);
+    }
+  }, [isPlayerSited, showGameTable, closeWindow, setWindowType]);
 
-  return (
-    <div className="main-loadingWindow">
-    </div>
-  );
+  useEffect(() => {
+    handlePlayerSited();
+  }, [isPlayerSited, handlePlayerSited]);
+
+  return <div className="main-loadingWindow"></div>;
 };
 
 export default LoadingWindow;

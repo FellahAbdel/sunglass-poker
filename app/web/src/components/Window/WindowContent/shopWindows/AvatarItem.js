@@ -5,7 +5,7 @@ import { useUserData } from "../../../Utiles/useUserData";
 /**
  * useItems is a custom hook that fetches and organizes items into categories based on ownership.
  * It structures items into 'owned' and 'unowned' for different item categories.
- * 
+ *
  * @returns {Object} items - Contains structured data for base avatars, sunglasses, and color avatars.
  */
 export const useItems = () => {

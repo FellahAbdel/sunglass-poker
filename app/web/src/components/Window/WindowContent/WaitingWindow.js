@@ -1,5 +1,5 @@
 // TutorialWindow.jsx
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth } from "./../../Utiles/AuthProvider.jsx";
 import { useDispatch } from "react-redux";
 import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
@@ -19,14 +19,8 @@ const WaitingWindow = () => {
 
   // Function to start the game.
   const startGame = () => {
-    // Logique pour commencer la partie
-    console.log("Starting game with roomId:");
     dispatch(actions.startGame(userId));
   };
-
-  useEffect(() => {
-    console.log("isFocus TABLE:", isFocus);
-  }, [isFocus]);
 
   return (
     <div className={`container-waitingRoom`}>

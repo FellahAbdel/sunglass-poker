@@ -14,7 +14,7 @@ import { useTranslation } from "../../../Utiles/Translations.jsx";
  * ResetPasswordWindow provides a form for users to reset their password.
  * It includes validation for email, new password, and password confirmation.
  */
-const ResetPasswordWindow = ({}) => {
+const ResetPasswordWindow = () => {
   const { getTranslatedWord } = useTranslation();
   const { openWindow, openSuccessWindow } = useWindowContext();
   const { changePassword } = useAuth();
@@ -79,7 +79,7 @@ const ResetPasswordWindow = ({}) => {
     setValidationErrors(errors);
     return Object.values(errors).every((error) => error === "");
   };
-  
+
   /**
    * Handles the form submission, performing the password change operation.
    * @param {Object} e - Event object to prevent default form submission.
@@ -125,7 +125,6 @@ const ResetPasswordWindow = ({}) => {
           errorMessage={validationErrors.email}
           styleClass={"input-connectionDefault"}
           iconSrc="static/media/assets/images/icons/black/email.png"
-
         />
         <TextInputComponent
           name="password"

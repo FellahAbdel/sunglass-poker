@@ -403,7 +403,7 @@ module.exports = function (app, bdd) {
         const users = await UserModel.aggregate([
           {
             $lookup: {
-              from: "Stat", // Assurez-vous que le nom de la collection est correct
+              from: "Stat",
               pipeline: [{ $project: { maxGain: 1 } }],
               as: "gain",
             },

@@ -9,7 +9,7 @@ import { useTranslation } from "../../../Utiles/Translations.jsx";
  * ForgotPassword provides a form for users to request a password reset link via email.
  * It validates user input and displays appropriate feedback messages.
  */
-const ForgotPassword = ({}) => {
+const ForgotPassword = () => {
   const { openWindow, openSuccessWindow } = useWindowContext();
   const { checkEmail } = useAuth();
   const [formData, setFormData] = useState({
@@ -39,9 +39,6 @@ const ForgotPassword = ({}) => {
     e.preventDefault();
     try {
       const result = await checkEmail(formData.email);
-
-      console.log("Resultats :", result);
-
       if (result === true) {
         openSuccessWindow(getTranslatedWord("connection.successMail"));
       } else if (result === "not-found") {
@@ -75,7 +72,6 @@ const ForgotPassword = ({}) => {
           errorMessage={validationError}
           styleClass={"input-connectionDefault"}
           iconSrc="static/media/assets/images/icons/black/email.png"
-
         />
         <Button
           styleClass="btn-connectionDefault button login-button back-color1"

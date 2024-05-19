@@ -23,20 +23,19 @@
   padding: 10px;
   border-left: 5px solid var(--color2-light);
 }
-.text-tutorial h1{
+.text-tutorial h1 {
   text-align: center;
   font-size: 2vw;
 }
-.text-tutorial h2{
+.text-tutorial h2 {
   font-size: 1.5vw;
 }
-.text-tutorial h3{
+.text-tutorial h3 {
   font-size: 1.5vw;
 }
-.text-tutorial li{
+.text-tutorial li {
   font-size: 1.1vw;
-
 }
-.text-tutorial p{
+.text-tutorial p {
   font-size: 1.1vw;
 }
