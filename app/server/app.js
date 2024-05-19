@@ -19,6 +19,7 @@ const logsocket = "socket.io.js";
 const loggameController = "gameController";
 const loggameReducer = "gameReducer";
 csl.silenced(logsocket);
+csl.silenced("socketio");
 csl.silenced("Session");
 csl.silenced("bdd");
 csl.silenced("broadcastStatus");
