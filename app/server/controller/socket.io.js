@@ -512,10 +512,11 @@ module.exports = function (
         session_timer.refresh();
         if (socket.alreadyCalled[kindOfTimer] === undefined || (Date.now() - socket.alreadyCalled[kindOfTimer] > 1000)){
           csl.log('sendSuccess', "Auth correct");
-          socket.emit('identifySuccessfull');
-          socket.alreadyCalled[kindOfTimer] = Date.now();
-          if(kindOfTimer === 1)
+          if(kindOfTimer === 1){
+            socket.emit('identifySuccessfull');
+            socket.alreadyCalled[kindOfTimer] = Date.now();
             socket.emit('askedForGame');
+          }
         }
       }
     });
