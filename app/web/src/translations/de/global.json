@@ -44,8 +44,8 @@
     "ok": "Ok"
   },
   "game": {
-    "loginPlay": "Melde dich an, um zu spielen",
-    "signupPlay": "Registriere dich, um zu spielen",
+    "loginPlay": "Melde dich an",
+    "signupPlay": "Registriere dich",
     "startGame": "Ein Spiel starten",
     "joinGame": "Einem Spiel beitreten",
     "createAgame": "Ein neues Spiel erstellen",
