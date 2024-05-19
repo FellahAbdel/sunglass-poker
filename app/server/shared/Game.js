@@ -38,7 +38,6 @@ class Game {
       allow_start: true,
       serverName: "",
       firstRoundForRoom: true,
-      firstToTalk:0,
     };
     Object.assign(this, basedValue, ...args);
     // this.activePlayers = null;
@@ -370,20 +369,6 @@ class Game {
         p.currentBetTurn = 0;
       });
       this.gameCurrentBet = 0;
-      this.focus = this.firstToTalk;
-      while (
-        !this.players[this.focus].isActive ||
-        this.players[this.focus].getStatus() === "tapis"
-      ) {
-        this.focus = (this.focus + 1) % this.players.length;
-        if (this.focus === originalFocus) {
-          clearTimeout(this.focusTurnCall);
-          while (this.currentStage !== "showdown") {
-            this.advanceStage();
-          }
-          return;
-        }
-      }
       this.advanceStage();
       // return;
     }
@@ -852,9 +837,8 @@ class Game {
     this.currentStage = "preflop";
     this.state = "active";
     this.rotateStartingPlayer();
-    this.firstToTalk = this.firstToTalk % this.players.length;
-    this.focus = this.firstToTalk;
-    this.firstToTalk++;
+    this.focus = this.startingPlayerIndex;
+    this.playerBeforeNextTurn = this.startingPlayerIndex;
     this.total = 0;
     this.pokerTable.reset();
     this.deck = new Deck();
@@ -872,7 +856,7 @@ class Game {
     console.log("firstplayer: ", firstPlayer);
     firstPlayer.betinitial(this.gameCurrentBet / 2);
     this.total += this.gameCurrentBet / 2;
-    
+
     this.rotateFocus();
     const nextPlayer = this.players[this.focus];
     console.log("nextPlayer: ", nextPlayer);
@@ -880,7 +864,8 @@ class Game {
     this.total += this.gameCurrentBet;
 
     this.rotateFocus();
-    this.firstToTalk = this.focus;
+    this.playerBeforeNextTurn = this.focus;
+
     //OU ICI
 
     //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
