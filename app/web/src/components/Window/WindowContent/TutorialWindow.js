@@ -1,8 +1,10 @@
 // TutorialWindow.jsx
 import React from "react";
 import './tutorial.css'
+import { useTranslation } from "../../Utiles/Translations";
 
 const TutorialWindow = () => {
+  const { getTranslatedWord } = useTranslation();
   return (
     <div className={`container-text-tutorial`}>
       <div className='text-tutorial'>
