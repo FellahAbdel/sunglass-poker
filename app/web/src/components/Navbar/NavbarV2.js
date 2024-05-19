@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./navbarV2.css";
 import Button from "../button/Button.tsx";
 import { useTranslation } from "../Utiles/Translations";
@@ -15,10 +15,8 @@ import { useGameTable } from "../Utiles/GameTableProvider.jsx";
 const Navbar = () => {
   const { isLogged, logingOut } = useAuth();
   const { gameState } = useGameTable();
-
   const isPlayerLeft = useSelector((state) => state.game.playerLeft);
 
-  // Handles the logout and room leave logic with confirmation dialogs
   const {
     isGameTableVisible,
     closeWindow,
@@ -28,6 +26,8 @@ const Navbar = () => {
     isWindowOpen,
   } = useWindowContext();
 
+  const dispatch = useDispatch();
+
   // useEffect to show the home page when the player leaves the table successfully
   useEffect(() => {
     if (isPlayerLeft) {
@@ -35,27 +35,20 @@ const Navbar = () => {
     }
   }, [isPlayerLeft, showHome]);
 
-  const dispatch = useDispatch();
-
-  const handleleaveRoom = () => {
+  const handleleaveRoom = useCallback(() => {
     // si le jeu est en cours
     if (gameState === "active") {
       // On le force à fold.
       dispatch(actions.fold());
     }
     dispatch(actions.leaveRoom());
-    if (isPlayerLeft) {
-      showHome();
-    } else {
-    }
-  };
+  }, [gameState, dispatch]);
 
-  const handleLogOutButton = () => {
+  const handleLogOutButton = useCallback(() => {
     if (windowType === "accueil") {
       openWindow("alert", {
         message: "alert.logout",
         onConfirm: () => {
-
           logingOut();
           showHome();
         },
@@ -65,7 +58,6 @@ const Navbar = () => {
       });
     } else if (windowType === "loading") {
       closeWindow();
-      return;
     } else if (windowType !== "") {
       closeWindow();
     } else if (isGameTableVisible) {
@@ -73,10 +65,6 @@ const Navbar = () => {
         message: "alert.confirmExitMessage",
         onConfirm: () => {
           handleleaveRoom();
-
-          // Before showing the home page, we need to to be sure
-          // that the server has processed the leaveRoom request
-          // We use the isPlayerLeft state to show the home page above.
         },
         onCancel: () => {
           closeWindow();
@@ -94,11 +82,20 @@ const Navbar = () => {
         },
       });
     }
-  };
+  }, [
+    windowType,
+    isGameTableVisible,
+    openWindow,
+    closeWindow,
+    logingOut,
+    showHome,
+    handleleaveRoom,
+  ]);
 
   const handleClick = (e) => {
     e.stopPropagation();
   };
+
   const { getTranslatedWord } = useTranslation();
 
   // Defines label based on the window type
@@ -112,9 +109,12 @@ const Navbar = () => {
   }
 
   const toAboutMe = () => {
-    window.open('https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrp9-1/sunglass-studio', '_blank', 'noopener,noreferrer');
-    }
-  
+    window.open(
+      "https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrp9-1/sunglass-studio",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
 
   return (
     <div className="container-nav-V2" onClick={handleClick}>
@@ -190,18 +190,16 @@ const Navbar = () => {
         </div>
       )}
       {windowType === "loading" && (
-        <>
-          <div className="container-navMain-V2">
-            {isLogged && (
-              <Button
-                label={label}
-                onClick={handleLogOutButton}
-                styleClass="btn-exit-V2"
-                iconSrc="static/media/assets/images/icons/white/exit.png"
-              />
-            )}
-          </div>
-        </>
+        <div className="container-navMain-V2">
+          {isLogged && (
+            <Button
+              label={label}
+              onClick={handleLogOutButton}
+              styleClass="btn-exit-V2"
+              iconSrc="static/media/assets/images/icons/white/exit.png"
+            />
+          )}
+        </div>
       )}
     </div>
   );

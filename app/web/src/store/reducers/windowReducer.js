@@ -1,3 +1,13 @@
+// Actions Types
+export const SET_SELECTED_ITEM = "SET_SELECTED_ITEM";
+export const SET_REDIRECT_AFTER_SUCCESS = "SET_REDIRECT_AFTER_SUCCESS";
+export const SET_ALERT_PARAMS = "SET_ALERT_PARAMS";
+export const TOGGLE_WINDOW_OPEN = "TOGGLE_WINDOW_OPEN";
+export const SET_WINDOW_TYPE = "SET_WINDOW_TYPE";
+export const TOGGLE_CONNECTION_WINDOW_OPEN = "TOGGLE_CONNECTION_WINDOW_OPEN";
+export const SET_SUCCESS_MESSAGE = "SET_SUCCESS_MESSAGE";
+export const TOGGLE_GAME_TABLE_VISIBLE = "TOGGLE_GAME_TABLE_VISIBLE";
+
 // Définition de l'état initial basé sur le code existant
 const functionMapper = {
   defaultConfirm: () => console.log("Confirmed"),
@@ -51,16 +61,6 @@ const loadInitialState = () => {
 };
 
 export const initialState = loadInitialState();
-
-// Actions Types
-const SET_SELECTED_ITEM = "SET_SELECTED_ITEM";
-const SET_REDIRECT_AFTER_SUCCESS = "SET_REDIRECT_AFTER_SUCCESS";
-const SET_ALERT_PARAMS = "SET_ALERT_PARAMS";
-const TOGGLE_WINDOW_OPEN = "TOGGLE_WINDOW_OPEN";
-const SET_WINDOW_TYPE = "SET_WINDOW_TYPE";
-const TOGGLE_CONNECTION_WINDOW_OPEN = "TOGGLE_CONNECTION_WINDOW_OPEN";
-const SET_SUCCESS_MESSAGE = "SET_SUCCESS_MESSAGE";
-const TOGGLE_GAME_TABLE_VISIBLE = "TOGGLE_GAME_TABLE_VISIBLE";
 
 // Reducer
 export function windowReducer(state = initialState, action) {
