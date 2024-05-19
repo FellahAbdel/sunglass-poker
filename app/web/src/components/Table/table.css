@@ -145,10 +145,19 @@
   background-repeat: no-repeat;
 }
 .table-carpet{
+  position: absolute;
+  border-radius: 0;
+  width: 0;
+  height: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 2s ease , height 0.7s ease , width 0.7s ease , border-radius 1s ease;
+}
+.table-carpet.appear{
+  opacity: 1;
   width: 65vw;
   height: 45vh;
   border-radius: 30vw 30vw 20vw 20vw;
-  z-index: -1;
 }
 
 /*Windows size change*/

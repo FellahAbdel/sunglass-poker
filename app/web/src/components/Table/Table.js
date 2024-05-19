@@ -64,13 +64,12 @@ const Table = ({}) => {
     // Table that becomes a container for the menus when they are activated
     <div className={classes.containerTable}>
       {/* table carpet in game */}
-      {isGameTableVisible && !isWindowOpen &&
-        (theme === "dark" ? 
-          <img className="table-carpet" src="static/media/assets/images/texture/carpetlow-bnw.jpg" alt="table carpet"/>
-        :
-          <img className="table-carpet" src="static/media/assets/images/texture/carpetlow.jpg" alt="table carpet"/>
-        )
-      }
+      <img 
+        className={`table-carpet 
+                    ${isGameTableVisible && !isWindowOpen && "appear"}`} 
+        src={`${theme === "dark" ? "static/media/assets/images/texture/carpetlow-bnw.jpg" : "static/media/assets/images/texture/carpetlow.jpg"}`} 
+        alt="table carpet"/>
+
       {/* the white border line around the table in the middle */}
       <div
         className={`${!isWindowOpen ? "table-lineAround" : ""} 
