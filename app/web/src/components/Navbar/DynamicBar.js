@@ -22,7 +22,7 @@ const DynamicBar = () => {
   const { getTranslatedWord } = useTranslation();
   const { serverName } = useGameTable();
   const dispatch = useDispatch();
-  const [notEnoughSC, setNotEnoughSC] = useState(user?.coins < 20);
+  const [notEnoughSC, setNotEnoughSC] = useState(user?.coins < 40);
 
   /**
    * Starts the game by dispatching the startGame action with the user's ID.
@@ -38,7 +38,7 @@ const DynamicBar = () => {
   }, [showWaitingMessage]);
 
   useEffect(() => {
-    setNotEnoughSC(user?.coins < 20);
+    setNotEnoughSC(user?.coins < 40);
   }, [user?.coins]);
 
   return (
