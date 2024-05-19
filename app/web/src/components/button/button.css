@@ -223,7 +223,8 @@ Button:hover {
 }
 
 .btn-gameStart {
-  width: 15vw;
+  min-width: 15vw;
+  width: fit-content;
   height: 4vh;
   margin-top: 10px;
   position: absolute;
