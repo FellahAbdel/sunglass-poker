@@ -124,7 +124,7 @@ class Player {
   }
 
   canJoinTable() {
-    return this.getPlayerMoney() > 0;
+    return this.getPlayerMoney() > 40;
   }
 
   toggleSpectator() {

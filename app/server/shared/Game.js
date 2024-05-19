@@ -141,10 +141,6 @@ class Game {
     }
   }
 
-  changeMaster() {
-    this.master = this.players[0].playerId;
-  }
-
   //si le nombre de joueur change en cours de parti ça risque de faire des saut chelou
   //faudrait faire un truc genre Modulo 10 joeurs en mode ça tourne autour de la table
   //et si la place est vide on va au prochain
@@ -180,7 +176,7 @@ class Game {
     player.setAfk();
     if (player.playerId === this.master) {
       console.log("Le master est AFK");
-      this.changeMaster();
+      this.checkForNewMaster();
     }
   }
 
@@ -671,7 +667,7 @@ class Game {
 
   movePlayersWithZeroCoinsToSpectators() {
     this.players.forEach((player) => {
-      if (player.getPlayerMoney() <= 0) {
+      if (player.getPlayerMoney() <= this.blind) {
         player.movePlayerToSpectator();
         if (this.master === player.getPlayerId()) {
           this.checkForNewMaster();
