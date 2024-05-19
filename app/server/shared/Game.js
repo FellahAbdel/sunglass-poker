@@ -566,8 +566,8 @@ class Game {
       //   --- TAPIS  ---
       else if(amount >= player.localMoney){
         this.total+=player.localMoney;
-        if(player.localMoney >= this.gameCurrentBet)
-          this.gameCurrentBet = player.localMoney+player.currentBetTurn;
+        if(this.gameCurrentBet < player.localMoney+player.currentBet)
+          this.gameCurrentBet = player.localMoney+player.currentBet;
         player.tapis(player.localMoney);
         player.setTapis();
       }
