@@ -143,7 +143,9 @@ const SignUpWindow = () => {
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.username")}
           errorMessage={validationErrors.pseudo}
-          styleClass={"input-connectionDefault input-icon-profile"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/profile.png"
+
         />
         <TextInputComponent
           name="email"
@@ -151,7 +153,8 @@ const SignUpWindow = () => {
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationErrors.email}
-          styleClass={"input-connectionDefault input-icon-email"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/email.png"
         />
         <TextInputComponent
           name="password"
@@ -160,7 +163,8 @@ const SignUpWindow = () => {
           placeholder={getTranslatedWord("connection.password")}
           type={"password"}
           errorMessage={validationErrors.password}
-          styleClass={"input-connectionDefault input-icon-password"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password.png"
         />
         <TextInputComponent
           name="repeatPassword"
@@ -169,7 +173,9 @@ const SignUpWindow = () => {
           placeholder={getTranslatedWord("connection.repeatPass")}
           type={"password"}
           errorMessage={validationErrors.repeatPassword}
-          styleClass={"input-connectionDefault input-icon-passwordRepeat"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password-repeat.png"
+
         />
         <Button
           styleClass="btn-connectionDefault login-button back-color1"

@@ -73,7 +73,9 @@ const ForgotPassword = ({}) => {
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationError}
-          styleClass={"input-connectionDefault input-icon-email"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/email.png"
+
         />
         <Button
           styleClass="btn-connectionDefault button login-button back-color1"

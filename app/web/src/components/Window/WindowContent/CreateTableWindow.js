@@ -141,7 +141,8 @@ const CreateGameWindow = () => {
           onChange={handleChange}
           placeholder="game.gameName"
           errorMessage={validationErrors.serverName}
-          styleClass="input-connectionDefault input-icon-GameName"
+          styleClass="input-connectionDefault"
+          iconSrc="static/media/assets/images/icons/black/name.png"
         />
         <TextInputComponent
           name="password"
@@ -150,7 +151,9 @@ const CreateGameWindow = () => {
           type="password"
           placeholder="game.PasswordOptionnal"
           errorMessage={validationErrors.password}
-          styleClass="input-connectionDefault input-icon-password"
+          styleClass="input-connectionDefault"
+          iconSrc="static/media/assets/images/icons/black/password.png"
+
         />
         <div className="container-select-rank">
           <label htmlFor="rank-select">{getTranslatedWord("serverPanel.selectRank")}</label>

@@ -78,7 +78,8 @@ const LoginWindow = () => {
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.username")}
           errorMessage={validationErrors.username}
-          styleClass={"input-connectionDefault input-icon-profile"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/profile.png"
         />
         <TextInputComponent
           name="password"
@@ -87,7 +88,9 @@ const LoginWindow = () => {
           type="password"
           placeholder={getTranslatedWord("connection.password")}
           errorMessage={validationErrors.password}
-          styleClass={"input-connectionDefault input-icon-password"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password.png"
+
         />
         <Button
           styleClass="btn-connectionDefault login-button back-color1"

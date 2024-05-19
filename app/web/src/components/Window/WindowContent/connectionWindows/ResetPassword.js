@@ -123,7 +123,9 @@ const ResetPasswordWindow = ({}) => {
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationErrors.email}
-          styleClass={"input-connectionDefault input-icon-email"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/email.png"
+
         />
         <TextInputComponent
           name="password"
@@ -132,7 +134,8 @@ const ResetPasswordWindow = ({}) => {
           type="password"
           placeholder={getTranslatedWord("connection.password")}
           errorMessage={validationErrors.password}
-          styleClass={"input-connectionDefault input-icon-password"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password.png"
         />
         <TextInputComponent
           name="repeatPassword"
@@ -141,7 +144,8 @@ const ResetPasswordWindow = ({}) => {
           type="password"
           placeholder={getTranslatedWord("connection.repeatPass")}
           errorMessage={validationErrors.repeatPassword}
-          styleClass={"input-connectionDefault input-icon-passwordRepeat"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password-repeat.png"
         />
         <Button
           styleClass="btn-connectionDefault back-color1"

@@ -25,6 +25,7 @@ const TextInputComponent = ({
   errorMessage,
   styleClass,
   styleClass2,
+  iconSrc,
   onKeyDown,
 }) => {
   // Check if an error message exists to conditionally style the input
@@ -40,7 +41,8 @@ const TextInputComponent = ({
         value={value}
         onChange={(e) => onChange(e)}
         onKeyDown={onKeyDown}
-      />
+      ></input>
+      <img className="texxtInput-icon" src={iconSrc}/>
       {errorMessage && <p>{getTranslatedWord(errorMessage)}</p>}{" "}
     </div>
   );

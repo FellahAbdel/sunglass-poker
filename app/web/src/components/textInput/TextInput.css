@@ -1,19 +1,22 @@
 .container-textInputComponent {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
+  margin-bottom: 3vh;
 }
-
+.container-textInputComponent img {
+  position: absolute;
+  margin-left: 1.6vw;
+  width: calc(0.5vh + 1vw);
+}
 .input-connectionDefault {
   width: 19.5vw;
   height: 5vh;
-  font-size: 16px;
-  padding-left: 60px;
+  padding-left: 4vw;
   border-radius: 10px;
   border: 2px solid #ccc;
   background-color: rgba(237, 242, 247, 1);
-  margin-bottom: 1vh;
   transition: width 0.5s ease, height 0.5s ease;
 }
 #dark .input-connectionDefault{
@@ -24,14 +27,15 @@
 }
 .input-connectionDefault::placeholder {
   color: #999;
-  font-size: 2vh;
+  font-size: calc(0.8vh + 0.5vw);
 }
 .container-textInputComponent p {
+  position: absolute;
   color: #f63e3e;
-  font-size: 0.8vw;
+  font-size: calc(0.5vh + 0.4vw);
   padding: 0;
-  margin-top: -0.7vh;
-  margin-bottom: 2vh;
+  margin-top: 7.5vh;
+  margin-bottom: 0;
 }
 .input-serverRoomPassword {
   width: 90%;
@@ -53,24 +57,33 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin:0;
+  margin-bottom: 0.7vh;
+}
+.container-textInputComponent2 img{
+  margin-left: 1vw;
 }
 .container-textInputComponent2 p {
   margin: 0;
   font-size: 1vw;
 }
 .input-searchBar {
-  width: 20.5vw;
+  width: 20vw;
   height: 2vw;
   opacity: 0.5;
-  background-color: var(--color1-light);
   border: unset;
-  padding-left: 35px;
+  font-size: calc(0.7vh + 0.5vw);
+  padding-left: 4vw;
   border-radius: 10px 10px 0 0;
   transition: width 0.5s ease, height 0.5s ease, font-size 1s ease;
 }
-.input-searchBar::placeholder {
-  font-size: 1vw;
+.input-searchBar2{
   margin: 0;
+}
+.input-searchBar::placeholder {
+  margin-left: 10%;
+  color: #999;
+  font-size: calc(0.7vh + 0.5vw);
 }
 .input-searchBar::-webkit-input-placeholder {
   font-size: 1vw;

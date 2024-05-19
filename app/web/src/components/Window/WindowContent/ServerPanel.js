@@ -145,7 +145,8 @@ const ServerPanelWindow = () => {
     <div className="listTableWindowPanel">
       <TextInputComponent
         placeholder="serverPanel.search"
-        styleClass={"input-connectionDefault input-searchBar input-icon-search"}
+        styleClass={"input-connectionDefault input-searchBar"}
+        iconSrc="static/media/assets/images/icons/black/search.png"
         styleClass2={"container-textInputComponent2"}
         errorMessage={""}
         onChange={handleChange}
