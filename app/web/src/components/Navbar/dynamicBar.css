@@ -85,4 +85,5 @@
 .txt-waiting {
   font-size:1.5vw;
   color: white;
+  white-space:nowrap;
 }

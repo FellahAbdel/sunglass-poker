@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./dynamicBar.css";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext";
@@ -22,6 +22,7 @@ const DynamicBar = () => {
   const { getTranslatedWord } = useTranslation();
   const { serverName } = useGameTable();
   const dispatch = useDispatch();
+  const [notEnoughSC, setNotEnoughSC] = useState(user?.coins < 20);
 
   /**
    * Starts the game by dispatching the startGame action with the user's ID.
@@ -36,6 +37,10 @@ const DynamicBar = () => {
     console.log("showWaitingMessage:", showWaitingMessage);
   }, [showWaitingMessage]);
 
+  useEffect(() => {
+    setNotEnoughSC(user?.coins < 20);
+  }, [user?.coins]);
+
   return (
     <>
       {/* User coins */}
@@ -48,7 +53,7 @@ const DynamicBar = () => {
                             }
                             ${windowType === "coins" && "center"}`}
       >
-        <div className="userCoinsTop">{formatNumber(user.coins)} SC</div>
+        <div className="userCoinsTop">{(user.coins)} SC</div>
         {(windowType === "shop" || windowType === "coins") && (
           <Button
             label={
@@ -90,26 +95,34 @@ const DynamicBar = () => {
       {/* Waiting panel and start button */}
       {isGameTableVisible && 
         <div className={`container-waiting ${showWaitingMessage && isGameTableVisible && !isWindowOpen && "appear"}`}>
+
           <div className="txt-waiting">
-            {getTranslatedWord("table.waiting")}
+          {notEnoughSC ? 
+            getTranslatedWord("game.notEnoughSC")
+            :
+            getTranslatedWord("table.waiting")
+          }
+          {" "}!
           </div>
-          {isMaster ? (
-            <Button
-              styleClass="btn-gameStart2 back-color1"
-              label={getTranslatedWord("table.start")}
-              onClick={() => startGame()}
-            />
-          ) : (
-            <Button
-              styleClass="btn-gameStart2 back-color1"
-              label={
-                isSpectator
-                  ? getTranslatedWord("table.join")
-                  : getTranslatedWord("table.spectacle")
-              }
-              onClick={() => startGame()}
-            />
-          )}
+          {!notEnoughSC && (<>
+            {isMaster ? (
+              <Button
+                styleClass="btn-gameStart2 back-color1"
+                label={getTranslatedWord("table.start")}
+                onClick={() => startGame()}
+              />
+            ) : (
+              <Button
+                styleClass="btn-gameStart2 back-color1"
+                label={
+                  isSpectator
+                    ? getTranslatedWord("table.join")
+                    : getTranslatedWord("table.spectacle")
+                }
+                onClick={() => startGame()}
+              />
+            )}
+          </>)}
         </div>
       }
     </>
