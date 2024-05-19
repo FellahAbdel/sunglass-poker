@@ -83,6 +83,7 @@ const tableReducer = (state = initialState, action) => {
       return {
         ...initialState,
         playerLeft: true,
+        gameStarted: false,
       };
     case actions.EMPTY_PAYLOAD:
       console.log("EMPTY PAYLOAD");
