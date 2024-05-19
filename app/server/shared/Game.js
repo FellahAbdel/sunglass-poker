@@ -900,6 +900,7 @@ class Game {
     this.players.forEach((p) => {(p.decrementalTotal =(p.decrementalTotal === undefined)?p.betTotal:p.decrementalTotal);csl.log('Mise par joueur a gagné',`${p.name} : ${p.decrementalTotal}`)});
     if (nbwinner >= 2) {
       let totalWinnerBet  = 0;
+      const FULLTOTAL = this.total;
       winner.forEach(w => totalWinnerBet += this.getPlayerById(w.id).betTotal); 
       for (let i = 0; i < nbwinner; i++) {
         csl.log(
@@ -911,7 +912,7 @@ class Game {
         const winnerHandName = winner[i].type;
         const winPlayer = this.getPlayerById(winner[i].id);
         let coef = winPlayer.betTotal/totalWinnerBet;
-        let prend = Math.floor((coef) * this.total);
+        let prend = Math.floor((coef) * FULLTOTAL);
         csl.log("pritwinner",`il avait un coef de  ${coef} le droit à  par joueur et a prit ${prend}`)
         winPlayer.playerHandName = winnerHandName;
         winPlayer.localMoney += prend;
