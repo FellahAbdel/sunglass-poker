@@ -36,11 +36,6 @@ const Table = () => {
     }
   }, [isWindowOpen, isGameTableVisible]);
 
-  // Log focus state changes
-  useEffect(() => {
-    console.log("isFocus TABLE:", isFocus);
-  }, [isFocus]);
-
   // Dynamic class assignment based on current UI context
   const classes = getStyles(
     windowType,

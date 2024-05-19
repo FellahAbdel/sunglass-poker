@@ -32,7 +32,6 @@ export function delayedExecutionWithCancel(fn, delay) {
 
   delayedFn.cancel = function () {
     clearTimeout(timerId);
-    console.log("Delayed execution canceled!");
   };
 
   return delayedFn;

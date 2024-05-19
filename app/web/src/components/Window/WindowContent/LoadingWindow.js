@@ -13,11 +13,9 @@ const LoadingWindow = () => {
   //for server joining from ServerPanel
   const handlePlayerSited = useCallback(() => {
     if (isPlayerSited) {
-      console.log("Game room displayed!");
       showGameTable();
       closeWindow();
       setWindowType("");
-      console.log("playerSited", isPlayerSited);
     }
   }, [isPlayerSited, showGameTable, closeWindow, setWindowType]);
 

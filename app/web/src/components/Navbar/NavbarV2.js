@@ -46,28 +46,21 @@ const Navbar = () => {
     }
     dispatch(actions.leaveRoom());
     if (isPlayerLeft) {
-      console.log("Player left the table successfully");
       showHome();
     } else {
-      console.log("Player did not leave the table successfully");
     }
   };
 
   const handleLogOutButton = () => {
-    console.log("handleLogOutButton :", windowType);
-    console.log("isLogged :", isLogged);
     if (windowType === "accueil") {
-      console.log("Open log out alert");
       openWindow("alert", {
         message: "alert.logout",
         onConfirm: () => {
-          console.log("User confirms log out");
 
           logingOut();
           showHome();
         },
         onCancel: () => {
-          console.log("User cancels log out");
           closeWindow();
         },
       });
@@ -77,11 +70,9 @@ const Navbar = () => {
     } else if (windowType !== "") {
       closeWindow();
     } else if (isGameTableVisible) {
-      console.log("Open leaving table alert");
       openWindow("alert", {
         message: "alert.confirmExitMessage",
         onConfirm: () => {
-          console.log("L'utilisateur quitte la table");
           handleleaveRoom();
 
           // Before showing the home page, we need to to be sure
@@ -90,20 +81,16 @@ const Navbar = () => {
         },
         onCancel: () => {
           closeWindow();
-          console.log("L'utilisateur a choisi de rester sur la table");
         },
       });
     } else {
-      console.log("Open log out alert");
       openWindow("alert", {
         message: "alert.logout",
         onConfirm: () => {
-          console.log("User confirms log out");
           logingOut();
           showHome();
         },
         onCancel: () => {
-          console.log("User cancels log out");
           closeWindow();
         },
       });

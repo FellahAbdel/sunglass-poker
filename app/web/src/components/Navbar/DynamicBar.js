@@ -28,14 +28,8 @@ const DynamicBar = () => {
    * Starts the game by dispatching the startGame action with the user's ID.
    */
   const startGame = () => {
-    console.log("Starting game with roomId:");
     dispatch(actions.startGame(userId));
   };
-
-  // Effect to log the waiting message state for debugging.
-  useEffect(() => {
-    console.log("showWaitingMessage:", showWaitingMessage);
-  }, [showWaitingMessage]);
 
   useEffect(() => {
     setNotEnoughSC(user?.coins <= 40);

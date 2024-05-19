@@ -46,7 +46,6 @@ export const WindowProvider = ({ children }) => {
   };
 
   const openWindow = (type, params = {}) => {
-    console.log(`Opening window: ${type}`, params);
 
     if (state.windowType === type && state.isWindowOpen) {
       closeWindow();
@@ -73,7 +72,6 @@ export const WindowProvider = ({ children }) => {
   };
 
   const closeWindow = () => {
-    console.log("Fermeture de la fenêtre");
     setAlertParams({ message: "", onConfirm: () => {}, onCancel: () => {} });
     setWindowOpen(false);
     if (state.isGameTableVisible) {

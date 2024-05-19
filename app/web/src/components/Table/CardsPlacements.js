@@ -41,7 +41,6 @@ const CardsPlacements = () => {
   useEffect(() => {
     if (communityCards && communityCards.length > 0) {
       updateDealingFlopSequentially();
-      console.log("communityCards: ", communityCards);
     }
   }, [communityCards, updateDealingFlopSequentially]);
 

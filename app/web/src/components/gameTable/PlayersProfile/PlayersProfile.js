@@ -40,16 +40,6 @@ const PlayersProfile = ({
   const formattedChips = chips?.toLocaleString();
   const dollarSign = " SC";
 
-  useEffect(() => {
-    console.log("playerHandName :", playerHandName);
-  }, [playerHandName]);
-  useEffect(() => {
-    console.log("isFocus playersProfile :", isFocus);
-  }, [isFocus]);
-  useEffect(() => {
-    console.log("Player status:", status);
-  }, [status]);
-
   /**
    * Converts the first character of a string to lowercase and retains the rest as is.
    * Useful for converting PascalCase or other formats to camelCase.
@@ -67,7 +57,6 @@ const PlayersProfile = ({
     if (cardsVisible[index] === true) {
       if (card && card.number !== undefined && card.color !== undefined) {
         const formattedCard = [card.number.toString(), card.color];
-        console.log("Formatted card:", formattedCard);
         return formattedCard;
       }
     }

@@ -13,7 +13,6 @@ import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
 const GameActionButtons = () => {
   const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } =
     useGameTable();
-  console.log("gameCurrentBet :", gameCurrentBet);
   const { getTranslatedWord } = useTranslation();
   const [coins, setCoins] = useState(playerMoney);
   const [min, setMin] = useState(20); // minimum amount to raise
@@ -60,13 +59,10 @@ const GameActionButtons = () => {
       // Only update if the parsed value is a valid number
       setAmount(newAmount); // Update the actual number
     }
-    console.log("handleChange amount:", amount);
-    console.log("handleChange newAmount:", newAmount);
   };
 
   // Commits the bet with the Redux action
   const handleBet = (amount) => {
-    console.log("handleBet amount :", amount);
     amount = Math.round(amount);
     dispatch(actions.bet(amount));
     setAmount(amount);
