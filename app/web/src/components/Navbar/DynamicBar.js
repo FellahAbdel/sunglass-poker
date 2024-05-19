@@ -107,7 +107,7 @@ const DynamicBar = () => {
           </div>
           {!notEnoughSC && (
             <>
-              {numberOfPlayers >= 2 ? (
+              {numberOfPlayers >= 2 && isMaster ? (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
                   label={getTranslatedWord("table.start")}
