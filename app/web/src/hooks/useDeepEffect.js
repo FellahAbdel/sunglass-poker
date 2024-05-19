@@ -17,7 +17,9 @@ const useDeepEffect = (callback, dependencies) => {
     if (currentDepsRef.current.length !== dependencies.length) {
       hasChanged = true;
     } else {
-      hasChanged = dependencies.some((dep, index) => !Object.is(dep, currentDepsRef.current[index]));
+      hasChanged = dependencies.some(
+        (dep, index) => !Object.is(dep, currentDepsRef.current[index])
+      );
     }
     // If dependencies have changed, call the callback and update the ref
     if (hasChanged) {
@@ -25,5 +27,5 @@ const useDeepEffect = (callback, dependencies) => {
       currentDepsRef.current = dependencies;
     }
   }, [callback, dependencies]);
-}
+};
 export default useDeepEffect;

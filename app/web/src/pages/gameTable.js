@@ -1,5 +1,5 @@
 //react imports
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth } from "./../components/Utiles/AuthProvider";
 import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
 import { useWindowContext } from "./../components/Utiles/WindowContext";
@@ -23,7 +23,7 @@ const GameTable = () => {
   const { isLogged } = useAuth();
   const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
-  const { playerBonus, playerCards ,showWaitingMessage } = useGameTable();
+  const { playerBonus, playerCards, showWaitingMessage } = useGameTable();
   const classes = getStyles(
     windowType,
     isLogged,
@@ -39,11 +39,6 @@ const GameTable = () => {
     }
   };
 
-  // Log player cards and bonus when they change
-  useEffect(() => {
-    console.log("Player cards and bonus received:", playerCards, playerBonus);
-  }, [playerBonus, playerCards]);
-
   // Prevent event propagation when clicking inside the box
   const handleBoxClick = (event) => {
     event.stopPropagation();
@@ -56,9 +51,15 @@ const GameTable = () => {
       onClick={handleCloseOnClickOutside}
     >
       {/* css Pattern background */}
-      {theme === "light" &&<img className="backdrop"  src="static/media/assets/images/backdrop/backdrop2.jpg" alt="backdrop"/>}
-      <div className="backdrop"/>
-      <div className="backdrop2"/>
+      {theme === "light" && (
+        <img
+          className="backdrop"
+          src="static/media/assets/images/backdrop/backdrop2.jpg"
+          alt="backdrop"
+        />
+      )}
+      <div className="backdrop" />
+      <div className="backdrop2" />
 
       {/* Navbar or header */}
       <div className="comp-navbar">
@@ -74,23 +75,25 @@ const GameTable = () => {
       {isGameTableVisible && !isWindowOpen && (
         <>
           <div
-            className={`comp-bonus  ${(isWindowOpen || showWaitingMessage) ? "slideDown" : "slideUp"}`}
+            className={`comp-bonus  ${
+              isWindowOpen || showWaitingMessage ? "slideDown" : "slideUp"
+            }`}
           >
-            {playerBonus !== undefined && ( 
-              <BonusPanel 
-                nbHearts = {playerBonus.H}
-                nbDiamonds = {playerBonus.D}
-                nbSpades = {playerBonus.S}
-                nbClubs = {playerBonus.C}
+            {playerBonus !== undefined && (
+              <BonusPanel
+                nbHearts={playerBonus.H}
+                nbDiamonds={playerBonus.D}
+                nbSpades={playerBonus.S}
+                nbClubs={playerBonus.C}
               />
             )}
           </div>
           <div
             className={`comp-gameAction ${
-              (isWindowOpen || showWaitingMessage)? "slideDown" : "slideUp"
+              isWindowOpen || showWaitingMessage ? "slideDown" : "slideUp"
             }`}
           >
-            <GameActionPanelV2/>
+            <GameActionPanelV2 />
           </div>
 
           <div

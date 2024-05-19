@@ -6,8 +6,6 @@ const functionMapper = {
 
 const getInitialWindowType = () => {
   const storedWindowType = sessionStorage.getItem("windowType");
-  const isGameTableVisible =
-    sessionStorage.getItem("isGameTableVisible") === "true";
 
   if (storedWindowType === "alert") {
     return "";
