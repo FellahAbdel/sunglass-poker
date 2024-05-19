@@ -26,17 +26,7 @@ const Table = ({}) => {
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const { showWaitingMessage, isFocus } = useGameTable();
-
-  // Effect to log window open status
-  useEffect(() => {
-    console.log("isWindowOpen a changé :", isWindowOpen);
-  }, [isWindowOpen]);
-
-  // Effect to log login status
-  useEffect(() => {
-    console.log("isLogged Table:", isLogged);
-  }, [isLogged]);
-
+  
   // Update visibility based on window and game table visibility states
   useEffect(() => {
     if (isWindowOpen && isGameTableVisible) {

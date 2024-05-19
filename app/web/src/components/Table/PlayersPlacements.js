@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PlayersProfile from "../gameTable/PlayersProfile/PlayersProfile";
 import PlayersPots from "../Table/PlayersPots";
 import { useSelector } from "react-redux";
+import { useAuth } from "./../Utiles/AuthProvider.jsx"
 
 /**
  * PlayersPlacements manages the display of player profiles and pots on the game table.
@@ -11,6 +12,8 @@ import { useSelector } from "react-redux";
  *  - showMiddle: Boolean to control the visibility of the middle section (usually pots in the game).
  */
 const PlayersPlacements = ({ showMiddle }) => {
+
+  const { fetchUserInfo } = useAuth();
 
   // Retrieves the list of players from the Redux store's game state
   const playersInTable = useSelector((state) => state.game.game?.players);
@@ -24,6 +27,7 @@ const PlayersPlacements = ({ showMiddle }) => {
   useEffect(() => {
     setUpdatedPlayers(playersInTable);
     console.log("playerInTAble: ", playersInTable);
+    fetchUserInfo();
   }, [playersInTable]);
 
   //const currentFocusIndex = gameClass?.focus;

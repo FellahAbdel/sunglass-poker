@@ -554,6 +554,7 @@ export const AuthProvider = ({ children }) => {
         verifyGamePassword,
         fetchRankings,
         changePassword,
+        fetchUserInfo,
       }}
     >
       {children}
