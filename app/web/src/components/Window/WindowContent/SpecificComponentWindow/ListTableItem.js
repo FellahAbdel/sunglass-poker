@@ -115,6 +115,7 @@ const ListTableItem = ({
                 errorMessage={passwordError}
                 styleClass="input-serverRoomPassword"
                 styleClass2="input-serverRoomPassword2"
+                iconSrc="static/media/assets/images/icons/black/password.png"
                 onKeyDown={handleKeyDown}
               />
             )}
