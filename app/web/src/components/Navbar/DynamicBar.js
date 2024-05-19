@@ -107,7 +107,7 @@ const DynamicBar = () => {
               : getTranslatedWord("table.waiting")}{" "}
             !
           </div>
-          {!notEnoughSC && numberOfPlayers<2 (
+          {!notEnoughSC && numberOfPlayers<2 && (
             <>
               {isMaster ? (
                 <Button
