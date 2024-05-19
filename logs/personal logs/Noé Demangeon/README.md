@@ -18,6 +18,10 @@
 
 2024/02/18: 1H30        Découverte Blender + design parasols
 
+15H
+
+--------- Début projet ---------
+
 2024/02/20 : 3h00          Réunion création pages, distribution taches.
 
 2024/02/22 : 1h30          Début page login
@@ -33,6 +37,10 @@
 2024/02/27 : 4H             Réunion, finition pages, fusion pages login et accueil, discussion semaine suivantes
 
 2024/02/27 : 30min          Modification css, ajout component text.
+
+19H
+
+--------- Pages connexion ---------
 
 2024/03/03 : 1H             Apprentissage mongodb.
 
@@ -55,6 +63,11 @@
 2024/03/09 : 1H30           Ajout vérification information fformulaire signup + feedback
 
 2024/03/09 : 2H00           Ajout feedback avec la bdd
+
+18H
+
+--------- BDD ---------
+
 
 2024/09/12 : 5h00           Réunion groupe, merge de toutes les branch de front-end, fonctionnement bdd.
 
@@ -90,9 +103,18 @@
 
 2024/03/29 : 1h00           Début window création table
 
+34H
+
+--------- Principe des Windows ---------
+
+
 2024/04/02 : 5h30           Réunion redux, traductions
 
 2024/04/02 : 3h30           Fin traductions + Début page shop, page confirmation achat
+
+9H
+--------- Traductions ---------
+
 
 2024/04/03 : 4h00           Amélioration sécurité bdd user, ajout cryptage mdp, nouvelle table avatars, le shop utilise cette nouvelle table, début items possédé, ne fonctionne pas encore dans le shop. Reste a faire l'achat d'items (déja fait du coté back) et wallpapers et cardskins. Difficultés pour afficher les images depuis un lien de la bdd.
 
@@ -112,6 +134,10 @@
 
 2024/04/14 : 2h00           Téléchargement models, générations avatar
 
+20H
+
+--------- Amélioration bdd + shop ---------
+
 2024/04/15 : 3h00           Window alert quand logout et leavetable, translations amélioré, reducer windowcontext.
 
 2024/04/16 : 2h30           Réunion debug, début DAO, discution IHM.
@@ -127,6 +153,10 @@
 2024/04/23 : 3h30           Réunion, correction bug, revue code, traductions supplémentaires
 
 2024/04/24 : 0h30           Correction bugs serverpannel
+
+14H
+
+--------- Amélioration window et traductions ---------
 
 2024/04/25 : 2h30           Affichage avatar autour table, Affichage carte joueur + boutons en bas à droite
 
@@ -146,6 +176,11 @@
 
 2024/05/11 : 2h00           Back + front achat coins fonctionnel
 
+26H
+
+--------- Backend, logique partie, spectateurs, showcards ---------
+
+
 2024/05/12 : 2h00           Corrections bug logique fin de game. Cartes montrés en fin de game
 
 2024/05/12 : 1h30           Correction bugs, vérification mots de passe pour les game. ServerName ingame
@@ -158,4 +193,35 @@
 
 2024/05/16 : 3h00           Test jeu pour débug, correction bug, code pour gérer les joueurs avec 0 SC, fin traductions, message erreur creategame
 
-TEMPS TOTAL: 162h30min
+2024/05/17 : 3h00           Correction bugs game, restart automatique, changement masters. Changement boutons pages Serverpannel. Fonction changement mot de passe + checkEmail fonctionnelles
+
+2024/05/17 : 4h00           Session tests avec Maël et Victor, debuggage.
+
+2024/05/18 : 4h00           Traductions, quitter loading page amélioré. Début rédaction rapport.
+
+23H
+
+--------- Deboggage, denier ajustements ---------
+
+
+Voici un résumé des heures faites :
+
+15H : Début projet, choix projet, visuels de base, blender.
+
+19H : Découverte React, pages de connexions.
+
+18H : Base de donnée et formulaire fonctionnels.
+
+34H : Windows
+
+9H : Traductions
+
+20H : Amélioration bdd + shop
+
+14H : Amélioration window + traductions
+
+26H : Backend, logique game
+
+23H : Deboggage, derniers ajustements
+
+TEMPS TOTAL: 173h30min

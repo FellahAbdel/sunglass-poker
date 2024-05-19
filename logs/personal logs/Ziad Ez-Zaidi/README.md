@@ -47,4 +47,8 @@
 - **07/05** : Réunion back + standup meeting, réglage de conflits - **3h**
 - **10/05** : Connexion de la chatbox avec Redux, corrections de bugs - **4h**
 - **11/05** : Résolution d'erreurs et tests de la chatbox et chatBox fonctionnel - **4h**
+- **13/05** : bug les joueurs ne recoient pas les messages --> Configuration de Socket.io côté serveur et liaison - **4h**
+- **14/05** : Réunion équipe + resolution du bug de reception de messages --> ChatboxV2 fonctionnel + tests - **7H**
+- **15/05** : Amélioration de la chatbox côté frontend (inclusion des expediteurs et de la forme des messages) - **4H**
+- **16/05** : Chatbox finale avec communications propre pour chaque salle + tests + merge et reglage des conflits - **6H**
 

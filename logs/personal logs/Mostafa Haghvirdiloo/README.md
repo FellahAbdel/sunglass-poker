@@ -110,5 +110,18 @@
 
 * 2024/05/10 : <b> 6h </b> <br/>       Travail individuel: <i>handGuide fonction pour determiner les main possible pour guider l'utilisateur, acceuil buttons layout + nouvelle button , texts update pour utiliser useTranslate , nouvelle designe des cart dynamique</i>
 
+* 2024/05/11 : <b> 1h </b> <br/>       Travail individuel: <i>coin buttons , buy coin window structure et css , logo css</i>
 
-total: 154h30min
+* 2024/05/12 : <b> 3h </b> <br/>       Travail individuel: <i>number formatting fonction debugge, interface server password, component dynamic bar qui gere les buttons et affichage different , server name dans le jeu </i>
+
+* 2024/05/14 : <b> 3h </b> <br/>       Travail en TP: <i>css responssiveness , tutorial text en anglais , chatbox affichage fix ,changement des source des image pour vm , status des players css , warning cleaning , emplacement des fichier des assetes dans le projet  </i>
+
+* 2024/05/15 : <b> 0h </b> <br/>       Travail individuel: <i>backdrop fix pour vm, translations</i>
+
+* 2024/05/16 : <b> 2h30min </b> <br/>       Travail individuel: <i>nouvelle gameActionPanel et debuggé et son CSS </i>
+
+* 2024/05/17 : <b> 5h </b> <br/>       Travail individuel: <i>loading window , debuggage de guide de main , deepEffec hook , gameActionPanel update , minor css corrections , navbar update , audio test avec deepUseEffect (fonction pas) , chatBox css</i>
+
+* 2024/05/16 : <b> 3h </b> <br/>       Travail individuel: <i>comments sur le front, reportage de projet </i>
+
+total: 172hmin

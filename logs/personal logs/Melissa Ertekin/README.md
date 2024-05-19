@@ -176,3 +176,6 @@
 
 * 2024/05/16 : <b>2h30</b> <br/> Travail individuel : <i> Finir le site vitrine pour Sun Games Studio. Finir le rapport de la communucation. </i>
 
+* 2024/05/19 : <b>2h</b> <br/> Travail individuel : <i> Travail sur le rapport final. Redaction de partie. Fonctionnement en Mode Projet (pas encore finit) </i>
+* Durant la semaine : <b>1h</b> <br/> Discussions sur discord: <i> Échanges sur le produit final et sur les rapports finaux/i> 
+
