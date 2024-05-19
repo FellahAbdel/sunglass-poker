@@ -25,7 +25,6 @@ const PlayersPlacements = ({ showMiddle }) => {
   // Updates the list of players whenever there's a change in the Redux state
   useEffect(() => {
     setUpdatedPlayers(playersInTable);
-    console.log("playerInTAble: ", playersInTable);
     fetchUserInfo();
   }, [playersInTable, fetchUserInfo]);
 

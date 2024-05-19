@@ -32,44 +32,52 @@ export const AuthProvider = ({ children }) => {
     };
   };
 
-  const fetchUserInfo = useCallback(
-    async (authToken) => {
-      try {
-        const response = await fetch("api/userInfo", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-            "Content-Type": "application/json",
+  const fetchUserInfo = useCallback(async () => {
+    try {
+      const authToken = sessionStorage.getItem("authToken");
+      if (!authToken) {
+        console.error("No auth token found");
+        return;
+      }
+
+      const response = await fetch("api/userInfo", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "API responded with an error.");
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            ...data.user,
           },
         });
-        const data = await response.json();
-
-        if (data.success) {
-          dispatch({
-            type: "LOGIN",
-            payload: {
-              ...data.user,
-            },
-          });
-        } else {
-          console.error(
-            "Impossible de récupérer les informations de l'utilisateur"
-          );
-        }
-      } catch (error) {
+      } else {
         console.error(
-          "Erreur lors de la récupération des informations de l'utilisateur :",
-          error
+          "Impossible de récupérer les informations de l'utilisateur"
         );
       }
-    },
-    [dispatch]
-  );
-
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des informations de l'utilisateur :",
+        error
+      );
+    }
+  }, [dispatch]);
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
     if (authToken) {
-      fetchUserInfo(authToken);
+      fetchUserInfo();
       dispatch({
         type: "LOGIN",
         payload: {
@@ -98,7 +106,7 @@ export const AuthProvider = ({ children }) => {
           type: "LOGIN",
           payload: { ...data.userData, token: data.token },
         });
-        fetchUserInfo(data.token); // Charger les informations utilisateur
+        fetchUserInfo(); // Charger les informations utilisateur
         return true;
       } else {
         console.error("Erreur de login:", data.message);
