@@ -198,6 +198,10 @@
 
 2024/05/18  1H  Test des derniers modif et tentative de debug sur une cas particulier du tapis+échange avec d'autre membre sur divers problemes/debat
 
---2024/05 SEMAINE 2: 29H30 (TOTAL: 143H)
+2024/05/18  30min Test en tout genre et discussion de problème avec les autres 
 
-TEMPS TOTAL: 143H
+2024/05/19  1H30    Rédaction de rapport et réunion avec Victor aziz mos et noé pour des tests.
+
+--2024/05 SEMAINE 2: 31H30 (TOTAL: 145H)
+
+TEMPS TOTAL: 145H
