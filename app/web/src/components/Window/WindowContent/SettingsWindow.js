@@ -37,14 +37,15 @@ const SettingsWindow = () => {
     <div className="settingsMenu">
       <h1>{getTranslatedWord("navbar.settings")}</h1>
       <div className="container-settingsParameteres">
-        <span className="container-switchSettings">
+        
+        {/* <span className="container-switchSettings">
           <p>{getTranslatedWord("settings.sound")}</p>
 
           <label className="switch">
             <input type="checkbox" checked={sound} onChange={toggleSound} />
             <span className="slider" />
           </label>
-        </span>
+        </span> */}
 
         <span className="container-switchSettings">
           <p>{getTranslatedWord("settings.animations")}</p>
