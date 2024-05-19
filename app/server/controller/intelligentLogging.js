@@ -7,6 +7,7 @@ module.exports = csl = {
     buffLocal: [],
     buffCallLocal: [],
     buffConsole: [],
+    isOn: true,
     outLocalAdd: function(args) {
         this.buffCallLocal.push(args);
     },
@@ -93,13 +94,16 @@ module.exports = csl = {
         }
     },
     log: function (type, ...data) {
-        this.prelog(type,'log',...data);
+        if(this.isOn)
+            this.prelog(type,'log',...data);
     },
     table: function (type, ...data) {
-        this.prelog(type,'table',...data);
+        if(this.isOn)
+            this.prelog(type,'table',...data);
     },
     error: function (type, ...data) {
-        this.prelog(type,'error',...data);
+        if(this.isOn)
+            this.prelog(type,'error',...data);
     },
     silenced: function (type) {
         if (Array.isArray(type)) {
