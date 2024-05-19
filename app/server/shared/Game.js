@@ -639,7 +639,7 @@ class Game {
   addPlayer(player) {
     this.allPlayers.push(player);
     const coins = player.getPlayerMoney() 
-    if (this.state !== "waiting" || coins <= 0) {
+    if (this.state !== "waiting" || coins <= this.blind) {
       csl.log(
         "gameObject : addPlayer",
         "either or both is true: ",
@@ -663,6 +663,7 @@ class Game {
     }
     console.log(coins);
     console.log(`Player ${player.name} added.`);
+    this.checkForNewMaster();
   }
 
   movePlayersWithZeroCoinsToSpectators() {
@@ -790,6 +791,7 @@ class Game {
       // Pour les non-maîtres
       this.getPlayerById(playerId).unsetAfk();
       this.moveSpecOrPlayer(playerId);
+      this.checkForNewMaster();
     }
   }
 
