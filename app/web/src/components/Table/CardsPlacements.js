@@ -133,6 +133,8 @@ const CardsPlacements = () => {
           flippingCard={false}
         />
 
+        {/* Unused Animation for card distribution */}
+        {/* 
         {new Array(10).fill(null).map((_, index) => (
           <React.Fragment key={index}>
             <Card
@@ -158,7 +160,7 @@ const CardsPlacements = () => {
               flippingCard={false}
             />
           </React.Fragment>
-        ))}
+        ))} */}
       </div>
     </div>
   );
