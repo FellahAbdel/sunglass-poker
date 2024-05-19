@@ -137,42 +137,13 @@ const Navbar = () => {
     label = getTranslatedWord("navbar.exitTable");
   }
 
+  const toAboutMe = () => {
+    window.open('https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrp9-1/sunglass-studio', '_blank', 'noopener,noreferrer');
+    }
+  
+
   return (
     <div className="container-nav-V2" onClick={handleClick}>
-      {/* Current Chips inventory and LogOut Button */}
-      {isLogged && (
-        <div className="container-nav-lefttop">
-          {isGameTableVisible && (
-            <div className={`chatBox-V2 ${isChatOpen && "chatBoxOpen-V2"}`}>
-              {!isChatOpen && (
-                <Button
-                  label={""}
-                  onClick={handleChatOpen}
-                  iconSrc="static/media/assets/images/icons/white/chat.png"
-                />
-              )}
-
-              {isChatOpen && (
-                <>
-                  <img
-                    className={"btn-chatClose-V2"}
-                    onClick={handleChatClose}
-                    src="static/media/assets/images/icons/white/cross.png"
-                    alt="exit-chat"
-                  />
-                  <TextInputComponent
-                    name="Message"
-                    value={handleNull}
-                    onChange={handleNull}
-                    placeholder={"Messages"}
-                    styleClass={"input-chatBox-V2"}
-                  />
-                </>
-              )}
-            </div>
-          )}
-        </div>
-      )}
       {windowType !== "loading" && (
         <div className="container-navMain-V2">
           {windowType !== "" && !isGameTableVisible && (
@@ -230,7 +201,7 @@ const Navbar = () => {
           />
           <Button
             label={getTranslatedWord("navbar.info")}
-            onClick={() => null}
+            onClick={toAboutMe}
             styleClass={`btn-settings-V2`}
             iconSrc="static/media/assets/images/icons/white/info.png"
           />
