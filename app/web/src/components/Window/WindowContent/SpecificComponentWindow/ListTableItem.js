@@ -112,6 +112,7 @@ const ListTableItem = ({
                 onChange={(e) => setPassword(e.target.value)}
                 errorMessage={passwordError}
                 styleClass="input-serverRoomPassword"
+                styleClass2="input-serverRoomPassword2"
                 onKeyDown={handleKeyDown}
               />
             )}

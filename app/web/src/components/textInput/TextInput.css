@@ -41,11 +41,19 @@
   width: 90%;
   height: 3vh;
   padding-left: 10%;
-  font-size: 16px;
+  font-size: calc(0.5vh + 0.4vw);
   border-radius: 10px;
   border: 2px solid #ccc;
   background-color: rgba(237, 242, 247, 1);
-  border-bottom: 2px solid #4d6478;
+}
+.input-serverRoomPassword2{
+  margin:0;
+}
+#light .input-serverRoomPassword{
+  border-bottom: 2px solid var(--color1-light);
+}
+#dark .input-serverRoomPassword{
+  border-bottom: 2px solid var(--color1-dark);
 }
 #dark .input-component-error,
 #light .input-component-error {
