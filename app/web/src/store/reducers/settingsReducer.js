@@ -3,6 +3,9 @@ export const initialState = {
   sound: localStorage.getItem("sound") === "true",
   language: localStorage.getItem("language") || "en",
   animation: localStorage.getItem("animation") === "true" || false,
+  volume: localStorage.getItem("volume")
+    ? parseFloat(localStorage.getItem("volume"))
+    : 1.0,
 };
 
 export function settingsReducer(state = initialState, action) {
@@ -19,8 +22,11 @@ export function settingsReducer(state = initialState, action) {
         sound: !state.sound,
       };
 
-      case 'SET_VOLUME':
-        return { ...state, volume: action.payload };
+    case "SET_VOLUME":
+      return {
+        ...state,
+        volume: action.payload,
+      };
 
     case "TOGGLE_ANIMATION":
       return {

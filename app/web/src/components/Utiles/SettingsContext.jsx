@@ -19,7 +19,7 @@ export const useSettings = () => useContext(SettingsContext);
 export const SettingsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(settingsReducer, initialState);
 
-  // Effets pour mettre jour sessionStorage
+  // Effets pour mettre à jour localStorage
   useEffect(() => {
     localStorage.setItem("theme", state.theme);
   }, [state.theme]);
@@ -36,6 +36,10 @@ export const SettingsProvider = ({ children }) => {
     localStorage.setItem("language", state.language);
   }, [state.language]);
 
+  useEffect(() => {
+    localStorage.setItem("volume", state.volume);
+  }, [state.volume]);
+
   // Fonctions pour dispatcher les actions
   const toggleTheme = () => {
     dispatch({ type: "TOGGLE_THEME" });
@@ -46,7 +50,7 @@ export const SettingsProvider = ({ children }) => {
   };
 
   const setVolume = (volume) => {
-    dispatch({ type: 'SET_VOLUME', payload: volume });
+    dispatch({ type: "SET_VOLUME", payload: volume });
   };
 
   const toggleAnimation = () => {
