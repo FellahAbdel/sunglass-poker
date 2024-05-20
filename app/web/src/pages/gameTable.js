@@ -30,7 +30,8 @@ const GameTable = () => {
     isLogged,
     isGameTableVisible,
     isWindowOpen,
-    showWaitingMessage
+    showWaitingMessage,
+    isSpectator
   );
   const [gameElementsAppear, setGameElementsAppear] = useState(isGameTableVisible && !isWindowOpen && !showWaitingMessage && !isSpectator);
 
@@ -112,7 +113,8 @@ const GameTable = () => {
           >
             {playerCards[0] !== undefined &&
               playerCards[1] !== undefined &&
-              playerCards.length === 2 && (
+              playerCards.length === 2 &&
+              isGameTableVisible && !isWindowOpen && !isSpectator && (
                 <HandCards
                   card1={playerCards[0]}
                   card2={playerCards[1]}
