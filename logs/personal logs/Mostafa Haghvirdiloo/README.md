@@ -24,8 +24,6 @@
 
 * 2024/02/25 : <b> 3h </b> <br/>        Travail individuel: <i> creation des compenents pour bonus et navbar + apprentissage </i>
 
-* 2024/02/25 : <b> 3h </b> <br/>        Travail individuel: <i> creation des compenents pour bonus et navbar + apprentissage </i>
-
 * 2024/02/26 : <b> 7h </b> <br/>        Travail individuel: <i> apprentissage de css + navbar contenant les buttoms profile ,settings ,exit et chips est fait + bonus Panel est fait avec system visuel des cart chargé + table simple et backdrop basic </i>
 
 * 2024/02/27 : <b> 3h30min </b> <br/>        Travail en TP: <i> apprentissage input range slider et implimentation + correction des structure des fichier de gameTable + reunion avec prof </i>
@@ -122,6 +120,10 @@
 
 * 2024/05/17 : <b> 5h </b> <br/>       Travail individuel: <i>loading window , debuggage de guide de main , deepEffec hook , gameActionPanel update , minor css corrections , navbar update , audio test avec deepUseEffect (fonction pas) , chatBox css</i>
 
-* 2024/05/16 : <b> 3h </b> <br/>       Travail individuel: <i>comments sur le front, reportage de projet </i>
+* 2024/05/18 : <b> 3h </b> <br/>       Travail individuel: <i>comments sur le front, reportage de projet </i>
 
-total: 172hmin
+* 2024/05/19 : <b> 6h </b> <br/>       Travail individuel: <i>video montage pour social media , unused code deleted , affichage de message pour des cas different , changement dapproche pour fond de table , debuggage de dynamic bar , winner hand name affichage , changemenr des affichage des image sur inputs pour passer par html au lieu de css , about us sur navbar , test avec le groupe , creation de content pour instagram </i>
+
+* 2024/05/20 : <b> 5h </b> <br/>       Travail individuel: <i>video pour instagram , audio ambience pour le jeu + l'interface </i>
+
+total: 180h

@@ -36,5 +36,7 @@
 - 09/05 , travail chatBox : 2H
 - 10/05 , resolution bug server combinaisons de jeux : 2H
 - 16/05 , debugage erreurs gagnants, push "franck" : 2H 
-
-- TOTAL:86H
+- 18/05 , test du jeu et revue de tout les cas de figures pour les combinaisons de jeu : 1H 
+-19/05 : edition de mon rapport perso : 30min
+- 20/05 : contribution rapport final :2H30
+- TOTAL:90H
