@@ -62,9 +62,22 @@ const GameTable = () => {
     event.stopPropagation();
   };
 
+  // undraggable img
+  useEffect(() => {
+    const disableDrag = (event) => {
+      if (event.target.tagName === "IMG") {
+        event.preventDefault();
+      }
+    };
+    document.addEventListener('dragstart', disableDrag);
+    return () => {
+      document.removeEventListener('dragstart', disableDrag);
+    };
+  }, []);
+
   return (
     <div
-      className={`container-main ${animation ? "" : "no-animation"}`}
+      className={`container-main unselectable ${animation ? "" : "no-animation"}`}
       id={theme}
       onClick={handleCloseOnClickOutside}
     >

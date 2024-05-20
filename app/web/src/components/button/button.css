@@ -3,6 +3,10 @@
   transition: background-color 1s ease;
 }
 
+button:focus{
+  outline: none;
+}
+
 #dark .back-color1 {
   background: var(--gradient-1-dark);
 }
@@ -23,6 +27,11 @@
 }
 #light .back-color3 {
   background: var(--gradient-3-light);
+}
+
+#light .back-color-grey,
+#dark .back-color-grey {
+  background: var(--gradient-gray);
 }
 
 Button:hover {
