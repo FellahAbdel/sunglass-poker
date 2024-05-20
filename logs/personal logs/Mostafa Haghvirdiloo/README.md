@@ -124,4 +124,6 @@
 
 * 2024/05/19 : <b> 6h </b> <br/>       Travail individuel: <i>video montage pour social media , unused code deleted , affichage de message pour des cas different , changement dapproche pour fond de table , debuggage de dynamic bar , winner hand name affichage , changemenr des affichage des image sur inputs pour passer par html au lieu de css , about us sur navbar , test avec le groupe , creation de content pour instagram </i>
 
-total: 175h
+* 2024/05/20 : <b> 5h </b> <br/>       Travail individuel: <i>video pour instagram , audio ambience pour le jeu + l'interface </i>
+
+total: 180h
