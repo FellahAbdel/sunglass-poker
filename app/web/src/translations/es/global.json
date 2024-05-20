@@ -122,7 +122,8 @@
     "sound": "Sonido",
     "theme": "Tema",
     "animations": "Animaciones",
-    "langSelect": "Seleccionar un idioma"
+    "langSelect": "Seleccionar un idioma",
+    "volume": "Volumen"
   },
   "profil": {
     "name": "Nombre",

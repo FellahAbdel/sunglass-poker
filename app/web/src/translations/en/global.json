@@ -128,7 +128,8 @@
     "sound": "Sound",
     "theme": "Theme",
     "animations": "Animations",
-    "langSelect": "Select a language"
+    "langSelect": "Select a language",
+    "volume": "Volume"
   },
   "profil": {
     "name": "Name",
