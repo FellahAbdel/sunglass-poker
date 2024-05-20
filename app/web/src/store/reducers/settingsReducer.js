@@ -19,6 +19,9 @@ export function settingsReducer(state = initialState, action) {
         sound: !state.sound,
       };
 
+      case 'SET_VOLUME':
+        return { ...state, volume: action.payload };
+
     case "TOGGLE_ANIMATION":
       return {
         ...state,

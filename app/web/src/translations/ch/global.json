@@ -122,7 +122,8 @@
     "sound": "声音",
     "theme": "主题",
     "animations": "动画",
-    "langSelect": "选择语言"
+    "langSelect": "选择语言",
+    "volume": "体积"
   },
   "profil": {
     "name": "名称",

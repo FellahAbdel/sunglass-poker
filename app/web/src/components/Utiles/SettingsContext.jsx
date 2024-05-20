@@ -45,6 +45,10 @@ export const SettingsProvider = ({ children }) => {
     dispatch({ type: "TOGGLE_SOUND" });
   };
 
+  const setVolume = (volume) => {
+    dispatch({ type: 'SET_VOLUME', payload: volume });
+  };
+
   const toggleAnimation = () => {
     dispatch({ type: "TOGGLE_ANIMATION" });
   };
@@ -61,6 +65,7 @@ export const SettingsProvider = ({ children }) => {
         toggleSound,
         toggleAnimation,
         changeLanguage,
+        setVolume,
       }}
     >
       {children}

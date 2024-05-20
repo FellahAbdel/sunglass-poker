@@ -122,7 +122,9 @@
     "sound": "صدا",
     "theme": "تم",
     "animations": "انیمیشن‌ها",
-    "langSelect": "انتخاب زبان"
+    "langSelect": "انتخاب زبان",
+    "volume": "ولوم صدا"
+
   },
   "profil": {
     "name": "نام",

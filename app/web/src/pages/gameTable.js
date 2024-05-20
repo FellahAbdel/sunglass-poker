@@ -3,6 +3,7 @@ import React from "react";
 import { useAuth } from "./../components/Utiles/AuthProvider";
 import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
 import { useWindowContext } from "./../components/Utiles/WindowContext";
+import useAudio from "../hooks/useAudio.js";
 
 //css imports
 import "./gameTable.css";
@@ -19,7 +20,7 @@ import DynamicBar from "../components/Navbar/DynamicBar.js";
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
 const GameTable = () => {
-  const { theme, animation } = useSettings();
+  const { theme, animation , sound , volume } = useSettings();
   const { isLogged } = useAuth();
   const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
@@ -31,6 +32,11 @@ const GameTable = () => {
     isWindowOpen,
     showWaitingMessage
   );
+  const ambientSoundURLLight = "static/media/assets/sounds/waveSound2.mp3";
+  const ambientSoundURLDark = "static/media/assets/sounds/casinoJazz.mp3";
+
+  useAudio(ambientSoundURLLight, ambientSoundURLDark, theme, sound, volume);
+
 
   // Handle closing the window when clicking outside
   const handleCloseOnClickOutside = (event) => {
