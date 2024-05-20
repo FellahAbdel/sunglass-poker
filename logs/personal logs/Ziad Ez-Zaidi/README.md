@@ -42,18 +42,18 @@
 - **30/04** : Intégration des websockets **3h**
 
 ### Mai
-- **02/05** : Création de fonctions pour les sockets **2h**
-- **03/05** : Développement des fonctions `sendMessage()` et `receiveMessage()` **2h**
-- **07/05** : Réunion back + standup meeting, réglage de conflits **3h**
-- **10/05** : Connexion de la chatbox avec Redux, corrections de bugs **4h**
-- **11/05** : Résolution d'erreurs et tests de la chatbox et chatBox fonctionnel **4h**
-- **13/05** : bug les joueurs ne recoient pas les messages --> Configuration de Socket.io côté serveur et liaison  **4h**
-- **14/05** : Réunion équipe + resolution du bug de reception de messages --> ChatboxV2 fonctionnel + tests  **7H**
-- **15/05** : Amélioration de la chatbox côté frontend (inclusion des expediteurs et de la forme des messages) **4H**
-- **16/05** : Chatbox finale avec communications propre pour chaque salle + tests + merge et reglage des conflits 
-- **17/05** : Tests et débogage liés au ScoreEngine  **5h**
-- **18/05** : Tests et débogage liés au ScoreEngine  **5h**
-- **19/05** : Développement et mise en page du tutoriel pour Texas Hold'em, intégration des images et des 
-- **20/05** : tutoriel finale + redaction rapport personnel  **4h**
+- **02/05** : Création de fonctions pour les sockets - **2h**
+- **03/05** : Développement des fonctions `sendMessage()` et `receiveMessage()` - **2h**
+- **07/05** : Réunion back + standup meeting, réglage de conflits - **3h**
+- **10/05** : Connexion de la chatbox avec Redux, corrections de bugs - **4h**
+- **11/05** : Résolution d'erreurs et tests de la chatbox et chatBox fonctionnel - **4h**
+- **13/05** : bug les joueurs ne reçoivent pas les messages --> Configuration de Socket.io côté serveur et liaison - **4h**
+- **14/05** : Réunion équipe + résolution du bug de réception de messages --> ChatboxV2 fonctionnel + tests - **7h**
+- **15/05** : Amélioration de la chatbox côté frontend (inclusion des expéditeurs et de la forme des messages) - **4h**
+- **16/05** : Chatbox finale avec communications propre pour chaque salle + tests + merge et réglage des conflits - **6h**
+- **17/05** : Tests et débogage liés au ScoreEngine - **5h**
+- **18/05** : Tests et débogage liés au ScoreEngine - **5h**
+- **19/05** : Développement et mise en page du tutoriel pour Texas Hold'em, intégration des images et des explications des fonctionnalités spéciales de l'application - **6h**
+- **20/05** : Tutoriel final + rédaction rapport personnel - **4h**
 
 - **Heures totales** : 144 heures et 20 minutes
