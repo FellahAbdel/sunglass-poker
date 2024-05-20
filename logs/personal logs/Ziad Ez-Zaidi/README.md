@@ -56,4 +56,4 @@
 - **19/05** : Développement et mise en page du tutoriel pour Texas Hold'em, intégration des images et des explications des fonctionnalités spéciales de l'application - **6h**
 - **20/05** : Tutoriel final + rédaction rapport personnel - **4h**
 
-- **Heures totales** : 144 heures et 20 minutes
+- **Heures totales** : 150 heures et 50 minutes
