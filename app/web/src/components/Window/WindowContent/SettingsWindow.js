@@ -84,7 +84,7 @@ const SettingsWindow = () => {
             value={volume}
             onChange={handleVolumeChange}
             style={theme === "dark" ? {
-              background: `linear-gradient(to right, var(--color1-dark) ${volume*100}%, white ${volume*100}%)`,
+              background: `linear-gradient(to right, var(--color1-dark) ${volume*95}%, white ${volume*100}%)`,
             } : {
               background: `linear-gradient(to right, var(--color1-light) ${volume*95}%, white ${volume*100}%)`,
             }}

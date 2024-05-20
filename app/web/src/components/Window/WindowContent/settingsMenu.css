@@ -69,6 +69,7 @@
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 34px;
+  box-shadow:inset 0 0 0.5vw black;
 }
 
 .slider:before {
@@ -194,6 +195,7 @@ input:checked + .slider:before {
   margin:0;
   padding-right: 0.3vw;
   padding-left: 0.3vw;
+  box-shadow:inset 0 0 0.5vw black;
 }
 .volume:hover {
   opacity: 1;
@@ -208,7 +210,6 @@ input:checked + .slider:before {
   border-radius: 5vw;
   margin-right: 0.3vw;
   box-shadow: 0 0 1vw black;
-
 }
 .slider::-moz-range-thumb {
   width: 1.8vw;
