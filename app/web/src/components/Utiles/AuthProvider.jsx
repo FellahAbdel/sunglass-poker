@@ -340,12 +340,28 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   };
+
   const avatarInCache = new Map();
+
   const getAvatarById = async (userId) => {
-    if(avatarInCache.has(userId))
-      return avatarInCache.get(userId)
+    userId = String(userId);
+
+    console.log("Checking userId:", userId);
+    console.log("Type of userId:", typeof userId);
+    console.log("avatarInCache:", avatarInCache);
+    console.log(
+      "Current cache keys before checking:",
+      Array.from(avatarInCache.keys())
+    ); // Affiche toutes les clés du cache
+
+    if (avatarInCache.has(userId)) {
+      console.log("avatarInCache trouvé, on le renvoi");
+      return avatarInCache.get(userId);
+    }
+
     try {
       const requestUrl = `api/avatar-info/${userId}`;
+      console.log("Fetching from URL:", requestUrl);
 
       const response = await fetch(requestUrl, {
         method: "GET",
@@ -359,6 +375,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
+      console.log("Data fetched from API:", data);
 
       if (data && data.baseAvatar && data.sunglasses && data.colorAvatar) {
         const avatarDataSet = {
@@ -374,6 +391,8 @@ export const AuthProvider = ({ children }) => {
           },
         };
         avatarInCache.set(userId, avatarDataSet);
+        console.log("Avatar fetched and cached:", avatarDataSet);
+        console.log("Updated cache keys:", Array.from(avatarInCache.keys())); // Affiche les clés mises à jour
         return avatarDataSet;
       } else {
         console.error("Data validation error: Missing required avatar fields.");
