@@ -374,6 +374,7 @@ module.exports = function (
               // If user information retrieval is successful
               if (response.success) {
                 const user = response.user;
+                if(user.inGame !== null)
                 gameController.removePlayer(
                   user.inGame.toString(), // Convert the room ID to string
                   uid
