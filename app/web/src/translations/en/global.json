@@ -61,8 +61,8 @@
     "join": "Join",
     "full": "Full",
     "noActiveServer": "No active server",
-    "notEnoughSC": "You don't have enough Sun Coins to join this game",
-    "notEnoughPlayer": "Not Enough Players to start the game ",
+    "notEnoughSC": "You don't have enough Sun Coins to join this game ",
+    "notEnoughPlayer": "Not enough players to start the game ",
     "yourTurn": "Your Turn",
     "theirTurn": "Their Turn"
   },
