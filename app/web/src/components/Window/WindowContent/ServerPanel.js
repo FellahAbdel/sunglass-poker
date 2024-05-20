@@ -73,45 +73,45 @@ const ServerPanelWindow = () => {
   };
 
   // Fetch room table records from the server and update the state.
-  useEffect(() => {
-    const fetchRoomTableRecords = async () => {
-      try {
-        const authToken = sessionStorage.getItem("authToken");
-        if (authToken) {
-          const data = await getRoomTableRecords(authToken);
-          if (data) {
-            // Diviser les tables en deux groupes : tables pleines et tables non pleines
-            const fullTables = data.filter(
-              (table) => table.players.length === 10
-            );
-            const nonFullTables = data.filter(
-              (table) => table.players.length < 10
-            );
+  const fetchRoomTableRecords = useCallback(async () => {
+    try {
+      const authToken = sessionStorage.getItem("authToken");
+      if (authToken) {
+        const data = await getRoomTableRecords(authToken);
+        if (data) {
+          // Diviser les tables en deux groupes : tables pleines et tables non pleines
+          const fullTables = data.filter(
+            (table) => table.players.length === 10
+          );
+          const nonFullTables = data.filter(
+            (table) => table.players.length < 10
+          );
 
-            // Trier les tables non pleines dans l'ordre décroissant du nombre de joueurs
-            const sortedNonFullTables = nonFullTables.sort(
-              (a, b) => b.players.length - a.players.length
-            );
+          // Trier les tables non pleines dans l'ordre décroissant du nombre de joueurs
+          const sortedNonFullTables = nonFullTables.sort(
+            (a, b) => b.players.length - a.players.length
+          );
 
-            // Fusionner les deux groupes de tables en plaçant les tables pleines à la fin
-            const sortedTables = [...sortedNonFullTables, ...fullTables];
+          // Fusionner les deux groupes de tables en plaçant les tables pleines à la fin
+          const sortedTables = [...sortedNonFullTables, ...fullTables];
 
-            // Filtrer les tables en fonction du texte de recherche
-            const filteredTables = sortedTables.filter((table) =>
-              table.serverName.toLowerCase().includes(searchText.toLowerCase())
-            );
+          // Filtrer les tables en fonction du texte de recherche
+          const filteredTables = sortedTables.filter((table) =>
+            table.serverName.toLowerCase().includes(searchText.toLowerCase())
+          );
 
-            // Mettre à jour l'état roomTableRecords avec les tables triées et filtrées
-            setRoomTableRecords(filteredTables);
-          }
+          // Mettre à jour l'état roomTableRecords avec les tables triées et filtrées
+          setRoomTableRecords(filteredTables);
         }
-      } catch (error) {
-        console.error("Error fetching roomTableRecords:", error);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching roomTableRecords:", error);
+    }
+  },[searchText,getRoomTableRecords]);
 
+  useEffect(() => {
     fetchRoomTableRecords();
-  }, [searchText, getRoomTableRecords]); //Mise à jour à chaque fois que le texte est changé
+  }, [searchText, fetchRoomTableRecords]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -149,6 +149,11 @@ const ServerPanelWindow = () => {
         errorMessage={""}
         onChange={handleChange}
       />
+      <Button 
+        styleClass={"btn-serverRefresh"}
+        onClick={fetchRoomTableRecords}
+        iconSrc="static/media/assets/images/icons/white/refresh.png"
+        />
 
       <div className="listTableHeader">
         <div className="headerItem">

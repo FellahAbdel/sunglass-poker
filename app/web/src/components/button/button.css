@@ -336,3 +336,19 @@ Button:hover {
   left: 15%;
   transition: top 1s ease;
 }
+
+.btn-serverRefresh{
+  width: 3vw;
+  height: 3vw;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  background: unset;
+}
+.btn-serverRefresh img{
+  width: 100%;
+  filter: brightness(50%);
+}
+.btn-serverRefresh:hover img{
+  filter: brightness(60%);
+}
