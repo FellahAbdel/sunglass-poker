@@ -38,4 +38,5 @@
 - 16/05 , debugage erreurs gagnants, push "franck" : 2H 
 - 18/05 , test du jeu et revue de tout les cas de figures pour les combinaisons de jeu : 1H 
 -19/05 : edition de mon rapport perso : 30min
-- TOTAL:87H30
+- 20/05 : contribution rapport final :2H30
+- TOTAL:90H
