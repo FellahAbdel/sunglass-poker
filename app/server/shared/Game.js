@@ -477,6 +477,7 @@ class Game {
       if(this.gameCurrentBet < amount+player.currentBet &&
          amount < player.localMoney
       ){
+        this.players.forEach(p => p.talkedThisTurn = false);
         this.total+=amount;
         player.raise();
         player.bet(amount);
