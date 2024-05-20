@@ -153,11 +153,14 @@
 | 15 mai | 2 Heures | Résolutions des multiples winner. Résolution des tapis + multis tapis. Test sur les VM avec beta-testeurs pour découvrir les bugs. | --
 | 16 mai | 4 Heures | Réunion courte avec Mostafa Noe Mael (Aziz) + tests. Fix d'un bug suite à l'ajout de commentaire. Recherche de bugs et de solutions. Nouvelles version sur la VM + bugs.  Création d'une nouvelle fonction rotateFocus. | --
 | 17 mai | 6 Heures | Travail en réunion avec Maël et Noé. Débug intensif et recherche de bugs. Refactorisation de plusieurs fonctions. Ajout de commentaires, simplification de la structure des fonctions qui portaient à confusion. Robustesse du code de certaines fonctions qui posaient souvent problème. | --
-| TOTAL | 25 Heures || --
+| 18 mai | 2 Heures | Résolution de bugs autour du rafraichissement de la page provoquant un déconnexion et des états bloquant côtés utilisateurs.. | --
+| 19 mai | 10 Heures | Test et travail en réunion avec Aziz Maël Mostafa et Noé. Résolutions de divers bugs autour des raise et bet parfois mal initialisé. RotateFocus compte parfois mal les utilisateurs restant quand quelqu'un fait tapis et ne peut plus jouer mais attend la fin. Mise à jours de plusieurs paramètres pour la VM. Amélioration des performances. F5 fonctionnelle. Rédaction du rapport et création de schémas. Brainstorm + petites créations pour la communication. Modification légère autour du logger pour permettre la désactivation totale des logs. Refactorisation des fichiers de communication de socket et ré-écriture des commentaires. WEBSOCKET bloquer par le reverse proxy, stress test pour déterminer les performances possible avec les longPolling de socketio.(Pas ouf du tout). Export et import de la bdd sur la VM en backup. Préparation d'un serveur de secours.(Encore un). Tentative de solutions de contournement du websocket.| --
+
+| TOTAL | 37 Heures || --
 
 
 
 ____
 
 # Total des heures : 
-> ## 191 Heures
+> ## 203 Heures
