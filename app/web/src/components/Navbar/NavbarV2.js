@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import "./navbarV2.css";
 import Button from "../button/Button.tsx";
 import { useTranslation } from "../Utiles/Translations";

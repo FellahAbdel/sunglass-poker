@@ -25,7 +25,7 @@ const Table = () => {
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
-  const { showWaitingMessage, isFocus } = useGameTable();
+  const { showWaitingMessage } = useGameTable();
 
   // Update visibility based on window and game table visibility states
   useEffect(() => {
