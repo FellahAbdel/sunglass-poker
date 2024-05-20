@@ -2,6 +2,7 @@
 
 | Dates | description | duree |
 --------|-------------|---------|
+| 06/02/2024 et 13/02/2024 | choix et structuration du projet | 8h |
 | 08/02/2024 | reunion de 14h00 a 16h20 | 2h20 |
 | 20/02/2024 et 22/02/2024 | travail de groupe le mardi 20/02/2024 de 13h a 16h et le jeudi 22/02/2024 de 22h-00 a 00h-00 sur la premiere partie de la specification du backend du deroulement d'une partie. | 5h |
 | 23/02/2024 | travail de groupe sur la finalisation de la specifications des fonctions du backend implementant le deroulement du jeu de 21h a 00h. | 3h |
@@ -24,4 +25,4 @@
 | 14/05/24 - 15/05/2024 | Creation de la video trailer dur jeu | 15h |
 | 17/05/24 | debuggage de la fonction second qui occasionnait des bugs sur la comparaison du gagnant | 1h |
 | 18/05/24 | Test du jeu a la recherche de bugs| 2h |
-| --/--/--- | Total| 134h |
+| --/--/--- | Total| 142h |
