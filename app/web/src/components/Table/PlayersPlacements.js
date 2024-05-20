@@ -16,6 +16,8 @@ const PlayersPlacements = ({ showMiddle }) => {
 
   // Retrieves the list of players from the Redux store's game state
   const playersInTable = useSelector((state) => state.game.game?.players);
+  const timer = useSelector((state) => state.game.game?.focusTurnTimer);
+
   const [updatedPlayers, setUpdatedPlayers] = useState([]);
 
   // Retrieves the game class, which includes the current focus index among other data
@@ -44,7 +46,7 @@ const PlayersPlacements = ({ showMiddle }) => {
             playerId={player.playerId}
             isFocus={currentFocusIndex === index}
             isYou={player.isYou}
-            timer={20}
+            timer={timer}
             playerHandName={player.playerHandName}
           />
         </div>
