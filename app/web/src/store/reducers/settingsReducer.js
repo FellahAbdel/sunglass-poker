@@ -1,11 +1,11 @@
 export const initialState = {
   theme: localStorage.getItem("theme") || "light",
-  sound: localStorage.getItem("sound") === "true",
+  sound: localStorage.getItem("sound") === "true" || true,
   language: localStorage.getItem("language") || "en",
-  animation: localStorage.getItem("animation") === "true" || false,
+  animation: localStorage.getItem("animation") === "true" || true,
   volume: localStorage.getItem("volume")
     ? parseFloat(localStorage.getItem("volume"))
-    : 1.0,
+    : 0.5,
 };
 
 export function settingsReducer(state = initialState, action) {
