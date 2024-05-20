@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from "react";
 
 /**
- * Progressbar component that visually counts down from a specified duration and displays a filling bar.
+ * Progressbar component that visually counts down to a specified end time and displays a filling bar.
  *
  * Props:
- *  - durationInSeconds: The starting number of seconds for the countdown.
+ *  - eventTimestamp: The end time in milliseconds since the epoch.
  */
-export default function Progressbar({ durationInSeconds }) {
-  const [count, setCount] = useState(durationInSeconds);
+export default function Progressbar({ eventTimestamp }) {
+  const [remainingTime, setRemainingTime] = useState(0);
   const [filled, setFilled] = useState(0);
+  const [totalDuration, setTotalDuration] = useState(0);
 
-  // Effect handles the countdown logic and updates the filled percentage
+  // Initialize total duration and remaining time
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((prevCount) => prevCount - 1);
-    }, 1000);
+    const now = Date.now();
+    const initialRemainingTime = (eventTimestamp - now) / 1000;
+    setRemainingTime(initialRemainingTime > 0 ? initialRemainingTime : 0);
+    setTotalDuration(initialRemainingTime);
+  }, [eventTimestamp]);
 
-    if (count === 0) {
-      clearInterval(interval);
-    }
+  // Effect to update the remaining time and filled percentage
+  useEffect(() => {
+    const updateRemainingTime = () => {
+      const now = Date.now();
+      const timeRemaining = (eventTimestamp - now) / 1000;
+      setRemainingTime(timeRemaining > 0 ? timeRemaining : 0);
 
-    setFilled(((durationInSeconds - count) / durationInSeconds) * 100);
+      // Calculate filled percentage based on total duration
+      const filledPercentage = ((totalDuration - timeRemaining) / totalDuration) * 100;
+      setFilled(filledPercentage > 0 ? filledPercentage : 0);
+    };
 
+    const interval = setInterval(updateRemainingTime, 1000);
     return () => clearInterval(interval);
-  }, [count, durationInSeconds]);
+  }, [eventTimestamp, totalDuration]);
 
   return (
     <div>
@@ -37,7 +47,7 @@ export default function Progressbar({ durationInSeconds }) {
             transition: "width 1s ease-in-out",
           }}
         ></div>
-        <span className="progressPercent">{count}s</span>
+        <span className="progressPercent">{Math.floor(remainingTime)}s</span>
       </div>
     </div>
   );

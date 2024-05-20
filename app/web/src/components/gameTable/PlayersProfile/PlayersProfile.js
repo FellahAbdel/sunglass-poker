@@ -84,7 +84,7 @@ const PlayersProfile = ({
         {isFocus ? (
           <ProgressBar
             className="progressBar progressPercentage"
-            durationInSeconds={timer}
+            eventTimestamp={timer}
           />
         ) : (
           <div className={`box-statusText ${status.toLowerCase()}`}>
