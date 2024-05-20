@@ -1,3 +1,7 @@
+/**
+ * @module server/store/actions/actionsCreator
+ */
+
 const actions = require("./actionTypes.js");
 
 module.exports.gameLobby = (idGame) => ({
@@ -72,10 +76,14 @@ module.exports.resetGame = () => ({
 // Rooms control
 
 /**
+ * Creates an action to sit a player at a table.
  *
- * @param {table: id} table
- * @param {{id: id, pseudo:STRING}} player
- * @returns
+ * @function sit
+ * @param {string} table - The ID of the table.
+ * @param {Object} player - The player object.
+ * @param {string} player.id - The ID of the player.
+ * @param {string} player.name - The name of the player.
+ * @returns {Object} The action object with type and payload.
  */
 module.exports.sit = (table, player) => ({
   type: actions.SIT,

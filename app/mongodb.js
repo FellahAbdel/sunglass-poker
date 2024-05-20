@@ -1,5 +1,3 @@
-use Poker
-
 db.createRole({
     role: "pokerServer",
     privileges : [

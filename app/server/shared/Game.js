@@ -183,7 +183,7 @@ class Game {
   /**
    *
    * @param {Player} player to play for. Will  set him afk.
-   * @param {left=false} left if the player left or it was an afk. By default we guess it's an afk.
+   * @param {boolean} [left=false] left if the player left or it was an afk. By default we guess it's an afk.
    */
 
   autoTurn(player, left = false) {

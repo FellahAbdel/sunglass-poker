@@ -1,0 +1,14 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "include": ["app/"],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)node_modules"
+    },
+    "opts": {
+        "recurse": true,
+        "destination": "./docs/"
+    }
+}
