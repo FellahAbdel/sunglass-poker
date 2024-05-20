@@ -1,5 +1,5 @@
 //react imports
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "./../components/Utiles/AuthProvider";
 import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
 import { useWindowContext } from "./../components/Utiles/WindowContext";
@@ -24,7 +24,7 @@ const GameTable = () => {
   const { isLogged } = useAuth();
   const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
-  const { playerBonus, playerCards, showWaitingMessage } = useGameTable();
+  const { playerBonus, playerCards, showWaitingMessage , isSpectator} = useGameTable();
   const classes = getStyles(
     windowType,
     isLogged,
@@ -32,6 +32,12 @@ const GameTable = () => {
     isWindowOpen,
     showWaitingMessage
   );
+  const [gameElementsAppear, setGameElementsAppear] = useState(isGameTableVisible && !isWindowOpen && !showWaitingMessage && !isSpectator);
+
+  useEffect(() => {
+    setGameElementsAppear(isGameTableVisible && !isWindowOpen && !showWaitingMessage && !isSpectator);
+  }, [isGameTableVisible,isWindowOpen,showWaitingMessage,isSpectator]);
+
   const ambientSoundURLLight = "static/media/assets/sounds/waveSound2.mp3";
   const ambientSoundURLDark = "static/media/assets/sounds/casinoJazz.mp3";
 
@@ -83,14 +89,10 @@ const GameTable = () => {
       </div>
 
       {/* playing elements opens when logged in */}
-      {isGameTableVisible && !isWindowOpen && (
-        <>
           <div
-            className={`comp-bonus  ${
-              isWindowOpen || showWaitingMessage ? "slideDown" : "slideUp"
-            }`}
+            className={`comp-bonus  ${gameElementsAppear && "appear"}`}
           >
-            {playerBonus !== undefined && (
+            {playerBonus !== undefined && gameElementsAppear && (
               <BonusPanel
                 nbHearts={playerBonus.H}
                 nbDiamonds={playerBonus.D}
@@ -100,17 +102,13 @@ const GameTable = () => {
             )}
           </div>
           <div
-            className={`comp-gameAction ${
-              isWindowOpen || showWaitingMessage ? "slideDown" : "slideUp"
-            }`}
+            className={`comp-gameAction ${gameElementsAppear && "appear"}`}
           >
-            <GameActionPanelV2 />
+            {gameElementsAppear && <GameActionPanelV2 />}
           </div>
 
           <div
-            className={`comp-handCards ${
-              isWindowOpen ? "slideDown" : "slideUp"
-            }`}
+            className={`comp-handCards ${!isWindowOpen && "appear"}`}
           >
             {playerCards[0] !== undefined &&
               playerCards[1] !== undefined &&
@@ -123,8 +121,7 @@ const GameTable = () => {
                 />
               )}
           </div>
-        </>
-      )}
+
       <DynamicBar />
     </div>
   );

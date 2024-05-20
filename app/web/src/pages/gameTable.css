@@ -125,22 +125,34 @@
 }
 .comp-bonus {
   position: absolute;
-  bottom: 10px;
+  bottom: -10%;
   left: 10px;
+  transition: bottom 1s ease;
 }
+.comp-bonus.appear{
+  bottom: 1%;
+}
+
 .comp-gameAction {
   position: absolute;
-  bottom: 10px;
+  bottom: -10%;
   z-index: 1;
   flex: 1;
+  transition: bottom 1s ease;
+}
+.comp-gameAction.appear{
+  bottom: 10px;
 }
 .comp-handCards {
   position: absolute;
-  bottom: 0;
+  bottom: -40%;
   right: 0;
   z-index: 1;
+  transition: bottom 1s ease;
 }
-
+.comp-handCards.appear{
+  bottom: 0;
+}
 /*Table placement*/
 .comp-table {
   display: flex;
@@ -194,3 +206,5 @@
   height: 100%;
   width: 100%;
 }
+
+
