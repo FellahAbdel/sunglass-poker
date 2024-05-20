@@ -183,9 +183,12 @@
   "error": {
     "noAccountFound": "Kein Konto gefunden",
     "invalidEmail": "Ungültige E-Mail-Adresse",
-    "badUsername": "Der Benutzername muss mindestens 3 Zeichen haben",
-    "password6Characters": "Das Passwort muss mindestens 6 Zeichen haben",
-    "passwordNotMatch": "Die Passwörter stimmen nicht überein",
-    "emailNotFound": "E-Mail nicht gefunden"
+    "badUsername": "Der Name muss mindestens 3 Zeichen lang sein",
+    "usernameTooLong": "Der Name darf nicht länger als 20 Zeichen sein",
+    "password6Characters": "Das Passwort muss mindestens 6 Zeichen lang sein",
+    "passwordNotMatch": "Passwörter stimmen nicht überein",
+    "emailNotFound": "E-Mail nicht gefunden",
+    "emailTooLong": "E-Mail ist zu lang",
+    "passwordTooLong": "Das Passwort darf nicht länger als 50 Zeichen sein"
   }
 }

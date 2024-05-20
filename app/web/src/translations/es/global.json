@@ -182,10 +182,13 @@
   },
   "error": {
     "noAccountFound": "No se encontró ninguna cuenta",
-    "invalidEmail": "Correo electrónico inválido",
-    "badUsername": "El nombre de usuario debe tener al menos 3 caracteres",
+    "invalidEmail": "Dirección de correo electrónico inválida",
+    "badUsername": "El nombre debe tener al menos 3 caracteres",
+    "usernameTooLong": "El nombre debe tener menos de 20 caracteres",
     "password6Characters": "La contraseña debe tener al menos 6 caracteres",
     "passwordNotMatch": "Las contraseñas no coinciden",
-    "emailNotFound": "Correo electrónico no encontrado"
+    "emailNotFound": "Correo electrónico no encontrado",
+    "emailTooLong": "Correo electrónico demasiado largo",
+    "passwordTooLong": "La contraseña no puede tener más de 50 caracteres"
   }
 }

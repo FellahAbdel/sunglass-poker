@@ -12,7 +12,7 @@
     "signin": "Sign Up",
     "ranking": "Ranking",
     "home": "Home",
-    "info":"About Us"
+    "info": "About Us"
   },
   "connection": {
     "login": "Log in",
@@ -61,10 +61,10 @@
     "join": "Join",
     "full": "Full",
     "noActiveServer": "No active server",
-    "notEnoughSC":"You don't have enough Sun Coins to join this game",
-    "notEnoughPlayer":"Not Enough Players to start the game",
+    "notEnoughSC": "You don't have enough Sun Coins to join this game",
+    "notEnoughPlayer": "Not Enough Players to start the game",
     "yourTurn": "Your Turn",
-    "theirTurn" : "Their Turn"
+    "theirTurn": "Their Turn"
   },
   "handGuide": {
     "highCard": "High Card",
@@ -77,7 +77,7 @@
     "fourOfAKind": "Four of a Kind",
     "straightFlush": "Straight Flush",
     "royalFlush": "Royal Flush",
-    "dernier joueur":"Last one",
+    "dernier joueur": "Last one",
     "show": "Show",
     "hide": "Hide",
     "showB": "Show both",
@@ -190,9 +190,11 @@
     "noAccountFound": "No account found",
     "invalidEmail": "Invalid email address",
     "badUsername": "Name must have at least 3 characters",
-    "usernameTooLong" : "Name must have less than 20 characters",
+    "usernameTooLong": "Name must have less than 20 characters",
     "password6Characters": "Password must have at least 6 characters",
     "passwordNotMatch": "Passwords do not match",
-    "emailNotFound": "Email not found"
+    "emailNotFound": "Email not found",
+    "emailTooLong": "Email to long",
+    "passwordTooLong": "Password cant have more than 50 characters"
   }
 }

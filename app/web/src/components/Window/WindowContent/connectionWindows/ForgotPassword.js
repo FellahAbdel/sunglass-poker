@@ -4,6 +4,7 @@ import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
+import { validateEmail } from "../../../Utiles/ValidationUtils.jsx";
 
 /**
  * ForgotPassword provides a form for users to request a password reset link via email.
@@ -37,6 +38,14 @@ const ForgotPassword = () => {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation de l'email
+    const emailValidation = validateEmail(formData.email);
+    if (!emailValidation.isValid) {
+      setValidationError(emailValidation.errorMessage);
+      return;
+    }
+
     try {
       const result = await checkEmail(formData.email);
       if (result === true) {
@@ -44,7 +53,7 @@ const ForgotPassword = () => {
       } else if (result === "not-found") {
         setValidationError("error.emailNotFound");
       } else {
-        console.error("Failed to found the mail.");
+        console.error("Failed to find the email.");
         setValidationError("error.emailNotFound");
       }
     } catch (error) {

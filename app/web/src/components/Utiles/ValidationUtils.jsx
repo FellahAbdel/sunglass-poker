@@ -25,18 +25,33 @@ export const validateUsername = (username) => {
 // Validation e-mail
 export const validateEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (email.length > 254) {
+    return {
+      isValid: false,
+      errorMessage: "error.emailTooLong",
+    };
+  }
+
   return {
     isValid: emailRegex.test(email),
-    errorMessage: "error.invalidEmail",
+    errorMessage: emailRegex.test(email) ? "" : "error.invalidEmail",
   };
 };
 
 // Validation mot de passe
 export const validatePassword = (password) => {
+  if (password.length > 50) {
+    return {
+      isValid: false,
+      errorMessage: "error.passwordTooLong",
+    };
+  }
+
   // Vérifier si le mot de passe a au moins 6 caractères
   return {
     isValid: password.length >= 6,
-    errorMessage: "error.password6Characters",
+    errorMessage: password.length >= 6 ? "" : "error.password6Characters",
   };
 };
 
@@ -52,6 +67,13 @@ export const validatePasswordMatch = (password, repeatPassword) => {
 //Fonction pour la création de table
 
 export const validatePasswordOrNull = (password) => {
+
+  if (password.length > 50) {
+    return {
+      isValid: false,
+      errorMessage: "error.passwordTooLong",
+    };
+  }
   // Vérifier si le mot de passe a au moins 6 caractères
   return {
     isValid: password.length === 0 || password.length >= 6,

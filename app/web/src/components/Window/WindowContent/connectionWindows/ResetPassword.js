@@ -97,11 +97,17 @@ const ResetPasswordWindow = () => {
           openSuccessWindow(getTranslatedWord("connection.successReset"));
         } else {
           console.error("Error changing password:", result.error);
-          setValidationErrors("error.emailNotFound");
+          setValidationErrors({
+            ...validationErrors,
+            email: "error.emailNotFound",
+          });
         }
       } catch (error) {
         console.error("Error changing password:", error);
-        setValidationErrors("error.emailNotFound");
+        setValidationErrors({
+          ...validationErrors,
+          email: "error.emailNotFound",
+        });
       }
     } else {
       console.error("Form validation failed");

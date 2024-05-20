@@ -14,17 +14,22 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       unique: true, // Pseudo must be unique
+      minlength: 3,
+      maxlength: 20
     },
     // User's email
     email: {
       type: String,
       required: true,
       unique: true, // Email must be unique
+      maxlength: 254
     },
     // User's password (hashed)
     password: {
       type: String,
       required: true,
+      minlength: 6,
+      maxlength: 20
     },
     // Number of coins owned by the user
     coins: {

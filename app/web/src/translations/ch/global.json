@@ -181,11 +181,14 @@
     "loadMore": "加载更多"
   },
   "error": {
-    "noAccountFound": "没有找到账户",
-    "invalidEmail": "无效的电子邮箱地址",
-    "badUsername": "用户名必须至少有3个字符",
+    "noAccountFound": "未找到账户",
+    "invalidEmail": "无效的电子邮件地址",
+    "badUsername": "名称必须至少有3个字符",
+    "usernameTooLong": "名称必须少于20个字符",
     "password6Characters": "密码必须至少有6个字符",
     "passwordNotMatch": "密码不匹配",
-    "emailNotFound": "未找到电子邮箱"
+    "emailNotFound": "电子邮件未找到",
+    "emailTooLong": "电子邮件太长",
+    "passwordTooLong": "密码不能超过50个字符"
   }
 }

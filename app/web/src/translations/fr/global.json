@@ -182,10 +182,13 @@
   },
   "error": {
     "noAccountFound": "Aucun compte trouvé",
-    "invalidEmail": "Adresse email invalide",
-    "badUsername": "Le nom d'utilisateur doit comporter au moins 3 caractères",
-    "password6Characters": "Le mot de passe doit comporter au moins 6 caractères",
+    "invalidEmail": "Adresse e-mail invalide",
+    "badUsername": "Le nom doit contenir au moins 3 caractères",
+    "usernameTooLong": "Le nom doit contenir moins de 20 caractères",
+    "password6Characters": "Le mot de passe doit contenir au moins 6 caractères",
     "passwordNotMatch": "Les mots de passe ne correspondent pas",
-    "emailNotFound": "Email non trouvé"
+    "emailNotFound": "E-mail non trouvé",
+    "emailTooLong": "L'e-mail est trop long",
+    "passwordTooLong": "Le mot de passe ne peut pas dépasser 50 caractères"
   }
 }

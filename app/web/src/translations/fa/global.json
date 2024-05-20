@@ -182,10 +182,13 @@
   },
   "error": {
     "noAccountFound": "هیچ حسابی پیدا نشد",
-    "invalidEmail": "آدرس ایمیل نامعتبر",
-    "badUsername": "نام کاربری باید حداقل 3 کاراکتر داشته باشد",
-    "password6Characters": "رمز عبور باید حداقل 6 کاراکتر داشته باشد",
+    "invalidEmail": "آدرس ایمیل نامعتبر است",
+    "badUsername": "نام باید حداقل ۳ کاراکتر داشته باشد",
+    "usernameTooLong": "نام باید کمتر از ۲۰ کاراکتر باشد",
+    "password6Characters": "رمز عبور باید حداقل ۶ کاراکتر داشته باشد",
     "passwordNotMatch": "رمزهای عبور مطابقت ندارند",
-    "emailNotFound": "ایمیل یافت نشد"
+    "emailNotFound": "ایمیل یافت نشد",
+    "emailTooLong": "ایمیل بیش از حد طولانی است",
+    "passwordTooLong": "رمز عبور نمی تواند بیش از ۵۰ کاراکتر باشد"
   }
 }
