@@ -156,15 +156,15 @@ module.exports = gameController = {
     // Check if the specified room exists in the game state.
     if (state.game.rooms.hasOwnProperty(room)) {
       const players = state.game.rooms[room].players;
-      console.log(players);
+      // console.log(players);
 
       // If the room is empty, delete it.
       if (players.length === 0) {
         this.dispatch(0, actions.deleteRoom(room));
         this.dao.removeGameDesc(room);
-        console.log("Room", room, "has been deleted because it is empty.");
+        csl.log("Room", room, "has been deleted because it is empty.");
       } else {
-        console.error(
+        csl.error(
           "Room",
           room,
           "is not empty",
@@ -173,7 +173,7 @@ module.exports = gameController = {
         );
       }
     } else {
-      console.error("Room", room, "does not exist, cannot delete.");
+      csl.error("Room", room, "does not exist, cannot delete.");
     }
   },
   // removeAfk:function(room,roomId){
@@ -346,11 +346,11 @@ module.exports = gameController = {
       // Retrieve the newly created game description.
       const gameDescr = respons.data;
       const room = gameDescr._id;
-      console.log("Before init", state.game.rooms);
+      // console.log("Before init", state.game.rooms);
 
       // Initialize the game room.
       state.game.rooms[room] = initGameRoom(room);
-      console.log("After init", state.game.rooms);
+      // console.log("After init", state.game.rooms);
 
       // Dispatch actions to create the game and join the room.
       this.dispatch(userId, actions.createGame(room, pseudo));
@@ -382,12 +382,12 @@ module.exports = gameController = {
       return;
     }
 
-    console.log("Before init", state.game.rooms);
+    // console.log("Before init", state.game.rooms);
 
     // Initialize the game room.
     state.game.rooms[gameRoomId] = initGameRoom(gameRoomId);
 
-    console.log("After init", state.game.rooms);
+    // console.log("After init", state.game.rooms);
 
     // Retrieve the server name from the provided game room ID.
     const serverName = await this.dao.getServerNameFromGameId(gameRoomId);
@@ -466,7 +466,7 @@ module.exports = gameController = {
     csl.log(fileType, "user : ", user, " dispatch event : ", action);
     store.dispatch(action);
     const state = store.getState();
-    console.log(state);
+    // console.log(state);
     const answer = state.game.answer;
     csl.log(fileType, "Answer: ", answer);
     store.dispatch(actions.clearAnswer());
@@ -480,7 +480,7 @@ module.exports = gameController = {
    */
   startGame: async function (room, userId) {
     // Logic to start the game
-    console.log("Starting game in room:", room, "requested by player:", userId);
+    // console.log("Starting game in room:", room, "requested by player:", userId);
     const state = store.getState();
     if (state.game.rooms.hasOwnProperty(room)) {
       store.dispatch(actions.startGame(room, userId));

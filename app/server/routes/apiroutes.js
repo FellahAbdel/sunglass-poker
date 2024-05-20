@@ -10,7 +10,7 @@ module.exports = (app, dao, gameController) => {
     var roomsInfos = [];
     roomsInfos[0] = store.getState().game;
     for (var room in roomsInfos[0].rooms) {
-      console.log(roomsInfos[0].rooms[room]);
+      csl.log(roomsInfos[0].rooms[room]);
       roomsInfos[0].rooms[room].game.restartCall =
         roomsInfos[0].rooms[room].game.restartCall === false ? 0 : 1;
       roomsInfos[0].rooms[room].game.focusTurnCall =
@@ -19,7 +19,7 @@ module.exports = (app, dao, gameController) => {
     roomsInfos[1] = [];
     if (gameController !== undefined)
       for (var room in gameController.refresh) {
-        console.log(room);
+        csl.log(room);
         roomsInfos[1].push({
           refresh: gameController.refresh[room] !== undefined ? true : false,
         });
@@ -57,7 +57,7 @@ module.exports = (app, dao, gameController) => {
         });
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      csl.error("Error during login:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -74,7 +74,7 @@ module.exports = (app, dao, gameController) => {
         res.status(404).json(result);
       }
     } catch (error) {
-      console.error("Error during email check:", error);
+      csl.error("Error during email check:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -96,7 +96,7 @@ module.exports = (app, dao, gameController) => {
         res.status(400).json(result);
       }
     } catch (error) {
-      console.error("Error updating user data:", error);
+      csl.error("Error updating user data:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -115,7 +115,7 @@ module.exports = (app, dao, gameController) => {
         res.status(400).json(result);
       }
     } catch (error) {
-      console.error("Error buying item:", error);
+      csl.error("Error buying item:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -131,7 +131,7 @@ module.exports = (app, dao, gameController) => {
         res.status(404).json(result);
       }
     } catch (error) {
-      console.error("Error fetching user information:", error);
+      csl.error("Error fetching user information:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -145,7 +145,7 @@ module.exports = (app, dao, gameController) => {
         res.status(500).json({ success: false, message: result.message });
       }
     } catch (error) {
-      console.error("Error fetching items:", error.message);
+      csl.error("Error fetching items:", error.message);
       res.status(500).json({
         success: false,
         message: "Server error during item retrieval",
@@ -164,7 +164,7 @@ module.exports = (app, dao, gameController) => {
         res.status(404).json(result);
       }
     } catch (error) {
-      console.error("Error activating avatar component:", error);
+      csl.error("Error activating avatar component:", error);
       res.status(500).json({ success: false, message: "Server error" });
     }
   });
@@ -207,7 +207,7 @@ module.exports = (app, dao, gameController) => {
       res.status(result.code).json(result.data);
     } catch (error) {
       // Handle unexpected errors
-      console.error("Error creating game:", error);
+      csl.error("Error creating game:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -227,7 +227,7 @@ module.exports = (app, dao, gameController) => {
       res.status(result.code).json(result.data);
     } catch (error) {
       // Handle unexpected errors
-      console.error("Error fetching game descriptions:", error);
+      csl.error("Error fetching game descriptions:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -247,13 +247,13 @@ module.exports = (app, dao, gameController) => {
       res.status(result.code).json(result.data);
     } catch (error) {
       // Handle unexpected errors
-      console.error("Error fetching avaliable games:", error);
+      csl.error("Error fetching avaliable games:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
 
   app.get("/api/avatar-info/:userId", async (req, res) => {
-    console.log("UserID from URL:", req.params.userId);
+    csl.log("UserID from URL:", req.params.userId);
     try {
       const userId = req.params.userId;
       const avatarData = await dao.getAvatarInfo(userId);
@@ -263,7 +263,7 @@ module.exports = (app, dao, gameController) => {
         res.status(404).json({ message: "Avatar information not found" });
       }
     } catch (error) {
-      console.error("Error fetching avatar information:", error);
+      csl.error("Error fetching avatar information:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -290,7 +290,7 @@ module.exports = (app, dao, gameController) => {
         });
       }
     } catch (error) {
-      console.error("Error updating coins:", error);
+      csl.error("Error updating coins:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -308,7 +308,7 @@ module.exports = (app, dao, gameController) => {
         res.status(401).json({ success: false, error: "Incorrect password" });
       }
     } catch (error) {
-      console.error("Error verifying game password:", error);
+      csl.error("Error verifying game password:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -324,7 +324,7 @@ module.exports = (app, dao, gameController) => {
         res.status(400).json(result);
       }
     } catch (error) {
-      console.error("Error changing password:", error);
+      csl.error("Error changing password:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });

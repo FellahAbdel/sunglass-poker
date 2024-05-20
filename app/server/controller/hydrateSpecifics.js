@@ -23,7 +23,7 @@ module.exports = eventHydra = (socket, data) => {
 
     // We check if the action the user tries to perform is related to a game.
     // If so, we will dispatch the event through specific game dispatchers to perform actions like end turn, etc.
-    console.log('Action received in hydra ->', action);
+    csl.log('Hydra','Action received in hydra ->', action);
     if (action.type !== undefined) {
         if (actions.PLAYER_GAME_ACTION_LIST.findIndex(e => e == action.type) !== -1) {
             hydrated.subtype = actions.PLAYER_GAME_ACTION;

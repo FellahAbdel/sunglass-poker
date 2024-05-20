@@ -100,7 +100,7 @@ const gameReducer = (state = initialState, action) => {
         };
       } else {
         // La partie est déjà en cours
-        console.log("La partie est déjà en cours.");
+        csl.log("La partie est déjà en cours.");
         return state;
       }
     case actions.GAME_STARTED:
@@ -109,7 +109,7 @@ const gameReducer = (state = initialState, action) => {
 
     case actions.LEAVE_ROOM:
       answer = { status: false, mes: "Couldn't remove player from room" };
-      console.log(action.payload);
+      csl.log(action.payload);
       room = action.payload.tableId;
       playerId = action.payload.player;
       var isMaster = false;
@@ -129,7 +129,7 @@ const gameReducer = (state = initialState, action) => {
             state.rooms[room].game.setMaster(updatedPlayers[0].getPlayerId());
         }
         if (updatedPlayers.length !== state.rooms[room].players.length) {
-          console.log("Player:", playerId, " removed from room:", room);
+          csl.log("Player:", playerId, " removed from room:", room);
           return {
             ...state,
             answer: {
@@ -273,13 +273,13 @@ const gameReducer = (state = initialState, action) => {
         ...state,
       };
     case actions.FOLD:
-      console.log(
+      csl.log(
         "Handling FOLD action for player",
         action.payload.playerId,
         "in room",
         action.payload.room
       );
-      console.log(state.rooms[action.payload.room], action);
+      csl.log(state.rooms[action.payload.room], action);
 
       if (action.payload && action.payload.playerId) {
         const room = state.rooms[action.payload.room];
@@ -291,10 +291,10 @@ const gameReducer = (state = initialState, action) => {
           csl.log("playerAction", "Player is folding.");
           room.game.fold(player);
         } else {
-          console.error("Player not found for the fold action");
+          csl.error("Player not found for the fold action");
         }
       } else {
-        console.error("Invalid payload for Fold action");
+        csl.error("Invalid payload for Fold action");
       }
 
       return { ...state };
@@ -305,7 +305,7 @@ const gameReducer = (state = initialState, action) => {
         mes: "Action did not go through",
         payload: undefined,
       };
-      console.log(state.rooms[action.payload.room], action);
+      csl.log(state.rooms[action.payload.room], action);
       if (action.payload && action.payload.playerId) {
         csl.log("playerAction", " call for raise of ", action.payload.amount);
         const room = state.rooms[action.payload.room];
@@ -317,22 +317,22 @@ const gameReducer = (state = initialState, action) => {
           csl.log("playerAction", "Player is beting.");
           answer = room.game.bet(player, action.payload.amount);
         } else {
-          console.error("Player not found for the bet action");
+          csl.error("Player not found for the bet action");
         }
       } else {
-        console.error("Invalid payload for bet action");
+        csl.error("Invalid payload for bet action");
       }
 
       return { ...state, answer: answer };
 
     case actions.CHECK:
-      console.log(
+      csl.log(
         "Handling CHECK action for player",
         action.payload.playerId,
         "in room",
         action.payload.room
       );
-      console.log(state.rooms[action.payload.room], action);
+      csl.log(state.rooms[action.payload.room], action);
 
       if (action.payload && action.payload.playerId) {
         const room = state.rooms[action.payload.room];
@@ -344,16 +344,16 @@ const gameReducer = (state = initialState, action) => {
           csl.log("playerAction", "Player is checking.");
           room.game.check(player);
         } else {
-          console.error("Player not found for the check action");
+          csl.error("Player not found for the check action");
         }
       } else {
-        console.error("Invalid payload for CHECK action");
+        csl.error("Invalid payload for CHECK action");
       }
 
       return { ...state };
 
     case actions.SHOW_CARD:
-      console.log(state.rooms[action.payload.room], action);
+      csl.log(state.rooms[action.payload.room], action);
       const {
         room: showRoomId,
         playerId: showPlayerId,
@@ -372,7 +372,7 @@ const gameReducer = (state = initialState, action) => {
       return { ...state };
 
     case actions.HIDE_CARD:
-      console.log(state.rooms[action.payload.room], action);
+      csl.log(state.rooms[action.payload.room], action);
       const {
         room: hideRoomId,
         playerId: hidePlayerId,
@@ -408,10 +408,10 @@ const gameReducer = (state = initialState, action) => {
         if (player) {
           room.game.activateBonus(player);
         } else {
-          console.error("Player not found for the bonus activation action");
+          csl.error("Player not found for the bonus activation action");
         }
       } else {
-        console.error("Invalid payload for bonus activation action");
+        csl.error("Invalid payload for bonus activation action");
       }
       return { ...state };
 

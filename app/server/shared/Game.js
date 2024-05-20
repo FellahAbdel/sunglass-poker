@@ -86,7 +86,7 @@ class Game {
     this.players = this.allPlayers.filter(
       (player) => !player.isSpectator && !player.isAFK
     );
-    console.log(
+    csl.log(
       `Updated players list: Now includes ${this.players.length} active players.`
     );
   }
@@ -96,7 +96,7 @@ class Game {
     if (player) {
       return player.name;
     } else {
-      console.error("Player not found with ID:", playerId);
+      csl.error("Player not found with ID:", playerId);
       return null;
     }
   }
@@ -111,13 +111,13 @@ class Game {
     // Vérifier si le joueur existe déjà et son état
     if (player) {
       // Si le joueur a 0 coins, il ne peut pas rejoindre la table
-      console.log(
+      csl.log(
         `Player ${player.name} player.isSpectator test`,
         player.isSpectator
       );
 
       if (player.getPlayerMoney() <= 0) {
-        console.log(
+        csl.log(
           `Player ${player.name} cannot rejoin the table due to insufficient coins.`
         );
         player.movePlayerToSpectator();
@@ -136,7 +136,7 @@ class Game {
     if (player) {
       return player;
     } else {
-      console.error("Player not found with ID:", playerId);
+      csl.error("Player not found with ID:", playerId);
       return null;
     }
   }
@@ -175,7 +175,7 @@ class Game {
     // this.moveSpecOrPlayer(player.getPlayerId());
     player.setAfk();
     if (player.playerId === this.master) {
-      console.log("Le master est AFK");
+      csl.log("Le master est AFK");
       this.checkForNewMaster();
     }
   }
@@ -296,12 +296,12 @@ class Game {
     }
 
     if (this.currentStage === "showdown" || this.currentStage === "end") {
-      console.log("ROTATE FOCUS DANS END OU SHOWDOWN");
+      csl.log("ROTATE FOCUS DANS END OU SHOWDOWN");
       return;
     }
 
     const originalFocus = this.focus;
-    console.log("original", originalFocus);
+    csl.log("original", originalFocus);
 
     this.focus = (this.focus + 1) % this.players.length;
     csl.log("rotateFocus", "focusapresoriginal", this.focus);
@@ -311,14 +311,14 @@ class Game {
       !this.players[this.focus].isActive ||
       this.players[this.focus].getStatus() === "tapis"
     ) {
-      console.log(
+      csl.log(
         "Player qu'on regarde :",
         this.players[this.focus].isActive,
         this.players[this.focus].getStatus()
       );
       this.focus = (this.focus + 1) % this.players.length;
       if (this.focus === originalFocus) {
-        console.log("No active players available. Setting focus to null.");
+        csl.log("No active players available. Setting focus to null.");
         clearTimeout(this.focusTurnCall);
         while (this.currentStage !== "showdown") {
           this.advanceStage();
@@ -383,7 +383,7 @@ class Game {
     this.focus = null;
     this.state = "waiting";
     this.updateActivePlayers();
-    console.log(
+    csl.log(
       "Joueurs actifs lors de la détermination du gagnant:",
       this.activePlayers.map((p) => p.name)
     );
@@ -399,12 +399,12 @@ class Game {
         this.movePlayersWithZeroCoinsToSpectators();
         this.updatePlayersList();
         if (this.state!=="waiting"){
-          console.log("game is already started");
+          csl.log("game is already started");
           return;
         }
         else if (this.players.length <= 1) {
           // Assurez-vous qu'il y a plus d'un joueur actif.
-          console.log("Not enough players to start the game.");
+          csl.log("Not enough players to start the game.");
           return;
         } else {
           this.newgame();
@@ -427,7 +427,7 @@ class Game {
     csl.log("isPlayersTurn", playerId, this.focus, this.activePlayers);
     if (this.focus < 0 || this.focus > this.players.length) this.rotateFocus();
     if (this.focus === null || this.players[this.focus].playerId !== playerId) {
-      console.error("It's not this player's turn.");
+      csl.error("It's not this player's turn.");
       return false;
     }
     return true;
@@ -436,10 +436,10 @@ class Game {
   fold(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
-      console.log("JE SUIS", this.focus);
+      csl.log("JE SUIS", this.focus);
       this.rotateFocus();
-      console.log("J'ai rotate", this.focus);
-      console.log("NOmbre de joururs actif :", this.activePlayers.length);
+      csl.log("J'ai rotate", this.focus);
+      csl.log("NOmbre de joururs actif :", this.activePlayers.length);
     }
   }
 
@@ -519,7 +519,7 @@ class Game {
   }
 
   activateBonus(player) {
-    console.log("j'active le bonus du joueur : ", player.name);
+    csl.log("j'active le bonus du joueur : ", player.name);
     if (this.isPlayersTurn(player.getPlayerId())) {
       const playerBonus = player.getPlayerBonus();
       const self = this;
@@ -596,8 +596,8 @@ class Game {
       this.players.push(player);
       this.checkForNewMaster();
     }
-    console.log(coins);
-    console.log(`Player ${player.name} added.`);
+    csl.log(coins);
+    csl.log(`Player ${player.name} added.`);
     this.checkForNewMaster();
   }
 
@@ -704,23 +704,23 @@ class Game {
 
   start(playerId) {
     if (this.master === playerId) {
-      console.log("Le master lance la game");
+      csl.log("Le master lance la game");
       // S'assurer que la liste des joueurs actifs est à jour avant de démarrer.
       this.movePlayersWithZeroCoinsToSpectators();
       this.updatePlayersList();
 
       if (this.state !== "waiting") {
-        console.log("The game is not in a waiting state.");
+        csl.log("The game is not in a waiting state.");
         return;
       }
 
       if (this.players.length <= 1) {
         // Assurez-vous qu'il y a plus d'un joueur actif.
-        console.log("Not enough players to start the game.");
+        csl.log("Not enough players to start the game.");
         return;
       }
 
-      console.log("newgame se lance");
+      csl.log("newgame se lance");
       this.newgame();
     } else {
       // Pour les non-maîtres
@@ -744,7 +744,7 @@ class Game {
   //Probmème:on devra surement clear l'affichage
   newgame() {
     if (!this.allow_start) return;
-    console.log("Passe     if (!this.allow_start) return");
+    csl.log("Passe     if (!this.allow_start) return");
     this.allow_start = false;
     // this.activePlayers = this.players.filter(
     //   (player) => player.isActive && !player.isAfk
@@ -757,7 +757,7 @@ class Game {
     this.updateActivePlayers();
 
     if (this.activePlayers.length <= 1) {
-      console.log(
+      csl.log(
         "pas assez de joueurs, if (this.activePlayers.length <= 1) {"
       );
       return;
@@ -786,13 +786,13 @@ class Game {
     this.nbhostfolded = 0;
 
     const firstPlayer = this.players[this.focus];
-    console.log("firstplayer: ", firstPlayer);
+    csl.log("firstplayer: ", firstPlayer);
     firstPlayer.betinitial(this.gameCurrentBet / 2);
     this.total += this.gameCurrentBet / 2;
 
     this.rotateFocus();
     const nextPlayer = this.players[this.focus];
-    console.log("nextPlayer: ", nextPlayer);
+    csl.log("nextPlayer: ", nextPlayer);
     nextPlayer.betinitial(this.gameCurrentBet);
     this.total += this.gameCurrentBet;
 
@@ -803,8 +803,8 @@ class Game {
 
     //IL VA SUREMENT MANQUE UN JOUEUR A CHECK AVANT D'AFFICHER LE FLOP
 
-    // console.log("length:",this.players.length);
-    // console.log("active:",this.activePlayers.length);
+    // csl.log("length:",this.players.length);
+    // csl.log("active:",this.activePlayers.length);
   }
 
   evaluateHands() {
@@ -827,8 +827,8 @@ class Game {
       // winner.jesuislewinner();
       // return;
     }
-    // console.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
-    console.log("winner est: ", winner);
+    // csl.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
+    csl.log("winner est: ", winner);
     const nbwinner = winner.length;
     this.players.forEach((p) => {(p.decrementalTotal =(p.decrementalTotal === undefined)?p.betTotal:p.decrementalTotal);csl.log('Mise par joueur a gagné',`${p.name} : ${p.decrementalTotal}`)});
     if (nbwinner >= 2) {
@@ -932,19 +932,19 @@ class Game {
     // Burn a card before dealing the flop
     this.deck.burn();
     // Deal 3 cards for the flop
-    console.log("je suis RENTREr DANS FLOP");
+    csl.log("je suis RENTREr DANS FLOP");
     const flopCards = this.deck.deal3Cards();
-    console.log("les flopCards:", flopCards);
+    csl.log("les flopCards:", flopCards);
 
     // If dealCards() doesn't return exactly 3 cards, handle the error
     if (flopCards.length !== 3) {
-      console.error("Unexpected number of cards dealt for the flop");
+      csl.error("Unexpected number of cards dealt for the flop");
       return; // Exit the method or handle the error appropriately
     }
 
     // Update the community cards on the poker table with the flop cards
     this.pokerTable.communityCards = [...flopCards];
-    console.log(this.pokerTable.communityCards);
+    csl.log(this.pokerTable.communityCards);
   }
 
   /*
@@ -956,7 +956,7 @@ class Game {
     this.deck.burn();
 
     this.pokerTable.communityCards.push(this.deck.deal());
-    console.log(this.pokerTable.communityCards);
+    csl.log(this.pokerTable.communityCards);
   }
 
   /*
@@ -968,11 +968,11 @@ class Game {
     this.deck.burn();
 
     this.pokerTable.communityCards.push(this.deck.deal());
-    console.log(this.pokerTable.communityCards);
+    csl.log(this.pokerTable.communityCards);
   }
   advanceStage() {
     if (this.state !== "active") {
-      console.log("Game not active, cannot advance stage.");
+      csl.log("Game not active, cannot advance stage.");
       return;
     }
     const entryStage = this.currentStage;
@@ -990,8 +990,8 @@ class Game {
 
     switch (this.currentStage) {
       case "flop":
-        console.log("PASSE PAR LE CASE FLOP");
-        console.log(
+        csl.log("PASSE PAR LE CASE FLOP");
+        csl.log(
           "activePlayers.length au niveau de flop",
           this.activePlayers.length
         );
@@ -999,18 +999,18 @@ class Game {
         break;
       case "turn":
         this.turn();
-        console.log("PASSE PAR LE CASE TURN");
-        console.log(
+        csl.log("PASSE PAR LE CASE TURN");
+        csl.log(
           "activePlayers.length au niveau de turn",
           this.activePlayers.length
         );
         break;
       case "river":
         this.river();
-        console.log("PASSE PAR LE CASE river");
+        csl.log("PASSE PAR LE CASE river");
         break;
       case "showdown":
-        console.log("PASSE PAR LE CASE showdown");
+        csl.log("PASSE PAR LE CASE showdown");
         //this.state = "waiting";
         //------------------------------------------------------------------------------------------------
         // this.players.forEach((player) => {
@@ -1031,7 +1031,7 @@ class Game {
         break;
       case "end":
         this.focus = null;
-        console.log("PASSE PAR LE CASE end");
+        csl.log("PASSE PAR LE CASE end");
         break;
     }
   }
@@ -1046,7 +1046,7 @@ class Game {
 
   advanceStageToShowdown() {
     if (this.state !== "active") {
-      console.log("Game not active, cannot advance stage to showdown.");
+      csl.log("Game not active, cannot advance stage to showdown.");
       return;
     }
 
@@ -1110,7 +1110,7 @@ class Game {
   listeCombinaison(activePlayers) {
     let res = [];
 
-    console.log("activePlayers.length:", activePlayers.length);
+    csl.log("activePlayers.length:", activePlayers.length);
     for (let i = 0; i < activePlayers.length; i++) {
       let f7c = this.make7Cards(activePlayers[i]);
       let c = this.combinaison(f7c.cards);
@@ -1124,7 +1124,7 @@ class Game {
   //result est vide mais ça passe et this.poker.table marche pas
   // determineWinner() {
   //   const results = this.listeCombinaison(this.getActivePlayers());
-  //   console.log("results: ", results);
+  //   csl.log("results: ", results);
   //   return results;
   // }
   /*

@@ -30,7 +30,7 @@ module.exports = function (app, bdd) {
 
   db.on(
     "error",
-    console.error.bind(console, "Error connecting to the database:")
+    csl.error.bind(console, "Error connecting to the database:")
   );
   db.once("open", () => {
     // Log successful database connection
@@ -391,7 +391,7 @@ module.exports = function (app, bdd) {
         return { success: true, data: users };
       } catch (err) {
         // Log and return error message if fetching rankings fails
-        console.error("Error fetching rankings:", err);
+        csl.error("Error fetching rankings:", err);
         return { success: false, error: err };
       }
     },
@@ -423,7 +423,7 @@ module.exports = function (app, bdd) {
         ]);
         return { success: true, data: users };
       } catch (err) {
-        console.error("Error fetching rankings:", err);
+        csl.error("Error fetching rankings:", err);
         return { success: false, error: err }; // rethrow the error after logging
       }
     },*/
@@ -448,7 +448,7 @@ module.exports = function (app, bdd) {
 
         // If user not found, log and return null
         if (!user) {
-          console.log("No user found with ID:", userId);
+          csl.log("No user found with ID:", userId);
           return null;
         }
 
@@ -473,7 +473,7 @@ module.exports = function (app, bdd) {
         };
       } catch (error) {
         // Log and throw error if fetching avatar information fails
-        console.error("Error fetching avatar information:", error);
+        csl.error("Error fetching avatar information:", error);
         throw error;
       }
     },
@@ -537,7 +537,7 @@ module.exports = function (app, bdd) {
 
       // Find the user by ID and update their inGame status to gameId
       const user = await UserModel.findById(userId);
-      console.log(userId, user);
+      csl.log(userId, user);
       user.inGame = gameId;
       await user.save();
     },
@@ -582,21 +582,21 @@ module.exports = function (app, bdd) {
         // Find the game description by user's inGame ID
         const gameDesc = await GameDescriptionModel.findById(user.inGame);
 
-        console.log("this ", user, " is leaving the game");
+        csl.log("this ", user, " is leaving the game");
 
-        console.log("game players before remove", gameDesc.players);
+        csl.log("game players before remove", gameDesc.players);
 
         // If game description exists, remove the player's ID from the players array
         if (gameDesc !== null) {
           gameDesc.players = gameDesc.players.filter((p) => p !== id);
           await gameDesc.save();
         }
-        console.log("game players after remove", gameDesc.players);
+        csl.log("game players after remove", gameDesc.players);
 
 
         // Reset the user's inGame status to null
         user.inGame = null;
-        console.log(user, " removing user in game");
+        csl.log(user, " removing user in game");
         await user.save();
       } catch (err) {
         // Log error if player leaving game encounters an error
@@ -639,7 +639,7 @@ module.exports = function (app, bdd) {
         };
       } catch (error) {
         // Log and return error if updating user coins fails
-        console.error("Error updating user coins:", error);
+        csl.error("Error updating user coins:", error);
         return { success: false, message: "Failed to update user coins" };
       }
     },
@@ -713,7 +713,7 @@ module.exports = function (app, bdd) {
         }
       } catch (error) {
         // Log and throw error if updating status to IN_PROGRESS fails
-        console.error("Error updating status to IN_PROGRESS:", error);
+        csl.error("Error updating status to IN_PROGRESS:", error);
         throw error;
       }
     },
@@ -735,7 +735,7 @@ module.exports = function (app, bdd) {
         return { success: false, error: "Incorrect password" };
       }
     } catch (error) {
-      console.error("Error verifying game password:", error);
+      csl.error("Error verifying game password:", error);
       return { success: false, error: "Internal server error" };
     }
   };
@@ -760,7 +760,7 @@ module.exports = function (app, bdd) {
       }
     } catch (error) {
       // Log and handle the error
-      console.error("Error updating password:", error);
+      csl.error("Error updating password:", error);
       return { success: false, message: "Failed to update password" };
     }
   };

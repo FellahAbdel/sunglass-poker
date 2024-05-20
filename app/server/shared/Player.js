@@ -46,7 +46,6 @@ class Player {
 
     return new Proxy(this, {
       set: (target, property, value) => {
-        console.log("proxyMoney called");
         if (property === "playerMoney") {
           target
             .updateMoneyInDatabase(value - target.playerMoney)
@@ -54,7 +53,7 @@ class Player {
               target.playerMoney = value;
             })
             .catch((error) => {
-              console.error("Failed to update money in database:", error);
+              csl.error("Failed to update money in database:", error);
             });
         } else {
           target[property] = value;
