@@ -50,10 +50,10 @@
 - **13/05** : bug les joueurs ne recoient pas les messages --> Configuration de Socket.io côté serveur et liaison  **4h**
 - **14/05** : Réunion équipe + resolution du bug de reception de messages --> ChatboxV2 fonctionnel + tests  **7H**
 - **15/05** : Amélioration de la chatbox côté frontend (inclusion des expediteurs et de la forme des messages) **4H**
-- **16/05** : Chatbox finale avec communications propre pour chaque salle + tests + merge et reglage des conflits **6H**
+- **16/05** : Chatbox finale avec communications propre pour chaque salle + tests + merge et reglage des conflits 
 - **17/05** : Tests et débogage liés au ScoreEngine  **5h**
 - **18/05** : Tests et débogage liés au ScoreEngine  **5h**
-- **19/05** : Développement et mise en page du tutoriel pour Texas Hold'em, intégration des images et des explications des fonctionnalités spéciales de l'application  **6h**
+- **19/05** : Développement et mise en page du tutoriel pour Texas Hold'em, intégration des images et des 
 - **20/05** : tutoriel finale + redaction rapport personnel  **4h**
 
 - **Heures totales** : 144 heures et 20 minutes
