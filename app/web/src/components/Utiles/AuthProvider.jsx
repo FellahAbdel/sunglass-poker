@@ -250,7 +250,6 @@ export const AuthProvider = ({ children }) => {
 
   const registerUser = async (userData) => {
     try {
-      // Effectuer la requête POST vers votre API
       const response = await fetch("api/users", {
         ...CORSSETTINGS,
         body: JSON.stringify(userData),

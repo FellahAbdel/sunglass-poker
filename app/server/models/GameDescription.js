@@ -24,7 +24,7 @@ const GameDescriptionSchema = new Schema({
     type: String,
     required: false,
     minlength: 6,
-    maxlength: 20
+    maxlength: 1024
   },
   rank: String,
   players: {

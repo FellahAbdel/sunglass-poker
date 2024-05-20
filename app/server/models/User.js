@@ -29,7 +29,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       minlength: 6,
-      maxlength: 20
+      maxlength: 1024
     },
     // Number of coins owned by the user
     coins: {
