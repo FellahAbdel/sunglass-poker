@@ -71,7 +71,7 @@ const ValidationWindow = () => {
           <Button
             label={getTranslatedWord("shop.confirm")}
             styleClass={`btn_onglets_shop2 ${hasEnoughCoins ? 'back-color1' : 'back-color4'}`}
-            onClick={handleConfirm}
+            onClick={hasEnoughCoins && handleConfirm}
           />
           <Button
             label={getTranslatedWord("shop.cancel")}
