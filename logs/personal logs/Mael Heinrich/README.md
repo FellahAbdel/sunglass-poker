@@ -204,7 +204,8 @@
 
 2024/05/19  3H      Reunion avec tout le monde (aziz victor mos et noé) pour test général + fini la video blender
 
+2024/05/20  2H      Fin du montage Blender avec la creation du trailer et retest 
 
---2024/05 SEMAINE 2: 34H30 (TOTAL: 148H)
+--2024/05 SEMAINE 2: 36H30 (TOTAL: 150H)
 
-TEMPS TOTAL: 148H
+TEMPS TOTAL: 150H
