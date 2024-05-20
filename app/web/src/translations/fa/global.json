@@ -44,8 +44,8 @@
     "ok": "تایید"
   },
   "game": {
-    "loginPlay": "برای بازی وارد شوید",
-    "signupPlay": "برای بازی ثبت نام کنید",
+    "loginPlay": "ورود برای بازی",
+    "signupPlay": "ثبت‌نام برای بازی",
     "startGame": "شروع بازی",
     "joinGame": "پیوستن به بازی",
     "createAgame": "ایجاد بازی جدید",
@@ -54,28 +54,34 @@
     "name": "نام",
     "gameName": "نام بازی",
     "PasswordOptionnal": "رمز عبور (اختیاری)",
-    "ranked": "رتبه بندی",
+    "ranked": "رتبه‌بندی",
     "players": "بازیکنان",
     "selectRank": "انتخاب رتبه",
     "join": "پیوستن",
-    "full": "پر",
-    "noActiveServer": "هیچ سرور فعالی نیست"
+    "full": "کامل",
+    "noActiveServer": "سرور فعال وجود ندارد",
+    "notEnoughSC": "سکه‌های خورشید کافی برای پیوستن به این بازی ندارید",
+    "notEnoughPlayer": "بازیکنان کافی برای شروع بازی وجود ندارد",
+    "yourTurn": "نوبت شما",
+    "theirTurn": "نوبت آن‌ها"
   },
   "handGuide": {
-    "highcard": "کارت بالا",
-    "pair": "جفت",
+    "highCard": "کارت بالا",
+    "onePair": "یک جفت",
     "twoPair": "دو جفت",
-    "threeOfKind": "سه تا از یک نوع",
-    "straight": "رابطه مستقیم",
+    "threeOfAKind": "سه هم نوع",
+    "straight": "ردیف",
     "flush": "فلاش",
-    "fullHouse": "فول هاوس",
-    "fourOfKind": "چهارتا از یک نوع",
-    "straightFlush": "رابطه مستقیم فلاش",
-    "royalFlush": "رابطه مستقیم فلاش سلطنتی",
+    "fullHouse": "فول",
+    "fourOfAKind": "چهار هم نوع",
+    "straightFlush": "ردیف هم نوع",
+    "royalFlush": "فلاش رویال",
+    "lastPlayer": "آخرین بازیکن",
     "show": "نمایش",
-    "hide": "پنهان کردن",
-    "showB": "نمایش هر دو",
-    "hideB": "پنهان کردن هر دو"
+    "hide": "پنهان",
+    "showB": "هر دو را نشان دهید",
+    "hideB": "هر دو را پنهان کنید",
+    "of": "از"
   },
   "gameActionPanel": {
     "raise": "بالا بردن",
@@ -124,7 +130,6 @@
     "animations": "انیمیشن‌ها",
     "langSelect": "انتخاب زبان",
     "volume": "ولوم صدا"
-
   },
   "profil": {
     "name": "نام",

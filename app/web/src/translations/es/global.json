@@ -44,7 +44,7 @@
     "ok": "Ok"
   },
   "game": {
-    "loginPlay": "Inicia sesión para jugar",
+    "loginPlay": "Iniciar sesión para jugar",
     "signupPlay": "Regístrate para jugar",
     "startGame": "Iniciar una partida",
     "joinGame": "Unirse a una partida",
@@ -53,29 +53,35 @@
     "status": "Estado",
     "name": "Nombre",
     "gameName": "Nombre de la partida",
-    "PasswordOptionnal": "Contraseña (Opcional)",
-    "ranked": "Clasificada",
+    "PasswordOptionnal": "Contraseña (opcional)",
+    "ranked": "Clasificado",
     "players": "Jugadores",
     "selectRank": "Seleccionar rango",
     "join": "Unirse",
     "full": "Completo",
-    "noActiveServer": "No hay servidores activos"
+    "noActiveServer": "No hay servidor activo",
+    "notEnoughSC": "No tienes suficientes Sun Coins para unirte a esta partida",
+    "notEnoughPlayer": "No hay suficientes jugadores para comenzar la partida",
+    "yourTurn": "Tu turno",
+    "theirTurn": "Su turno"
   },
   "handGuide": {
-    "highcard": "Carta alta",
-    "pair": "Pareja",
+    "highCard": "Carta alta",
+    "onePair": "Pareja",
     "twoPair": "Doble pareja",
-    "threeOfKind": "Trío",
+    "threeOfAKind": "Trío",
     "straight": "Escalera",
     "flush": "Color",
     "fullHouse": "Full",
-    "fourOfKind": "Póker",
+    "fourOfAKind": "Póker",
     "straightFlush": "Escalera de color",
     "royalFlush": "Escalera real",
+    "lastPlayer": "Último jugador",
     "show": "Mostrar",
     "hide": "Ocultar",
     "showB": "Mostrar ambos",
-    "hideB": "Ocultar ambos"
+    "hideB": "Ocultar ambos",
+    "of": "de"
   },
   "gameActionPanel": {
     "raise": "Subir",

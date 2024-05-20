@@ -62,7 +62,7 @@
     "full": "Full",
     "noActiveServer": "No active server",
     "notEnoughSC": "You don't have enough Sun Coins to join this game",
-    "notEnoughPlayer": "Not Enough Players to start the game",
+    "notEnoughPlayer": "Not Enough Players to start the game ",
     "yourTurn": "Your Turn",
     "theirTurn": "Their Turn"
   },
@@ -81,7 +81,8 @@
     "show": "Show",
     "hide": "Hide",
     "showB": "Show both",
-    "hideB": "Hide both"
+    "hideB": "Hide both",
+    "of":"of"
   },
   "gameActionPanel": {
     "raise": "Raise",

@@ -103,10 +103,10 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
             card1.isVisible
               ? `${getTranslatedWord("handGuide.hide")} ${getCardLabel(
                   card1.number
-                )} of `
+                )} ${getTranslatedWord("handGuide.of")}`
               : `${getTranslatedWord("handGuide.show")} ${getCardLabel(
                   card1.number
-                )} of `
+                )} ${getTranslatedWord("handGuide.of")}`
           }
           iconSrc={cardIcons[card1.color]}
           onClick={() => toggleShowCard(0, card1)}
@@ -115,14 +115,15 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
           styleClass={
             card2.isVisible ? "btn-showCard disabled" : "btn-showCard"
           }
+
           label={
-            card1.isVisible
+            card2.isVisible
               ? `${getTranslatedWord("handGuide.hide")} ${getCardLabel(
                   card2.number
-                )} of `
+                )} ${getTranslatedWord("handGuide.of")}`
               : `${getTranslatedWord("handGuide.show")} ${getCardLabel(
                   card2.number
-                )} of `
+                )} ${getTranslatedWord("handGuide.of")}`
           }
           iconSrc={cardIcons[card2.color]}
           onClick={() => toggleShowCard(1, card2)}
