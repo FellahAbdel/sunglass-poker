@@ -341,8 +341,10 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   };
-
+  const avatarInCache = new Map();
   const getAvatarById = async (userId) => {
+    if(avatarInCache.has(userId))
+      return avatarInCache.get(userId)
     try {
       const requestUrl = `api/avatar-info/${userId}`;
 
@@ -360,7 +362,7 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (data && data.baseAvatar && data.sunglasses && data.colorAvatar) {
-        return {
+        const avatarDataSet = {
           baseAvatar: {
             imgSrc: data.baseAvatar.imgSrc,
             eyePosition: data.baseAvatar.eyePosition,
@@ -372,6 +374,8 @@ export const AuthProvider = ({ children }) => {
             imgSrc: data.colorAvatar.imgSrc,
           },
         };
+        avatarInCache.set(userId, avatarDataSet);
+        return avatarDataSet;
       } else {
         console.error("Data validation error: Missing required avatar fields.");
         throw new Error(

@@ -56,7 +56,7 @@ module.exports = gameController = {
           // Broadcast the updated status of the room.
           gc.broadcastStatus(room);
         },
-        2000, // Refresh interval (in milliseconds).
+        4000, // Refresh interval (in milliseconds).
         room, // Parameter: room name.
         this // Parameter: reference to the current object.
       );

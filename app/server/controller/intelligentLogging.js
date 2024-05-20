@@ -7,7 +7,7 @@ module.exports = csl = {
     buffLocal: [],
     buffCallLocal: [],
     buffConsole: [],
-    isOn: true,
+    isOn: false,
     outLocalAdd: function(args) {
         this.buffCallLocal.push(args);
     },

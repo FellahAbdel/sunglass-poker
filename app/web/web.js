@@ -59,7 +59,7 @@ app.use('/api', apiProxy);
 
 // Reverse proxy for /socketio/
 const socketProxy = createProxyMiddleware('/socketio', {
-    target: 'http://localhost:'+configserver.port_api,
+    target: 'ws://localhost:'+configserver.port_api,
     changeOrigin: true,
     pathRewrite: {
         '^/socketio': 'socket.io/'  // Remove the '/socketio' prefix

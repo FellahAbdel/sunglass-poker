@@ -724,7 +724,7 @@ class Game {
       this.newgame();
     } else {
       // Pour les non-maîtres
-      playerObject = this.getPlayerById(playerId);
+      let playerObject = this.getPlayerById(playerId);
       if(playerObject !== undefined && playerObject !== null){
         playerObject.unsetAfk();
         this.moveSpecOrPlayer(playerId);

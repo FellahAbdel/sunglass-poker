@@ -2,13 +2,13 @@
 import io from "socket.io-client";
 import store from "../store/configureStore";
 let vm = "https://mai-projet-integrateur.u-strasbg.fr/";
-let target = "http://localhost:3001";
+let target = "ws://localhost:3001";
 
 // Create Socket.io instance
 const socket = io(target, {
   withCredentials: true,
   path: target === vm ? "/vmProjetIntegrateurgrp9-1/socketio/" : "",
-  transports: ["polling"],
+  // transports: ["polling"],
 });
 
 /** Fonction de test de communication entre le front et le back
