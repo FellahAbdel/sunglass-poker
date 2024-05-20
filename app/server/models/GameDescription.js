@@ -17,7 +17,6 @@ const GameDescriptionSchema = new Schema({
     type: String,
     required: true,
     unique: true, // Ensures uniqueness of server names
-    minlength: 3,
     maxlength: 20
   },
   roomPassword: {
