@@ -475,7 +475,7 @@ class Game {
 
 
      //   --- RAISE  ---
-      if(this.gameCurrentBet < amount+player.currentBet &&
+      if(this.gameCurrentBet < amount+player.currentBetTurn &&
          amount < player.localMoney
       ){
         this.total+=amount;
