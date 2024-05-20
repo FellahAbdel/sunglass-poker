@@ -352,3 +352,28 @@ Button:hover {
 .btn-serverRefresh:hover img{
   filter: brightness(60%);
 }
+
+.btn-serverPass{
+  width: 25%;
+  height: 100%;
+  border-radius: 0 10px 10px 0;
+  border-top: solid 2px #ccc ;
+  border-right: solid 2px #ccc ;
+}
+#light .btn-serverPass{
+  border-bottom: 2px solid var(--color1-light);
+  background: var(--gradient-1-light);
+}
+#dark .btn-serverPass{
+  border-bottom: 2px solid var(--color1-dark);
+  background: var(--gradient-1-dark);
+}
+.btn-serverPass img{
+  width: 100%;
+  height: auto;
+}
+#dark .btn-serverPass.error,
+#light .btn-serverPass.error{
+  background: var(--gradient-red);
+  border-bottom: 2px solid #f63e3e;
+}

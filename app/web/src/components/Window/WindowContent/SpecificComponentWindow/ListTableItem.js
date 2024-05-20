@@ -107,16 +107,23 @@ const ListTableItem = ({
               />
             )}
             {!ouvert && showPasswordInput && (
-              <TextInputComponent
-                placeholder="Enter Password"
-                value={password}
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                errorMessage={passwordError}
-                styleClass="input-serverRoomPassword"
-                styleClass2="input-serverRoomPassword2"
-                onKeyDown={handleKeyDown}
+              <div className="container-serverRoomPass">
+                <TextInputComponent
+                  placeholder="Enter Password"
+                  value={password}
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  errorMessage={passwordError}
+                  styleClass="input-serverRoomPassword"
+                  styleClass2="input-serverRoomPassword2"
+                  onKeyDown={handleKeyDown}
+                />
+                <Button
+                styleClass={`btn-serverPass ${passwordError && "error"}`}
+                iconSrc="static/media/assets/images/icons/white/return.png"
+                onClick={checkPassword}
               />
+              </div>
             )}
           </>
         ) : (
