@@ -41,6 +41,8 @@ const ValidationWindow = () => {
 
   // Calculate remaining coins after the transaction
   const finalCoins = user.coins - selectedItem.price;
+  const hasEnoughCoins = finalCoins>=0;
+
 
   return (
     <div
@@ -68,7 +70,7 @@ const ValidationWindow = () => {
         <div className="container-ValidationButtons">
           <Button
             label={getTranslatedWord("shop.confirm")}
-            styleClass="btn_onglets_shop2 back-color1"
+            styleClass={`btn_onglets_shop2 ${hasEnoughCoins ? 'back-color1' : 'back-color4'}`}
             onClick={handleConfirm}
           />
           <Button
