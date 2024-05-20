@@ -156,13 +156,14 @@
 | 18 mai | 2 Heures | Résolution de bugs autour du rafraichissement de la page provoquant un déconnexion et des états bloquant côtés utilisateurs.. | --
 | 19 mai | 10 Heures | Test et travail en réunion avec Aziz Maël Mostafa et Noé. Résolutions de divers bugs autour des raise et bet parfois mal initialisé. RotateFocus compte parfois mal les utilisateurs restant quand quelqu'un fait tapis et ne peut plus jouer mais attend la fin. Mise à jours de plusieurs paramètres pour la VM. Amélioration des performances. F5 fonctionnelle. Rédaction du rapport et création de schémas. Brainstorm + petites créations pour la communication. Modification légère autour du logger pour permettre la désactivation totale des logs. Refactorisation des fichiers de communication de socket et ré-écriture des commentaires. WEBSOCKET bloquer par le reverse proxy, stress test pour déterminer les performances possible avec les longPolling de socketio.(Pas ouf du tout). Export et import de la bdd sur la VM en backup. Préparation d'un serveur de secours.(Encore un). Tentative de solutions de contournement du websocket.| --
 | 20 mai | 2 Heures | Rédaction du rapport, page personnelle. Création d'un test sur multi server (non fonctionnelle) | --
+| 20 mai | 4 Heures | Corrections des derniers bugs. Ajout de la suppression des socket déconnecter. Correction de l'implémentation du cache avec Noé pour soulager les appels au serveur.  | --
 
 
-| TOTAL | 39 Heures || --
+| TOTAL | 45 Heures || --
 
 
 
 ____
 
 # Total des heures : 
-> ## 205 Heures
+> ## 209 Heures
