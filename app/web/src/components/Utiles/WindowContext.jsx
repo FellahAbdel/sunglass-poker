@@ -1,7 +1,15 @@
-import React, { createContext, useContext, useReducer, useEffect, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useCallback,
+} from "react";
 import {
   windowReducer,
   initialState,
+  SHOW_GAME_TABLE,
+  HIDE_GAME_TABLE,
 } from "../../store/reducers/windowReducer.js";
 
 const WindowContext = createContext();
@@ -16,7 +24,12 @@ export const WindowProvider = ({ children }) => {
     console.log("windowType:", state.windowType);
     console.log("isGameTableVisible:", state.isGameTableVisible);
     console.log("connectionWindowOpen:", state.connectionWindowOpen);
-  }, [state.isWindowOpen, state.windowType, state.isGameTableVisible, state.connectionWindowOpen]);
+  }, [
+    state.isWindowOpen,
+    state.windowType,
+    state.isGameTableVisible,
+    state.connectionWindowOpen,
+  ]);
 
   const setWindowOpen = useCallback((isOpen) => {
     dispatch({ type: "TOGGLE_WINDOW_OPEN", payload: isOpen });
@@ -42,28 +55,49 @@ export const WindowProvider = ({ children }) => {
     dispatch({ type: "SET_REDIRECT_AFTER_SUCCESS", payload: redirect });
   }, []);
 
-  const toggleGameTableVisibility = useCallback(() => {
-    dispatch({ type: "TOGGLE_GAME_TABLE_VISIBLE" });
+  const showGameTable = useCallback(() => {
+    dispatch({ type: SHOW_GAME_TABLE });
   }, []);
 
-  const openWindow = useCallback((type, params = {}) => {
-    console.log(`Opening window: ${type}`, params);
+  const hideGameTable = useCallback(() => {
+    dispatch({ type: HIDE_GAME_TABLE });
+  }, []);
 
-    if (state.windowType === type && state.isWindowOpen) {
-      closeWindow();
-      return;
-    }
+  const openWindow = useCallback(
+    (type, params = {}) => {
+      console.log(`Opening window: ${type}`, params);
 
-    if (type === "alert") {
-      setAlertParams({
-        message: params.message || "Default message",
-        onConfirm: params.onConfirm || (() => { console.log("No confirm action set"); }),
-        onCancel: params.onCancel || (() => { console.log("No cancel action set"); }),
-      });
-    }
-    setWindowOpen(true);
-    setWindowType(type);
-  }, [state.windowType, state.isWindowOpen, setAlertParams, setWindowOpen, setWindowType]);
+      if (state.windowType === type && state.isWindowOpen) {
+        closeWindow();
+        return;
+      }
+
+      if (type === "alert") {
+        setAlertParams({
+          message: params.message || "Default message",
+          onConfirm:
+            params.onConfirm ||
+            (() => {
+              console.log("No confirm action set");
+            }),
+          onCancel:
+            params.onCancel ||
+            (() => {
+              console.log("No cancel action set");
+            }),
+        });
+      }
+      setWindowOpen(true);
+      setWindowType(type);
+    },
+    [
+      state.windowType,
+      state.isWindowOpen,
+      setAlertParams,
+      setWindowOpen,
+      setWindowType,
+    ]
+  );
 
   const closeWindow = useCallback(() => {
     console.log("Fermeture de la fenêtre");
@@ -75,24 +109,39 @@ export const WindowProvider = ({ children }) => {
       setRedirectAfterSuccess("");
     }
     setSuccessMessage("");
-  }, [setAlertParams, setWindowOpen, setWindowType, openWindow, setRedirectAfterSuccess, setSuccessMessage, state.redirectAfterSuccess]);
+  }, [
+    setAlertParams,
+    setWindowOpen,
+    setWindowType,
+    openWindow,
+    setRedirectAfterSuccess,
+    setSuccessMessage,
+    state.redirectAfterSuccess,
+  ]);
 
   const showHome = useCallback(() => {
-    toggleGameTableVisibility();
+    hideGameTable();
     setWindowOpen(false);
     setWindowType("");
-  }, [toggleGameTableVisibility, setWindowOpen, setWindowType]);
+  }, [hideGameTable, setWindowOpen, setWindowType]);
 
-  const openSuccessWindow = useCallback((message, redirect = "") => {
-    console.log(`Ouverture de la fenêtre de succès avec le message : ${message}`);
-    setSuccessMessage(message);
-    setRedirectAfterSuccess(redirect);
-    setWindowType("success");
-    setWindowOpen(true);
-  }, [setSuccessMessage, setRedirectAfterSuccess, setWindowType, setWindowOpen]);
+  const openSuccessWindow = useCallback(
+    (message, redirect = "") => {
+      console.log(
+        `Ouverture de la fenêtre de succès avec le message : ${message}`
+      );
+      setSuccessMessage(message);
+      setRedirectAfterSuccess(redirect);
+      setWindowType("success");
+      setWindowOpen(true);
+    },
+    [setSuccessMessage, setRedirectAfterSuccess, setWindowType, setWindowOpen]
+  );
 
   const openValidationWindow = useCallback((item) => {
-    console.log(`Ouverture de la fenêtre de validation pour l'élément : ${item.imgSrc}`);
+    console.log(
+      `Ouverture de la fenêtre de validation pour l'élément : ${item.imgSrc}`
+    );
     dispatch({ type: "SET_SELECTED_ITEM", payload: item });
     dispatch({ type: "SET_WINDOW_TYPE", payload: "validation" });
     dispatch({ type: "TOGGLE_WINDOW_OPEN", payload: true });
@@ -102,15 +151,14 @@ export const WindowProvider = ({ children }) => {
     openWindow("game");
   }, [openWindow]);
 
-  const showGameTable = () => {
-    toggleGameTableVisibility();
-  };
-
   // Effets pour gérer la persistance de sessionStorage
   useEffect(() => {
     sessionStorage.setItem("isWindowOpen", state.isWindowOpen);
     sessionStorage.setItem("windowType", state.windowType);
-    sessionStorage.setItem("isGameTableVisible", state.isGameTableVisible.toString());
+    sessionStorage.setItem(
+      "isGameTableVisible",
+      state.isGameTableVisible.toString()
+    );
   }, [state.isWindowOpen, state.windowType, state.isGameTableVisible]);
 
   return (
@@ -119,7 +167,8 @@ export const WindowProvider = ({ children }) => {
         ...state,
         openWindow,
         closeWindow,
-        toggleGameTableVisibility,
+        showGameTable,
+        hideGameTable,
         setSelectedItem,
         setWindowType,
         setWindowOpen,
@@ -130,7 +179,6 @@ export const WindowProvider = ({ children }) => {
         openSuccessWindow,
         openValidationWindow,
         onClickStartGame,
-        showGameTable
       }}
     >
       {children}

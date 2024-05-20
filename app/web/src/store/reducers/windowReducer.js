@@ -6,7 +6,8 @@ export const TOGGLE_WINDOW_OPEN = "TOGGLE_WINDOW_OPEN";
 export const SET_WINDOW_TYPE = "SET_WINDOW_TYPE";
 export const TOGGLE_CONNECTION_WINDOW_OPEN = "TOGGLE_CONNECTION_WINDOW_OPEN";
 export const SET_SUCCESS_MESSAGE = "SET_SUCCESS_MESSAGE";
-export const TOGGLE_GAME_TABLE_VISIBLE = "TOGGLE_GAME_TABLE_VISIBLE";
+export const SHOW_GAME_TABLE = "SHOW_GAME_TABLE";
+export const HIDE_GAME_TABLE = "HIDE_GAME_TABLE";
 
 // Définition de l'état initial basé sur le code existant
 const functionMapper = {
@@ -16,9 +17,6 @@ const functionMapper = {
 
 const getInitialWindowType = () => {
   const storedWindowType = sessionStorage.getItem("windowType");
-  const isGameTableVisible =
-    sessionStorage.getItem("isGameTableVisible") === "true";
-
   if (storedWindowType === "alert") {
     return "";
   }
@@ -62,7 +60,6 @@ const loadInitialState = () => {
 
 export const initialState = loadInitialState();
 
-// Reducer
 export function windowReducer(state = initialState, action) {
   console.log("Action Received:", action);
   console.log("Current State before update:", state);
@@ -79,33 +76,45 @@ export function windowReducer(state = initialState, action) {
       break;
     case SET_ALERT_PARAMS:
       sessionStorage.setItem("alertMessage", action.payload.message);
-      sessionStorage.setItem("alertOnConfirm", action.payload.onConfirm);
-      sessionStorage.setItem("alertOnCancel", action.payload.onCancel);
+      sessionStorage.setItem(
+        "alertOnConfirm",
+        action.payload.onConfirm.toString()
+      );
+      sessionStorage.setItem(
+        "alertOnCancel",
+        action.payload.onCancel.toString()
+      );
       nextState.alertParams = action.payload;
       break;
     case TOGGLE_WINDOW_OPEN:
-      sessionStorage.setItem(
-        "isWindowOpen",
-        (action.payload !== undefined
-          ? action.payload
-          : !state.isWindowOpen
-        ).toString()
-      );
-      nextState.isWindowOpen =
+      const newIsWindowOpen =
         action.payload !== undefined ? action.payload : !state.isWindowOpen;
+      sessionStorage.setItem("isWindowOpen", newIsWindowOpen.toString());
+      nextState.isWindowOpen = newIsWindowOpen;
       break;
     case SET_WINDOW_TYPE:
+      sessionStorage.setItem("windowType", action.payload);
       nextState.windowType = action.payload;
       break;
     case TOGGLE_CONNECTION_WINDOW_OPEN:
-      nextState.connectionWindowOpen = !state.connectionWindowOpen;
+      const newConnectionWindowOpen = !state.connectionWindowOpen;
+      sessionStorage.setItem(
+        "connectionWindowOpen",
+        newConnectionWindowOpen.toString()
+      );
+      nextState.connectionWindowOpen = newConnectionWindowOpen;
       break;
     case SET_SUCCESS_MESSAGE:
       nextState.successMessage = action.payload;
       sessionStorage.setItem("successMessage", action.payload);
       break;
-    case TOGGLE_GAME_TABLE_VISIBLE:
-      nextState.isGameTableVisible = !state.isGameTableVisible;
+    case SHOW_GAME_TABLE:
+      nextState.isGameTableVisible = true;
+      sessionStorage.setItem("isGameTableVisible", "true");
+      break;
+    case HIDE_GAME_TABLE:
+      nextState.isGameTableVisible = false;
+      sessionStorage.setItem("isGameTableVisible", "false");
       break;
     default:
       console.log("Unhandled action type in windowReducer:", action.type);
