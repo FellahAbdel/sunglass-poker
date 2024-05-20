@@ -206,6 +206,9 @@
 
 2024/05/20  2H      Fin du montage Blender avec la creation du trailer et retest 
 
---2024/05 SEMAINE 2: 36H30 (TOTAL: 150H)
+2024/05/20  2H      Test+reunion avec Victor et noé sur de multiples derniers reglages+ discussion avec les autres
 
-TEMPS TOTAL: 150H
+
+--2024/05 SEMAINE 2: 38H30 (TOTAL: 152H)
+
+TEMPS TOTAL: 152H
