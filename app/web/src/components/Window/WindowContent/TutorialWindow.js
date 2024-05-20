@@ -1,10 +1,20 @@
-// TutorialWindow.jsx
 import React from "react";
 import "./tutorial.css";
 import { useTranslation } from "../../Utiles/Translations";
+import Card from "../../gameTable/Card/Card";
+import Button from "../../button/Button.tsx";
+import BonusPanel from "../../gameTable/Bonus/BonusPanel";
 
 const TutorialWindow = () => {
   const { getTranslatedWord } = useTranslation();
+    /**
+   * Formats a number to a readable string with commas.
+   * @param {number} number - The number to format.
+   * @returns {string} The formatted number.
+   */
+    const formatNumber = (number) => {
+      return new Intl.NumberFormat().format(number);
+    };
   return (
     <div className={`container-text-tutorial`}>
       <div className="text-tutorial">
@@ -49,362 +59,179 @@ const TutorialWindow = () => {
             <strong>Royal Flush</strong>: A, K, Q, J, 10 of the same suit.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/1_of_C.png"
-              alt="One of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/13_of_C.png"
-              alt="Thirteen of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/12_of_C.png"
-              alt="Twelve of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/11_of_C.png"
-              alt="Eleven of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/10_of_C.png"
-              alt="Ten of Clubs"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['A', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['Q', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['J', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['10', 'C']} flippingCard={true}/>
           </div>
           <li>
             <strong>Straight Flush</strong>: Five consecutive cards of the same
             suit.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/1_of_H.png"
-              alt="One of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/2_of_H.png"
-              alt="Two of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/3_of_H.png"
-              alt="Three of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/4_of_H.png"
-              alt="Four of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/5_of_H.png"
-              alt="Five of Hearts"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['A', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['2', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['3', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['4', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['5', 'H']} flippingCard={true}/>
           </div>
           <li>
             <strong>Four of a Kind</strong>: Four cards of the same rank.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/1_of_C.png"
-              alt="One of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/1_of_H.png"
-              alt="One of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/1_of_D.png"
-              alt="One of diamonds"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/1_of_S.png"
-              alt="One of speds"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/10_of_C.png"
-              alt="Ten of Clubs"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['A', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['A', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['A', 'D']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['A', 'S']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'C']} flippingCard={true}/>
           </div>
           <li>
             <strong>Full House</strong>: Three of a kind plus a pair.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/1_of_C.png"
-              alt="One of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/1_of_D.png"
-              alt="One of diamonds"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/1_of_H.png"
-              alt="One of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/10_of_H.png"
-              alt="Ten of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/10_of_C.png"
-              alt="Ten of Clubs"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['A', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['A', 'D']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['A', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'C']} flippingCard={true}/>
           </div>
           <li>
-            <strong>Flush</strong>: Five cards of the same suit.
+          <strong>Flush</strong>: Five cards of the same suit.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/1_of_C.png"
-              alt="One of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/5_of_C.png"
-              alt="Five of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/12_of_C.png"
-              alt="Twelve of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/2_of_C.png"
-              alt="Two of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/9_of_C.png"
-              alt="Nine of Clubs"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['A', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['Q', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['J', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['9', 'C']} flippingCard={true}/>
           </div>
           <li>
-            <strong>Straight</strong>: Five consecutive cards of different
-            suits.
+            <strong>Straight</strong>: Five consecutive cards of different suits.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/5_of_C.png"
-              alt="Five of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/6_of_H.png"
-              alt="Six of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/7_of_D.png"
-              alt="Seven of Diamonds"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/8_of_S.png"
-              alt="Height of Speds"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/9_of_C.png"
-              alt="Nine of Clubs"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['5', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['6', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['7', 'D']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['8', 'S']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['9', 'C']} flippingCard={true}/>
           </div>
           <li>
             <strong>Three of a Kind</strong>: Three cards of the same rank.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/1_of_C.png"
-              alt="One of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/1_of_H.png"
-              alt="One of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/1_of_D.png"
-              alt="One of Diamonds"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/7_of_C.png"
-              alt="Seven of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/10_of_C.png"
-              alt="Ten of Clubs"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['A', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['A', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['A', 'D']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['9', 'S']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'C']} flippingCard={true}/> {/* Assume K as kicker */}
           </div>
           <li>
             <strong>Two Pair</strong>: Two different pairs.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/1_of_C.png"
-              alt="One of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/13_of_C.png"
-              alt="Thirteen of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/13_of_H.png"
-              alt="Thirteen of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/5_of_D.png"
-              alt="Five of Diamonds"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/5_of_S.png"
-              alt="Five od Speds"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['A', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['A', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'D']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'S']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['Q', 'C']} flippingCard={true}/> {/* Assume Q as kicker */}
           </div>
           <li>
             <strong>One Pair</strong>: One pair of the same rank.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/1_of_C.png"
-              alt="One of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/2_of_C.png"
-              alt="Two of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/6_of_H.png"
-              alt="Six of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/11_of_C.png"
-              alt="Eleven of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/11_of_S.png"
-              alt="Ten of Clubs"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['A', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['A', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'D']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['Q', 'S']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['J', 'C']} flippingCard={true}/> {/* Assume J as kicker */}
           </div>
           <li>
-            <strong>High Card</strong>: The highest card when no other hand is
-            made.
+            <strong>High Card</strong>: The highest card when no other hand is made.
           </li>
           <div className="cards-container">
-            <img
-              src="/static/media/assets/images/card_front/1_of_D.png"
-              alt="One of Diamonds"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/7_of_C.png"
-              alt="Seven of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/5_of_C.png"
-              alt="Five of Clubs"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/11_of_H.png"
-              alt="Eleven of Hearts"
-              className="card-image"
-            />
-            <img
-              src="/static/media/assets/images/card_front/8_of_S.png"
-              alt="Height of Speds"
-              className="card-image"
-            />
+            <Card styleClass={"handCard"} card={['A', 'D']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['K', 'C']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['Q', 'H']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['J', 'S']} flippingCard={true}/>
+            <Card styleClass={"handCard"} card={['9', 'C']} flippingCard={true}/>
           </div>
-        </ul>
-
-        <h3>The Deal</h3>
-        <ul>
-          <li>
-            <strong>Blinds</strong>: Two players post blinds (small and big) to
-            start the betting.
-          </li>
-          <li>
-            <strong>Hole Cards</strong>: Each player is dealt two private cards
-            face down.
-          </li>
-          <li>
-            <strong>Betting Rounds</strong>:
-            <ul>
-              <li>
-                <strong>Pre-Flop</strong>: Betting round after hole cards are
-                dealt.
-              </li>
-              <li>
-                <strong>Flop</strong>: Three community cards are dealt face up.
-                Another round of betting follows.
-              </li>
-              <li>
-                <strong>Turn</strong>: A fourth community card is dealt. Betting
-                continues.
-              </li>
-              <li>
-                <strong>River</strong>: The fifth and final community card is
-                dealt. The final betting round ensues.
-              </li>
-              <li>
-                <strong>Showdown</strong>: Remaining players reveal their hands,
-                and the best hand wins the pot.
-              </li>
-            </ul>
-          </li>
         </ul>
 
         <h3>Betting Actions</h3>
         <p>
           During a game of Texas Hold'em, players have several betting options:
         </p>
-        <div className="container-ActionButtons">
-          <button className="btn-mainAction disabled" aria-disabled="true">
-            Raise
-          </button>
-          <button className="btn-mainAction disabled" aria-disabled="true">
-            Call
-          </button>
-          <button
-            className="btn-mainAction btn-fold disabled"
-            aria-disabled="true"
-          >
-            Fold
-          </button>
+        <div className="container-ActionButtonsDemo">
+          <div className="container-gameAction">
+        <div className="container-cashSituation">
+          <div className="userCoinCashs">
+            {getTranslatedWord("gameActionPanel.currentSC")}:{" "}
+            {formatNumber(10000)}
+          </div>
+              <div className="userCoinCashs">
+                {getTranslatedWord("gameActionPanel.afterSC")}:{" "}
+                {formatNumber(9000)}
+              </div>
+                <div className="userCoinCashs">
+                  {getTranslatedWord("gameActionPanel.totalRaise")}:{" "}
+                  {formatNumber(500)}+{formatNumber(1000)}
+                </div>
         </div>
+            <div className="container-raiseButtons">
+              <Button
+                styleClass={"btn-mainAction"}
+                label={"Min"}
+              />
+              <Button
+                styleClass={"btn-mainAction"}
+                label={"1/4"}
+              />
+              <Button
+                styleClass={"btn-mainAction"}
+                label={"1/2"}
+              />
+              <Button
+                styleClass={"btn-mainAction"}
+                label={"3/4"}
+              />
+              <Button
+                styleClass={"btn-mainAction"}
+                label={"All in"}
+              />
+            </div>
+            <div className={`container-raiseAdjuster`}>
+              <Button
+                styleClass="btn-raiseDecrement"
+                label={"−"}
+              />
+              <input
+                type="text"
+                className="raiseValueDisplay"
+                value={10000}
+              />
+              SC
+              <Button
+                styleClass="btn-raiseIncrement"
+                label={"+"}
+              />
+            </div>
+        <div className={`container-ActionButtons`}>
+          <Button
+            styleClass={`btn-mainAction raise`}
+            label={`${getTranslatedWord("gameActionPanel.raise")}`}
+          />
+          <Button
+            styleClass={`btn-mainAction`}
+            label={getTranslatedWord("gameActionPanel.check")}
+          />
+          <Button
+            styleClass={`btn-fold btn-mainAction`}
+            label={getTranslatedWord("gameActionPanel.fold")}
+          />
+        </div>
+      </div>
+      </div>
         <p>Here's what each action means:</p>
         <ul>
           <li>
@@ -502,22 +329,35 @@ const TutorialWindow = () => {
           </li>
         </ul>
         <div className="card-reveal-section">
-          <div className="cards-display">
-            <img
-              src="/static/media/assets/images/card_front/5_of_D.png"
-              alt="Five of Diamonds"
-              className="card-image-reveal"
-            />
-            <img
-              src="/static/media/assets/images/card_front/4_of_S.png"
-              alt="Four of Spades"
-              className="card-image-reveal"
-            />
-          </div>
-          <div className="reveal-buttons">
-            <button className="btn-reveal">Show 5 ♦</button>
-            <button className="btn-reveal">Show 4 ♠</button>
-            <button className="btn-reveal">Show Both</button>
+          <div className="container-handMainDemo">
+            <div className="container-showCardsButtons">
+              <Button
+                styleClass={"btn-showCard"}
+                label={"Show A of"}
+                iconSrc={"static/media/assets/images/icons/white/heart.png"}
+              />
+              <Button
+                styleClass={"btn-showCard"}
+                label={"Show A of"}
+                iconSrc={"static/media/assets/images/icons/white/spade.png"}
+              />
+              <Button
+                styleClass={"btn-showCard"}
+                label={getTranslatedWord("handGuide.showB")}
+              />
+            </div>
+              <div className="container-handCardDemo">
+                <Card
+                  styleClass="handCard"
+                  card={["A","S"]}
+                  flippingCard={true}
+                />
+                <Card
+                  styleClass="handCard"
+                  card={["A","H"]}
+                  flippingCard={true}
+                />
+            </div>
           </div>
         </div>
         <p>
@@ -538,29 +378,7 @@ const TutorialWindow = () => {
         </p>
 
         <div className="bonus-feature-section">
-          <div className="bonus-icons">
-            <img
-              src="/static/media/assets/images/icons/white/heart.png"
-              alt="Heart Suit"
-              className="bonus-icon"
-            />
-            <img
-              src="/static/media/assets/images/icons/white/diamond.png"
-              alt="Diamond Suit"
-              className="bonus-icon"
-            />
-            <img
-              src="/static/media/assets/images/icons/white/spade.png"
-              alt="Spade Suit"
-              className="bonus-icon"
-            />
-            <img
-              src="/static/media/assets/images/icons/white/club.png"
-              alt="Club Suit"
-              className="bonus-icon"
-            />
-          </div>
-          <button className="bonus-button">ACTIVATE BONUS</button>
+            <BonusPanel/>
         </div>
 
         <h2>Practice</h2>
@@ -583,36 +401,20 @@ const TutorialWindow = () => {
         <div className="highlight">
           <p>
             <strong>Pre-Flop</strong>: You are dealt&nbsp;
-            <img
-              src="/static/media/assets/images/card_front/1_of_S.png"
-              alt="Ace of Spades"
-              className="card-image-ex"
-            />
-            <img
-              src="/static/media/assets/images/card_front/13_of_S.png"
-              alt="King of Spades"
-              className="card-image-ex"
-            />
+            <div className="cards-container">
+              <Card styleClass={"handCard small"} card={['1', 'S']} flippingCard={true}/>
+              <Card styleClass={"handCard small"} card={['K', 'S']} flippingCard={true}/>
+            </div>
             . You raise, and two players call.
           </p>
 
           <p>
             <strong>Flop</strong>: The dealer reveals&nbsp;
-            <img
-              src="/static/media/assets/images/card_front/10_of_S.png"
-              alt="Ten of Spades"
-              className="card-image-ex"
-            />
-            <img
-              src="/static/media/assets/images/card_front/11_of_S.png"
-              alt="Jack of Spades"
-              className="card-image-ex"
-            />
-            <img
-              src="/static/media/assets/images/card_front/2_of_C.png"
-              alt="Two of Clubs"
-              className="card-image-ex"
-            />
+            <div className="cards-container">
+              <Card styleClass={"handCard small"} card={['10', 'S']} flippingCard={true}/>
+              <Card styleClass={"handCard small"} card={['J', 'S']} flippingCard={true}/>
+              <Card styleClass={"handCard small"} card={['2', 'C']} flippingCard={true}/>
+            </div>
             . You have a flush draw and a straight draw.
           </p>
           <p>
@@ -621,11 +423,9 @@ const TutorialWindow = () => {
           </p>
           <p>
             <strong>Turn</strong>: The dealer reveals&nbsp;
-            <img
-              src="/static/media/assets/images/card_front/12_of_S.png"
-              alt="Queen of Spades"
-              className="card-image-ex"
-            />
+            <div className="cards-container">
+              <Card styleClass={"handCard small"} card={['Q', 'S']} flippingCard={true}/>
+            </div>
             , completing your flush and straight.
           </p>
           <p>
@@ -633,12 +433,9 @@ const TutorialWindow = () => {
           </p>
           <p>
             <strong>River</strong>: The dealer reveals&nbsp;
-            <img
-              src="/static/media/assets/images/card_front/3_of_D.png"
-              alt="Three of Diamonds"
-              className="card-image-ex"
-            />
-            .
+            <div className="cards-container">
+              <Card styleClass={"handCard small"} card={['3', 'D']} flippingCard={true}/>
+            </div>
           </p>
           <p>
             <strong>Betting</strong>: You bet again, and the opponent raises.
@@ -646,16 +443,11 @@ const TutorialWindow = () => {
           </p>
           <p>
             <strong>Showdown</strong>: You reveal your&nbsp;
-            <img
-              src="/static/media/assets/images/card_front/1_of_S.png"
-              alt="Ace of Spades"
-              className="card-image-ex"
-            />
-            <img
-              src="/static/media/assets/images/card_front/13_of_S.png"
-              alt="King of Spades"
-              className="card-image-ex"
-            />
+            <div className="cards-container">
+              <Card styleClass={"handCard small"} card={['A', 'S']} flippingCard={true}/>
+              <Card styleClass={"handCard small"} card={['K', 'S']} flippingCard={true}/>
+            </div>
+
             , winning with an Ace-high flush.
           </p>
         </div>

@@ -7,7 +7,12 @@
   height: 100%;
   border-radius: 4vw;
 }
+.container-ActionButtonsDemo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+}
 .text-tutorial {
   color: #ffffff;
   width: 100%;
@@ -18,10 +23,21 @@
   border: none;
   text-align: justify;
 }
-.text-tutorial .highlight {
+.text-tutorial ul{
+  align-items: center;
+  width: 80%;
+  padding-left: 15%;
+}
+
+#light .text-tutorial .highlight {
   background-color: var(--color3-light);
   padding: 10px;
   border-left: 5px solid var(--color2-light);
+}
+#dark .text-tutorial .highlight {
+  background-color: var(--color3-dark);
+  padding: 10px;
+  border-left: 5px solid var(--color2-dark);
 }
 .text-tutorial h1 {
   text-align: center;
@@ -39,26 +55,24 @@
 .text-tutorial p {
   font-size: 1.1vw;
 }
-/* Conteneur pour les cartes */
 .cards-container {
   display: flex;
-  flex-wrap: wrap; /* Permet aux cartes de passer à la ligne suivante si nécessaire */
-  justify-content: center; /* Centre les cartes horizontalement */
-  align-items: center; /* Alignement vertical au centre */
-  gap: 10px; /* Espace entre les cartes */
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  margin: 2vh 0 2vh 0;
 }
-
-/* Style des images des cartes */
 .card-image {
-  width: 80px; /* Taille réduite pour une meilleure adaptation */
-  height: auto; /* Maintien de l'aspect ratio */
-  display: block; /* Utilisé pour appliquer les marges */
-  margin: 5px; /* Espace réduit autour de chaque carte */
+  width: 80px;
+  height: auto;
+  display: block;
+  margin: 5px;
 }
 .card-image-ex {
-  width: 30px; /* ou toute autre taille appropriée */
+  width: 30px;
   height: auto;
-  vertical-align: middle; /* pour aligner avec le texte */
+  vertical-align: middle;
 }
 .card-reveal-section {
   display: flex;
@@ -73,7 +87,7 @@
 }
 
 .card-image-reveal {
-  width: 100px; /* Ajustez la taille selon vos besoins */
+  width: 100px; 
   margin-right: 10px;
 }
 
@@ -83,7 +97,7 @@
 }
 
 .btn-reveal {
-  background-color: #444; /* Gris foncé */
+  background-color: #444;
   color: white;
   border: none;
   border-radius: 5px;
@@ -98,6 +112,8 @@
 }
 
 .bonus-feature-section {
+  width: 40%;
+  margin-left: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,4 +141,20 @@
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+}
+.container-handMainDemo{
+  display: flex;
+  gap: 4vw;
+}
+.container-handCardDemo{
+  width: 100%;
+  display: flex;
+  gap:2vw;
+}
+.handCard.small{
+  width: 3vw;
+  height: 4.2vw;
+}
+.handCard.small .cardNumber div{
+  font-size: 1vw;
 }

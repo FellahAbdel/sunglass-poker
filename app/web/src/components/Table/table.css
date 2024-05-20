@@ -198,8 +198,8 @@
 
 #light .container-tutorial,
 #dark .container-tutorial {
-  width: 60vw;
-  height: 50vh;
+  width: 65vw;
+  height: 60vh;
   border-radius: 4vw;
   background: unset;
   background-color: rgb(43, 41, 41);
@@ -413,10 +413,13 @@
 }
 .container-shop .box-onGameNotif.visible,
 .container-profile .box-onGameNotif.visible,
-.container-tutorial .box-onGameNotif.visible,
 .container-alert .box-onGameNotif.visible,
 .container-validation .box-onGameNotif.visible {
   bottom: -25%;
+  opacity: 1;
+}
+.container-tutorial .box-onGameNotif.visible{
+  bottom: -20%;
   opacity: 1;
 }
 .box-onGameNotif {

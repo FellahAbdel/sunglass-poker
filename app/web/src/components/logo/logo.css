@@ -84,17 +84,20 @@
 .logo-settings img {
   width: 13vw;
 }
-
-.logo-profile,
-.logo-tutorial {
+.logo-profile{
   bottom: 110%;
   z-index: -1;
 }
-.logo-profile img,
-.logo-tutorial img {
+.logo-tutorial{
+  bottom: 102%;
+  z-index: -1;
+}
+.logo-profile img{
   width: 9vw;
 }
-
+.logo-tutorial img {
+  width: 8.5vw;
+}
 .logo-success,
 .logo-alert {
   bottom: 110%;
