@@ -724,9 +724,12 @@ class Game {
       this.newgame();
     } else {
       // Pour les non-maîtres
-      this.getPlayerById(playerId).unsetAfk();
-      this.moveSpecOrPlayer(playerId);
-      this.checkForNewMaster();
+      playerObject = this.getPlayerById(playerId);
+      if(playerObject !== undefined && playerObject !== null){
+        playerObject.unsetAfk();
+        this.moveSpecOrPlayer(playerId);
+        this.checkForNewMaster();
+      }
     }
   }
 
