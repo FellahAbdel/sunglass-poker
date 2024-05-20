@@ -1,5 +1,5 @@
 //react imports
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "./../components/Utiles/AuthProvider";
 import { useGameTable } from "../components/Utiles/GameTableProvider.jsx";
 import { useWindowContext } from "./../components/Utiles/WindowContext";
@@ -35,8 +35,13 @@ const GameTable = () => {
   const ambientSoundURLLight = "static/media/assets/sounds/waveSound2.mp3";
   const ambientSoundURLDark = "static/media/assets/sounds/casinoJazz.mp3";
 
-  useAudio(ambientSoundURLLight, ambientSoundURLDark, theme, sound, volume);
+  const audioRef = useAudio(ambientSoundURLLight, ambientSoundURLDark, theme, sound, volume);
 
+  useEffect(() => {
+    if (sound && audioRef.current) {
+      audioRef.current.play().catch(error => console.error("Playback was prevented:", error));
+    }
+  }, [sound, audioRef, theme, windowType]);
 
   // Handle closing the window when clicking outside
   const handleCloseOnClickOutside = (event) => {

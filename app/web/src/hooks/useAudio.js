@@ -1,9 +1,8 @@
-// useAudio.js
 import { useEffect, useRef } from "react";
 
 /**
  * Custom hook to manage audio playback based on the theme and sound settings.
- * 
+ *
  * @param {string} urlLight - The URL of the audio file for the light theme.
  * @param {string} urlDark - The URL of the audio file for the dark theme.
  * @param {string} theme - Current theme setting ('light' or 'dark').
@@ -20,9 +19,12 @@ const useAudio = (urlLight, urlDark, theme, play, volume, loop = true) => {
       if (!audioRef.current || audioRef.current.src !== url) {
         audioRef.current = new Audio(url);
         audioRef.current.loop = loop; // Set looping based on the loop parameter
+        audioRef.current.volume = isFinite(volume) ? volume : 0.5;
       }
       if (play) {
-        audioRef.current.play().catch(error => console.error("Playback was prevented:", error));
+        audioRef.current
+          .play()
+          .catch((error) => console.error("Playback was prevented:", error));
       }
     }
 
@@ -45,11 +47,11 @@ const useAudio = (urlLight, urlDark, theme, play, volume, loop = true) => {
         audioRef.current.currentTime = 0;
       }
     };
-  }, [urlLight, urlDark, theme, play, loop]);  // Note: `volume` is removed from this useEffect dependencies
+  }, [urlLight, urlDark, theme, play, loop]); // Note: `volume` is removed from this useEffect dependencies
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = isFinite(volume) ? volume : 1.0; // Safely set the volume
+      audioRef.current.volume = isFinite(volume) ? volume : 0.5; // Safely set the volume
     }
   }, [volume]); // This useEffect only runs when `volume` changes
 

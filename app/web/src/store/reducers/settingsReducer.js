@@ -1,6 +1,6 @@
 export const initialState = {
   theme: localStorage.getItem("theme") || "light",
-  sound: localStorage.getItem("sound") === "true" || true,
+  sound: localStorage.getItem("sound") === "true" || false,
   language: localStorage.getItem("language") || "en",
   animation: localStorage.getItem("animation") === "true" || true,
   volume: localStorage.getItem("volume")
