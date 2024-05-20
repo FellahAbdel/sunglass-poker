@@ -349,6 +349,7 @@ class Player {
     this.isActive = true;
     // this.isAfk = false;
     this.alreadyWon = false;
+    this.isTapis = false;
     this.cardsVisible = [false, false];
     this.status = "Playing";
     this.betTotal = 0;
