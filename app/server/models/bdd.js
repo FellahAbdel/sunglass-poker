@@ -573,8 +573,8 @@ module.exports = function (app, bdd) {
         throw error;
       }
     },
-    
-    playerLeftGame: async function (id, roomId) {
+
+    playerLeftGame: async function (id) {
       try {
         // Find the user by ID
         const user = await UserModel.findById(id);
