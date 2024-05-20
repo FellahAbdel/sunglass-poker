@@ -46,28 +46,14 @@ const SettingsWindow = () => {
     <div className="settingsMenu">
       <h1>{getTranslatedWord("navbar.settings")}</h1>
       <div className="container-settingsParameteres">
-        
-        <span className="container-switchSettings">
-          <p>{getTranslatedWord("settings.sound")}</p>
+      <span className="container-switchSettings container-switch-theme">
+          <p>{getTranslatedWord("settings.theme")}</p>
 
           <label className="switch">
-            <input type="checkbox" checked={sound} onChange={toggleSound} />
+            <input type="checkbox" checked={themeDark} onChange={toggleTheme} />
             <span className="slider" />
           </label>
         </span>
-
-        <span className="container-switchSettings">
-          <p>{getTranslatedWord("settings.volume")}</p>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            value={volume}
-            onChange={handleVolumeChange}
-          />
-        </span>
-
         <span className="container-switchSettings">
           <p>{getTranslatedWord("settings.animations")}</p>
           <label className="switch">
@@ -79,14 +65,25 @@ const SettingsWindow = () => {
             <span className="slider" />
           </label>
         </span>
-
-        <span className="container-switchSettings container-switch-theme">
-          <p>{getTranslatedWord("settings.theme")}</p>
-
+        <span className="container-switchSettings">
+          <p>{getTranslatedWord("settings.sound")}</p>
           <label className="switch">
-            <input type="checkbox" checked={themeDark} onChange={toggleTheme} />
+            <input type="checkbox" checked={sound} onChange={toggleSound} />
             <span className="slider" />
           </label>
+        </span>
+
+        <span className="container-switchSettings">
+          <p>{getTranslatedWord("settings.volume")}</p>
+          <input
+            className="volume"
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={volume}
+            onChange={handleVolumeChange}
+          />
         </span>
 
         <span className="container-select-lang">
