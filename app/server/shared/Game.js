@@ -339,9 +339,10 @@ class Game {
         allplayedenough_orTapis +=1
       csl.log("iterate", `Playerbet : ${p.currentBetTurn} =?= ${this.gameCurrentBet} ; ${p.isTapis}`);
     });
-    this.activePlayers.map(
-      (p) => (alltalkedThisTurn += p.talkedThisTurn === true)
-    );
+    this.activePlayers.map((p) =>{
+    if(p.talkedThisTurn === true || p.isTapis)
+      alltalkedThisTurn += 1;
+    });
     let aPlength = this.activePlayers.length; // nbr de joueurs total
     csl.log(
       "rotateFocusVictor",
@@ -477,7 +478,6 @@ class Game {
       if(this.gameCurrentBet < amount+player.currentBet &&
          amount < player.localMoney
       ){
-        this.players.forEach(p => p.talkedThisTurn = false);
         this.total+=amount;
         player.raise();
         player.bet(amount);
