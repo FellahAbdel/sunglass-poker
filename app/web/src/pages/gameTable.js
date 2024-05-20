@@ -32,7 +32,7 @@ const GameTable = () => {
     isWindowOpen,
     showWaitingMessage
   );
-  const ambientSoundURLLight = "static/media/assets/sounds/waveSound.mp3";
+  const ambientSoundURLLight = "static/media/assets/sounds/waveSound2.mp3";
   const ambientSoundURLDark = "static/media/assets/sounds/casinoJazz.mp3";
 
   useAudio(ambientSoundURLLight, ambientSoundURLDark, theme, sound, volume);
