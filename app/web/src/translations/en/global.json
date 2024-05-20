@@ -82,7 +82,7 @@
     "hide": "Hide",
     "showB": "Show both",
     "hideB": "Hide both",
-    "of":"of"
+    "of": "of"
   },
   "gameActionPanel": {
     "raise": "Raise",
@@ -198,5 +198,145 @@
     "emailNotFound": "Email not found",
     "emailTooLong": "Email to long",
     "passwordTooLong": "Password cant have more than 50 characters"
+  },
+  "tutorial": {
+    "title": "Texas Hold'em Poker",
+    "introduction": {
+      "heading": "Introduction",
+      "text": "Texas Hold'em is the most popular variant of poker. It is played in casinos, online platforms, and home games worldwide. This tutorial will guide you through the basic rules, betting rounds, and strategies to get you started."
+    },
+    "objective": {
+      "heading": "Objective",
+      "text": "The goal of Texas Hold'em is to win chips by having the best five-card hand or by making other players fold before the showdown."
+    },
+    "setup": {
+      "heading": "Setup",
+      "deckBold": "Deck",
+      "deckText": ": A standard 52-card deck.",
+      "playersBold": "Players",
+      "playersText": ": Typically 2-10 players.",
+      "chipsBold": "Chips",
+      "chipsText": ": Used for betting."
+    },
+    "bettingOptions": {
+      "description": "Here's what each action means:",
+      "foldBold": "Fold",
+      "foldText": ": Give up the hand and all the bets you've made so far.",
+      "checkCallBold": "Check/Call",
+      "checkCallText": ": Match the current highest bet or pass if no bet has been made.",
+      "raiseBold": "Raise",
+      "raiseText": ": Increase the bet amount, forcing others to meet the new bet."
+    },
+    "strategyTips": {
+      "heading": "Strategy Tips",
+      "startingHandsHeading": "Starting Hands",
+      "startingHandsTips": {
+        "1":" Play strong starting hands (e.g., high pairs, suited connectors).",
+        "2": "Avoid weak hands (e.g., low unsuited cards) unless in the right position."
+      },
+      "positionHeading": "Position",
+      "positionTips": {
+        "1" : "Being in a later position allows you to see how opponents act before you make your move.",
+        "2" : "Use your position to control the pot and gain information."
+    },
+      "bluffingHeading": "Bluffing",
+      "bluffingTips": {
+        "1":"Bluff occasionally to keep opponents guessing.",
+        "2" :"Ensure your bluffs are convincing and in line with previous actions."
+      },
+      "potOddsHeading": "Pot Odds",
+      "potOddsTip": "Calculate pot odds to determine if calling a bet is profitable in the long run."
+    },
+    "commonTerms": {
+      "heading": "Common Terms",
+      "blindBold": "Blind",
+      "blindText": ": Forced bet to ensure there is money in the pot.",
+      "communityCardsBold": "Community Cards",
+      "communityCardsText": ": Cards dealt face up in the center of the table.",
+      "kickerBold": "Kicker",
+      "kickerText": ": An unpaired card that can determine the winner if players have similar hands.",
+      "potBold": "Pot",
+      "potText": ": The total amount of chips bet in a hand."
+    },
+    "specialFeatures": {
+      "strategyPsychology": {
+        "description": "This feature is particularly useful for adding an extra layer of strategy and psychological warfare to the game. It's a powerful tool that should be used wisely as it can significantly impact the outcome of the hand."
+      },
+      "heading": "Special Features of Our App",
+      "description": "Our Texas Hold'em app includes several unique features that enhance your playing experience and allow for deeper strategic play.",
+      "revealingCardsHeading": "Revealing Your Cards",
+      "revealingCardsText": "Unlike traditional games, our app gives you the ability to reveal one or both of your hole cards at any point during the hand. This option can be used to:",
+      "bluffMisleadBold": "Bluff or Mislead:",
+      "bluffMisleadText": " Showing one card can create a misleading impression about the strength of your hand, influencing your opponents' actions.",
+      "showStrengthWeaknessBold": "Show Strength or Weakness:",
+      "showStrengthWeaknessText": " You can choose to show a strong card to scare off competitors or a weaker card to bait them into betting more.",
+      "bonusFeatureHeading": "Bonus Feature",
+      "bonusFeatureDescription": "Throughout the game, our Bonus system tracks the number of Spades, Hearts, Diamonds, and Clubs you collect. Once you have at least two of each suit, you can activate the bonus. This powerful feature forces every player to contribute an additional 50 SC (the currency of our app) to the pot, potentially changing the dynamics of the game significantly."
+    },
+    "basicRules": {
+      "heading": "Basic Rules",
+      "handRankings": {
+        "heading": "Hand Rankings",
+        "text": "Understanding hand rankings is crucial. Here are the rankings from highest to lowest:",
+        "royalFlushBold": "Royal Flush",
+        "royalFlushText": ": A, K, Q, J, 10 of the same suit.",
+        "straightFlushBold": "Straight Flush",
+        "straightFlushText": ": Five consecutive cards of the same suit.",
+        "fourOfAKindBold": "Four of a Kind",
+        "fourOfAKindText": ": Four cards of the same rank.",
+        "fullHouseBold": "Full House",
+        "fullHouseText": ": Three of a kind plus a pair.",
+        "flushBold": "Flush",
+        "flushText": ": Five cards of the same suit.",
+        "straightBold": "Straight",
+        "straightText": ": Five consecutive cards of different suits.",
+        "threeOfAKindBold": "Three of a Kind",
+        "threeOfAKindText": ": Three cards of the same rank.",
+        "twoPairBold": "Two Pair",
+        "twoPairText": ": Two different pairs.",
+        "onePairBold": "One Pair",
+        "onePairText": ": One pair of the same rank.",
+        "highCardBold": "High Card",
+        "highCardText": ": The highest card when no other hand is made."
+      },
+      "bettingActions": {
+        "heading": "Betting Actions",
+        "text": "During a game of Texas Hold'em, players have several betting options:"
+      }
+    },
+    "practice": {
+      "heading": "Practice",
+      "description": "To get better at Texas Hold'em:",
+      "playRegularlyBold": "Play Regularly",
+      "playRegularlyText": ": Experience is the best teacher.",
+      "studyGameBold": "Study the Game",
+      "studyGameText": ": Read books and watch videos on poker strategy.",
+      "reviewHandsBold": "Review Hands",
+      "reviewHandsText": ": Analyze your play and learn from mistakes."
+    },
+    "exampleHand": {
+      "heading": "Example Hand",
+      "preFlopBold": "Pre-Flop",
+      "preFlopText": "You are dealt ",
+      "flopBold": "Flop",
+      "flopText": "The dealer reveals ",
+      "bettingBold": "Betting",
+      "bettingText": "You bet, one player raises, and the other folds. You call.",
+      "turnBold": "Turn",
+      "turnText": "The dealer reveals ",
+      "riverBold": "River",
+      "riverText": "The dealer reveals ",
+      "showdownBold": "Showdown",
+      "showdownText": "You reveal your ",
+      "turnContinuation": ", completing your flush and straight.",
+      "preFlopContinuation": ". You raise, and two players call.",
+      "flopContinuation": ". You have a flush draw and a straight draw.",
+      "finalBettingText": "You bet again, and the opponent raises. You re-raise, and the opponent calls.",
+      "showdownContinuation": ", winning with an Ace-high flush."
+
+    },
+    "conclusion": {
+      "text": "* Texas Hold'em is a game of skill, strategy, and a bit of luck. By understanding the rules, practicing regularly, and learning from each hand, you can improve and enjoy this exciting game. Happy playing!"
+    }
   }
 }

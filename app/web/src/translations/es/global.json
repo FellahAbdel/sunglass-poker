@@ -197,5 +197,144 @@
     "emailNotFound": "Correo electrónico no encontrado",
     "emailTooLong": "Correo electrónico demasiado largo",
     "passwordTooLong": "La contraseña no puede tener más de 50 caracteres"
+  },
+  "tutorial": {
+    "title": "Texas Hold'em Poker",
+    "introduction": {
+      "heading": "Introducción",
+      "text": "El Texas Hold'em es la variante más popular del póker. Se juega en casinos, plataformas en línea y juegos en casa en todo el mundo. Este tutorial te guiará a través de las reglas básicas, las rondas de apuestas y las estrategias para comenzar."
+    },
+    "objective": {
+      "heading": "Objetivo",
+      "text": "El objetivo del Texas Hold'em es ganar fichas teniendo la mejor mano de cinco cartas o haciendo que los demás jugadores se retiren antes del showdown."
+    },
+    "setup": {
+      "heading": "Configuración",
+      "deckBold": "Baraja",
+      "deckText": ": Una baraja estándar de 52 cartas.",
+      "playersBold": "Jugadores",
+      "playersText": ": Típicamente de 2 a 10 jugadores.",
+      "chipsBold": "Fichas",
+      "chipsText": ": Usadas para las apuestas."
+    },
+    "bettingOptions": {
+      "description": "Aquí está el significado de cada acción:",
+      "foldBold": "Retirarse",
+      "foldText": ": Abandonar la mano y todas las apuestas realizadas hasta el momento.",
+      "checkCallBold": "Pasar/Igualar",
+      "checkCallText": ": Igualar la apuesta más alta actual o pasar si no se ha realizado ninguna apuesta.",
+      "raiseBold": "Subir",
+      "raiseText": ": Aumentar la cantidad de la apuesta, obligando a los demás a igualar la nueva apuesta."
+    },
+    "strategyTips": {
+      "heading": "Consejos de estrategia",
+      "startingHandsHeading": "Manos iniciales",
+      "startingHandsTips": {
+        "1": "Juega manos iniciales fuertes (por ejemplo, pares altos, conectores del mismo palo).",
+        "2": "Evita manos débiles (por ejemplo, cartas bajas no del mismo palo) a menos que estés en la posición adecuada."
+      },
+      "positionHeading": "Posición",
+      "positionTips": {
+        "1": "Estar en una posición tardía te permite ver cómo actúan los oponentes antes de que hagas tu jugada.",
+        "2": "Usa tu posición para controlar el bote y obtener información."
+      },
+      "bluffingHeading": "Farolear",
+      "bluffingTips": {
+        "1": "Farolea ocasionalmente para mantener a los oponentes adivinando.",
+        "2": "Asegúrate de que tus faroles sean convincentes y coherentes con tus acciones anteriores."
+      },
+      "potOddsHeading": "Probabilidades del bote",
+      "potOddsTip": "Calcula las probabilidades del bote para determinar si igualar una apuesta es rentable a largo plazo."
+    },
+    "commonTerms": {
+      "heading": "Términos comunes",
+      "blindBold": "Ciega",
+      "blindText": ": Apuesta obligatoria para asegurar que haya dinero en el bote.",
+      "communityCardsBold": "Cartas comunitarias",
+      "communityCardsText": ": Cartas repartidas boca arriba en el centro de la mesa.",
+      "kickerBold": "Kicker",
+      "kickerText": ": Una carta no emparejada que puede determinar el ganador si los jugadores tienen manos similares.",
+      "potBold": "Bote",
+      "potText": ": La cantidad total de fichas apostadas en una mano."
+    },
+    "specialFeatures": {
+      "strategyPsychology": {
+        "description": "Esta función es particularmente útil para agregar una capa adicional de estrategia y guerra psicológica al juego. Es una herramienta poderosa que debe usarse sabiamente, ya que puede influir significativamente en el resultado de la mano."
+      },
+      "heading": "Características especiales de nuestra aplicación",
+      "description": "Nuestra aplicación de Texas Hold'em incluye varias características únicas que mejoran tu experiencia de juego y permiten un juego estratégico más profundo.",
+      "revealingCardsHeading": "Revelar tus cartas",
+      "revealingCardsText": "A diferencia de los juegos tradicionales, nuestra aplicación te permite revelar una o ambas de tus cartas ocultas en cualquier momento durante la mano. Esta opción se puede utilizar para:",
+      "bluffMisleadBold": "Farolear o engañar:",
+      "bluffMisleadText": " Mostrar una carta puede crear una impresión engañosa sobre la fuerza de tu mano, influyendo en las acciones de tus oponentes.",
+      "showStrengthWeaknessBold": "Mostrar fuerza o debilidad:",
+      "showStrengthWeaknessText": " Puedes elegir mostrar una carta fuerte para asustar a los competidores o una carta más débil para incitarlos a apostar más.",
+      "bonusFeatureHeading": "Función de bonificación",
+      "bonusFeatureDescription": "A lo largo del juego, nuestro sistema de bonificación rastrea la cantidad de picas, corazones, diamantes y tréboles que recolectas. Una vez que tienes al menos dos de cada palo, puedes activar la bonificación. Esta función poderosa obliga a cada jugador a contribuir con 50 SC adicionales (la moneda de nuestra aplicación) al bote, lo que puede cambiar significativamente la dinámica del juego."
+    },
+    "basicRules": {
+      "heading": "Reglas básicas",
+      "handRankings": {
+        "heading": "Clasificación de manos",
+        "text": "Entender la clasificación de manos es crucial. Aquí están las clasificaciones de mayor a menor:",
+        "royalFlushBold": "Escalera real",
+        "royalFlushText": ": A, K, Q, J, 10 del mismo palo.",
+        "straightFlushBold": "Escalera de color",
+        "straightFlushText": ": Cinco cartas consecutivas del mismo palo.",
+        "fourOfAKindBold": "Póker",
+        "fourOfAKindText": ": Cuatro cartas del mismo rango.",
+        "fullHouseBold": "Full",
+        "fullHouseText": ": Un trío más una pareja.",
+        "flushBold": "Color",
+        "flushText": ": Cinco cartas del mismo palo.",
+        "straightBold": "Escalera",
+        "straightText": ": Cinco cartas consecutivas de diferentes palos.",
+        "threeOfAKindBold": "Trío",
+        "threeOfAKindText": ": Tres cartas del mismo rango.",
+        "twoPairBold": "Dos parejas",
+        "twoPairText": ": Dos parejas diferentes.",
+        "onePairBold": "Una pareja",
+        "onePairText": ": Una pareja del mismo rango.",
+        "highCardBold": "Carta alta",
+        "highCardText": ": La carta más alta cuando no se forma ninguna otra mano."
+      },
+      "bettingActions": {
+        "heading": "Acciones de apuestas",
+        "text": "Durante una partida de Texas Hold'em, los jugadores tienen varias opciones de apuestas:"
+      }
+    },
+    "practice": {
+      "heading": "Práctica",
+      "description": "Para mejorar en Texas Hold'em:",
+      "playRegularlyBold": "Juega regularmente",
+      "playRegularlyText": ": La experiencia es el mejor maestro.",
+      "studyGameBold": "Estudia el juego",
+      "studyGameText": ": Lee libros y mira videos sobre estrategias de póker.",
+      "reviewHandsBold": "Revisa las manos",
+      "reviewHandsText": ": Analiza tu juego y aprende de los errores."
+    },
+    "exampleHand": {
+      "heading": "Ejemplo de mano",
+      "preFlopBold": "Pre-Flop",
+      "preFlopText": "Te reparten ",
+      "flopBold": "Flop",
+      "flopText": "El crupier revela ",
+      "bettingBold": "Apuesta",
+      "bettingText": "Apuestas, un jugador sube y el otro se retira. Igualas.",
+      "turnBold": "Turn",
+      "turnText": "El crupier revela ",
+      "riverBold": "River",
+      "riverText": "El crupier revela ",
+      "showdownBold": "Showdown",
+      "showdownText": "Revelas tu ",
+      "turnContinuation": ", completando tu color y tu escalera.",
+      "preFlopContinuation": ". Subes, y dos jugadores igualan.",
+      "flopContinuation": ". Tienes un proyecto de color y un proyecto de escalera.",
+      "finalBettingText": "Apuestas de nuevo, y el oponente sube. Subes nuevamente, y el oponente iguala.",
+      "showdownContinuation": ", ganando con un color al As."
+    },
+    "conclusion": {
+      "text": "* El Texas Hold'em es un juego de habilidad, estrategia y un poco de suerte. Al entender las reglas, practicar regularmente y aprender de cada mano, puedes mejorar y disfrutar de este emocionante juego. ¡Feliz juego!"
+    }
   }
 }

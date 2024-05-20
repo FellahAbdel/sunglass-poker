@@ -197,5 +197,144 @@
     "emailNotFound": "E-Mail nicht gefunden",
     "emailTooLong": "E-Mail ist zu lang",
     "passwordTooLong": "Das Passwort darf nicht länger als 50 Zeichen sein"
+  },
+  "tutorial": {
+    "title": "Texas Hold'em Poker",
+    "introduction": {
+      "heading": "Einführung",
+      "text": "Texas Hold'em ist die beliebteste Poker-Variante. Es wird in Casinos, auf Online-Plattformen und bei Heimspielen weltweit gespielt. Dieses Tutorial führt Sie durch die grundlegenden Regeln, Einsatzrunden und Strategien, um Ihnen den Einstieg zu erleichtern."
+    },
+    "objective": {
+      "heading": "Ziel",
+      "text": "Das Ziel von Texas Hold'em ist es, Chips zu gewinnen, indem man die beste Fünf-Karten-Hand hat oder indem man die anderen Spieler dazu bringt, vor dem Showdown auszusteigen."
+    },
+    "setup": {
+      "heading": "Aufbau",
+      "deckBold": "Deck",
+      "deckText": ": Ein Standard-52-Karten-Deck.",
+      "playersBold": "Spieler",
+      "playersText": ": Typischerweise 2-10 Spieler.",
+      "chipsBold": "Chips",
+      "chipsText": ": Werden zum Setzen verwendet."
+    },
+    "bettingOptions": {
+      "description": "Das bedeuten die einzelnen Aktionen:",
+      "foldBold": "Passen",
+      "foldText": ": Geben Sie die Hand auf und alle bisherigen Einsätze.",
+      "checkCallBold": "Schieben/Callen",
+      "checkCallText": ": Gleichen Sie den aktuellen Höchsteinsatz aus oder schieben Sie, wenn keine Einsätze gemacht wurden.",
+      "raiseBold": "Erhöhen",
+      "raiseText": ": Erhöhen Sie den Einsatzbetrag und zwingen Sie andere, den neuen Einsatz zu übernehmen."
+    },
+    "strategyTips": {
+      "heading": "Strategietipps",
+      "startingHandsHeading": "Startkarten",
+      "startingHandsTips": {
+        "1": "Spielen Sie starke Startkarten (z. B. hohe Paare, zusammenhängende Suited-Karten).",
+        "2": "Vermeiden Sie schwache Hände (z. B. niedrige unsuited Karten), es sei denn, Sie sind in der richtigen Position."
+      },
+      "positionHeading": "Position",
+      "positionTips": {
+        "1": "In einer späteren Position zu sein, ermöglicht es Ihnen zu sehen, wie die Gegner agieren, bevor Sie Ihre Entscheidung treffen.",
+        "2": "Nutzen Sie Ihre Position, um den Pot zu kontrollieren und Informationen zu gewinnen."
+      },
+      "bluffingHeading": "Bluffen",
+      "bluffingTips": {
+        "1": "Bluffen Sie gelegentlich, um die Gegner im Ungewissen zu halten.",
+        "2": "Stellen Sie sicher, dass Ihre Bluffs überzeugend und im Einklang mit Ihren vorherigen Aktionen sind."
+      },
+      "potOddsHeading": "Pot Odds",
+      "potOddsTip": "Berechnen Sie die Pot Odds, um festzustellen, ob es langfristig rentabel ist, einen Einsatz zu callen."
+    },
+    "commonTerms": {
+      "heading": "Gängige Begriffe",
+      "blindBold": "Blind",
+      "blindText": ": Erzwungener Einsatz, um sicherzustellen, dass Geld im Pot ist.",
+      "communityCardsBold": "Gemeinschaftskarten",
+      "communityCardsText": ": Karten, die offen in der Mitte des Tisches ausgeteilt werden.",
+      "kickerBold": "Kicker",
+      "kickerText": ": Eine unpaarige Karte, die den Gewinner bestimmen kann, wenn die Spieler ähnliche Hände haben.",
+      "potBold": "Pot",
+      "potText": ": Die Gesamtsumme der Chips, die in einer Hand gesetzt wurden."
+    },
+    "specialFeatures": {
+      "strategyPsychology": {
+        "description": "Diese Funktion ist besonders nützlich, um dem Spiel eine zusätzliche Ebene von Strategie und psychologischer Kriegsführung hinzuzufügen. Es ist ein mächtiges Werkzeug, das weise eingesetzt werden sollte, da es das Ergebnis der Hand erheblich beeinflussen kann."
+      },
+      "heading": "Spezielle Funktionen unserer App",
+      "description": "Unsere Texas Hold'em-App enthält mehrere einzigartige Funktionen, die Ihr Spielerlebnis verbessern und ein tieferes strategisches Spiel ermöglichen.",
+      "revealingCardsHeading": "Ihre Karten aufdecken",
+      "revealingCardsText": "Im Gegensatz zu traditionellen Spielen ermöglicht Ihnen unsere App, eine oder beide Ihrer Hole Cards zu jedem Zeitpunkt während der Hand aufzudecken. Diese Option kann verwendet werden, um:",
+      "bluffMisleadBold": "Bluffen oder Täuschen:",
+      "bluffMisleadText": " Das Zeigen einer Karte kann einen irreführenden Eindruck von der Stärke Ihrer Hand erwecken und die Aktionen Ihrer Gegner beeinflussen.",
+      "showStrengthWeaknessBold": "Stärke oder Schwäche zeigen:",
+      "showStrengthWeaknessText": " Sie können eine starke Karte zeigen, um Konkurrenten zu erschrecken, oder eine schwächere Karte, um sie zu höheren Einsätzen zu verleiten.",
+      "bonusFeatureHeading": "Bonusfunktion",
+      "bonusFeatureDescription": "Während des Spiels verfolgt unser Bonussystem die Anzahl der Pik, Herz, Karo und Kreuz, die Sie sammeln. Sobald Sie mindestens zwei von jeder Farbe haben, können Sie den Bonus aktivieren. Diese mächtige Funktion zwingt jeden Spieler, zusätzliche 50 SC (die Währung unserer App) in den Pot einzuzahlen, was die Dynamik des Spiels erheblich verändern kann."
+    },
+    "basicRules": {
+      "heading": "Grundregeln",
+      "handRankings": {
+        "heading": "Hand Rankings",
+        "text": "Das Verständnis der Hand Rankings ist entscheidend. Hier sind die Rangfolgen von der höchsten zur niedrigsten:",
+        "royalFlushBold": "Royal Flush",
+        "royalFlushText": ": A, K, Q, J, 10 derselben Farbe.",
+        "straightFlushBold": "Straight Flush",
+        "straightFlushText": ": Fünf aufeinanderfolgende Karten derselben Farbe.",
+        "fourOfAKindBold": "Vierling",
+        "fourOfAKindText": ": Vier Karten desselben Rangs.",
+        "fullHouseBold": "Full House",
+        "fullHouseText": ": Ein Drilling plus ein Paar.",
+        "flushBold": "Flush",
+        "flushText": ": Fünf Karten derselben Farbe.",
+        "straightBold": "Straight",
+        "straightText": ": Fünf aufeinanderfolgende Karten verschiedener Farben.",
+        "threeOfAKindBold": "Drilling",
+        "threeOfAKindText": ": Drei Karten desselben Rangs.",
+        "twoPairBold": "Zwei Paare",
+        "twoPairText": ": Zwei verschiedene Paare.",
+        "onePairBold": "Ein Paar",
+        "onePairText": ": Ein Paar desselben Rangs.",
+        "highCardBold": "Hohe Karte",
+        "highCardText": ": Die höchste Karte, wenn keine andere Hand gebildet wird."
+      },
+      "bettingActions": {
+        "heading": "Setzoptionen",
+        "text": "Während eines Texas Hold'em-Spiels haben die Spieler mehrere Setzoptionen:"
+      }
+    },
+    "practice": {
+      "heading": "Übung",
+      "description": "Um besser im Texas Hold'em zu werden:",
+      "playRegularlyBold": "Regelmäßig spielen",
+      "playRegularlyText": ": Erfahrung ist der beste Lehrer.",
+      "studyGameBold": "Das Spiel studieren",
+      "studyGameText": ": Lesen Sie Bücher und schauen Sie sich Videos über Pokerstrategien an.",
+      "reviewHandsBold": "Hände überprüfen",
+      "reviewHandsText": ": Analysieren Sie Ihr Spiel und lernen Sie aus Fehlern."
+    },
+    "exampleHand": {
+      "heading": "Beispielhand",
+      "preFlopBold": "Pre-Flop",
+      "preFlopText": "Sie erhalten ",
+      "flopBold": "Flop",
+      "flopText": "Der Dealer zeigt ",
+      "bettingBold": "Setzen",
+      "bettingText": "Sie setzen, ein Spieler erhöht und der andere steigt aus. Sie callen.",
+      "turnBold": "Turn",
+      "turnText": "Der Dealer zeigt ",
+      "riverBold": "River",
+      "riverText": "Der Dealer zeigt ",
+      "showdownBold": "Showdown",
+      "showdownText": "Sie zeigen Ihre ",
+      "turnContinuation": ", und vervollständigen Ihre Farbe und Straße.",
+      "preFlopContinuation": ". Sie erhöhen, und zwei Spieler callen.",
+      "flopContinuation": ". Sie haben einen Flush-Draw und einen Straight-Draw.",
+      "finalBettingText": "Sie setzen erneut, und der Gegner erhöht. Sie erhöhen erneut, und der Gegner callt.",
+      "showdownContinuation": ", und gewinnen mit einem Ass-hohen Flush."
+    },
+    "conclusion": {
+      "text": "* Texas Hold'em ist ein Spiel von Können, Strategie und ein bisschen Glück. Wenn Sie die Regeln verstehen, regelmäßig üben und aus jeder Hand lernen, können Sie sich verbessern und dieses aufregende Spiel genießen. Viel Spaß beim Spielen!"
+    }
   }
 }
