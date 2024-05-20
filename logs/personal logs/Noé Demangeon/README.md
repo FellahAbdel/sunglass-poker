@@ -199,7 +199,11 @@
 
 2024/05/18 : 4h00           Traductions, quitter loading page amélioré. Début rédaction rapport.
 
-23H
+2024/05/19 : 4h00           Ecriture rapport, Nettoyage code
+
+2024/05/19 : 5h00           Deboggage, correction window, communication.
+
+34H
 
 --------- Deboggage, denier ajustements ---------
 
@@ -222,6 +226,6 @@ Voici un résumé des heures faites :
 
 26H : Backend, logique game
 
-23H : Deboggage, derniers ajustements
+34H : Deboggage, derniers ajustements
 
-TEMPS TOTAL: 173h30min
+TEMPS TOTAL: 182h30min
