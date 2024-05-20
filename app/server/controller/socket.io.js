@@ -7,6 +7,9 @@ const Player = require("../shared/Player"); // Player class
 const game = require("./game"); // Game logic module
 const csl = require("./intelligentLogging"); // Intelligent logging module
 const hydra = require("./hydrateSpecifics"); // Hydra module for action hydration
+const { clearTimeout } = require("timers");
+const { decode } = require("punycode");
+const { setTimeout } = require("timers/promises");
 
 // Duration of a session in milliseconds
 const SESSION_DURATION = 2 ** 31 - 1;
@@ -21,7 +24,8 @@ module.exports = function (
 ) {
   // Initializing socket.io server with CORS settings
   const io = require("socket.io")(server, { cors: corsSettings });
-
+  const userTimeoutRefresh = new Map();
+  
   // Applying middleware to socket.io engine
   io.engine.use(Middleware);
 
@@ -213,6 +217,11 @@ module.exports = function (
         return false;
       }
 
+      if(userTimeoutRefresh.has(decoded.id)){
+        clearTimeout(userTimeoutRefresh.get(decoded.id));
+        userTimeoutRefresh.delete(decoded.id);
+      }
+
       // Check if the socket is not already in the room identified by the token
       // If so, he's auth again.
       if (socket.rooms.has(decoded.id)) return true;
@@ -349,6 +358,36 @@ module.exports = function (
           socket.leave(room);
         }
       });
+    }
+  }
+
+  function lastInstanceLeaveGame(socket){
+    if(socket.request.session.userId){
+      let uid = socket.request.session.userId;
+      if(!userTimeoutRefresh.has(uid)){
+        const room = io.sockets.adapter.rooms[uid];
+        let nbrSocketLeft = room ? room.length : 0;
+        if(nbrSocketLeft === 0){
+          const call = setInterval(async () => {
+            
+              const response = await dao.getUserInfo(uid);
+              // If user information retrieval is successful
+              if (response.success) {
+                const user = response.user;
+                gameController.removePlayer(
+                  user.inGame.toString(), // Convert the room ID to string
+                  uid
+                );
+              }
+              if(userTimeoutRefresh.has(uid)){
+                clearInterval(userTimeoutRefresh.get(uid));
+                userTimeoutRefresh.delete(uid);
+              }
+
+          }, 3000);
+          userTimeoutRefresh.set(uid,call);
+        }
+      }
     }
   }
 
@@ -538,6 +577,7 @@ module.exports = function (
     });
 
     socket.on("disconnect", () => {
+      
       // Log user disconnection
       csl.log(
         "socketio",
@@ -546,6 +586,7 @@ module.exports = function (
         " | session : " +
         socket.request.session.id
       );
+      lastInstanceLeaveGame(socket);
     });
 
     // Only take action event from user Auth
