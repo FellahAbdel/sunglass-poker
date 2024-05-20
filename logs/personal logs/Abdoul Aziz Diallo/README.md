@@ -136,18 +136,18 @@
 
 | Date  | Description                                                                                                                                                                                                                                             | Skills developed | Time Spent | Resources |
 | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------- | --------- |
-| 14/05 | Handle double click to optimize the workload of the server + start to understand why when a player left a room and then try to create or join another room. it's his old room is shown without him being in that room                                   |                  | 4h         |           |
+| 14/05 | Handle double click to optimize the workload of the server (didn't work) + start to understand why when a player left a room and then try to create or join another room. it's his old room is shown without him being in that room                     |                  | 4h         |           |
 | 15/05 | I understand why we got the previous memory problem. After a player leave the room, the store is not re-initialized to it's initial state. So to fix that issue I added EMPTY_PAYLOAD action to dispatch once we the client receive the LEFT_ROOM event |                  | 6h         |           |
-| 16/05 | Add JsDoc for back-end code                                                                                                                                                                                                                             |                  | 2h         |           |
+| 16/05 | Add JsDoc for back-end code (Creates intentional bugs)                                                                                                                                                                                                  |                  | 2h         |           |
 |       | During joining the room sometimes the player's room is displayed but without players inside it, it's because the server took times to handle his action. So I make sure to let in only if the server finish handling JOIN_ROOM event.                   |                  | 3h         |           |
-| 17/05 | Add JsDoc for back-end code                                                                                                                                                                                                                             |                  | 2h         |           |
+| 17/05 | Continue working in the client store (logic when player join or left update the isPlayerLeft var)                                                                                                                                                       |                  | 2h         |           |
 | 18/05 | I find and fix a bug in the playerLeftGame function, it delete the wrong player.                                                                                                                                                                        |                  | 3h         |           |
 |       | Add JsDoc for back-end code                                                                                                                                                                                                                             |                  | 1h         |           |
 | 19/05 | Writing the game's mechanics for the general report and my contribution to the project.                                                                                                                                                                 |                  | 3h         |           |
 |       | Discord meeting with Victor, Noe, and Mostapha for testing purpose and fixing bugs                                                                                                                                                                      |                  | 3h         |           |
 
+---
 
-____
+# TOTAL :
 
-# Total des heures : 
-> ## 197.5 Heures
+> ## 197.5 H
