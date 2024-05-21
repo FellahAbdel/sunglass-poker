@@ -544,20 +544,21 @@ module.exports = function (
         token = data.token;
         kindOfTimer = (data.init === true);
       }
-      if(socket.alreadyCalled === undefined)
-        socket.alreadyCalled = {0:Date.now()-1000,1:Date.now()-1000};
-      csl.log('myNameIs', data, socket.alreadyCalled);
+      if(socket.request.session.alreadyCalled === undefined)
+        socket.request.session.alreadyCalled = {0:Date.now()-1000,1:Date.now()-1000};
+      csl.log('myNameIs', data, socket.request.session.alreadyCalled);
       // Identify the user with the provided token
       if (identify(socket, data.token)) {
         session_timer.refresh();
-        if (socket.alreadyCalled[kindOfTimer] === undefined || (Date.now() - socket.alreadyCalled[kindOfTimer] > 1000)){
+        if (socket.request.session.alreadyCalled[kindOfTimer] === undefined || (Date.now() - socket.request.session.alreadyCalled[kindOfTimer] > 1000)){
           csl.log('sendSuccess', "Auth correct");
           socket.emit('identifySuccessfull');
-          socket.alreadyCalled[kindOfTimer] = Date.now();
-          if(kindOfTimer === 1)
+          socket.request.session.alreadyCalled[kindOfTimer] = Date.now();
+          // if(kindOfTimer === 1)
             socket.emit('askedForGame');
         }
       }
+      socket.request.session.save();
     });
 
     // Try to join if Auth

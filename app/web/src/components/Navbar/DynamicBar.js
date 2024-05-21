@@ -107,7 +107,7 @@ const DynamicBar = () => {
           </div>
           {!notEnoughSC && (
             <>
-             {isMaster && (
+             {/* {isMaster && (
               <span className="container-switchSettings">
               <p>{getTranslatedWord("Autorestart")}</p>
               <label className="switch">
@@ -118,7 +118,7 @@ const DynamicBar = () => {
               </label>
             </span>
              )
-            }
+            } */}
               {numberOfPlayers >= 2 && isMaster ? (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
