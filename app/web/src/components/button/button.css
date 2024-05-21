@@ -190,8 +190,8 @@ Button:hover {
   font-size: calc(0.5vh+0.5vw);
   height: fit-content;
   width: fit-content;
-  min-width: 7vw;
-  padding: 5%;
+  min-width: 8vw;
+  padding: 5% 10% 5% 10%;
   cursor: pointer;
   margin-bottom: unset;
   box-shadow: unset;
@@ -232,9 +232,9 @@ Button:hover {
 }
 
 .btn-gameStart {
-  min-width: 15vw;
+  min-width: 16vw;
   width: fit-content;
-  height: 4vh;
+  height: 5vh;
   margin-top: 10px;
   position: absolute;
   bottom: 13%;
@@ -242,6 +242,8 @@ Button:hover {
   box-shadow: 0 5px 20px black;
   font-size: 1vw;
   font-weight: bold;
+  white-space:nowrap;
+  text-align: center;
 }
 .btn-gameJoin {
   position: unset;

@@ -80,11 +80,27 @@ const DynamicBar = () => {
 
       {/* Server Name */}
       <div
-        className={`container-serverInfo back-color1 ${
-          isGameTableVisible && "appear"
-        }`}
+        className={`container-serverInfo back-color2 ${
+          isGameTableVisible && "appear"}
+        ${isMaster  && "autoRestart"}`}
       >
+        {/* auto Restart button */}
+
+          <span className={`container-switchSettings ${isMaster && "autoRestart"} `}>
+          {(isMaster ) && (<>
+          <p>{getTranslatedWord("game.autoRestart")}</p>
+          <label className="switch autoRestart">
+            <input
+              type="checkbox"
+            />
+            <span className="slider autoRestart"/>
+          </label>
+          </>  )}
+
+        </span>
+        {/* room name */}
         {serverName ? serverName : getTranslatedWord("game.noActiveServer")}
+
       </div>
 
       {/* Waiting panel and start button */}
@@ -107,18 +123,6 @@ const DynamicBar = () => {
           </div>
           {!notEnoughSC && (
             <>
-             {/* {isMaster && (
-              <span className="container-switchSettings">
-              <p>{getTranslatedWord("Autorestart")}</p>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                />
-                <span className="slider" />
-              </label>
-            </span>
-             )
-            } */}
               {numberOfPlayers >= 2 && isMaster ? (
                 <Button
                   styleClass="btn-gameStart2 back-color1"
