@@ -211,4 +211,12 @@
 
 --2024/05 SEMAINE 2: 38H30 (TOTAL: 152H)
 
-TEMPS TOTAL: 152H
+2024/05/21  4H REunion
+
+2024/05/21  2H  Reunion avec victor et noé pour faire les commentaires 
+
+
+--2024/05 SEMAINE 3:    6H  (TOTAL:158H)
+
+
+TEMPS TOTAL: 158H
