@@ -21,6 +21,11 @@ const csl = require("../controller/intelligentLogging");
 
 require("dotenv").config();
 
+/**
+ * Sends a verification email to the specified email address with the provided verification code.
+ * @param {string} email - The recipient's email address
+ * @param {string} code - The verification code to be sent
+ */
 async function sendVerificationEmail(email, code) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -807,9 +812,10 @@ module.exports = function (app, bdd) {
     },
 
     /**
-     * Search through the database to quickly verify if the mail is already being used.
-     * @param {String} email
-     * @returns Success status & boolean
+     * Search through the database to quickly verify if the email is already being used.
+     * If the email exists, generate a verification code and send it to the user's email.
+     * @param {String} email - The email to be checked
+     * @returns {Object} Success status and boolean
      */
     checkEmail: async (email) => {
       try {
@@ -879,10 +885,11 @@ module.exports = function (app, bdd) {
 
     /**
      * Allow a player to change the current password.
-     * The user is searched base on the email.
-     * @param {String} email
-     * @param {String} newPassword
-     * @returns Success status
+     * The user is searched based on the email.
+     * @param {String} email - The user's email
+     * @param {String} code - The verification code
+     * @param {String} newPassword - The new password
+     * @returns {Object} Success status
      */
     changePassword: async (email, code, newPassword) => {
       try {
