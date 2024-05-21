@@ -180,5 +180,7 @@
 
 * 2024/05/20 : <b>1h30</b> <br/> Travail individuel : <i> Surveillance des journaux et les heures. Demandes de feedback. Rédaction du compte-rendu hebdomadaire. </i>
 
+* 2024/05/20 : <b>3h</b> <br/> Travail individuel : <i> Travail sur les rapports. </i>
+
 * Durant la semaine : <b>1h</b> <br/> Discussions sur discord: <i> Échanges sur le produit final et sur les rapports finaux </i> 
 
