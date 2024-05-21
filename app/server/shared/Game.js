@@ -430,7 +430,7 @@ class Game {
     });
     this.resetRestartCall();
     this.updatePlayersList();
-    this.autoRestartCall = createAutoRestartCall();
+    this.autoRestartCall = this.createAutoRestartCall();
   }
 
   playerPlayed() {
