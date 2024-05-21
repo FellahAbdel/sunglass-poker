@@ -1,4 +1,4 @@
-const { createStore, applyMiddleware } = require("redux");
+const { createStore } = require("redux");
 const rootReducer = require("./reducers/rootReducer.js");
 
 

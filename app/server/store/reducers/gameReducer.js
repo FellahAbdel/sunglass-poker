@@ -1,10 +1,8 @@
 // This file contains the reducer for game-related actions
 const actions = require("../actions/actionTypes.js");
-const Deck = require("../../shared/Deck.js");
 const Player = require("../../shared/Player.js");
 const game = require("../../shared/Game.js");
 const csl = require("../../controller/intelligentLogging.js");
-const { strictEqual } = require("assert");
 const fileType = "gameReducer";
 
 const initialRoomState = (serverName) => {
@@ -21,22 +19,6 @@ const initialState = {
 };
 
 const begin = (state) => {
-  const playersInRoom = state.game.players;
-
-  // Start the game
-  //var posBigBlind = state.game.blind;
-  //var posSmallBlind = (posBigBlind + 1) % playersInRoom.length;
-  //var blind = 20;
-  //playersInRoom[posBigBlind].bet(blind * 2);
-  //playersInRoom[posSmallBlind].bet(blind);
-  //state.game.focus = (posSmallBlind + 1) % playersInRoom.length;
-
-  // Distribute blinds
-  //state.game.pokerTable.playerBet(state.game.players[posBigBlind], blind * 2);
-
-  //state.game.pokerTable.playerBet(state.game.players[posSmallBlind], blind);
-
-  //state.game.start();
   return {
     ...state,
     controlsMode: "roundOne",
@@ -44,7 +26,6 @@ const begin = (state) => {
 };
 
 const gameReducer = (state = initialState, action) => {
-  // csl.log(fileType, state, action);
   var room;
   var playerId;
   var answer;
@@ -64,7 +45,6 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         rooms: {
           ...state.rooms,
-          // [action.payload.id]: { ...initialRoomState() },
         },
       };
     case actions.START_GAME:
@@ -119,7 +99,6 @@ const gameReducer = (state = initialState, action) => {
           (player) => player.getPlayerId() !== playerId
         );
 
-        // state.rooms[room].game.players = updatedPlayers;
         // If the player who leave was the master we change the master.
         // But only if there is still at least one player in the room.
         csl.log("leaveRoom", " srggm : ", state.rooms[room]);
@@ -214,15 +193,6 @@ const gameReducer = (state = initialState, action) => {
         };
         failed = true;
       }
-
-      // if (room.game.state !== "waiting" && !found) {
-      //   failed = true;
-      //   state.answer = {
-      //     status: false,
-      //     alreadyIn: false,
-      //     mes: "Game already started, can't join.",
-      //   };
-      // }
       // --------------
 
       // We can add the player in the game
