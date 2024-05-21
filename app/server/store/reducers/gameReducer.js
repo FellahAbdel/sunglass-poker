@@ -67,18 +67,6 @@ const gameReducer = (state = initialState, action) => {
           // [action.payload.id]: { ...initialRoomState() },
         },
       };
-    case actions.AUTO_RESTART_TOGGLE:
-      if(action.payload.playerId){
-        if(action.payload.room){
-          room = action.payload.room
-          if(state.rooms[room]){
-            state.rooms[room].game.toggleAutorestart(action.payload.playerId);
-          }
-        }
-      }
-      return {
-        ...state,
-      }
     case actions.START_GAME:
       if(state.rooms[action.payload.id].players.length <= 1)
         csl.log('START_GAME_EVENT',"not enough player");

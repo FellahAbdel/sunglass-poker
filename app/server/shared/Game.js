@@ -34,7 +34,6 @@ class Game {
       autoTurnDelay: 20000,
       restartCall: false,
       restartTimer: 0,
-      autoRestartCall: false,
       restartDelay: 5000,
       allow_start: true,
       serverName: "",
@@ -74,7 +73,6 @@ class Game {
       gameCurrentBet: this.gameCurrentBet,
       focusTurnTimer: this.focusTurnTimer,
       serverName: this.serverName,
-      autoRestartStatus:this.autoRestartStatus
     });
     return g;
   }
@@ -380,40 +378,6 @@ class Game {
     this.rotateTimer();
   }
 
-  toggleAutorestart(playerId){
-    if(playerId !== this.master)
-      return false;
-    if(this.autoRestartStatus){
-      clearTimeout(this.autoRestartCall);
-      this.autoRestartCall = false;
-    }
-    else{
-      this.autoRestartStatus = true;
-    }
-  }
-
-  createAutoRestart(){
-    if(this.autoRestartStatus)
-    return setTimeout(() => {
-      if (this.allow_start) {
-        this.movePlayersWithZeroCoinsToSpectators();
-        this.updatePlayersList();
-        if (this.state!=="waiting"){
-          csl.log("game is already started");
-          return;
-        }
-        else if (this.players.length <= 1) {
-          // Assurez-vous qu'il y a plus d'un joueur actif.
-          csl.log("Not enough players to start the game.");
-          return;
-        } else {
-          this.newgame();
-        }
-      }
-    }, 10000);
-    return false;
-  }
-
   gameEnd() {
     this.moveAfkPlayersToSpectators();
     this.focus = null;
@@ -430,7 +394,23 @@ class Game {
     });
     this.resetRestartCall();
     this.updatePlayersList();
-    this.autoRestartCall = createAutoRestart();
+    setTimeout(() => {
+      if (this.allow_start) {
+        this.movePlayersWithZeroCoinsToSpectators();
+        this.updatePlayersList();
+        if (this.state!=="waiting"){
+          csl.log("game is already started");
+          return;
+        }
+        else if (this.players.length <= 1) {
+          // Assurez-vous qu'il y a plus d'un joueur actif.
+          csl.log("Not enough players to start the game.");
+          return;
+        } else {
+          this.newgame();
+        }
+      }
+    }, 10000);
   }
 
   playerPlayed() {
