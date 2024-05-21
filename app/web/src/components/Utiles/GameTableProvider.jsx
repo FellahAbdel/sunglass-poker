@@ -116,8 +116,8 @@ export const GameTableProvider = ({ children }) => {
         setIsSpectator(true);
       }
 
-      if (gameInfo?.game.autoRestartStatus) {
-        setautoRestartStatus(autoRestartStatus);
+      if (gameInfo?.game.autoRestartStatus !== undefined) {
+        setautoRestartStatus(gameInfo.game.autoRestartStatus);
       }
 
       // Mettre à jour les cartes communautaires
