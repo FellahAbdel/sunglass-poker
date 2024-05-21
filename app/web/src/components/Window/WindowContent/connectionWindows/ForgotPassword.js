@@ -3,22 +3,26 @@ import Button from "../../../button/Button.tsx";
 import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../../Utiles/Translations.jsx';
+import { useTranslation } from "../../../Utiles/Translations.jsx";
+import { validateEmail } from "../../../Utiles/ValidationUtils.jsx";
 
-const ForgotPassword = ({
-  showSuccess,
-}) => {
-  const {
-    openWindow,
-  } = useWindowContext();
+/**
+ * ForgotPassword provides a form for users to request a password reset link via email.
+ * It validates user input and displays appropriate feedback messages.
+ */
+const ForgotPassword = () => {
+  const { openWindow, openSuccessWindow } = useWindowContext();
   const { checkEmail } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
   });
   const { getTranslatedWord } = useTranslation();
-
   const [validationError, setValidationError] = useState("");
 
+  /**
+   * Handles changes to form inputs, updating local state and resetting validation errors.
+   * @param {Object} e - Event object from the form element.
+   */
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -28,25 +32,32 @@ const ForgotPassword = ({
     setValidationError("");
   };
 
+  /**
+   * Handles the form submission to send a password reset request.
+   * @param {Object} e - Event object to prevent default form submission behavior.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Effectuer la vérification de l'e-mail en utilisant la fonction de AuthProvider
-      const result = await checkEmail(formData.email);
+    // Validation de l'email
+    const emailValidation = validateEmail(formData.email);
+    if (!emailValidation.isValid) {
+      setValidationError(emailValidation.errorMessage);
+      return;
+    }
 
+    try {
+      const result = await checkEmail(formData.email);
       if (result === true) {
-        showSuccess("Reset password email sent successfully.");
+        openSuccessWindow(getTranslatedWord("connection.successMail"));
       } else if (result === "not-found") {
-        // Affichez un message d'erreur indiquant une mauvaise combinaison pseudo/mdp
-        setValidationError("Email not found");
+        setValidationError("error.emailNotFound");
       } else {
-        // Autres erreurs
-        console.error("Failed to found the mail.");
+        console.error("Failed to find the email.");
+        setValidationError("error.emailNotFound");
       }
     } catch (error) {
       console.error("Error:", error);
-      // Afficher le message d'erreur à l'utilisateur
       setValidationError(
         "Failed to send reset password email. Please check your email address."
       );
@@ -55,8 +66,12 @@ const ForgotPassword = ({
 
   return (
     <div className="box">
-      <div className="login-page-title">{getTranslatedWord("connection.forgotPassQuestion")}</div>
-      <div className="login-page-text">{getTranslatedWord("connection.forgotPassEnter")}</div>
+      <div className="login-page-title">
+        {getTranslatedWord("connection.forgotPassQuestion")}
+      </div>
+      <div className="login-page-text">
+        {getTranslatedWord("connection.forgotPassEnter")}
+      </div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="email"
@@ -64,22 +79,23 @@ const ForgotPassword = ({
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationError}
-          styleClass={"input-connectionDefault input-icon-email"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/email.png"
         />
         <Button
-          styleClass="btn-connectionDefault button login-button"
+          styleClass="btn-connectionDefault button login-button back-color1"
           type="submit"
           label={getTranslatedWord("connection.send")}
         />
         <Button
-          styleClass="btn-connectionDefault button login-button"
+          styleClass="btn-connectionDefault button login-button back-color3"
           type="temporary"
           onClick={() => openWindow("reset")}
-          label="TEMPORARY BUTTON"
+          label={getTranslatedWord("connection.temporary")}
         />
       </form>
       <Button
-        styleClass="btn-connectionDefault forgot-button"
+        styleClass="btn-connectionDefault forgot-button back-color1"
         onClick={() => openWindow("login")}
         label={getTranslatedWord("connection.returnConnection")}
       />

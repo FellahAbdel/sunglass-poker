@@ -4,24 +4,19 @@
   bottom: 0;
   width: 100%;
   height: 100%;
-  /* background-color: rgba(0, 0, 0, 0.5); */
-  /* backdrop-filter: blur(5px); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .login-box {
-  /* background-color: white; */
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* box-shadow: 10px 15px rgba(253, 204, 22, 1); */
 }
 
 .text {
@@ -48,28 +43,38 @@
   width: 100%;
 }
 
-.main-SuccessWindow{
+.main-SuccessWindow {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  color:aliceblue;
+  color: aliceblue;
   width: 100%;
 }
 
-.main-SuccessWindow p{
+.main-SuccessWindow p {
   font-size: 2vw;
-  /* margin: 10%; */
+  width: 60%;
+  text-align: center;
 }
 
-
-.login-page-title{
-  color:white;
+.login-page-title {
+  color: white;
   font-size: 2vw;
   margin-bottom: 20px;
 }
 
-.login-page-text{
-  color:white;
+.login-page-text {
+  color: white;
   font-size: 1vw;
+  width: 23vw;
+  margin-bottom: 3vh;
+}
+.container-leaveButtons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
 }

@@ -1,40 +1,41 @@
-export function getStyles(windowType, isLogged, isGameTableVisible) {
+export function getStyles(
+  windowType,
+  isLogged,
+  isGameTableVisible,
+  isWindowOpen,
+  showWaitingMessage,
+  isSpectator
+) {
+  // Utiliser 'accueil' comme fallback si windowType est vide et isGameTableVisible est false
+  const effectiveWindowType =
+    windowType || (!isGameTableVisible ? "accueil" : "");
+
   return {
-    compTable: `comp-table ${
-      ["login", "register", "forgot", "reset"].includes(windowType)
-        ? "comp-table-login"
-        : ""
-    } ${windowType === "settings" && "comp-table-login"}
-      ${windowType === "tutorial" && "comp-table-tutorial"}
-      ${windowType === "" && isLogged && "comp-table-inGame"}`,
-
-    logoComponent: `logo-acceuil logo-${windowType}
-      ${windowType === "" && isGameTableVisible && "disappear"}
-      ${windowType === "validation" && !isGameTableVisible && "logo-success"}
+    //Table Placement
+    compTable: `comp-table
+      ${isGameTableVisible && !isWindowOpen && "comp-table-inGame"}
+      ${effectiveWindowType ? `comp-table-${effectiveWindowType}` : ""}
       ${
-        ["login", "register", "forgot", "reset"].includes(windowType)
-          ? "logo-login"
-          : ""
+        (showWaitingMessage || isSpectator) &&
+        isGameTableVisible &&
+        !isWindowOpen &&
+        "comp-table-waitingMessage"
       }
-      ${windowType === "create_table" ? "logo-create_table" : ""}`,
-
-    containerTable: `container-table 
-    ${
-      isLogged ? "table-isLogged" : "table-notLogged"
-    } 
-    ${isGameTableVisible && "container-inGame"}
-     
-      container-${windowType}  
-      ${windowType === "" && !isGameTableVisible && "container-acceuil"}
-      ${windowType === "validation" && !isGameTableVisible && "container-success"}
-
-      ${
-        ["login", "register", "forgot", "reset"].includes(windowType) &&
-        !isLogged
-          ? "container-logIn"
-          : ""
-      }
-      ${windowType === "create_table" && "container-create_table"}
       `,
+
+    //Table itself
+    containerTable: `
+      container-table
+      ${isLogged ? "table-isLogged" : "table-notLogged"}
+      ${effectiveWindowType ? `container-${effectiveWindowType}` : ""}
+      ${isGameTableVisible && !isWindowOpen && "container-inGame"}
+      `,
+
+    //Logo
+    logoComponent: `
+      logo-main
+      logo-${windowType}
+      ${isGameTableVisible && !isWindowOpen && "disappear"}
+    `,
   };
 }

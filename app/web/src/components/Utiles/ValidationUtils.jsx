@@ -2,36 +2,81 @@
 
 // Validation pseudo
 export const validateUsername = (username) => {
-    // Vérifiez si le pseudo a au moins 3 caractères
+  if (username.length < 3) {
     return {
-      isValid: username.length >= 3,
-      errorMessage: "Username must have at least 3 characters",
+      isValid: false,
+      errorMessage: "error.badUsername",
     };
-  };
-  
-  // Validation e-mail
-  export const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  }
+
+  if (username.length > 20) {
     return {
-      isValid: emailRegex.test(email),
-      errorMessage: "Invalid email address",
+      isValid: false,
+      errorMessage: "error.usernameTooLong",
     };
+  }
+
+  return {
+    isValid: true,
+    errorMessage: "",
   };
-  
-  // Validation mot de passe
-  export const validatePassword = (password) => {
-    // Vérifier si le mot de passe a au moins 6 caractères
+};
+
+// Validation e-mail
+export const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (email.length > 254) {
     return {
-      isValid: password.length >= 6,
-      errorMessage: "Password must have at least 6 characters",
+      isValid: false,
+      errorMessage: "error.emailTooLong",
     };
+  }
+
+  return {
+    isValid: emailRegex.test(email),
+    errorMessage: emailRegex.test(email) ? "" : "error.invalidEmail",
   };
-  
-  // Vérification correspondance mots de passe
-  export const validatePasswordMatch = (password, repeatPassword) => {
-    // Vérifier si les mots de passe correspondent
+};
+
+// Validation mot de passe
+export const validatePassword = (password) => {
+  if (password.length > 50) {
     return {
-      isValid: password === repeatPassword,
-      errorMessage: "Passwords do not match",
+      isValid: false,
+      errorMessage: "error.passwordTooLong",
     };
+  }
+
+  // Vérifier si le mot de passe a au moins 6 caractères
+  return {
+    isValid: password.length >= 6,
+    errorMessage: password.length >= 6 ? "" : "error.password6Characters",
   };
+};
+
+// Vérification correspondance mots de passe
+export const validatePasswordMatch = (password, repeatPassword) => {
+  // Vérifier si les mots de passe correspondent
+  return {
+    isValid: password === repeatPassword,
+    errorMessage: "error.passwordNotMatch",
+  };
+};
+
+//Fonction pour la création de table
+
+export const validatePasswordOrNull = (password) => {
+
+  if (password.length > 50) {
+    return {
+      isValid: false,
+      errorMessage: "error.passwordTooLong",
+    };
+  }
+  // Vérifier si le mot de passe a au moins 6 caractères
+  return {
+    isValid: password.length === 0 || password.length >= 6,
+    errorMessage: "Password must have at least 6 characters",
+  };
+};

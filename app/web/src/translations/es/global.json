@@ -3,12 +3,15 @@
     "profile": "Perfil",
     "chat": "Chat",
     "message": "Mensaje",
-    "settings": "Ajustes",
+    "settings": "Configuración",
     "tutorial": "Tutorial",
-    "exit": "Salir",
+    "exitTable": "Dejar la mesa",
+    "exit": "Cerrar ventana",
     "logout": "Cerrar sesión",
     "login": "Iniciar sesión",
-    "signin": "Registrarse"
+    "signin": "Registrarse",
+    "ranking": "Clasificación",
+    "home": "Inicio"
   },
   "connection": {
     "login": "Iniciar sesión",
@@ -16,54 +19,78 @@
     "username": "Nombre de usuario",
     "password": "Contraseña",
     "repeatPass": "Repite tu contraseña",
-    "email": "correo electrónico",
+    "email": "Correo electrónico",
     "forgotPass": "Olvidé mi contraseña",
     "forgotPassQuestion": "¿Olvidaste tu contraseña?",
-    "forgotPassEnter": "Ingresa tu correo electrónico para recibir un enlace de restablecimiento de contraseña.",
-    "registerNewAcc": "Registrar una nueva cuenta",
+    "forgotPassEnter": "Introduce tu correo electrónico para recibir un enlace de restablecimiento de contraseña.",
+    "registerNewAcc": "Registrar nueva cuenta",
     "signinG": "Iniciar sesión con Google",
     "haveAccQuestion": "¿Ya tienes una cuenta?",
     "optional": "Opcional",
     "loginMessage": "Inicia sesión en tu cuenta",
     "registerMessage": "Crea tu cuenta",
     "send": "Enviar",
-    "returnConnection": "Volver al menú de conexión"
+    "returnConnection": "Volver al menú de conexión",
+    "loginSuccess": "¡Sesión iniciada con éxito!",
+    "successMail": "Correo de restablecimiento de contraseña enviado con éxito",
+    "successAccount": "¡Cuenta creada con éxito!",
+    "resetPassword": "Restablece tu contraseña",
+    "successReset": "Has cambiado tu contraseña con éxito",
+    "enterNewPassword": "Introduce tu nueva contraseña aquí:",
+    "temporary": "BOTÓN TEMPORAL"
   },
   "messageBox": {
     "loginSucces": "¡Sesión iniciada con éxito!",
     "ok": "Ok"
   },
   "game": {
-    "loginPlay": "iniciar sesión para jugar",
-    "startGame": "Iniciar un juego",
-    "joinGame": "Unirse a un juego",
-    "createAgame": "Crear un nuevo juego",
+    "loginPlay": "Iniciar sesión para jugar",
+    "signupPlay": "Regístrate para jugar",
+    "startGame": "Iniciar una partida",
+    "joinGame": "Unirse a una partida",
+    "createAgame": "Crear una nueva partida",
+    "quickGame": "Partida rápida",
     "status": "Estado",
     "name": "Nombre",
-    "gameName": "Nombre del juego",
+    "gameName": "Nombre de la partida",
+    "PasswordOptionnal": "Contraseña (opcional)",
     "ranked": "Clasificado",
     "players": "Jugadores",
-    "selectRank": "Seleccionar Rango",
+    "selectRank": "Seleccionar rango",
     "join": "Unirse",
-    "full": "Lleno"
+    "full": "Completo",
+    "noActiveServer": "No hay servidor activo",
+    "notEnoughSC": "No tienes suficientes Sun Coins para unirte a esta partida",
+    "notEnoughPlayer": "No hay suficientes jugadores para comenzar la partida",
+    "yourTurn": "Tu turno",
+    "theirTurn": "Su turno"
   },
   "handGuide": {
-    "highcard": "Carta Alta",
-    "pair": "Par",
-    "twoPair": "Doble Par",
-    "threeOfKind": "Trio",
+    "highCard": "Carta alta",
+    "onePair": "Pareja",
+    "twoPair": "Doble pareja",
+    "threeOfAKind": "Trío",
     "straight": "Escalera",
     "flush": "Color",
     "fullHouse": "Full",
-    "fourOfKind": "Póquer",
-    "straightFlush": "Escalera de Color",
-    "royalFlush": "Escalera Real"
+    "fourOfAKind": "Póker",
+    "straightFlush": "Escalera de color",
+    "royalFlush": "Escalera real",
+    "lastPlayer": "Último jugador",
+    "show": "Mostrar",
+    "hide": "Ocultar",
+    "showB": "Mostrar ambos",
+    "hideB": "Ocultar ambos",
+    "of": "de"
   },
   "gameActionPanel": {
     "raise": "Subir",
     "call": "Igualar",
     "check": "Pasar",
-    "fold": "Retirarse"
+    "fold": "Retirarse",
+    "currentSC": "SC actual",
+    "afterSC": "SC después de subir",
+    "totalRaise": "Aumento total de ronda"
   },
   "bonus": {
     "bonus": "BONO"
@@ -73,44 +100,241 @@
     "rank": "Rango",
     "privacy": "Privacidad",
     "join": "Unirse",
-    "full": "Lleno",
+    "full": "Completo",
     "status": "Estado",
-    "action": "Acción"
+    "action": "Acción",
+    "selectRank": "Seleccionar rango",
+    "friendly": "Amistoso",
+    "intermediate": "Intermedio",
+    "advanced": "Avanzado",
+    "elite": "Élite",
+    "createTheGame": "Crear la partida",
+    "search": "Buscar sala",
+    "gameExist": "El nombre de la partida ya existe"
   },
   "playersStatus": {
     "empty": "Vacío",
-    "called": "Igualado",
-    "fold": "Retirado",
-    "raised": "Subido",
+    "call": "Igualado",
+    "folded": "Retirado",
+    "raise": "Subido",
     "checked": "Pasado",
-    "playing": "Jugando"
+    "tapis": "ALL IN",
+    "playing": "Jugando",
+    "waiting": "Esperando",
+    "winner": "Ganador"
   },
   "settings": {
-    "mute": "Silenciar",
+    "mute": "Silencio",
+    "sound": "Sonido",
     "theme": "Tema",
-    "langSelect": "Seleccionar idioma"
+    "animations": "Animaciones",
+    "langSelect": "Seleccionar un idioma",
+    "volume": "Volumen"
   },
   "profil": {
     "name": "Nombre",
     "mail": "Correo",
     "coins": "Monedas",
-    "date": "Fecha de Ingreso"
+    "date": "Fecha de registro",
+    "unknowDate": "Fecha desconocida"
   },
   "shop": {
     "shop": "Tienda",
-    "avatars": "Avatares",
-    "cards": "Cartas",
-    "wallpapers": "Fondos de pantalla",
+    "baseAvatar": "Avatares",
+    "sunglasses": "Gafas de sol",
+    "colorAvatar": "Color",
     "confirmationMessage": "¿Realmente quieres comprar este artículo por ",
     "confirm": "Confirmar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "price": "precio",
+    "success": "¡Compra realizada con éxito!",
+    "afterTransaction": "Monedas después de la transacción",
+    "buyMore": "Comprar más",
+    "purchase": "Compra",
+    "buy": "Comprar",
+    "backStore": "Volver a la tienda",
+    "loading": "Cargando",
+    "coins": "Gracias por tu donación"
   },
   "messageLogo": {
     "tutorial": "Tutorial",
     "profile": "Perfil",
-    "listeTable": "UNIRSE A UN JUEGO",
-    "createTable": "CREAR UN NUEVO JUEGO",
+    "servers": "UNIRSE A UNA PARTIDA",
+    "create_table": "CREAR UNA NUEVA PARTIDA",
     "validation": "Confirmación de compra",
-    "shop": "Comercio"
+    "shop": "Tienda",
+    "ranking": "Clasificaciones",
+    "coins": "Comprar monedas"
+  },
+  "alert": {
+    "confirmExitMessage": "¿Estás seguro de que quieres dejar la mesa? Perderás todos los SC en juego.",
+    "leftTableSuccess": "Has dejado la mesa con éxito.",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "logout": "Estás a punto de cerrar sesión"
+  },
+  "table": {
+    "total": "Bote total",
+    "waiting": "Esperando a los jugadores",
+    "join": "Unirse a la partida",
+    "spectacle": "Ver la partida",
+    "start": "Comenzar la partida",
+    "inGame": "Todavía estás en la mesa de juego"
+  },
+  "ranking": {
+    "rank": "Rango",
+    "pseudo": "Seudónimo",
+    "gain": "Ganancia",
+    "loadMore": "Cargar más"
+  },
+  "error": {
+    "noAccountFound": "No se encontró ninguna cuenta",
+    "invalidEmail": "Dirección de correo electrónico inválida",
+    "badUsername": "El nombre debe tener al menos 3 caracteres",
+    "usernameTooLong": "El nombre debe tener menos de 20 caracteres",
+    "password6Characters": "La contraseña debe tener al menos 6 caracteres",
+    "passwordNotMatch": "Las contraseñas no coinciden",
+    "emailNotFound": "Correo electrónico no encontrado",
+    "emailTooLong": "Correo electrónico demasiado largo",
+    "passwordTooLong": "La contraseña no puede tener más de 50 caracteres"
+  },
+  "tutorial": {
+    "title": "Texas Hold'em Poker",
+    "introduction": {
+      "heading": "Introducción",
+      "text": "El Texas Hold'em es la variante más popular del póker. Se juega en casinos, plataformas en línea y juegos en casa en todo el mundo. Este tutorial te guiará a través de las reglas básicas, las rondas de apuestas y las estrategias para comenzar."
+    },
+    "objective": {
+      "heading": "Objetivo",
+      "text": "El objetivo del Texas Hold'em es ganar fichas teniendo la mejor mano de cinco cartas o haciendo que los demás jugadores se retiren antes del showdown."
+    },
+    "setup": {
+      "heading": "Configuración",
+      "deckBold": "Baraja",
+      "deckText": ": Una baraja estándar de 52 cartas.",
+      "playersBold": "Jugadores",
+      "playersText": ": Típicamente de 2 a 10 jugadores.",
+      "chipsBold": "Fichas",
+      "chipsText": ": Usadas para las apuestas."
+    },
+    "bettingOptions": {
+      "description": "Aquí está el significado de cada acción:",
+      "foldBold": "Retirarse",
+      "foldText": ": Abandonar la mano y todas las apuestas realizadas hasta el momento.",
+      "checkCallBold": "Pasar/Igualar",
+      "checkCallText": ": Igualar la apuesta más alta actual o pasar si no se ha realizado ninguna apuesta.",
+      "raiseBold": "Subir",
+      "raiseText": ": Aumentar la cantidad de la apuesta, obligando a los demás a igualar la nueva apuesta."
+    },
+    "strategyTips": {
+      "heading": "Consejos de estrategia",
+      "startingHandsHeading": "Manos iniciales",
+      "startingHandsTips": {
+        "1": "Juega manos iniciales fuertes (por ejemplo, pares altos, conectores del mismo palo).",
+        "2": "Evita manos débiles (por ejemplo, cartas bajas no del mismo palo) a menos que estés en la posición adecuada."
+      },
+      "positionHeading": "Posición",
+      "positionTips": {
+        "1": "Estar en una posición tardía te permite ver cómo actúan los oponentes antes de que hagas tu jugada.",
+        "2": "Usa tu posición para controlar el bote y obtener información."
+      },
+      "bluffingHeading": "Farolear",
+      "bluffingTips": {
+        "1": "Farolea ocasionalmente para mantener a los oponentes adivinando.",
+        "2": "Asegúrate de que tus faroles sean convincentes y coherentes con tus acciones anteriores."
+      },
+      "potOddsHeading": "Probabilidades del bote",
+      "potOddsTip": "Calcula las probabilidades del bote para determinar si igualar una apuesta es rentable a largo plazo."
+    },
+    "commonTerms": {
+      "heading": "Términos comunes",
+      "blindBold": "Ciega",
+      "blindText": ": Apuesta obligatoria para asegurar que haya dinero en el bote.",
+      "communityCardsBold": "Cartas comunitarias",
+      "communityCardsText": ": Cartas repartidas boca arriba en el centro de la mesa.",
+      "kickerBold": "Kicker",
+      "kickerText": ": Una carta no emparejada que puede determinar el ganador si los jugadores tienen manos similares.",
+      "potBold": "Bote",
+      "potText": ": La cantidad total de fichas apostadas en una mano."
+    },
+    "specialFeatures": {
+      "strategyPsychology": {
+        "description": "Esta función es particularmente útil para agregar una capa adicional de estrategia y guerra psicológica al juego. Es una herramienta poderosa que debe usarse sabiamente, ya que puede influir significativamente en el resultado de la mano."
+      },
+      "heading": "Características especiales de nuestra aplicación",
+      "description": "Nuestra aplicación de Texas Hold'em incluye varias características únicas que mejoran tu experiencia de juego y permiten un juego estratégico más profundo.",
+      "revealingCardsHeading": "Revelar tus cartas",
+      "revealingCardsText": "A diferencia de los juegos tradicionales, nuestra aplicación te permite revelar una o ambas de tus cartas ocultas en cualquier momento durante la mano. Esta opción se puede utilizar para:",
+      "bluffMisleadBold": "Farolear o engañar:",
+      "bluffMisleadText": " Mostrar una carta puede crear una impresión engañosa sobre la fuerza de tu mano, influyendo en las acciones de tus oponentes.",
+      "showStrengthWeaknessBold": "Mostrar fuerza o debilidad:",
+      "showStrengthWeaknessText": " Puedes elegir mostrar una carta fuerte para asustar a los competidores o una carta más débil para incitarlos a apostar más.",
+      "bonusFeatureHeading": "Función de bonificación",
+      "bonusFeatureDescription": "A lo largo del juego, nuestro sistema de bonificación rastrea la cantidad de picas, corazones, diamantes y tréboles que recolectas. Una vez que tienes al menos dos de cada palo, puedes activar la bonificación. Esta función poderosa obliga a cada jugador a contribuir con 50 SC adicionales (la moneda de nuestra aplicación) al bote, lo que puede cambiar significativamente la dinámica del juego."
+    },
+    "basicRules": {
+      "heading": "Reglas básicas",
+      "handRankings": {
+        "heading": "Clasificación de manos",
+        "text": "Entender la clasificación de manos es crucial. Aquí están las clasificaciones de mayor a menor:",
+        "royalFlushBold": "Escalera real",
+        "royalFlushText": ": A, K, Q, J, 10 del mismo palo.",
+        "straightFlushBold": "Escalera de color",
+        "straightFlushText": ": Cinco cartas consecutivas del mismo palo.",
+        "fourOfAKindBold": "Póker",
+        "fourOfAKindText": ": Cuatro cartas del mismo rango.",
+        "fullHouseBold": "Full",
+        "fullHouseText": ": Un trío más una pareja.",
+        "flushBold": "Color",
+        "flushText": ": Cinco cartas del mismo palo.",
+        "straightBold": "Escalera",
+        "straightText": ": Cinco cartas consecutivas de diferentes palos.",
+        "threeOfAKindBold": "Trío",
+        "threeOfAKindText": ": Tres cartas del mismo rango.",
+        "twoPairBold": "Dos parejas",
+        "twoPairText": ": Dos parejas diferentes.",
+        "onePairBold": "Una pareja",
+        "onePairText": ": Una pareja del mismo rango.",
+        "highCardBold": "Carta alta",
+        "highCardText": ": La carta más alta cuando no se forma ninguna otra mano."
+      },
+      "bettingActions": {
+        "heading": "Acciones de apuestas",
+        "text": "Durante una partida de Texas Hold'em, los jugadores tienen varias opciones de apuestas:"
+      }
+    },
+    "practice": {
+      "heading": "Práctica",
+      "description": "Para mejorar en Texas Hold'em:",
+      "playRegularlyBold": "Juega regularmente",
+      "playRegularlyText": ": La experiencia es el mejor maestro.",
+      "studyGameBold": "Estudia el juego",
+      "studyGameText": ": Lee libros y mira videos sobre estrategias de póker.",
+      "reviewHandsBold": "Revisa las manos",
+      "reviewHandsText": ": Analiza tu juego y aprende de los errores."
+    },
+    "exampleHand": {
+      "heading": "Ejemplo de mano",
+      "preFlopBold": "Pre-Flop",
+      "preFlopText": "Te reparten ",
+      "flopBold": "Flop",
+      "flopText": "El crupier revela ",
+      "bettingBold": "Apuesta",
+      "bettingText": "Apuestas, un jugador sube y el otro se retira. Igualas.",
+      "turnBold": "Turn",
+      "turnText": "El crupier revela ",
+      "riverBold": "River",
+      "riverText": "El crupier revela ",
+      "showdownBold": "Showdown",
+      "showdownText": "Revelas tu ",
+      "turnContinuation": ", completando tu color y tu escalera.",
+      "preFlopContinuation": ". Subes, y dos jugadores igualan.",
+      "flopContinuation": ". Tienes un proyecto de color y un proyecto de escalera.",
+      "finalBettingText": "Apuestas de nuevo, y el oponente sube. Subes nuevamente, y el oponente iguala.",
+      "showdownContinuation": ", ganando con un color al As."
+    },
+    "conclusion": {
+      "text": "* El Texas Hold'em es un juego de habilidad, estrategia y un poco de suerte. Al entender las reglas, practicar regularmente y aprender de cada mano, puedes mejorar y disfrutar de este emocionante juego. ¡Feliz juego!"
+    }
   }
 }

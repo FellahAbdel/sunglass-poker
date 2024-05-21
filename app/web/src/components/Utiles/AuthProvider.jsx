@@ -1,5 +1,11 @@
 // AuthProvider.js
-import React, { createContext, useContext, useEffect, useReducer } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useCallback,
+} from "react";
 import { useWindowContext } from "./WindowContext";
 import { userReducer, initialState } from "../../store/reducers/userReducer";
 
@@ -7,7 +13,7 @@ const AuthContext = createContext();
 const CORSSETTINGS = {
   method: "POST",
   mode: "cors",
-  origin: "http://localhost:3000",
+  origin: "http://localhost:10002",
   headers: {
     "Content-Type": "application/json",
   },
@@ -15,13 +21,63 @@ const CORSSETTINGS = {
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
-  const { showHome } = useWindowContext();
+  const { showHome, windowType } = useWindowContext();
   const { isLogged, user } = state;
 
+  const getAuthHeaders = () => {
+    const token = sessionStorage.getItem("authToken");
+    return {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+  };
+
+  const fetchUserInfo = useCallback(async () => {
+    try {
+      const authToken = sessionStorage.getItem("authToken");
+      if (!authToken) {
+        console.error("No auth token found");
+        return;
+      }
+
+      const response = await fetch("api/userInfo", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "API responded with an error.");
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            ...data.user,
+          },
+        });
+      } else {
+        console.error(
+          "Impossible de récupérer les informations de l'utilisateur"
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des informations de l'utilisateur :",
+        error
+      );
+    }
+  }, [dispatch]);
   useEffect(() => {
-    const authToken = sessionStorage.getItem("authToken"); // Ou localStorage selon votre préférence
+    const authToken = sessionStorage.getItem("authToken");
     if (authToken) {
-      fetchUserInfo(authToken); // Récupérer les informations de l'utilisateur à partir du token
+      fetchUserInfo();
       dispatch({
         type: "LOGIN",
         payload: {
@@ -29,31 +85,83 @@ export const AuthProvider = ({ children }) => {
         },
       });
     }
-  }, []);
+  }, [windowType, fetchUserInfo]);
 
   const login = async (credentials) => {
     try {
-      const response = await fetch("http://localhost:3001/api/login", {
+      const response = await fetch("api/login", {
         ...CORSSETTINGS,
-
         body: JSON.stringify(credentials),
       });
+      if (!response.ok) {
+        // Si la réponse n'est pas un 2xx, gérer l'erreur
+        const errorData = await response.json();
+        console.error("Erreur de login:", errorData.message);
+        return { error: errorData.message };
+      }
       const data = await response.json();
       if (data.success) {
-        sessionStorage.setItem("authToken", data.token); // Stocker le token en mémoire ou gérer via headers
+        sessionStorage.setItem("authToken", data.token); // Stocker le token en session
         dispatch({
           type: "LOGIN",
           payload: { ...data.userData, token: data.token },
         });
-        fetchUserInfo(data.token); //Charger les info de l'utilisateur
+        fetchUserInfo(); // Charger les informations utilisateur
         return true;
       } else {
-        console.error(data.message);
+        console.error("Erreur de login:", data.message);
         return { error: data.message };
       }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error);
       return false;
+    }
+  };
+
+  // Créer une description de jeu d'un salon.
+  const createGameRoom = async (serverName, password, rank, masterInfo) => {
+    try {
+      const response = await fetch("api/games", {
+        ...CORSSETTINGS,
+        body: JSON.stringify({
+          serverName,
+          password,
+          rank,
+          master: masterInfo,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        // Additional logic if needed
+        return data._id;
+      } else {
+        console.error("Error creating game:", data.message);
+        return { error: data.error, field: data.field };
+      }
+    } catch (error) {
+      console.error("Error creating game:", error);
+      return false;
+    }
+  };
+
+  const getRoomTableRecords = async (token) => {
+    try {
+      const response = await fetch("api/gameRoomDescription", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch roomTableRecords");
+      } else {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error("Error fetching roomTableRecords:", error);
+      return null;
     }
   };
 
@@ -76,78 +184,73 @@ export const AuthProvider = ({ children }) => {
   ) => {
     try {
       const isEmailIdentifier = identifierType === "email";
-      // Utilisation de state.isLogged et state.user pour vérifier la connexion et accéder aux informations utilisateur
       if (!isEmailIdentifier && (!state.isLogged || !state.user)) {
         console.error("User not logged in.");
         return;
       }
 
       const identifierField = isEmailIdentifier ? "email" : "pseudo";
-      // Utilisation de state.user pour déterminer la valeur d'identifiant si nécessaire
       const identifier = isEmailIdentifier
         ? identifierValue
         : state.user[identifierField];
 
-      const response = await fetch(
-        "http://localhost:3001/api/update-user-data",
-        {
-          ...CORSSETTINGS,
-          headers: {
-            ...CORSSETTINGS.headers,
-            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Récupérer le token du sessionStorage
-          },
-          body: JSON.stringify({
-            field,
-            value,
-            identifierType,
-            identifierValue: identifier,
-          }),
-        }
-      );
+      const response = await fetch("api/update-user-data", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          ...getAuthHeaders(),
+        },
+        body: JSON.stringify({
+          field,
+          value,
+          identifierType,
+          identifierValue: identifier,
+        }),
+      });
 
       const data = await response.json();
 
       if (data.success) {
-        // Dispatch d'une action pour mettre à jour l'état utilisateur si la mise à jour est réussie
         dispatch({
           type: "UPDATE_USER_DATA",
           payload: { ...state.user, [field]: value },
         });
-        console.log(`${field} updated successfully.`);
         return true;
       } else {
         console.error(`Failed to update ${field}:`, data.message);
+        return { error: data.message };
       }
     } catch (error) {
       console.error(`Error updating ${field}:`, error);
+      return { error: error.message };
     }
   };
 
   const checkEmail = async (email) => {
     try {
       // Envoyer l'e-mail à l'utilisateur avec un lien pour réinitialiser le mot de passe
-      const response = await fetch("http://localhost:3001/api/check-email", {
+      const response = await fetch("api/check-email", {
         ...CORSSETTINGS,
         body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
 
-      if (data.success) {
-        console.log("Reset password email sent successfully.");
+      if (response.ok) {
+        return true;
       } else {
-        console.error("not-found");
-        return "not-found";
+        console.error("Mail not found");
+        return { error: data.error, field: data.field };
       }
     } catch (error) {
-      console.error("Error sending reset password email:", error);
+      console.error("Erreur lors de l'envoi du mail", error);
+      return false;
     }
   };
 
   const registerUser = async (userData) => {
     try {
-      // Effectuer la requête POST vers votre API
-      const response = await fetch("http://localhost:3001/api/users", {
+      const response = await fetch("api/users", {
         ...CORSSETTINGS,
         body: JSON.stringify(userData),
       });
@@ -155,7 +258,6 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Utilisateur créé avec succès!");
         return true;
       } else {
         console.error("Erreur lors de la création de l'utilisateur");
@@ -167,91 +269,266 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const fetchUserInfo = async (token) => {
-    try {
-      const response = await fetch("http://localhost:3001/api/userInfo", {
-        // Assurez-vous que cette route existe dans votre backend et qu'elle renvoie les informations de l'utilisateur basé sur le token
-        method: "GET",
-        headers: {
-          ...CORSSETTINGS.headers,
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-
-      console.log("Réponse de /api/userInfo:", data); // Log pour voir la réponse
-
-      if (data.success) {
-        dispatch({
-          type: "LOGIN",
-          payload: {
-            ...data.user,
-            token: token,
-          },
-        });
-      } else {
-        console.error(
-          "Impossible de récupérer les informations de l'utilisateur"
-        );
-      }
-    } catch (error) {
-      console.error(
-        "Erreur lors de la récupération des informations de l'utilisateur :",
-        error
-      );
-    }
-  };
-
-  const fetchStats = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:3001/api/user-stats/${user._id}`,
-        {
-          method: "GET",
-          headers: {
-            ...CORSSETTINGS.headers,
-            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Inclure le token JWT ici
-          },
-        }
-      );
-      const data = await response.json();
-      console.log("Data fetched from fetchStats:", data);
-      if (data.success) {
-        return data.stats; // Supposons que la réponse contient un objet stats dans data.stats
-      } else {
-        console.error("Failed to fetch user stats");
-        return null;
-      }
-    } catch (error) {
-      console.error("Error fetching user stats:", error);
-      return null;
-    }
-  };
-
   const resolveImagePath = (relativePath) => {
     return `${process.env.PUBLIC_URL}${relativePath}`;
   };
 
-  const fetchAvatars = async () => {
+  const fetchItems = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/avatars", {
-        ...CORSSETTINGS,
+      const response = await fetch("api/items", {
         method: "GET",
       });
-      let avatars = await response.json();
+      let items = await response.json();
       if (response.ok) {
-        // Résolvez le chemin de chaque avatar
-        avatars = avatars.map((avatar) => ({
-          ...avatar,
-          imgSrc: resolveImagePath(avatar.imgSrc),
+        items = items.map((item) => ({
+          ...item,
+          imgSrc: resolveImagePath(item.imgSrc),
         }));
-        console.log(avatars);
-        return avatars;
+
+        return items;
       } else {
-        console.error("Erreur lors du chargement des avatars");
+        console.error("Erreur lors du chargement des items");
       }
     } catch (error) {
       console.error("Erreur lors de la connexion à l'API:", error);
+    }
+  };
+
+  const buyItem = async (itemId) => {
+    try {
+      const response = await fetch("api/buy-item", {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          userId: user._id,
+          itemId: itemId,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        dispatch({ type: "UPDATE_USER", payload: data.user });
+        fetchUserInfo();
+        return true;
+      } else {
+        console.error(data.message);
+        return false;
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'achat de l'item :", error);
+      return false;
+    }
+  };
+
+  const activateAvatar = async (itemId, itemType) => {
+    try {
+      const response = await fetch(`api/activate-avatar`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ userId: user._id, itemId, itemType }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        dispatch({ type: "UPDATE_USER_AVATAR", payload: { itemId, itemType } });
+        fetchUserInfo();
+        return true;
+      } else {
+        console.error("Failed to activate avatar component", data.message);
+        return false;
+      }
+    } catch (error) {
+      console.error("Error activating avatar component:", error);
+      return false;
+    }
+  };
+
+  let avatarInCache = new Map(JSON.parse(sessionStorage.getItem("avatarInCache")) || []);
+
+  const saveAvatarToCache = () => {
+    sessionStorage.setItem("avatarInCache", JSON.stringify(Array.from(avatarInCache)));
+  };
+  const getAvatarById = async (userId,forced=false) => {
+    userId = String(userId);
+    if(!forced)
+    if (avatarInCache.has(userId)) {
+      let dataSet = avatarInCache.get(userId);
+      if(dataSet !== null && dataSet !== undefined){
+        if(Date.now() - dataSet.lastUpdated <= 10000){
+          return dataSet.avatar;    
+        }
+      }
+    }
+
+    try {
+      const requestUrl = `api/avatar-info/${userId}`;
+
+      const response = await fetch(requestUrl, {
+        method: "GET",
+        headers: getAuthHeaders(),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Failed to fetch avatar:", errorText);
+        throw new Error(errorText || "API responded with an error.");
+      }
+
+      const data = await response.json();
+
+      if (data && data.baseAvatar && data.sunglasses && data.colorAvatar) {
+        const avatarDataSet = {
+          baseAvatar: {
+            imgSrc: data.baseAvatar.imgSrc,
+            eyePosition: data.baseAvatar.eyePosition,
+          },
+          sunglasses: {
+            imgSrc: data.sunglasses.imgSrc,
+          },
+          colorAvatar: {
+            imgSrc: data.colorAvatar.imgSrc,
+          },
+        };
+        avatarInCache.set(userId, {avatar:avatarDataSet,lastUpdated:Date.now()});
+        sessionStorage.setItem("avatarInCache",avatarInCache);
+        saveAvatarToCache();
+        return avatarDataSet;
+      } else {
+        console.error("Data validation error: Missing required avatar fields.");
+        throw new Error(
+          "Data validation error: Missing required avatar fields."
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching avatar:", error);
+      return null;
+    }
+  };
+
+  const updateUserCoins = async (coinsToAdd) => {
+    if (!state.isLogged || !user) {
+      console.error("User not logged in.");
+      return false;
+    }
+
+    try {
+      const response = await fetch("api/update-coins", {
+        ...CORSSETTINGS,
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          userId: user._id,
+          coinsToAdd,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Failed to update coins:", data.message);
+        return false;
+      }
+      dispatch({
+        type: "UPDATE_USER_DATA",
+        payload: { ...user, coins: data.updatedCoins },
+      });
+
+      return true;
+    } catch (error) {
+      console.error("Error updating user coins:", error);
+      return false;
+    }
+  };
+
+  const getAvailableRooms = async () => {
+    try {
+      const response = await fetch("api/availableRooms", {
+        method: "GET",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        console.error("Failed to fetch rooms:", data.message);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching rooms:", error);
+      return null;
+    }
+  };
+
+  const verifyGamePassword = async (roomId, password) => {
+    try {
+      const response = await fetch(`api/verify-game-password`, {
+        ...CORSSETTINGS,
+        body: JSON.stringify({
+          roomId,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Password verification failed:", data.message);
+        return { success: false, error: data.message };
+      }
+
+      return { success: data.success, roomId: data.roomId };
+    } catch (error) {
+      console.error("Error during password verification:", error);
+      return { success: false, error: "Network error or server is down" };
+    }
+  };
+
+  const fetchRankings = async (pageNum, nbResults = 10) => {
+    try {
+      const response = await fetch(
+        `api/get-all-ranking?page=${pageNum}&nbres=${nbResults}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return {
+        success: true,
+        rankings: data.data,
+        hasMore: data.data.length === nbResults,
+      };
+    } catch (error) {
+      console.error("Error fetching rankings:", error);
+      return {
+        success: false,
+        message: error.message || "An error occurred while fetching rankings.",
+      };
+    }
+  };
+
+  const changePassword = async (email, newPassword) => {
+    try {
+      const response = await fetch("api/change-password", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, newPassword }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        return true;
+      } else {
+        console.error("Error changing password:", data.message);
+        return { error: data.message };
+      }
+    } catch (error) {
+      console.error("Error changing password:", error);
+      return false;
     }
   };
 
@@ -260,7 +537,10 @@ export const AuthProvider = ({ children }) => {
       value={{
         isLogged,
         user,
+        userId: user ? user._id : null,
         login,
+        createGameRoom,
+        getRoomTableRecords,
         logingOut,
         getUserInfo,
         updateUserData,
@@ -268,8 +548,16 @@ export const AuthProvider = ({ children }) => {
         registerUser,
         state,
         dispatch,
-        fetchStats,
-        fetchAvatars,
+        fetchItems,
+        buyItem,
+        activateAvatar,
+        getAvatarById,
+        updateUserCoins,
+        getAvailableRooms,
+        verifyGamePassword,
+        fetchRankings,
+        changePassword,
+        fetchUserInfo,
       }}
     >
       {children}

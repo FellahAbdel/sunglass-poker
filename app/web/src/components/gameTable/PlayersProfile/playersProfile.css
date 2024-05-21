@@ -1,271 +1,349 @@
-.container-onGameProfile{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 8vw;
-    min-width: 40px;
-    height: 9vh;
+.container-onGameProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 8vw;
+  min-width: 40px;
+  height: 9vh;
+  z-index: 1;
 }
 
-
-@media (max-height:300px){
-    .container-onGameProfile{
-        height: 10vh;
-    }
+@media (max-height: 300px) {
+  .container-onGameProfile {
+    height: 10vh;
+  }
 }
 
-@media (max-height:600px){
-    .container-onGameProfile{
-        height: 10vh;
-    }
+@media (max-height: 600px) {
+  .container-onGameProfile {
+    height: 10vh;
+  }
 }
 
-@media (max-height:500px){
-    .box-playerInfo{
-        font-size: 1.8vh;
-    }
-    .progressBar{
-        font-size: 1.8vh;
-    }
-} 
-
-
-@media (max-width:600px){
-    .container-onGameProfile{
-        height: 10vh;
-    }
+@media (max-height: 500px) {
+  .box-playerInfo {
+    font-size: 1.8vh;
+  }
+  .progressBar {
+    font-size: 1.8vh;
+  }
 }
 
-@media (max-width:700px){
-    .container-onGameProfile{
-        height: 10vh;
-    }
-
+@media (max-width: 600px) {
+  .container-onGameProfile {
+    height: 10vh;
+  }
 }
 
-
-
-.box-status{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top:6%;
-
-    width:100%;
-    height: 25%;
-    padding: 0;
-    box-shadow: 0  0 10px black;
-    border-radius: 20px;
-    z-index: 1;
-
-    border-style: solid;
-    border-width: 2px;
+@media (max-width: 700px) {
+  .container-onGameProfile {
+    height: 10vh;
+  }
 }
 
-
-#dark .box-status{
-    box-shadow: 
-        inset 0 0 10px 1px rgb(0, 132, 255),
-        0 0 10px 1px rgb(0, 132, 255);
-    background-color: rgb(0, 0, 0);
-    border-color: aliceblue;
-
+.container-profileMessage {
+  position: absolute;
+  top: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease, top 0.5s ease;
 }
-#light .box-status{
-    box-shadow: 
-    inset 0 0 10px 1px rgb(24, 146, 176),
+
+.profileMessageShow {
+  border: 0.15vw solid white;
+  border-radius: 0.5vw;
+  color: white;
+  font-size: 1vw;
+  padding: 2% 5% 9% 5%;
+  top: -33%;
+  opacity: 1;
+}
+
+.box-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 6%;
+
+  width: 100%;
+  height: 25%;
+  padding: 0;
+  box-shadow: 0 0 10px black;
+  border-radius: 20px;
+  z-index: 1;
+
+  border-style: solid;
+  border-width: 2px;
+}
+
+#dark .box-status {
+  box-shadow: inset 0 0 10px 1px rgb(0, 132, 255), 0 0 10px 1px rgb(0, 132, 255);
+  background-color: rgb(0, 0, 0);
+  border-color: aliceblue;
+}
+#light .box-status {
+  box-shadow: inset 0 0 10px 1px rgb(24, 146, 176),
     0 0 10px 1px rgb(24, 146, 176);
-    border: unset;
-    background-color: rgb(24, 146, 176);
-    border-color: rgb(89, 89, 89);
+  border: unset;
+  background-color: rgb(24, 146, 176);
+  border-color: rgb(89, 89, 89);
 }
 
-.box-statusText{
-    font-size: 1vw;
-    z-index: -1;
-    color:rgb(255, 255, 255);
-}
-#light .box-statusText{
-    color: rgb(255, 255, 255);
-}
-#dark .box-statusText.Fold{
-    color: rgb(255, 255, 255);
+.box-statusText {
+  font-size: 1vw;
+  z-index: unset;
+  color: rgb(255, 255, 255);
 }
 
-
-#dark .box-status.Fold{
-    filter: brightness(30%);
-    box-shadow:
-        inset 0 0 10px 1px rgb(0, 0, 0),
-        0 0 10px 1px rgb(0, 0, 0);
-    background-color: rgb(0, 0, 0) ;
-}
-#light .box-status.Fold{
-    filter: brightness(30%);
-    box-shadow:unset;
+#light .box-statusText {
+  color: rgb(255, 255, 255);
 }
 
-#dark .box-status.Waiting{
-    box-shadow:
-        inset 0 0 10px 1px rgb(0, 255, 98),
-        0 0 10px 1px rgb(0 , 255, 98);
-}
-#light .box-status.Waiting{
-    box-shadow:unset;
-    background-color: #00a674;
-}
-#dark .box-status.Raised{
-    box-shadow: inset 0 0 10px 1px rgb(255, 0, 0),
-                0 0 10px 1px rgb(255, 0, 0);
-}
-#light .box-status.Raised{
-    background-color: rgb(254, 111, 68);
-    box-shadow: inset 0 0 10px 1px rgb(255, 0, 0),
-    0 0 10px 1px rgb(255, 0, 0);
+#dark .box-statusText.folded {
+  color: rgb(255, 255, 255);
 }
 
-#dark .box-status.Empty{
-    box-shadow:
-        inset 0 0 10px 0px rgb(255, 255, 255),
-        0 0 10px 0px rgb(255, 255, 255);
-    filter: brightness(30%);
+#dark .box-status.folded {
+  filter: brightness(30%);
+  box-shadow: inset 0 0 10px 1px rgb(0, 0, 0), 0 0 10px 1px rgb(0, 0, 0);
+  background-color: rgb(0, 0, 0);
 }
-#light .box-status.Empty{
-    box-shadow:
-        inset 0 0 10px 0px rgb(255, 255, 255),
-        0 0 10px 0px rgb(255, 255, 255);
-    filter: brightness(30%);
-    background-color: black;
-}
-.profilePic.Fold{
-    filter:saturate(0);
-    filter: brightness(40%);
-}
-.profilePic.Empty{
-    
-    filter: blur(3px);
-}
-.box-playerInfo.Fold{
-    color: rgb(88, 88, 88);
+#light .box-status.folded {
+  filter: brightness(30%);
+  box-shadow: unset;
 }
 
-
-
-
-
-.progressBar{
-    position: absolute;
-    display: flex;
-    align-self: center;
-
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
-	border-radius: 20px;
-	background-color: #000000;
-    filter: opacity(100%);
-    top:0;
-    left: 0;
+#dark .box-status.waiting {
+  box-shadow: inset 0 0 10px 1px rgb(0, 255, 98), 0 0 10px 1px rgb(0, 255, 98);
 }
 
-.progressPercent{
-    position: absolute;
-    align-self: center;
-
-	font-weight: unset;
-    font-size: 1vw;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%,-50%);
-	text-shadow: unset;
-    color:rgb(255, 255, 255);
-
+#light .box-status.waiting {
+  box-shadow: unset;
+  background-color: #00a674;
 }
 
-
-.box-playerInfo{
-    display:flex;
-    align-items:flex-end;
-    justify-content: center;
-    text-align: center;
-
-
-    height:100%;
-    width: 100%;
-    padding: 7px;
-    margin: 0;
-
-    text-align: left;
-
-
-    border-radius: 13px;
-
-    font-size: 1vw;
-
-    border: unset;
+#dark .box-status.raise {
+  box-shadow: inset 0 0 10px 1px rgb(255, 0, 0), 0 0 10px 1px rgb(255, 0, 0);
 }
 
-#dark .box-playerInfo{
-    color: rgb(198, 198, 198);
-    background-color: rgba(0, 0, 0, 0.5);
-    box-shadow:  unset;
+#light .box-status.raise {
+  background-color: rgb(254, 111, 68);
+  box-shadow: inset 0 0 10px 1px rgb(255, 0, 0), 0 0 10px 1px rgb(255, 0, 0);
 }
 
-#light .box-playerInfo{
-    border: unset;
-    color: rgb(36, 36, 36);
-    background-color: rgba(255, 255, 255, 0.761);
-    box-shadow: 0px -23px 25px 0px rgba(0, 0, 0, 0.17) inset, 0px -36px 30px 0px rgba(0, 0, 0, 0.15) inset, 0px -79px 40px 0px rgba(0, 0, 0, 0.1) inset, 0px 2px 1px rgba(0, 0, 0, 0.06), 0px 4px 2px rgba(0, 0, 0, 0.09), 0px 8px 4px rgba(0, 0, 0, 0.09), 0px 16px 8px rgba(0, 0, 0, 0.09);
-}
-.profilePic{
-    position: absolute;
-    left:-35%;
-    bottom: -15%;
-    border-radius:50%;
-    width:3.3vw;
-    border-style:solid;
-    border-width: 0.3vw;
-    box-shadow: 0 0 10px black;
-}
-#dark .profilePic{
-    border-color: black;
-}
-#light .profilePic{
-    border-color: rgba(0, 0, 0, 0.204);
-    border-width: 0.2vw;
+#dark .box-status.tapis {
+  background-color: var(--color3-dark);
+  box-shadow: inset 0 0 10px 1px var(--color1-dark),
+    0 0 30px 10px var(--color1-dark);
 }
 
-
-
-.showCardPlayers1 img ,.showCardPlayers2 img{
-    width:2.5vw;
-    height: auto;
-    position: absolute;
-    box-shadow: -2px 2px 5px  black;
-}
-.showCardPlayers1 , .showCardPlayers2{
-    opacity: 0%;
-    transform: rotate(-20deg);
-    transform-origin: left bottom;
-    position: absolute;
-    transition: transform 1s ease, opacity 1s ease 0.5s; 
-}
-.playerCardAppear{
-    opacity: 100;
-}
-.showCardPlayers1{
-    left: 35%;
-    bottom: -5%;
-}
-.showCardPlayers2{
-    left: 45%;
-    bottom: -5%;
-}
-.flippedPlayerCards{
-    transform: rotateY(180deg);
-    transform-origin: center;
-    transition: transform 2s ease;
-    transform-style: preserve-3d;
+#light .box-status.tapis {
+  background-color: var(--color3-light);
+  box-shadow: inset 0 0 10px 1px var(--color1-light),
+    0 0 30px 10px var(--color2-light);
 }
 
+#dark .box-status.empty {
+  box-shadow: inset 0 0 10px 0px rgb(255, 255, 255),
+    0 0 10px 0px rgb(255, 255, 255);
+  filter: brightness(30%);
+  height: 86%;
+  width: 105%;
+  border-radius: 13px;
+}
+
+#light .box-status.empty {
+  box-shadow: inset 0 0 10px 0px rgb(255, 255, 255),
+    0 0 10px 0px rgb(255, 255, 255);
+  filter: brightness(30%);
+  background-color: black;
+  height: 86%;
+  width: 105%;
+  border-radius: 13px;
+}
+
+#dark .box-status.winner {
+  box-shadow: inset 0 0 10px 1px #ff9d00, 0 0 10px 1px #ff9d00;
+}
+
+#light .box-status.winner {
+  background-color: #a57423;
+  box-shadow: inset 0 0 10px 1px #a57423, 0 0 10px 1px #a57423;
+}
+
+.profilePic img#crown {
+  width: 3.3vw;
+  position: absolute;
+  top: -50%;
+  left: -27%;
+  rotate: -20deg;
+  filter: drop-shadow(0 0 1vw var(--color1-light))
+    drop-shadow(0 0 1vw var(--color1-light));
+}
+
+.profilePic.folded {
+  filter: saturate(0);
+  filter: brightness(40%);
+}
+
+.profilePic.empty {
+  filter: blur(3px);
+}
+
+.box-playerInfo.folded {
+  color: rgb(88, 88, 88);
+}
+
+.progressBar {
+  position: absolute;
+  display: flex;
+  align-self: center;
+
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background-color: #000000;
+  filter: opacity(100%);
+  top: 0;
+  left: 0;
+}
+
+.progressPercent {
+  position: absolute;
+  align-self: center;
+
+  font-weight: unset;
+  font-size: 1vw;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: unset;
+  color: rgb(255, 255, 255);
+}
+
+.box-playerInfo {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+
+  height: 100%;
+  width: 110%;
+  padding: 0;
+  margin: 0;
+
+  text-align: left;
+  border-radius: 1vw;
+  font-size: 1vw;
+  border: unset;
+  backdrop-filter: blur(5px);
+}
+
+.box-playerInfo p {
+  margin: 0;
+  margin-bottom: 7%;
+}
+
+#dark .box-playerInfo {
+  color: rgb(198, 198, 198);
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: unset;
+}
+
+#light .box-playerInfo {
+  border: unset;
+  color: rgb(36, 36, 36);
+  background-color: rgba(255, 255, 255, 0.761);
+  box-shadow: 0px -23px 25px 0px rgba(0, 0, 0, 0.17) inset,
+    0px -36px 30px 0px rgba(0, 0, 0, 0.15) inset,
+    0px -79px 40px 0px rgba(0, 0, 0, 0.1) inset, 0px 2px 1px rgba(0, 0, 0, 0.06),
+    0px 4px 2px rgba(0, 0, 0, 0.09), 0px 8px 4px rgba(0, 0, 0, 0.09),
+    0px 16px 8px rgba(0, 0, 0, 0.09);
+}
+
+#light .profilePic.you {
+  outline: 0.2vw solid var(--color2-light);
+}
+
+#dark .profilePic.you {
+  outline: 0.2vw solid var(--color2-dark);
+}
+
+.profilePic {
+  position: absolute;
+  left: -35%;
+  bottom: -15%;
+  border-radius: 50%;
+  width: 3.3vw;
+  border-style: solid;
+  border-width: 0.3vw;
+  box-shadow: 0 0 10px black;
+}
+#dark .profilePic {
+  border-color: black;
+}
+
+#light .profilePic {
+  border-color: rgba(0, 0, 0, 0.204);
+  border-width: 0.2vw;
+}
+
+.cardPlayers1 img#back,
+.cardPlayers2 img#back {
+  width: 2.5vw;
+  height: auto;
+  position: absolute;
+  box-shadow: -2px 2px 5px black;
+}
+
+.cardPlayers1,
+.cardPlayers2 {
+  width: 2.5vw;
+  height: 3.5vw;
+  filter: drop-shadow(-2px 2 5px rgb(255, 255, 255));
+  opacity: 0%;
+  transform: rotate(-20deg);
+  transform-origin: unset;
+  position: absolute;
+  transition: transform 1s ease, opacity 1s ease 0.5s, left 2s ease,
+    bottom 1s ease;
+}
+
+.cardPlayers1 .cardContainer .cardNumber,
+.cardPlayers2 .cardContainer .cardNumber {
+  font-size: 0.8vw;
+  left: 10%;
+  top: 10%;
+  gap: 0.2vh;
+}
+
+.playerCardAppear {
+  opacity: 100;
+}
+
+.cardPlayers1 {
+  left: 35%;
+  bottom: -60%;
+}
+
+.cardPlayers2 {
+  left: 45%;
+  bottom: -60%;
+}
+
+.flippedPlayerCards {
+  transform: rotateY(180deg);
+  transform-origin: center;
+}
+
+.cardPlayers1.flippedPlayerCards {
+  left: 20%;
+  bottom: -65%;
+}
+
+.cardPlayers2.flippedPlayerCards {
+  left: 45%;
+  bottom: -60%;
+}

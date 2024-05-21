@@ -3,11 +3,10 @@ export const initialState = {
   user: null,
 };
 
-export function userReducer(state = initialState, action) {
+function userReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    
     case "LOGIN":
       return {
         ...state,
@@ -35,3 +34,6 @@ export function userReducer(state = initialState, action) {
       return state;
   }
 }
+
+export default userReducer;
+export { userReducer };

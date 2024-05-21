@@ -1,25 +1,31 @@
 import React from "react";
 import "./profileMenu.css";
-//import ClientsProfile from "./../../gameTable/PlayersProfile/PlayersProfile";
-import Button from "../../button/Button.tsx";
-//import { useAuth } from "../../AuthProvider";
-import { useWindowContext } from "../../Utiles/WindowContext";
 import { useUserData } from "../../Utiles/useUserData";
 import { useTranslation } from "../../Utiles/Translations";
+import AvatarDisplay from "../../AvatarDisplay/AvatarDisplay.jsx";
 
+/**
+ * ProfileWindow component displays the user's profile information,
+ * including their avatar, name, email, coin balance, and account creation date.
+ */
 const ProfileWindow = () => {
   const { getTranslatedWord } = useTranslation();
 
-  const { openWindow } = useWindowContext();
   const { user } = useUserData();
+
+  // Format the account creation date for display.
+  const date = new Date(user.createdAt);
+  const formattedDate = date.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <div className="profileMenu">
-      <img
-        className="userPP"
-        src={user.avatar}
-        alt="User Profile"
-      />
+      <div className="userPP">
+        <AvatarDisplay />
+      </div>
 
       <div className="userInfo">
         <div className="userInfo-items">
@@ -42,15 +48,9 @@ const ProfileWindow = () => {
           <br />
           {user?.coins}
           <br />
-          {user?.joinedDate || "Date inconnue"}
-          <br />
+          {formattedDate} <br />
         </div>
       </div>
-      <Button
-        styleClass={"btn-gameStart back-color1"}
-        label={"Shop"}
-        onClick={() => openWindow("shop")}
-      />
     </div>
   );
 };

@@ -1,37 +1,34 @@
 /*Animations*/
-@keyframes slideUp{
-    from{
-        transform: translateY(100%);
-        filter: opacity(0%);
-    }
-    to{
-        transform: TranslateY(0%);
-        filter: opacity(100%);
-    }
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    filter: opacity(0%);
+  }
+  to {
+    transform: TranslateY(0%);
+    filter: opacity(100%);
+  }
 }
-.slideUp{
-    animation-name: slideUp ;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode:both;
-}
-
-@keyframes slideDown{
-    from{
-        transform: TranslateY(0%);
-        filter: opacity(100%);
-    }
-    to{
-        transform: translateY(100%);
-        filter: opacity(0%);
-    }
-}
-.slideDown{
-    animation: slideDown 0.5s ease 0s 1 normal both;
+.slideUp {
+  animation-name: slideUp;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: both;
 }
 
-
-
+@keyframes slideDown {
+  from {
+    transform: TranslateY(0%);
+    filter: opacity(100%);
+  }
+  to {
+    transform: translateY(100%);
+    filter: opacity(0%);
+  }
+}
+.slideDown {
+  animation: slideDown 0.5s ease 0s 1 normal both;
+}

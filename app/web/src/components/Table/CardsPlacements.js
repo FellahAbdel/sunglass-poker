@@ -1,67 +1,84 @@
-import React from 'react'
-import Card from '../gameTable/Card/Card'
-import TextGlitch from './../TextGlitch/TextGlitch'
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import Card from "../gameTable/Card/Card";
+import { useGameTable } from "../Utiles/GameTableProvider";
 
-const CardsPlacements = ({
-    moneyPot,
-    dealingFlop,
-    disappear,
-    playersCardDistributedProp
-}) => {
+/**
+ * CardsPlacements manages the display and animation of community cards and
+ * transition animations for player cards during a game.
+ * 
+ */
+const CardsPlacements = () => {
+  const { communityCards } = useGameTable();
+  const [flipped, setFlipped] = useState(communityCards.map(() => false)); // to stop the transition animation to happend more than once
+  //playersCardDistributed for each player
+  // *** also has been used in PlayersPlacements component
+  // *** here only for animation purposes
+  const timeoutRefs = useRef([]);
+
+  // Initialize dealingFlop from local storage or set to default if not available
+  const [dealingFlop, setDealingFlop] = useState(() => {
+    const saved = localStorage.getItem("dealingFlop");
+    return saved ? JSON.parse(saved) : [false, false, false, false, false];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("dealingFlop", JSON.stringify(dealingFlop));
+    setFlipped(flipped.map((f, index) => f || dealingFlop[index]));
+  }, [dealingFlop]);
+
+  const updateDealingFlopSequentially = useCallback(() => {
+    communityCards.forEach((card, index) => {
+      const timeout = setTimeout(() => {
+        setDealingFlop((prev) =>
+          prev.map((item, idx) => (idx === index ? card !== null : item))
+        );
+      }, 2000 * index);
+      timeoutRefs.current.push(timeout);
+    });
+  }, [communityCards]);
+
+  // Update dealingFlop based on communityCards with sequential timing
+  useEffect(() => {
+    if (communityCards && communityCards.length > 0) {
+      updateDealingFlopSequentially();
+    }
+  }, [communityCards, updateDealingFlopSequentially]);
+
+  // Clear timeouts on component unmount
+  useEffect(() => {
+    const timeouts = timeoutRefs.current;
+    return () => timeouts.forEach(clearTimeout);
+  }, []);
+
+  // Helper function to format card data for rendering
+  const formatCardData = (card) => {
+    return card ? [card.number.toString(), card.color] : null;
+  };
 
   return (
-    <div className={`container-cards ${disappear ? 'disappear' : ""}`}>
-          
-          <div className={`container-moneyPot`}>{moneyPot.toLocaleString()}$</div>
+    <div className={`container-cards`}>
+      <div className="container-fiveCards">
+        {new Array(5).fill(null).map((_, index) => (
+          <Card
+            key={index}
+            card={formatCardData(communityCards[index])}
+            styleClass={`tableCard ${flipped[index] && "flipped"}`}
+            flippedStyle={`dealingFlop${index}`}
+            flippingCard={dealingFlop[index]}
+          />
+        ))}
+      </div>
 
-          <div className="container-tableCards">
-            {/* first three flops -> dealingFlop[0]
-            first forth flops -> dealingFlop[1]
-            first fifth flops -> dealingFlop[2] */}
-            <Card card={["2","clubs"]} styleClass={`tableCard`} flippedStyle={"dealingFlop0"} flippingCard={dealingFlop[0]}/>
-            <Card card={["3","clubs"]} styleClass={"tableCard"} flippedStyle={"dealingFlop1"} flippingCard={dealingFlop[0]}/>
-            <Card card={["4","clubs"]} styleClass={"tableCard"} flippedStyle={"dealingFlop2"} flippingCard={dealingFlop[0]}/>
-            <Card card={["5","clubs"]} styleClass={"tableCard"} flippedStyle={"dealingFlop3"} flippingCard={dealingFlop[1]}/>
-            <Card card={["6","clubs"]} styleClass={"tableCard"} flippedStyle={"dealingFlop4"} flippingCard={dealingFlop[2]}/>
-          </div>  
-        
+      <div className="container-dealerDuck">
+        <Card
+          styleClass="cardDuck"
+          card={null}
+          flippedStyle={null}
+          flippingCard={false}
+        />
+      </div>
+    </div>
+  );
+};
 
-          
-          <div className="container-dealerDuck">
-            <Card  styleClass={"cardDuck"}  card={null} flippedStyle={null} flippingCard={false}/>
-            
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[0] ? "transition1 profile0cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[0] ? "transition2 profile0cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[1] ? "transition1 profile1cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[1] ? "transition2 profile1cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[2] ? "transition1 profile2cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[2] ? "transition2 profile2cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[3] ? "transition1 profile3cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[3] ? "transition2 profile3cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[4] ? "transition1 profile4cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[4] ? "transition2 profile4cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[5] ? "transition1 profile5cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[5] ? "transition2 profile5cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[6] ? "transition1 profile6cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[6] ? "transition2 profile6cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[7] ? "transition1 profile7cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[7] ? "transition2 profile7cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[8] ? "transition1 profile8cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[8] ? "transition2 profile8cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[9] ? "transition1 profile9cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-            <Card  styleClass={`cardPlayer ${playersCardDistributedProp[9] ? "transition2 profile9cards": ""}`}  card={null} flippedStyle={null} flippingCard={false}/>
-          </div>  
-        </div>
-  )
-}
-
-export default CardsPlacements
+export default CardsPlacements;

@@ -1,226 +1,280 @@
 /**/
-.container-tableCards {
-    height: 100%;
-    width: 80%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
+.container-fiveCards {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
-.container-tableCards img{
-    display: flex;
-    position: absolute;
-    right: 0;
-    height: auto;
-    width: 4vw;
-    z-index: 1;
-    margin:0 1% 0 1%; 
+.container-fiveCards img#back {
+  display: flex;
+  position: absolute;
+  right: 0;
+  height: auto;
+  width: 4vw;
+  z-index: 1;
+  margin: 0 1% 0 1%;
 }
 
 /**/
 .tableCard {
-    display: flex;
-    align-items: center;
-    width: 4vw;
-    height: auto;
-    position: absolute;
-    right:0;
-    z-index: 1;
-    margin:0 1% 0 1%; 
-    transition: transform 2s, right 2s;
-    transform-style: preserve-3d;
-  }
-/*flipping animation*/
-/* .flipped {
-    transform: rotateY(-180deg);
-    transform-origin: center;
+  display: flex;
+  align-items: center;
+  width: 4vw;
+  height: 5.6vw;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  margin: 0 1% 0 1%;
+  transition: transform 1s ease 0.5s, right 2s ease;
+  transform-style: preserve-3d;
 }
-.tableCardBack , .tableCardFront{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;   
-    box-shadow: -5px 5px 10px black;
- 
+.tableCard .cardContainer .cardNumber {
+  font-size: 1.5vw;
 }
-.tableCardFront{
-    transform: rotateY(-180deg);
 
-} */
+.flipped {
+  transition: none !important;
+}
+
 .dealingFlop0 {
-    display: flex;
-    right:85%;
+  display: flex;
+  right: 85%;
 }
 .dealingFlop1 {
-    display: flex;
-    right: 70%;
+  display: flex;
+  right: 70%;
 }
 .dealingFlop2 {
-    display: flex;
-    right: 55%;
+  display: flex;
+  right: 55%;
 }
 .dealingFlop3 {
-    display: flex;
-    right: 40%;
+  display: flex;
+  right: 40%;
 }
 .dealingFlop4 {
-    display: flex;
-    right: 25%;    
+  display: flex;
+  right: 25%;
 }
 
 /*SunGlass Poker text*/
-.container-cards p{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    font: italic small-caps  1.5vw/2 cursive;
+.container-cards p {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font: unset;
 }
-
 
 /*table duck of cards*/
 .container-dealerDuck {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    height: 100%;
-    width:20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 100%;
+  width: 20%;
 }
-.cardDuck{
-    display: flex;
-    align-self: center; 
-    align-items: center;
-    justify-content: center;
-    align-items: center;
+.cardDuck {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
 }
-.cardDuck img{
-    position: absolute;
-    right:0;
-    
-    width: 4vw;
-    height: auto;
-    border: 1px solid rgba(255, 255, 255, 0.468);
-    border-radius: 5px;
-    padding: 1%;
+.cardDuck img {
+  position: absolute;
+  right: 0;
+
+  width: 4vw;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.468);
+  border-radius: 5px;
+  padding: 1%;
 }
 
 /*card distribution animation*/
-.cardPlayer{
-    display: flex;
-    align-self: center; 
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right:1%;
-    top:0%;
-    bottom: 0%;
+.cardPlayer {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 1%;
+  top: 0%;
+  bottom: 0%;
 }
-.transition1{
-    transition: right 1s ease,top 1s ease,opacity 1s ease;
+.transition1 {
+  transition: right 1s ease, top 1s ease, opacity 1s ease;
 }
-.transition2{
-    transition: right 1s ease 0.2s,top 1s ease 0.2s,opacity 1s ease 0.2s;
+.transition2 {
+  transition: right 1s ease 0.2s, top 1s ease 0.2s, opacity 1s ease 0.2s;
 }
-.cardPlayer img{
-    display: flex;
-    align-self: center; 
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    width: 4vw;
-    height: auto;
-    position: absolute;
-    right:0;
-    margin: 1%;
+.cardPlayer img {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  width: 4vw;
+  height: auto;
+  position: absolute;
+  right: 0;
+  margin: 1%;
 }
-.profile0cards{
-    top:-100%; 
-    right:43%;
-    opacity: 0;
+.profile0cards {
+  top: -100%;
+  right: 43%;
+  opacity: 0;
 }
-.profile1cards{
-    top:-100%;
-    right:-5%;
-    opacity: 0;
+.profile1cards {
+  top: -100%;
+  right: -5%;
+  opacity: 0;
 }
-.profile2cards{
-    top:-30%;
-    right:-55%;
-    opacity: 0;
+.profile2cards {
+  top: -30%;
+  right: -55%;
+  opacity: 0;
 }
-.profile3cards{
-    top:60%;
-    right:-55%;
-    opacity: 0;
+.profile3cards {
+  top: 60%;
+  right: -55%;
+  opacity: 0;
 }
-.profile4cards{
-    top: 120%;
-    right:-5%;
-    opacity: 0;
+.profile4cards {
+  top: 120%;
+  right: -5%;
+  opacity: 0;
 }
-.profile5cards{
-    top: 120%;
-    right:43%;
-    opacity: 0;
+.profile5cards {
+  top: 120%;
+  right: 43%;
+  opacity: 0;
 }
-.profile6cards{
-    top:120%;
-    right:91.5%;
-    opacity: 0;
+.profile6cards {
+  top: 120%;
+  right: 91.5%;
+  opacity: 0;
 }
-.profile7cards{
-    top:60%;
-    right:141%;
-    opacity: 0;
+.profile7cards {
+  top: 60%;
+  right: 141%;
+  opacity: 0;
 }
-.profile8cards{
-    top:-33%;
-    right:141%;
-    opacity: 0;
+.profile8cards {
+  top: -33%;
+  right: 141%;
+  opacity: 0;
 }
-.profile9cards{
-    top:-100%;
-    right:91.5%;
-    opacity: 0;
+.profile9cards {
+  top: -100%;
+  right: 91.5%;
+  opacity: 0;
 }
-
-
 
 /*responsive*/
-@media (max-width:600px) {
-    .container-dealerDuck img{
-        width: 5vw;
-    }
-    .container-tableCards img{
-        width: 5vw;
-    }
-
+@media (max-width: 600px) {
+  .container-dealerDuck img {
+    width: 5vw;
+  }
+  .container-tableCards img {
+    width: 5vw;
+  }
 }
 
-
 /*Money pot container*/
-.container-moneyPot{
-    width: fit-content;
-    height: fit-content;
-    padding: 1.1% 2% 1.3% 2%;
+.container-playerPots {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  font-size: 0.7vw;
+  font-weight: 600;
+  z-index: unset;
+}
+#light .container-playerPots {
+  color: black;
+}
+#dark .container-playerPots {
+  color: white;
+}
 
-    text-align: center;
+.container-totalPot {
+  width: fit-content;
+  height: fit-content;
+  padding: 1.1% 2% 1.3% 2%;
 
-    position: absolute;
-    top:0;
-    left: 50%;
-    transform: translateX(-50%);
+  text-align: center;
 
-    color: #fff;
-    font-size: 2vh;
-    text-shadow:unset;
-    box-shadow: inset 0 0 8px 1px black;
+  position: absolute;
+  top: 28%;
+  left: 50%;
 
-    background-color: #303b44;
-    border-radius: 30px;
-    z-index: 99;
+  transform: translateX(-50%);
+  font-size: 2vh;
+  text-shadow: unset;
+  box-shadow: inset 0 0 8px black;
+  z-index: 1;
+}
+#dark .container-totalPot {
+  color: #fff;
+}
+#light .container-totalPot {
+  color: #000000;
+}
+.container-playerPots div {
+  width: fit-content;
+  white-space: nowrap;
+  border-radius: 1vh;
+  padding: 0.3vw 0.4vw 0.3vw 0.4vw;
+  box-shadow: inset 0 0 5px 1px black;
+  position: absolute;
+  display: flex;
+}
+#light .container-playerPots div {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.playerPot0 {
+  top: 18%;
+}
+.playerPot1 {
+  top: 18%;
+  right: 23%;
+}
+.playerPot2 {
+  top: 30%;
+  right: 14%;
+}
+.playerPot3 {
+  bottom: 30%;
+  right: 12%;
+}
+.playerPot4 {
+  bottom: 18%;
+  right: 23%;
+}
+.playerPot5 {
+  bottom: 18%;
+}
+.playerPot6 {
+  bottom: 18%;
+  left: 23%;
+}
+.playerPot7 {
+  bottom: 30%;
+  left: 12%;
+}
+.playerPot8 {
+  top: 30%;
+  left: 14%;
+}
+.playerPot9 {
+  top: 18%;
+  left: 23%;
 }

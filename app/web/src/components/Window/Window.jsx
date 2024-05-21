@@ -10,16 +10,24 @@ import SuccessWindow from "./WindowContent/SuccessWindow";
 import TutorialWindow from "./WindowContent/TutorialWindow";
 import SettingsWindow from "./WindowContent/SettingsWindow";
 import ProfileWindow from "./WindowContent/ProfileWindow";
-import StatsWindow from "./WindowContent/StatsWindow";
 import ServerPanelWindow from "./WindowContent/ServerPanel";
 import CreateTableWindow from "./WindowContent/CreateTableWindow";
-import ShopWindow  from "./WindowContent/shopWindows/ShopWindow";
-import ValidationWindow  from "./WindowContent/shopWindows/ValidationWindow";
+import ShopWindow from "./WindowContent/shopWindows/ShopWindow";
+import BuyCoinsWindow from "./WindowContent/shopWindows/BuyCoins";
+import ValidationWindow from "./WindowContent/shopWindows/ValidationWindow";
+import AcceuilWindow from "./WindowContent/AcceuilWindow";
+import AlertWindow from "./WindowContent/AlertWindow";
+import RankingWindow from "./WindowContent/RankingWindow";
+import LoadingWindow from "./WindowContent/LoadingWindow";
 
 import { useWindowContext } from "../Utiles/WindowContext";
 
+/**
+ * The Window component acts as a container for various modal windows in the application.
+ * It renders different content based on the current window type from the context.
+ */
 const Window = () => {
-  const { windowType } = useWindowContext();
+  const { windowType, isGameTableVisible } = useWindowContext();
 
   const handleWindowClick = (event) => {
     event.stopPropagation();
@@ -40,14 +48,15 @@ const Window = () => {
         {windowType === "tutorial" && <TutorialWindow />}
         {windowType === "settings" && <SettingsWindow />}
         {windowType === "profile" && <ProfileWindow />}
-        {windowType === "stats" && <StatsWindow />}
         {windowType === "servers" && <ServerPanelWindow />}
         {windowType === "create_table" && <CreateTableWindow />}
         {windowType === "shop" && <ShopWindow />}
         {windowType === "validation" && <ValidationWindow />}
-
-
-        
+        {windowType === "" && !isGameTableVisible && <AcceuilWindow />}
+        {windowType === "alert" && <AlertWindow />}
+        {windowType === "ranking" && <RankingWindow />}
+        {windowType === "coins" && <BuyCoinsWindow />}
+        {windowType === "loading" && <LoadingWindow />}
       </div>
     </div>
   );

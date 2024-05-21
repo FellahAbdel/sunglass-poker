@@ -1,4 +1,3 @@
-// forgotPassword.jsx
 import React, { useState } from "react";
 import Button from "../../../button/Button.tsx";
 import TextInputComponent from "../../../textInput/TextInput.jsx";
@@ -10,14 +9,15 @@ import {
   validatePasswordMatch,
 } from "../../../Utiles/ValidationUtils.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../../Utiles/Translations.jsx';
+import { useTranslation } from "../../../Utiles/Translations.jsx";
 
+/**
+ * SignUpWindow provides a user interface for registering a new account.
+ * It includes form fields for user information and performs client-side validation.
+ */
 const SignUpWindow = () => {
   const { getTranslatedWord } = useTranslation();
-  const {
-    openSuccessWindow,
-    openWindow,
-  } = useWindowContext();
+  const { openSuccessWindow, openWindow } = useWindowContext();
   const { registerUser } = useAuth();
   const [formData, setFormData] = useState({
     pseudo: "",
@@ -33,6 +33,10 @@ const SignUpWindow = () => {
     repeatPassword: "",
   });
 
+  /**
+   * Updates form data and clears associated validation errors when user edits an input.
+   * @param {Object} e - Event object from the input change.
+   */
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -46,6 +50,10 @@ const SignUpWindow = () => {
     }));
   };
 
+  /**
+   * Validates all form fields using utility functions and updates the validationErrors state.
+   * @returns {boolean} True if all form fields are valid, false otherwise.
+   */
   const validateForm = () => {
     const errors = {
       pseudo: "",
@@ -87,6 +95,10 @@ const SignUpWindow = () => {
     return Object.values(errors).every((error) => error === "");
   };
 
+  /**
+   * Handles form submission for registering a new user.
+   * @param {Object} e - Event object to prevent default form submission.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -95,7 +107,7 @@ const SignUpWindow = () => {
         const result = await registerUser(formData);
 
         if (result === true) {
-          openSuccessWindow("Account created with success!");
+          openSuccessWindow(getTranslatedWord("connection.successAccount"));
         } else if (result && result.error) {
           if (result.error === "user_exists") {
             // Affichez un message d'erreur indiquant que l'utilisateur existe déjà
@@ -121,7 +133,9 @@ const SignUpWindow = () => {
 
   return (
     <div className="box">
-      <div className="login-page-title">{getTranslatedWord("connection.registerMessage")}</div>
+      <div className="login-page-title">
+        {getTranslatedWord("connection.registerMessage")}
+      </div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
           name="pseudo"
@@ -129,7 +143,8 @@ const SignUpWindow = () => {
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.username")}
           errorMessage={validationErrors.pseudo}
-          styleClass={"input-connectionDefault input-icon-profile"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/profile.png"
         />
         <TextInputComponent
           name="email"
@@ -137,7 +152,8 @@ const SignUpWindow = () => {
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationErrors.email}
-          styleClass={"input-connectionDefault input-icon-email"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/email.png"
         />
         <TextInputComponent
           name="password"
@@ -146,7 +162,8 @@ const SignUpWindow = () => {
           placeholder={getTranslatedWord("connection.password")}
           type={"password"}
           errorMessage={validationErrors.password}
-          styleClass={"input-connectionDefault input-icon-password"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password.png"
         />
         <TextInputComponent
           name="repeatPassword"
@@ -155,25 +172,19 @@ const SignUpWindow = () => {
           placeholder={getTranslatedWord("connection.repeatPass")}
           type={"password"}
           errorMessage={validationErrors.repeatPassword}
-          styleClass={"input-connectionDefault input-icon-passwordRepeat"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password-repeat.png"
         />
         <Button
-          styleClass="btn-connectionDefault login-button"
+          styleClass="btn-connectionDefault login-button back-color1"
           type="submit"
-          label={getTranslatedWord("connection.signin")} 
+          label={getTranslatedWord("connection.signin")}
         />
       </form>
 
       <Button
-        styleClass="btn-connectionDefault google-button"
-        label={getTranslatedWord("connection.signinG")}
-        iconSrc={require("./../../../assets/images/icons/white/google.png")}
-        iconStyle={true}
-      />
-
-      <Button
         onClick={() => openWindow("login")}
-        styleClass="btn-connectionDefault forgot-button"
+        styleClass="btn-connectionDefault forgot-button back-color1"
         label={getTranslatedWord("connection.haveAccQuestion")}
       />
     </div>

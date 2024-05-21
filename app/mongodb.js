@@ -1,5 +1,3 @@
-use Poker
-
 db.createRole({
     role: "pokerServer",
     privileges : [
@@ -17,3 +15,5 @@ db.createUser({
     pwd: "azerty",
     roles: ["pokerServer"]
 })
+
+//auth as root  :  'superuser' '123456789'

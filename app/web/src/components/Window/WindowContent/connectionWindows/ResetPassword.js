@@ -8,14 +8,16 @@ import {
   validatePasswordMatch,
 } from "../../../Utiles/ValidationUtils.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
-import { useTranslation } from '../../../Utiles/Translations.jsx';
+import { useTranslation } from "../../../Utiles/Translations.jsx";
 
-const ResetPasswordWindow = ({ showSuccess }) => {
+/**
+ * ResetPasswordWindow provides a form for users to reset their password.
+ * It includes validation for email, new password, and password confirmation.
+ */
+const ResetPasswordWindow = () => {
   const { getTranslatedWord } = useTranslation();
-  const {
-    openWindow,
-  } = useWindowContext();
-  const { updateUserData } = useAuth();
+  const { openWindow, openSuccessWindow } = useWindowContext();
+  const { changePassword } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -29,40 +31,43 @@ const ResetPasswordWindow = ({ showSuccess }) => {
     repeatPassword: "",
   });
 
+  /**
+   * Handles form input changes and updates form data and validation errors states.
+   * @param {Object} e - The event object from the input change.
+   */
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
 
-    // Réinitialiser le message d'erreur associé au champ modifié
     setValidationErrors((prevErrors) => ({
       ...prevErrors,
       [e.target.name]: "",
     }));
   };
 
+  /**
+   * Validates the form data and sets appropriate error messages.
+   * @returns {boolean} - True if the form is valid, otherwise false.
+   */
   const validateForm = () => {
     const errors = {
-      pseudo: "",
       email: "",
       password: "",
       repeatPassword: "",
     };
 
-    // Validation de l'e-mail
     const emailValidation = validateEmail(formData.email);
     if (!emailValidation.isValid) {
       errors.email = emailValidation.errorMessage;
     }
 
-    // Validation du mot de passe
     const passwordValidation = validatePassword(formData.password);
     if (!passwordValidation.isValid) {
       errors.password = passwordValidation.errorMessage;
     }
 
-    // Validation de la correspondance des mots de passe
     const passwordMatchValidation = validatePasswordMatch(
       formData.password,
       formData.repeatPassword
@@ -72,11 +77,13 @@ const ResetPasswordWindow = ({ showSuccess }) => {
     }
 
     setValidationErrors(errors);
-
-    // Vérifie si tous les champs sont valides
     return Object.values(errors).every((error) => error === "");
   };
 
+  /**
+   * Handles the form submission, performing the password change operation.
+   * @param {Object} e - Event object to prevent default form submission.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -84,23 +91,23 @@ const ResetPasswordWindow = ({ showSuccess }) => {
 
     if (validateForm()) {
       try {
-        // Utilisez la fonction générique pour mettre à jour le mot de passe dans la base de données
-        const result = await updateUserData(
-          "password",
-          password,
-          "email",
-          email
-        );
+        const result = await changePassword(email, password);
 
         if (result === true) {
-          showSuccess("Password changed!");
+          openSuccessWindow(getTranslatedWord("connection.successReset"));
         } else {
           console.error("Error changing password:", result.error);
-          validationErrors.email = "Email not found";
+          setValidationErrors({
+            ...validationErrors,
+            email: "error.emailNotFound",
+          });
         }
       } catch (error) {
         console.error("Error changing password:", error);
-        validationErrors.email = "Email not found";
+        setValidationErrors({
+          ...validationErrors,
+          email: "error.emailNotFound",
+        });
       }
     } else {
       console.error("Form validation failed");
@@ -109,16 +116,21 @@ const ResetPasswordWindow = ({ showSuccess }) => {
 
   return (
     <div className="box">
-      <div className="login-page-title">Reset your password</div>
-      <div className="login-page-text">Enter your new password here :</div>
+      <div className="login-page-title">
+        {getTranslatedWord("connection.resetPassword")}
+      </div>
+      <div className="login-page-text">
+        {getTranslatedWord("connection.enterNewPassword")}
+      </div>
       <form onSubmit={handleSubmit} className="myForm">
-        <TextInputComponent //Temporaire, il faudrait que l'e-mail soit passé en parametre et récupéré dans le mail du user
+        <TextInputComponent
           name="email"
           value={formData.email}
           onChange={handleChange}
           placeholder={getTranslatedWord("connection.email")}
           errorMessage={validationErrors.email}
-          styleClass={"input-connectionDefault input-icon-email"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/email.png"
         />
         <TextInputComponent
           name="password"
@@ -127,7 +139,8 @@ const ResetPasswordWindow = ({ showSuccess }) => {
           type="password"
           placeholder={getTranslatedWord("connection.password")}
           errorMessage={validationErrors.password}
-          styleClass={"input-connectionDefault input-icon-password"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password.png"
         />
         <TextInputComponent
           name="repeatPassword"
@@ -136,20 +149,20 @@ const ResetPasswordWindow = ({ showSuccess }) => {
           type="password"
           placeholder={getTranslatedWord("connection.repeatPass")}
           errorMessage={validationErrors.repeatPassword}
-          styleClass={"input-connectionDefault input-icon-passwordRepeat"}
+          styleClass={"input-connectionDefault"}
+          iconSrc="static/media/assets/images/icons/black/password-repeat.png"
         />
         <Button
-          styleClass="btn-connectionDefault button login-button"
+          styleClass="btn-connectionDefault back-color1"
           type="submit"
-          label="Send"
+          label={getTranslatedWord("connection.send")}
         />
       </form>
       <Button
-        styleClass="btn-connectionDefault forgot-button"
+        styleClass="btn-connectionDefault back-color3"
         onClick={() => openWindow("login")}
-        label="Return to connection menu"
+        label={getTranslatedWord("connection.returnConnection")}
       />
-      <p></p>
     </div>
   );
 };

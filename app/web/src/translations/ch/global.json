@@ -1,0 +1,341 @@
+{
+  "navbar": {
+    "profile": "个人资料",
+    "chat": "聊天",
+    "message": "消息",
+    "settings": "设置",
+    "tutorial": "教程",
+    "exitTable": "离开桌子",
+    "exit": "关闭窗口",
+    "logout": "登出",
+    "login": "登录",
+    "signin": "注册",
+    "ranking": "排名",
+    "home": "首页"
+  },
+  "connection": {
+    "login": "登录",
+    "signin": "注册",
+    "username": "用户名",
+    "password": "密码",
+    "repeatPass": "重复密码",
+    "email": "电子邮箱",
+    "forgotPass": "我忘记了密码",
+    "forgotPassQuestion": "忘记密码？",
+    "forgotPassEnter": "输入你的电子邮箱以接收重置密码的链接。",
+    "registerNewAcc": "注册新账户",
+    "signinG": "使用Google登录",
+    "haveAccQuestion": "已经有账户？",
+    "optional": "可选",
+    "loginMessage": "登录到你的账户",
+    "registerMessage": "创建你的账户",
+    "send": "发送",
+    "returnConnection": "返回连接菜单",
+    "loginSuccess": "登录成功！",
+    "successMail": "重置密码的邮件发送成功",
+    "successAccount": "账户创建成功！",
+    "resetPassword": "重置你的密码",
+    "successReset": "你已成功更改密码",
+    "enterNewPassword": "在此输入新密码：",
+    "temporary": "临时按钮"
+  },
+  "messageBox": {
+    "loginSucces": "登录成功！",
+    "ok": "好的"
+  },
+  "game": {
+    "loginPlay": "登录以玩",
+    "signupPlay": "注册以玩",
+    "startGame": "开始游戏",
+    "joinGame": "加入游戏",
+    "createAgame": "创建新游戏",
+    "quickGame": "快速游戏",
+    "status": "状态",
+    "name": "名字",
+    "gameName": "游戏名称",
+    "PasswordOptionnal": "密码（可选）",
+    "ranked": "排名",
+    "players": "玩家",
+    "selectRank": "选择等级",
+    "join": "加入",
+    "full": "已满",
+    "noActiveServer": "没有活动的服务器",
+    "notEnoughSC": "你没有足够的Sun Coins来加入这个游戏",
+    "notEnoughPlayer": "没有足够的玩家开始游戏",
+    "yourTurn": "轮到你",
+    "theirTurn": "轮到他们"
+  },
+  "handGuide": {
+    "highCard": "高牌",
+    "onePair": "对子",
+    "twoPair": "两对",
+    "threeOfAKind": "三条",
+    "straight": "顺子",
+    "flush": "同花",
+    "fullHouse": "葫芦",
+    "fourOfAKind": "四条",
+    "straightFlush": "同花顺",
+    "royalFlush": "皇家同花顺",
+    "lastPlayer": "最后一个",
+    "show": "展示",
+    "hide": "隐藏",
+    "showB": "展示两个",
+    "hideB": "隐藏两个",
+    "of": "的"
+  },
+  "gameActionPanel": {
+    "raise": "加注",
+    "call": "跟注",
+    "check": "看牌",
+    "fold": "弃牌",
+    "currentSC": "当前SC",
+    "afterSC": "加注后的SC",
+    "totalRaise": "本轮总加注"
+  },
+  "bonus": {
+    "bonus": "奖金"
+  },
+  "serverPanel": {
+    "name": "名称",
+    "rank": "排名",
+    "privacy": "隐私",
+    "join": "加入",
+    "full": "已满",
+    "status": "状态",
+    "action": "操作",
+    "selectRank": "选择排名",
+    "friendly": "友好",
+    "intermediate": "中级",
+    "advanced": "高级",
+    "elite": "精英",
+    "createTheGame": "创建游戏",
+    "search": "搜索房间",
+    "gameExist": "游戏名称已存在"
+  },
+  "playersStatus": {
+    "empty": "空",
+    "call": "跟注",
+    "folded": "弃牌",
+    "raise": "加注",
+    "checked": "看牌",
+    "tapis": "全押",
+    "playing": "正在玩",
+    "waiting": "等待中",
+    "winner": "胜利者"
+  },
+  "settings": {
+    "mute": "静音",
+    "sound": "声音",
+    "theme": "主题",
+    "animations": "动画",
+    "langSelect": "选择语言",
+    "volume": "体积"
+  },
+  "profil": {
+    "name": "名称",
+    "mail": "邮箱",
+    "coins": "金币",
+    "date": "加入日期",
+    "unknowDate": "未知日期"
+  },
+  "shop": {
+    "shop": "商店",
+    "baseAvatar": "头像",
+    "sunglasses": "太阳镜",
+    "colorAvatar": "颜色",
+    "confirmationMessage": "你确定要购买这个物品，价格为 ",
+    "confirm": "确认",
+    "cancel": "取消",
+    "price": "价格",
+    "success": "购买成功！",
+    "afterTransaction": "交易后的Sun Coins",
+    "buyMore": "购买更多",
+    "purchase": "购买",
+    "buy": "买",
+    "backStore": "返回商店",
+    "loading": "加载中",
+    "coins": "感谢你的捐赠"
+  },
+  "messageLogo": {
+    "tutorial": "教程",
+    "profile": "个人资料",
+    "servers": "加入游戏",
+    "create_table": "创建新游戏",
+    "validation": "购买确认",
+    "shop": "商店",
+    "ranking": "排名",
+    "coins": "购买金币"
+  },
+  "alert": {
+    "confirmExitMessage": "你确定要离开桌子吗？你会失去所有正在玩的SC。",
+    "leftTableSuccess": "你已成功离开桌子。",
+    "confirm": "确认",
+    "cancel": "取消",
+    "logout": "你即将登出"
+  },
+  "table": {
+    "total": "总底池",
+    "waiting": "等待玩家",
+    "join": "加入游戏",
+    "spectacle": "观看游戏",
+    "start": "开始游戏",
+    "inGame": "你还在游戏桌上"
+  },
+  "ranking": {
+    "rank": "排名",
+    "pseudo": "昵称",
+    "gain": "收益",
+    "loadMore": "加载更多"
+  },
+  "error": {
+    "noAccountFound": "未找到账户",
+    "invalidEmail": "无效的电子邮件地址",
+    "badUsername": "名称必须至少有3个字符",
+    "usernameTooLong": "名称必须少于20个字符",
+    "password6Characters": "密码必须至少有6个字符",
+    "passwordNotMatch": "密码不匹配",
+    "emailNotFound": "电子邮件未找到",
+    "emailTooLong": "电子邮件太长",
+    "passwordTooLong": "密码不能超过50个字符"
+  },
+  "tutorial": {
+    "title": "德州扑克",
+    "introduction": {
+      "heading": "介绍",
+      "text": "德州扑克是最流行的扑克变种。它在赌场、在线平台和家庭游戏中广泛流行。本教程将引导您了解基本规则、下注轮次和策略，以便您入门。"
+    },
+    "objective": {
+      "heading": "目标",
+      "text": "德州扑克的目标是通过拥有最好的五张牌手牌或让其他玩家在摊牌前弃牌来赢得筹码。"
+    },
+    "setup": {
+      "heading": "设置",
+      "deckBold": "牌组",
+      "deckText": "：一副标准的52张牌。",
+      "playersBold": "玩家",
+      "playersText": "：通常为2-10名玩家。",
+      "chipsBold": "筹码",
+      "chipsText": "：用于下注。"
+    },
+    "bettingOptions": {
+      "description": "以下是每个动作的含义：",
+      "foldBold": "弃牌",
+      "foldText": "：放弃手牌并放弃迄今为止所下注的筹码。",
+      "checkCallBold": "过牌/跟注",
+      "checkCallText": "：匹配当前最高的下注金额或在没有下注时选择过牌。",
+      "raiseBold": "加注",
+      "raiseText": "：增加下注金额，迫使其他玩家匹配新的下注。"
+    },
+    "strategyTips": {
+      "heading": "策略提示",
+      "startingHandsHeading": "起始手牌",
+      "startingHandsTips": {
+        "1": "打强力起始手牌（例如，高对子，同花连接牌）。",
+        "2": "除非在合适的位置，否则避免打弱手牌（例如，低牌不成花）。"
+      },
+      "positionHeading": "位置",
+      "positionTips": {
+        "1": "处于后位可以让你在对手行动后再做决定。",
+        "2": "利用你的位置控制底池并获取信息。"
+      },
+      "bluffingHeading": "诈唬",
+      "bluffingTips": {
+        "1": "偶尔诈唬以保持对手的猜疑。",
+        "2": "确保你的诈唬可信并与之前的行动一致。"
+      },
+      "potOddsHeading": "底池赔率",
+      "potOddsTip": "计算底池赔率，以确定跟注是否在长期内有利可图。"
+    },
+    "commonTerms": {
+      "heading": "常用术语",
+      "blindBold": "盲注",
+      "blindText": "：强制下注以确保底池有钱。",
+      "communityCardsBold": "公共牌",
+      "communityCardsText": "：面朝上的发在桌子中央的牌。",
+      "kickerBold": "踢脚",
+      "kickerText": "：一张未配对的牌，当玩家拥有类似的手牌时，这张牌可以决定胜负。",
+      "potBold": "底池",
+      "potText": "：一手牌中投注的筹码总额。"
+    },
+    "specialFeatures": {
+      "strategyPsychology": {
+        "description": "此功能特别有助于为游戏增加额外的策略和心理战层次。它是一种强大的工具，应该明智地使用，因为它可以显著影响手牌的结果。"
+      },
+      "heading": "我们应用的特殊功能",
+      "description": "我们的德州扑克应用程序包含几种独特功能，这些功能可以提升您的游戏体验，并允许进行更深入的战略游戏。",
+      "revealingCardsHeading": "揭示你的牌",
+      "revealingCardsText": "与传统游戏不同，我们的应用程序允许您在任何时候揭示一张或两张底牌。此选项可用于：",
+      "bluffMisleadBold": "诈唬或误导：",
+      "bluffMisleadText": " 展示一张牌可以制造一个关于你手牌强度的误导性印象，从而影响对手的行动。",
+      "showStrengthWeaknessBold": "展示强度或弱点：",
+      "showStrengthWeaknessText": " 你可以选择展示一张强牌来吓退对手，或者展示一张弱牌来诱使他们下注更多。",
+      "bonusFeatureHeading": "奖励功能",
+      "bonusFeatureDescription": "在整个游戏过程中，我们的奖励系统会跟踪您收集的黑桃、红心、方块和梅花的数量。一旦您至少收集到每种花色两张牌，您就可以激活奖励功能。此强大的功能会强制每位玩家向底池额外贡献50 SC（我们的应用程序货币），这可能会显著改变游戏动态。"
+
+    },
+    "basicRules": {
+      "heading": "基本规则",
+      "handRankings": {
+        "heading": "手牌排名",
+        "text": "理解手牌排名至关重要。以下是从高到低的排名：",
+        "royalFlushBold": "皇家同花顺",
+        "royalFlushText": "：同一花色的A、K、Q、J、10。",
+        "straightFlushBold": "同花顺",
+        "straightFlushText": "：同一花色的五张连续的牌。",
+        "fourOfAKindBold": "四条",
+        "fourOfAKindText": "：四张相同点数的牌。",
+        "fullHouseBold": "满堂红",
+        "fullHouseText": "：三条加一对。",
+        "flushBold": "同花",
+        "flushText": "：同一花色的五张牌。",
+        "straightBold": "顺子",
+        "straightText": "：五张连续的不同花色的牌。",
+        "threeOfAKindBold": "三条",
+        "threeOfAKindText": "：三张相同点数的牌。",
+        "twoPairBold": "两对",
+        "twoPairText": "：两组不同的对子。",
+        "onePairBold": "一对",
+        "onePairText": "：一对相同点数的牌。",
+        "highCardBold": "高牌",
+        "highCardText": "：当没有其他组合时，最高的那张牌。"
+      },
+      "bettingActions": {
+        "heading": "下注动作",
+        "text": "在德州扑克游戏中，玩家有几种下注选项："
+      }
+    },
+    "practice": {
+      "heading": "练习",
+      "description": "要提高德州扑克水平：",
+      "playRegularlyBold": "定期玩",
+      "playRegularlyText": "：经验是最好的老师。",
+      "studyGameBold": "学习游戏",
+      "studyGameText": "：阅读书籍和观看扑克策略的视频。",
+      "reviewHandsBold": "复盘手牌",
+      "reviewHandsText": "：分析你的游戏并从错误中学习。"
+    },
+    "exampleHand": {
+      "heading": "示例手牌",
+      "preFlopBold": "翻牌前",
+      "preFlopText": "你拿到 ",
+      "flopBold": "翻牌",
+      "flopText": "庄家翻出 ",
+      "bettingBold": "下注",
+      "bettingText": "你下注，一名玩家加注，另一名玩家弃牌。你跟注。",
+      "turnBold": "转牌",
+      "turnText": "庄家翻出 ",
+      "riverBold": "河牌",
+      "riverText": "庄家翻出 ",
+      "showdownBold": "摊牌",
+      "showdownText": "你展示你的 ",
+      "turnContinuation": "，完成了你的同花和顺子。",
+      "preFlopContinuation": "。你加注，两名玩家跟注。",
+      "flopContinuation": "。你有同花听牌和顺子听牌。",
+      "finalBettingText": "你再次下注，对手加注。你再加注，对手跟注。",
+      "showdownContinuation": "，以A高的同花赢得底池。"
+    },
+    "conclusion": {
+      "text": "* 德州扑克是一种技巧、策略和一点运气的游戏。通过理解规则、定期练习并从每一手牌中学习，你可以提高水平并享受这款刺激的游戏。祝你玩得开心！"
+    }
+  }
+}

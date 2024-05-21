@@ -1,0 +1,116 @@
+.container-nav-V2 {
+  width: 100%;
+}
+
+.container-nav-V2 Button {
+  background-color: unset;
+  color: white;
+  opacity: 0.5;
+}
+.container-nav-V2 Button:hover {
+  cursor: pointer;
+}
+
+.container-navMain-V2 {
+  position: absolute;
+  right: 0.7vw;
+  top: 0.7vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+.container-navMain-V2 img {
+  width: 2.2vw;
+  transition: width 0.1s ease;
+}
+.container-navMain-V2 Button:hover img {
+  width: 3vw;
+}
+.container-navMain-V2 Button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.container-navMain-V2 span {
+  opacity: 0.5;
+  font-size: 0;
+  white-space: nowrap;
+  margin-right: 5%;
+  text-align: right;
+  opacity: 0;
+  transition: opacity 0.2s ease, font-size 0.2s ease;
+}
+.container-navMain-V2 Button:hover span {
+  text-align: right;
+  font-size: large;
+  opacity: 100;
+}
+
+.container-nav-lefttop {
+  display: flex;
+  align-items: flex-start;
+  position: absolute;
+  left: 0;
+}
+.box-chips-V2 {
+  color: white;
+  margin: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: 1vw 0 0 1vw;
+  padding: 5px;
+  font-size: calc(0.5vh + 1vw);
+
+  display: flex;
+  align-items: center;
+
+  opacity: 0.5;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+/*chat button*/
+.chatBox-V2 {
+  width: 3vw;
+  height: 3vw;
+  min-width: max-content;
+  min-height: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+
+  border-radius: 0 0 1vw 0;
+  background-color: rgba(10, 111, 200, 0);
+
+  transition: width 1s ease, height 1s ease, background-color 1s ease,
+    box-shadow 1s ease;
+}
+.chatBoxOpen-V2 {
+  width: 20vw;
+  height: 50vh;
+  backdrop-filter: blur(35px);
+  box-shadow: 10px 10px 20px black;
+}
+.chatBox-V2 Button img {
+  transition: width 0.1s ease;
+  width: 2vw;
+}
+.chatBox-V2:hover Button img {
+  cursor: pointer;
+  width: 3vw;
+}
+#dark .chatBoxOpen-V2 {
+  background-color: rgba(67, 67, 67, 0.458);
+}
+#light .chatBoxOpen-V2 {
+  background-color: rgba(26, 26, 26, 0.458);
+}
+.btn-chatClose-V2 {
+  position: absolute;
+  top: 1vw;
+  right: 1vw;
+  width: 20px;
+  height: auto;
+}

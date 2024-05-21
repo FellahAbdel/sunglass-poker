@@ -1,4 +1,4 @@
-.logo-acceuil {
+.logo-main {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,58 +13,112 @@
   color: white;
 
   transition: top 1s ease, bottom 1s ease, right 1s ease, left 1s ease,
-    opacity 0.5s ease, filter 2s ease , padding-left 1s ease;
+    opacity 0.5s ease, filter 2s ease, padding-left 1s ease;
 }
-.logo-textPadding h1{
-  padding-left: 1.5vw;
-}
-
-
-#light .logo-acceuil {
+#light .logo-main {
   filter: saturate(100%);
 }
-#dark .logo-acceuil {
+#dark .logo-main {
   filter: saturate(0%);
 }
 
-.logo-acceuil img {
+.logo-main img {
+  display: flex;
   width: 11vw;
   transition: width 1s ease;
 }
+.logo-main.disappear {
+  opacity: 0;
+  z-index: -999;
+}
+.logo-accueil.logo-textPadding h1 {
+  padding: 0;
+}
+.logo-textPadding h1 {
+  padding-left: 1.5vw;
+}
+
+.logo-loading {
+  bottom: unset;
+}
+.container-logoParts {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-core,
+.logo-flare {
+  position: absolute;
+  width: 100%;
+}
+.logo-flare.loading {
+  animation: spin 5s ease-in-out infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) scale(100%);
+  }
+  50% {
+    transform: rotate(360deg) scale(120%);
+  }
+  100% {
+    transform: rotate(0deg) scale(100%);
+  }
+}
 
 .logo-login,
-.logo-settings {
+.logo-register,
+.logo-forgot,
+.logo-reset,
+.logo-settings,
+.logo-coins {
   left: -90%;
   z-index: -1;
   opacity: 100%;
 }
 .logo-login img,
+.logo-register img,
+.logo-forgot img,
+.logo-reset img,
 .logo-settings img {
   width: 13vw;
 }
-
-.logo-profile,
-.logo-tutorial {
+.logo-profile{
   bottom: 110%;
   z-index: -1;
 }
-.logo-profile img,
-.logo-tutorial img {
+.logo-tutorial{
+  bottom: 102%;
+  z-index: -1;
+}
+.logo-profile img{
   width: 9vw;
 }
-
-
-.logo-success {
+.logo-tutorial img {
+  width: 8.5vw;
+}
+.logo-success,
+.logo-alert {
   bottom: 110%;
   z-index: -1;
   opacity: 100;
 }
-.logo-success img {
+.logo-success img,
+.logo-alert img {
   width: 9vw;
 }
 
-.logo-acceuil.disappear {
-  opacity: 0;
+.logo-validation {
+  bottom: 105%;
+  z-index: -1;
+  opacity: 100;
+}
+.logo-validation img {
+  width: 9vw;
+}
+.logo-validation h1 {
+  font-size: 2vw;
 }
 
 .logo-stats {
@@ -74,15 +128,16 @@
 .logo-stats img {
   width: 9vw;
 }
-
-.logo-servers {
+.logo-servers,
+.logo-ranking {
+  font-size: 1vw;
   z-index: -1;
   bottom: 100%;
 }
-.logo-servers img {
+.logo-servers img,
+.logo-ranking img {
   width: 7vw;
 }
-
 .logo-create_table {
   bottom: 100%;
   left: 0;
@@ -92,20 +147,11 @@
 .logo-create_table img {
   width: 9vw;
 }
-
-.logo-validation {
-  bottom: 110%;
-  z-index: -1;
-  opacity: 100;
-}
-.logo-validation img{
-  width: 9vw;
-}
-
 .logo-shop {
+  font-size: 1.5vw;
   bottom: 110%;
   z-index: -1;
 }
-.logo-shop img{
+.logo-shop img {
   width: 9vw;
 }

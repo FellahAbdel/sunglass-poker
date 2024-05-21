@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "./AuthProvider";
 import { useWindowContext } from "./WindowContext";
 
@@ -11,24 +11,22 @@ export const useUserData = () => {
     return `${process.env.PUBLIC_URL}${relativePath}`;
   };
 
-  useEffect(() => {
-    const loadUserStats = async () => {
-      if (windowType === "stats" && user?._id) {
-        try {
-          const fetchedStats = await fetchStats();
-          setStats(fetchedStats);
-        } catch (error) {
-          console.error("Error fetching user stats:", error);
-        }
+  const loadUserStats = useCallback(async () => {
+    if (windowType === "stats" && user?._id) {
+      try {
+        const fetchedStats = await fetchStats();
+        setStats(fetchedStats);
+      } catch (error) {
+        console.error("Error fetching user stats:", error);
       }
-    };
-
-    loadUserStats();
-  }, [windowType, user?._id, fetchStats]);
+    }
+  }, [windowType, user?._id, fetchStats]);  
 
   useEffect(() => {
-    console.log("Current user data:", user); // Ceci affichera les informations de l'utilisateur à chaque mise à jour
+    loadUserStats();
+  }, [windowType, user?._id, fetchStats, loadUserStats]);
 
+  useEffect(() => {
     const loadUserStats = async () => {
       if (windowType === "stats" && user?._id) {
         try {
@@ -50,5 +48,5 @@ export const useUserData = () => {
       : "default_avatar_path",
   };
 
-  return { user: resolvedUser, stats };
+  return { user: resolvedUser, stats, loadUserStats };
 };

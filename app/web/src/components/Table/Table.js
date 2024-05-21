@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "./../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../Utiles/WindowContext.jsx";
-import { useTranslation } from '../Utiles/Translations';
-
-
+import { useTranslation } from "../Utiles/Translations";
+import { useGameTable } from "../Utiles/GameTableProvider.jsx";
 //CSS
 import "./table.css";
 import "./tableCards.css";
@@ -12,157 +11,97 @@ import { getStyles } from "../Utiles/useStyles.jsx";
 import Window from "../Window/Window";
 import PlayersPlacements from "./PlayersPlacements";
 import CardsPlacements from "./CardsPlacements";
-import TextGlitch from "./../TextGlitch/TextGlitch";
 import LogoComponent from "../logo/Logo";
-import Button from "../button/Button.tsx";
-
-//Redux
-import { useDispatch, useSelector } from "react-redux";
-import { startGame } from "../../store/actions/actionsCreator";
-
-const Table = ({
-  dealingFlop, //a list of 3 booleans , to deal the first 3 cards , second 4th card , third 5th card
-  showCards,
-  playersCardDistributedProp, // a list of 10 booleans to distribute to choosen players
-  playersCardsShowProp, // a list of 10 booleans to show the cards of choosen players
-  moneyPot, // money on the table
-}) => {
-  const {
-    openWindow,
-    isWindowOpen,
-    windowType,
-    isGameTableVisible,
-    showGameTable,
-  } = useWindowContext();
+import TotalPot from "./TotalPot";
+import { useSettings } from "../Utiles/SettingsContext.jsx";
+/**
+ * The Table component serves as the primary UI container for the game,
+ * including players' placements, cards, and other game-related information
+ * based on the visibility state controlled through window context.
+ */
+const Table = () => {
+  const { theme } = useSettings();
+  const { isWindowOpen, windowType, isGameTableVisible } = useWindowContext();
   const { isLogged } = useAuth();
   const { getTranslatedWord } = useTranslation();
+  const [isVisible, setIsVisible] = useState(false);
+  const { showWaitingMessage } = useGameTable();
 
+  // Update visibility based on window and game table visibility states
   useEffect(() => {
-    console.log("isWindowOpen a changé :", isWindowOpen);
-  }, [isWindowOpen]);
-
-  useEffect(() => {
-    console.log("isLogged Table:", isLogged);
-  }, [isLogged]);
-
-  const dispatch = useDispatch();
-
-  //name , user ID , level , games played , winning ratio , joined Date
-  const player = useSelector((state) => state.game.player);
-
-  const onClickStartGame = () => {
-    console.log(
-      "isLogged Table onClickStartGame : ",
-      isLogged ? "true" : "false"
-    );
-    if (isLogged) {
-      dispatch(startGame());
-      // Si l'utilisateur est connecté, montrez GameTable ou effectuez une action spécifique
-      console.log("Utilisateur connecté, on montre la table");
-      showGameTable();
+    if (isWindowOpen && isGameTableVisible) {
+      setIsVisible(true);
     } else {
-      // Si l'utilisateur n'est pas connecté, ouvrez la fenêtre de connexion
-      console.log("Utilisateur déconnecté, login page");
-      openWindow("login");
+      setIsVisible(false);
     }
-  };
+  }, [isWindowOpen, isGameTableVisible]);
 
-  const showGameList = () => {
-    if (isLogged) {
-      openWindow("servers");
-    } else {
-      openWindow("login");
-    }
-  };
-  const classes = getStyles(windowType, isLogged, isGameTableVisible);
+  // Dynamic class assignment based on current UI context
+  const classes = getStyles(
+    windowType,
+    isLogged,
+    isGameTableVisible,
+    isWindowOpen,
+    showWaitingMessage
+  );
 
   return (
     // Table that becomes a container for the menus when they are activated
-    // container-table : main css for game table
-    // container-menu : table css for settings and profile menu
-    // container-logIn : css for when user click on logIn button for table menu to open
-    // container-acceuil : for the table to show up in acceuil when game opens
-    // container-tutorial : for tuto
     <div className={classes.containerTable}>
-      
-      {/*the white border line around the table in the middle*/}
-      <div className={`${classes.containerTable} ${!isWindowOpen && "table-lineAround"} ${(windowType === "" && !isGameTableVisible || isWindowOpen) && "disappear" }`}/>
+      {/* table carpet in game */}
+      <img
+        className={`table-carpet 
+                    ${isGameTableVisible && !isWindowOpen && "appear"}`}
+        src={`${
+          theme === "dark"
+            ? "static/media/assets/images/texture/carpetlow-bnw.jpg"
+            : "static/media/assets/images/texture/carpetlow.jpg"
+        }`}
+        alt="table carpet"
+      />
 
-      {/* Acceuil table if not logged in and game table if logged in */}
-      {isGameTableVisible && !isWindowOpen ? (
+      {/* the white border line around the table in the middle */}
+      <div
+        className={`${!isWindowOpen ? "table-lineAround" : ""} 
+        ${!isGameTableVisible || isWindowOpen ? "disappear" : ""}
+        ${showWaitingMessage ? "table-lineAround-waiting" : ""}`}
+      />
+
+      {/* Game Components */}
+      {isGameTableVisible && !isWindowOpen && (
         <>
-
-          {/* cards and the pot in the center of the table */}
-          <CardsPlacements
-            moneyPot={moneyPot}
-            dealingFlop={dealingFlop}
-            disappear={isWindowOpen}
-            playersCardDistributedProp={playersCardDistributedProp}
-          />
-
-          {/* players around the table */}
-          <PlayersPlacements
-            playersCardDistributedProp={playersCardDistributedProp}
-            playersCardsShowProp={playersCardsShowProp}
-            disappear={isWindowOpen}
-          />
-
-          {/* Settings menu panel */}
-          {isWindowOpen && <Window />}
-        </>
-      ) : (
-        <>
-          {/* Acceuil */}
-          {isWindowOpen ? (
-            <Window />
-          ) : (
-            <>
-              <TextGlitch
-                children={"SunGlassPoker"}
-                styleClass={"glitch-accueil"}
-                glitchStyle={"glitchStyle-accueil"}
-              />
-              <div className="container-startButtons">
-                {isLogged ? (
-                  <>
-                    <Button
-                      styleClass={"btn-gameStart btn-gameJoin back-color1"}
-                      label={getTranslatedWord("game.startGame")}
-                      onClick={onClickStartGame}
-                    />
-                    <Button
-                      styleClass={"btn-gameStart btn-gameJoin back-color1"}
-                      label={getTranslatedWord("game.joinGame")}
-                      onClick={showGameList}
-                    />
-                  </>
-                ) : (
-                  <>
-                    {/* Bouton affiché si l'utilisateur n'est pas connecté */}
-                    <Button
-                      styleClass={"btn-gameStart back-color2"}
-                      label={getTranslatedWord("game.loginPlay")}
-                      onClick={onClickStartGame}
-                    />
-                  </>
-                )}
-              </div>
-            </>
-          )}
+          <PlayersPlacements showMiddle={!showWaitingMessage} />
+          <CardsPlacements />
+          <TotalPot />
         </>
       )}
 
-      {/* dynamique logo , moves according to the menu that is open */}
+      {/* Window component for rendering non-game related UI elements */}
+      <Window />
+
+      {/* notifying the player that they are still in game in case they open an other window while playing */}
+      <div className={`box-onGameNotif ${isVisible ? "visible" : ""}`}>
+        {getTranslatedWord("table.inGame")}!
+      </div>
+
+      {/* Dynamic usage of the LogoComponent, content changes based on the current window type */}
       <LogoComponent
         styleClass={classes.logoComponent}
-        label={
-  `${windowType === "tutorial" ? getTranslatedWord("messageLogo.tutorial") : ""}` +
-  `${windowType === "profile" ? getTranslatedWord("messageLogo.profile") : ""}` +
-  `${windowType === "servers" ? getTranslatedWord("messageLogo.listeTable") : ""}` +
-  `${windowType === "create_table" ? getTranslatedWord("messageLogo.createTable") : ""}` +
-  `${windowType === "validation" ? getTranslatedWord("messageLogo.validation") : ""}`+
-  `${windowType === "shop" ? getTranslatedWord("messageLogo.shop") : ""}`
-}
+        label={`
+        ${
+          [
+            "tutorial",
+            "profile",
+            "servers",
+            "create_table",
+            "validation",
+            "shop",
+            "ranking",
+          ].some((type) => windowType.includes(type))
+            ? getTranslatedWord(`messageLogo.${windowType}`)
+            : ""
+        }`}
+        loading={windowType === "loading"}
       />
     </div>
   );
