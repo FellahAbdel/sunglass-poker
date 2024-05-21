@@ -361,6 +361,12 @@ module.exports = function (
     }
   }
 
+  /**
+   * When a socket leave we check if it was a Authenticated socket and if it was the last of the user
+   * we set a timer that will remove him from his game he's hasn't connected back.
+   * This allow to remove player that loose internet for too long but keep people doing quick refresh of page. 
+   * @param {socket} socket that is disconnecting. 
+   */
   function lastInstanceLeaveGame(socket){
     if(socket.request.session.userId){
       let uid = socket.request.session.userId;
@@ -641,7 +647,7 @@ module.exports = function (
       }
     });
 
-
+    // Action to toggle the restart.
     socket.on("autoRestartToggle", () => {
       if(socket.request.session.userId && socket.request.session.userRoom){
         dispatch(socket,{action:actcrea.autoRestartToggle()});
