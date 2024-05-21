@@ -192,6 +192,13 @@ module.exports = function (
     }
   }
 
+  async function toggleAutoRestartPlayerGame(socket){
+    playerId = socket.request.session.userId;
+    room = socket.request.session.userRoom;
+    if(room && playerId){
+      gameController.dispatch(playerId, actcrea.autoRestartToggle(playerId,room));
+    }
+  }
 
   /**
    * Identify a user based on the token he got at login
@@ -638,6 +645,12 @@ module.exports = function (
         findPlayerRoom(socket, socket.request.session.userId);
       }
     });
+
+    socket.on('toggleAutoRestart', () => {
+      if(socket.request.session.userId){
+        toggleAutoRestartPlayerGame(socket);
+      }
+    })
 
     // Save the session
     socket.request.session.save();

@@ -73,6 +73,11 @@ module.exports.resetGame = () => ({
   type: actions.RESET_GAME,
 });
 
+module.exports.autoRestartToggle = (playerId,room) => ({
+  type:AUTO_RESTART_TOGGLE,
+  payload:{playerId:playerId,room:room}
+});
+
 // Rooms control
 
 /**

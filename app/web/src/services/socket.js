@@ -39,6 +39,9 @@ export const comm = {
     // console.log("Getting status");
     // console.log(data);
   },
+  toggleAutoRestart: function (){
+    socket.emit('toggleAutoRestart');
+  },
 
   Init: function () {
     this.preFun(true);

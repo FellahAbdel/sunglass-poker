@@ -27,6 +27,8 @@ export const REFRESH = "REFRESH";
 
 export const LOGIN = "LOGIN";
 
+export const TOGGLE_AUTO_RESTART = "TOGGLE_AUTO_RESTART";
+
 /**
  * _______________________________________
  *

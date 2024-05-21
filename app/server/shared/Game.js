@@ -34,6 +34,7 @@ class Game {
       autoTurnDelay: 20000,
       restartCall: false,
       restartTimer: 0,
+      autoRestartCall: false,
       restartDelay: 5000,
       allow_start: true,
       serverName: "",
@@ -73,6 +74,7 @@ class Game {
       gameCurrentBet: this.gameCurrentBet,
       focusTurnTimer: this.focusTurnTimer,
       serverName: this.serverName,
+      autoRestartStatus:this.autoRestartStatus
     });
     return g;
   }
@@ -378,23 +380,21 @@ class Game {
     this.rotateTimer();
   }
 
-  gameEnd() {
-    this.moveAfkPlayersToSpectators();
-    this.focus = null;
-    this.state = "waiting";
-    this.updateActivePlayers();
-    csl.log(
-      "Joueurs actifs lors de la détermination du gagnant:",
-      this.activePlayers.map((p) => p.name)
-    );
+  toggleAutorestart(playerId){
+    if(playerId !== this.master)
+      return false;
+    if(this.autoRestartStatus){
+      clearTimeout(this.autoRestartCall);
+      this.autoRestartCall = false;
+    }
+    else{
+      this.autoRestartStatus = true;
+    }
+  }
 
-    this.activePlayers.forEach((player) => {
-      player.revealCard(0);
-      player.revealCard(1);
-    });
-    this.resetRestartCall();
-    this.updatePlayersList();
-    setTimeout(() => {
+  createAutoRestart(){
+    if(this.autoRestartStatus)
+    return setTimeout(() => {
       if (this.allow_start) {
         this.movePlayersWithZeroCoinsToSpectators();
         this.updatePlayersList();
@@ -411,6 +411,26 @@ class Game {
         }
       }
     }, 10000);
+    return false;
+  }
+
+  gameEnd() {
+    this.moveAfkPlayersToSpectators();
+    this.focus = null;
+    this.state = "waiting";
+    this.updateActivePlayers();
+    csl.log(
+      "Joueurs actifs lors de la détermination du gagnant:",
+      this.activePlayers.map((p) => p.name)
+    );
+
+    this.activePlayers.forEach((player) => {
+      player.revealCard(0);
+      player.revealCard(1);
+    });
+    this.resetRestartCall();
+    this.updatePlayersList();
+    this.autoRestartCall = createAutoRestart();
   }
 
   playerPlayed() {

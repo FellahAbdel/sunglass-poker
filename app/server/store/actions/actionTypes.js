@@ -10,6 +10,7 @@ module.exports.RESET_GAME = "RESET_GAME";
 module.exports.SHOW_CARD = "SHOW_CARD";
 module.exports.HIDE_CARD = "HIDE_CARD";
 module.exports.ACTIVATE_BONUS = "ACTIVATE_BONUS";
+module.exports.AUTO_RESTART_TOGGLE = "AUTO_RESTART_TOGGLE";
 
 module.exports.LEAVE_ROOM = "LEAVE_ROOM";
 module.exports.LEFT_ROOM = "LEFT_ROOM";
