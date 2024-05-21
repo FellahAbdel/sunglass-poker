@@ -84,7 +84,7 @@ module.exports = csl = {
      * Create a String of the object. Prevent loop in string cast and allow nested object based on the decorator.
      * @param {Object} obj The object we need to detail.
      * @param {String} decorate Correspond to the left Space we need to leave. Allow readable indentation for nested object and table.
-     * @returns 
+     * @returns the generated string
      */
     getObjString: function (obj, decorate = '    ') {
         var output = ' { ';

@@ -844,7 +844,7 @@ class Game {
 
   /**
    * start a newgame
-   * @returns
+   * @returns nothing. Stop early  if game cannot start.
    */
   newgame() {
     if (!this.allow_start) return;
@@ -957,7 +957,7 @@ class Game {
 
   /**
    * rotate the focus Player and advance in the game if condition are fill
-   * @returns
+   * @returns Stop early if we need to end the game or no one is playing.
    */
   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
@@ -1139,7 +1139,7 @@ class Game {
   /**
    * start the game
    * @param {id} playerId
-   * @returns
+   * @returns stop early if the game cannot start.
    */
   start(playerId) {
     if (this.master === playerId) {

@@ -77,7 +77,7 @@ module.exports = function (app, bdd) {
      * @param {String} pseudo
      * @param {String} email
      * @param {String} password
-     * @returns
+     * @returns Success status
      */
     createUser: async (pseudo, email, password) => {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -782,7 +782,7 @@ module.exports = function (app, bdd) {
     /**
      * Find the corresponding Gamedescription and change the status.
      * @param {String} roomId
-     * @returns
+     * @returns Success status
      */
     updateStatusToInProgress: async function (roomId) {
       try {
