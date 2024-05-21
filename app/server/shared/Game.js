@@ -2,8 +2,6 @@ const hands = require("./score-engine/index");
 const Deck = require("./Deck.js");
 const PokerTable = require("./PokerTable.js");
 const scoreEngineUtils = require("./ScoreEngineUtils.js");
-const Players = require("./Player.js");
-const { clearScreenDown } = require("readline");
 const csl = require("../controller/intelligentLogging.js");
 const { clearTimeout } = require("timers");
 
