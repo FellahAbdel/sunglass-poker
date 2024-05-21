@@ -1,6 +1,5 @@
 /**
- * @file Player.js
- * @module Player
+ * Class Containing all information of a player.
  */
 class Player {
   cardsVisible = [false, false];
@@ -162,7 +161,6 @@ class Player {
 
   /**
    * change the player to spectator or unspecator
-   * @returns
    */
   toggleSpectator() {
     if (this.isSpectator && !this.canJoinTable()) {

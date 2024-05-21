@@ -173,7 +173,6 @@ class Game {
 
   /**
    * skip the stage for go to showdown
-   * @returns
    */
   advanceStageToShowdown() {
     if (this.state !== "active") {
@@ -246,7 +245,6 @@ class Game {
 
    * @param {string} player
    * @param {int} amount
-   * @returns
    */
   bet(player, amount) {
     /*  On laisse le joueur bet si
