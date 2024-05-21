@@ -65,7 +65,9 @@ export const socketMiddleware = (socket) => (store) => (next) => (action) => {
       // console.log("Player wants to leave the room, emit");
       comm.leaveRoom();
       break;
-
+    case actions.AUTO_RESTART_TOGGLE:
+      comm.toggleAutoRestart();
+      break;
     default:
       break;
   }

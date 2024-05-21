@@ -11,7 +11,7 @@ import { validateEmail } from "../../../Utiles/ValidationUtils.jsx";
  * It validates user input and displays appropriate feedback messages.
  */
 const ForgotPassword = () => {
-  const { openWindow, openSuccessWindow } = useWindowContext();
+  const { openWindow, openSuccessWindow, setEmail } = useWindowContext();
   const { checkEmail } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
@@ -49,7 +49,9 @@ const ForgotPassword = () => {
     try {
       const result = await checkEmail(formData.email);
       if (result === true) {
-        openSuccessWindow(getTranslatedWord("connection.successMail"));
+        setEmail(formData.email);
+        console.log("setEmail a été appellé avec ", formData.email);
+        openSuccessWindow("connection.successMail", "reset");
       } else if (result === "not-found") {
         setValidationError("error.emailNotFound");
       } else {
@@ -86,12 +88,6 @@ const ForgotPassword = () => {
           styleClass="btn-connectionDefault button login-button back-color1"
           type="submit"
           label={getTranslatedWord("connection.send")}
-        />
-        <Button
-          styleClass="btn-connectionDefault button login-button back-color3"
-          type="temporary"
-          onClick={() => openWindow("reset")}
-          label={getTranslatedWord("connection.temporary")}
         />
       </form>
       <Button

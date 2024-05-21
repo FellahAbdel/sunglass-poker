@@ -199,4 +199,8 @@ export const comm = {
     console.log("Emitting startGame with room and userId:", roomId, userId);
     socket.emit("startGame", { room: roomId, userId: userId });
   },
+
+  toggleAutoRestart: function(){
+    socket.emit("autoRestartToggle");
+  }
 };

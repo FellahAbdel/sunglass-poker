@@ -17,7 +17,10 @@ import {
 // Créer un contexte pour la table de jeu
 const GameTableContext = createContext();
 
-// Créer un provider pour le contexte
+/**
+ *Manages the game table state, including player data updates and table data.
+ *Provides functions to access game information and player data.
+ */
 export const GameTableProvider = ({ children }) => {
   const [state, dispatch] = useReducer(gameTableReducer, {
     isMaster: false,
@@ -31,6 +34,7 @@ export const GameTableProvider = ({ children }) => {
   const [communityCards, setCommunityCards] = useState([]);
   const [gameCurrentBet, SetGameCurrentBet] = useState(0);
   const [playerBonus, setPlayerBonus] = useState([]);
+  const [autoRestartStatus, setautoRestartStatus] = useState(true);
   //MAel a add mais pas sur du fonctionnement
   const [gamePlayerCurrentBet, setGamePlayerCurrentBet] = useState([]);
   const [total, setTotal] = useState(0);
@@ -39,7 +43,6 @@ export const GameTableProvider = ({ children }) => {
   const [playerHandName, setPlayerHandName] = useState("");
   const [serverName, setServerName] = useState("");
   const [numberOfPlayers, setNumberOfPlayers] = useState(0);
-
 
   useEffect(() => {
     const isMaster =
@@ -113,6 +116,10 @@ export const GameTableProvider = ({ children }) => {
         setIsSpectator(true);
       }
 
+      if (gameInfo?.game.autoRestartStatus) {
+        setautoRestartStatus(autoRestartStatus);
+      }
+
       // Mettre à jour les cartes communautaires
       if (gameInfo?.game.pokerTable.communityCards) {
         setCommunityCards(gameInfo.game.pokerTable.communityCards);
@@ -153,6 +160,7 @@ export const GameTableProvider = ({ children }) => {
         serverName,
         playerHandName,
         numberOfPlayers,
+        autoRestartStatus,
       }}
     >
       {children}

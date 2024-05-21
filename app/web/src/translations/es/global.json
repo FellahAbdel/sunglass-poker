@@ -37,7 +37,8 @@
     "resetPassword": "Restablece tu contraseña",
     "successReset": "Has cambiado tu contraseña con éxito",
     "enterNewPassword": "Introduce tu nueva contraseña aquí:",
-    "temporary": "BOTÓN TEMPORAL"
+    "temporary": "BOTÓN TEMPORAL",
+    "code": "Código de verificación"
   },
   "messageBox": {
     "loginSucces": "¡Sesión iniciada con éxito!",
@@ -196,7 +197,10 @@
     "passwordNotMatch": "Las contraseñas no coinciden",
     "emailNotFound": "Correo electrónico no encontrado",
     "emailTooLong": "Correo electrónico demasiado largo",
-    "passwordTooLong": "La contraseña no puede tener más de 50 caracteres"
+    "passwordTooLong": "La contraseña no puede tener más de 50 caracteres",
+    "codeNotFound": "Código de verificación no válido",
+    "codeExpired": "El código de verificación ha caducado",
+    "general": "Se ha producido un error. Por favor, inténtelo de nuevo."
   },
   "tutorial": {
     "title": "Texas Hold'em Poker",

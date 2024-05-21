@@ -16,6 +16,10 @@ const WindowContext = createContext();
 
 export const useWindowContext = () => useContext(WindowContext);
 
+/**
+ * Manages window state and actions related to windows, such as opening, closing, and setting window types.
+ * Provides functions to interact with the window state and perform window-related actions.
+ */
 export const WindowProvider = ({ children }) => {
   const [state, dispatch] = useReducer(windowReducer, initialState);
 
@@ -24,11 +28,13 @@ export const WindowProvider = ({ children }) => {
     console.log("windowType:", state.windowType);
     console.log("isGameTableVisible:", state.isGameTableVisible);
     console.log("connectionWindowOpen:", state.connectionWindowOpen);
+    console.log("email:", state.email);
   }, [
     state.isWindowOpen,
     state.windowType,
     state.isGameTableVisible,
     state.connectionWindowOpen,
+    state.email,
   ]);
 
   const setWindowOpen = useCallback((isOpen) => {
@@ -61,6 +67,10 @@ export const WindowProvider = ({ children }) => {
 
   const hideGameTable = useCallback(() => {
     dispatch({ type: HIDE_GAME_TABLE });
+  }, []);
+
+  const setEmail = useCallback((email) => {
+    dispatch({ type: "SET_EMAIL", payload: email });
   }, []);
 
   const openWindow = useCallback(
@@ -159,7 +169,13 @@ export const WindowProvider = ({ children }) => {
       "isGameTableVisible",
       state.isGameTableVisible.toString()
     );
-  }, [state.isWindowOpen, state.windowType, state.isGameTableVisible]);
+    sessionStorage.setItem("email", state.email);
+  }, [
+    state.isWindowOpen,
+    state.windowType,
+    state.isGameTableVisible,
+    state.email,
+  ]);
 
   return (
     <WindowContext.Provider
@@ -179,6 +195,7 @@ export const WindowProvider = ({ children }) => {
         openSuccessWindow,
         openValidationWindow,
         onClickStartGame,
+        setEmail,
       }}
     >
       {children}

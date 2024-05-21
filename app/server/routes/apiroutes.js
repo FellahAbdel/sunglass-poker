@@ -5,8 +5,18 @@ const store = require("../store/configStore");
 const verifyToken = require("./auth");
 const { count } = require("console");
 
+/**
+ * Route all the api call to the corresponding dao function.
+ * @param {Object} app express server object. 
+ * @param {Object} dao the dao object containing the function to mongodb.
+ * @param {Object} gameController GameController object containing the games states.
+ */
 module.exports = (app, dao, gameController) => {
-  app.get("/api/rooms", (req, res) => {
+  /**
+   * Route to dump the memory of the games on the server.
+   * Should only be accessible from the local server or developpment environnment.
+   */
+  app.get("/rooms", (req, res) => {
     var roomsInfos = [];
     roomsInfos[0] = store.getState().game;
     for (var room in roomsInfos[0].rooms) {
@@ -315,9 +325,9 @@ module.exports = (app, dao, gameController) => {
 
   app.put("/api/change-password", async (req, res) => {
     try {
-      const { email, newPassword } = req.body;
-      const result = await dao.changePassword(email, newPassword);
-      
+      const { email, code, newPassword } = req.body;
+      const result = await dao.changePassword(email, code, newPassword);
+
       if (result.success) {
         res.json(result);
       } else {

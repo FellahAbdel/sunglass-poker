@@ -10,6 +10,8 @@ const StatModel = require("./Stat");
 const ItemModel = require("./Item");
 const GameDescriptionModel = require("./GameDescription");
 
+const nodemailer = require("nodemailer");
+
 // Initialize items (if necessary)
 const initItems = require("./initItems");
 const resetServer = require("./resetServer");
@@ -18,6 +20,34 @@ const csl = require("../controller/intelligentLogging");
 // csl.silenced('bdd');
 
 require("dotenv").config();
+
+/**
+ * Sends a verification email to the specified email address with the provided verification code.
+ * @param {string} email - The recipient's email address
+ * @param {string} code - The verification code to be sent
+ */
+async function sendVerificationEmail(email, code) {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "sunglass.poker@gmail.com",
+      pass: "lmqnlxnhafubvuan",
+    },
+  });
+
+  const mailOptions = {
+    from: "sunglass.poker@gmail.com",
+    to: email,
+    subject: "Verify your email",
+    text: `Your verification code is: ${code}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Email send error:", error);
+    }
+  });
+}
 
 module.exports = function (app, bdd) {
   // Logging database connection
@@ -28,10 +58,7 @@ module.exports = function (app, bdd) {
 
   const db = mongoose.connection;
 
-  db.on(
-    "error",
-    csl.error.bind(console, "Error connecting to the database:")
-  );
+  db.on("error", csl.error.bind(console, "Error connecting to the database:"));
   db.once("open", () => {
     // Log successful database connection
     csl.log("bdd", "Connected to MongoDB database");
@@ -43,6 +70,15 @@ module.exports = function (app, bdd) {
   });
 
   const dao = {
+    /**
+     * Create new use to the database if the email and pseudo are not already used.
+     * The password will be hashed in the db
+     * The User will be associated with his stats (future) and all the basics item he's unlocking.
+     * @param {String} pseudo
+     * @param {String} email
+     * @param {String} password
+     * @returns
+     */
     createUser: async (pseudo, email, password) => {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
       try {
@@ -121,6 +157,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Return the Token of the connection when the hashed password match to the username passed..
+     * @param {String} username
+     * @param {String} password
+     * @returns Success status & token
+     */
     loginUser: async (username, password) => {
       try {
         // Find user by username
@@ -171,27 +213,14 @@ module.exports = function (app, bdd) {
       }
     },
 
-    checkEmail: async (email) => {
-      try {
-        // Find user by email
-        const user = await UserModel.findOne({ email: email });
-        if (user) {
-          // If user exists, return exists:true with a message
-          return { exists: true, message: "E-mail exists in the database" };
-        } else {
-          // If user does not exist, return exists:false with a message
-          return {
-            exists: false,
-            message: "E-mail does not exist in the database",
-          };
-        }
-      } catch (error) {
-        // Handle error
-        csl.error("bdd", "Error during email check:", error);
-        throw error;
-      }
-    },
-
+    /**
+     * Search for a user based on the identifiers and value pass and set the specified field to the new value.
+     * @param {String} identifierType
+     * @param {*} identifierValue
+     * @param {String} field
+     * @param {*} value
+     * @returns Success status
+     */
     updateUserData: async (identifierType, identifierValue, field, value) => {
       try {
         // Find the user by the specified identifier and update the field with the new value
@@ -214,6 +243,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Buy a item in the shop if the user has enough money. Adds it to the user list and remove the corresponding money.
+     * @param {String} userId
+     * @param {String} itemId
+     * @returns Success status
+     */
     buyItem: async (userId, itemId) => {
       try {
         // Find the user by ID
@@ -262,6 +297,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Take a user id and send back the user Object from the database.
+     * @param {String} userId
+     * @returns Success status with the user object
+     */
     getUserInfo: async (userId) => {
       // Log fetching info for the user ID
       csl.log("bdd", "Fetching info for user ID:", userId);
@@ -300,6 +340,10 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Send back all item purchasable from the database.
+     * @returns Success status with an Array of item .
+     */
     getItems: async () => {
       try {
         // Find all items in the database
@@ -313,6 +357,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Change the ownership of the specific item for the user.
+     * @param {String} userId
+     * @param {String} itemId
+     * @returns Success status
+     */
     activateAvatar: async (userId, itemId) => {
       try {
         // Find the user by ID
@@ -377,6 +427,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Return the players stats base on the page number and the number of stats asked.
+     * @param {*} page
+     * @param {*} nbRes
+     * @returns [...stats]
+     */
     getAllRanking: async (page, nbRes) => {
       try {
         // Find all users, sort them by coins in descending order, paginate the results,
@@ -396,38 +452,11 @@ module.exports = function (app, bdd) {
       }
     },
 
-    //Ranking function with the stats of player, but the stats are not setups yet so we only use coins
-    /*
-    getAllRanking: async (page, nbRes) => {
-      try {
-        const users = await UserModel.aggregate([
-          {
-            $lookup: {
-              from: "Stat",
-              pipeline: [{ $project: { maxGain: 1 } }],
-              as: "gain",
-            },
-          },
-          {
-            $sort: { gain: -1 },
-          },
-          {
-            $project: { pseudo: 1, gain: 1 },
-          },
-          {
-            $skip: (page - 1) * nbRes,
-          },
-          {
-            $limit: nbRes,
-          },
-        ]);
-        return { success: true, data: users };
-      } catch (err) {
-        csl.error("Error fetching rankings:", err);
-        return { success: false, error: err }; // rethrow the error after logging
-      }
-    },*/
-
+    /**
+     * Return the avatar infos of the user.
+     * @param {String} userId
+     * @returns Success & Object avatar
+     */
     getAvatarInfo: async (userId) => {
       try {
         // Find the user by ID and populate avatar-related fields with necessary information
@@ -478,6 +507,14 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Create a new Game descriptor with the info of the game.
+     * @param {String} serverName
+     * @param {String} roomPassword
+     * @param {String} rank
+     * @param {String} master
+     * @returns Success & GameDescription created.
+     */
     createGameDescription: async function (
       serverName,
       roomPassword,
@@ -523,6 +560,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Update a GameDescription to include a new user in the game
+     * if he's not already in and update the user.inGame field.
+     * @param {String} gameId
+     * @param {String} userId
+     */
     addOnePlayerGameDesc: async function (gameId, userId) {
       // Log the addition of a player to a game
       csl.log("bdd", "add a player in game bdd");
@@ -542,11 +585,23 @@ module.exports = function (app, bdd) {
       await user.save();
     },
 
+    /**
+     * Destroy the gameDescription base on the id provided.
+     * @param {String} gameId
+     */
     removeGameDesc: async function (gameId) {
       // Find and delete the game description by ID
       await GameDescriptionModel.findByIdAndDelete(gameId);
     },
 
+    /**
+     * Update a specific field of a gameDescription item base on the passed identifier.
+     * @param {String} identifierType
+     * @param {Any} identifierValue
+     * @param {String} field
+     * @param {Any} value
+     * @returns Success status & boolean
+     */
     updateGameDescription: async function (
       identifierType,
       identifierValue,
@@ -574,6 +629,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Find the player and update his inGame field and the corresponding game.
+     * Can be done safely with a player without knowing the inGame field.
+     * @param {String} id
+     */
     playerLeftGame: async function (id) {
       try {
         // Find the user by ID
@@ -593,7 +653,6 @@ module.exports = function (app, bdd) {
         }
         csl.log("game players after remove", gameDesc.players);
 
-
         // Reset the user's inGame status to null
         user.inGame = null;
         csl.log(user, " removing user in game");
@@ -604,6 +663,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Not a future proof solution. Game are relatively in small  quantity
+     * but should be refactor to include a number of page maximum like @see getAllRanking
+     * @returns Success status & array of GameDescription
+     */
     gameRoomDescription: async function () {
       try {
         // Fetch all game descriptions from the database
@@ -621,6 +685,13 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Add the coins in argument to the current amount of the user.
+     * This uses negative amount to remove player coins.
+     * @param {String} userId
+     * @param {int} coinsToAdd
+     * @returns Success status & updated coins amount
+     */
     updateUserCoins: async (userId, coinsToAdd) => {
       try {
         // Find user by ID
@@ -644,6 +715,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Fetch the username based on the id.
+     * @param {String} userId
+     * @returns Success & username.
+     */
     getUserPseudoFromUserId: async (userId) => {
       try {
         // Find user by ID and return their pseudo (username)
@@ -660,15 +736,18 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Return all the game where a player could potentially join.
+     * @returns Success status & Array of gameDescription
+     */
     getAvailableGames: async function () {
       try {
         // Fetch all available games with status "WAITING" from the database
         const availableGames = await GameDescriptionModel.find({
-          status: "WAITING",
-          $or:[
-                { roomPassword: { $exists: false } }, // No roomPassword field
-                { roomPassword: "" } // roomPassword field is an empty string
-            ]
+          $or: [
+            { roomPassword: { $exists: false } }, // No roomPassword field
+            { roomPassword: "" }, // roomPassword field is an empty string
+          ],
         });
         // Return fetched available games along with success status code 200
         return { code: 200, data: availableGames };
@@ -678,6 +757,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Return the serverName of a gameDescription
+     * @param {String} gameId
+     * @returns Success status & String
+     */
     getServerNameFromGameId: async function (gameId) {
       csl.log("getServerNameFromGameId", "Argument gameId: ", gameId);
       if (gameId.gameRoomId !== undefined) gameId = gameId.gameRoomId;
@@ -695,6 +779,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Find the corresponding Gamedescription and change the status.
+     * @param {String} roomId
+     * @returns
+     */
     updateStatusToInProgress: async function (roomId) {
       try {
         // Find and update the game description's status to "IN_PROGRESS" by room ID
@@ -721,52 +810,128 @@ module.exports = function (app, bdd) {
         throw error;
       }
     },
-  };
-  dao.verifyGamePassword = async (roomId, password) => {
-    try {
-      const gameDescription = await GameDescriptionModel.findById(roomId);
-      if (!gameDescription) {
-        return { success: false, error: "Game room not found" };
+
+    /**
+     * Search through the database to quickly verify if the email is already being used.
+     * If the email exists, generate a verification code and send it to the user's email.
+     * @param {String} email - The email to be checked
+     * @returns {Object} Success status and boolean
+     */
+    checkEmail: async (email) => {
+      try {
+        // Find user by email
+        const user = await UserModel.findOne({ email: email });
+        if (user) {
+          // If user exists, generete verification code
+          const verificationCode = Math.random()
+            .toString(36)
+            .substring(2, 7)
+            .toUpperCase();
+
+          //Send the mail
+          await sendVerificationEmail(email, verificationCode);
+
+          const hashedVerificationCode = await bcrypt.hash(
+            verificationCode,
+            10
+          );
+
+          user.verificationCode = hashedVerificationCode;
+          user.verificationCodeExpires = Date.now() + 300000; //5 minutes
+          await user.save();
+
+          return { exists: true, message: "E-mail exists in the database" };
+        } else {
+          // If user does not exist, return exists:false with a message
+          return {
+            exists: false,
+            message: "E-mail does not exist in the database",
+          };
+        }
+      } catch (error) {
+        // Handle error
+        csl.error("bdd", "Error during email check:", error);
+        throw error;
       }
+    },
 
-      const match = await bcrypt.compare(
-        password,
-        gameDescription.roomPassword
-      );
-      if (match) {
-        return { success: true };
-      } else {
-        return { success: false, error: "Incorrect password" };
+    /**
+     * Check the password hash to allow or not a player to join.
+     * @param {string} roomId
+     * @param {string} password
+     * @returns Success status
+     */
+    verifyGamePassword: async (roomId, password) => {
+      try {
+        const gameDescription = await GameDescriptionModel.findById(roomId);
+        if (!gameDescription) {
+          return { success: false, error: "Game room not found" };
+        }
+
+        const match = await bcrypt.compare(
+          password,
+          gameDescription.roomPassword
+        );
+        if (match) {
+          return { success: true };
+        } else {
+          return { success: false, error: "Incorrect password" };
+        }
+      } catch (error) {
+        csl.error("Error verifying game password:", error);
+        return { success: false, error: "Internal server error" };
       }
-    } catch (error) {
-      csl.error("Error verifying game password:", error);
-      return { success: false, error: "Internal server error" };
-    }
-  };
+    },
 
-  dao.changePassword = async (email, newPassword) => {
-    try {
-      // Hash the new password
-      const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+    /**
+     * Allow a player to change the current password.
+     * The user is searched based on the email.
+     * @param {String} email - The user's email
+     * @param {String} code - The verification code
+     * @param {String} newPassword - The new password
+     * @returns {Object} Success status
+     */
+    changePassword: async (email, code, newPassword) => {
+      try {
+        console.log(
+          `Received data - Email: ${email}, Code: ${code}, New Password: ${newPassword}`
+        );
 
-      // Find the user by email and update the password
-      const updatedUser = await UserModel.findOneAndUpdate(
-        { email: email },
-        { $set: { password: hashedPassword } },
-        { new: true, runValidators: true }
-      );
+        // Rechercher l'utilisateur par email
+        const user = await UserModel.findOne({ email: email });
 
-      // Check if the user was found and the password updated
-      if (updatedUser) {
+        // Vérifier si l'utilisateur existe
+        if (!user) {
+          return { success: false, message: "User not found" };
+        }
+
+        // Vérifier si le code de validation est expiré
+        if (user.verificationCodeExpires < Date.now()) {
+          return { success: false, message: "Verification code has expired" };
+        }
+
+        // Vérifier si le code de vérification est correct
+        const isCodeValid = await bcrypt.compare(code, user.verificationCode);
+        if (!isCodeValid) {
+          return { success: false, message: "Invalid verification code" };
+        }
+
+        // Hasher le nouveau mot de passe
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+        // Mettre à jour le mot de passe
+        user.password = hashedPassword;
+        user.verificationCode = null;
+        user.verificationCodeExpires = null;
+        await user.save();
+
         return { success: true, message: "Password updated successfully" };
-      } else {
-        return { success: false, message: "User not found" };
+      } catch (error) {
+        // Log and handle the error
+        console.error("Error updating password:", error);
+        return { success: false, message: "Failed to update password" };
       }
-    } catch (error) {
-      // Log and handle the error
-      csl.error("Error updating password:", error);
-      return { success: false, message: "Failed to update password" };
-    }
+    },
   };
 
   return dao;

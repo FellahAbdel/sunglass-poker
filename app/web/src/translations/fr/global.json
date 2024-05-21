@@ -37,7 +37,8 @@
     "resetPassword": "Réinitialisez votre mot de passe",
     "successReset": "Votre mot de passe a été changé avec succès",
     "enterNewPassword": "Entrez votre nouveau mot de passe ici :",
-    "temporary": "BOUTON TEMPORAIRE"
+    "temporary": "BOUTON TEMPORAIRE",
+    "code": "Code de vérification"
   },
   "messageBox": {
     "loginSucces": "Connexion réussie !",
@@ -119,7 +120,7 @@
     "raise": "A relancé",
     "checked": "A checké",
     "tapis": "ALL IN",
-    "playing": "En train de jouer",
+    "playing": "En jeu",
     "waiting": "En attente",
     "winner": "Gagnant"
   },
@@ -196,7 +197,10 @@
     "passwordNotMatch": "Les mots de passe ne correspondent pas",
     "emailNotFound": "E-mail non trouvé",
     "emailTooLong": "L'e-mail est trop long",
-    "passwordTooLong": "Le mot de passe ne peut pas dépasser 50 caractères"
+    "passwordTooLong": "Le mot de passe ne peut pas dépasser 50 caractères",
+    "codeNotFound": "Code de vérification invalide",
+    "codeExpired": "Le code de vérification a expiré",
+    "general": "Une erreur s'est produite. Veuillez réessayer."
   },
 
   "tutorial": {

@@ -1,3 +1,13 @@
+/**
+ * Generates styles based on window state and other parameters.
+ * @param {string} windowType - The type of window. 
+ * @param {boolean} isLogged - Indicates whether the user is logged in.
+ * @param {boolean} isGameTableVisible - Indicates whether the game table is visible.
+ * @param {boolean} isWindowOpen - Indicates whether any window is open.
+ * @param {boolean} showWaitingMessage - Indicates whether a waiting message should be shown.
+ * @param {boolean} isSpectator - Indicates whether the user is a spectator.
+ * @returns {object} An object containing CSS classes for different components based on the provided parameters.
+ */
 export function getStyles(
   windowType,
   isLogged,
