@@ -75,7 +75,7 @@ class Player {
 
   /**
    * in the name
-   * @param {int} coinsToAdd 
+   * @param {int} coinsToAdd
    */
   async updateMoneyInDatabase(coinsToAdd) {
     const result = await this.updateUserCoins(this.playerId, coinsToAdd);
@@ -101,7 +101,7 @@ class Player {
   }
 
   /**
-   * Set the player allin 
+   * Set the player allin
    */
   setTapis() {
     this.isTapis = true;
@@ -116,8 +116,8 @@ class Player {
 
   /**
    * give all the status of the player
-   * @param {id} id 
-   * @returns the info of the player id 
+   * @param {id} id
+   * @returns the info of the player id
    */
   statusFor(id) {
     const view = {
@@ -143,8 +143,8 @@ class Player {
   }
 
   /**
-   * reveal the player card index 
-   * @param {*} cardIndex 
+   * reveal the player card index
+   * @param {int} cardIndex
    */
   revealCard(cardIndex) {
     if (this.playerCards.length > cardIndex) {
@@ -153,16 +153,16 @@ class Player {
   }
 
   /**
-   * check if the player have enough money
-   * @returns true if player have more than 40SC |false otherwise
+   * check if the player have enough money to join a game
+   * @returns true if player have more than 40SC | false otherwise
    */
   canJoinTable() {
     return this.getPlayerMoney() > 40;
   }
 
   /**
-   * change the player to spectator or unspecator 
-   * @returns 
+   * change the player to spectator or unspecator
+   * @returns
    */
   toggleSpectator() {
     if (this.isSpectator && !this.canJoinTable()) {
@@ -180,7 +180,7 @@ class Player {
   }
 
   /**
-   * move the player to spectator
+   * move the player to spectator and reset his status
    */
   movePlayerToSpectator() {
     this.newRoundReset();
@@ -190,7 +190,7 @@ class Player {
 
   /**
    * hide the playerCard index
-   * @param {*} cardIndex 
+   * @param {int} cardIndex
    */
   hideCard(cardIndex) {
     if (this.playerCards.length > cardIndex) {
@@ -200,28 +200,27 @@ class Player {
 
   /**
    * Put the pot in my pocket (when he win the game the player get the money)
-   * @param {*} total 
+   * @param {int} total
    */
   seRemplirLesPoches(total) {
     this.localMoney += total;
   }
 
   /**
-   * 
-   * @param {*} t 
+   * Sets the time of the last answer.
+   * @param {int} t - The time of the last answer.
    */
   settimeLastAnswer(t) {
     this.timeLastAnswer = t;
   }
 
   /**
-   * 
-   * @returns 
+   * Gets the time of the last answer.
+   * @returns {int} - The time of the last answer.
    */
   gettimeLastAnswer() {
     return this.timeLastAnswer;
   }
-
 
   // Methods to get and set status
   setStatus(status) {
@@ -271,6 +270,9 @@ class Player {
     return this.playerBonus;
   }
 
+  /**
+   * Resets the player's bonus points to zero and marks them as not ready.
+   */
   resetPlayerBonus() {
     this.playerBonus.C = 0;
     this.playerBonus.H = 0;
@@ -298,7 +300,7 @@ class Player {
   }
 
   /**
-   * 
+   *
    * @returns how many the player bet in the turn
    */
   howmanyBetTurn() {
@@ -316,7 +318,7 @@ class Player {
 
   /**
    * add the card in the bonus of the player
-   * @param {*} card 
+   * @param {*} card
    */
   addCard(card) {
     this.playerCards.push(card);
@@ -333,34 +335,56 @@ class Player {
       this.playerBonus.ready = true;
   }
 
+  /**
+   * Clears the player's hand by removing all cards.
+   */
   clearHand() {
     this.playerCards = [];
   }
 
+  /**
+   * Checks if the player is currently active.
+   * @returns {boolean} - True if the player is active, otherwise false.
+   */
   isPlayerActive() {
     return this.playerState === "active";
   }
 
+  /**
+   * Folds the player's hand, marking them as folded and inactive for the current round.
+   */
   fold() {
     this.talkedThisTurn = true;
     this.status = "folded";
     this.isActive = false;
   }
 
+  /**
+   * Checks the player's hand, marking them as checked for the current round.
+   */
   check() {
     this.talkedThisTurn = true;
     this.status = "checked";
   }
 
+  /**
+   * Calls the current bet, marking the player as having called for the current round.
+   */
   call() {
     this.talkedThisTurn = true;
     this.status = "call";
   }
 
+  /**
+   * Marks the player as actively playing in the current round.
+   */
   playing() {
     this.status = "playing";
   }
 
+  /**
+   * Raises the current bet, marking the player as having raised for the current round.
+   */
   raise() {
     this.talkedThisTurn = true;
     this.status = "raise";
@@ -375,7 +399,7 @@ class Player {
 
   /**
    * all in the player
-   * @param {int} amount 
+   * @param {int} amount
    */
   tapis(amount) {
     this.talkedThisTurn = true;
@@ -386,6 +410,10 @@ class Player {
     this.localMoney = 0;
   }
 
+  /**
+   * The player places a bet in the game.
+   * @param {int} amount - amount of the bet
+   */
   bet(amount) {
     if (this.localMoney >= amount) {
       this.talkedThisTurn = true;
@@ -399,7 +427,7 @@ class Player {
 
   /**
    * special case of the bet for the initial blind
-   * @param {int} amount 
+   * @param {int} amount
    */
   betinitial(amount) {
     if (this.localMoney >= amount) {
@@ -407,14 +435,12 @@ class Player {
       this.currentBetTurn += amount;
       this.localMoney -= amount;
       this.betTotal += amount;
-      //status a definir:
-      // this.status = "raise";
     }
   }
 
   /**
-   * bet the bonus ine the Total pot
-   * @param {int} amount 
+   * bet the bonus in the Total pot
+   * @param {int} amount
    */
   betBonus(amount) {
     if (this.localMoney > amount) {
@@ -424,7 +450,7 @@ class Player {
   }
 
   /**
-   * reset the player for the newgame
+   * Resets the player's state for a new round in the game.
    */
   newRoundReset() {
     this.clearHand();
@@ -432,7 +458,6 @@ class Player {
     this.currentBet = 0;
     this.currentBetTurn = 0;
     this.isActive = true;
-    // this.isAfk = false;
     this.alreadyWon = false;
     this.isTapis = false;
     this.cardsVisible = [false, false];
@@ -445,7 +470,7 @@ class Player {
   }
 
   /**
-   * reset the player for the newTurn
+   * Resets the player's state for a new turn.
    */
   newTurnReset() {
     this.talkedThisTurn = false;

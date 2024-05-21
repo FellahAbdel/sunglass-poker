@@ -64,7 +64,8 @@
     "notEnoughSC": "No tienes suficientes Sun Coins para unirte a esta partida",
     "notEnoughPlayer": "No hay suficientes jugadores para comenzar la partida",
     "yourTurn": "Tu turno",
-    "theirTurn": "Su turno"
+    "theirTurn": "Su turno",
+    "autoRestart": "Inicio automático"
   },
   "handGuide": {
     "highCard": "Carta alta",

@@ -33,12 +33,9 @@ const emptyState = {
 };
 const initialState = loadStateFromSessionStorage() || emptyState;
 
-console.log("initialState", initialState);
 const tableReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.GAME_STARTED:
-      console.log(action);
-      console.log("game started");
       const newStateGameStarted = {
         ...state,
         gameStarted: true,
@@ -48,7 +45,6 @@ const tableReducer = (state = initialState, action) => {
       saveStateToSessionStorage(newStateGameStarted);
       return newStateGameStarted;
     case actions.REFRESH:
-      console.log("Refresh page (tableReducer-fellah) ");
       const newStateRefresh = {
         ...state,
         players: action.payload.players || state.players,
@@ -57,7 +53,6 @@ const tableReducer = (state = initialState, action) => {
       saveStateToSessionStorage(newStateRefresh);
       return newStateRefresh;
     case actions.SIT:
-      console.log("New player sit at the table");
       const newStateSit = {
         ...state,
         players: action.payload.game.players,
@@ -65,7 +60,6 @@ const tableReducer = (state = initialState, action) => {
       saveStateToSessionStorage(newStateSit);
       return newStateSit;
     case actions.SITTED:
-      console.log("You sit successfully");
       const newStateSitted = {
         ...state,
         gameCreated: true,
@@ -74,7 +68,6 @@ const tableReducer = (state = initialState, action) => {
         playerLeft: false,
         players: action.payload.players,
       };
-      console.log("newStateSitted", newStateSitted);
       saveStateToSessionStorage(newStateSitted);
       return newStateSitted;
     case actions.LEFT_ROOM:
@@ -86,10 +79,8 @@ const tableReducer = (state = initialState, action) => {
         gameStarted: false,
       };
     case actions.EMPTY_PAYLOAD:
-      console.log("EMPTY PAYLOAD");
       return emptyState;
     default:
-      console.log("Table reducer called");
       return state;
   }
 };

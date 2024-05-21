@@ -82,7 +82,8 @@
     "hide": "Verstecken",
     "showB": "Beide zeigen",
     "hideB": "Beide verstecken",
-    "of": "von"
+    "of": "von",
+    "autoRestart": "Automatischer Start"
   },
   "gameActionPanel": {
     "raise": "Erhöhen",

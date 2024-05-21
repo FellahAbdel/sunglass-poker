@@ -15,10 +15,6 @@ module.exports.playerPlayed = (room) => ({
 })
 
 module.exports.startGame = (idGame, userId) => {
-  console.log("Action START_GAME created with payload:", {
-    id: idGame,
-    userId: userId,
-  });
   return {
     type: actions.START_GAME,
     payload: { id: idGame, userId: userId },

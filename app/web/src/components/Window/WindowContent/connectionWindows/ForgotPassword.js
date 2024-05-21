@@ -50,7 +50,6 @@ const ForgotPassword = () => {
       const result = await checkEmail(formData.email);
       if (result === true) {
         setEmail(formData.email);
-        console.log("setEmail a été appellé avec ", formData.email);
         openSuccessWindow("connection.successMail", "reset");
       } else if (result === "not-found") {
         setValidationError("error.emailNotFound");

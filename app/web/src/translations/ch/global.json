@@ -82,7 +82,8 @@
     "hide": "隐藏",
     "showB": "展示两个",
     "hideB": "隐藏两个",
-    "of": "的"
+    "of": "的",
+    "autoRestart": "自动启动"
   },
   "gameActionPanel": {
     "raise": "加注",
