@@ -644,7 +644,7 @@ module.exports = function (
 
     socket.on("autoRestartToggle", () => {
       if(socket.request.session.userId && socket.request.session.userRoom){
-        gameController.dispatch(actcrea.autoRestartToggle(socket.request.session.userId,socket.request.session.userRoom));
+        gameController.dispatch(socket.request.session.userId,actcrea.autoRestartToggle(socket.request.session.userId,socket.request.session.userRoom));
       }
     })
 
