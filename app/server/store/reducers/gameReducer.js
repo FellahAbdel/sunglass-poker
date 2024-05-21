@@ -421,6 +421,13 @@ const gameReducer = (state = initialState, action) => {
     case actions.CLEARANSWER:
       state.answer = false;
       return { ...state };
+    case actions.AUTO_RESTART_TOGGLE:
+      if(action.payload.playerId && action.payload.room){
+        if(state.rooms[action.payload.room]){
+          state.rooms[action.payload.room].game.toggleRestart(action.payload.playerId);
+        }
+      }
+      return {...state};
     // Other game actions can be handled here
     default:
       csl.log(fileType, "default", action.type);

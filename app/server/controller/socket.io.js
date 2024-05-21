@@ -578,6 +578,7 @@ module.exports = function (
       socket.emit("world", { responseData: "The world salute you :) " });
     });
 
+
     socket.on("disconnect", () => {
       
       // Log user disconnection
@@ -639,6 +640,13 @@ module.exports = function (
         findPlayerRoom(socket, socket.request.session.userId);
       }
     });
+
+
+    socket.on("autoRestartToggle", () => {
+      if(socket.request.session.userId && socket.request.session.userRoom){
+        gameController.dispatch(actcrea.autoRestartToggle(socket.request.session.userId,socket.request.session.userRoom));
+      }
+    })
 
     // Save the session
     socket.request.session.save();

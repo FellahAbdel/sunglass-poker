@@ -128,6 +128,14 @@ module.exports.clearAnswer = () => ({
   type: actions.CLEARANSWER,
 });
 
+module.exports.autoRestartToggle = (playerId,room) => ({
+  type:actions.AUTO_RESTART_TOGGLE,
+  payload: {
+    playerID: playerId,
+    room:room
+  }
+});
+
 /**
  * _______________________________________
  *

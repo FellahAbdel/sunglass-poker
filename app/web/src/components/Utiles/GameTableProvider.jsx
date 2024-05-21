@@ -31,6 +31,7 @@ export const GameTableProvider = ({ children }) => {
   const [communityCards, setCommunityCards] = useState([]);
   const [gameCurrentBet, SetGameCurrentBet] = useState(0);
   const [playerBonus, setPlayerBonus] = useState([]);
+  const [autoRestartStatus, setautoRestartStatus] = useState(true);
   //MAel a add mais pas sur du fonctionnement
   const [gamePlayerCurrentBet, setGamePlayerCurrentBet] = useState([]);
   const [total, setTotal] = useState(0);
@@ -111,6 +112,10 @@ export const GameTableProvider = ({ children }) => {
         );
       } else {
         setIsSpectator(true);
+      }
+
+      if (gameInfo?.game.autoRestartStatus){
+        setautoRestartStatus(autoRestartStatus);
       }
 
       // Mettre à jour les cartes communautaires

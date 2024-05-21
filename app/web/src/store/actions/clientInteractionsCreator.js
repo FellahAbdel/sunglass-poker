@@ -34,6 +34,12 @@ export const startGame = (userId) => {
   };
 };
 
+export const autoRestartToggle = () => {
+  return {
+    type:actions.AUTO_RESTART_TOGGLE
+  };
+};
+
 /**
  * Creates an action to create a game.
  * Includes possible arguments for game creation such as rules, game description, name, etc.

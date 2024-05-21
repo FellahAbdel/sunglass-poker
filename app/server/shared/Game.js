@@ -38,6 +38,7 @@ class Game {
       allow_start: true,
       serverName: "",
       firstRoundForRoom: true,
+      autoRestartStatus:false
     };
     Object.assign(this, basedValue, ...args);
     // this.activePlayers = null;
@@ -54,6 +55,40 @@ class Game {
     // this.nbhostfolded = nbhostfolded;
     // this.gameCurrentBet = gameCurrentBet; // Utilisez gameCurrentBet ici
     // this.startingPlayerIndex = startingPlayerIndex;
+  }
+  
+  toggleRestart(playerId){
+    if(this.master === playerId){
+      this.autoRestartStatus = !this.autoRestartStatus;
+      if(this.autoRestartStatus){
+        if(this.state === "waiting")
+          this.autoRestartCall = this.createAutoRestartCall();
+      }else{
+        clearTimeout(this.autoRestartCall);
+      }
+    }
+  }
+
+  createAutoRestartCall(){
+    if(this.autoRestartStatus)
+      return setTimeout(() => {
+        if (this.allow_start) {
+          this.movePlayersWithZeroCoinsToSpectators();
+          this.updatePlayersList();
+          if (this.state!=="waiting"){
+            csl.log("game is already started");
+            return;
+          }
+          else if (this.players.length <= 1) {
+            // Assurez-vous qu'il y a plus d'un joueur actif.
+            csl.log("Not enough players to start the game.");
+            return;
+          } else {
+            this.newgame();
+          }
+        }
+      }, 10000);
+    else return false;
   }
 
   getForPlayer(id) {
@@ -73,6 +108,7 @@ class Game {
       gameCurrentBet: this.gameCurrentBet,
       focusTurnTimer: this.focusTurnTimer,
       serverName: this.serverName,
+      autoRestartStatus:this.autoRestartStatus
     });
     return g;
   }
@@ -394,23 +430,7 @@ class Game {
     });
     this.resetRestartCall();
     this.updatePlayersList();
-    setTimeout(() => {
-      if (this.allow_start) {
-        this.movePlayersWithZeroCoinsToSpectators();
-        this.updatePlayersList();
-        if (this.state!=="waiting"){
-          csl.log("game is already started");
-          return;
-        }
-        else if (this.players.length <= 1) {
-          // Assurez-vous qu'il y a plus d'un joueur actif.
-          csl.log("Not enough players to start the game.");
-          return;
-        } else {
-          this.newgame();
-        }
-      }
-    }, 10000);
+    this.autoRestartCall = createAutoRestartCall();
   }
 
   playerPlayed() {
