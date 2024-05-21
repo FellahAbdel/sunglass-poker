@@ -664,7 +664,6 @@ module.exports = function (app, bdd) {
       try {
         // Fetch all available games with status "WAITING" from the database
         const availableGames = await GameDescriptionModel.find({
-          status: "WAITING",
           $or:[
                 { roomPassword: { $exists: false } }, // No roomPassword field
                 { roomPassword: "" } // roomPassword field is an empty string
