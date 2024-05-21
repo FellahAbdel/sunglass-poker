@@ -32,6 +32,10 @@ const DynamicBar = () => {
     dispatch(actions.startGame(userId));
   };
 
+  const handleToggleRestart = () => {
+    dispatch(actions.autoRestartToggle());
+  }
+
   useEffect(() => {
     setNotEnoughSC(user?.coins <= 40);
   }, [user?.coins]);
