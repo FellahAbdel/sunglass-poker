@@ -233,7 +233,7 @@ const gameReducer = (state = initialState, action) => {
             "Sit player, first player set as Master and first to play."
           );
           room.game.setMaster(playerId);
-          //room.game.setFocus(0);
+        
         }
         state.answer = {
           status: true,
