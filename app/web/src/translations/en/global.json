@@ -38,7 +38,8 @@
     "resetPassword": "Reset your password",
     "successReset": "You successfully changed password",
     "enterNewPassword": "Enter your new password here:",
-    "temporary": "TEMPORARY BUTTON"
+    "temporary": "TEMPORARY BUTTON",
+    "code": "Verification Code"
   },
   "messageBox": {
     "loginSucces": "Logged in with success!",
@@ -197,7 +198,10 @@
     "passwordNotMatch": "Passwords do not match",
     "emailNotFound": "Email not found",
     "emailTooLong": "Email to long",
-    "passwordTooLong": "Password cant have more than 50 characters"
+    "passwordTooLong": "Password cant have more than 50 characters",
+    "codeNotFound": "Invalid verification code",
+    "codeExpired": "Verification code has expired",
+    "general": "An error occurred. Please try again."
   },
   "tutorial": {
     "title": "Texas Hold'em Poker",
@@ -231,18 +235,18 @@
       "heading": "Strategy Tips",
       "startingHandsHeading": "Starting Hands",
       "startingHandsTips": {
-        "1":" Play strong starting hands (e.g., high pairs, suited connectors).",
+        "1": " Play strong starting hands (e.g., high pairs, suited connectors).",
         "2": "Avoid weak hands (e.g., low unsuited cards) unless in the right position."
       },
       "positionHeading": "Position",
       "positionTips": {
-        "1" : "Being in a later position allows you to see how opponents act before you make your move.",
-        "2" : "Use your position to control the pot and gain information."
-    },
+        "1": "Being in a later position allows you to see how opponents act before you make your move.",
+        "2": "Use your position to control the pot and gain information."
+      },
       "bluffingHeading": "Bluffing",
       "bluffingTips": {
-        "1":"Bluff occasionally to keep opponents guessing.",
-        "2" :"Ensure your bluffs are convincing and in line with previous actions."
+        "1": "Bluff occasionally to keep opponents guessing.",
+        "2": "Ensure your bluffs are convincing and in line with previous actions."
       },
       "potOddsHeading": "Pot Odds",
       "potOddsTip": "Calculate pot odds to determine if calling a bet is profitable in the long run."
@@ -333,7 +337,6 @@
       "flopContinuation": ". You have a flush draw and a straight draw.",
       "finalBettingText": "You bet again, and the opponent raises. You re-raise, and the opponent calls.",
       "showdownContinuation": ", winning with an Ace-high flush."
-
     },
     "conclusion": {
       "text": "* Texas Hold'em is a game of skill, strategy, and a bit of luck. By understanding the rules, practicing regularly, and learning from each hand, you can improve and enjoy this exciting game. Happy playing!"

@@ -44,7 +44,6 @@ async function sendVerificationEmail(email, code) {
   });
 }
 
-
 module.exports = function (app, bdd) {
   // Logging database connection
   csl.log("bdd", "bdd!", bdd);
@@ -54,10 +53,7 @@ module.exports = function (app, bdd) {
 
   const db = mongoose.connection;
 
-  db.on(
-    "error",
-    csl.error.bind(console, "Error connecting to the database:")
-  );
+  db.on("error", csl.error.bind(console, "Error connecting to the database:"));
   db.once("open", () => {
     // Log successful database connection
     csl.log("bdd", "Connected to MongoDB database");
@@ -86,8 +82,6 @@ module.exports = function (app, bdd) {
             },
           };
         }
-
-      
 
         // Function to find default items
         async function findDefaultItem(name, category = null) {
@@ -195,38 +189,6 @@ module.exports = function (app, bdd) {
       } catch (error) {
         // Handle error
         csl.error("bdd", "Error during login:", error);
-        throw error;
-      }
-    },
-
-    checkEmail: async (email) => {
-      try {
-        // Find user by email
-        const user = await UserModel.findOne({ email: email });
-        if (user) {
-          // If user exists, generete verification code
-        const verificationCode = Math.random()
-        .toString(36)
-        .substring(2, 7)
-        .toUpperCase();
-        
-        //Send the mail
-        await sendVerificationEmail(email, verificationCode);
-        
-        user.verificationCode = verificationCode;
-        await user.save();
-
-          return { exists: true, message: "E-mail exists in the database" };
-        } else {
-          // If user does not exist, return exists:false with a message
-          return {
-            exists: false,
-            message: "E-mail does not exist in the database",
-          };
-        }
-      } catch (error) {
-        // Handle error
-        csl.error("bdd", "Error during email check:", error);
         throw error;
       }
     },
@@ -632,7 +594,6 @@ module.exports = function (app, bdd) {
         }
         csl.log("game players after remove", gameDesc.players);
 
-
         // Reset the user's inGame status to null
         user.inGame = null;
         csl.log(user, " removing user in game");
@@ -703,10 +664,10 @@ module.exports = function (app, bdd) {
       try {
         // Fetch all available games with status "WAITING" from the database
         const availableGames = await GameDescriptionModel.find({
-          $or:[
-                { roomPassword: { $exists: false } }, // No roomPassword field
-                { roomPassword: "" } // roomPassword field is an empty string
-            ]
+          $or: [
+            { roomPassword: { $exists: false } }, // No roomPassword field
+            { roomPassword: "" }, // roomPassword field is an empty string
+          ],
         });
         // Return fetched available games along with success status code 200
         return { code: 200, data: availableGames };
@@ -759,52 +720,107 @@ module.exports = function (app, bdd) {
         throw error;
       }
     },
-  };
-  dao.verifyGamePassword = async (roomId, password) => {
-    try {
-      const gameDescription = await GameDescriptionModel.findById(roomId);
-      if (!gameDescription) {
-        return { success: false, error: "Game room not found" };
+    verifyGamePassword: async (roomId, password) => {
+      try {
+        const gameDescription = await GameDescriptionModel.findById(roomId);
+        if (!gameDescription) {
+          return { success: false, error: "Game room not found" };
+        }
+
+        const match = await bcrypt.compare(
+          password,
+          gameDescription.roomPassword
+        );
+        if (match) {
+          return { success: true };
+        } else {
+          return { success: false, error: "Incorrect password" };
+        }
+      } catch (error) {
+        csl.error("Error verifying game password:", error);
+        return { success: false, error: "Internal server error" };
       }
+    },
 
-      const match = await bcrypt.compare(
-        password,
-        gameDescription.roomPassword
-      );
-      if (match) {
-        return { success: true };
-      } else {
-        return { success: false, error: "Incorrect password" };
+    checkEmail: async (email) => {
+      try {
+        // Find user by email
+        const user = await UserModel.findOne({ email: email });
+        if (user) {
+          // If user exists, generete verification code
+          const verificationCode = Math.random()
+            .toString(36)
+            .substring(2, 7)
+            .toUpperCase();
+
+          //Send the mail
+          await sendVerificationEmail(email, verificationCode);
+
+          const hashedVerificationCode = await bcrypt.hash(
+            verificationCode,
+            10
+          );
+
+          user.verificationCode = hashedVerificationCode;
+          user.verificationCodeExpires = Date.now() + 30000;
+          await user.save();
+
+          return { exists: true, message: "E-mail exists in the database" };
+        } else {
+          // If user does not exist, return exists:false with a message
+          return {
+            exists: false,
+            message: "E-mail does not exist in the database",
+          };
+        }
+      } catch (error) {
+        // Handle error
+        csl.error("bdd", "Error during email check:", error);
+        throw error;
       }
-    } catch (error) {
-      csl.error("Error verifying game password:", error);
-      return { success: false, error: "Internal server error" };
-    }
-  };
+    },
 
-  dao.changePassword = async (email, newPassword) => {
-    try {
-      // Hash the new password
-      const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+    changePassword: async (email, code, newPassword) => {
+      try {
+        console.log(
+          `Received data - Email: ${email}, Code: ${code}, New Password: ${newPassword}`
+        );
 
-      // Find the user by email and update the password
-      const updatedUser = await UserModel.findOneAndUpdate(
-        { email: email },
-        { $set: { password: hashedPassword } },
-        { new: true, runValidators: true }
-      );
+        // Rechercher l'utilisateur par email
+        const user = await UserModel.findOne({ email: email });
 
-      // Check if the user was found and the password updated
-      if (updatedUser) {
+        // Vérifier si l'utilisateur existe
+        if (!user) {
+          return { success: false, message: "User not found" };
+        }
+
+        // Vérifier si le code de validation est expiré
+        if (user.verificationCodeExpires < Date.now()) {
+          return { success: false, message: "Verification code has expired" };
+        }
+
+        // Vérifier si le code de vérification est correct
+        const isCodeValid = await bcrypt.compare(code, user.verificationCode);
+        if (!isCodeValid) {
+          return { success: false, message: "Invalid verification code" };
+        }
+
+        // Hasher le nouveau mot de passe
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+        // Mettre à jour le mot de passe
+        user.password = hashedPassword;
+        user.verificationCode = null;
+        user.verificationCodeExpires = null;
+        await user.save();
+
         return { success: true, message: "Password updated successfully" };
-      } else {
-        return { success: false, message: "User not found" };
+      } catch (error) {
+        // Log and handle the error
+        console.error("Error updating password:", error);
+        return { success: false, message: "Failed to update password" };
       }
-    } catch (error) {
-      // Log and handle the error
-      csl.error("Error updating password:", error);
-      return { success: false, message: "Failed to update password" };
-    }
+    },
   };
 
   return dao;

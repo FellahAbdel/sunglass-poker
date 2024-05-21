@@ -315,9 +315,9 @@ module.exports = (app, dao, gameController) => {
 
   app.put("/api/change-password", async (req, res) => {
     try {
-      const { email, newPassword } = req.body;
-      const result = await dao.changePassword(email, newPassword);
-      
+      const { email, code, newPassword } = req.body;
+      const result = await dao.changePassword(email, code, newPassword);
+
       if (result.success) {
         res.json(result);
       } else {

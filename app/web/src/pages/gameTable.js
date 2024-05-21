@@ -20,11 +20,12 @@ import DynamicBar from "../components/Navbar/DynamicBar.js";
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
 const GameTable = () => {
-  const { theme, animation , sound , volume } = useSettings();
+  const { theme, animation, sound, volume } = useSettings();
   const { isLogged } = useAuth();
   const { windowType, isWindowOpen, closeWindow, isGameTableVisible } =
     useWindowContext();
-  const { playerBonus, playerCards, showWaitingMessage , isSpectator} = useGameTable();
+  const { playerBonus, playerCards, showWaitingMessage, isSpectator } =
+    useGameTable();
   const classes = getStyles(
     windowType,
     isLogged,
@@ -33,26 +34,43 @@ const GameTable = () => {
     showWaitingMessage,
     isSpectator
   );
-  const [gameElementsAppear, setGameElementsAppear] = useState(isGameTableVisible && !isWindowOpen && !showWaitingMessage && !isSpectator);
+  const [gameElementsAppear, setGameElementsAppear] = useState(
+    isGameTableVisible && !isWindowOpen && !showWaitingMessage && !isSpectator
+  );
 
   useEffect(() => {
-    setGameElementsAppear(isGameTableVisible && !isWindowOpen && !showWaitingMessage && !isSpectator);
-  }, [isGameTableVisible,isWindowOpen,showWaitingMessage,isSpectator]);
+    setGameElementsAppear(
+      isGameTableVisible && !isWindowOpen && !showWaitingMessage && !isSpectator
+    );
+  }, [isGameTableVisible, isWindowOpen, showWaitingMessage, isSpectator]);
 
   const ambientSoundURLLight = "static/media/assets/sounds/waveSound2.mp3";
   const ambientSoundURLDark = "static/media/assets/sounds/casinoJazz.mp3";
 
-  const audioRef = useAudio(ambientSoundURLLight, ambientSoundURLDark, theme, sound, volume);
+  const audioRef = useAudio(
+    ambientSoundURLLight,
+    ambientSoundURLDark,
+    theme,
+    sound,
+    volume
+  );
 
   useEffect(() => {
     if (sound && audioRef.current) {
-      audioRef.current.play().catch(error => console.error("Playback was prevented:", error));
+      audioRef.current
+        .play()
+        .catch((error) => console.error("Playback was prevented:", error));
     }
   }, [sound, audioRef, theme, windowType]);
 
   // Handle closing the window when clicking outside
   const handleCloseOnClickOutside = (event) => {
-    if (isWindowOpen && (windowType !== "loading" && windowType !=="validationCode")) {
+    if (
+      isWindowOpen &&
+      windowType !== "loading" &&
+      windowType !== "success" &&
+      windowType !== "reset"
+    ) {
       closeWindow();
     }
   };
@@ -69,15 +87,17 @@ const GameTable = () => {
         event.preventDefault();
       }
     };
-    document.addEventListener('dragstart', disableDrag);
+    document.addEventListener("dragstart", disableDrag);
     return () => {
-      document.removeEventListener('dragstart', disableDrag);
+      document.removeEventListener("dragstart", disableDrag);
     };
   }, []);
 
   return (
     <div
-      className={`container-main unselectable ${animation ? "" : "no-animation"}`}
+      className={`container-main unselectable ${
+        animation ? "" : "no-animation"
+      }`}
       id={theme}
       onClick={handleCloseOnClickOutside}
     >
@@ -103,39 +123,35 @@ const GameTable = () => {
       </div>
 
       {/* playing elements opens when logged in */}
-          <div
-            className={`comp-bonus  ${gameElementsAppear && "appear"}`}
-          >
-            {playerBonus !== undefined && gameElementsAppear && (
-              <BonusPanel
-                nbHearts={playerBonus.H}
-                nbDiamonds={playerBonus.D}
-                nbSpades={playerBonus.S}
-                nbClubs={playerBonus.C}
-              />
-            )}
-          </div>
-          <div
-            className={`comp-gameAction ${gameElementsAppear && "appear"}`}
-          >
-            {gameElementsAppear && <GameActionPanelV2 />}
-          </div>
+      <div className={`comp-bonus  ${gameElementsAppear && "appear"}`}>
+        {playerBonus !== undefined && gameElementsAppear && (
+          <BonusPanel
+            nbHearts={playerBonus.H}
+            nbDiamonds={playerBonus.D}
+            nbSpades={playerBonus.S}
+            nbClubs={playerBonus.C}
+          />
+        )}
+      </div>
+      <div className={`comp-gameAction ${gameElementsAppear && "appear"}`}>
+        {gameElementsAppear && <GameActionPanelV2 />}
+      </div>
 
-          <div
-            className={`comp-handCards ${!isWindowOpen && "appear"}`}
-          >
-            {playerCards[0] !== undefined &&
-              playerCards[1] !== undefined &&
-              playerCards.length === 2 &&
-              isGameTableVisible && !isWindowOpen && !isSpectator && (
-                <HandCards
-                  card1={playerCards[0]}
-                  card2={playerCards[1]}
-                  showHandCardProp={[true, true]}
-                  handGuideProp={"straight"}
-                />
-              )}
-          </div>
+      <div className={`comp-handCards ${!isWindowOpen && "appear"}`}>
+        {playerCards[0] !== undefined &&
+          playerCards[1] !== undefined &&
+          playerCards.length === 2 &&
+          isGameTableVisible &&
+          !isWindowOpen &&
+          !isSpectator && (
+            <HandCards
+              card1={playerCards[0]}
+              card2={playerCards[1]}
+              showHandCardProp={[true, true]}
+              handGuideProp={"straight"}
+            />
+          )}
+      </div>
 
       <DynamicBar />
     </div>

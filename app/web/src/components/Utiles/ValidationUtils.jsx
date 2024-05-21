@@ -67,7 +67,6 @@ export const validatePasswordMatch = (password, repeatPassword) => {
 //Fonction pour la création de table
 
 export const validatePasswordOrNull = (password) => {
-
   if (password.length > 50) {
     return {
       isValid: false,
@@ -78,5 +77,19 @@ export const validatePasswordOrNull = (password) => {
   return {
     isValid: password.length === 0 || password.length >= 6,
     errorMessage: "Password must have at least 6 characters",
+  };
+};
+
+//Validation des codes de vérifications
+export const validateCode = (Code) => {
+  if (Code.length >= 4 && Code.length <= 6) {
+    return {
+      isValid: true,
+    };
+  }
+
+  return {
+    isValid: false,
+    errorMessage: "error.codeNotFound",
   };
 };
