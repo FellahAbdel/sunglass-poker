@@ -37,6 +37,11 @@ const UserSchema = new Schema(
       required: true,
       default: 1000, // Default value for coins
     },
+    verificationCode: {
+      type: String,
+      required: false,
+    },
+
     // Reference to the base avatar item
     baseAvatar: {
       type: Schema.Types.ObjectId,

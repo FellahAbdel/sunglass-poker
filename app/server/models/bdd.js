@@ -10,6 +10,8 @@ const StatModel = require("./Stat");
 const ItemModel = require("./Item");
 const GameDescriptionModel = require("./GameDescription");
 
+const nodemailer = require("nodemailer");
+
 // Initialize items (if necessary)
 const initItems = require("./initItems");
 const resetServer = require("./resetServer");
@@ -18,6 +20,30 @@ const csl = require("../controller/intelligentLogging");
 // csl.silenced('bdd');
 
 require("dotenv").config();
+
+async function sendVerificationEmail(email, code) {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "sunglass.poker@gmail.com",
+      pass: "lmqnlxnhafubvuan",
+    },
+  });
+
+  const mailOptions = {
+    from: "sunglass.poker@gmail.com",
+    to: email,
+    subject: "Verify your email",
+    text: `Your verification code is: ${code}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Email send error:", error);
+    }
+  });
+}
+
 
 module.exports = function (app, bdd) {
   // Logging database connection
@@ -60,6 +86,8 @@ module.exports = function (app, bdd) {
             },
           };
         }
+
+      
 
         // Function to find default items
         async function findDefaultItem(name, category = null) {
@@ -176,7 +204,18 @@ module.exports = function (app, bdd) {
         // Find user by email
         const user = await UserModel.findOne({ email: email });
         if (user) {
-          // If user exists, return exists:true with a message
+          // If user exists, generete verification code
+        const verificationCode = Math.random()
+        .toString(36)
+        .substring(2, 7)
+        .toUpperCase();
+        
+        //Send the mail
+        await sendVerificationEmail(email, verificationCode);
+        
+        user.verificationCode = verificationCode;
+        await user.save();
+
           return { exists: true, message: "E-mail exists in the database" };
         } else {
           // If user does not exist, return exists:false with a message

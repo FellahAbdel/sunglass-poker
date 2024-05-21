@@ -52,7 +52,7 @@ const GameTable = () => {
 
   // Handle closing the window when clicking outside
   const handleCloseOnClickOutside = (event) => {
-    if (isWindowOpen && windowType !== "loading") {
+    if (isWindowOpen && (windowType !== "loading" && windowType !=="validationCode")) {
       closeWindow();
     }
   };

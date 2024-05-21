@@ -4,13 +4,13 @@ import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import { useWindowContext } from "../../../Utiles/WindowContext.jsx";
 import { useTranslation } from "../../../Utiles/Translations.jsx";
-import { validateEmail } from "../../../Utiles/ValidationUtils.jsx";
+import { validateUsername } from "../../../Utiles/ValidationUtils.jsx";
 
 /**
  * ForgotPassword provides a form for users to request a password reset link via email.
  * It validates user input and displays appropriate feedback messages.
  */
-const ForgotPassword = () => {
+const ValidationCodeWindow = () => {
   const { openWindow, openSuccessWindow } = useWindowContext();
   const { checkEmail } = useAuth();
   const [formData, setFormData] = useState({
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     // Validation de l'email
-    const emailValidation = validateEmail(formData.email);
+    const emailValidation = validateUsername(formData.email);
     if (!emailValidation.isValid) {
       setValidationError(emailValidation.errorMessage);
       return;
@@ -49,7 +49,7 @@ const ForgotPassword = () => {
     try {
       const result = await checkEmail(formData.email);
       if (result === true) {
-        openWindow("validationCode");
+        openSuccessWindow(getTranslatedWord("connection.successMail"));
       } else if (result === "not-found") {
         setValidationError("error.emailNotFound");
       } else {
@@ -74,10 +74,10 @@ const ForgotPassword = () => {
       </div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
-          name="email"
+          name="Code"
           value={formData.email}
           onChange={handleChange}
-          placeholder={getTranslatedWord("connection.email")}
+          placeholder={getTranslatedWord("Code from your email")}
           errorMessage={validationError}
           styleClass={"input-connectionDefault"}
           iconSrc="static/media/assets/images/icons/black/email.png"
@@ -104,4 +104,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ValidationCodeWindow;

@@ -6,6 +6,7 @@ import LoginWindow from "./WindowContent/connectionWindows/LoginWindow";
 import SignUpWindow from "./WindowContent/connectionWindows/SignupWindow";
 import ResetPasswordWindow from "./WindowContent/connectionWindows/ResetPassword";
 import ForgotPassword from "./WindowContent/connectionWindows/ForgotPassword";
+import ValidationCodeWindow from "./WindowContent/connectionWindows/Validation";
 import SuccessWindow from "./WindowContent/SuccessWindow";
 import TutorialWindow from "./WindowContent/TutorialWindow";
 import SettingsWindow from "./WindowContent/SettingsWindow";
@@ -57,6 +58,7 @@ const Window = () => {
         {windowType === "ranking" && <RankingWindow />}
         {windowType === "coins" && <BuyCoinsWindow />}
         {windowType === "loading" && <LoadingWindow />}
+        {windowType === "validationCode" && <ValidationCodeWindow/>}
       </div>
     </div>
   );
