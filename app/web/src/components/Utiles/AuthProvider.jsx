@@ -341,22 +341,27 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  let avatarInCache = new Map(JSON.parse(sessionStorage.getItem("avatarInCache")) || []);
+  let avatarInCache = new Map(
+    JSON.parse(sessionStorage.getItem("avatarInCache")) || []
+  );
 
   const saveAvatarToCache = () => {
-    sessionStorage.setItem("avatarInCache", JSON.stringify(Array.from(avatarInCache)));
+    sessionStorage.setItem(
+      "avatarInCache",
+      JSON.stringify(Array.from(avatarInCache))
+    );
   };
-  const getAvatarById = async (userId,forced=false) => {
+  const getAvatarById = async (userId, forced = false) => {
     userId = String(userId);
-    if(!forced)
-    if (avatarInCache.has(userId)) {
-      let dataSet = avatarInCache.get(userId);
-      if(dataSet !== null && dataSet !== undefined){
-        if(Date.now() - dataSet.lastUpdated <= 10000){
-          return dataSet.avatar;    
+    if (!forced)
+      if (avatarInCache.has(userId)) {
+        let dataSet = avatarInCache.get(userId);
+        if (dataSet !== null && dataSet !== undefined) {
+          if (Date.now() - dataSet.lastUpdated <= 10000) {
+            return dataSet.avatar;
+          }
         }
       }
-    }
 
     try {
       const requestUrl = `api/avatar-info/${userId}`;
@@ -387,8 +392,11 @@ export const AuthProvider = ({ children }) => {
             imgSrc: data.colorAvatar.imgSrc,
           },
         };
-        avatarInCache.set(userId, {avatar:avatarDataSet,lastUpdated:Date.now()});
-        sessionStorage.setItem("avatarInCache",avatarInCache);
+        avatarInCache.set(userId, {
+          avatar: avatarDataSet,
+          lastUpdated: Date.now(),
+        });
+        sessionStorage.setItem("avatarInCache", avatarInCache);
         saveAvatarToCache();
         return avatarDataSet;
       } else {
@@ -508,27 +516,27 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const changePassword = async (email, newPassword) => {
+  const changePassword = async (email, code, newPassword) => {
     try {
       const response = await fetch("api/change-password", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, newPassword }),
+        body: JSON.stringify({ email, code, newPassword }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        return true;
+        return { success: true };
       } else {
         console.error("Error changing password:", data.message);
-        return { error: data.message };
+        return { success: false, message: data.message };
       }
     } catch (error) {
-      console.error("Error changing password:", error);
-      return false;
+      console.error("Error changing password:", error.message);
+      return { success: false, message: "Network error or server is down" };
     }
   };
 
