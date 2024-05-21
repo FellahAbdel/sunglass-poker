@@ -411,9 +411,9 @@ module.exports = gameController = {
 
     // Check if the action is to show or hide a card
     if (
-      action.type === actionsTypes.SHOW_CARD ||
-      action.type === actionsTypes.HIDE_CARD
+      action.subtype === actionsTypes.PLAYER_GAME_ASYNC
     ) {
+      csl.log("PLAYER_ACTION_ASYNC", "Player doesn't require to be playing.");
       // Dispatch the action directly to the player
       this.dispatch(action.payload.playerId, action);
     } else {

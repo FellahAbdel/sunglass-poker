@@ -153,7 +153,7 @@ module.exports = function (
     // Check if the action is auth.
     if (action.payload.playerId) {
       // Check if the action subtype is for player game action
-      if (action.subtype === actions.PLAYER_GAME_ACTION) {
+      if (action.subtype === actions.PLAYER_GAME_ACTION || action.subtype === actions.PLAYER_GAME_ASYNC) {
         gameController.playerAction(action);
       } else {
         // If not, regular dispatch in gameController
@@ -644,7 +644,7 @@ module.exports = function (
 
     socket.on("autoRestartToggle", () => {
       if(socket.request.session.userId && socket.request.session.userRoom){
-        gameController.dispatch(socket.request.session.userId,actcrea.autoRestartToggle(socket.request.session.userId,socket.request.session.userRoom));
+        dispatch(socket,{action:actcrea.autoRestartToggle()});
       }
     })
 

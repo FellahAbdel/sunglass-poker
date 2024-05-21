@@ -49,6 +49,7 @@ module.exports.CLEARANSWER = "CLEAR_ANSWER";
 
 module.exports.USER_GENERIC_ACTION = "USER_GENERIC_ACTION";
 module.exports.PLAYER_GAME_ACTION = "PLAYER_GAME_ACTION";
+module.exports.PLAYER_GAME_ASYNC = "PLAYER_GAME_ASYNC";
 
 module.exports.PLAYER_PLAYED = "PLAYER_PLAYED";
 
@@ -57,9 +58,13 @@ module.exports.PLAYER_GAME_ACTION_LIST = [
   module.exports.BET,,
   module.exports.CHECK,
   module.exports.RAISE,
+  module.exports.ACTIVATE_BONUS,
+];
+
+module.exports.PLAYER_GAME_ASYNC_LIST = [
   module.exports.SHOW_CARD,
   module.exports.HIDE_CARD,
-  module.exports.ACTIVATE_BONUS,
+  module.exports.AUTO_RESTART_TOGGLE
 ];
 
 

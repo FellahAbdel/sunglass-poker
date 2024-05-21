@@ -131,7 +131,7 @@ module.exports.clearAnswer = () => ({
 module.exports.autoRestartToggle = (playerId,room) => ({
   type:actions.AUTO_RESTART_TOGGLE,
   payload: {
-    playerID: playerId,
+    playerId: playerId,
     room:room
   }
 });

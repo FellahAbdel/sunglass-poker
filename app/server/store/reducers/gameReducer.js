@@ -422,8 +422,10 @@ const gameReducer = (state = initialState, action) => {
       state.answer = false;
       return { ...state };
     case actions.AUTO_RESTART_TOGGLE:
+      csl.log("TOGGLE_RESTART","payload : ",action.payload);
       if(action.payload.playerId && action.payload.room){
         if(state.rooms[action.payload.room]){
+          console.log("A".repeat(100));
           state.rooms[action.payload.room].game.toggleRestart(action.payload.playerId);
         }
       }

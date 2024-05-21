@@ -58,8 +58,10 @@ class Game {
   }
   
   toggleRestart(playerId){
+    csl.log("toggleRestart",`master: ${this.master} === ${playerId}`);
     if(this.master === playerId){
       this.autoRestartStatus = !this.autoRestartStatus;
+      csl.log("toggleRestart", `status is now ${this.autoRestartStatus}`);
       if(this.autoRestartStatus){
         if(this.state === "waiting")
           this.autoRestartCall = this.createAutoRestartCall();

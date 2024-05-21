@@ -16,9 +16,9 @@ module.exports = eventHydra = (socket, data) => {
     
     // Hydrating the action payload with user and room information
     hydrated.payload = {
+        ...action.payload,
         playerId: userId,
         room: room,
-        ...action.payload
     };
 
     // We check if the action the user tries to perform is related to a game.
@@ -27,6 +27,8 @@ module.exports = eventHydra = (socket, data) => {
     if (action.type !== undefined) {
         if (actions.PLAYER_GAME_ACTION_LIST.findIndex(e => e == action.type) !== -1) {
             hydrated.subtype = actions.PLAYER_GAME_ACTION;
+        } else if(actions.PLAYER_GAME_ASYNC_LIST.findIndex(e => e == action.type) !== -1){
+            hydrated.subtype = actions.PLAYER_GAME_ASYNC;
         } else {
             hydrated.subtype = actions.USER_GENERIC_ACTION;
         }
