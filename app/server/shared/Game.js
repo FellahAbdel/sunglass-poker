@@ -41,180 +41,41 @@ class Game {
       autoRestartStatus:false
     };
     Object.assign(this, basedValue, ...args);
-    // this.activePlayers = null;
-    // this.players = players;
-    // this.spectators = spectators;
-    // this.deck = deck;
-    // this.pokerTable = pokerTable;
-    // this.master = master;
-    // this.blind = blind;
-    // this.focus = focus;
-    // this.currentStage = currentStage;
-    // this.state = state;
-    // this.total = total;
-    // this.nbhostfolded = nbhostfolded;
-    // this.gameCurrentBet = gameCurrentBet; // Utilisez gameCurrentBet ici
-    // this.startingPlayerIndex = startingPlayerIndex;
+
   }
   
-  toggleRestart(playerId){
-    csl.log("toggleRestart",`master: ${this.master} === ${playerId}`);
-    if(this.master === playerId){
-      this.autoRestartStatus = !this.autoRestartStatus;
-      csl.log("toggleRestart", `status is now ${this.autoRestartStatus}`);
-      if(this.autoRestartStatus){
-        if(this.state === "waiting")
-          this.autoRestartCall = this.createAutoRestartCall();
-      }else{
-        clearTimeout(this.autoRestartCall);
-      }
-    }
-  }
-
-  createAutoRestartCall(){
-    if(this.autoRestartStatus)
-      return setTimeout(() => {
-        if (this.allow_start) {
-          this.movePlayersWithZeroCoinsToSpectators();
-          this.updatePlayersList();
-          if (this.state!=="waiting"){
-            csl.log("game is already started");
-            return;
-          }
-          else if (this.players.length <= 1) {
-            // Assurez-vous qu'il y a plus d'un joueur actif.
-            csl.log("Not enough players to start the game.");
-            return;
-          } else {
-            this.newgame();
-          }
-        }
-      }, 10000);
-    else return false;
-  }
-
-  getForPlayer(id) {
-    var filteredPlayer = this.players.map((player) => player.statusFor(id));
-    var g = new Game({
-      players: filteredPlayer,
-      allPlayers: this.allPlayers,
-      pokerTable: this.pokerTable,
-      master: this.master,
-      blind: this.blind,
-      focus: this.focus,
-      currentStage: this.currentStage,
-      state: this.state,
-      total: this.total,
-      playerBeforeNextTurn: this.playerBeforeNextTurn,
-      nbhostfolded: this.nbhostfolded,
-      gameCurrentBet: this.gameCurrentBet,
-      focusTurnTimer: this.focusTurnTimer,
-      serverName: this.serverName,
-      autoRestartStatus:this.autoRestartStatus
-    });
-    return g;
-  }
-
-  getActivePlayers() {
-    return this.players.filter((player) => player.isActive);
-  }
-
-  updatePlayersList() {
-    // Filtrer les joueurs qui ne sont pas spectateurs et qui sont actifs
-    this.players = this.allPlayers.filter(
-      (player) => !player.isSpectator && !player.isAFK
-    );
-    csl.log(
-      `Updated players list: Now includes ${this.players.length} active players.`
-    );
-  }
-
-  getPlayerNameById(playerId) {
-    const player = this.allPlayers.find((p) => p.playerId === playerId);
-    if (player) {
-      return player.name;
-    } else {
-      csl.error("Player not found with ID:", playerId);
-      return null;
-    }
-  }
 
   /**
-   *
-   * @param {id} playerId
-   */
-  moveSpecOrPlayer(playerId) {
-    let player = this.allPlayers.find((p) => p.playerId === playerId);
+ * active the bonus for all the activeplayer
+ * @param {string} player 
+ */
+   activateBonus(player) {
+    csl.log("j'active le bonus du joueur : ", player.name);
+    if (this.isPlayersTurn(player.getPlayerId())) {
+      const playerBonus = player.getPlayerBonus();
+      const self = this;
 
-    // Vérifier si le joueur existe déjà et son état
-    if (player) {
-      // Si le joueur a 0 coins, il ne peut pas rejoindre la table
-      csl.log(
-        `Player ${player.name} player.isSpectator test`,
-        player.isSpectator
-      );
-
-      if (player.getPlayerMoney() <= 0) {
-        csl.log(
-          `Player ${player.name} cannot rejoin the table due to insufficient coins.`
+      if (playerBonus.ready) {
+        // On va parcourrir liste de joueur actifs dans l'ordre du tour de jeu
+        // On commence par le joueur qui a active le bonus car c'est son tour
+        // On parcours toute liste de maniere circulaire jusqu'a retomber sur lui
+        let startIndex = this.activePlayers.findIndex(
+          (p) => p.getPlayerId() === player.getPlayerId()
         );
-        player.movePlayerToSpectator();
-        this.updatePlayersList();
-        return;
-      } else {
-        player.playing();
-        player.toggleSpectator();
-        this.updatePlayersList();
+        let index = startIndex;
+
+        do {
+          let p = this.activePlayers[index];
+          const playerMoney = p.localMoney;
+          const amountToBet =
+            playerMoney < self.bonusAmount ? playerMoney : self.bonusAmount;
+          p.betBonus(amountToBet);
+          this.total += amountToBet;
+          index = (index + 1) % this.activePlayers.length;
+        } while (index != startIndex);
+
+        player.resetPlayerBonus();
       }
-    }
-  }
-
-  getPlayerById(playerId) {
-    const player = this.allPlayers.find((p) => p.playerId === playerId);
-    if (player) {
-      return player;
-    } else {
-      csl.error("Player not found with ID:", playerId);
-      return null;
-    }
-  }
-
-  //si le nombre de joueur change en cours de parti ça risque de faire des saut chelou
-  //faudrait faire un truc genre Modulo 10 joeurs en mode ça tourne autour de la table
-  //et si la place est vide on va au prochain
-  rotateStartingPlayer() {
-    this.startingPlayerIndex =
-      (this.startingPlayerIndex + 1) % this.players.length;
-  }
-
-  setMaster(id) {
-    this.master = id;
-  }
-  getMaster() {
-    return this.master;
-  }
-  setFocus(n) {
-    if (n >= 0 && n < this.players.length) {
-      this.focus = n;
-    }
-  }
-  getFocus() {
-    return this.focus;
-  }
-
-  /**
-   *
-   * @param {Player} player Player class Object
-   * @description Will set the player to afk, remove him from player and set him  as spectator
-   * @return {void}
-   */
-  setPlayerAFK(player) {
-    csl.log("setPlayerAFK", "Player received:", player);
-    // this.moveSpecOrPlayer(player.getPlayerId());
-    player.setAfk();
-    if (player.playerId === this.master) {
-      csl.log("Le master est AFK");
-      this.checkForNewMaster();
     }
   }
 
@@ -223,8 +84,7 @@ class Game {
    * @param {Player} player to play for. Will  set him afk.
    * @param {boolean} [left=false] left if the player left or it was an afk. By default we guess it's an afk.
    */
-
-  autoTurn(player, left = false) {
+   autoTurn(player, left = false) {
     if (this.master === player.getPlayerId()) {
       this.checkForNewMaster(true);
     }
@@ -255,7 +115,125 @@ class Game {
     }
   }
 
-  createAutoTurnCall() {
+    /**
+   * the player bet the amount 
+   * @param {string} player 
+   * @param {int} amount 
+   * @returns 
+   */
+     bet(player, amount) {
+      /*  On laisse le joueur bet si
+                                    - c'est son tour
+                                    - il a assez d'argent
+      */
+      if (this.isPlayersTurn(player.getPlayerId())) {
+        csl.log("bet", `before the bet : total = ${this.total} pMoney = ${player.localMoney} pbet = ${player.currentBet} pcurrentBet = ${player.currentBetTurn} amount = ${amount} GameCurrentBet = ${this.gameCurrentBet}`);
+        /*
+              **** RAISE *****
+          si :   0 < gameCurrentBet < miseTotal < allin
+          
+              **** CALL *****
+          si :  miseTotal = gameCurrentBet != allin
+  
+              **** CHECK *****
+          si :   0 = mise = gameCurrentBet
+  
+              **** ALLIN *****
+          si :   mise = playerMoney
+        */
+  
+  
+       //   --- RAISE  ---
+        if(this.gameCurrentBet < amount+player.currentBetTurn &&
+           amount < player.localMoney
+        ){
+          this.total+=amount;
+          player.raise();
+          player.bet(amount);
+          this.gameCurrentBet = player.currentBetTurn;
+        }
+       //   --- CALL  ---
+        else if((amount+player.currentBetTurn) === this.gameCurrentBet &&
+                amount !== player.localMoney
+        ) {
+          this.total+=amount;
+          player.bet(amount);
+          player.call();
+        }
+        //   --- CHECK  ---
+        else if(amount === 0 &&
+               this.gameCurrentBet === 0
+        ){
+          player.check();
+        }
+        //   --- TAPIS  ---
+        else if(amount >= player.localMoney){
+          this.total+=player.localMoney;
+          if(this.gameCurrentBet < player.localMoney+player.currentBetTurn)
+            this.gameCurrentBet = player.localMoney+player.currentBetTurn;
+          player.tapis(player.localMoney);
+          player.setTapis();
+        }
+        //   --- FAILED  ---
+        else{
+          csl.log('betfailed',"player bet is not valid.",amount,player.localMoney,this.gameCurrentBet);
+          return;
+        }
+        if(player.currentBetTurn > this.gameCurrentBet)
+          this.gameCurrentBet =player.currentBetTurn;
+        csl.log("bet", "gameCurrentBet after this bet : ", this.gameCurrentBet);
+        csl.log("bet", `After the bet : ${this.total}`);
+        this.rotateFocus();
+      }
+    }
+  
+
+  /**
+   * check the player
+   * @param {string} player 
+   */
+   check(player) {
+    if (this.isPlayersTurn(player.getPlayerId())) {
+      if (this.gameCurrentBet === 0) {
+        player.check();
+        this.rotateFocus();
+      }
+    }
+  }
+
+
+/**
+ * call a newgame if the autoRestart is True
+ * 
+ * @returns setTimeout | False 
+ */
+  createAutoRestartCall(){
+    if(this.autoRestartStatus)
+      return setTimeout(() => {
+        if (this.allow_start) {
+          this.movePlayersWithZeroCoinsToSpectators();
+          this.updatePlayersList();
+          if (this.state!=="waiting"){
+            csl.log("game is already started");
+            return;
+          }
+          else if (this.players.length <= 1) {
+            // Assurez-vous qu'il y a plus d'un joueur actif.
+            csl.log("Not enough players to start the game.");
+            return;
+          } else {
+            this.newgame();
+          }
+        }
+      }, 10000);
+    else return false;
+  }
+
+  /**
+   * Auto fold if player is AFK
+   * @returns setTimeout
+   */
+   createAutoTurnCall() {
     let n = this.focus;
     return setTimeout(() => {
       csl.log(
@@ -270,19 +248,221 @@ class Game {
       }
     }, this.autoTurnDelay);
   }
-  rotateTimer() {
-    clearTimeout(this.focusTurnCall);
-    if (
-      this.state !== "waiting" &&
-      this.stage !== "end" &&
-      this.stage !== "showdown"
-    ) {
-      this.focusTurnCall = this.createAutoTurnCall();
-      this.focusTurnTimer = Date.now() + this.autoTurnDelay;
+
+  /**
+ * fold the player
+ * @param {string} player 
+ */
+   fold(player) {
+    if (this.isPlayersTurn(player.getPlayerId())) {
+      player.fold();
+      csl.log("JE SUIS", this.focus);
+      this.rotateFocus();
+      csl.log("J'ai rotate", this.focus);
+      csl.log("NOmbre de joururs actif :", this.activePlayers.length);
     }
   }
 
-  rotateFocus() {
+  /**
+ * reveal the cards and move the AFK to specator
+ */
+   gameEnd() {
+    this.moveAfkPlayersToSpectators();
+    this.focus = null;
+    this.state = "waiting";
+    this.updateActivePlayers();
+    csl.log(
+      "Joueurs actifs lors de la détermination du gagnant:",
+      this.activePlayers.map((p) => p.name)
+    );
+
+    this.activePlayers.forEach((player) => {
+      player.revealCard(0);
+      player.revealCard(1);
+    });
+    this.resetRestartCall();
+    this.updatePlayersList();
+    this.autoRestartCall = this.createAutoRestartCall();
+  }
+
+
+/**
+ * filter the ActivePlayers in the player
+ * @returns a tab of Activeplayer 
+ */
+  getActivePlayers() {
+    return this.players.filter((player) => player.isActive);
+  }
+
+  /**
+ * 
+ * @returns the focus player
+ */
+   getFocus() {
+    return this.focus;
+  }
+
+
+  /**
+   * 
+   * @returns the playe master of the lobby
+   *
+   */
+   getMaster() {
+    return this.master;
+  }
+
+
+  /**
+   * 
+   * @param {string} id 
+   * @returns the gale where is the player
+   */
+  getForPlayer(id) {
+    var filteredPlayer = this.players.map((player) => player.statusFor(id));
+    var g = new Game({
+      players: filteredPlayer,
+      allPlayers: this.allPlayers,
+      pokerTable: this.pokerTable,
+      master: this.master,
+      blind: this.blind,
+      focus: this.focus,
+      currentStage: this.currentStage,
+      state: this.state,
+      total: this.total,
+      playerBeforeNextTurn: this.playerBeforeNextTurn,
+      nbhostfolded: this.nbhostfolded,
+      gameCurrentBet: this.gameCurrentBet,
+      focusTurnTimer: this.focusTurnTimer,
+      serverName: this.serverName,
+      autoRestartStatus:this.autoRestartStatus
+    });
+    return g;
+  }
+
+
+  /**
+   * 
+   * @param {string} playerId 
+   * @returns player | null
+   */
+  getPlayerById(playerId) {
+    const player = this.allPlayers.find((p) => p.playerId === playerId);
+    if (player) {
+      return player;
+    } else {
+      csl.error("Player not found with ID:", playerId);
+      return null;
+    }
+  }
+
+
+/**
+ * 
+ * @param {string} playerId 
+ * @returns the PlayeName
+ */
+  getPlayerNameById(playerId) {
+    const player = this.allPlayers.find((p) => p.playerId === playerId);
+    if (player) {
+      return player.name;
+    } else {
+      csl.error("Player not found with ID:", playerId);
+      return null;
+    }
+  }
+
+  /**
+ * check if it's the player turn 
+ * @param {id} playerId 
+ * @returns boolean
+ */
+   isPlayersTurn(playerId) {
+    csl.log("isPlayersTurn", playerId, this.focus, this.activePlayers);
+    if (this.focus < 0 || this.focus > this.players.length) this.rotateFocus();
+    if (this.focus === null || this.players[this.focus].playerId !== playerId) {
+      csl.error("It's not this player's turn.");
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   *
+   * @param {id} playerId
+   */
+   moveSpecOrPlayer(playerId) {
+      let player = this.allPlayers.find((p) => p.playerId === playerId);
+  
+      // Vérifier si le joueur existe déjà et son état
+      if (player) {
+        // Si le joueur a 0 coins, il ne peut pas rejoindre la table
+        csl.log(
+          `Player ${player.name} player.isSpectator test`,
+          player.isSpectator
+        );
+  
+        if (player.getPlayerMoney() <= 0) {
+          csl.log(
+            `Player ${player.name} cannot rejoin the table due to insufficient coins.`
+          );
+          player.movePlayerToSpectator();
+          this.updatePlayersList();
+          return;
+        } else {
+          player.playing();
+          player.toggleSpectator();
+          this.updatePlayersList();
+        }
+      }
+  }
+  
+  /**
+ * just a csllog
+ */
+   playerPlayed() {
+    csl.log("classGame_PLAYER_PLAYED", "un joueur a joué");
+  }
+
+
+  /**
+   * Change the starting Player every start of a newgame
+   */
+   rotateStartingPlayer() {
+    this.startingPlayerIndex =
+      (this.startingPlayerIndex + 1) % this.players.length;
+  }
+
+    /**
+   *
+   * @param {Player} player Player class Object
+   * @description Will set the player to afk, remove him from player and set him  as spectator
+   * @return {void}
+   */
+     setPlayerAFK(player) {
+      csl.log("setPlayerAFK", "Player received:", player);
+      // this.moveSpecOrPlayer(player.getPlayerId());
+      player.setAfk();
+      if (player.playerId === this.master) {
+        csl.log("Le master est AFK");
+        this.checkForNewMaster();
+      }
+    }
+  
+  /**
+   * set the master at the id player
+   * @param {string} id 
+   * 
+   */
+   setMaster(id) {
+      this.master = id;
+  }
+  
+  /**
+ * rotate the focus Player and advance in the game if condition are fill
+ * @returns 
+ */
+   rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
     let someoneTapis =
@@ -416,169 +596,73 @@ class Game {
     this.rotateTimer();
   }
 
-  gameEnd() {
-    this.moveAfkPlayersToSpectators();
-    this.focus = null;
-    this.state = "waiting";
-    this.updateActivePlayers();
+  /**
+   * Rotate the timer on the focus player
+   */
+   rotateTimer() {
+    clearTimeout(this.focusTurnCall);
+    if (
+      this.state !== "waiting" &&
+      this.stage !== "end" &&
+      this.stage !== "showdown"
+    ) {
+      this.focusTurnCall = this.createAutoTurnCall();
+      this.focusTurnTimer = Date.now() + this.autoTurnDelay;
+    }
+  }
+
+/**
+ * 
+ * @param {string} playerId 
+ * 
+ */
+  toggleRestart(playerId){
+    csl.log("toggleRestart",`master: ${this.master} === ${playerId}`);
+    if(this.master === playerId){
+      this.autoRestartStatus = !this.autoRestartStatus;
+      csl.log("toggleRestart", `status is now ${this.autoRestartStatus}`);
+      if(this.autoRestartStatus){
+        if(this.state === "waiting")
+          this.autoRestartCall = this.createAutoRestartCall();
+      }else{
+        clearTimeout(this.autoRestartCall);
+      }
+    }
+  }
+  
+  /**
+   * update the ActviePlayer
+   */
+    updateActivePlayers() {
+      this.activePlayers = this.players.filter(
+        (player) => player.isActive && !player.isAfk
+      );
+    }
+
+  /**
+ * update the Players list with the nonspecator and nonAfk Players
+ */
+   updatePlayersList() {
+    // Filtrer les joueurs qui ne sont pas spectateurs et qui sont actifs
+    this.players = this.allPlayers.filter(
+      (player) => !player.isSpectator && !player.isAFK
+    );
     csl.log(
-      "Joueurs actifs lors de la détermination du gagnant:",
-      this.activePlayers.map((p) => p.name)
-    );
-
-    this.activePlayers.forEach((player) => {
-      player.revealCard(0);
-      player.revealCard(1);
-    });
-    this.resetRestartCall();
-    this.updatePlayersList();
-    this.autoRestartCall = this.createAutoRestartCall();
-  }
-
-  playerPlayed() {
-    csl.log("classGame_PLAYER_PLAYED", "un joueur a joué");
-  }
-
-  updateActivePlayers() {
-    this.activePlayers = this.players.filter(
-      (player) => player.isActive && !player.isAfk
+      `Updated players list: Now includes ${this.players.length} active players.`
     );
   }
 
-  isPlayersTurn(playerId) {
-    csl.log("isPlayersTurn", playerId, this.focus, this.activePlayers);
-    if (this.focus < 0 || this.focus > this.players.length) this.rotateFocus();
-    if (this.focus === null || this.players[this.focus].playerId !== playerId) {
-      csl.error("It's not this player's turn.");
-      return false;
-    }
-    return true;
-  }
-
-  fold(player) {
-    if (this.isPlayersTurn(player.getPlayerId())) {
-      player.fold();
-      csl.log("JE SUIS", this.focus);
-      this.rotateFocus();
-      csl.log("J'ai rotate", this.focus);
-      csl.log("NOmbre de joururs actif :", this.activePlayers.length);
-    }
-  }
-
-  check(player) {
-    if (this.isPlayersTurn(player.getPlayerId())) {
-      if (this.gameCurrentBet === 0) {
-        player.check();
-        this.rotateFocus();
-      }
-    }
-  }
-
-  bet(player, amount) {
-    /*  On laisse le joueur bet si
-                                  - c'est son tour
-                                  - il a assez d'argent
-    */
-    if (this.isPlayersTurn(player.getPlayerId())) {
-      csl.log("bet", `before the bet : total = ${this.total} pMoney = ${player.localMoney} pbet = ${player.currentBet} pcurrentBet = ${player.currentBetTurn} amount = ${amount} GameCurrentBet = ${this.gameCurrentBet}`);
-      /*
-            **** RAISE *****
-        si :   0 < gameCurrentBet < miseTotal < allin
-        
-            **** CALL *****
-        si :  miseTotal = gameCurrentBet != allin
-
-            **** CHECK *****
-        si :   0 = mise = gameCurrentBet
-
-            **** ALLIN *****
-        si :   mise = playerMoney
-      */
 
 
-     //   --- RAISE  ---
-      if(this.gameCurrentBet < amount+player.currentBetTurn &&
-         amount < player.localMoney
-      ){
-        this.total+=amount;
-        player.raise();
-        player.bet(amount);
-        this.gameCurrentBet = player.currentBetTurn;
-      }
-     //   --- CALL  ---
-      else if((amount+player.currentBetTurn) === this.gameCurrentBet &&
-              amount !== player.localMoney
-      ) {
-        this.total+=amount;
-        player.bet(amount);
-        player.call();
-      }
-      //   --- CHECK  ---
-      else if(amount === 0 &&
-             this.gameCurrentBet === 0
-      ){
-        player.check();
-      }
-      //   --- TAPIS  ---
-      else if(amount >= player.localMoney){
-        this.total+=player.localMoney;
-        if(this.gameCurrentBet < player.localMoney+player.currentBetTurn)
-          this.gameCurrentBet = player.localMoney+player.currentBetTurn;
-        player.tapis(player.localMoney);
-        player.setTapis();
-      }
-      //   --- FAILED  ---
-      else{
-        csl.log('betfailed',"player bet is not valid.",amount,player.localMoney,this.gameCurrentBet);
-        return;
-      }
-      if(player.currentBetTurn > this.gameCurrentBet)
-        this.gameCurrentBet =player.currentBetTurn;
-      csl.log("bet", "gameCurrentBet after this bet : ", this.gameCurrentBet);
-      csl.log("bet", `After the bet : ${this.total}`);
-      this.rotateFocus();
-    }
-  }
 
-  activateBonus(player) {
-    csl.log("j'active le bonus du joueur : ", player.name);
-    if (this.isPlayersTurn(player.getPlayerId())) {
-      const playerBonus = player.getPlayerBonus();
-      const self = this;
 
-      if (playerBonus.ready) {
-        // On va parcourrir liste de joueur actifs dans l'ordre du tour de jeu
-        // On commence par le joueur qui a active le bonus car c'est son tour
-        // On parcours toute liste de maniere circulaire jusqu'a retomber sur lui
-        let startIndex = this.activePlayers.findIndex(
-          (p) => p.getPlayerId() === player.getPlayerId()
-        );
-        let index = startIndex;
+//plus trié a parir de la 
 
-        do {
-          let p = this.activePlayers[index];
-          const playerMoney = p.localMoney;
-          const amountToBet =
-            playerMoney < self.bonusAmount ? playerMoney : self.bonusAmount;
-          p.betBonus(amountToBet);
-          this.total += amountToBet;
-          index = (index + 1) % this.activePlayers.length;
-        } while (index != startIndex);
 
-        player.resetPlayerBonus();
-      }
-    }
-  }
-
-  // startNewRound() {
-  //   if (this.state === 'active') {
-  //     this.startingPlayerIndex = (this.blind + 2) % this.players.length;
-  //     this.focus = this.startingPlayerIndex;
-  //     this.players.forEach(player => player.newRoundReset());
-  //     this.currentStage = 'preflop';
-  //   }
-  // }
-
+/**
+ * remove the player who leave the lobby
+ * @param {id} playerId 
+ */
   removePlayer(playerId) {
     let player = this.allPlayers.find((p) => p.getPlayerId() === playerId);
     if (
@@ -593,6 +677,10 @@ class Game {
     // this.updateActivePlayers();
   }
 
+  /**
+   * add the new player in the lobby to the playerlist
+   * @param {string} player 
+   */
   addPlayer(player) {
     this.allPlayers.push(player);
     const coins = player.getPlayerMoney() 
@@ -623,6 +711,9 @@ class Game {
     this.checkForNewMaster();
   }
 
+  /**
+   * Kick the poor in spectator (0 money)
+   */
   movePlayersWithZeroCoinsToSpectators() {
     this.players.forEach((player) => {
       if (player.getPlayerMoney() <= this.blind) {
@@ -635,6 +726,9 @@ class Game {
     this.updatePlayersList();
   }
 
+  /**
+   * moove the afk in specator
+   */
   moveAfkPlayersToSpectators() {
     this.players.forEach((player) => {
       if (player.isAfk) {
@@ -647,6 +741,10 @@ class Game {
     this.updatePlayersList();
   }
 
+  /**
+   * forced a new master if needed 
+   * @param {*} forced 
+   */
   checkForNewMaster(forced = false) {
     //setNewMaster can be forced.
     let setNewMaster = forced;
@@ -724,6 +822,11 @@ class Game {
     }
   }
 
+  /**
+   * start the game 
+   * @param {id} playerId 
+   * @returns 
+   */
   start(playerId) {
     if (this.master === playerId) {
       csl.log("Le master lance la game");
@@ -755,6 +858,9 @@ class Game {
     }
   }
 
+  /**
+   * reset the lobby for a newgame
+   */
   reset() {
     this.players = [];
     this.state = "waiting";
@@ -763,7 +869,10 @@ class Game {
     this.pokerTable.reset();
   }
 
-  //Probmème:on devra surement clear l'affichage
+  /**
+   * start a newgame
+   * @returns 
+   */
   newgame() {
     if (!this.allow_start) return;
     csl.log("Passe     if (!this.allow_start) return");
@@ -829,6 +938,10 @@ class Game {
     // csl.log("active:",this.activePlayers.length);
   }
 
+  /**
+   * evaluate the hands of activePlayers 
+   * @returns the winners of the game (can have multiple winers)
+   */
   evaluateHands() {
     this.updateActivePlayers();
     // this.players = this.activePlayers;
@@ -938,12 +1051,6 @@ class Game {
     this.players.forEach(p => p.playerMoney = p.localMoney);
   }
 
-  //Debut de fonction pour le bonus, a terminer
-  UseBonus(playerId) {
-    this.activePlayers.forEach((player) => {
-      player.bet(50);
-    });
-  }
 
   /*
   in : nothing
@@ -992,6 +1099,11 @@ class Game {
     this.pokerTable.communityCards.push(this.deck.deal());
     csl.log(this.pokerTable.communityCards);
   }
+
+  /**
+   * advance in Stage (preflop flop,trun,river,...)
+   * @returns 
+   */
   advanceStage() {
     if (this.state !== "active") {
       csl.log("Game not active, cannot advance stage.");
@@ -1058,6 +1170,9 @@ class Game {
     }
   }
 
+  /**
+   * 
+   */
   resetRestartCall() {
     clearTimeout(this.resetRestartCall);
     this.restartTimer = Date.now() + this.restartDelay;
@@ -1066,6 +1181,10 @@ class Game {
     }, this.restartDelay);
   }
 
+  /**
+   * skip the stage for go to showdown
+   * @returns 
+   */
   advanceStageToShowdown() {
     if (this.state !== "active") {
       csl.log("Game not active, cannot advance stage to showdown.");
@@ -1085,6 +1204,11 @@ class Game {
     return this.players.filter((player) => player.isPlayerActive());
   }
 
+  /**
+   * 
+   * @param {string} player 
+   * @returns best card and id of the player 
+   */
   make7Cards(player) {
     return {
       cards: [...this.pokerTable.communityCards, ...player.getPlayerCards()],
@@ -1143,12 +1267,6 @@ class Game {
     return res;
   }
 
-  //result est vide mais ça passe et this.poker.table marche pas
-  // determineWinner() {
-  //   const results = this.listeCombinaison(this.getActivePlayers());
-  //   csl.log("results: ", results);
-  //   return results;
-  // }
   /*
    * IN : rien
    * OUT : { [c1, ..., c5], playerId } tableau de combinaison et identifiant du gagnant
