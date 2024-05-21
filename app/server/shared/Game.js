@@ -38,18 +38,16 @@ class Game {
       allow_start: true,
       serverName: "",
       firstRoundForRoom: true,
-      autoRestartStatus:false
+      autoRestartStatus: false,
     };
     Object.assign(this, basedValue, ...args);
-
   }
-  
 
   /**
- * active the bonus for all the activeplayer
- * @param {string} player 
- */
-   activateBonus(player) {
+   * active the bonus for all the activeplayer
+   * @param {string} player
+   */
+  activateBonus(player) {
     csl.log("j'active le bonus du joueur : ", player.name);
     if (this.isPlayersTurn(player.getPlayerId())) {
       const playerBonus = player.getPlayerBonus();
@@ -84,7 +82,7 @@ class Game {
    * @param {Player} player to play for. Will  set him afk.
    * @param {boolean} [left=false] left if the player left or it was an afk. By default we guess it's an afk.
    */
-   autoTurn(player, left = false) {
+  autoTurn(player, left = false) {
     if (this.master === player.getPlayerId()) {
       this.checkForNewMaster(true);
     }
@@ -115,20 +113,23 @@ class Game {
     }
   }
 
-    /**
-   * the player bet the amount 
-   * @param {string} player 
-   * @param {int} amount 
-   * @returns 
+  /**
+   * the player bet the amount
+   * @param {string} player
+   * @param {int} amount
+   * @returns
    */
-     bet(player, amount) {
-      /*  On laisse le joueur bet si
+  bet(player, amount) {
+    /*  On laisse le joueur bet si
                                     - c'est son tour
                                     - il a assez d'argent
       */
-      if (this.isPlayersTurn(player.getPlayerId())) {
-        csl.log("bet", `before the bet : total = ${this.total} pMoney = ${player.localMoney} pbet = ${player.currentBet} pcurrentBet = ${player.currentBetTurn} amount = ${amount} GameCurrentBet = ${this.gameCurrentBet}`);
-        /*
+    if (this.isPlayersTurn(player.getPlayerId())) {
+      csl.log(
+        "bet",
+        `before the bet : total = ${this.total} pMoney = ${player.localMoney} pbet = ${player.currentBet} pcurrentBet = ${player.currentBetTurn} amount = ${amount} GameCurrentBet = ${this.gameCurrentBet}`
+      );
+      /*
               **** RAISE *****
           si :   0 < gameCurrentBet < miseTotal < allin
           
@@ -141,58 +142,62 @@ class Game {
               **** ALLIN *****
           si :   mise = playerMoney
         */
-  
-  
-       //   --- RAISE  ---
-        if(this.gameCurrentBet < amount+player.currentBetTurn &&
-           amount < player.localMoney
-        ){
-          this.total+=amount;
-          player.raise();
-          player.bet(amount);
-          this.gameCurrentBet = player.currentBetTurn;
-        }
-       //   --- CALL  ---
-        else if((amount+player.currentBetTurn) === this.gameCurrentBet &&
-                amount !== player.localMoney
-        ) {
-          this.total+=amount;
-          player.bet(amount);
-          player.call();
-        }
-        //   --- CHECK  ---
-        else if(amount === 0 &&
-               this.gameCurrentBet === 0
-        ){
-          player.check();
-        }
-        //   --- TAPIS  ---
-        else if(amount >= player.localMoney){
-          this.total+=player.localMoney;
-          if(this.gameCurrentBet < player.localMoney+player.currentBetTurn)
-            this.gameCurrentBet = player.localMoney+player.currentBetTurn;
-          player.tapis(player.localMoney);
-          player.setTapis();
-        }
-        //   --- FAILED  ---
-        else{
-          csl.log('betfailed',"player bet is not valid.",amount,player.localMoney,this.gameCurrentBet);
-          return;
-        }
-        if(player.currentBetTurn > this.gameCurrentBet)
-          this.gameCurrentBet =player.currentBetTurn;
-        csl.log("bet", "gameCurrentBet after this bet : ", this.gameCurrentBet);
-        csl.log("bet", `After the bet : ${this.total}`);
-        this.rotateFocus();
+
+      //   --- RAISE  ---
+      if (
+        this.gameCurrentBet < amount + player.currentBetTurn &&
+        amount < player.localMoney
+      ) {
+        this.total += amount;
+        player.raise();
+        player.bet(amount);
+        this.gameCurrentBet = player.currentBetTurn;
       }
+      //   --- CALL  ---
+      else if (
+        amount + player.currentBetTurn === this.gameCurrentBet &&
+        amount !== player.localMoney
+      ) {
+        this.total += amount;
+        player.bet(amount);
+        player.call();
+      }
+      //   --- CHECK  ---
+      else if (amount === 0 && this.gameCurrentBet === 0) {
+        player.check();
+      }
+      //   --- TAPIS  ---
+      else if (amount >= player.localMoney) {
+        this.total += player.localMoney;
+        if (this.gameCurrentBet < player.localMoney + player.currentBetTurn)
+          this.gameCurrentBet = player.localMoney + player.currentBetTurn;
+        player.tapis(player.localMoney);
+        player.setTapis();
+      }
+      //   --- FAILED  ---
+      else {
+        csl.log(
+          "betfailed",
+          "player bet is not valid.",
+          amount,
+          player.localMoney,
+          this.gameCurrentBet
+        );
+        return;
+      }
+      if (player.currentBetTurn > this.gameCurrentBet)
+        this.gameCurrentBet = player.currentBetTurn;
+      csl.log("bet", "gameCurrentBet after this bet : ", this.gameCurrentBet);
+      csl.log("bet", `After the bet : ${this.total}`);
+      this.rotateFocus();
     }
-  
+  }
 
   /**
    * check the player
-   * @param {string} player 
+   * @param {string} player
    */
-   check(player) {
+  check(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       if (this.gameCurrentBet === 0) {
         player.check();
@@ -201,23 +206,21 @@ class Game {
     }
   }
 
-
-/**
- * call a newgame if the autoRestart is True
- * 
- * @returns setTimeout | False 
- */
-  createAutoRestartCall(){
-    if(this.autoRestartStatus)
+  /**
+   * call a newgame if the autoRestart is True
+   *
+   * @returns setTimeout | False
+   */
+  createAutoRestartCall() {
+    if (this.autoRestartStatus)
       return setTimeout(() => {
         if (this.allow_start) {
           this.movePlayersWithZeroCoinsToSpectators();
           this.updatePlayersList();
-          if (this.state!=="waiting"){
+          if (this.state !== "waiting") {
             csl.log("game is already started");
             return;
-          }
-          else if (this.players.length <= 1) {
+          } else if (this.players.length <= 1) {
             // Assurez-vous qu'il y a plus d'un joueur actif.
             csl.log("Not enough players to start the game.");
             return;
@@ -233,7 +236,7 @@ class Game {
    * Auto fold if player is AFK
    * @returns setTimeout
    */
-   createAutoTurnCall() {
+  createAutoTurnCall() {
     let n = this.focus;
     return setTimeout(() => {
       csl.log(
@@ -250,10 +253,10 @@ class Game {
   }
 
   /**
- * fold the player
- * @param {string} player 
- */
-   fold(player) {
+   * fold the player
+   * @param {string} player
+   */
+  fold(player) {
     if (this.isPlayersTurn(player.getPlayerId())) {
       player.fold();
       csl.log("JE SUIS", this.focus);
@@ -264,9 +267,9 @@ class Game {
   }
 
   /**
- * reveal the cards and move the AFK to specator
- */
-   gameEnd() {
+   * reveal the cards and move the AFK to specator
+   */
+  gameEnd() {
     this.moveAfkPlayersToSpectators();
     this.focus = null;
     this.state = "waiting";
@@ -285,37 +288,34 @@ class Game {
     this.autoRestartCall = this.createAutoRestartCall();
   }
 
-
-/**
- * filter the ActivePlayers in the player
- * @returns a tab of Activeplayer 
- */
+  /**
+   * filter the ActivePlayers in the player
+   * @returns a tab of Activeplayer
+   */
   getActivePlayers() {
     return this.players.filter((player) => player.isActive);
   }
 
   /**
- * 
- * @returns the focus player
- */
-   getFocus() {
+   *
+   * @returns the focus player
+   */
+  getFocus() {
     return this.focus;
   }
 
-
   /**
-   * 
+   *
    * @returns the playe master of the lobby
    *
    */
-   getMaster() {
+  getMaster() {
     return this.master;
   }
 
-
   /**
-   * 
-   * @param {string} id 
+   *
+   * @param {string} id
    * @returns the gale where is the player
    */
   getForPlayer(id) {
@@ -335,15 +335,14 @@ class Game {
       gameCurrentBet: this.gameCurrentBet,
       focusTurnTimer: this.focusTurnTimer,
       serverName: this.serverName,
-      autoRestartStatus:this.autoRestartStatus
+      autoRestartStatus: this.autoRestartStatus,
     });
     return g;
   }
 
-
   /**
-   * 
-   * @param {string} playerId 
+   *
+   * @param {string} playerId
    * @returns player | null
    */
   getPlayerById(playerId) {
@@ -356,12 +355,11 @@ class Game {
     }
   }
 
-
-/**
- * 
- * @param {string} playerId 
- * @returns the PlayeName
- */
+  /**
+   *
+   * @param {string} playerId
+   * @returns the PlayeName
+   */
   getPlayerNameById(playerId) {
     const player = this.allPlayers.find((p) => p.playerId === playerId);
     if (player) {
@@ -373,11 +371,11 @@ class Game {
   }
 
   /**
- * check if it's the player turn 
- * @param {id} playerId 
- * @returns boolean
- */
-   isPlayersTurn(playerId) {
+   * check if it's the player turn
+   * @param {id} playerId
+   * @returns boolean
+   */
+  isPlayersTurn(playerId) {
     csl.log("isPlayersTurn", playerId, this.focus, this.activePlayers);
     if (this.focus < 0 || this.focus > this.players.length) this.rotateFocus();
     if (this.focus === null || this.players[this.focus].playerId !== playerId) {
@@ -391,78 +389,77 @@ class Game {
    *
    * @param {id} playerId
    */
-   moveSpecOrPlayer(playerId) {
-      let player = this.allPlayers.find((p) => p.playerId === playerId);
-  
-      // Vérifier si le joueur existe déjà et son état
-      if (player) {
-        // Si le joueur a 0 coins, il ne peut pas rejoindre la table
+  moveSpecOrPlayer(playerId) {
+    let player = this.allPlayers.find((p) => p.playerId === playerId);
+
+    // Vérifier si le joueur existe déjà et son état
+    if (player) {
+      // Si le joueur a 0 coins, il ne peut pas rejoindre la table
+      csl.log(
+        `Player ${player.name} player.isSpectator test`,
+        player.isSpectator
+      );
+
+      if (player.getPlayerMoney() <= 0) {
         csl.log(
-          `Player ${player.name} player.isSpectator test`,
-          player.isSpectator
+          `Player ${player.name} cannot rejoin the table due to insufficient coins.`
         );
-  
-        if (player.getPlayerMoney() <= 0) {
-          csl.log(
-            `Player ${player.name} cannot rejoin the table due to insufficient coins.`
-          );
-          player.movePlayerToSpectator();
-          this.updatePlayersList();
-          return;
-        } else {
-          player.playing();
-          player.toggleSpectator();
-          this.updatePlayersList();
-        }
+        player.movePlayerToSpectator();
+        this.updatePlayersList();
+        return;
+      } else {
+        player.playing();
+        player.toggleSpectator();
+        this.updatePlayersList();
       }
-  }
-  
-  /**
- * just a csllog
- */
-   playerPlayed() {
-    csl.log("classGame_PLAYER_PLAYED", "un joueur a joué");
+    }
   }
 
+  /**
+   * just a csllog
+   */
+  playerPlayed() {
+    csl.log("classGame_PLAYER_PLAYED", "un joueur a joué");
+  }
 
   /**
    * Change the starting Player every start of a newgame
    */
-   rotateStartingPlayer() {
+  rotateStartingPlayer() {
     this.startingPlayerIndex =
       (this.startingPlayerIndex + 1) % this.players.length;
   }
 
-    /**
+  /**
    *
    * @param {Player} player Player class Object
    * @description Will set the player to afk, remove him from player and set him  as spectator
    * @return {void}
    */
-     setPlayerAFK(player) {
-      csl.log("setPlayerAFK", "Player received:", player);
-      // this.moveSpecOrPlayer(player.getPlayerId());
-      player.setAfk();
-      if (player.playerId === this.master) {
-        csl.log("Le master est AFK");
-        this.checkForNewMaster();
-      }
+  setPlayerAFK(player) {
+    csl.log("setPlayerAFK", "Player received:", player);
+    // this.moveSpecOrPlayer(player.getPlayerId());
+    player.setAfk();
+    if (player.playerId === this.master) {
+      csl.log("Le master est AFK");
+      this.checkForNewMaster();
     }
-  
+  }
+
   /**
    * set the master at the id player
-   * @param {string} id 
-   * 
+   * @param {string} id
+   *
    */
-   setMaster(id) {
-      this.master = id;
+  setMaster(id) {
+    this.master = id;
   }
-  
+
   /**
- * rotate the focus Player and advance in the game if condition are fill
- * @returns 
- */
-   rotateFocus() {
+   * rotate the focus Player and advance in the game if condition are fill
+   * @returns
+   */
+  rotateFocus() {
     this.updateActivePlayers(); // Mise à jour de la liste des joueurs actifs
     // Vérification pour passer directement à showdown si moins de deux joueurs actifs
     let someoneTapis =
@@ -503,7 +500,13 @@ class Game {
         (dernierPasTapis.talkedThisTurn &&
           dernierPasTapis.currentBetTurn === this.gameCurrentBet))
     ) {
-      csl.log(['evaluateHands','lastAvecTapis'],"lastPasTapis: ",dernierPasTapis, "Game Current bet:",this.gameCurrentBet);
+      csl.log(
+        ["evaluateHands", "lastAvecTapis"],
+        "lastPasTapis: ",
+        dernierPasTapis,
+        "Game Current bet:",
+        this.gameCurrentBet
+      );
       // this.advanceStageToShowdown();
       clearTimeout(this.focusTurnCall);
       // this.players.forEach(p => {this.total+=p.currentBetTurn;p.currentBetTurn =0;});
@@ -553,13 +556,15 @@ class Game {
     let allplayedenough_orTapis = 0; // nbr de joueurs qui ont payé
     let alltalkedThisTurn = 0; // nbr de joueurs qui  ont parlé
     this.activePlayers.map((p) => {
-      if(p.isTapis || (p.currentBetTurn === this.gameCurrentBet))
-        allplayedenough_orTapis +=1
-      csl.log("iterate", `Playerbet : ${p.currentBetTurn} =?= ${this.gameCurrentBet} ; ${p.isTapis}`);
+      if (p.isTapis || p.currentBetTurn === this.gameCurrentBet)
+        allplayedenough_orTapis += 1;
+      csl.log(
+        "iterate",
+        `Playerbet : ${p.currentBetTurn} =?= ${this.gameCurrentBet} ; ${p.isTapis}`
+      );
     });
-    this.activePlayers.map((p) =>{
-    if(p.talkedThisTurn === true || p.isTapis)
-      alltalkedThisTurn += 1;
+    this.activePlayers.map((p) => {
+      if (p.talkedThisTurn === true || p.isTapis) alltalkedThisTurn += 1;
     });
     let aPlength = this.activePlayers.length; // nbr de joueurs total
     csl.log(
@@ -599,7 +604,7 @@ class Game {
   /**
    * Rotate the timer on the focus player
    */
-   rotateTimer() {
+  rotateTimer() {
     clearTimeout(this.focusTurnCall);
     if (
       this.state !== "waiting" &&
@@ -611,38 +616,38 @@ class Game {
     }
   }
 
-/**
- * 
- * @param {string} playerId 
- * 
- */
-  toggleRestart(playerId){
-    csl.log("toggleRestart",`master: ${this.master} === ${playerId}`);
-    if(this.master === playerId){
+  /**
+   *
+   * @param {string} playerId
+   *
+   */
+  toggleRestart(playerId) {
+    csl.log("toggleRestart", `master: ${this.master} === ${playerId}`);
+    if (this.master === playerId) {
       this.autoRestartStatus = !this.autoRestartStatus;
       csl.log("toggleRestart", `status is now ${this.autoRestartStatus}`);
-      if(this.autoRestartStatus){
-        if(this.state === "waiting")
+      if (this.autoRestartStatus) {
+        if (this.state === "waiting")
           this.autoRestartCall = this.createAutoRestartCall();
-      }else{
+      } else {
         clearTimeout(this.autoRestartCall);
       }
     }
   }
-  
+
   /**
    * update the ActviePlayer
    */
-    updateActivePlayers() {
-      this.activePlayers = this.players.filter(
-        (player) => player.isActive && !player.isAfk
-      );
-    }
+  updateActivePlayers() {
+    this.activePlayers = this.players.filter(
+      (player) => player.isActive && !player.isAfk
+    );
+  }
 
   /**
- * update the Players list with the nonspecator and nonAfk Players
- */
-   updatePlayersList() {
+   * update the Players list with the nonspecator and nonAfk Players
+   */
+  updatePlayersList() {
     // Filtrer les joueurs qui ne sont pas spectateurs et qui sont actifs
     this.players = this.allPlayers.filter(
       (player) => !player.isSpectator && !player.isAFK
@@ -652,17 +657,12 @@ class Game {
     );
   }
 
+  //plus trié a parir de la
 
-
-
-
-//plus trié a parir de la 
-
-
-/**
- * remove the player who leave the lobby
- * @param {id} playerId 
- */
+  /**
+   * remove the player who leave the lobby
+   * @param {id} playerId
+   */
   removePlayer(playerId) {
     let player = this.allPlayers.find((p) => p.getPlayerId() === playerId);
     if (
@@ -672,18 +672,18 @@ class Game {
     this.allPlayers = this.allPlayers.filter(
       (p) => p.getPlayerId() !== playerId
     );
-    if(this.state === "waiting")
+    if (this.state === "waiting")
       this.players = this.players.filter((p) => p.getPlayerId() !== playerId);
     // this.updateActivePlayers();
   }
 
   /**
    * add the new player in the lobby to the playerlist
-   * @param {string} player 
+   * @param {string} player
    */
   addPlayer(player) {
     this.allPlayers.push(player);
-    const coins = player.getPlayerMoney() 
+    const coins = player.getPlayerMoney();
     if (this.state !== "waiting" || coins <= this.blind) {
       csl.log(
         "gameObject : addPlayer",
@@ -742,8 +742,8 @@ class Game {
   }
 
   /**
-   * forced a new master if needed 
-   * @param {*} forced 
+   * forced a new master if needed
+   * @param {*} forced
    */
   checkForNewMaster(forced = false) {
     //setNewMaster can be forced.
@@ -823,9 +823,9 @@ class Game {
   }
 
   /**
-   * start the game 
-   * @param {id} playerId 
-   * @returns 
+   * start the game
+   * @param {id} playerId
+   * @returns
    */
   start(playerId) {
     if (this.master === playerId) {
@@ -850,7 +850,7 @@ class Game {
     } else {
       // Pour les non-maîtres
       let playerObject = this.getPlayerById(playerId);
-      if(playerObject !== undefined && playerObject !== null){
+      if (playerObject !== undefined && playerObject !== null) {
         playerObject.unsetAfk();
         this.moveSpecOrPlayer(playerId);
         this.checkForNewMaster();
@@ -871,7 +871,7 @@ class Game {
 
   /**
    * start a newgame
-   * @returns 
+   * @returns
    */
   newgame() {
     if (!this.allow_start) return;
@@ -888,9 +888,7 @@ class Game {
     this.updateActivePlayers();
 
     if (this.activePlayers.length <= 1) {
-      csl.log(
-        "pas assez de joueurs, if (this.activePlayers.length <= 1) {"
-      );
+      csl.log("pas assez de joueurs, if (this.activePlayers.length <= 1) {");
       return;
     }
     clearTimeout(this.restartCall);
@@ -939,7 +937,7 @@ class Game {
   }
 
   /**
-   * evaluate the hands of activePlayers 
+   * evaluate the hands of activePlayers
    * @returns the winners of the game (can have multiple winers)
    */
   evaluateHands() {
@@ -965,11 +963,17 @@ class Game {
     // csl.log(`Le gagnant est ${winner.name} avec ${winner.hand}`);
     csl.log("winner est: ", winner);
     const nbwinner = winner.length;
-    this.players.forEach((p) => {(p.decrementalTotal =(p.decrementalTotal === undefined)?p.betTotal:p.decrementalTotal);csl.log('Mise par joueur a gagné',`${p.name} : ${p.decrementalTotal}`)});
+    this.players.forEach((p) => {
+      p.decrementalTotal =
+        p.decrementalTotal === undefined ? p.betTotal : p.decrementalTotal;
+      csl.log("Mise par joueur a gagné", `${p.name} : ${p.decrementalTotal}`);
+    });
     if (nbwinner >= 2) {
-      let totalWinnerBet  = 0;
+      let totalWinnerBet = 0;
       const FULLTOTAL = this.total;
-      winner.forEach(w => totalWinnerBet += this.getPlayerById(w.id).betTotal); 
+      winner.forEach(
+        (w) => (totalWinnerBet += this.getPlayerById(w.id).betTotal)
+      );
       for (let i = 0; i < nbwinner; i++) {
         csl.log(
           ["evaluateHands", "multiwinner"],
@@ -979,15 +983,18 @@ class Game {
         );
         const winnerHandName = winner[i].type;
         const winPlayer = this.getPlayerById(winner[i].id);
-        let coef = winPlayer.betTotal/totalWinnerBet;
-        let prend = Math.floor((coef) * FULLTOTAL);
-        csl.log("pritwinner",`il avait un coef de  ${coef} le droit à  par joueur et a prit ${prend}`)
+        let coef = winPlayer.betTotal / totalWinnerBet;
+        let prend = Math.floor(coef * FULLTOTAL);
+        csl.log(
+          "pritwinner",
+          `il avait un coef de  ${coef} le droit à  par joueur et a prit ${prend}`
+        );
         winPlayer.playerHandName = winnerHandName;
         winPlayer.localMoney += prend;
-        this.total-= prend;
+        this.total -= prend;
         winPlayer.jesuislewinner();
       }
-      // Le reste va au croupier :) 
+      // Le reste va au croupier :)
       this.total = 0;
     } else {
       const winnerHandName = winner[0].type;
@@ -1015,12 +1022,13 @@ class Game {
       let x = 0;
       this.players.forEach((p) => {
         // if(!p.alreadyWon){
-          x = (p.decrementalTotal >= maxwin ) ?
-           maxwin :
-           p.decrementalTotal;
-          prend += x;
-          p.decrementalTotal -= x;
-          csl.log("evaluateHandswinnerperPlayerTake",`winner prend ${x} à ${p.name}`)
+        x = p.decrementalTotal >= maxwin ? maxwin : p.decrementalTotal;
+        prend += x;
+        p.decrementalTotal -= x;
+        csl.log(
+          "evaluateHandswinnerperPlayerTake",
+          `winner prend ${x} à ${p.name}`
+        );
         // }
       });
       // const prend = maxwin <= this.total ? maxwin : this.total;
@@ -1040,17 +1048,14 @@ class Game {
       winPlayer.jesuislewinner();
       if (this.total > 0) {
         csl.log("evaluateHands", "Money left, check for another winner.");
-        if(this.activePlayers.filter(p => !p.alreadyWon).length ===0){
+        if (this.activePlayers.filter((p) => !p.alreadyWon).length === 0) {
           winPlayer.localMoney += this.total;
           this.total = 0;
-        }
-        else
-          this.evaluateHands();
+        } else this.evaluateHands();
       }
     }
-    this.players.forEach(p => p.playerMoney = p.localMoney);
+    this.players.forEach((p) => (p.playerMoney = p.localMoney));
   }
-
 
   /*
   in : nothing
@@ -1102,7 +1107,7 @@ class Game {
 
   /**
    * advance in Stage (preflop flop,trun,river,...)
-   * @returns 
+   * @returns
    */
   advanceStage() {
     if (this.state !== "active") {
@@ -1171,7 +1176,7 @@ class Game {
   }
 
   /**
-   * 
+   *
    */
   resetRestartCall() {
     clearTimeout(this.resetRestartCall);
@@ -1183,7 +1188,7 @@ class Game {
 
   /**
    * skip the stage for go to showdown
-   * @returns 
+   * @returns
    */
   advanceStageToShowdown() {
     if (this.state !== "active") {
@@ -1205,9 +1210,9 @@ class Game {
   }
 
   /**
-   * 
-   * @param {string} player 
-   * @returns best card and id of the player 
+   *
+   * @param {string} player
+   * @returns best card and id of the player
    */
   make7Cards(player) {
     return {

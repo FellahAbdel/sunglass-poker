@@ -837,7 +837,7 @@ module.exports = function (app, bdd) {
           );
 
           user.verificationCode = hashedVerificationCode;
-          user.verificationCodeExpires = Date.now() + 30000;
+          user.verificationCodeExpires = Date.now() + 300000; //5 minutes
           await user.save();
 
           return { exists: true, message: "E-mail exists in the database" };
