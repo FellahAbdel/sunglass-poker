@@ -893,10 +893,6 @@ module.exports = function (app, bdd) {
      */
     changePassword: async (email, code, newPassword) => {
       try {
-        console.log(
-          `Received data - Email: ${email}, Code: ${code}, New Password: ${newPassword}`
-        );
-
         // Rechercher l'utilisateur par email
         const user = await UserModel.findOne({ email: email });
 

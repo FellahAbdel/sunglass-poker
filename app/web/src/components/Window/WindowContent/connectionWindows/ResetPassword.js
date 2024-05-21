@@ -138,7 +138,7 @@ const ResetPasswordWindow = () => {
           placeholder={getTranslatedWord("connection.code")}
           errorMessage={validationErrors.code}
           styleClass={"input-connectionDefault"}
-          iconSrc="static/media/assets/images/icons/black/email.png"
+          iconSrc="static/media/assets/images/icons/black/name.png"
         />
         <TextInputComponent
           name="password"
