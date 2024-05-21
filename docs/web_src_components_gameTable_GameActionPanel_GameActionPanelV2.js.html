@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: web/src/components/gameTable/GameActionPanel/GameActionPanelV2.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: web/src/components/gameTable/GameActionPanel/GameActionPanelV2.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import "./gameActionPanelV2.css";
+import Button from "../../button/Button.tsx";
+import * as actions from "../../../store/actions/clientInteractionsCreator.js";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "../../Utiles/Translations";
+import { useGameTable } from "../../Utiles/GameTableProvider.jsx";
+
+/**
+ * GameActionButtons provides an interface for user actions in a game context,
+ * such as betting, raising, checking, calling, and folding.
+ */
+const GameActionButtons = () => {
+  const { isFocus, playerMoney, gameCurrentBet, gamePlayerCurrentBet } =
+    useGameTable();
+  const { getTranslatedWord } = useTranslation();
+  const [coins, setCoins] = useState(playerMoney);
+  const [min, setMin] = useState(20); // minimum amount to raise
+  const [max, setMax] = useState(playerMoney); // maximum amount to raise set to coins
+  const [step, setStep] = useState(Math.floor(coins / 5)); // toggle coin steps : setted to 5% of the coins
+  const [amount, setAmount] = useState(min); //amount to raise
+  const [showPopup, setShowPopup] = useState(false); // popUp to show raise panel
+  const [coinsAfterRaise, setCoinsAfterRaise] = useState(0); // calculating the amount that player will be left after the raise to show before
+  const dispatch = useDispatch();
+
+  /**
+   * Formats a number to a readable string with commas.
+   * @param {number} number - The number to format.
+   * @returns {string} The formatted number.
+   */
+  const formatNumber = (number) => {
+    return new Intl.NumberFormat().format(number);
+  };
+
+  // Increments the bet amount within the allowable range
+  const handleIncrement = () => {
+    setAmount((prevAmount) => {
+      const newAmount = Math.min(prevAmount + step, max);
+      setCoinsAfterRaise(coins - newAmount);
+      return newAmount;
+    });
+  };
+
+  // Decrements the bet amount within the allowable range
+  const handleDecrement = () => {
+    setAmount((prevAmount) => {
+      const newAmount = Math.max(prevAmount - step, min);
+      setCoinsAfterRaise(coins - newAmount);
+      return newAmount;
+    });
+  };
+
+  // Handles direct input changes to the bet amount
+  const handleChange = (event) => {
+    const input = event.target.value;
+    // Remove commas for parsing
+    const newAmount = parseInt(input.replace(/,/g, ""), 10);
+    if (!isNaN(newAmount)) {
+      // Only update if the parsed value is a valid number
+      setAmount(newAmount); // Update the actual number
+    }
+  };
+
+  // Commits the bet with the Redux action
+  const handleBet = (amount) => {
+    amount = Math.round(amount);
+    dispatch(actions.bet(amount));
+    setAmount(amount);
+  };
+
+  // Toggles the raise panel or submits the raise
+  const handleRaise = () => {
+    if (!showPopup) {
+      setShowPopup(true);
+    } else {
+      if (amount &lt; min || amount > max) {
+        const validatedAmount = Math.max(min, Math.min(max, amount));
+        setAmount(validatedAmount);
+      } else {
+        handleBet(amount);
+        setAmount(min);
+        setShowPopup(false);
+      }
+    }
+  };
+
+  // Updates the label for the check/call button based on current game state
+  const getCheckOrCallLabel = () => {
+    if (gameCurrentBet > 0 &amp;&amp; gameCurrentBet !== gamePlayerCurrentBet) {
+      if (playerMoney &lt;= gameCurrentBet - gamePlayerCurrentBet) {
+        return `${getTranslatedWord("gameActionPanel.call")} ${playerMoney} SC`;
+      } else {
+        return `${getTranslatedWord("gameActionPanel.call")} ${
+          gameCurrentBet - gamePlayerCurrentBet
+        } SC`;
+      }
+    } else {
+      return getTranslatedWord("gameActionPanel.check");
+    }
+  };
+
+  // Handles the check or call action
+  const handleCheckOrCall = () => {
+    if (isFocus) {
+      if (gameCurrentBet > 0) {
+        if (playerMoney &lt; gameCurrentBet - gamePlayerCurrentBet) {
+          dispatch(actions.bet(playerMoney));
+        } else {
+          dispatch(actions.bet(gameCurrentBet - gamePlayerCurrentBet));
+        }
+      } else {
+        dispatch(actions.check());
+      }
+      setAmount(min);
+      setShowPopup(false);
+    }
+  };
+
+  // Handles the fold action
+  const handleFold = () => {
+    if (isFocus) {
+      setAmount(min);
+      setShowPopup(false);
+      dispatch(actions.fold());
+    }
+  };
+
+  // Effect to update minimum bet when the game's current bet changes
+  useEffect(() => {
+    if (gameCurrentBet) {
+      setMin(gameCurrentBet - gamePlayerCurrentBet);
+    } else {
+      setMin(20);
+    }
+  }, [gameCurrentBet, gamePlayerCurrentBet]);
+
+  // Effect to adjust the player's remaining coins after setting a bet amount
+  useEffect(() => {
+    setCoinsAfterRaise(coins - amount);
+  }, [amount, coins]);
+
+  // Hide the raise panel when the player is not focused
+  useEffect(() => {
+    if (!isFocus) {
+      setShowPopup(false);
+    }
+  }, [isFocus]);
+
+  // Update local state with the latest player money amount
+  useEffect(() => {
+    setCoins(playerMoney);
+  }, [playerMoney]);
+
+  useEffect(() => {
+    setMax(coins);
+    setStep(Math.floor(coins / 5));
+  }, [coins]);
+
+  return (
+    &lt;div className="container-gameAction">
+      &lt;div className="container-cashSituation">
+        &lt;div className="userCoinCashs">
+          {getTranslatedWord("gameActionPanel.currentSC")}:{" "}
+          {formatNumber(coins)}
+        &lt;/div>
+
+        {showPopup &amp;&amp; (coinsAfterRaise || amount) &amp;&amp; (
+          &lt;>
+            &lt;div className="userCoinCashs">
+              {getTranslatedWord("gameActionPanel.afterSC")}:{" "}
+              {formatNumber(coinsAfterRaise)}
+            &lt;/div>
+            {gamePlayerCurrentBet ? (
+              &lt;div className="userCoinCashs">
+                {getTranslatedWord("gameActionPanel.totalRaise")}:{" "}
+                {formatNumber(gamePlayerCurrentBet)}+{formatNumber(amount)}
+              &lt;/div>
+            ) : null}
+          &lt;/>
+        )}
+      &lt;/div>
+      {/* UI for bet sizing quick select buttons and the bet size input */}
+      {showPopup &amp;&amp; (
+        &lt;>
+          &lt;div className="container-raiseButtons">
+            &lt;Button
+              styleClass={"btn-mainAction"}
+              onClick={() => setAmount(min)}
+              label={"Min"}
+            />
+            &lt;Button
+              styleClass={"btn-mainAction"}
+              onClick={() => setAmount(Math.floor(coins / 4))}
+              label={"1/4"}
+            />
+            &lt;Button
+              styleClass={"btn-mainAction"}
+              onClick={() => setAmount(Math.floor(coins / 2))}
+              label={"1/2"}
+            />
+            &lt;Button
+              styleClass={"btn-mainAction"}
+              onClick={() => setAmount(Math.floor((coins * 3) / 4))}
+              label={"3/4"}
+            />
+            &lt;Button
+              styleClass={"btn-mainAction"}
+              onClick={() => setAmount(coins)}
+              label={"All in"}
+            />
+          &lt;/div>
+          &lt;div className={`container-raiseAdjuster`}>
+            &lt;Button
+              styleClass="btn-raiseDecrement"
+              label={"−"}
+              onClick={handleDecrement}
+            />
+            &lt;input
+              type="text"
+              className="raiseValueDisplay"
+              value={amount === "" ? "" : formatNumber(amount)}
+              onChange={handleChange}
+            />
+            SC
+            &lt;Button
+              styleClass="btn-raiseIncrement"
+              label={"+"}
+              onClick={handleIncrement}
+            />
+          &lt;/div>
+        &lt;/>
+      )}
+      {/* Main action buttons for raising, checking/calling, and folding */}
+      &lt;div className={`container-ActionButtons`}>
+        &lt;Button
+          styleClass={`btn-mainAction ${!isFocus &amp;&amp; "disabled"} ${
+            isFocus &amp;&amp; amount !== 0 &amp;&amp; showPopup &amp;&amp; "raise"
+          }`}
+          onClick={handleRaise}
+          label={`${getTranslatedWord("gameActionPanel.raise")}`}
+        />
+        &lt;Button
+          styleClass={`btn-mainAction ${!isFocus &amp;&amp; "disabled"}`}
+          onClick={handleCheckOrCall}
+          label={getCheckOrCallLabel()}
+        />
+        &lt;Button
+          styleClass={`btn-fold btn-mainAction ${!isFocus &amp;&amp; "disabled"}`}
+          onClick={handleFold}
+          label={getTranslatedWord("gameActionPanel.fold")}
+        />
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default GameActionButtons;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-clientInteractionsType.html">clientInteractionsType</a></li><li><a href="module-server_store_actions_actionsCreator.html">server/store/actions/actionsCreator</a></li><li><a href="module-socketMiddleware.html">socketMiddleware</a></li></ul><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Player.html">Player</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AcceuilWindow">AcceuilWindow</a></li><li><a href="global.html#AlertWindow">AlertWindow</a></li><li><a href="global.html#AvatarDisplay">AvatarDisplay</a></li><li><a href="global.html#BonusPanel">BonusPanel</a></li><li><a href="global.html#BuyCoinsWindow">BuyCoinsWindow</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#CardsPlacements">CardsPlacements</a></li><li><a href="global.html#CreateGameWindow">CreateGameWindow</a></li><li><a href="global.html#DynamicBar">DynamicBar</a></li><li><a href="global.html#ForgotPassword">ForgotPassword</a></li><li><a href="global.html#GameActionButtons">GameActionButtons</a></li><li><a href="global.html#GameTable">GameTable</a></li><li><a href="global.html#GameTableProvider">GameTableProvider</a></li><li><a href="global.html#HandCards">HandCards</a></li><li><a href="global.html#ListTableItem">ListTableItem</a></li><li><a href="global.html#LoadingWindow">LoadingWindow</a></li><li><a href="global.html#LoginWindow">LoginWindow</a></li><li><a href="global.html#LogoComponent">LogoComponent</a></li><li><a href="global.html#Middleware">Middleware</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#PlayersPlacements">PlayersPlacements</a></li><li><a href="global.html#PlayersPots">PlayersPots</a></li><li><a href="global.html#PlayersProfile">PlayersProfile</a></li><li><a href="global.html#ProfileWindow">ProfileWindow</a></li><li><a href="global.html#REFRESH">REFRESH</a></li><li><a href="global.html#RankingWindow">RankingWindow</a></li><li><a href="global.html#ResetPasswordWindow">ResetPasswordWindow</a></li><li><a href="global.html#SET_SELECTED_ITEM">SET_SELECTED_ITEM</a></li><li><a href="global.html#ServerPanelWindow">ServerPanelWindow</a></li><li><a href="global.html#SettingsProvider">SettingsProvider</a></li><li><a href="global.html#SettingsWindow">SettingsWindow</a></li><li><a href="global.html#ShopItem">ShopItem</a></li><li><a href="global.html#ShopWindow">ShopWindow</a></li><li><a href="global.html#SignUpWindow">SignUpWindow</a></li><li><a href="global.html#SuccessWindow">SuccessWindow</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TextGlitch">TextGlitch</a></li><li><a href="global.html#TextInputComponent">TextInputComponent</a></li><li><a href="global.html#TotalPot">TotalPot</a></li><li><a href="global.html#ValidationWindow">ValidationWindow</a></li><li><a href="global.html#WaitingWindow">WaitingWindow</a></li><li><a href="global.html#Window">Window</a></li><li><a href="global.html#WindowProvider">WindowProvider</a></li><li><a href="global.html#activateBonus">activateBonus</a></li><li><a href="global.html#bet">bet</a></li><li><a href="global.html#check">check</a></li><li><a href="global.html#comm">comm</a></li><li><a href="global.html#corsSettings">corsSettings</a></li><li><a href="global.html#countByValue">countByValue</a></li><li><a href="global.html#createGame">createGame</a></li><li><a href="global.html#createGameV2">createGameV2</a></li><li><a href="global.html#delayedExecution">delayedExecution</a></li><li><a href="global.html#delayedExecutionWithCancel">delayedExecutionWithCancel</a></li><li><a href="global.html#emptyGameDesc">emptyGameDesc</a></li><li><a href="global.html#emptyPayload">emptyPayload</a></li><li><a href="global.html#fold">fold</a></li><li><a href="global.html#formatNumber">formatNumber</a></li><li><a href="global.html#gameLobby">gameLobby</a></li><li><a href="global.html#getPokerHand">getPokerHand</a></li><li><a href="global.html#getStyles">getStyles</a></li><li><a href="global.html#hideCard">hideCard</a></li><li><a href="global.html#isFlush">isFlush</a></li><li><a href="global.html#isFourOfAKind">isFourOfAKind</a></li><li><a href="global.html#isFullHouse">isFullHouse</a></li><li><a href="global.html#isPair">isPair</a></li><li><a href="global.html#isStraight">isStraight</a></li><li><a href="global.html#isStraightFlush">isStraightFlush</a></li><li><a href="global.html#isThreeOfAKind">isThreeOfAKind</a></li><li><a href="global.html#isTwoPairs">isTwoPairs</a></li><li><a href="global.html#joinRoom">joinRoom</a></li><li><a href="global.html#leaveRoom">leaveRoom</a></li><li><a href="global.html#loggedIn">loggedIn</a></li><li><a href="global.html#logsocket">logsocket</a></li><li><a href="global.html#resetPlayerInGame">resetPlayerInGame</a></li><li><a href="global.html#sendVerificationEmail">sendVerificationEmail</a></li><li><a href="global.html#showCard">showCard</a></li><li><a href="global.html#sitted">sitted</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#useAudio">useAudio</a></li><li><a href="global.html#useItems">useItems</a></li><li><a href="global.html#useOnClickOutside">useOnClickOutside</a></li><li><a href="global.html#useTranslation">useTranslation</a></li><li><a href="global.html#useUserData">useUserData</a></li><li><a href="global.html#validateCode">validateCode</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#validatePasswordMatch">validatePasswordMatch</a></li><li><a href="global.html#validatePasswordOrNull">validatePasswordOrNull</a></li><li><a href="global.html#validateUsername">validateUsername</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed May 22 2024 00:17:59 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
