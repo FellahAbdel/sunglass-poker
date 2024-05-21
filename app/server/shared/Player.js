@@ -1,3 +1,7 @@
+/**
+ * @file Player.js
+ * @module Player
+ */
 class Player {
   cardsVisible = [false, false];
   timeLastAnswer = 0;

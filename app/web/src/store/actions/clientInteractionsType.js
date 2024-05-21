@@ -1,3 +1,16 @@
+/**
+ * @module clientInteractionsType
+ */
+
+/**
+ * _______________________________________
+ *
+ *  Actions sent by the client to the server
+ *
+ * _______________________________________
+ */
+
+
 export const START_GAME = "START_GAME";
 
 export const CREATE_GAME = "CREATE_GAME";
