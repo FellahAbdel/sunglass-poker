@@ -1,10 +1,20 @@
-// Redux middleware
+/**
+ * @file socketMiddleware.js
+ * @module socketMiddleware
+ */
+
 import { comm } from "../../services/socket.js";
 window.addEventListener("DOMContentLoaded", (event) => {
   comm.Init();
 });
 const actions = require("../actions/clientInteractionsType.js");
 
+/**
+ * Redux middleware to handle socket communication.
+ *
+ * @param {Object} socket - The socket instance.
+ * @returns {Function} Middleware function to handle socket-related actions.
+ */
 export const socketMiddleware = (socket) => (store) => (next) => (action) => {
   // console.log("Middleware scoket");
   switch (action.type) {
