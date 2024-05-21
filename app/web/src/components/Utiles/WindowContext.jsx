@@ -16,6 +16,10 @@ const WindowContext = createContext();
 
 export const useWindowContext = () => useContext(WindowContext);
 
+/**
+ * Manages window state and actions related to windows, such as opening, closing, and setting window types.
+ * Provides functions to interact with the window state and perform window-related actions.
+ */
 export const WindowProvider = ({ children }) => {
   const [state, dispatch] = useReducer(windowReducer, initialState);
 

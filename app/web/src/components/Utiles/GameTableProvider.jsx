@@ -17,7 +17,10 @@ import {
 // Créer un contexte pour la table de jeu
 const GameTableContext = createContext();
 
-// Créer un provider pour le contexte
+/**
+ *Manages the game table state, including player data updates and table data.
+ *Provides functions to access game information and player data.
+ */
 export const GameTableProvider = ({ children }) => {
   const [state, dispatch] = useReducer(gameTableReducer, {
     isMaster: false,
@@ -40,7 +43,6 @@ export const GameTableProvider = ({ children }) => {
   const [playerHandName, setPlayerHandName] = useState("");
   const [serverName, setServerName] = useState("");
   const [numberOfPlayers, setNumberOfPlayers] = useState(0);
-
 
   useEffect(() => {
     const isMaster =
@@ -114,7 +116,7 @@ export const GameTableProvider = ({ children }) => {
         setIsSpectator(true);
       }
 
-      if (gameInfo?.game.autoRestartStatus){
+      if (gameInfo?.game.autoRestartStatus) {
         setautoRestartStatus(autoRestartStatus);
       }
 

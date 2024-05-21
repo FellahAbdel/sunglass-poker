@@ -19,6 +19,10 @@ import HandCards from "../components/gameTable/HandCards/HandCards";
 import DynamicBar from "../components/Navbar/DynamicBar.js";
 import { useSettings } from "./../components/Utiles/SettingsContext.jsx";
 
+/**
+ * Represents the main component for the game table.
+ * Manages the display of game elements and interactions with user settings and game state.
+ */
 const GameTable = () => {
   const { theme, animation, sound, volume } = useSettings();
   const { isLogged } = useAuth();

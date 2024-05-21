@@ -1,4 +1,6 @@
-// Actions Types
+/**
+ * Defines action types for window-related actions.
+ */
 export const SET_SELECTED_ITEM = "SET_SELECTED_ITEM";
 export const SET_REDIRECT_AFTER_SUCCESS = "SET_REDIRECT_AFTER_SUCCESS";
 export const SET_ALERT_PARAMS = "SET_ALERT_PARAMS";
