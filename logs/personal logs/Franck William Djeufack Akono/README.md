@@ -25,4 +25,5 @@
 | 14/05/24 - 15/05/2024 | Creation de la video trailer dur jeu | 15h |
 | 17/05/24 | debuggage de la fonction second qui occasionnait des bugs sur la comparaison du gagnant | 1h |
 | 18/05/24 | Test du jeu a la recherche de bugs| 2h |
-| --/--/--- | Total| 142h |
+| 20/05/24 | Redaction du rapport personnel| 3h |
+| --/--/--- | Total| 145h |
