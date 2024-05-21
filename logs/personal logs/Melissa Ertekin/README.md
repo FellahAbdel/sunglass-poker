@@ -1,4 +1,4 @@
-# Melissa Ertekin | Temps Totale : 124h30
+# Melissa Ertekin | Temps Totale : 138h30
 
 
 ### Semaine 0 : 30 Janvier - 05 Février  | Temps Totale: 5h
@@ -168,7 +168,7 @@
 
 * Durant la semaine : <b>1h</b> <br/> Discussions sur discord: <i> Échanges sur le projet</i> 
 
-### Semaine 15 : 13 Mai - 21 Mai | Temps Totale: 
+### Semaine 15 : 13 Mai - 21 Mai | Temps Totale:  14h
 
 * 2024/05/14 : <b>3h</b> <br/> Réunion du mardi en groupe : <i> Réunions hebdomadaires avec le mentor. Réunion avec les développeurs et planification de la semaine </i>
 
