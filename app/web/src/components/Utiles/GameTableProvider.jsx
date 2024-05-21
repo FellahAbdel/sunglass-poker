@@ -158,6 +158,7 @@ export const GameTableProvider = ({ children }) => {
         serverName,
         playerHandName,
         numberOfPlayers,
+        autoRestartStatus,
       }}
     >
       {children}

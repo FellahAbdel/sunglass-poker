@@ -17,7 +17,7 @@ const DynamicBar = () => {
   const { userId } = useAuth();
   const { openWindow, windowType, isGameTableVisible, isWindowOpen } =
     useWindowContext();
-  const { isMaster, showWaitingMessage, isSpectator, numberOfPlayers } =
+  const { isMaster, showWaitingMessage, isSpectator, numberOfPlayers , autoRestartStatus } =
     useGameTable();
   const { user } = useUserData();
   const { getTranslatedWord } = useTranslation();
@@ -96,6 +96,8 @@ const DynamicBar = () => {
           <label className="switch autoRestart">
             <input
               type="checkbox"
+              checked={autoRestartStatus}
+              // onChange={}
             />
             <span className="slider autoRestart"/>
           </label>
