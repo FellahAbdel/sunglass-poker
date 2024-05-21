@@ -73,6 +73,10 @@ class Player {
     });
   }
 
+  /**
+   * in the name
+   * @param {int} coinsToAdd 
+   */
   async updateMoneyInDatabase(coinsToAdd) {
     const result = await this.updateUserCoins(this.playerId, coinsToAdd);
     if (!result.success) {
@@ -80,23 +84,41 @@ class Player {
     }
   }
 
+  /**
+   * set the Player in AFK
+   */
   setAfk() {
     this.isAfk = true;
     this.isActive = false;
   }
+
+  /**
+   * unset the AFK player
+   */
   unsetAfk() {
     this.isAfk = false;
     this.isActive = true;
   }
 
+  /**
+   * Set the player allin 
+   */
   setTapis() {
     this.isTapis = true;
   }
 
+  /**
+   * Unset the allin player
+   */
   unsetTapis() {
     this.isTapis = false;
   }
 
+  /**
+   * give all the status of the player
+   * @param {id} id 
+   * @returns the info of the player id 
+   */
   statusFor(id) {
     const view = {
       playerId: this.playerId,
@@ -120,16 +142,28 @@ class Player {
     return view;
   }
 
+  /**
+   * reveal the player card index 
+   * @param {*} cardIndex 
+   */
   revealCard(cardIndex) {
     if (this.playerCards.length > cardIndex) {
       this.cardsVisible[cardIndex] = true;
     }
   }
 
+  /**
+   * check if the player have enough money
+   * @returns true if player have more than 40SC |false otherwise
+   */
   canJoinTable() {
     return this.getPlayerMoney() > 40;
   }
 
+  /**
+   * change the player to spectator or unspecator 
+   * @returns 
+   */
   toggleSpectator() {
     if (this.isSpectator && !this.canJoinTable()) {
       this.movePlayerToSpectator();
@@ -145,28 +179,49 @@ class Player {
     }
   }
 
+  /**
+   * move the player to spectator
+   */
   movePlayerToSpectator() {
     this.newRoundReset();
     this.isSpectator = true;
     this.isActive = false;
   }
 
+  /**
+   * hide the playerCard index
+   * @param {*} cardIndex 
+   */
   hideCard(cardIndex) {
     if (this.playerCards.length > cardIndex) {
       this.cardsVisible[cardIndex] = false;
     }
   }
 
+  /**
+   * Put the pot in my pocket (when he win the game the player get the money)
+   * @param {*} total 
+   */
   seRemplirLesPoches(total) {
     this.localMoney += total;
   }
 
+  /**
+   * 
+   * @param {*} t 
+   */
   settimeLastAnswer(t) {
     this.timeLastAnswer = t;
   }
+
+  /**
+   * 
+   * @returns 
+   */
   gettimeLastAnswer() {
     return this.timeLastAnswer;
   }
+
 
   // Methods to get and set status
   setStatus(status) {
@@ -242,6 +297,10 @@ class Player {
     this.playerCards = randomCardsList;
   }
 
+  /**
+   * 
+   * @returns how many the player bet in the turn
+   */
   howmanyBetTurn() {
     return this.currentBetTurn;
   }
@@ -255,6 +314,10 @@ class Player {
     this.playerActionLog.push({ action: playerAction, bet: playerMoneyBet });
   }
 
+  /**
+   * add the card in the bonus of the player
+   * @param {*} card 
+   */
   addCard(card) {
     this.playerCards.push(card);
 
@@ -303,10 +366,17 @@ class Player {
     this.status = "raise";
   }
 
+  /**
+   * put the winner status
+   */
   jesuislewinner() {
     this.status = "winner";
   }
 
+  /**
+   * all in the player
+   * @param {int} amount 
+   */
   tapis(amount) {
     this.talkedThisTurn = true;
     this.status = "tapis";
@@ -327,6 +397,10 @@ class Player {
     }
   }
 
+  /**
+   * special case of the bet for the initial blind
+   * @param {int} amount 
+   */
   betinitial(amount) {
     if (this.localMoney >= amount) {
       this.currentBet = amount;
@@ -338,6 +412,10 @@ class Player {
     }
   }
 
+  /**
+   * bet the bonus ine the Total pot
+   * @param {int} amount 
+   */
   betBonus(amount) {
     if (this.localMoney > amount) {
       this.localMoney -= amount;
@@ -345,6 +423,9 @@ class Player {
     }
   }
 
+  /**
+   * reset the player for the newgame
+   */
   newRoundReset() {
     this.clearHand();
     this.playerActionLog = [];
@@ -363,6 +444,9 @@ class Player {
     // Ajouter d'autres réinitialisations si nécessaire
   }
 
+  /**
+   * reset the player for the newTurn
+   */
   newTurnReset() {
     this.talkedThisTurn = false;
     this.currentBetTurn = 0;
