@@ -43,6 +43,15 @@ module.exports = function (app, bdd) {
   });
 
   const dao = {
+    /**
+     * Create new use to the database if the email and pseudo are not already used.
+     * The password will be hashed in the db
+     * The User will be associated with his stats (future) and all the basics item he's unlocking.
+     * @param {String} pseudo 
+     * @param {String} email 
+     * @param {String} password 
+     * @returns 
+     */
     createUser: async (pseudo, email, password) => {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
       try {
@@ -121,6 +130,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Return the Token of the connection when the hashed password match to the username passed.. 
+     * @param {String} username 
+     * @param {String} password 
+     * @returns Success status & token
+     */
     loginUser: async (username, password) => {
       try {
         // Find user by username
@@ -171,6 +186,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Search through the database to quickly verify if the mail is already being used.
+     * @param {String} email 
+     * @returns Success status & boolean
+     */
     checkEmail: async (email) => {
       try {
         // Find user by email
@@ -192,6 +212,14 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Search for a user based on the identifiers and value pass and set the specified field to the new value.
+     * @param {String} identifierType 
+     * @param {*} identifierValue 
+     * @param {String} field 
+     * @param {*} value 
+     * @returns Success status
+     */
     updateUserData: async (identifierType, identifierValue, field, value) => {
       try {
         // Find the user by the specified identifier and update the field with the new value
@@ -214,6 +242,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Buy a item in the shop if the user has enough money. Adds it to the user list and remove the corresponding money.
+     * @param {String} userId 
+     * @param {String} itemId 
+     * @returns Success status
+     */
     buyItem: async (userId, itemId) => {
       try {
         // Find the user by ID
@@ -262,6 +296,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Take a user id and send back the user Object from the database.
+     * @param {String} userId 
+     * @returns Success status with the user object
+     */
     getUserInfo: async (userId) => {
       // Log fetching info for the user ID
       csl.log("bdd", "Fetching info for user ID:", userId);
@@ -300,6 +339,10 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Send back all item purchasable from the database.
+     * @returns Success status with an Array of item .
+     */
     getItems: async () => {
       try {
         // Find all items in the database
@@ -313,6 +356,13 @@ module.exports = function (app, bdd) {
       }
     },
 
+
+    /**
+     * Change the ownership of the specific item for the user.
+     * @param {String} userId 
+     * @param {String} itemId 
+     * @returns Success status
+     */
     activateAvatar: async (userId, itemId) => {
       try {
         // Find the user by ID
@@ -377,6 +427,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Return the players stats base on the page number and the number of stats asked.
+     * @param {*} page 
+     * @param {*} nbRes 
+     * @returns [...stats]
+     */
     getAllRanking: async (page, nbRes) => {
       try {
         // Find all users, sort them by coins in descending order, paginate the results,
@@ -396,38 +452,11 @@ module.exports = function (app, bdd) {
       }
     },
 
-    //Ranking function with the stats of player, but the stats are not setups yet so we only use coins
-    /*
-    getAllRanking: async (page, nbRes) => {
-      try {
-        const users = await UserModel.aggregate([
-          {
-            $lookup: {
-              from: "Stat",
-              pipeline: [{ $project: { maxGain: 1 } }],
-              as: "gain",
-            },
-          },
-          {
-            $sort: { gain: -1 },
-          },
-          {
-            $project: { pseudo: 1, gain: 1 },
-          },
-          {
-            $skip: (page - 1) * nbRes,
-          },
-          {
-            $limit: nbRes,
-          },
-        ]);
-        return { success: true, data: users };
-      } catch (err) {
-        csl.error("Error fetching rankings:", err);
-        return { success: false, error: err }; // rethrow the error after logging
-      }
-    },*/
-
+    /**
+     * Return the avatar infos of the user.
+     * @param {String} userId 
+     * @returns Success & Object avatar
+     */
     getAvatarInfo: async (userId) => {
       try {
         // Find the user by ID and populate avatar-related fields with necessary information
@@ -478,6 +507,15 @@ module.exports = function (app, bdd) {
       }
     },
 
+
+    /**
+     * Create a new Game descriptor with the info of the game.
+     * @param {String} serverName 
+     * @param {String} roomPassword 
+     * @param {String} rank 
+     * @param {String} master 
+     * @returns Success & GameDescription created.
+     */
     createGameDescription: async function (
       serverName,
       roomPassword,
@@ -523,6 +561,13 @@ module.exports = function (app, bdd) {
       }
     },
 
+
+    /**
+     * Update a GameDescription to include a new user in the game
+     * if he's not already in and update the user.inGame field.
+     * @param {String} gameId 
+     * @param {String} userId 
+     */
     addOnePlayerGameDesc: async function (gameId, userId) {
       // Log the addition of a player to a game
       csl.log("bdd", "add a player in game bdd");
@@ -542,11 +587,23 @@ module.exports = function (app, bdd) {
       await user.save();
     },
 
+    /**
+     * Destroy the gameDescription base on the id provided.
+     * @param {String} gameId 
+     */
     removeGameDesc: async function (gameId) {
       // Find and delete the game description by ID
       await GameDescriptionModel.findByIdAndDelete(gameId);
     },
 
+    /**
+     * Update a specific field of a gameDescription item base on the passed identifier.
+     * @param {String} identifierType 
+     * @param {Any} identifierValue 
+     * @param {String} field 
+     * @param {Any} value 
+     * @returns Success status & boolean
+     */
     updateGameDescription: async function (
       identifierType,
       identifierValue,
@@ -574,6 +631,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+
+    /**
+     * Find the player and update his inGame field and the corresponding game.
+     * Can be done safely with a player without knowing the inGame field.
+     * @param {String} id 
+     */
     playerLeftGame: async function (id) {
       try {
         // Find the user by ID
@@ -604,6 +667,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Not a future proof solution. Game are relatively in small  quantity
+     * but should be refactor to include a number of page maximum like @see getAllRanking 
+     * @returns Success status & array of GameDescription
+     */
     gameRoomDescription: async function () {
       try {
         // Fetch all game descriptions from the database
@@ -621,6 +689,13 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Add the coins in argument to the current amount of the user.
+     * This uses negative amount to remove player coins. 
+     * @param {String} userId 
+     * @param {int} coinsToAdd 
+     * @returns Success status & updated coins amount
+     */
     updateUserCoins: async (userId, coinsToAdd) => {
       try {
         // Find user by ID
@@ -644,6 +719,12 @@ module.exports = function (app, bdd) {
       }
     },
 
+
+    /**
+     * Fetch the username based on the id.
+     * @param {String} userId 
+     * @returns Success & username.
+     */
     getUserPseudoFromUserId: async (userId) => {
       try {
         // Find user by ID and return their pseudo (username)
@@ -660,6 +741,10 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Return all the game where a player could potentially join.
+     * @returns Success status & Array of gameDescription
+     */
     getAvailableGames: async function () {
       try {
         // Fetch all available games with status "WAITING" from the database
@@ -677,6 +762,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Return the serverName of a gameDescription
+     * @param {String} gameId 
+     * @returns Success status & String
+     */
     getServerNameFromGameId: async function (gameId) {
       csl.log("getServerNameFromGameId", "Argument gameId: ", gameId);
       if (gameId.gameRoomId !== undefined) gameId = gameId.gameRoomId;
@@ -694,6 +784,11 @@ module.exports = function (app, bdd) {
       }
     },
 
+    /**
+     * Find the corresponding Gamedescription and change the status.
+     * @param {String} roomId 
+     * @returns 
+     */
     updateStatusToInProgress: async function (roomId) {
       try {
         // Find and update the game description's status to "IN_PROGRESS" by room ID
@@ -721,6 +816,13 @@ module.exports = function (app, bdd) {
       }
     },
   };
+
+  /**
+   * Check the password hash to allow or not a player to join.
+   * @param {string} roomId 
+   * @param {string} password 
+   * @returns Success status
+   */
   dao.verifyGamePassword = async (roomId, password) => {
     try {
       const gameDescription = await GameDescriptionModel.findById(roomId);
@@ -743,6 +845,13 @@ module.exports = function (app, bdd) {
     }
   };
 
+  /**
+   * Allow a player to change the current password.
+   * The user is searched base on the email.
+   * @param {String} email 
+   * @param {String} newPassword 
+   * @returns Success status
+   */
   dao.changePassword = async (email, newPassword) => {
     try {
       // Hash the new password
