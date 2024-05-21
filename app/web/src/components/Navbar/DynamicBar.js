@@ -97,7 +97,7 @@ const DynamicBar = () => {
             <input
               type="checkbox"
               checked={autoRestartStatus}
-              // onChange={}
+              onChange={handleToggleRestart}
             />
             <span className="slider autoRestart"/>
           </label>
