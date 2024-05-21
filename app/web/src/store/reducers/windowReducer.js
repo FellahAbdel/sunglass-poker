@@ -65,8 +65,6 @@ const loadInitialState = () => {
 export const initialState = loadInitialState();
 
 export function windowReducer(state = initialState, action) {
-  console.log("Action Received:", action);
-  console.log("Current State before update:", state);
 
   let nextState = { ...state };
 
@@ -125,10 +123,8 @@ export function windowReducer(state = initialState, action) {
       sessionStorage.setItem("email", action.payload);
       break;
     default:
-      console.log("Unhandled action type in windowReducer:", action.type);
       return state;
   }
 
-  console.log("New State after update:", nextState);
   return nextState;
 }

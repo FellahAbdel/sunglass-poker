@@ -4,7 +4,6 @@ const initialState = {
   gameStarted: false,
 };
 
-console.log(actions);
 const clientInteractionsReducer = (state = initialState, action) => {
   switch (action.type) {
     // case actions.REFRESH:
@@ -16,7 +15,6 @@ const clientInteractionsReducer = (state = initialState, action) => {
     //         players:action.payload.game.players
     //       };
     default:
-      console.log("from clientInterReducer default => type : ", action.type);
       return state;
   }
 };

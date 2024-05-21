@@ -27,7 +27,6 @@ export const leaveRoom = () => ({
  * @returns {Object} The action object with type and payload.
  */
 export const startGame = (userId) => {
-  console.log("UserId récupéré par startGame :", userId);
   return {
     type: actions.START_GAME,
     payload: { userId: userId },

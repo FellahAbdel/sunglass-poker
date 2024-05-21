@@ -23,13 +23,7 @@ export const useWindowContext = () => useContext(WindowContext);
 export const WindowProvider = ({ children }) => {
   const [state, dispatch] = useReducer(windowReducer, initialState);
 
-  useEffect(() => {
-    console.log("isWindowOpen:", state.isWindowOpen);
-    console.log("windowType:", state.windowType);
-    console.log("isGameTableVisible:", state.isGameTableVisible);
-    console.log("connectionWindowOpen:", state.connectionWindowOpen);
-    console.log("email:", state.email);
-  }, [
+  useEffect(() => {}, [
     state.isWindowOpen,
     state.windowType,
     state.isGameTableVisible,
@@ -75,8 +69,6 @@ export const WindowProvider = ({ children }) => {
 
   const openWindow = useCallback(
     (type, params = {}) => {
-      console.log(`Opening window: ${type}`, params);
-
       if (state.windowType === type && state.isWindowOpen) {
         closeWindow();
         return;
@@ -85,16 +77,8 @@ export const WindowProvider = ({ children }) => {
       if (type === "alert") {
         setAlertParams({
           message: params.message || "Default message",
-          onConfirm:
-            params.onConfirm ||
-            (() => {
-              console.log("No confirm action set");
-            }),
-          onCancel:
-            params.onCancel ||
-            (() => {
-              console.log("No cancel action set");
-            }),
+          onConfirm: params.onConfirm || (() => {}),
+          onCancel: params.onCancel || (() => {}),
         });
       }
       setWindowOpen(true);
@@ -110,7 +94,6 @@ export const WindowProvider = ({ children }) => {
   );
 
   const closeWindow = useCallback(() => {
-    console.log("Fermeture de la fenêtre");
     setAlertParams({ message: "", onConfirm: () => {}, onCancel: () => {} });
     setWindowOpen(false);
     setWindowType("");
@@ -137,9 +120,6 @@ export const WindowProvider = ({ children }) => {
 
   const openSuccessWindow = useCallback(
     (message, redirect = "") => {
-      console.log(
-        `Ouverture de la fenêtre de succès avec le message : ${message}`
-      );
       setSuccessMessage(message);
       setRedirectAfterSuccess(redirect);
       setWindowType("success");
@@ -149,9 +129,6 @@ export const WindowProvider = ({ children }) => {
   );
 
   const openValidationWindow = useCallback((item) => {
-    console.log(
-      `Ouverture de la fenêtre de validation pour l'élément : ${item.imgSrc}`
-    );
     dispatch({ type: "SET_SELECTED_ITEM", payload: item });
     dispatch({ type: "SET_WINDOW_TYPE", payload: "validation" });
     dispatch({ type: "TOGGLE_WINDOW_OPEN", payload: true });

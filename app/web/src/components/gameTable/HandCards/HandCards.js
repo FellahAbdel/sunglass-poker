@@ -52,7 +52,6 @@ const HandCards = ({ card1, card2, showHandCardProp }) => {
       ];
       const hand = getPokerHand(cardCombo);
       setHandGuide(hand);
-      console.log("cardCombo:", cardCombo);
     }
   }, [communityCards, card1, card2]);
 

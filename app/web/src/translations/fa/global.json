@@ -67,7 +67,8 @@
     "notEnoughSC": "سکه‌های خورشید کافی برای پیوستن به این بازی ندارید",
     "notEnoughPlayer": "بازیکنان کافی برای شروع بازی وجود ندارد",
     "yourTurn": "نوبت شما",
-    "theirTurn": "نوبت آن‌ها"
+    "theirTurn": "نوبت آن‌ها",
+    "autoRestart": "شروع خودکار"
   },
   "handGuide": {
     "highCard": "کارت بالا",
