@@ -218,5 +218,11 @@
 
 --2024/05 SEMAINE 3:    6H  (TOTAL:158H)
 
+derniere semaine: 2H test en tt genre 
+    3H REunion avec le groupe pour preparer l'oral
+    30min preparation de mes textes
+    2H Reunion avant l'oral
 
-TEMPS TOTAL: 158H
+
+
+TEMPS TOTAL: 165H30
