@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: web/src/components/Window/WindowContent/TutorialWindow.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: web/src/components/Window/WindowContent/TutorialWindow.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import "./tutorial.css";
+import { useTranslation } from "../../Utiles/Translations";
+import Card from "../../gameTable/Card/Card";
+import Button from "../../button/Button.tsx";
+import BonusPanel from "../../gameTable/Bonus/BonusPanel";
+
+const TutorialWindow = () => {
+  const { getTranslatedWord } = useTranslation();
+  /**
+   * Formats a number to a readable string with commas.
+   * @param {number} number - The number to format.
+   * @returns {string} The formatted number.
+   */
+  const formatNumber = (number) => {
+    return new Intl.NumberFormat().format(number);
+  };
+  return (
+    &lt;div className={`container-text-tutorial`}>
+      &lt;div className="text-tutorial">
+        &lt;h1>{getTranslatedWord("tutorial.title")}&lt;/h1>
+
+        &lt;h2>{getTranslatedWord("tutorial.introduction.heading")}&lt;/h2>
+        &lt;p>{getTranslatedWord("tutorial.introduction.text")}&lt;/p>
+
+        &lt;h2>{getTranslatedWord("tutorial.objective.heading")}&lt;/h2>
+        &lt;p>{getTranslatedWord("tutorial.objective.text")}&lt;/p>
+
+        &lt;h2>{getTranslatedWord("tutorial.setup.heading")}&lt;/h2>
+        &lt;ul>
+          &lt;li>
+            &lt;strong>{getTranslatedWord("tutorial.setup.deckBold")}&lt;/strong>
+            {getTranslatedWord("tutorial.setup.deckText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>{getTranslatedWord("tutorial.setup.playersBold")}&lt;/strong>
+            {getTranslatedWord("tutorial.setup.playersText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>{getTranslatedWord("tutorial.setup.chipsBold")}&lt;/strong>
+            {getTranslatedWord("tutorial.setup.chipsText")}
+          &lt;/li>
+        &lt;/ul>
+
+        &lt;h2>{getTranslatedWord("tutorial.basicRules.heading")}&lt;/h2>
+
+        &lt;h3>{getTranslatedWord("tutorial.basicRules.handRankings.heading")}&lt;/h3>
+        &lt;p>{getTranslatedWord("tutorial.basicRules.handRankings.text")}&lt;/p>
+        &lt;ul>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.basicRules.handRankings.royalFlushBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord(
+              "tutorial.basicRules.handRankings.royalFlushText"
+            )}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["Q", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["J", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["10", "C"]}
+              flippingCard={true}
+            />
+          &lt;/div>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.basicRules.handRankings.straightFlushBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord(
+              "tutorial.basicRules.handRankings.straightFlushText"
+            )}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["2", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["3", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["4", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["5", "H"]}
+              flippingCard={true}
+            />
+          &lt;/div>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.basicRules.handRankings.fourOfAKindBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord(
+              "tutorial.basicRules.handRankings.fourOfAKindText"
+            )}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "D"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "S"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "C"]}
+              flippingCard={true}
+            />
+          &lt;/div>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.basicRules.handRankings.fullHouseBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord(
+              "tutorial.basicRules.handRankings.fullHouseText"
+            )}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "D"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "C"]}
+              flippingCard={true}
+            />
+          &lt;/div>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.basicRules.handRankings.flushBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.basicRules.handRankings.flushText")}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["Q", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["J", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["9", "C"]}
+              flippingCard={true}
+            />
+          &lt;/div>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.basicRules.handRankings.straightBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.basicRules.handRankings.straightText")}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["5", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["6", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["7", "D"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["8", "S"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["9", "C"]}
+              flippingCard={true}
+            />
+          &lt;/div>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.basicRules.handRankings.threeOfAKindBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord(
+              "tutorial.basicRules.handRankings.threeOfAKindText"
+            )}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "D"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["9", "S"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "C"]}
+              flippingCard={true}
+            />{" "}
+            {/* Assume K as kicker */}
+          &lt;/div>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.basicRules.handRankings.twoPairBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.basicRules.handRankings.twoPairText")}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "D"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "S"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["Q", "C"]}
+              flippingCard={true}
+            />{" "}
+            {/* Assume Q as kicker */}
+          &lt;/div>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.basicRules.handRankings.onePairBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.basicRules.handRankings.onePairText")}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "D"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["Q", "S"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["J", "C"]}
+              flippingCard={true}
+            />{" "}
+            {/* Assume J as kicker */}
+          &lt;/div>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.basicRules.handRankings.highCardBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.basicRules.handRankings.highCardText")}
+          &lt;/li>
+          &lt;div className="cards-container">
+            &lt;Card
+              styleClass={"handCard"}
+              card={["A", "D"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["K", "C"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["Q", "H"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["J", "S"]}
+              flippingCard={true}
+            />
+            &lt;Card
+              styleClass={"handCard"}
+              card={["9", "C"]}
+              flippingCard={true}
+            />
+          &lt;/div>
+        &lt;/ul>
+
+        &lt;h3>
+          {getTranslatedWord("tutorial.basicRules.bettingActions.heading")}
+        &lt;/h3>
+        &lt;p>{getTranslatedWord("tutorial.basicRules.bettingActions.text")}&lt;/p>
+
+        &lt;div className="container-ActionButtonsDemo">
+          &lt;div className="container-gameAction">
+            &lt;div className="container-cashSituation">
+              &lt;div className="userCoinCashs">
+                {getTranslatedWord("gameActionPanel.currentSC")}:{" "}
+                {formatNumber(10000)}
+              &lt;/div>
+              &lt;div className="userCoinCashs">
+                {getTranslatedWord("gameActionPanel.afterSC")}:{" "}
+                {formatNumber(9000)}
+              &lt;/div>
+              &lt;div className="userCoinCashs">
+                {getTranslatedWord("gameActionPanel.totalRaise")}:{" "}
+                {formatNumber(500)}+{formatNumber(1000)}
+              &lt;/div>
+            &lt;/div>
+            &lt;div className="container-raiseButtons">
+              &lt;Button styleClass={"btn-mainAction"} label={"Min"} />
+              &lt;Button styleClass={"btn-mainAction"} label={"1/4"} />
+              &lt;Button styleClass={"btn-mainAction"} label={"1/2"} />
+              &lt;Button styleClass={"btn-mainAction"} label={"3/4"} />
+              &lt;Button styleClass={"btn-mainAction"} label={"All in"} />
+            &lt;/div>
+            &lt;div className={`container-raiseAdjuster`}>
+              &lt;Button styleClass="btn-raiseDecrement" label={"−"} />
+              &lt;input type="text" className="raiseValueDisplay" value={10000} />
+              SC
+              &lt;Button styleClass="btn-raiseIncrement" label={"+"} />
+            &lt;/div>
+            &lt;div className={`container-ActionButtons`}>
+              &lt;Button
+                styleClass={`btn-mainAction raise`}
+                label={`${getTranslatedWord("gameActionPanel.raise")}`}
+              />
+              &lt;Button
+                styleClass={`btn-mainAction`}
+                label={getTranslatedWord("gameActionPanel.check")}
+              />
+              &lt;Button
+                styleClass={`btn-fold btn-mainAction`}
+                label={getTranslatedWord("gameActionPanel.fold")}
+              />
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+
+        &lt;p>{getTranslatedWord("tutorial.bettingOptions.description")}&lt;/p>
+        &lt;ul>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.bettingOptions.foldBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.bettingOptions.foldText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.bettingOptions.checkCallBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.bettingOptions.checkCallText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.bettingOptions.raiseBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.bettingOptions.raiseText")}
+          &lt;/li>
+        &lt;/ul>
+
+        &lt;h2>{getTranslatedWord("tutorial.strategyTips.heading")}&lt;/h2>
+
+        &lt;h3>
+          {getTranslatedWord("tutorial.strategyTips.startingHandsHeading")}
+        &lt;/h3>
+        &lt;ul>
+          &lt;li>
+            {getTranslatedWord("tutorial.strategyTips.startingHandsTips.1")}
+          &lt;/li>
+          &lt;li>
+            {getTranslatedWord("tutorial.strategyTips.startingHandsTips.2")}
+          &lt;/li>
+        &lt;/ul>
+
+        &lt;h3>{getTranslatedWord("tutorial.strategyTips.positionHeading")}&lt;/h3>
+        &lt;ul>
+          &lt;li>{getTranslatedWord("tutorial.strategyTips.positionTips.1")}&lt;/li>
+          &lt;li>{getTranslatedWord("tutorial.strategyTips.positionTips.2")}&lt;/li>
+        &lt;/ul>
+
+        &lt;h3>{getTranslatedWord("tutorial.strategyTips.bluffingHeading")}&lt;/h3>
+        &lt;ul>
+          &lt;li>{getTranslatedWord("tutorial.strategyTips.bluffingTips.1")}&lt;/li>
+          &lt;li>{getTranslatedWord("tutorial.strategyTips.bluffingTips.2")}&lt;/li>
+        &lt;/ul>
+
+        &lt;h3>{getTranslatedWord("tutorial.strategyTips.potOddsHeading")}&lt;/h3>
+        &lt;ul>
+          &lt;li>{getTranslatedWord("tutorial.strategyTips.potOddsTip")}&lt;/li>
+        &lt;/ul>
+
+        &lt;h2>{getTranslatedWord("tutorial.commonTerms.heading")}&lt;/h2>
+        &lt;ul>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.commonTerms.blindBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.commonTerms.blindText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.commonTerms.communityCardsBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.commonTerms.communityCardsText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.commonTerms.kickerBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.commonTerms.kickerText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>{getTranslatedWord("tutorial.commonTerms.potBold")}&lt;/strong>
+            {getTranslatedWord("tutorial.commonTerms.potText")}
+          &lt;/li>
+        &lt;/ul>
+
+        &lt;h2>{getTranslatedWord("tutorial.specialFeatures.heading")}&lt;/h2>
+        &lt;p>{getTranslatedWord("tutorial.specialFeatures.description")}&lt;/p>
+
+        &lt;h3>
+          {getTranslatedWord("tutorial.specialFeatures.revealingCardsHeading")}
+        &lt;/h3>
+        &lt;p>
+          {getTranslatedWord("tutorial.specialFeatures.revealingCardsText")}
+        &lt;/p>
+        &lt;ul>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.specialFeatures.bluffMisleadBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.specialFeatures.bluffMisleadText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord(
+                "tutorial.specialFeatures.showStrengthWeaknessBold"
+              )}
+            &lt;/strong>
+            {getTranslatedWord(
+              "tutorial.specialFeatures.showStrengthWeaknessText"
+            )}
+          &lt;/li>
+        &lt;/ul>
+
+        &lt;div className="card-reveal-section">
+          &lt;div className="container-handMainDemo">
+            &lt;div className="container-showCardsButtons">
+              &lt;Button
+                styleClass={"btn-showCard"}
+                label={`${getTranslatedWord(
+                  "handGuide.hide"
+                )} A ${getTranslatedWord("handGuide.of")}`}
+                iconSrc={"static/media/assets/images/icons/white/heart.png"}
+              />
+              &lt;Button
+                styleClass={"btn-showCard"}
+                label={`${getTranslatedWord(
+                  "handGuide.hide"
+                )} A ${getTranslatedWord("handGuide.of")}`}
+                iconSrc={"static/media/assets/images/icons/white/spade.png"}
+              />
+              &lt;Button
+                styleClass={"btn-showCard"}
+                label={getTranslatedWord("handGuide.showB")}
+              />
+            &lt;/div>
+            &lt;div className="container-handCardDemo">
+              &lt;Card
+                styleClass="handCard"
+                card={["A", "S"]}
+                flippingCard={true}
+              />
+              &lt;Card
+                styleClass="handCard"
+                card={["A", "H"]}
+                flippingCard={true}
+              />
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+
+        &lt;p>
+          {getTranslatedWord(
+            "tutorial.specialFeatures.strategyPsychology.description"
+          )}
+        &lt;/p>
+
+        &lt;h3>
+          {getTranslatedWord("tutorial.specialFeatures.bonusFeatureHeading")}
+        &lt;/h3>
+        &lt;p>
+          {getTranslatedWord(
+            "tutorial.specialFeatures.bonusFeatureDescription"
+          )}
+        &lt;/p>
+
+        &lt;div className="bonus-feature-section">
+          &lt;BonusPanel />
+        &lt;/div>
+
+        &lt;h2>{getTranslatedWord("tutorial.practice.heading")}&lt;/h2>
+        &lt;p>{getTranslatedWord("tutorial.practice.description")}&lt;/p>
+        &lt;ul>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.practice.playRegularlyBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.practice.playRegularlyText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.practice.studyGameBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.practice.studyGameText")}
+          &lt;/li>
+          &lt;li>
+            &lt;strong>
+              {getTranslatedWord("tutorial.practice.reviewHandsBold")}
+            &lt;/strong>
+            {getTranslatedWord("tutorial.practice.reviewHandsText")}
+          &lt;/li>
+        &lt;/ul>
+
+        &lt;h3>{getTranslatedWord("tutorial.exampleHand.heading")}&lt;/h3>
+        &lt;div className="highlight">
+          &lt;p>
+            &lt;strong>
+              {getTranslatedWord("tutorial.exampleHand.preFlopBold")}
+            &lt;/strong>
+            : {getTranslatedWord("tutorial.exampleHand.preFlopText")}
+            &lt;div className="cards-container">
+              &lt;Card
+                styleClass={"handCard small"}
+                card={["1", "S"]}
+                flippingCard={true}
+              />
+              &lt;Card
+                styleClass={"handCard small"}
+                card={["K", "S"]}
+                flippingCard={true}
+              />
+            &lt;/div>
+            {getTranslatedWord("tutorial.exampleHand.preFlopContinuation")}
+          &lt;/p>
+
+          &lt;p>
+            &lt;strong>
+              {getTranslatedWord("tutorial.exampleHand.flopBold")}
+            &lt;/strong>
+            : {getTranslatedWord("tutorial.exampleHand.flopText")}
+            &lt;div className="cards-container">
+              &lt;Card
+                styleClass={"handCard small"}
+                card={["10", "S"]}
+                flippingCard={true}
+              />
+              &lt;Card
+                styleClass={"handCard small"}
+                card={["J", "S"]}
+                flippingCard={true}
+              />
+              &lt;Card
+                styleClass={"handCard small"}
+                card={["2", "C"]}
+                flippingCard={true}
+              />
+            &lt;/div>
+            {getTranslatedWord("tutorial.exampleHand.flopContinuation")}
+          &lt;/p>
+
+          &lt;p>
+            &lt;strong>
+              {getTranslatedWord("tutorial.exampleHand.bettingBold")}
+            &lt;/strong>
+            : {getTranslatedWord("tutorial.exampleHand.bettingText")}
+          &lt;/p>
+
+          &lt;p>
+            &lt;strong>
+              {getTranslatedWord("tutorial.exampleHand.turnBold")}
+            &lt;/strong>
+            : {getTranslatedWord("tutorial.exampleHand.turnText")}
+            &lt;div className="cards-container">
+              &lt;Card
+                styleClass={"handCard small"}
+                card={["Q", "S"]}
+                flippingCard={true}
+              />
+            &lt;/div>
+            {getTranslatedWord("tutorial.exampleHand.turnContinuation")}
+          &lt;/p>
+
+          &lt;p>
+            &lt;strong>
+              {getTranslatedWord("tutorial.exampleHand.bettingBold")}
+            &lt;/strong>
+            : {getTranslatedWord("tutorial.exampleHand.bettingText")}
+          &lt;/p>
+
+          &lt;p>
+            &lt;strong>
+              {getTranslatedWord("tutorial.exampleHand.riverBold")}
+            &lt;/strong>
+            : {getTranslatedWord("tutorial.exampleHand.riverText")}
+            &lt;div className="cards-container">
+              &lt;Card
+                styleClass={"handCard small"}
+                card={["3", "D"]}
+                flippingCard={true}
+              />
+            &lt;/div>
+          &lt;/p>
+
+          &lt;p>
+            &lt;strong>
+              {getTranslatedWord("tutorial.exampleHand.bettingBold")}
+            &lt;/strong>
+            &lt;strong>
+              {getTranslatedWord("tutorial.exampleHand.bettingBold")}
+            &lt;/strong>
+            : {getTranslatedWord("tutorial.exampleHand.finalBettingText")}
+          &lt;/p>
+
+          &lt;p>
+            &lt;strong>
+              {getTranslatedWord("tutorial.exampleHand.showdownBold")}
+            &lt;/strong>
+            : {getTranslatedWord("tutorial.exampleHand.showdownText")}
+            &lt;div className="cards-container">
+              &lt;Card
+                styleClass={"handCard small"}
+                card={["A", "S"]}
+                flippingCard={true}
+              />
+              &lt;Card
+                styleClass={"handCard small"}
+                card={["K", "S"]}
+                flippingCard={true}
+              />
+            &lt;/div>
+            {getTranslatedWord("tutorial.exampleHand.showdownContinuation")}
+          &lt;/p>
+        &lt;/div>
+
+        &lt;p>{getTranslatedWord("tutorial.conclusion.text")}&lt;/p>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default TutorialWindow;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-clientInteractionsType.html">clientInteractionsType</a></li><li><a href="module-server_store_actions_actionsCreator.html">server/store/actions/actionsCreator</a></li><li><a href="module-socketMiddleware.html">socketMiddleware</a></li></ul><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Player.html">Player</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AcceuilWindow">AcceuilWindow</a></li><li><a href="global.html#AlertWindow">AlertWindow</a></li><li><a href="global.html#AvatarDisplay">AvatarDisplay</a></li><li><a href="global.html#BonusPanel">BonusPanel</a></li><li><a href="global.html#BuyCoinsWindow">BuyCoinsWindow</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#CardsPlacements">CardsPlacements</a></li><li><a href="global.html#CreateGameWindow">CreateGameWindow</a></li><li><a href="global.html#DynamicBar">DynamicBar</a></li><li><a href="global.html#ForgotPassword">ForgotPassword</a></li><li><a href="global.html#GameActionButtons">GameActionButtons</a></li><li><a href="global.html#GameTable">GameTable</a></li><li><a href="global.html#GameTableProvider">GameTableProvider</a></li><li><a href="global.html#HandCards">HandCards</a></li><li><a href="global.html#ListTableItem">ListTableItem</a></li><li><a href="global.html#LoadingWindow">LoadingWindow</a></li><li><a href="global.html#LoginWindow">LoginWindow</a></li><li><a href="global.html#LogoComponent">LogoComponent</a></li><li><a href="global.html#Middleware">Middleware</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#PlayersPlacements">PlayersPlacements</a></li><li><a href="global.html#PlayersPots">PlayersPots</a></li><li><a href="global.html#PlayersProfile">PlayersProfile</a></li><li><a href="global.html#ProfileWindow">ProfileWindow</a></li><li><a href="global.html#REFRESH">REFRESH</a></li><li><a href="global.html#RankingWindow">RankingWindow</a></li><li><a href="global.html#ResetPasswordWindow">ResetPasswordWindow</a></li><li><a href="global.html#SET_SELECTED_ITEM">SET_SELECTED_ITEM</a></li><li><a href="global.html#ServerPanelWindow">ServerPanelWindow</a></li><li><a href="global.html#SettingsProvider">SettingsProvider</a></li><li><a href="global.html#SettingsWindow">SettingsWindow</a></li><li><a href="global.html#ShopItem">ShopItem</a></li><li><a href="global.html#ShopWindow">ShopWindow</a></li><li><a href="global.html#SignUpWindow">SignUpWindow</a></li><li><a href="global.html#SuccessWindow">SuccessWindow</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TextGlitch">TextGlitch</a></li><li><a href="global.html#TextInputComponent">TextInputComponent</a></li><li><a href="global.html#TotalPot">TotalPot</a></li><li><a href="global.html#ValidationWindow">ValidationWindow</a></li><li><a href="global.html#WaitingWindow">WaitingWindow</a></li><li><a href="global.html#Window">Window</a></li><li><a href="global.html#WindowProvider">WindowProvider</a></li><li><a href="global.html#activateBonus">activateBonus</a></li><li><a href="global.html#bet">bet</a></li><li><a href="global.html#check">check</a></li><li><a href="global.html#comm">comm</a></li><li><a href="global.html#corsSettings">corsSettings</a></li><li><a href="global.html#countByValue">countByValue</a></li><li><a href="global.html#createGame">createGame</a></li><li><a href="global.html#createGameV2">createGameV2</a></li><li><a href="global.html#delayedExecution">delayedExecution</a></li><li><a href="global.html#delayedExecutionWithCancel">delayedExecutionWithCancel</a></li><li><a href="global.html#emptyGameDesc">emptyGameDesc</a></li><li><a href="global.html#emptyPayload">emptyPayload</a></li><li><a href="global.html#fold">fold</a></li><li><a href="global.html#formatNumber">formatNumber</a></li><li><a href="global.html#gameLobby">gameLobby</a></li><li><a href="global.html#getPokerHand">getPokerHand</a></li><li><a href="global.html#getStyles">getStyles</a></li><li><a href="global.html#hideCard">hideCard</a></li><li><a href="global.html#isFlush">isFlush</a></li><li><a href="global.html#isFourOfAKind">isFourOfAKind</a></li><li><a href="global.html#isFullHouse">isFullHouse</a></li><li><a href="global.html#isPair">isPair</a></li><li><a href="global.html#isStraight">isStraight</a></li><li><a href="global.html#isStraightFlush">isStraightFlush</a></li><li><a href="global.html#isThreeOfAKind">isThreeOfAKind</a></li><li><a href="global.html#isTwoPairs">isTwoPairs</a></li><li><a href="global.html#joinRoom">joinRoom</a></li><li><a href="global.html#leaveRoom">leaveRoom</a></li><li><a href="global.html#loggedIn">loggedIn</a></li><li><a href="global.html#logsocket">logsocket</a></li><li><a href="global.html#resetPlayerInGame">resetPlayerInGame</a></li><li><a href="global.html#sendVerificationEmail">sendVerificationEmail</a></li><li><a href="global.html#showCard">showCard</a></li><li><a href="global.html#sitted">sitted</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#useAudio">useAudio</a></li><li><a href="global.html#useItems">useItems</a></li><li><a href="global.html#useOnClickOutside">useOnClickOutside</a></li><li><a href="global.html#useTranslation">useTranslation</a></li><li><a href="global.html#useUserData">useUserData</a></li><li><a href="global.html#validateCode">validateCode</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#validatePasswordMatch">validatePasswordMatch</a></li><li><a href="global.html#validatePasswordOrNull">validatePasswordOrNull</a></li><li><a href="global.html#validateUsername">validateUsername</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed May 22 2024 00:17:59 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

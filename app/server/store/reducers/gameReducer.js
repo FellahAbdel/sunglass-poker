@@ -1,16 +1,14 @@
 // This file contains the reducer for game-related actions
 const actions = require("../actions/actionTypes.js");
-const Deck = require("../../shared/Deck.js");
 const Player = require("../../shared/Player.js");
 const game = require("../../shared/Game.js");
 const csl = require("../../controller/intelligentLogging.js");
-const { strictEqual } = require("assert");
 const fileType = "gameReducer";
 
 const initialRoomState = (serverName) => {
-  csl.log('initialRoomsState',serverName);
+  csl.log("initialRoomsState", serverName);
   return {
-    game: new game({serverName:serverName}),
+    game: new game({ serverName: serverName }),
     players: [], // initial players
   };
 };
@@ -21,22 +19,6 @@ const initialState = {
 };
 
 const begin = (state) => {
-  const playersInRoom = state.game.players;
-
-  // Start the game
-  //var posBigBlind = state.game.blind;
-  //var posSmallBlind = (posBigBlind + 1) % playersInRoom.length;
-  //var blind = 20;
-  //playersInRoom[posBigBlind].bet(blind * 2);
-  //playersInRoom[posSmallBlind].bet(blind);
-  //state.game.focus = (posSmallBlind + 1) % playersInRoom.length;
-
-  // Distribute blinds
-  //state.game.pokerTable.playerBet(state.game.players[posBigBlind], blind * 2);
-
-  //state.game.pokerTable.playerBet(state.game.players[posSmallBlind], blind);
-
-  //state.game.start();
   return {
     ...state,
     controlsMode: "roundOne",
@@ -44,34 +26,33 @@ const begin = (state) => {
 };
 
 const gameReducer = (state = initialState, action) => {
-  // csl.log(fileType, state, action);
   var room;
   var playerId;
   var answer;
   switch (action.type) {
     case actions.SET_DAO:
-      return  {
+      return {
         ...state,
-        dao:action.payload.dao
+        dao: action.payload.dao,
       };
     case actions.CREATE_GAME:
-      if(action.payload.serverName === undefined) return state;
+      if (action.payload.serverName === undefined) return state;
       csl.log(fileType, "CREATE GAME");
       // Create a new room with an initial state
       // We should have the creator of the room in the players list
-      state.rooms[action.payload.id] = initialRoomState(action.payload.serverName);
+      state.rooms[action.payload.id] = initialRoomState(
+        action.payload.serverName
+      );
       return {
         ...state,
         rooms: {
           ...state.rooms,
-          // [action.payload.id]: { ...initialRoomState() },
         },
       };
     case actions.START_GAME:
-      if(state.rooms[action.payload.id].players.length <= 1)
-        csl.log('START_GAME_EVENT',"not enough player");
-      else
-      if (state.rooms[action.payload.id].game.state === "waiting") {
+      if (state.rooms[action.payload.id].players.length <= 1)
+        csl.log("START_GAME_EVENT", "not enough player");
+      else if (state.rooms[action.payload.id].game.state === "waiting") {
         csl.log("START_GAME_EVENT", "Action payload:", action.payload);
         csl.log(
           "START_GAME_EVENT",
@@ -119,7 +100,6 @@ const gameReducer = (state = initialState, action) => {
           (player) => player.getPlayerId() !== playerId
         );
 
-        // state.rooms[room].game.players = updatedPlayers;
         // If the player who leave was the master we change the master.
         // But only if there is still at least one player in the room.
         csl.log("leaveRoom", " srggm : ", state.rooms[room]);
@@ -135,7 +115,12 @@ const gameReducer = (state = initialState, action) => {
             answer: {
               status: true,
               mes: "Player removed from room",
-              payload: { restant: state.rooms[room].game.allPlayers.filter((p)=>!p.isSpectator && !p.isAfk).length, wasMaster: isMaster },
+              payload: {
+                restant: state.rooms[room].game.allPlayers.filter(
+                  (p) => !p.isSpectator && !p.isAfk
+                ).length,
+                wasMaster: isMaster,
+              },
             },
             rooms: {
               ...state.rooms,
@@ -183,7 +168,7 @@ const gameReducer = (state = initialState, action) => {
         state.answer = { status: false, mes: "player empty" };
       }
 
-      if (coins === undefined ) {
+      if (coins === undefined) {
         failed = true;
         state.answer = { status: false, mes: "coins empty" };
       }
@@ -214,15 +199,6 @@ const gameReducer = (state = initialState, action) => {
         };
         failed = true;
       }
-
-      // if (room.game.state !== "waiting" && !found) {
-      //   failed = true;
-      //   state.answer = {
-      //     status: false,
-      //     alreadyIn: false,
-      //     mes: "Game already started, can't join.",
-      //   };
-      // }
       // --------------
 
       // We can add the player in the game
@@ -233,7 +209,6 @@ const gameReducer = (state = initialState, action) => {
             "Sit player, first player set as Master and first to play."
           );
           room.game.setMaster(playerId);
-          //room.game.setFocus(0);
         }
         state.answer = {
           status: true,
@@ -243,7 +218,7 @@ const gameReducer = (state = initialState, action) => {
         room.game.resetRestartCall();
         let newPlayer = new Player(playerId, pseudo, coins);
         newPlayer.updateUserCoins = state.dao.updateUserCoins;
-        csl.log(['gameReducer','new Player'],"player created : ", newPlayer)
+        csl.log(["gameReducer", "new Player"], "player created : ", newPlayer);
         if (room.players.length === 0) {
           room.game.setMaster(playerId);
         }
@@ -266,7 +241,10 @@ const gameReducer = (state = initialState, action) => {
         if (state.rooms.hasOwnProperty(action.payload.tableId)) {
           state.rooms[action.payload.tableId].game.destroy();
           delete state.rooms[action.payload.tableId];
-            csl.log(fileType, "Room " + action.payload.tableId + " deleted successfully");
+          csl.log(
+            fileType,
+            "Room " + action.payload.tableId + " deleted successfully"
+          );
         }
       }
       return {
@@ -417,9 +395,19 @@ const gameReducer = (state = initialState, action) => {
 
     case actions.PLAYER_PLAYED:
       state.rooms[action.payload.room].game.playerPlayed();
-      return { ...state};
+      return { ...state };
     case actions.CLEARANSWER:
       state.answer = false;
+      return { ...state };
+    case actions.AUTO_RESTART_TOGGLE:
+      csl.log("TOGGLE_RESTART", "payload : ", action.payload);
+      if (action.payload.playerId && action.payload.room) {
+        if (state.rooms[action.payload.room]) {
+          state.rooms[action.payload.room].game.toggleRestart(
+            action.payload.playerId
+          );
+        }
+      }
       return { ...state };
     // Other game actions can be handled here
     default:

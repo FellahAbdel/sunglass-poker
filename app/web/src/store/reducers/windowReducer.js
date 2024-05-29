@@ -1,4 +1,6 @@
-// Actions Types
+/**
+ * Defines action types for window-related actions.
+ */
 export const SET_SELECTED_ITEM = "SET_SELECTED_ITEM";
 export const SET_REDIRECT_AFTER_SUCCESS = "SET_REDIRECT_AFTER_SUCCESS";
 export const SET_ALERT_PARAMS = "SET_ALERT_PARAMS";
@@ -8,6 +10,7 @@ export const TOGGLE_CONNECTION_WINDOW_OPEN = "TOGGLE_CONNECTION_WINDOW_OPEN";
 export const SET_SUCCESS_MESSAGE = "SET_SUCCESS_MESSAGE";
 export const SHOW_GAME_TABLE = "SHOW_GAME_TABLE";
 export const HIDE_GAME_TABLE = "HIDE_GAME_TABLE";
+export const SET_EMAIL = "SET_EMAIL";
 
 // Définition de l'état initial basé sur le code existant
 const functionMapper = {
@@ -55,14 +58,13 @@ const loadInitialState = () => {
       sessionStorage.getItem("connectionWindowOpen") === "true",
     successMessage: sessionStorage.getItem("successMessage") || "",
     isGameTableVisible: sessionStorage.getItem("isGameTableVisible") === "true",
+    email: sessionStorage.getItem("email") || null,
   };
 };
 
 export const initialState = loadInitialState();
 
 export function windowReducer(state = initialState, action) {
-  console.log("Action Received:", action);
-  console.log("Current State before update:", state);
 
   let nextState = { ...state };
 
@@ -116,11 +118,13 @@ export function windowReducer(state = initialState, action) {
       nextState.isGameTableVisible = false;
       sessionStorage.setItem("isGameTableVisible", "false");
       break;
+    case SET_EMAIL:
+      nextState.email = action.payload;
+      sessionStorage.setItem("email", action.payload);
+      break;
     default:
-      console.log("Unhandled action type in windowReducer:", action.type);
       return state;
   }
 
-  console.log("New State after update:", nextState);
   return nextState;
 }

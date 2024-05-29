@@ -203,9 +203,11 @@
 
 2024/05/19 : 5h00           Debogage, correction window, communication.
 
-2024/05/19 : 6h00           Debogage, fin correction window, traduction tutoriel, taille formulaires
+2024/05/20 : 6h00           Debogage, fin correction window, traduction tutoriel, taille formulaires
 
-40H
+2024/05/21 : 8h00           Envoi mail change password, derniers ajustements, merges, commentaires.
+
+48H
 
 --------- Debogage, denier ajustements ---------
 
@@ -228,6 +230,6 @@ Voici un résumé des heures faites :
 
 26H : Backend, logique game
 
-40H : Debogage, derniers ajustements
+48H : Debogage, derniers ajustements
 
-TEMPS TOTAL: 188h30min
+TEMPS TOTAL: 196h30min

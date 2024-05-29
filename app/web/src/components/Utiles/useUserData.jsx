@@ -2,6 +2,10 @@ import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "./AuthProvider";
 import { useWindowContext } from "./WindowContext";
 
+/**
+ *Manages user data, including statistics and user-specific information.
+ *Provides functions to load and update user statistics.
+ */
 export const useUserData = () => {
   const [stats, setStats] = useState(null);
   const { user, fetchStats } = useAuth();
@@ -20,7 +24,7 @@ export const useUserData = () => {
         console.error("Error fetching user stats:", error);
       }
     }
-  }, [windowType, user?._id, fetchStats]);  
+  }, [windowType, user?._id, fetchStats]);
 
   useEffect(() => {
     loadUserStats();

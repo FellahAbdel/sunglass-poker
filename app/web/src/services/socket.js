@@ -24,7 +24,6 @@ export const comm = {
   preFun: function (init = false) {
     if (!this.authenticated) {
       this.token = sessionStorage.getItem("authToken");
-      console.log("PREFUN Token is ", this.token);
       socket.emit("myNameIs", { token: this.token, init: init });
     }
   },
@@ -42,7 +41,6 @@ export const comm = {
 
   Init: function () {
     this.preFun(true);
-    console.log("Init of socketio client side");
     this.Hello();
     socket.on("world", (data) => {
       // console.log(data);
@@ -151,7 +149,6 @@ export const comm = {
       // console.log("refreshing room", sessionStorage.getItem("room"));
       this.status();
     } else {
-      console.log("No room no status");
     }
   },
 
@@ -169,34 +166,32 @@ export const comm = {
   joinRoom: function (id) {
     this.preFun();
     socket.emit("joinRoom", { id: id });
-    console.log("joining room id", id);
   },
 
   dispatch: function (data) {
-    console.log("dispatch of socket");
     this.preFun();
-    console.log("Event dispatch (socket.js - fellah) : ", data);
     socket.emit("dispatch", data);
   },
 
   createGame: function () {
     this.preFun();
     // socket.emit('startGame',{room:sessionStorage.getItem('room')});
-    console.log("Emit startGame from comm");
     socket.emit("createGame");
   },
 
   createGameV2: function (gameRoomId) {
     this.preFun();
     // socket.emit('startGame',{room:sessionStorage.getItem('room')});
-    console.log("Emit startGame from comm");
     socket.emit("createGameV2", { gameRoomId: gameRoomId });
   },
 
   startGame: function (userId) {
     this.preFun();
     const roomId = sessionStorage.getItem("room");
-    console.log("Emitting startGame with room and userId:", roomId, userId);
     socket.emit("startGame", { room: roomId, userId: userId });
   },
+
+  toggleAutoRestart: function(){
+    socket.emit("autoRestartToggle");
+  }
 };

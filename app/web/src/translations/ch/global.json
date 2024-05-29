@@ -37,7 +37,8 @@
     "resetPassword": "重置你的密码",
     "successReset": "你已成功更改密码",
     "enterNewPassword": "在此输入新密码：",
-    "temporary": "临时按钮"
+    "temporary": "临时按钮",
+    "code": "验证代码"
   },
   "messageBox": {
     "loginSucces": "登录成功！",
@@ -81,7 +82,8 @@
     "hide": "隐藏",
     "showB": "展示两个",
     "hideB": "隐藏两个",
-    "of": "的"
+    "of": "的",
+    "autoRestart": "自动启动"
   },
   "gameActionPanel": {
     "raise": "加注",
@@ -196,7 +198,10 @@
     "passwordNotMatch": "密码不匹配",
     "emailNotFound": "电子邮件未找到",
     "emailTooLong": "电子邮件太长",
-    "passwordTooLong": "密码不能超过50个字符"
+    "passwordTooLong": "密码不能超过50个字符",
+    "codeNotFound": "无效的验证代码",
+    "codeExpired": "验证代码已过期",
+    "general": "发生了错误。请重试。"
   },
   "tutorial": {
     "title": "德州扑克",
@@ -271,7 +276,6 @@
       "showStrengthWeaknessText": " 你可以选择展示一张强牌来吓退对手，或者展示一张弱牌来诱使他们下注更多。",
       "bonusFeatureHeading": "奖励功能",
       "bonusFeatureDescription": "在整个游戏过程中，我们的奖励系统会跟踪您收集的黑桃、红心、方块和梅花的数量。一旦您至少收集到每种花色两张牌，您就可以激活奖励功能。此强大的功能会强制每位玩家向底池额外贡献50 SC（我们的应用程序货币），这可能会显著改变游戏动态。"
-
     },
     "basicRules": {
       "heading": "基本规则",

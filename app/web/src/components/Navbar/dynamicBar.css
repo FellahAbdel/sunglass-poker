@@ -47,21 +47,72 @@
   position: absolute;
   top: -10%;
   left: 10%;
-  color: aliceblue;
+  color: rgb(212, 212, 212);
   width: fit-content;
   padding: 0.5vh 1vw 0.5vh 1vw;
   height: 4%;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 0 0 1vw 1vw;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   transition: top 1s ease;
   font-size: 1vw;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.container-serverInfo.autoRestart{
+  top: -16%;
+  height: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap:1.7vw;
 }
 .container-serverInfo.appear {
-  top: 0;
+  top: 0%;
+}
+.container-serverInfo.appear.autoRestart{
+  top: -6%;
+}
+.container-serverInfo.autoRestart:hover{
+  top: 0%;
+}
+.container-switchSettings.autoRestart{
+  gap: 1vw;
+  display: flex;
+  justify-content: space-between;
+}
+.container-switchSettings.autoRestart p{
+  font-size: 1vw;
+
+}
+.switch.autoRestart{
+  width: 3vw;
+  height: 1vw;
+  padding: 0.3;
+}
+.slider.autoRestart{
+  width: 3vw;
+  height: 1.5vw;
+
+}
+.slider.autoRestart::before{
+  height: 1vw;
+  width: 1vw;
+  left: 0.25vw;
+  bottom: 0.24vw;
+}
+#light .autoRestart input:checked + .autoRestart.slider{
+  background: var(--color3-light);
+}
+#dark .autoRestart input:checked + .autoRestart.slider {
+  background: var(--color3-dark);
+}
+.autoRestart input:checked + .autoRestart.slider:before {
+  -webkit-transform: translateX(1.4vw);
+  -ms-transform: translateX(1.4vw);
+  transform: translateX(1.4vw);
 }
 
 .container-waiting {

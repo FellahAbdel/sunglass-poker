@@ -176,18 +176,6 @@ module.exports = gameController = {
       csl.error("Room", room, "does not exist, cannot delete.");
     }
   },
-  // removeAfk:function(room,roomId){
-  //   csl.log("removeAFK",room,roomId);
-  //   const copy = room.players;
-  //   csl.log('removeAfk','List of player :',copy);
-  //   for(p in copy){
-  //     csl.log('removeAfk',copy[p]);
-  //     if(copy[p].isAfk){
-  //       this.removePlayer(roomId,copy[p].getPlayerId());
-  //     }
-  //   }
-  //   room.hasAfk = false;
-  // },
   /**
    * Removes a player from a game room.
    * @param {string} room - The ID of the room from which the player is being removed.
@@ -217,7 +205,7 @@ module.exports = gameController = {
     }
   },
 
-  timeOutPlayer: 3e10,
+  timeOutPlayer: 3e10, // deprecated.
   /**
    * Broadcasts the status of a game room to connected clients.
    * @param {string} room - The ID of the room to broadcast the status of.
@@ -254,16 +242,6 @@ module.exports = gameController = {
         if (this.refresh[room] !== undefined)
           this.refresh[room] = clearInterval(this.refresh[room]);
       }
-
-      // Code to kick someone if they didn't answer soon enough.
-      // for (var i = 0; i < players.length; i++) {
-      //     timedPassed = (Date.now() - players[i].gettimeLastAnswer());
-      //     csl.log(('refreshCall'),' last answer :', players[i].gettimeLastAnswer());
-      //     if (timedPassed > this.timeOutPlayer) {
-      //         this.removePlayer(room, players[i].id);
-      //     }
-      // }
-
       // Broadcast the status of the room to connected clients.
       this.io.broadcastStatus(room);
     } else {
@@ -411,9 +389,9 @@ module.exports = gameController = {
 
     // Check if the action is to show or hide a card
     if (
-      action.type === actionsTypes.SHOW_CARD ||
-      action.type === actionsTypes.HIDE_CARD
+      action.subtype === actionsTypes.PLAYER_GAME_ASYNC
     ) {
+      csl.log("PLAYER_ACTION_ASYNC", "Player doesn't require to be playing.");
       // Dispatch the action directly to the player
       this.dispatch(action.payload.playerId, action);
     } else {

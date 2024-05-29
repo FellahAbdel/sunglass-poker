@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: web/src/components/Utiles/CombinationDetection.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: web/src/components/Utiles/CombinationDetection.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Counts occurrences of each card value in a set of cards.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {Object} An object with card values as keys and their counts as values.
+ */
+export const countByValue = (cards) =>
+  cards.reduce((acc, [value]) => {
+    acc[value] = (acc[value] || 0) + 1;
+    return acc;
+  }, {});
+
+/**
+ * Determines if a set of cards contains a flush.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {string|undefined} The suit of the flush if a flush exists, otherwise undefined.
+ */
+export const isFlush = (cards) => {
+  const suits = cards.map((card) => card[1]);
+  const suitCount = suits.reduce((acc, suit) => {
+    acc[suit] = (acc[suit] || 0) + 1;
+    return acc;
+  }, {});
+  return Object.keys(suitCount).find((suit) => suitCount[suit] >= 5);
+};
+
+/**
+ * Determines if a set of cards contains a straight.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {boolean} True if the cards form a straight, false otherwise.
+ */
+export const isStraight = (cards) => {
+  let values = cards.map((card) => card[0]);
+
+  // Add 14 to the values if there's an Ace
+  if (values.includes(1)) values.push(14);
+
+  values = Array.from(new Set(values)).sort((a, b) => a - b); // Remove duplicates and sort
+
+  for (let i = 0; i &lt;= values.length - 5; i++) {
+    if (values[i + 4] - values[i] === 4) return true;
+  }
+
+  // Special case for Ace-low straight
+  if (
+    values.includes(14) &amp;&amp;
+    values.includes(2) &amp;&amp;
+    values.includes(3) &amp;&amp;
+    values.includes(4) &amp;&amp;
+    values.includes(5)
+  )
+    return true;
+
+  return false;
+};
+
+/**
+ * Determines if a set of cards contains a straight flush.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {boolean} True if the cards form a straight flush, false otherwise.
+ */
+export const isStraightFlush = (cards) => {
+  const suit = isFlush(cards); // get the flush suit
+  if (!suit) return false;
+
+  const flushCards = cards.filter((card) => card[1] === suit);
+  return isStraight(flushCards);
+};
+
+/**
+ * Determines if a set of cards contains four of a kind.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {boolean} True if there are four cards of the same value, false otherwise.
+ */
+export const isFourOfAKind = (cards) => {
+  const counts = countByValue(cards);
+  return Object.values(counts).some((count) => count === 4);
+};
+
+/**
+ * Determines if a set of cards contains a full house.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {boolean} True if there is a three of a kind and a pair, false otherwise.
+ */
+export const isFullHouse = (cards) => {
+  const counts = countByValue(cards);
+  const values = Object.values(counts);
+  return values.includes(3) &amp;&amp; values.includes(2);
+};
+
+/**
+ * Determines if a set of cards contains three of a kind.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {boolean} True if there are three cards of the same value, false otherwise.
+ */
+export const isThreeOfAKind = (cards) => {
+  const counts = countByValue(cards);
+  return Object.values(counts).some((count) => count === 3);
+};
+
+/**
+ * Determines if a set of cards contains two pairs.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {boolean} True if there are two pairs, false otherwise.
+ */
+export const isTwoPairs = (cards) => {
+  const counts = countByValue(cards);
+  let pairs = 0;
+  Object.values(counts).forEach((count) => {
+    if (count === 2) pairs++;
+  });
+  return pairs >= 2;
+};
+
+/**
+ * Determines if a set of cards contains a pair.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {boolean} True if there is a pair, false otherwise.
+ */
+export const isPair = (cards) => {
+  const counts = countByValue(cards);
+  return Object.values(counts).some((count) => count === 2);
+};
+
+/**
+ * Evaluates the highest poker hand possible from a set of cards.
+ * @param {Array} cards - An array of card tuples [value, suit].
+ * @returns {string} The name of the highest poker hand.
+ */
+export const getPokerHand = (cards) => {
+  if (cards.length &lt; 5) return "";
+  if (isStraightFlush(cards)) return "straightFlush";
+  if (isFourOfAKind(cards)) return "fourOfAKind";
+  if (isFullHouse(cards)) return "fullHouse";
+  if (isFlush(cards)) return "flush";
+  if (isStraight(cards)) return "straight";
+  if (isThreeOfAKind(cards)) return "threeOfAKind";
+  if (isTwoPairs(cards)) return "twoPair";
+  if (isPair(cards)) return "onePair";
+  return "highCard";
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-clientInteractionsType.html">clientInteractionsType</a></li><li><a href="module-server_store_actions_actionsCreator.html">server/store/actions/actionsCreator</a></li><li><a href="module-socketMiddleware.html">socketMiddleware</a></li></ul><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Player.html">Player</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AcceuilWindow">AcceuilWindow</a></li><li><a href="global.html#AlertWindow">AlertWindow</a></li><li><a href="global.html#AvatarDisplay">AvatarDisplay</a></li><li><a href="global.html#BonusPanel">BonusPanel</a></li><li><a href="global.html#BuyCoinsWindow">BuyCoinsWindow</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#CardsPlacements">CardsPlacements</a></li><li><a href="global.html#CreateGameWindow">CreateGameWindow</a></li><li><a href="global.html#DynamicBar">DynamicBar</a></li><li><a href="global.html#ForgotPassword">ForgotPassword</a></li><li><a href="global.html#GameActionButtons">GameActionButtons</a></li><li><a href="global.html#GameTable">GameTable</a></li><li><a href="global.html#GameTableProvider">GameTableProvider</a></li><li><a href="global.html#HandCards">HandCards</a></li><li><a href="global.html#ListTableItem">ListTableItem</a></li><li><a href="global.html#LoadingWindow">LoadingWindow</a></li><li><a href="global.html#LoginWindow">LoginWindow</a></li><li><a href="global.html#LogoComponent">LogoComponent</a></li><li><a href="global.html#Middleware">Middleware</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#PlayersPlacements">PlayersPlacements</a></li><li><a href="global.html#PlayersPots">PlayersPots</a></li><li><a href="global.html#PlayersProfile">PlayersProfile</a></li><li><a href="global.html#ProfileWindow">ProfileWindow</a></li><li><a href="global.html#REFRESH">REFRESH</a></li><li><a href="global.html#RankingWindow">RankingWindow</a></li><li><a href="global.html#ResetPasswordWindow">ResetPasswordWindow</a></li><li><a href="global.html#SET_SELECTED_ITEM">SET_SELECTED_ITEM</a></li><li><a href="global.html#ServerPanelWindow">ServerPanelWindow</a></li><li><a href="global.html#SettingsProvider">SettingsProvider</a></li><li><a href="global.html#SettingsWindow">SettingsWindow</a></li><li><a href="global.html#ShopItem">ShopItem</a></li><li><a href="global.html#ShopWindow">ShopWindow</a></li><li><a href="global.html#SignUpWindow">SignUpWindow</a></li><li><a href="global.html#SuccessWindow">SuccessWindow</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TextGlitch">TextGlitch</a></li><li><a href="global.html#TextInputComponent">TextInputComponent</a></li><li><a href="global.html#TotalPot">TotalPot</a></li><li><a href="global.html#ValidationWindow">ValidationWindow</a></li><li><a href="global.html#WaitingWindow">WaitingWindow</a></li><li><a href="global.html#Window">Window</a></li><li><a href="global.html#WindowProvider">WindowProvider</a></li><li><a href="global.html#activateBonus">activateBonus</a></li><li><a href="global.html#bet">bet</a></li><li><a href="global.html#check">check</a></li><li><a href="global.html#comm">comm</a></li><li><a href="global.html#corsSettings">corsSettings</a></li><li><a href="global.html#countByValue">countByValue</a></li><li><a href="global.html#createGame">createGame</a></li><li><a href="global.html#createGameV2">createGameV2</a></li><li><a href="global.html#delayedExecution">delayedExecution</a></li><li><a href="global.html#delayedExecutionWithCancel">delayedExecutionWithCancel</a></li><li><a href="global.html#emptyGameDesc">emptyGameDesc</a></li><li><a href="global.html#emptyPayload">emptyPayload</a></li><li><a href="global.html#fold">fold</a></li><li><a href="global.html#formatNumber">formatNumber</a></li><li><a href="global.html#gameLobby">gameLobby</a></li><li><a href="global.html#getPokerHand">getPokerHand</a></li><li><a href="global.html#getStyles">getStyles</a></li><li><a href="global.html#hideCard">hideCard</a></li><li><a href="global.html#isFlush">isFlush</a></li><li><a href="global.html#isFourOfAKind">isFourOfAKind</a></li><li><a href="global.html#isFullHouse">isFullHouse</a></li><li><a href="global.html#isPair">isPair</a></li><li><a href="global.html#isStraight">isStraight</a></li><li><a href="global.html#isStraightFlush">isStraightFlush</a></li><li><a href="global.html#isThreeOfAKind">isThreeOfAKind</a></li><li><a href="global.html#isTwoPairs">isTwoPairs</a></li><li><a href="global.html#joinRoom">joinRoom</a></li><li><a href="global.html#leaveRoom">leaveRoom</a></li><li><a href="global.html#loggedIn">loggedIn</a></li><li><a href="global.html#logsocket">logsocket</a></li><li><a href="global.html#resetPlayerInGame">resetPlayerInGame</a></li><li><a href="global.html#sendVerificationEmail">sendVerificationEmail</a></li><li><a href="global.html#showCard">showCard</a></li><li><a href="global.html#sitted">sitted</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#useAudio">useAudio</a></li><li><a href="global.html#useItems">useItems</a></li><li><a href="global.html#useOnClickOutside">useOnClickOutside</a></li><li><a href="global.html#useTranslation">useTranslation</a></li><li><a href="global.html#useUserData">useUserData</a></li><li><a href="global.html#validateCode">validateCode</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#validatePasswordMatch">validatePasswordMatch</a></li><li><a href="global.html#validatePasswordOrNull">validatePasswordOrNull</a></li><li><a href="global.html#validateUsername">validateUsername</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed May 22 2024 00:17:59 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -15,27 +15,35 @@ const UserSchema = new Schema(
       required: true,
       unique: true, // Pseudo must be unique
       minlength: 3,
-      maxlength: 20
+      maxlength: 20,
     },
     // User's email
     email: {
       type: String,
       required: true,
       unique: true, // Email must be unique
-      maxlength: 254
+      maxlength: 254,
     },
     // User's password (hashed)
     password: {
       type: String,
       required: true,
       minlength: 6,
-      maxlength: 1024
+      maxlength: 1024,
     },
     // Number of coins owned by the user
     coins: {
       type: Number,
       required: true,
       default: 1000, // Default value for coins
+    },
+    verificationCode: {
+      type: String,
+      required: false,
+    },
+    verificationCodeExpires: {
+      type: Date,
+      required: false,
     },
     // Reference to the base avatar item
     baseAvatar: {
@@ -86,4 +94,3 @@ const UserModel = model("User", UserSchema);
 
 // Export the User model
 module.exports = UserModel;
-

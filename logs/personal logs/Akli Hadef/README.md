@@ -19,8 +19,8 @@
 - 15/03 , Réunion equipe Back-end | avancement dans les fonctions de jeux : 2H
 - 19/03 , Réunuin TP | avancement tests unitaire et Split des diffèrentes classes et fonctions du jeu : 4H
 - 22/03 , Rajout de tests unitaires : 2H
-- 26/02, finition de tout les tests unitaires, Reunion brain storming : 4H
-- 30/02, apprentissage redux/react :2H
+- 26/03, finition de tout les tests unitaires, Reunion brain storming : 4H
+- 30/03, apprentissage redux/react :2H
 - 02/04 , Réunion mise à niveau et spec techniques :2H
 - 02/04 , Réunion TP | avancement dans les fonctions backend, démo de la Première version du jeu : 3H
 - 06/04 , apprentissage redux/react sur YouTube :2H
@@ -39,4 +39,8 @@
 - 18/05 , test du jeu et revue de tout les cas de figures pour les combinaisons de jeu : 1H 
 -19/05 : edition de mon rapport perso : 30min
 - 20/05 : contribution rapport final :2H30
-- TOTAL:90H
+- 21/05 : reunion de groupe , tests du jeu en equipe et planification pour la soutenance : 3H 
+-28/05 : entrainement de groupe pour la soutenance : 3h
+-28/05 : entrainement individuel :1H
+
+- TOTAL:97H

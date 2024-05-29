@@ -15,10 +15,6 @@ module.exports.playerPlayed = (room) => ({
 })
 
 module.exports.startGame = (idGame, userId) => {
-  console.log("Action START_GAME created with payload:", {
-    id: idGame,
-    userId: userId,
-  });
   return {
     type: actions.START_GAME,
     payload: { id: idGame, userId: userId },
@@ -126,6 +122,14 @@ module.exports.createGame = (id,serverName, player = false) => ({
 
 module.exports.clearAnswer = () => ({
   type: actions.CLEARANSWER,
+});
+
+module.exports.autoRestartToggle = (playerId,room) => ({
+  type:actions.AUTO_RESTART_TOGGLE,
+  payload: {
+    playerId: playerId,
+    room:room
+  }
 });
 
 /**

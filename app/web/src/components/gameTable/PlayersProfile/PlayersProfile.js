@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./playersProfile.css";
 import ProgressBar from "../../Utiles/ProgressBar";
 import Card from "../Card/Card";

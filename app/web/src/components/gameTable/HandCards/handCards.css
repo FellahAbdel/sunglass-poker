@@ -1,8 +1,8 @@
 .container-handMain {
-  width: 23vw;
+  width: 25vw;
   height: 12vw;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex-direction: row;
   align-items: center;
   gap: 2vw;

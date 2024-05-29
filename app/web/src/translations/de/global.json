@@ -37,7 +37,8 @@
     "resetPassword": "Setze dein Passwort zurück",
     "successReset": "Dein Passwort wurde erfolgreich geändert",
     "enterNewPassword": "Gib hier dein neues Passwort ein:",
-    "temporary": "TEMPORÄRER BUTTON"
+    "temporary": "TEMPORÄRER BUTTON",
+    "code": "Bestätigungscode"
   },
   "messageBox": {
     "loginSucces": "Erfolgreich angemeldet!",
@@ -81,7 +82,8 @@
     "hide": "Verstecken",
     "showB": "Beide zeigen",
     "hideB": "Beide verstecken",
-    "of": "von"
+    "of": "von",
+    "autoRestart": "Automatischer Start"
   },
   "gameActionPanel": {
     "raise": "Erhöhen",
@@ -196,7 +198,10 @@
     "passwordNotMatch": "Passwörter stimmen nicht überein",
     "emailNotFound": "E-Mail nicht gefunden",
     "emailTooLong": "E-Mail ist zu lang",
-    "passwordTooLong": "Das Passwort darf nicht länger als 50 Zeichen sein"
+    "passwordTooLong": "Das Passwort darf nicht länger als 50 Zeichen sein",
+    "codeNotFound": "Ungültiger Bestätigungscode",
+    "codeExpired": "Bestätigungscode ist abgelaufen",
+    "general": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
   },
   "tutorial": {
     "title": "Texas Hold'em Poker",

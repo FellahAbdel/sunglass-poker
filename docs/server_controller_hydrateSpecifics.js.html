@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: server/controller/hydrateSpecifics.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: server/controller/hydrateSpecifics.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Importing necessary modules
+const actions = require('../store/actions/actionTypes'); // Importing action types
+const csl = require('./intelligentLogging'); // Importing intelligent logging module
+
+// Exporting eventHydra function
+/**
+ *  @param socket - Socket upon which we hydrate the action
+ *  @param data - the data received in the socket dispatch.
+ */
+module.exports = eventHydra = (socket, data) => {
+    // Action received from the user data.
+    const action = {...data.action};
+    
+    // Action filtered that will be executed on the server
+    var hydrated = {};
+    
+    // Information of the user based on the socket
+    const userId = socket.request.session.userId; // User ID from socket session
+    const room = socket.request.session.userRoom; // Room ID from socket session
+    
+    // Always hydrate the action payload with user and room information
+    // Overide any information a user could have tried to implement himself
+    // (pass someone else id)
+    hydrated.payload = {
+        ...action.payload,
+        playerId: userId,
+        room: room,
+    };
+
+    // We check what kind of subtype action it is.
+    // For future code this will help group similar actions together
+    // Right now it allow us to filter actions in game that required the user to be focused and in game
+    // or one that can be done in lobby and when it's not his turn.
+    csl.log('Hydra','Action received in hydra ->', action);
+    if (action.type !== undefined) {
+        if (actions.PLAYER_GAME_ACTION_LIST.findIndex(e => e == action.type) !== -1) {
+            hydrated.subtype = actions.PLAYER_GAME_ACTION;
+        } else if(actions.PLAYER_GAME_ASYNC_LIST.findIndex(e => e == action.type) !== -1){
+            hydrated.subtype = actions.PLAYER_GAME_ASYNC;
+        } else {
+            hydrated.subtype = actions.USER_GENERIC_ACTION;
+        }
+    }
+    
+    // Switch statement to handle specific action types
+    switch (action.type) {
+        // If the user tries to bet, we get the bet value and force it to be a valid int.
+        case actions.BET:
+            var amount = action.payload.amount;
+            if (typeof(amount) !== 'number') {
+                amount = 0;
+            }
+            amount = parseInt(amount);
+            hydrated = {subtype: hydrated.subtype, payload: {...hydrated.payload}, 'amount': amount};
+            break;
+        default:
+            // Logging default action hydration
+            csl.log('HYDRA', 'Default action hydrated; In case of error, make sure you add the correct case and hydrate the arguments with CORRECT verification for type and range.');
+    }
+
+    // Returning the hydrated action
+    return {type: action.type, ...hydrated};
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-clientInteractionsType.html">clientInteractionsType</a></li><li><a href="module-server_store_actions_actionsCreator.html">server/store/actions/actionsCreator</a></li><li><a href="module-socketMiddleware.html">socketMiddleware</a></li></ul><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Player.html">Player</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AcceuilWindow">AcceuilWindow</a></li><li><a href="global.html#AlertWindow">AlertWindow</a></li><li><a href="global.html#AvatarDisplay">AvatarDisplay</a></li><li><a href="global.html#BonusPanel">BonusPanel</a></li><li><a href="global.html#BuyCoinsWindow">BuyCoinsWindow</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#CardsPlacements">CardsPlacements</a></li><li><a href="global.html#CreateGameWindow">CreateGameWindow</a></li><li><a href="global.html#DynamicBar">DynamicBar</a></li><li><a href="global.html#ForgotPassword">ForgotPassword</a></li><li><a href="global.html#GameActionButtons">GameActionButtons</a></li><li><a href="global.html#GameTable">GameTable</a></li><li><a href="global.html#GameTableProvider">GameTableProvider</a></li><li><a href="global.html#HandCards">HandCards</a></li><li><a href="global.html#ListTableItem">ListTableItem</a></li><li><a href="global.html#LoadingWindow">LoadingWindow</a></li><li><a href="global.html#LoginWindow">LoginWindow</a></li><li><a href="global.html#LogoComponent">LogoComponent</a></li><li><a href="global.html#Middleware">Middleware</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#PlayersPlacements">PlayersPlacements</a></li><li><a href="global.html#PlayersPots">PlayersPots</a></li><li><a href="global.html#PlayersProfile">PlayersProfile</a></li><li><a href="global.html#ProfileWindow">ProfileWindow</a></li><li><a href="global.html#REFRESH">REFRESH</a></li><li><a href="global.html#RankingWindow">RankingWindow</a></li><li><a href="global.html#ResetPasswordWindow">ResetPasswordWindow</a></li><li><a href="global.html#SET_SELECTED_ITEM">SET_SELECTED_ITEM</a></li><li><a href="global.html#ServerPanelWindow">ServerPanelWindow</a></li><li><a href="global.html#SettingsProvider">SettingsProvider</a></li><li><a href="global.html#SettingsWindow">SettingsWindow</a></li><li><a href="global.html#ShopItem">ShopItem</a></li><li><a href="global.html#ShopWindow">ShopWindow</a></li><li><a href="global.html#SignUpWindow">SignUpWindow</a></li><li><a href="global.html#SuccessWindow">SuccessWindow</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TextGlitch">TextGlitch</a></li><li><a href="global.html#TextInputComponent">TextInputComponent</a></li><li><a href="global.html#TotalPot">TotalPot</a></li><li><a href="global.html#ValidationWindow">ValidationWindow</a></li><li><a href="global.html#WaitingWindow">WaitingWindow</a></li><li><a href="global.html#Window">Window</a></li><li><a href="global.html#WindowProvider">WindowProvider</a></li><li><a href="global.html#activateBonus">activateBonus</a></li><li><a href="global.html#bet">bet</a></li><li><a href="global.html#check">check</a></li><li><a href="global.html#comm">comm</a></li><li><a href="global.html#corsSettings">corsSettings</a></li><li><a href="global.html#countByValue">countByValue</a></li><li><a href="global.html#createGame">createGame</a></li><li><a href="global.html#createGameV2">createGameV2</a></li><li><a href="global.html#delayedExecution">delayedExecution</a></li><li><a href="global.html#delayedExecutionWithCancel">delayedExecutionWithCancel</a></li><li><a href="global.html#emptyGameDesc">emptyGameDesc</a></li><li><a href="global.html#emptyPayload">emptyPayload</a></li><li><a href="global.html#fold">fold</a></li><li><a href="global.html#formatNumber">formatNumber</a></li><li><a href="global.html#gameLobby">gameLobby</a></li><li><a href="global.html#getPokerHand">getPokerHand</a></li><li><a href="global.html#getStyles">getStyles</a></li><li><a href="global.html#hideCard">hideCard</a></li><li><a href="global.html#isFlush">isFlush</a></li><li><a href="global.html#isFourOfAKind">isFourOfAKind</a></li><li><a href="global.html#isFullHouse">isFullHouse</a></li><li><a href="global.html#isPair">isPair</a></li><li><a href="global.html#isStraight">isStraight</a></li><li><a href="global.html#isStraightFlush">isStraightFlush</a></li><li><a href="global.html#isThreeOfAKind">isThreeOfAKind</a></li><li><a href="global.html#isTwoPairs">isTwoPairs</a></li><li><a href="global.html#joinRoom">joinRoom</a></li><li><a href="global.html#leaveRoom">leaveRoom</a></li><li><a href="global.html#loggedIn">loggedIn</a></li><li><a href="global.html#logsocket">logsocket</a></li><li><a href="global.html#resetPlayerInGame">resetPlayerInGame</a></li><li><a href="global.html#sendVerificationEmail">sendVerificationEmail</a></li><li><a href="global.html#showCard">showCard</a></li><li><a href="global.html#sitted">sitted</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#useAudio">useAudio</a></li><li><a href="global.html#useItems">useItems</a></li><li><a href="global.html#useOnClickOutside">useOnClickOutside</a></li><li><a href="global.html#useTranslation">useTranslation</a></li><li><a href="global.html#useUserData">useUserData</a></li><li><a href="global.html#validateCode">validateCode</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#validatePasswordMatch">validatePasswordMatch</a></li><li><a href="global.html#validatePasswordOrNull">validatePasswordOrNull</a></li><li><a href="global.html#validateUsername">validateUsername</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed May 22 2024 00:17:59 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

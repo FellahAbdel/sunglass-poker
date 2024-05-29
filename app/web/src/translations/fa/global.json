@@ -37,7 +37,11 @@
     "resetPassword": "بازنشانی رمز عبور شما",
     "successReset": "رمز عبور با موفقیت تغییر کرد",
     "enterNewPassword": "رمز عبور جدید خود را اینجا وارد کنید:",
-    "temporary": "دکمه موقت"
+    "temporary": "دکمه موقت",
+    "code": "کد تأیید",
+    "codeNotFound": "کد تأیید نامعتبر است",
+    "codeExpired": "کد تأیید منقضی شده است",
+    "general": "یک خطا رخ داده است. لطفاً دوباره تلاش کنید."
   },
   "messageBox": {
     "loginSucces": "ورود موفقیت آمیز بود!",
@@ -63,7 +67,8 @@
     "notEnoughSC": "سکه‌های خورشید کافی برای پیوستن به این بازی ندارید",
     "notEnoughPlayer": "بازیکنان کافی برای شروع بازی وجود ندارد",
     "yourTurn": "نوبت شما",
-    "theirTurn": "نوبت آن‌ها"
+    "theirTurn": "نوبت آن‌ها",
+    "autoRestart": "شروع خودکار"
   },
   "handGuide": {
     "highCard": "کارت بالا",

@@ -153,7 +153,7 @@ module.exports = function (
     // Check if the action is auth.
     if (action.payload.playerId) {
       // Check if the action subtype is for player game action
-      if (action.subtype === actions.PLAYER_GAME_ACTION) {
+      if (action.subtype === actions.PLAYER_GAME_ACTION || action.subtype === actions.PLAYER_GAME_ASYNC) {
         gameController.playerAction(action);
       } else {
         // If not, regular dispatch in gameController
@@ -361,6 +361,12 @@ module.exports = function (
     }
   }
 
+  /**
+   * When a socket leave we check if it was a Authenticated socket and if it was the last of the user
+   * we set a timer that will remove him from his game he's hasn't connected back.
+   * This allow to remove player that loose internet for too long but keep people doing quick refresh of page. 
+   * @param {socket} socket that is disconnecting. 
+   */
   function lastInstanceLeaveGame(socket){
     if(socket.request.session.userId){
       let uid = socket.request.session.userId;
@@ -578,6 +584,7 @@ module.exports = function (
       socket.emit("world", { responseData: "The world salute you :) " });
     });
 
+
     socket.on("disconnect", () => {
       
       // Log user disconnection
@@ -639,6 +646,13 @@ module.exports = function (
         findPlayerRoom(socket, socket.request.session.userId);
       }
     });
+
+    // Action to toggle the restart.
+    socket.on("autoRestartToggle", () => {
+      if(socket.request.session.userId && socket.request.session.userRoom){
+        dispatch(socket,{action:actcrea.autoRestartToggle()});
+      }
+    })
 
     // Save the session
     socket.request.session.save();

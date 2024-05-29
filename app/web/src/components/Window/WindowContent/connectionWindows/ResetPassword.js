@@ -3,7 +3,7 @@ import Button from "../../../button/Button.tsx";
 import TextInputComponent from "../../../textInput/TextInput.jsx";
 import { useAuth } from "../../../Utiles/AuthProvider.jsx";
 import {
-  validateEmail,
+  validateCode,
   validatePassword,
   validatePasswordMatch,
 } from "../../../Utiles/ValidationUtils.jsx";
@@ -12,21 +12,21 @@ import { useTranslation } from "../../../Utiles/Translations.jsx";
 
 /**
  * ResetPasswordWindow provides a form for users to reset their password.
- * It includes validation for email, new password, and password confirmation.
+ * It includes validation for code, new password, and password confirmation.
  */
 const ResetPasswordWindow = () => {
   const { getTranslatedWord } = useTranslation();
-  const { openWindow, openSuccessWindow } = useWindowContext();
+  const { openWindow, openSuccessWindow, email } = useWindowContext();
   const { changePassword } = useAuth();
 
   const [formData, setFormData] = useState({
-    email: "",
+    code: "",
     password: "",
     repeatPassword: "",
   });
 
   const [validationErrors, setValidationErrors] = useState({
-    email: "",
+    code: "",
     password: "",
     repeatPassword: "",
   });
@@ -53,14 +53,14 @@ const ResetPasswordWindow = () => {
    */
   const validateForm = () => {
     const errors = {
-      email: "",
+      code: "",
       password: "",
       repeatPassword: "",
     };
 
-    const emailValidation = validateEmail(formData.email);
-    if (!emailValidation.isValid) {
-      errors.email = emailValidation.errorMessage;
+    const CodeValidation = validateCode(formData.code);
+    if (!CodeValidation.isValid) {
+      errors.code = CodeValidation.errorMessage;
     }
 
     const passwordValidation = validatePassword(formData.password);
@@ -87,27 +87,35 @@ const ResetPasswordWindow = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { email, password } = formData;
+    const { code, password } = formData;
 
     if (validateForm()) {
       try {
-        const result = await changePassword(email, password);
+        const result = await changePassword(email, code, password);
 
-        if (result === true) {
+        if (result.success) {
           openSuccessWindow(getTranslatedWord("connection.successReset"));
         } else {
-          console.error("Error changing password:", result.error);
-          setValidationErrors({
-            ...validationErrors,
-            email: "error.emailNotFound",
-          });
+          console.error("Error changing password:", result.message);
+          let errorMessage;
+          if (result.message === "Verification code has expired") {
+            errorMessage = getTranslatedWord("error.codeExpired");
+          } else if (result.message === "Invalid verification code") {
+            errorMessage = getTranslatedWord("error.codeNotFound");
+          } else {
+            errorMessage = getTranslatedWord("error.general");
+          }
+          setValidationErrors((prevErrors) => ({
+            ...prevErrors,
+            code: errorMessage,
+          }));
         }
       } catch (error) {
-        console.error("Error changing password:", error);
-        setValidationErrors({
-          ...validationErrors,
-          email: "error.emailNotFound",
-        });
+        console.error("Error changing password:", error.message);
+        setValidationErrors((prevErrors) => ({
+          ...prevErrors,
+          code: getTranslatedWord("error.general"),
+        }));
       }
     } else {
       console.error("Form validation failed");
@@ -124,13 +132,13 @@ const ResetPasswordWindow = () => {
       </div>
       <form onSubmit={handleSubmit} className="myForm">
         <TextInputComponent
-          name="email"
-          value={formData.email}
+          name="code"
+          value={formData.code}
           onChange={handleChange}
-          placeholder={getTranslatedWord("connection.email")}
-          errorMessage={validationErrors.email}
+          placeholder={getTranslatedWord("connection.code")}
+          errorMessage={validationErrors.code}
           styleClass={"input-connectionDefault"}
-          iconSrc="static/media/assets/images/icons/black/email.png"
+          iconSrc="static/media/assets/images/icons/black/name.png"
         />
         <TextInputComponent
           name="password"

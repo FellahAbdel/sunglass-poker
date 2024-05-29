@@ -3,6 +3,10 @@ const actions = require('../store/actions/actionTypes'); // Importing action typ
 const csl = require('./intelligentLogging'); // Importing intelligent logging module
 
 // Exporting eventHydra function
+/**
+ *  @param socket - Socket upon which we hydrate the action
+ *  @param data - the data received in the socket dispatch.
+ */
 module.exports = eventHydra = (socket, data) => {
     // Action received from the user data.
     const action = {...data.action};
@@ -14,19 +18,25 @@ module.exports = eventHydra = (socket, data) => {
     const userId = socket.request.session.userId; // User ID from socket session
     const room = socket.request.session.userRoom; // Room ID from socket session
     
-    // Hydrating the action payload with user and room information
+    // Always hydrate the action payload with user and room information
+    // Overide any information a user could have tried to implement himself
+    // (pass someone else id)
     hydrated.payload = {
+        ...action.payload,
         playerId: userId,
         room: room,
-        ...action.payload
     };
 
-    // We check if the action the user tries to perform is related to a game.
-    // If so, we will dispatch the event through specific game dispatchers to perform actions like end turn, etc.
+    // We check what kind of subtype action it is.
+    // For future code this will help group similar actions together
+    // Right now it allow us to filter actions in game that required the user to be focused and in game
+    // or one that can be done in lobby and when it's not his turn.
     csl.log('Hydra','Action received in hydra ->', action);
     if (action.type !== undefined) {
         if (actions.PLAYER_GAME_ACTION_LIST.findIndex(e => e == action.type) !== -1) {
             hydrated.subtype = actions.PLAYER_GAME_ACTION;
+        } else if(actions.PLAYER_GAME_ASYNC_LIST.findIndex(e => e == action.type) !== -1){
+            hydrated.subtype = actions.PLAYER_GAME_ASYNC;
         } else {
             hydrated.subtype = actions.USER_GENERIC_ACTION;
         }
