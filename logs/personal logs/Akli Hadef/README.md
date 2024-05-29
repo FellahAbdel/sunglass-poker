@@ -19,8 +19,8 @@
 - 15/03 , Réunion equipe Back-end | avancement dans les fonctions de jeux : 2H
 - 19/03 , Réunuin TP | avancement tests unitaire et Split des diffèrentes classes et fonctions du jeu : 4H
 - 22/03 , Rajout de tests unitaires : 2H
-- 26/02, finition de tout les tests unitaires, Reunion brain storming : 4H
-- 30/02, apprentissage redux/react :2H
+- 26/03, finition de tout les tests unitaires, Reunion brain storming : 4H
+- 30/03, apprentissage redux/react :2H
 - 02/04 , Réunion mise à niveau et spec techniques :2H
 - 02/04 , Réunion TP | avancement dans les fonctions backend, démo de la Première version du jeu : 3H
 - 06/04 , apprentissage redux/react sur YouTube :2H
